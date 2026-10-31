@@ -1,87 +1,101 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1A69606A31C
-	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 17:07:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77219606A31A
+	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 17:09:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=V1iZJU4j
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNCXZ-0002mm-DD; Sat, 31 Oct 2026 13:06:49 -0400
+	id 1xNCaU-0003pk-OG; Sat, 31 Oct 2026 13:09:51 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1xNCXR-0002jM-Cr; Sat, 31 Oct 2026 13:06:42 -0400
-Received: from zero.eik.bme.hu ([2001:738:2001:2001::2001])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <balaton@eik.bme.hu>)
- id 1xNCXP-0001ER-Bg; Sat, 31 Oct 2026 13:06:41 -0400
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 1C40360C0F3;
- Sat, 31 Oct 2026 18:06:34 +0100 (CET)
-X-Virus-Scanned: amavis at eik.bme.hu
-Received: from zero.eik.bme.hu ([127.0.0.1])
- by localhost (zero.eik.bme.hu [127.0.0.1]) (amavis, port 10028) with ESMTP
- id fr4sjKasLPmZ; Sat, 31 Oct 2026 18:06:32 +0100 (CET)
-Received: by zero.eik.bme.hu (Postfix, from userid 432)
- id 04BE860C072; Sat, 31 Oct 2026 18:06:32 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
- by zero.eik.bme.hu (Postfix) with ESMTP id 0153713996F;
- Sat, 31 Oct 2026 18:06:31 +0100 (CET)
-Date: Sat, 31 Oct 2026 18:06:31 +0100 (CET)
-From: BALATON Zoltan <balaton@eik.bme.hu>
-To: Yonggang Luo <luoyonggang@gmail.com>
-cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
- qemu-devel@nongnu.org, Anthony PERARD <anthony@xenproject.org>, 
- Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>, 
- Philippe Mathieu-Daude <philmd@mailo.com>, 
- Antony Pavlov <antonynpavlov@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- =?ISO-8859-15?Q?Herv=E9_Poussineau?= <hpoussin@reactos.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, 
- Niek Linnenbank <nieklinnenbank@gmail.com>, xen-devel@lists.xenproject.org, 
- qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>, 
- qemu-ppc@nongnu.org, Alexandre Iooss <erdnaxe@crans.org>, 
- Weiwei Li <liwei1518@gmail.com>, Zhao Liu <zhao1.liu@intel.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
- =?ISO-8859-15?Q?Philippe_Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>, 
- Thomas Huth <th.huth+qemu@posteo.eu>, 
- =?ISO-8859-15?Q?Cl=E9ment_Chigot?= <chigot@adacore.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
- Yoshinori Sato <yoshinori.sato@nifty.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Peter Maydell <peter.maydell@linaro.org>, 
- Chao Liu <chao.liu@processmission.com>, 
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>, 
- Alistair Francis <alistair@alistair23.me>, 
- Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
- Gaurav Sharma <gaurav.sharma_7@nxp.com>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-In-Reply-To: <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
-Message-ID: <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu>
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
- <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
- <ba106173-fca3-6019-3028-122831887921@eik.bme.hu>
- <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xNCaT-0003pE-4p
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:49 -0400
+Received: from mail-dl1-x1232.google.com ([2607:f8b0:4864:20::1232])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
+ id 1xNCaR-0001VR-KC
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:09:48 -0400
+Received: by mail-dl1-x1232.google.com with SMTP id
+ a92af1059eb24-14394530ec6so2244284c88.1
+ for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 10:09:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793466586; x=1794071386; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=SCvaE1xWeWnx7UnU/1gnWw/QKe7acN1+xJB52VmOclA=;
+ b=V1iZJU4jjNZdqvQIdP19g0LWBrnhsZnQYPh0zpFcot3gH9nKvjnEPIFlbpzFc5N+Ju
+ Y7Z9q6gD703fhNxLefJ+gvVHhaBQKDttTex0NUr/kb4ZCvRsMUq0cgn2rsiCNp78rRlr
+ mO6kyAIo2jdqJtZE2HH2UwjS094rudsY5f6QHAwXUIkrXSQt+Xy/MPytsN+Em/bxpqyM
+ IzXvEldMqrAEljCdeR5r4s72yE8urpAcQPbE/9ZNylXbyXSzAmCdLJJQdfLMrwe9IjG3
+ w8mVxhVXKbdYsbbNoLlSRBNKfH8mKoKyruc2BLmD9My5gH97KQWtiunS93aEu99HgRky
+ YznQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793466586; x=1794071386;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=SCvaE1xWeWnx7UnU/1gnWw/QKe7acN1+xJB52VmOclA=;
+ b=HuFgcvCAu8liqUSrAZBDaCKgiiZ1+xBLpB7P7+NTaLzOfmDwdEhHq73mVT1PXYTc6M
+ Ipu4Y2Pe5SzEHLcGMkgYeySwSXeI3FLaYP3wXdEQQg2ZPk+OPj/gYGoKgIFK9sIPvXjp
+ xODBOYzE13khNTgDN9V0aB7Yt3wlGXJDZYuvJSZrmI6VfSbbBdtN2S7+79Qa6WM7Gv4T
+ qTr1hVyMrwuNiyHhXhgM1QUC7btRDKIZPVzsEG9s1VRcISd62tfJK1xuTQwAqTljk6/f
+ P6Cuh/miUGVu0PXk+hY6i7EeoyF3UbTwhNqSIGgtnfmWTVRtw/GfJ8f810JdjGaLXa0+
+ sXbA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwyc8quRmjNJwHU9TYoTVBonVLLmuuwlIEWeiB6DeUNh0dS12PJC/9md66RDqb/I4N0kJHCWg/Ay/vU@nongnu.org
+X-Gm-Message-State: AFq9FYJbQM7Yn0ID8IGPAvdIic0KJokphiqoxjwCULalJOKTcCx/zZh5
+ j23U8rVmUpg7P1AaTrxJu3W47BUnE3QXnH9ZxaOSFTJHvUkJTnYhwhEW
+X-Gm-Gg: AYBFou3s7AwJdsY5WJXSQYDCqNrf7O+ZBqHnfC3vZAe0W6m1YG3wJ60H9S0DWP9e1Xd
+ y25SfI/2UCzkp+RIfALbEk43hSKz/6DhgfJzVQ4GRllMXxkXbMAhw7HIXMMRIcORFymPT1ARGDR
+ hx82LD5RnF+gNu1mfMvcwReS9pdiTGEpB6eM2u/1OlrHAuIl645GThXEo0whLCM8XynTFU+EFaf
+ yahaHQFSnp1crViRGVZSxa7o+cJN3gkouATefol17p046hzTUvKvwEf0m8fVpsUA5rxvrGz+Gsr
+ hZRS+LAkJq+jbucH2o6bE7P1Wm0y6NlimRPTwPdPNJDss2IgZgD2tE1uVPzjebiJw6jNhmMdGHg
+ Fqz4NCi5o8pTmCqEWq8TyeIKMUAw3XZ1czaHppt7NhuEL1VEbiAY1GpFHRrbOuw/fDMkAJZ/M8E
+ daL9sBNgqoHyp7saXeyKoacEwXOZ63QQIl3Mp0E5G1/2NNNlnRbgEjjdIv2TO1tyncqG5+7NJZh
+ jXnu0/nZ57qY2oKUyVEjzSDj2AqNqK+bmptxvWEWHqHU7Z/Lr8/O1aFVLgLYbcYRUzgDmxKT+87
+ T7SYpRpxp6j+Op81UxALuMdLCsZQxeN2JJd0s75le3/5K+0R
+X-Received: by 2002:a05:701b:4206:20b0:1a4:9eaa:d01d with SMTP id
+ a92af1059eb24-1ac5fd08905mr7930123c88.45.1793466585766; 
+ Sat, 31 Oct 2026 10:09:45 -0700 (PDT)
+Received: from DESKTOP-Q716RM7 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ a92af1059eb24-1ac1854da78sm23749065c88.6.2026.10.31.10.09.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 31 Oct 2026 10:09:44 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Weiwei Li <liwei1518@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Alistair Francis <alistair.francis@wdc.com>, qemu-riscv@nongnu.org,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>
+Subject: [PATCH v3 2/3] Revert "target/riscv/kvm: restrict kvm-accel-riscv-cpu
+ to riscv targets"
+Date: Sun,  1 Nov 2026 01:09:24 +0800
+Message-ID: <20261031170925.789-3-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.3
+In-Reply-To: <20261031170925.789-1-luoyonggang@gmail.com>
+References: <20261031170925.789-1-luoyonggang@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/mixed;
- boundary="3866299591-1954894860-1793466392=:93531"
-Received-SPF: pass client-ip=2001:738:2001:2001::2001;
- envelope-from=balaton@eik.bme.hu; helo=zero.eik.bme.hu
-X-Spam_score_int: -18
-X-Spam_score: -1.9
-X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1232;
+ envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1232.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -94,86 +108,44 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
+This is redundant now as all accel-$cpu_type parent is already registered.
 
---3866299591-1954894860-1793466392=:93531
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8BIT
+This reverts commit 2d3e6b4003d5380c245ce8ffac4b8866f6d10a33.
 
-On Sat, 31 Oct 2026, Yonggang Luo wrote:
-> On Sat, Oct 31, 2026 at 8:42 PM BALATON Zoltan <balaton@eik.bme.hu> wrote:
->>
->> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
->>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
->>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
->>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
->>>>> type_init
->>>>> function that calls type_register_static(). A later change needs to
->>>>> pass a
->>>>
->>>> That's the point of the macro to hide the boiler plate code.
->>>>
->>>>> target mask into that registration, and the macros have no parameter
->>>>> for it.
->>>>
->>>> Couldn't you just change the macros to take that parameter instead of
->>>> expanding it everywhere?
->>>>
->>>
->>> Problem of macros is that they don't have default parameters, so you
->>> need variants for everything:
->>>
->>> DEFINE_MACHINE
->>> DEFINE_MACHINE_EXTENDED
->>> DEFINE_MACHINE_WITH_INTERFACES
->>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
->>> and now would need a new variant, with variant for other existing ones.
->>>
->>> In the end, it's just simpler to remove this and add the boilerplate.
->>> It's written once and never modified, so using a macro just save typing
->>> those lines once.
->>>
->>>> Regards,
->>>> BALATON Zoltan
->>>>
->>>>> This series expands every caller first, with no behavior change, so the
->>>>> follow-up only replaces the type_register_static() call.
->>>>>
->>>>> Each machine file gains a class_init function, a TypeInfo, and a
->>>>> type_init
->>>>> function that calls type_register_static(). The last patch removes
->>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boards.h.
->>
->> Macros help reading the code not saving typing. If the actual
->> functionality is buried in a lot of boiler plate it's harder to understand
->> and spot bugs so putting the unintresting boiler plate behind a macro is
->> better even if you need a separate version for different cases. Then the
->> code that uses the macro will be much more obvious and not just a lot of
->
-> I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* are
-> not defined properly
-> that causes them to not be extended easily.
->
-> DEFINE_TYPES is another example, use them can extend easily, how about
-> always use DEFINE_TYPES?
-> Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and DEFINE_SECURE_MACHINE*?
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-Maybe I'm missing the problem but DEFINE_MACHINE macros are just 
-convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't you add 
-the needed parameter to DEFINE_MACHINE_EXTENDED and use that for machines 
-that need it, or if it's needed by all machines then make the new 
-parameter required and add it to all convenience wrappers too so you can 
-keep using DEFINE_MACHINE* and just need to add one parameter to it in 
-machines?
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 5a82a63b822..c085b22b23e 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -26,7 +26,6 @@
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/main-loop.h"
+-#include "qemu/target-info.h"
+ #include "qapi/visitor.h"
+ #include "system/system.h"
+ #include "system/kvm.h"
+@@ -2236,7 +2235,6 @@ static const TypeInfo kvm_cpu_accel_type_info = {
+ 
+     .parent = TYPE_ACCEL_CPU,
+     .class_init = kvm_cpu_accel_class_init,
+-    .is_available = target_base_riscv,
+     .abstract = true,
+ };
+ static void kvm_cpu_accel_register_types(void)
+-- 
+2.55.0.windows.3
 
-Regards,
-BALATON Zoltan
---3866299591-1954894860-1793466392=:93531--
 
