@@ -1,145 +1,147 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D7782606A31A
-	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 17:16:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78C60606A31C
+	for <qemu-riscv@archiver.kernel.org>; Sat, 31 Oct 2026 18:59:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=od5ub31Z
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nu/Y51/f;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=D23lCNP/
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNCgT-0006sW-An; Sat, 31 Oct 2026 13:16:01 -0400
+	id 1xNEIm-00041R-8P; Sat, 31 Oct 2026 14:59:42 -0400
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNCgP-0006qC-RU
- for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:15:57 -0400
-Received: from mail-ed1-x533.google.com ([2a00:1450:4864:20::533])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNCgO-00022A-00
- for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 13:15:57 -0400
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6b1ec41d8e9so1849706a12.0
- for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 10:15:55 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1793466954; cv=none;
- d=google.com; s=arc-20260327;
- b=PINlXHcZ5haFgZDq54YRVukns3NrXSj/KZokfamZZzikc49LUHb+PGdVMvvC8HABlz
- HeUJAqtVrOzm/AY0wtolFfcab5kVSBpD++wuOqwIO/rNzaGN7Hw8NwmEby1rnU2TBAd5
- CUYuNelJxHssjkviYejBSbEQtPc3nvh2hRiBHgLUfIMxINKyduRTffzx2WoeQSBlG1S8
- 9DtmPs8/ouoeES9KW6gTlCpaEALY3uwkiA9T9qgATws2kOD6BQzktQKbqlSaQXg/wxpi
- /bzDYggkrbyuIk3uFoaEliZLOYyhIJR20iMzmV3sDGw7VfTwodYqTnPJAd2CQmPm3/3x
- tJBw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=jcR6W1B2xKRqIisqldgJOoXdL57ofMb0Mlm4KaPe//A=;
- fh=bnKoXJTguMwAxeIP/rfF9tUsUxCD3hKqnNFvLUiwI+c=;
- b=CWfBQ2mZkT6wyKAOeenkve30I+yUvb1oMQojCYgyk2MQzbbYU14hFyTVK/9l4+3MmD
- eXayr8Iy/CT0lD2gynv2ZFIT7LpVyr7VxDFgJE625iRpAuzhWnFfjebf61P7wwdUGnrg
- zFSisecmwSXqPDp9r1ISC2xLWU3qhjmOwBXq+cEo930g2v/KAcx/VXxXEvzVnUo4wj8v
- vi8e/xrE/ZEkxCxW+r/tWck5bXJeKhceU2EtcpGGMYQybNdBjIU8tZ/Hv1sCgT6pEE8+
- e71vXS/vavW5K/m+Uzr6HiN73gs38bpOG43WLcp1HgmnS8ts/sCLKDdakYcoZR2aP2zw
- jQiw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xNEIJ-000405-4u
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 14:59:14 -0400
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xNEIG-0001d9-ME
+ for qemu-riscv@nongnu.org; Sat, 31 Oct 2026 14:59:10 -0400
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69VGU1K83196983
+ for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 18:59:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ aUUSuJ/CMSWVWk4MHFVd4V5rrcVMm1hKJ/KpWDOScdU=; b=nu/Y51/fQPEJMaVH
+ Su3dCtdZyinNjpUywG7xGB4GOc231zojBOYkfpiavDDRZr++jrU2FbF06+unW/zw
+ 9Z4u/UYjMW4AiCEjktNkuCLlkohu3wqZptMa9VvoL31j4Jo2J1D1oTxJyN/Ux7Gc
+ yBfuPNkhxyMl2+o0U6p/5rrZAgekyiE7mCCTWK1AbFrf9WGy7wezOSmLqWs0dOol
+ S60KZ26Y5Zkejc1k5CUPxUwO2Z+IZo7pZRmEDw9+XaR2pSfvjosQ5YU0NdkBgVxd
+ DuB+UeLo6yChmCTGs7QkrzD7tAdBoSMCpaAnf3IW+83OxPauDjsmDQTZv0CkTMrA
+ kb0JQw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn7b6hyj6-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 18:59:06 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-532f343a55bso30723811cf.3
+ for <qemu-riscv@nongnu.org>; Sat, 31 Oct 2026 11:59:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793466954; x=1794071754; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=jcR6W1B2xKRqIisqldgJOoXdL57ofMb0Mlm4KaPe//A=;
- b=od5ub31ZOvJPvyP6yY4M2o9CKHRwaYetrIc5yL6SU4B+SlERUCBXOh2OjuyD/iQJgv
- NPIMEHeVZ0BRvL4LKbBQ7E11oLRafdDxANmk/EUjkaAwRcSew9Eyukh36sbVhig65BUF
- EWPAMceV5Hna1HRqi9pQDb36Nl9YgRHQN/v3ubzisZNRJzxD6FVhhMW5IGNGT+EJQwRo
- g4RaKCcM1tUQ5sZ38plqHDBi8lkszKoMYnMOHIc2dZmPx6yVgjxhTTidz9yYB9WOK2gk
- slQ1wrlqEq5UiNnnxUeeGUlMd4B3XJVvy7glbrPqkYgwFNqidb7H/M5wE8ur48fWUO38
- c3ug==
+ d=oss.qualcomm.com; s=google; t=1793473146; x=1794077946; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=aUUSuJ/CMSWVWk4MHFVd4V5rrcVMm1hKJ/KpWDOScdU=;
+ b=D23lCNP/a7UNhIYMToGMt6lqyXH1JyMgbvOu4G/+wha0fcaBT1bsYzccELduZRK/Gi
+ lK2S5fcZxrPxENm0o1c4hIStNoxKHw7UGDDyNVeRJ3pAR31Jj+bHLT346QucqDtkltyl
+ rWNAORrG8GEGGUmoVK2N+LrLJomRb2Ceifi+qGofLDB5TUcNxvR5ccMAHdq7WR3QCM27
+ hkHhXxzc1C0fwrrCvoQ1LisDzsn2H1eJHCOhF5evH5EQUYo2DeZxLIQWaXAG4Mf84eBp
+ XzNDCG8+owpOgrUsV0cMTAVldbucOVvzGWroJQlXkQvp/ZePt0JkscMvnRTVH3mVaroF
+ YGKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793466954; x=1794071754;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=jcR6W1B2xKRqIisqldgJOoXdL57ofMb0Mlm4KaPe//A=;
- b=lCHWpQE7GbHJzFb0BmEuBNL+rwbi6GxMrqhpspFRY0DSP4sa8MUGgwZnYLpS7uczK0
- zBui3h292Ocl8Uh+w7cT2Vende+vfiZYG51cFlzSlTlt7c7/gD7zj7w8VLSaoc0Zsf5P
- 0l/mb70kkY3ZE+OE6ILYfy+ydIxFwUz4yBJmLvNtVB27wHzCF4ZgaKlpWrTkwIuDiKQw
- IOQ3waMN/TIEy02UlEaxXyL4qB7jv3EX+3XKHiL0Rr8n01YyQI+lBZujcfZuhqRC4r2g
- o6+xnnJJN+OcLJniQePq9Yuaj8zujkYBeSD6wPmlwtPfc4bhTidFYPzpRVsJv7aOZr9P
- 4GfQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvBxvG3kPDgO44AMRu5dTjmiYtjMybaJvEx3v5M4h+xTkuZ8W4nc40SjybzLwfH3abuzNwB7d9hGMgp9j@nongnu.org
-X-Gm-Message-State: AFq9FYJxRgbgUU24FaHXpqX+DjSQ5ZHi49umOKIJPIb/kkf7wxkgOBcI
- HNaZ4lEwyCuoJhFj5AyQretZPBSMiscegHLnnnx0cxn41+xtk6WfRkB/xIaaift+buK7TviAWhs
- eevpsctB1yNHB156aGd4/b6sQIPGiX2U=
-X-Gm-Gg: AYBFou3t+w+fQtFEvDbllrCE3TUtjCOUwoEnwQbvMdbiEH/G5hSq5dYZ8mn6Cy50Fw0
- zaeoOajjkGyVlV55pkLrFm76XuKjDUYyQjYaXX1fSf4wSEJyMjSLoUS+2YXNccrJ5Zca59m/v5E
- eenI0vxZxH7Q9xRQgyJmU7E38ViPoUOdLbXkqa76GI3WOgVuU1lIjoU8/NOzCeoIV8QIRBqZydA
- WcBzM2O6E3xySyKkZb9zZ8fCIIiaQRVP+oWG+UM86WebK06ePmqQYzNDbmM4VjHg7AsnpN0bN3q
- Gb0utatKV+zhKbB00VDTSFDcBBdm+OCLmAYWYUr3ZUMYieNHgvmW9W3WNEOFfqjOBnciz7AT9Y9
- FbnIx0XYnO+oBa0U4YLwDs45nSQv/C7PACNti
-X-Received: by 2002:a05:6402:4505:b0:6b4:8d16:f026 with SMTP id
- 4fb4d7f45d1cf-6b4d3391cd5mr3933460a12.1.1793466954061; Sat, 31 Oct 2026
- 10:15:54 -0700 (PDT)
+ d=1e100.net; s=20260707; t=1793473146; x=1794077946;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=aUUSuJ/CMSWVWk4MHFVd4V5rrcVMm1hKJ/KpWDOScdU=;
+ b=XyoiDgj/a23hv7I8kEom0yupL87cvEtMsE/3v2r2DBLBhr7Mj2n6cRAqrc8fvGtJPg
+ S7gik5BzdpNbjFQ/hJ5ozTQM0vXggbqrezVii8pTkATandmrMNU1sCFdGkcmZSAZwJOi
+ +5MtWpKVbQAEkFycw4moh+gweJ5mMn85B0LWMXaQid8k7anZBAn5o9pB87Ox36NCM5za
+ yVBOt+fac5fhgzcgpvXW5Xfl8vhfSajaeqmEEVLDFLDUDBCLmbE46YDmU3ocR/M4SbwB
+ zRJ4vp0kU7IVWmT1v1lMJ3xTcx5azJAOSWmwhtev8+vy04q21fPu/543cBISoIJq51BS
+ eOrA==
+X-Gm-Message-State: AFq9FYKCph7jkveemi2rU4HrprxLM6pMDW0M+aFmQ8nRmRfxZ4AuMN0O
+ FoWChkTVkroT6Mta7CJuo5t3quGuMEN99qRcA/xA1xa2BSI1woxEHh8v/0xyZLTv9PNz7iKt90N
+ ZnpWwEbGyaDC4Pz2XC0NEBEElg1e5yjy+D40KLemdfGqcy1ucEB8G6NiAPg==
+X-Gm-Gg: AYBFou18Q/45DUx231NrSB6InJV+tvn+J1UWr5y782Qgh9PrDuke40T72BNvMNS3SYr
+ xvRxMfg5wgBK/oMKzsyeuOmSTtlDIpJGm53ujTwNwSknDAIaZkIlj51h+n/0fCv7O5notFGr/29
+ ZGo+3xWBh2qO5fQ4Yr8/fH6qcPJYyPCzSpYgFWU7fpn/OO5S8+NhG8VNDz9YKd4+FFIAMc7C+35
+ vvxGtPcrelqqJlSNWxkbTWnj7rbGWj3xpba3NMHt5bOu3bc4Te1AJapjRQb81ZaIXBHIHrJLQk2
+ sC1ba/NEnEWvkLfYRTRdbxXrGxnSpb4uCfZ10rokyX8A8M57tT6rZSQ79dy3mf4vPRuq71TdQkV
+ mUxV2wxctZwgoxa4IzR70I+5Umhcjt2iTqnCd6A/n4FelwtgsBnr8Ohcs0lFQjFABk0Li8uP0R2
+ quXgtwfmzOYw==
+X-Received: by 2002:a05:622a:488b:b0:535:157b:ea22 with SMTP id
+ d75a77b69052e-542b704b995mr97094081cf.40.1793473145923; 
+ Sat, 31 Oct 2026 11:59:05 -0700 (PDT)
+X-Received: by 2002:a05:622a:488b:b0:535:157b:ea22 with SMTP id
+ d75a77b69052e-542b704b995mr97093851cf.40.1793473145399; 
+ Sat, 31 Oct 2026 11:59:05 -0700 (PDT)
+Received: from [192.168.68.102] ([152.234.122.251])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-54312a56289sm43798741cf.22.2026.10.31.11.59.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 31 Oct 2026 11:59:04 -0700 (PDT)
+Message-ID: <f88f9867-69b6-4efa-a5bc-9cb8cb9afc37@oss.qualcomm.com>
+Date: Sat, 31 Oct 2026 15:59:00 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
- <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
- <ba106173-fca3-6019-3028-122831887921@eik.bme.hu>
- <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
- <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu>
-In-Reply-To: <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Sun, 1 Nov 2026 01:15:40 +0800
-X-Gm-Features: AclHuK8AaPCnv2Mbs_9iupAlH2py4_RazQLc7kNcPpAEEJrZBPKdgONHzmsQuE0
-Message-ID: <CAE2XoE9_b5UiE2+BXFRqB3RPv=M+8jr1HQy7rEFVEb6w1DdoGg@mail.gmail.com>
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
- Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
- Aleksandar Rikalo <arikalo@gmail.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>, 
- Antony Pavlov <antonynpavlov@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Stefano Stabellini <sstabellini@kernel.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org, 
- Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>,
- Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Thomas Huth <th.huth+qemu@posteo.eu>,
- =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yoshinori Sato <yoshinori.sato@nifty.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>, 
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
- Gaurav Sharma <gaurav.sharma_7@nxp.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::533;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x533.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] target/riscv: do not raise the no-PMP-rule access
+ fault from mret
+To: tewaro <tewaro@theorem.dev>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, disclosures@theorem.dev, tewaro@tewaro.org
+References: <cover.1793217528.git.tewaro@theorem.dev>
+ <fbeadd5b2fe5ccfd20b52dbccd4e5856f215ede0.1793217528.git.tewaro@theorem.dev>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <fbeadd5b2fe5ccfd20b52dbccd4e5856f215ede0.1793217528.git.tewaro@theorem.dev>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: zOv9G8ZiNQlQpriMNoSqedF5l24WNr9_
+X-Authority-Analysis: v=2.4 cv=QuvLTlyd c=1 sm=1 tr=0 ts=6ae63a7a cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=QOY8BskYDu05dfarAz2gNQ==:17
+ a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=xvfqbYfxAAAA:20 a=p0WdMEafAAAA:8 a=4DrwxvsbF9mSuPFYZSoA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: zOv9G8ZiNQlQpriMNoSqedF5l24WNr9_
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDMxMDA3NSBTYWx0ZWRfX51tAd3EqEB7C
+ or7Vjk3mcAWjzOiGVtM0TzxD+oNrcj38UNaMpR1fAGP57thpTYoq8HmPuYY5mexY1H6tpOv7nW5
+ QEwZ//fGox7/IpTiZdDw76iyMeJ/SE0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDMxMDA3NSBTYWx0ZWRfX+DUqN+n3EopJ
+ nDBr+I0j6vcdDC1GyEuEJ3IrpV0lhTTEymYApWzEQxOu4iGWNYOUXTr9XiikZXLDg5mar8Z8TYP
+ uuf24+BnPRPwgV/uJxXXs/k6OWN4O53w8pKp20VjEjuaobgU4jlIhfcM/iH2AiNAMryprZcrrXx
+ Dcz+V7vurKMZjV9s/DnGZpotHOlYS9qGrjXvl3VGwRAFSxGesXyc3wx02jdd4g4HRov21IIFWJ6
+ Z5ajl0ldY5HXg19K9C81izHiNK/U+Nf8ZWGTYgWIVnflr1p+hqUd9F4gNyQxq0qx+f2126byPbK
+ bFycwvGaA+3QvJmoEmqxG6CNH5Q7NGHsTUslR8cHuP1taU6XCqc1nDS4GCAQC4CItRiiYxEs0TX
+ AGnQ2z054eemhXrlygzjIeLO1Xhp8S8VYLCfi1D+LuXm6VKKLP4ob81g1GHsswZAGFEtPbHlZ0r
+ AehOfa3bhXOQhqBfZ2w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-31_04,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 priorityscore=1501 malwarescore=0 spamscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2610310075
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -150,120 +152,124 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Sun, Nov 1, 2026 at 1:06=E2=80=AFAM BALATON Zoltan <balaton@eik.bme.hu> =
-wrote:
->
-> On Sat, 31 Oct 2026, Yonggang Luo wrote:
-> > On Sat, Oct 31, 2026 at 8:42=E2=80=AFPM BALATON Zoltan <balaton@eik.bme=
-.hu> wrote:
-> >>
-> >> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
-> >>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
-> >>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
-> >>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and th=
-e
-> >>>>> type_init
-> >>>>> function that calls type_register_static(). A later change needs to
-> >>>>> pass a
-> >>>>
-> >>>> That's the point of the macro to hide the boiler plate code.
-> >>>>
-> >>>>> target mask into that registration, and the macros have no paramete=
-r
-> >>>>> for it.
-> >>>>
-> >>>> Couldn't you just change the macros to take that parameter instead o=
-f
-> >>>> expanding it everywhere?
-> >>>>
-> >>>
-> >>> Problem of macros is that they don't have default parameters, so you
-> >>> need variants for everything:
-> >>>
-> >>> DEFINE_MACHINE
-> >>> DEFINE_MACHINE_EXTENDED
-> >>> DEFINE_MACHINE_WITH_INTERFACES
-> >>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
-> >>> and now would need a new variant, with variant for other existing one=
-s.
-> >>>
-> >>> In the end, it's just simpler to remove this and add the boilerplate.
-> >>> It's written once and never modified, so using a macro just save typi=
-ng
-> >>> those lines once.
-> >>>
-> >>>> Regards,
-> >>>> BALATON Zoltan
-> >>>>
-> >>>>> This series expands every caller first, with no behavior change, so=
- the
-> >>>>> follow-up only replaces the type_register_static() call.
-> >>>>>
-> >>>>> Each machine file gains a class_init function, a TypeInfo, and a
-> >>>>> type_init
-> >>>>> function that calls type_register_static(). The last patch removes
-> >>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/core/boa=
-rds.h.
-> >>
-> >> Macros help reading the code not saving typing. If the actual
-> >> functionality is buried in a lot of boiler plate it's harder to unders=
-tand
-> >> and spot bugs so putting the unintresting boiler plate behind a macro =
-is
-> >> better even if you need a separate version for different cases. Then t=
-he
-> >> code that uses the macro will be much more obvious and not just a lot =
-of
-> >
-> > I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* are
-> > not defined properly
-> > that causes them to not be extended easily.
-> >
-> > DEFINE_TYPES is another example, use them can extend easily, how about
-> > always use DEFINE_TYPES?
-> > Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and DEFINE_SECURE_MACHI=
-NE*?
->
-> Maybe I'm missing the problem but DEFINE_MACHINE macros are just
-> convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't you add
-> the needed parameter to DEFINE_MACHINE_EXTENDED and use that for machines
-> that need it, or if it's needed by all machines then make the new
-> parameter required and add it to all convenience wrappers too so you can
-> keep using DEFINE_MACHINE* and just need to add one parameter to it in
-> machines?
-
-That's the issue, add parameter to DEFINE_MACHINE_EXTENDED means all
-calls to it also need
-to be changed, that means touch many $target_arch files. currently
-it's 13. But after these
-changes, there will be much more usage on it, and if we want to add
-more parameters or attributes
-to it, it will be a new tree-wide change.
-
-And DEFINE_TYPES do not suffer from such issues. As the TypeInfo[] is
-explicit defined for
-DEFINE_TYPES
-
->
-> Regards,
-> BALATON Zoltan
 
 
+On 10/28/2026 5:01 PM, tewaro wrote:
+> Consider a CPU that implements PMP but has no PMP entry configured.
+> If M-mode executes mret with MPP set to S or U, QEMU raises an
+> instruction access fault on the mret. The trap is taken in M-mode,
+> with mepc pointing at the mret, mtval zero and MPP equal to M.
+> 
+> The spec says the mret succeeds and the first S/U-mode fetch fails
+> [1][2]. The trap should therefore be taken from S/U-mode, with mepc
+> and mtval equal to the mret target [3][4] and MPP equal to S/U [5].
+> 
+> The early check in check_ret_from_m_mode() is what moves the fault
+> onto the mret. Without it, the fetch at the target misses the TB and
+> TLB caches, which are keyed by privilege level, and reaches
+> pmp_hart_has_privs_default() through riscv_cpu_tlb_fill(). That
+> function already denies S/U-mode when no rule matches. Nothing
+> executes between the privilege switch and that fetch, so no other
+> behaviour changes.
+> 
+> As it stands, S/U-mode can never be entered on such a configuration,
+> and a handler that steps mepc past the apparent fault resumes in
+> M-mode at the S-mode entry point (GitLab issue #2074).
+> 
+> The check was added by commit d102f19a208 alongside the pmp.c change
+> that makes the no-rule path M-mode-only, and I believe it was already
+> redundant then. Building v6.0.0 and v7.2.0 with only the check removed
+> confirms the fetch faults as expected. Later commits (0fbb5d2d3c9,
+> 4c48aad1, 3157a553, 16aa7771) changed its gating, cause and location
+> but not the normal path. Remove it and the now unused prev_priv
+> parameter.
+> 
+> The bug was found and debugged with the help of Claude (Anthropic),
+> used as a research and debugging aid; the patch was written by hand.
+> 
+> [1] Privileged ISA v1.12, 3.7.1 "Physical Memory Protection CSRs",
+>      Priority and Matching Logic
+> [2] Privileged ISA v1.12, 3.3.2 "Trap-Return Instructions"
+> [3] Privileged ISA v1.12, 3.1.14 "Machine Exception Program Counter"
+> [4] Privileged ISA v1.12, 3.1.16 "Machine Trap Value Register"
+> [5] Privileged ISA v1.12, 3.1.6.1 "Privilege and Global
+>      Interrupt-Enable Stack in mstatus register"
+> 
+> Privileged ISA v1.12 (ratified, 2021-12-03):
+> https://github.com/riscv/riscv-isa-manual/releases/tag/Priv-v1.12
+> Current source, same wording:
+> https://github.com/riscv/riscv-isa-manual/blob/4877e41a/src/priv/machine.adoc
+> 
+> Fixes: d102f19a2085 ("target/riscv/pmp: Raise exception if no PMP entry is configured")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/2074
 
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
+The code LGTM but I don't think this is the right bug.  This points to:
+
+"riscv64 cannot use the mret instruction to jump to the address corresponding to s mode"
+
+A bug that is currently close as non-reproducible since Jan 2024.
+
+
+Thanks,
+Daniel
+
+> Signed-off-by: tewaro <tewaro@theorem.dev>
+> ---
+> v2: rebased onto current master; no change.
+> 
+>   target/riscv/tcg/op_helper.c | 10 ++--------
+>   1 file changed, 2 insertions(+), 8 deletions(-)
+> 
+> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+> index f9c79fe6b9..e46190079a 100644
+> --- a/target/riscv/tcg/op_helper.c
+> +++ b/target/riscv/tcg/op_helper.c
+> @@ -388,7 +388,6 @@ target_ulong HELPER(sret)(CPURISCVState *env)
+>   }
+>   
+>   static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
+> -                                  privilege_mode_t prev_priv,
+>                                     uintptr_t ra)
+>   {
+>       if (!(env->priv >= PRV_M)) {
+> @@ -400,11 +399,6 @@ static void check_ret_from_m_mode(CPURISCVState *env, target_ulong retpc,
+>                                       env->misa_ext) && (retpc & 0x3)) {
+>           riscv_raise_exception(env, RISCV_EXCP_INST_ADDR_MIS, ra);
+>       }
+> -
+> -    if (riscv_cpu_cfg(env)->pmp &&
+> -        !pmp_get_num_rules(env) && (prev_priv != PRV_M)) {
+> -        riscv_raise_exception(env, RISCV_EXCP_INST_ACCESS_FAULT, ra);
+> -    }
+>   }
+>   static target_ulong ssdbltrp_mxret(CPURISCVState *env, target_ulong mstatus,
+>                                      privilege_mode_t prev_priv,
+> @@ -430,7 +424,7 @@ target_ulong HELPER(mret)(CPURISCVState *env)
+>       privilege_mode_t prev_priv = get_field(mstatus, MSTATUS_MPP);
+>       uintptr_t ra = GETPC();
+>   
+> -    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+> +    check_ret_from_m_mode(env, retpc, ra);
+>   
+>       bool prev_virt = !!(get_field(env->mstatus, MSTATUS_MPV) &&
+>                        (prev_priv != PRV_M));
+> @@ -548,7 +542,7 @@ target_ulong HELPER(mnret)(CPURISCVState *env)
+>       bool prev_virt;
+>       uintptr_t ra = GETPC();
+>   
+> -    check_ret_from_m_mode(env, retpc, prev_priv, ra);
+> +    check_ret_from_m_mode(env, retpc, ra);
+>   
+>       prev_virt = !!(get_field(env->mnstatus, MNSTATUS_MNPV) &&
+>                   (prev_priv != PRV_M));
+
 
