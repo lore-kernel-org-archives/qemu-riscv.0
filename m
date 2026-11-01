@@ -1,102 +1,102 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0AA7606A324
-	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 09:33:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4AD2606A332
+	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 09:34:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VcyaMjyW;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AJadysbQ
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UuVutc/o;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XoYprw4f
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNRwK-0002gm-5l; Sun, 01 Nov 2026 04:33:24 -0500
+	id 1xNRx3-0003I6-PK; Sun, 01 Nov 2026 04:34:09 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xNRwI-0002aq-A5
- for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 04:33:22 -0500
+ id 1xNRx1-0003HY-HW
+ for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 04:34:07 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xNRwG-0005rC-Oc
- for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 04:33:22 -0500
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+ id 1xNRwz-0005sB-Gi
+ for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 04:34:07 -0500
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A18K6ja350105
- for <qemu-riscv@nongnu.org>; Sun, 1 Nov 2026 09:33:19 GMT
+ 6A18K40Q341764
+ for <qemu-riscv@nongnu.org>; Sun, 1 Nov 2026 09:34:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- vjSB4LDeJALQzuED1orO75o4jl26Cu3LHV5FBo6NDr0=; b=VcyaMjyW/18XhyKJ
- 42NB+Eo+PSaq16N2g1Z/ssRxe+i+ajvayrQYDi1JmSwRTO/VRgOxoLusXbhhn8n0
- xsjzl2BfgoE8TJdFdGBHnso7Sbd08fef8nxpsE7EcW/JE4GS6GtSnyVPO+ftmfBt
- 7a9kjQNXEaN0ajy0Y5xDa6816m47WOjJvTyK82+YY976tN7WzWfk/L2MHzCimgZs
- G9undzSQDPwkDX/kH1IARh4fM0e3tNiUp2+03X4Qf8Rhx7U+0IkhRWeunG9eGh1m
- vhkUHFkO7De+qtXkBbt/Ye60NBpF47H0EQPWQuvXjjBbcXlypnGBmz3NnP+AWc0/
- EpRr8A==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn5pkkfak-1
+ 9JvQTCHyvXPENpJYsFDxQNE0uyF1aJX8drj7pdl3PUY=; b=UuVutc/o7gIatI9r
+ DeNt57deT2IFxsEgQIBsY5/zr7vR6U+Q0H2o8gc5A6MU4Vz3F2vMLQMUloE9mbS8
+ y3OFs3dE+QeRnIQ71nPJmJoHd7r9BzU6xnYI+UJJiYhNIpUB4VaMYHnqchH85/tV
+ ZgT7QAplw3K0TSU2n4AvjeEz8DwItImKcWY4FlMyVFacSzBpWIjDQmW1++oDF9nF
+ it0JclyVZK4iLcajojBzZWbOGTUXEbSu+UpBJArFKHdwAGDTd6fM5yZRg/O45Fm8
+ wG0Sbt+r3W4THoz3zWZrKLYdII6oWx8Rl/x3Lf20WY+NusjYjk98LLVwkS+xXbhq
+ DNdK7g==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hn8dub26k-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sun, 01 Nov 2026 09:33:19 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-91c71966998so26841066d6.1
- for <qemu-riscv@nongnu.org>; Sun, 01 Nov 2026 01:33:19 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Sun, 01 Nov 2026 09:34:04 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-5365d95f4a1so33659501cf.1
+ for <qemu-riscv@nongnu.org>; Sun, 01 Nov 2026 01:34:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793525599; x=1794130399; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1793525644; x=1794130444; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=vjSB4LDeJALQzuED1orO75o4jl26Cu3LHV5FBo6NDr0=;
- b=AJadysbQ2lqy5es8xP0yTc/xUaLxDMN9J9974WxpC4SRM2RWWtRJ9Ghbxnn4U2DjSI
- N+NAmfHrha2uo9gG+nqgHM40fD2EfKZoQecUY4Qkex7SLKOJoB0QJj14yHyF3qiYKNP1
- /DcIBHhcVdlJMQX3ZcVGwWPRKgZQbDgjQ/7zYStu65vVd2l7pPwRHxWYRbMcAAMZ6JAk
- 7fCpRMYDvVWXIZ9fMLJfDbZGxRM4sysapQiijcA3u9Dq3H9ZgVrMPoYvw3YTq3ri7AbY
- tsIapCRRgimK3/oljCQMODlb9J9pWXWAF5S6vSb+FUaXKc1/TD1tzpoa8WbEBiTEcKLP
- gJmA==
+ bh=9JvQTCHyvXPENpJYsFDxQNE0uyF1aJX8drj7pdl3PUY=;
+ b=XoYprw4fVldR3aeF8MQj8HYGjYaq+JTAWsED2qekLiVFyO4ofqOySVJuvIvd8Z5wnO
+ DGVTcVaHZq2rfn34DPI6LX5/RZkP73PKr17oBsLGQ3F0XEZvpRRHFBVPxcBf1FCcQOx9
+ Mpl5/n60jZOT68tGv+kbtU8CPE31FD016xnbhOxm6SNNpI2CKofxYt4fAK1NsHtw43cZ
+ UV4vuJ40YDFvcQ5kdAidrVAdduZoCmt2J4/A1lz4zIQ3Veh0NFZ996ZFpyz1DS1G4qwH
+ /NU2EQIO5Y70iy/ydKPb1eST8qYgX8mvS2BRm2kvIhhrUYgCeofqM3SlreME+Eo0E8F2
+ qCvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793525599; x=1794130399;
+ d=1e100.net; s=20260707; t=1793525644; x=1794130444;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=vjSB4LDeJALQzuED1orO75o4jl26Cu3LHV5FBo6NDr0=;
- b=qQlJW/kCMjnRkVY/UP+PrXWjAno4qpYFot1i/5hW+nF4VqP3zAx3vhq6/RvQnrxetT
- n+vvsxUaybB1PA2rWNAwkv/fVi0DQbr/fP8E1K/bntICdq7Mu9YtS8X4do79vkBp5Ip/
- cgdXvFjQOKqPFkmCWpWn/qpO/5pErpWGFKTxglqvnA2SVLsASwf65VgpOSB+LYkpZp85
- oAB5wvynGijTTRYyg/QJ0DPOs9JuDJknwxHTwTyepU13+WRO+utLhVJrmE5/eQBoKmLR
- M7SNaYyeWUj6RwivfceUAFh+SDHEq1SS9W/jfN3wvBEg0wtQWxONNIXZErb56TTj2EGG
- U4EA==
+ bh=9JvQTCHyvXPENpJYsFDxQNE0uyF1aJX8drj7pdl3PUY=;
+ b=KzcEe/k7XGP33A4DpeRD7YddeaBRlMtkr4nwwQX8OF67TRKNUI0PMa7ejKLd78atHy
+ 1Os7fAKyHSsELetYGtaj8DbGeHHpwEnpJPXQH/7Yv0UVfw2tALez8uQM6wM6g4aQAt6a
+ b/eL5X1kyMs4eM79KRKNczF7wEspVDzK0/sUfESHnxGjKzqKybqHj4orpfsfkhyzpUVX
+ zWwK/skEDFZT6Z2HKHd94I1DyeRu9I16fGQO4RdIO6wWrVi8orr+HRA7fO1kO1Ry8Vm9
+ n/3ktvIMoc8/vRdy2957SsHwcqBcnCkCj0yweyTWSsaIjAxmBXjwVJ58TGyIF8SUIRm+
+ akzA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBzhahJCkMmLjx3wf1CIijfWWvJ34sVUlVgH2T+YC18PlQ8X+ucTMIqdz6abYocfwMmV9aCcgSAbrFhF@nongnu.org
-X-Gm-Message-State: APuU4Z+AW5i0aMQA8bcWYMTbTBpFfjHHIn2f5uo+tsjotLcKbQTgeFis
- cQRmmoNbJ/rLBLS3+xPraVZ8rVxL5wACGKapc9ySP2SrQQEg21fqj/iRuKB496LRwkm0O4lPMyW
- rbfqOPZpATGeA6JwnbB9zOwOTCqBNw3ZQQ6O4S8Lj/7ycw4FQEBlHrxwbpg==
-X-Gm-Gg: AYBFou1F0m/DPQ3iJPh9qqz2o/hu3cb/PB9iZCGM82ygCx3rVzVPk5nt71qeZAH/s+y
- G+j+5eZbcaxFxYEMYNUiDMV6At85OGoWlGc7gnw8YhHRhTw1UbrLVnn5gElDujKnLs4TFmXFJHn
- icO4+kgfA1aa++iDF3cxLf5D9qYVHjlmx0xlht5f2uBaBG7v/5syE/ktbYm53R0cGZ3dE3MyeGD
- P+EgtZsS1H1y+hePY1Sgf9AfXQ5OQFonXvdNs3FyzOhO6cuL7jJp9f++l+HkJUUi3TBdOdmDK+8
- kYaKUFm6GtGa8A/IMwoaNpnJz2rdGqk9J2p/MLZPIYvLdiVtRWd1QQMiqtpQbL6OLvcaxKMDnWc
- Os2MzKSmyYMwWVX+9CGBA6BdT2dzhz11unYxv9UQ+SccFHDBZ166JXu/HrULo0tBVGNgo8iHl7W
- Kixywuf6FF
-X-Received: by 2002:a05:6214:cc5:b0:917:8783:341 with SMTP id
- 6a1803df08f44-91ca4b9a559mr103086926d6.45.1793525599058; 
- Sun, 01 Nov 2026 01:33:19 -0800 (PST)
-X-Received: by 2002:a05:6214:cc5:b0:917:8783:341 with SMTP id
- 6a1803df08f44-91ca4b9a559mr103086786d6.45.1793525598563; 
- Sun, 01 Nov 2026 01:33:18 -0800 (PST)
+ AKwUvBw2ID2CQkEYSGeAS6lNgWdog3Dhva4UEfMK4kM7ncE1VKwb45vefDlBWdSwPXLh42yHInStEqOc5b3y@nongnu.org
+X-Gm-Message-State: AFq9FYI66CmfG21GHfeSc5aM86ghNngJdC/+M0RH/PmxtYtRuW0yxOtj
+ WvEd2bDFE8MQXbAfJ2kQjoH2OICUS/o5eHtflPqY1QC8TG7eFc/7EImgXcqA4rFciBKxyEatYkV
+ SILaOshOoBxj9ThPFD96IVAVxVv8/yRjgzFxJ/l+F41OLP7VkSgMxoj7AoA==
+X-Gm-Gg: AYBFou2Mjx5hVob7HTnqqYCrKPVieEN4FAcoFLj0FBXR9KfGXjYK3dX9jsOQB5gAEOd
+ b4PuJ9v0Xb9kweafW+KhSJMkGMOGhf4HcRq7MVhKLF6R5Qh3EvN55iVQ4+bI/4JkHhM+Lx8JUCB
+ 3uuJZrZ8pZOa/DN5nFInSpZ3GWZOuoKyH8XL1yPAAKKu2Ok60XD63qTPWCeaAZmUvbdG6X5+odx
+ 9BXEWz/hOk8fdqqQ3QNI3j1k445iuAXGz6ODX0UgUSe3jY+kTK6MepwE8K43Kl6w6ZBPDuKiyJm
+ APwXDRDBQtWrFBaA9AJmRpg1TwoNWk6ESH+6W+l8E1eBnBPV4jRmwvymiqdGbtBa1F5/jKZM3mg
+ xM9L8hxifX6Ijf0r7HIN1rHAAj9BH0uWbuJKzWZ8gc1Wus7wqudaQxIakDaRm9xlZyUst6Tk4pR
+ vX2iCwjp8Q
+X-Received: by 2002:a05:622a:5c0f:b0:536:91bf:b540 with SMTP id
+ d75a77b69052e-542b6780d8emr117248181cf.23.1793525643529; 
+ Sun, 01 Nov 2026 01:34:03 -0800 (PST)
+X-Received: by 2002:a05:622a:5c0f:b0:536:91bf:b540 with SMTP id
+ d75a77b69052e-542b6780d8emr117247741cf.23.1793525642815; 
+ Sun, 01 Nov 2026 01:34:02 -0800 (PST)
 Received: from [192.168.68.102] ([152.234.122.251])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91ca7f4767asm62614196d6.21.2026.11.01.01.33.15
+ d75a77b69052e-54312b52eacsm57333121cf.26.2026.11.01.01.33.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 01 Nov 2026 01:33:18 -0800 (PST)
-Message-ID: <2dc56262-8580-4612-9c80-8aff6cf56078@oss.qualcomm.com>
-Date: Sun, 1 Nov 2026 06:33:14 -0300
+ Sun, 01 Nov 2026 01:34:01 -0800 (PST)
+Message-ID: <70bfb1bd-24fa-45df-b36b-ecd908803010@oss.qualcomm.com>
+Date: Sun, 1 Nov 2026 06:33:58 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 13/27] hw/riscv: pfsoc: Enable 64-bit SDHCI system bus
- support
+Subject: Re: [PATCH v4 19/27] hw/misc: pfsoc: Let IOSCB own service interrupt
+ state
 To: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>
 Cc: Conor Dooley <conor.dooley@microchip.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -106,41 +106,40 @@ Cc: Conor Dooley <conor.dooley@microchip.com>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>,
  Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
 References: <20261014012323.322790-1-bin.meng@processmission.com>
- <20261014012323.322790-14-bin.meng@processmission.com>
+ <20261014012323.322790-20-bin.meng@processmission.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261014012323.322790-14-bin.meng@processmission.com>
+In-Reply-To: <20261014012323.322790-20-bin.meng@processmission.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: biVXTYy9iBzNyM_o5KLQlo3mdRJpEuOJ
-X-Authority-Analysis: v=2.4 cv=Z4F5j3RA c=1 sm=1 tr=0 ts=6ae7075f cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=QOY8BskYDu05dfarAz2gNQ==:17
+X-Authority-Analysis: v=2.4 cv=O6esLx9W c=1 sm=1 tr=0 ts=6ae7078c cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=QOY8BskYDu05dfarAz2gNQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=FRSEYCzRAAAA:8 a=XYAwZIGsAAAA:8 a=EUspDBNiAAAA:8 a=X6nEVRAShBcqs7oysRMA:9
- a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22 a=H4N_Y-AU75W7NKDNhZlT:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=FRSEYCzRAAAA:8 a=XYAwZIGsAAAA:8 a=EUspDBNiAAAA:8 a=TIZ2mjcJ1XorKqfiCOoA:9
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22 a=H4N_Y-AU75W7NKDNhZlT:22
  a=E8ToXWR_bxluHZ7gmE-Z:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDAzNyBTYWx0ZWRfX1MEAKaxftcqP
- GpiKU/DzL2epIUgQY9YMWHbuyy+GaO1v/HqWpG17NfvOloQ8pk7XA7Y1NkIyVNpwGnwPAT7sfVq
- jXmXQ7ZiKgqJ5ZI84aYruKzgiNBJDjg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDAzNyBTYWx0ZWRfXw02M7VrNBb1p
- uPPYfqUld+84OWQR2K6ZcH/bhnCBSsiCp1brmspsMZ9/xZypOISfa1f3frt9G4AiZkZMiyvVsSk
- ZxK/7fQuiQQ41FkPuOdeTAXr+nUn7IsmJygw6Rl6nanUjIne03bP9EzT0c0HbZtZ60yi2B0YMkK
- DwYL/zpgko4x7FyURvZKen2GEMpTMHRRjha4cRDENtKaQlBTrIfHAcr67r96F7gId4Mmsnv3p8M
- DhH34Zr76h1i9VOEUYY3GPO4uBtpHIQYaSsnKz6GnwqUH1ZfD8PiWm66mBS2+KLB6mG33ubUPap
- esutxk4xa6wSxYa7k0Ar30PJtoDuCCPgh/QkIdrSjTgmV97HQPzmwAh5DIoYZJXyGoLxMan6nVJ
- ffRxsCBi+PCy3ZzwnImSag7VfPLOHRJX/tBKSFJCkQez483QsdyjL+1Gu0UPBmOtLxN+hUifgL6
- lJEhZMfTQmVv8vt5T1A==
-X-Proofpoint-ORIG-GUID: biVXTYy9iBzNyM_o5KLQlo3mdRJpEuOJ
+X-Proofpoint-ORIG-GUID: uVk4pN7T3_E8qECIKPpixzxxzClSmTys
+X-Proofpoint-GUID: uVk4pN7T3_E8qECIKPpixzxxzClSmTys
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAxMDAzNyBTYWx0ZWRfX+rQ4k3xaQgBo
+ S0h5q5ICck5mu7ORlIiqOO7aFvChlZ93ROc4h40vCtMZKkWCJOvyrIGMrNy6+ROyvLhQSO1gwuz
+ q7DoF1QroBO9JQBAiVJRswF8e+k2QM7/GFo5rcrbkSXin0h6ZaCfhFOTqnpnecM1el40gCpGlSX
+ S2XIIe0+3fHPhPaL3l6FPzl7NV/goMkik0gnJU2zQ9wgBY8wMjvhKwPtbezzkd7UiKMDs/MpD3n
+ ORTjWI9bU4HrnRS0YISg7LRUm0szIrbO68lo8FD9EYdc0nuHf/331PtAvBBHbyhGvR8YYJ53HUf
+ t9gKyp8O98Q/fQZENX8SPtwOGCo6M5X1s4YArJdufYiKYzenFjxkoyI4sVdVXEOBknQSWkk4m8s
+ 5i3VAIgz/Xf8xUtAN96ySJeVn30/+gQX2wujGwQVFcxqFFYsCobgwngY3M2iZHQ7xGsNjpZTo3L
+ FE/t216zC+G6OkNhRhQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAxMDAzNyBTYWx0ZWRfX6zh8U7lTUbCl
+ K4RBbcEg3q9rYyjxAoCaCC9Tjiz6oC8lpirvvUA35x6ZyVmSeiX83+gpAJRL5909oyTnQkD5HFx
+ +3Jtc8+4+eaPxnHzyN2ti8HKjXV2uCE=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-01_03,2026-10-21_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
- phishscore=0 impostorscore=0 adultscore=0 spamscore=0 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
- definitions=main-2611010037
+ suspectscore=0 phishscore=0 malwarescore=0 impostorscore=0 lowpriorityscore=0
+ bulkscore=0 priorityscore=1501 adultscore=0 spamscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611010037
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -172,41 +171,230 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 On 10/13/2026 10:22 PM, Bin Meng wrote:
-> PolarFire SoC software selects 64-bit ADMA descriptors for the Cadence
-> SDHCI controller. The controller supports those descriptors, but the
-> Cadence property remains disabled by default for other integrations.
+> System service completion raises PLIC source 96 from IOSCB, while
+> software accesses MESSAGE_INT through SYSREG. The MESSAGE_INT pending
+> bit is not modelled explicitly, so reads return zero even when a
+> service interrupt is active. Model the bit so service completion and
+> register accesses use the same state.
 > 
-> Enable the bus64bit property from the PolarFire SoC so the generic
-> SDHCI descriptor engine can execute 64-bit ADMA transfers.
+> Keep the pending state and PLIC output in IOSCB. Link SYSREG to IOSCB
+> so MESSAGE_INT reads the current pending bit and writes update the
+> same state.
 > 
 > Signed-off-by: Bin Meng <bin.meng@processmission.com>
 > Tested-by: Conor Dooley <conor.dooley@microchip.com>
 > 
 > ---
-
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
 > 
-> (no changes since v2)
+> (no changes since v3)
 > 
-> Changes in v2:
-> - New
+> Changes in v3:
+> - Separate interrupt state ownership from the NOTIFY fix
+> - Link SYSREG to IOSCB for MESSAGE_INT reads and writes
+> - Support both clearing and setting the MESSAGE_INT pending bit
 > 
->   hw/riscv/microchip_pfsoc.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   include/hw/misc/mchp_pfsoc_ioscb.h  |  4 ++++
+>   include/hw/misc/mchp_pfsoc_sysreg.h |  3 ++-
+>   hw/misc/mchp_pfsoc_ioscb.c          | 20 ++++++++++++++--
+>   hw/misc/mchp_pfsoc_sysreg.c         | 37 ++++++++++++++++++++++-------
+>   hw/riscv/microchip_pfsoc.c          |  5 ++--
+>   5 files changed, 55 insertions(+), 14 deletions(-)
 > 
+> diff --git a/include/hw/misc/mchp_pfsoc_ioscb.h b/include/hw/misc/mchp_pfsoc_ioscb.h
+> index aa108d2d88..e8386f9794 100644
+> --- a/include/hw/misc/mchp_pfsoc_ioscb.h
+> +++ b/include/hw/misc/mchp_pfsoc_ioscb.h
+> @@ -53,6 +53,7 @@ typedef struct MchpPfSoCIoscbState {
+>       uint32_t services_sr;
+>       uint8_t mailbox_data[MCHP_PFSOC_IOSCB_MAILBOX_SIZE];
+>       char *serial_number;
+> +    bool irq_pending;
+>       qemu_irq irq;
+>   } MchpPfSoCIoscbState;
+>   
+> @@ -61,4 +62,7 @@ typedef struct MchpPfSoCIoscbState {
+>   #define MCHP_PFSOC_IOSCB(obj) \
+>       OBJECT_CHECK(MchpPfSoCIoscbState, (obj), TYPE_MCHP_PFSOC_IOSCB)
+>   
+> +bool mchp_pfsoc_ioscb_get_irq_pending(MchpPfSoCIoscbState *s);
+> +void mchp_pfsoc_ioscb_set_irq_pending(MchpPfSoCIoscbState *s, bool pending);
+> +
+>   #endif /* MCHP_PFSOC_IOSCB_H */
+> diff --git a/include/hw/misc/mchp_pfsoc_sysreg.h b/include/hw/misc/mchp_pfsoc_sysreg.h
+> index c2b3688a94..d6c9027f2d 100644
+> --- a/include/hw/misc/mchp_pfsoc_sysreg.h
+> +++ b/include/hw/misc/mchp_pfsoc_sysreg.h
+> @@ -24,13 +24,14 @@
+>   #define MCHP_PFSOC_SYSREG_H
+>   
+>   #include "hw/core/sysbus.h"
+> +#include "hw/misc/mchp_pfsoc_ioscb.h"
+>   
+>   #define MCHP_PFSOC_SYSREG_REG_SIZE  0x2000
+>   
+>   typedef struct MchpPfSoCSysregState {
+>       SysBusDevice parent;
+>       MemoryRegion sysreg;
+> -    qemu_irq irq;
+> +    MchpPfSoCIoscbState *ioscb;
+>   } MchpPfSoCSysregState;
+>   
+>   #define TYPE_MCHP_PFSOC_SYSREG "mchp.pfsoc.sysreg"
+> diff --git a/hw/misc/mchp_pfsoc_ioscb.c b/hw/misc/mchp_pfsoc_ioscb.c
+> index bde1917c10..1f77da6852 100644
+> --- a/hw/misc/mchp_pfsoc_ioscb.c
+> +++ b/hw/misc/mchp_pfsoc_ioscb.c
+> @@ -209,6 +209,22 @@ static const MemoryRegionOps mchp_pfsoc_io_calib_ddr_ops = {
+>   #define SERVICES_STATUS_SUCCESS             0
+>   #define SERVICES_STATUS_FAILED              1
+>   
+> +static void mchp_pfsoc_ioscb_update_irq(MchpPfSoCIoscbState *s)
+> +{
+> +    qemu_set_irq(s->irq, s->irq_pending);
+> +}
+> +
+> +bool mchp_pfsoc_ioscb_get_irq_pending(MchpPfSoCIoscbState *s)
+> +{
+> +    return s->irq_pending;
+> +}
+> +
+> +void mchp_pfsoc_ioscb_set_irq_pending(MchpPfSoCIoscbState *s, bool pending)
+> +{
+> +    s->irq_pending = pending;
+> +    mchp_pfsoc_ioscb_update_irq(s);
+> +}
+> +
+>   static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
+>   {
+>       uint32_t command;
+> @@ -248,7 +264,7 @@ static void services_cr_write(MchpPfSoCIoscbState *s, uint32_t value)
+>   
+>       s->services_sr = status << SERVICES_SR_STATUS_SHIFT;
+>       if (value & SERVICES_CR_NOTIFY) {
+> -        qemu_irq_raise(s->irq);
+> +        mchp_pfsoc_ioscb_set_irq_pending(s, true);
+>       }
+>   }
+>   
+> @@ -339,7 +355,7 @@ static void mchp_pfsoc_ioscb_reset(DeviceState *dev)
+>       s->services_cr = 0;
+>       s->services_sr = 0;
+>       memset(s->mailbox_data, 0, sizeof(s->mailbox_data));
+> -    qemu_irq_lower(s->irq);
+> +    mchp_pfsoc_ioscb_set_irq_pending(s, false);
+>   }
+>   
+>   static const Property mchp_pfsoc_ioscb_properties[] = {
+> diff --git a/hw/misc/mchp_pfsoc_sysreg.c b/hw/misc/mchp_pfsoc_sysreg.c
+> index 1d9154280a..4c52338c8a 100644
+> --- a/hw/misc/mchp_pfsoc_sysreg.c
+> +++ b/hw/misc/mchp_pfsoc_sysreg.c
+> @@ -24,20 +24,22 @@
+>   #include "qemu/bitops.h"
+>   #include "qemu/log.h"
+>   #include "qapi/error.h"
+> -#include "hw/core/irq.h"
+> +#include "hw/core/qdev-properties.h"
+>   #include "hw/core/sysbus.h"
+>   #include "hw/misc/mchp_pfsoc_sysreg.h"
+>   #include "system/runstate.h"
+>   
+> -#define CLOCK_CONFIG_CR 0x8
+> -#define RTC_CLOCK_CR    0xc
+> -#define MSS_RESET_CR    0x18
+> -#define ENVM_CR         0xb8
+> -#define MESSAGE_INT     0x118c
+> +#define CLOCK_CONFIG_CR     0x8
+> +#define RTC_CLOCK_CR        0xc
+> +#define MSS_RESET_CR        0x18
+> +#define ENVM_CR             0xb8
+> +#define MESSAGE_INT         0x118c
+> +#define MESSAGE_INT_PENDING BIT(0)
+>   
+>   static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
+>                                          unsigned size)
+>   {
+> +    MchpPfSoCSysregState *s = opaque;
+>       uint32_t val = 0;
+>   
+>       switch (offset) {
+> @@ -56,6 +58,10 @@ static uint64_t mchp_pfsoc_sysreg_read(void *opaque, hwaddr offset,
+>           /* Indicate the eNVM is running at the configured divider rate */
+>           val = BIT(6);
+>           break;
+> +    case MESSAGE_INT:
+> +        val = mchp_pfsoc_ioscb_get_irq_pending(s->ioscb) ?
+> +              MESSAGE_INT_PENDING : 0;
+> +        break;
+>       default:
+>           qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
+>                         "(size %d, offset 0x%" HWADDR_PRIx ")\n",
+> @@ -77,7 +83,12 @@ static void mchp_pfsoc_sysreg_write(void *opaque, hwaddr offset,
+>           }
+>           break;
+>       case MESSAGE_INT:
+> -        qemu_irq_lower(s->irq);
+> +        /*
+> +         * MESSAGE_INT bit 0 is read/write: writing zero clears the interrupt
+> +         * and writing one sets it. IOSCB owns the state and PLIC output.
+> +         */
+> +        mchp_pfsoc_ioscb_set_irq_pending(s->ioscb,
+> +                                        value & MESSAGE_INT_PENDING);
+>           break;
+>       default:
+>           qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
+> @@ -97,20 +108,30 @@ static void mchp_pfsoc_sysreg_realize(DeviceState *dev, Error **errp)
+>   {
+>       MchpPfSoCSysregState *s = MCHP_PFSOC_SYSREG(dev);
+>   
+> +    if (!s->ioscb) {
+> +        error_setg(errp, "The 'ioscb' link must be set");
+> +        return;
+> +    }
+> +
+>       memory_region_init_io(&s->sysreg, OBJECT(dev),
+>                             &mchp_pfsoc_sysreg_ops, s,
+>                             "mchp.pfsoc.sysreg",
+>                             MCHP_PFSOC_SYSREG_REG_SIZE);
+>       sysbus_init_mmio(SYS_BUS_DEVICE(dev), &s->sysreg);
+> -    sysbus_init_irq(SYS_BUS_DEVICE(dev), &s->irq);
+>   }
+>   
+> +static const Property mchp_pfsoc_sysreg_properties[] = {
+> +    DEFINE_PROP_LINK("ioscb", MchpPfSoCSysregState, ioscb,
+> +                     TYPE_MCHP_PFSOC_IOSCB, MchpPfSoCIoscbState *),
+> +};
+> +
+>   static void mchp_pfsoc_sysreg_class_init(ObjectClass *klass, const void *data)
+>   {
+>       DeviceClass *dc = DEVICE_CLASS(klass);
+>   
+>       dc->desc = "Microchip PolarFire SoC SYSREG module";
+>       dc->realize = mchp_pfsoc_sysreg_realize;
+> +    device_class_set_props(dc, mchp_pfsoc_sysreg_properties);
+>   }
+>   
+>   static const TypeInfo mchp_pfsoc_sysreg_info = {
 > diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
-> index d0d8c8f84c..3d1b3246db 100644
+> index 36c894b677..38f4e7d799 100644
 > --- a/hw/riscv/microchip_pfsoc.c
 > +++ b/hw/riscv/microchip_pfsoc.c
-> @@ -193,6 +193,8 @@ static void microchip_pfsoc_soc_instance_init(Object *obj)
+> @@ -315,12 +315,11 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+>       }
 >   
->       object_initialize_child(obj, "sd-controller", &s->sdhci,
->                               TYPE_CADENCE_SDHCI);
-> +    object_property_set_bool(OBJECT(&s->sdhci), "bus64bit", true,
+>       /* SYSREG */
+> +    object_property_set_link(OBJECT(&s->sysreg), "ioscb", OBJECT(&s->ioscb),
 > +                             &error_abort);
+>       sysbus_realize(SYS_BUS_DEVICE(&s->sysreg), errp);
+>       sysbus_mmio_map(SYS_BUS_DEVICE(&s->sysreg), 0,
+>                       memmap[MICROCHIP_PFSOC_SYSREG].base);
+> -    sysbus_connect_irq(SYS_BUS_DEVICE(&s->sysreg), 0,
+> -                       qdev_get_gpio_in(DEVICE(s->plic),
+> -                       MICROCHIP_PFSOC_MAILBOX_IRQ));
 >   
->       object_initialize_child(obj, "ioscb", &s->ioscb, TYPE_MCHP_PFSOC_IOSCB);
->   }
+>       /* AXISW */
+>       create_unimplemented_device("microchip.pfsoc.axisw",
 
 
