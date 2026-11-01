@@ -1,45 +1,45 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97742606A324
-	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 20:27:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7175D606A324
+	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 20:27:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FQZ3DoLO
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=K47Mxn85
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNc7w-0006vx-Ay; Sun, 01 Nov 2026 15:26:04 -0500
+	id 1xNc7u-0006uj-L4; Sun, 01 Nov 2026 15:26:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xNc7t-0006te-50; Sun, 01 Nov 2026 15:26:01 -0500
-Received: from sea.source.kernel.org ([172.234.252.31])
+ id 1xNc7r-0006tB-O1; Sun, 01 Nov 2026 15:25:59 -0500
+Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xNc7p-0008EL-99; Sun, 01 Nov 2026 15:26:00 -0500
+ id 1xNc7p-0008Dt-2u; Sun, 01 Nov 2026 15:25:59 -0500
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id E22B54400C;
- Sun,  1 Nov 2026 20:25:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A40C1F00A02;
- Sun,  1 Nov 2026 20:25:55 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 5ED9243E87;
+ Sun,  1 Nov 2026 20:25:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 114D71F0093A;
+ Sun,  1 Nov 2026 20:25:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1793564755;
- bh=SMaaZvOmw5MWE8lMY7EmIkbxn3KO4hSq6KXD/Zi1lYk=;
+ s=k20260515; t=1793564754;
+ bh=I7ouLT/M+BCFIajGZwqKr4c5+Q8BhYcniakHEvtW6E8=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=FQZ3DoLOSPyY+2r2sMdcVZRRfAmWXFmQ5Q0qLy3KmycfFD68FLXfUDRrAEu/WAQsr
- 5jmzwfZe15/NrYBtwgsc6aIhc4nR0aoa8b5ZrSBIDRgp66PSzuphW169fhEaMqJ24j
- E9sqc19CRIWEEZco4bYRTz7MFR9BwgSKynVFYH7aHxyprCMlZJECAKhj7QA/EUMDQw
- 54aG0OjClqTswhGRljMrBdoHWeiBufuFIkadsgN8xi5pFjWvs0Ba4Ltolx19qqYXho
- KDvKo16Or6g9yKYFuJ7oDQ8Dk3TchQnv5gfMYKGrlD6QrA9PSZjshZ4us76z8bIAnp
- 2H98lcbftCEKw==
+ b=K47Mxn85Gz6CytauvsyeJqfW5kQCc1UzWTB4gt3t5Dv9znW4e+ruW4LuSuNRLxbNU
+ bE8V/OqwCzG1ujQOMxKTUHxXl/7IIBLKxIGyl9IzpIgqj0cxC5ArC3DNwaBSysFxfl
+ xC9jpKVgEpB5K3xXql9wvxpSeE2OLdNX2Wv2WCRcCYRylAe0MD1hOmQEgPD3n7iTnW
+ ZtJGbeKCHSQGhCtAYFnLMeNfRxdIml5GDjXRnn1kOI8zJu2H6no0mIPuLBgyuFdktM
+ ctdNyCNthLTLtC8N5etbvIrgAqb8vN7dL4HBVGm8g9YTL19cYgHSgRpoEEmOYJSNB4
+ rIflhhZ3Z9WOA==
 From: Drew Fustini <fustini@kernel.org>
-Date: Sun, 01 Nov 2026 12:25:38 -0800
-Subject: [PATCH v7 6/6] hw/riscv: add CBQRI controllers to virt machine
+Date: Sun, 01 Nov 2026 12:25:33 -0800
+Subject: [PATCH v7 1/6] riscv: implement Ssqosid extension and srmcfg CSR
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261101-riscv-ssqosid-cbqri-v7-6-92d1aae43e48@kernel.org>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261101-riscv-ssqosid-cbqri-v7-1-92d1aae43e48@kernel.org>
 References: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
 In-Reply-To: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
 To: qemu-devel@nongnu.org
@@ -56,19 +56,18 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <radim.krcmar@oss.qualcomm.com>, 
  yunhui cui <cuiyunhui@bytedance.com>, Chen Pei <cp0613@linux.alibaba.com>, 
  guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
- Drew Fustini <fustini@kernel.org>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ Drew Fustini <fustini@kernel.org>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4083; i=fustini@kernel.org;
- h=from:subject:message-id; bh=jeqPCa4uB2VVu0cWbY6S2YDW5CAWVJ0IW5bxDb8e1EE=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQ9XxAYr/GUpZ3d4Esj2x7N6n3Z5zf/a1EJyUj0vTrHW
- Sgv+09oRykLgxgXg6yYIsumD3kXlniFfl0w/8U2mDmsTCBDGLg4BWAiz24w/K9/sOtRu+/F1BmT
- ShckRAel/T90mkXhTNLFdl9lTuPi1huMDF3vH85ij/aW0DI6V+63VPeLFq+ElZbFTqUtfafXzcn
- o4QAA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8592; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=pH4ntEx3/2eZ64PKcIOMCwFtuys3Wn2+acOLUhS3X44=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQ9XxDYLMnDYxncZWvhGXqvwfJD6N+nylVlmgVcLuwcP
+ UczI9U7SlkYxLgYZMUUWTZ9yLuwxCv064L5L7bBzGFlAhnCwMUpABMJuMDwV/6g2jG5EsEphw+z
+ uMu927steq7LrYVJrPqiUbNOtUwXuMrIsNC/rG72y9fyco6iacue7V+yuNn77C/59/bvlj/zU2P
+ rZQUA
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
-Received-SPF: pass client-ip=172.234.252.31; envelope-from=fustini@kernel.org;
- helo=sea.source.kernel.org
+Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
+ envelope-from=fustini@kernel.org; helo=sea.source.kernel.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -87,115 +86,254 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Nicolas Pitre <npitre@baylibre.com>
+From: Kornel Dulęba <mindal@semihalf.com>
 
-Add CBQRI controllers to the RISC-V virt machine. The device properties
-can be fully configured from the command line:
+Implement the srmcfg CSR defined by the Ssqosid ISA extension
+(Supervisor-mode Quality of Service ID). The CSR contains two fields:
 
-  $ qemu-system-riscv64 -M virt ... \
-      -device riscv.cbqri.capacity,mmio_base=0x04820000[,...] \
-      -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
+  - Resource Control ID (RCID) used to determine resource allocation
+  - Monitoring Counter ID (MCID) used to track resource usage
 
-The mmio_base option is mandatory. The others are optional.
+The CSR is defined for S-mode, so check mstateen0.srmcfg to determine
+if S-mode is allowed to access it. In addition, accessing it when V=1
+shall cause a virtual instruction exception.
 
-As many -device arguments as wanted can be provided as long as their
-mmio regions don't conflict.
-
-To see all possible options:
-
-  $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
-  riscv.cbqri.capacity options:
-    alloc_op_config_limit=<bool> - on/off (default: on)
-    alloc_op_flush_rcid=<bool> - on/off (default: on)
-    alloc_op_read_limit=<bool> - on/off (default: on)
-    at_code=<bool>         - on/off (default: on)
-    max_mcids=<uint16>     -  (default: 256)
-    max_rcids=<uint16>     -  (default: 64)
-    mmio_base=<uint64>     -  (default: 0)
-    mon_evt_id_none=<bool> - on/off (default: on)
-    mon_evt_id_occupancy=<bool> - on/off (default: on)
-    mon_op_config_event=<bool> - on/off (default: on)
-    mon_op_read_counter=<bool> - on/off (default: on)
-    ncblks=<uint16>        -  (default: 16)
-
-  $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
-  riscv.cbqri.bandwidth options:
-    alloc_op_config_limit=<bool> - on/off (default: on)
-    alloc_op_read_limit=<bool> - on/off (default: on)
-    at_code=<bool>         - on/off (default: on)
-    max_mcids=<uint16>     -  (default: 256)
-    max_rcids=<uint16>     -  (default: 64)
-    mmio_base=<uint64>     -  (default: 0)
-    mon_evt_id_none=<bool> - on/off (default: on)
-    mon_evt_id_rdonly_count=<bool> - on/off (default: on)
-    mon_evt_id_rdwr_count=<bool> - on/off (default: on)
-    mon_evt_id_wronly_count=<bool> - on/off (default: on)
-    mon_op_config_event=<bool> - on/off (default: on)
-    mon_op_read_counter=<bool> - on/off (default: on)
-    mrbwb=<uint16>         -  (default: 819)
-    nbwblks=<uint16>       -  (default: 1024)
-
-Boolean options correspond to hardware capabilities that can be
-disabled.
-
-Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
+Link: https://docs.riscv.org/reference/isa/priv/smstateen.html
+Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
+[fustini: rebase, fix check_srmcfg]
+Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- hw/core/sysbus-fdt.c | 4 ++++
- hw/riscv/virt.c      | 3 +++
- 2 files changed, 7 insertions(+)
+ disas/riscv.c                     |  1 +
+ target/riscv/cpu.c                |  3 +++
+ target/riscv/cpu.h                |  3 +++
+ target/riscv/cpu_bits.h           |  9 ++++++++
+ target/riscv/cpu_cfg_fields.h.inc |  1 +
+ target/riscv/machine.c            | 19 +++++++++++++++++
+ target/riscv/tcg/csr.c            | 45 +++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 81 insertions(+)
 
-diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
-index 12238570b5e1..265917ef573e 100644
---- a/hw/core/sysbus-fdt.c
-+++ b/hw/core/sysbus-fdt.c
-@@ -35,6 +35,7 @@
- #include "hw/core/platform-bus.h"
- #include "hw/display/ramfb.h"
- #include "hw/uefi/var-service-api.h"
-+#include "hw/riscv/cbqri.h"
- #include "hw/arm/fdt.h"
- #include "hw/watchdog/sbsa_gwdt.h"
+diff --git a/disas/riscv.c b/disas/riscv.c
+index ca0d6e90b373..bce5f58305dd 100644
+--- a/disas/riscv.c
++++ b/disas/riscv.c
+@@ -703,6 +703,7 @@ static const char *csr_name(int csrno)
+     case 0x0143: return "stval";
+     case 0x0144: return "sip";
+     case 0x0180: return "satp";
++    case 0x0181: return "srmcfg";
+     case 0x0200: return "hstatus";
+     case 0x0202: return "hedeleg";
+     case 0x0203: return "hideleg";
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 5a0529fbdade..3432fea38ba0 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -284,6 +284,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
+     ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
+     ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
+     ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
++    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_13_0, ext_ssqosid),
+     ISA_INTERNAL_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
+     ISA_INTERNAL_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
+     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
+@@ -3504,6 +3505,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.ext_zbc = true,
+         .cfg.ext_zbs = true,
+         .cfg.ext_sstc = true,
++        .cfg.ext_ssqosid = true,
+         .cfg.ext_svadu = true,
+         .cfg.ext_svvptc = true,
+     ),
+@@ -3577,6 +3579,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .cfg.ext_zbc = true,
+         .cfg.ext_zbs = true,
+         .cfg.ext_sstc = true,
++        .cfg.ext_ssqosid = true,
+         .cfg.ext_svadu = true,
+         .cfg.ext_svvptc = true,
+     ),
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 49a1186bdbb2..0dfb280d1f33 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -369,6 +369,9 @@ struct CPUArchState {
+     uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
+     uint64_t ctr_data[16 << SCTRDEPTH_MAX];
  
-@@ -142,6 +143,9 @@ static const BindingEntry bindings[] = {
-     TYPE_BINDING(TYPE_RAMFB_DEVICE, no_fdt_node),
-     TYPE_BINDING(TYPE_UEFI_VARS_SYSBUS, add_uefi_vars_node),
-     TYPE_BINDING(TYPE_WDT_SBSA, no_fdt_node),
-+    /* RISC-V CBQRI controllers have no generic device tree node */
-+    TYPE_BINDING(TYPE_RISCV_CBQRI_BC, no_fdt_node),
-+    TYPE_BINDING(TYPE_RISCV_CBQRI_CC, no_fdt_node),
-     TYPE_BINDING("", NULL), /* last element */
++    /* Ssqosid extension */
++    target_ulong srmcfg;
++
+     /* Machine and Supervisor interrupt priorities */
+     uint8_t miprio[64];
+     uint8_t siprio[64];
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 3579789a1f56..33af64f3667e 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -228,6 +228,9 @@
+ #define CSR_SPTBR           0x180
+ #define CSR_SATP            0x180
+ 
++/* Ssqosid extension */
++#define CSR_SRMCFG          0x181
++
+ /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+ #define CSR_SISELECT        0x150
+ #define CSR_SIREG           0x151
+@@ -356,6 +359,7 @@
+ #define SMSTATEEN0_FCSR     (1ULL << 1)
+ #define SMSTATEEN0_JVT      (1ULL << 2)
+ #define SMSTATEEN0_CTR      (1ULL << 54)
++#define SMSTATEEN0_SRMCFG   (1ULL << 55)
+ #define SMSTATEEN0_P1P13    (1ULL << 56)
+ #define SMSTATEEN0_HSCONTXT (1ULL << 57)
+ #define SMSTATEEN0_IMSIC    (1ULL << 58)
+@@ -1199,4 +1203,9 @@ typedef enum CTRType {
+ #define MCONTEXT64                         0x0000000000001FFFULL
+ #define MCONTEXT32_HCONTEXT                0x0000007F
+ #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
++
++/* SRMCFG CSR field masks (Ssqosid extension) */
++#define SRMCFG_RCID                      0x00000FFF
++#define SRMCFG_MCID                      0x0FFF0000
++
+ #endif
+diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+index 85fc3ad8bb8c..1ecdf9f393b4 100644
+--- a/target/riscv/cpu_cfg_fields.h.inc
++++ b/target/riscv/cpu_cfg_fields.h.inc
+@@ -113,6 +113,7 @@ BOOL_FIELD(ext_ssaia)
+ BOOL_FIELD(ext_smctr)
+ BOOL_FIELD(ext_ssctr)
+ BOOL_FIELD(ext_sscofpmf)
++BOOL_FIELD(ext_ssqosid)
+ BOOL_FIELD(ext_smepmp)
+ BOOL_FIELD(ext_smrnmi)
+ BOOL_FIELD(ext_ssnpm)
+diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+index 0de06e958809..fa99c68fc852 100644
+--- a/target/riscv/machine.c
++++ b/target/riscv/machine.c
+@@ -382,6 +382,24 @@ static const VMStateDescription vmstate_sdext = {
+     }
  };
  
-diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
-index d4b501802f60..dbc0f8cfc8d7 100644
---- a/hw/riscv/virt.c
-+++ b/hw/riscv/virt.c
-@@ -57,6 +57,7 @@
- #include "hw/pci-host/gpex.h"
- #include "hw/display/ramfb.h"
- #include "hw/acpi/aml-build.h"
-+#include "hw/riscv/cbqri.h"
- #include "qapi/qapi-visit-common.h"
- #include "hw/virtio/virtio-iommu.h"
- #include "hw/uefi/var-service-api.h"
-@@ -1157,6 +1158,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
- #ifdef CONFIG_TPM
-     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
- #endif
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
-+    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
++static bool ssqosid_needed(void *opaque)
++{
++    RISCVCPU *cpu = opaque;
++
++    return cpu->cfg.ext_ssqosid;
++}
++
++static const VMStateDescription vmstate_ssqosid = {
++    .name = "cpu/ssqosid",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .needed = ssqosid_needed,
++    .fields = (const VMStateField[]) {
++        VMSTATE_UINTTL(env.srmcfg, RISCVCPU),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ static int riscv_cpu_post_load(void *opaque, int version_id)
+ {
+     RISCVCPU *cpu = opaque;
+@@ -656,6 +674,7 @@ const VMStateDescription vmstate_riscv_cpu = {
+         &vmstate_sstc,
+         &vmstate_mseccfg,
+         &vmstate_sdext,
++        &vmstate_ssqosid,
+         NULL
+     }
+ };
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f32..cf8c8d924835 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1805,6 +1805,40 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
  
-     object_class_property_add_bool(oc, "aclint", virt_get_aclint,
-                                    virt_set_aclint);
++static RISCVException check_srmcfg(CPURISCVState *env, int csrno)
++{
++    if (!riscv_cpu_cfg(env)->ext_ssqosid) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
++
++    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_SRMCFG);
++    if (ret != RISCV_EXCP_NONE) {
++        return ret;
++    }
++
++    /*
++     * Even though this is an S-mode CSR the spec says that we need to throw
++     * a virtual instruction fault if a guest tries to access it.
++     */
++    return env->virt_enabled ?
++           RISCV_EXCP_VIRT_INSTRUCTION_FAULT : smode(env, csrno);
++}
++
++static RISCVException read_srmcfg(CPURISCVState *env, int csrno,
++                                  target_ulong *val)
++{
++    *val = env->srmcfg;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_srmcfg(CPURISCVState *env, int csrno,
++                                   target_ulong val, uintptr_t ra)
++{
++    env->srmcfg = val & (SRMCFG_RCID | SRMCFG_MCID);
++    return RISCV_EXCP_NONE;
++}
++
++
+ #define VSTOPI_NUM_SRCS 5
+ 
+ /*
+@@ -3738,6 +3772,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
+         if (riscv_cpu_cfg(env)->ext_ssctr) {
+             wr_mask |= SMSTATEEN0_CTR;
+         }
++
++        if (riscv_cpu_cfg(env)->ext_ssqosid) {
++            wr_mask |= SMSTATEEN0_SRMCFG;
++        }
+     }
+ 
+     return write_mstateen(env, csrno, wr_mask, new_val);
+@@ -3797,6 +3835,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
+         wr_mask |= SMSTATEEN0_CTR;
+     }
+ 
++    if (riscv_cpu_cfg(env)->ext_ssqosid) {
++        wr_mask |= SMSTATEEN0_SRMCFG;
++    }
++
+     return write_mstateenh(env, csrno, wr_mask, new_val);
+ }
+ 
+@@ -6377,6 +6419,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Supervisor Protection and Translation */
+     [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
+ 
++    /* Supervisor-Level Quality-of-Service Identifiers (Ssqosid) */
++    [CSR_SRMCFG]   = { "srmcfg",  check_srmcfg, read_srmcfg, write_srmcfg },
++
+     /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
+     [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
+                          rmw_xiselect                                       },
 
 -- 
 2.43.0
