@@ -1,177 +1,81 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B95606A324
-	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 20:15:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 085C6606A324
+	for <qemu-riscv@archiver.kernel.org>; Sun,  1 Nov 2026 20:26:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=cbvEG/ji
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Rj8Ft6Fq
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNbx4-0002tZ-Fr; Sun, 01 Nov 2026 15:14:50 -0500
+	id 1xNc7z-0006xC-7i; Sun, 01 Nov 2026 15:26:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xNbwQ-0002Jr-5Y
- for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 15:14:14 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xNc7t-0006td-3z; Sun, 01 Nov 2026 15:26:01 -0500
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <armbru@redhat.com>) id 1xNbwM-0006lV-Vs
- for qemu-riscv@nongnu.org; Sun, 01 Nov 2026 15:14:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793564044;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:resent-to:
- resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references; 
- bh=dG6QdUgPpDE3LmNNjTQwdz8vTAxBziYTzulA/MP9vJ8=;
- b=cbvEG/jiMIhdThfGamWn2PAfMvmAK46jL6CXAVWcomAAP5llar9fo1+l+0VgukeovN4/gO
- W1hANlWPlK3gUqol1FLMiprBqj0FQ1v2nwUowwOtrVT+GFY/1daTVyAyqNoDG9SlX/CknM
- 5n9qbFX4+reLMDH7qGBuqJ61VHMHavA=
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-90-zUz3wxw2MFW_-TF18iVIrQ-1; Sun,
- 01 Nov 2026 15:13:57 -0500
-X-MC-Unique: zUz3wxw2MFW_-TF18iVIrQ-1
-X-Mimecast-MFC-AGG-ID: zUz3wxw2MFW_-TF18iVIrQ_1793564033
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9C6A01800364; Sun,  1 Nov 2026 20:13:53 +0000 (UTC)
-Received: from blackfin.pond.sub.org (unknown [10.44.22.2])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D5BA37E0; Sun,  1 Nov 2026 20:13:52 +0000 (UTC)
-Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 8867121E6A04; Sun, 01 Nov 2026 21:13:50 +0100 (CET)
-Resent-To: pasic@linux.ibm.com, 17746591750@163.com, rathc@linux.ibm.com,
- alistair@alistair23.me, stefanb@linux.vnet.ibm.com, graf@amazon.com,
- xen-devel@lists.xenproject.org, FangSheng.Huang@amd.com, luc@lmichel.fr,
- michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
- palmer@dabbelt.com, rbolshakov@ddn.com, foss@defmacro.it,
- sebastian.huber@embedded-brains.de, fam@euphon.net,
- jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, atar4qemu@gmail.com,
- edgar.iglesias@gmail.com, jasowangio@gmail.com, liwei1518@gmail.com,
- npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
- wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
- mark.cave-ayland@ilande.co.uk, junjie.cao@intel.com, zhao1.liu@intel.com,
- its@irrelevant.dk, clg@kaod.org, conor@kernel.org, david@kernel.org,
- jic23@kernel.org, kbusch@kernel.org, mchehab+huawei@kernel.org,
- sstabellini@kernel.org, peter.maydell@linaro.org,
- richard.henderson@linaro.org, zhiwei_liu@linux.alibaba.com,
- zhenwei.pi@linux.dev, adityag@linux.ibm.com, alifm@linux.ibm.com,
- amachhiw@linux.ibm.com, borntraeger@linux.ibm.com,
- brueckner@linux.ibm.com, farman@linux.ibm.com, harshpb@linux.ibm.com,
- iii@linux.ibm.com, jjherne@linux.ibm.com, milesg@linux.ibm.com,
- mjrosato@linux.ibm.com, lixianglai@loongson.cn, maobibo@loongson.cn,
- pbarbuda@microsoft.com, yoshinori.sato@nifty.com, qemu-arm@nongnu.org,
- qemu-block@nongnu.org, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, john.levon@nutanix.com,
- thanos.makatos@nutanix.com, kfting@nuvoton.com, den@openvz.org,
- elena.ufimtseva@oracle.com, jag.raman@oracle.com,
- daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
- pierrick.bouvier@oss.qualcomm.com, phil@philjordan.eu,
- tangtao1634@phytium.com.cn, chao.liu@processmission.com, jiri@resnulli.us,
- sam@rfc1149.net, anisa.su@samsung.com, alex@shazbot.org, farosas@suse.de,
- mohamed@unpredictable.fr, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
- alistair.francis@wdc.com, anthony@xenproject.org
-Resent-From: Markus Armbruster <armbru@redhat.com>
-Resent-Date: Sun, 01 Nov 2026 21:13:50 +0100
-Resent-Message-ID: <87wlqwz4w1.fsf@pond.sub.org>
-From: Markus Armbruster <armbru@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,  Michael
- Roth <michael.roth@amd.com>,  John Snow <jsnow@redhat.com>,  Peter Maydell
- <peter.maydell@linaro.org>,  Mauro Carvalho Chehab
- <mchehab+huawei@kernel.org>,  Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
- Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
- Kostiuk
- <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
- <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
- Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
- Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
- Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
- <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
- <philmd@oss.qualcomm.com>,
- Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
- Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
- Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
- <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
- Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
- <clg@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
- <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
- qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
- qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
- Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
- <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
- <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
- qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
- <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
- <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
- Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
- <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
- Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
- <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
- Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
- "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
- <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
- <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
- Lin
- <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
- Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
- Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
- Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
- <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
- <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
- Dooley <conor@kernel.org>,  Sebastian Huber
- <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
- <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
- Stabellini <sstabellini@kernel.org>,  Anthony PERARD
- <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
- <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
- xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
- Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
- Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
- Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
- <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
- Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
- <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
- Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
- Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 44/65] hw/nvdimm: convert UUID property to QAPI-aware
- registration
-In-Reply-To: <20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
- (=?utf-8?Q?=22Marc-Andr=C3=A9?=
- Lureau"'s message of "Tue, 20 Oct 2026 14:46:01 +0400")
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-44-431a86b02b58@redhat.com>
-Date: Sun, 01 Nov 2026 18:39:55 +0100
-Message-ID: <871p9478no.fsf@pond.sub.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xNc7p-0008EA-BB; Sun, 01 Nov 2026 15:26:00 -0500
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id DC4166022F;
+ Sun,  1 Nov 2026 20:25:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D7D01F00919;
+ Sun,  1 Nov 2026 20:25:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1793564754;
+ bh=B/3PclIShAossW4fxY/CZvc2qmS9hUOAuapIg+7fmiQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=Rj8Ft6Fq5Lo0UD0BXczNVGavYjfa41vcoAESNdPAhij8YhUMlHj98joRSw63NQziE
+ V1OggiDYyqdNOGEibaXjkGYbJO3DmwOMHQk5aP5rH1VSGnIM5FmbzdVa2XhrF+Sii3
+ LXb23bvCaw0Mim8jgTHQssFDOyviAo8/494+CM5qcuOT8q9HBQmO2SKHb0TM3rZ0tX
+ QHcG7hxXfPhAuo1iasr1We/urHGolkvLXOnpDWbqgDFTSa1OGTyB/R2qaUFmVQROsR
+ A178T8te0FvTMfonpFjWaW0XGhQc1JmxREb8TFQUkKx5KjB/R9xwsSsx/OoAqG6XIO
+ HX7DyIInPThKA==
+From: Drew Fustini <fustini@kernel.org>
+Date: Sun, 01 Nov 2026 12:25:34 -0800
+Subject: [PATCH v7 2/6] hw/riscv: define capabilities of CBQRI controllers
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: jr1B-U_T6UtnIT1B_NSJH7SKeLG21yAXaM6IB7g70UY_1793564033
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=armbru@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20261101-riscv-ssqosid-cbqri-v7-2-92d1aae43e48@kernel.org>
+References: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
+In-Reply-To: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Sunil V L <sunilvl@oss.qualcomm.com>, 
+ Anup Patel <anup.patel@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Nicolas Pitre <npitre@baylibre.com>, 
+ =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+ Atish Patra <atish.patra@linux.dev>, 
+ =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <radim.krcmar@oss.qualcomm.com>, 
+ yunhui cui <cuiyunhui@bytedance.com>, Chen Pei <cp0613@linux.alibaba.com>, 
+ guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
+ Drew Fustini <fustini@kernel.org>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3353; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=4sczrBB0Pg2eM6iGPrH5HkLyrIMf+D6N1EMIYWr6dow=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWQ9XxAYecO2ZPn5HWUcxa1MGc3PKl7/Z7uUU2m5PKxe8
+ uH1axXTOkpZGMS4GGTFFFk2fci7sMQr9OuC+S+2wcxhZQIZwsDFKQATyfvGyHDbgefGh9tb2RR3
+ VAYb64kzhzCsUtJ2996l/WPB17y57poMf6WC5jEtn9k4Ud/P9vE/s185XdOfOz7PFbog8TLN3T5
+ gGi8A
+X-Developer-Key: i=fustini@kernel.org; a=openpgp;
+ fpr=1B6F948213EA489734F3997035D5CD577C1E6010
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
+ helo=tor.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=-0.01, RCVD_IN_MSPIKE_WL=-0.01,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -183,104 +87,122 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
+From: Nicolas Pitre <npitre@baylibre.com>
 
-> Add a QemuUUID_type_info and use object_property_add_qapi() instead of
-> object_property_add() for the nvdimm UUID property.
->
-> The type info is defined manually in uuid.c rather than generated,
-> since QAPI does not yet support string typedefs. An alternative would
-> be to extend the QAPI schema language with a 'typedef' construct
-> (e.g. { 'typedef': 'UUID', 'data': 'str' }), which would let the
-> generator produce the type info, C typedef, and introspection entry
-> automatically.
->
-> Alternatively, the exposed type being a string, we could change the
-> property to be str_type_info.
->
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> ---
->  hw/mem/nvdimm.c     | 4 ++--
->  include/qemu/uuid.h | 4 ++++
->  util/uuid.c         | 5 +++++
->  3 files changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/hw/mem/nvdimm.c b/hw/mem/nvdimm.c
-> index 123ddc938546..b7ccb5c93678 100644
-> --- a/hw/mem/nvdimm.c
-> +++ b/hw/mem/nvdimm.c
-> @@ -104,8 +104,8 @@ static void nvdimm_init(Object *obj)
->                               nvdimm_get_label_size, nvdimm_set_label_siz=
-e, NULL,
->                               NULL);
-> =20
-> -    object_property_add(obj, NVDIMM_UUID_PROP, "QemuUUID", nvdimm_get_uu=
-id,
-> -                        nvdimm_set_uuid, NULL, NULL);
-> +    object_property_add_qapi(obj, NVDIMM_UUID_PROP, &QemuUUID_type_info,
-> +                             nvdimm_get_uuid, nvdimm_set_uuid, NULL, NUL=
-L);
->  }
-> =20
+Define structs to represent the hardware capabilities of capacity and
+bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
+Register Interface (CBQRI).
 
-Let's pass &str_type_info, like the next patch does, because ...
+Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
+Signed-off-by: Drew Fustini <fustini@kernel.org>
+---
+ MAINTAINERS              |  7 +++++
+ include/hw/riscv/cbqri.h | 66 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+)
 
->  static void nvdimm_finalize(Object *obj)
-> diff --git a/include/qemu/uuid.h b/include/qemu/uuid.h
-> index 869f84af09dd..ed0c62327d4d 100644
-> --- a/include/qemu/uuid.h
-> +++ b/include/qemu/uuid.h
-> @@ -16,6 +16,8 @@
->  #ifndef QEMU_UUID_H
->  #define QEMU_UUID_H
-> =20
-> +#include "qapi/qapi-type-info.h"
-> +
-> =20
->  /* Version 4 UUID (pseudo random numbers), RFC4122 4.4. */
-> =20
-> @@ -99,4 +101,6 @@ QemuUUID qemu_uuid_bswap(QemuUUID uuid);
-> =20
->  uint32_t qemu_uuid_hash(const void *uuid);
-> =20
-> +extern const QAPITypeInfo QemuUUID_type_info;
-> +
->  #endif
-> diff --git a/util/uuid.c b/util/uuid.c
-> index 234619dd5e69..363a03051aba 100644
-> --- a/util/uuid.c
-> +++ b/util/uuid.c
-> @@ -17,6 +17,11 @@
->  #include "qemu/uuid.h"
->  #include "qemu/bswap.h"
-> =20
-> +const QAPITypeInfo QemuUUID_type_info =3D {
-> +    .name =3D "QemuUUID",
-> +    .masked_name =3D "str",
-> +};
-> +
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 4ca1751e30f5..2984779ce43a 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -403,6 +403,13 @@ F: target/riscv/XVentanaCondOps.decode
+ F: target/riscv/insn_trans/trans_xventanacondops.c.inc
+ F: disas/riscv-xventana*
+ 
++RISC-V QoS (Ssqosid ext and CBQRI spec)
++M: Nicolas Pitre <npitre@baylibre.com>
++M: Drew Fustini <fustini@kernel.org>
++L: qemu-riscv@nongnu.org
++S: Supported
++F: include/hw/riscv/cbqri.h
++
+ RISC-V SiFive (Xsf*) extensions
+ M: Max Chou <max.chou@sifive.com>
+ L: qemu-riscv@nongnu.org
+diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
+new file mode 100644
+index 000000000000..1b3d85973717
+--- /dev/null
++++ b/include/hw/riscv/cbqri.h
+@@ -0,0 +1,66 @@
++/*
++ * RISC-V Capacity and Bandwidth QoS Register Interface
++ * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
++ *
++ * Copyright (c) 2023 BayLibre SAS
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#ifndef HW_RISCV_CBQRI_H
++#define HW_RISCV_CBQRI_H
++
++#include "qemu/typedefs.h"
++
++#define RISCV_CBQRI_VERSION_MAJOR   1
++#define RISCV_CBQRI_VERSION_MINOR   0
++
++#define TYPE_RISCV_CBQRI_CC         "riscv.cbqri.capacity"
++#define TYPE_RISCV_CBQRI_BC         "riscv.cbqri.bandwidth"
++
++/* Capacity Controller hardware capabilities */
++typedef struct RiscvCbqriCapacityCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
++
++    uint16_t ncblks;
++
++    bool supports_at_code:1;
++
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++    bool supports_alloc_op_flush_rcid:1;
++
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_occupancy:1;
++} RiscvCbqriCapacityCaps;
++
++/* Bandwidth Controller hardware capabilities */
++typedef struct RiscvCbqriBandwidthCaps {
++    uint16_t nb_mcids;
++    uint16_t nb_rcids;
++
++    uint16_t nbwblks;
++    uint16_t mrbwb;
++
++    bool supports_at_code:1;
++
++    bool supports_alloc_op_config_limit:1;
++    bool supports_alloc_op_read_limit:1;
++
++    bool supports_mon_op_config_event:1;
++    bool supports_mon_op_read_counter:1;
++
++    bool supports_mon_evt_id_none:1;
++    bool supports_mon_evt_id_rdwr_count:1;
++    bool supports_mon_evt_id_rdonly_count:1;
++    bool supports_mon_evt_id_wronly_count:1;
++} RiscvCbqriBandwidthCaps;
++
++DeviceState *riscv_cbqri_cc_create(hwaddr addr,
++                                   const RiscvCbqriCapacityCaps *caps);
++DeviceState *riscv_cbqri_bc_create(hwaddr addr,
++                                   const RiscvCbqriBandwidthCaps *caps);
++#endif
 
-... the only difference to str_type_info is @name.
-
-In v7, @name is used as value of ObjectPropertyInfo /
-ObjectPropertyValue member @type.  Your manual QAPITypeInfo lets you
-preserve the value of @type.
-
-It isn't used that way v8 (which I'll post real soon now).  It preserves
-@type values differently.  The problem discussed in the commit message
-doesn't exist then, so I'll cut it some.
-
->  void qemu_uuid_generate(QemuUUID *uuid)
->  {
->      int i;
+-- 
+2.43.0
 
 
