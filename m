@@ -1,91 +1,140 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20714606A326
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Nov 2026 08:15:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B849606A324
+	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Nov 2026 08:33:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MgKSjsNo
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dRf+tsIE;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VkpQxXeZ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNnCE-0000PB-TN; Mon, 02 Nov 2026 03:15:19 -0500
+	id 1xNnTF-0002pV-HP; Mon, 02 Nov 2026 03:32:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xNnBo-0000Ar-MS
- for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 03:14:51 -0500
-Received: from mail-pj2-x05.google.com ([2607:f8b0:4864:39::5])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xNnBl-0003BL-0w
- for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 03:14:48 -0500
-Received: by mail-pj2-x05.google.com with SMTP id
- d9443c01a7336-2eafd4b09b8so496365ad.1
- for <qemu-riscv@nongnu.org>; Mon, 02 Nov 2026 00:14:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1xNnSk-0002ln-PP
+ for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 03:32:20 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
+ id 1xNnSg-0004nC-Qb
+ for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 03:32:18 -0500
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A24CdWc1811587
+ for <qemu-riscv@nongnu.org>; Mon, 2 Nov 2026 08:32:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=ivvhCDRbOVetdcS8+AMHEf
+ 47qp6RPR8TxQCc5w+GuC8=; b=dRf+tsIEVB1kgFHxkWhgi1cec/FyMQWo3HWZy6
+ qiU5qurJiGRHQkDzqmwKQci7lq6OpqqUu/9QruDLCf+G3VqSmwhV0UZptJfh7Yr2
+ p8+nq5Sr+/ikbKzQvzaEg62DJfmWUxjVymq4nwd53z0E7p8tMbpEWCaIhCNxcAU6
+ FEXeuedOqu85V6EqlWeZwoCCP7/FBbNUkgN8pv/Of3gZR6FLVK2Me2X2GwDnBTr9
+ uJOa5iz+WcBDTQF1uTMIbEi+oII1r+A8luvRGL7K7HRwe2eYJhevlzbIZzlalvua
+ SsGqEJDEl2yu8xiHCeTxmKy/kazq6QWC8m59yJpFI0qRhViQ==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
+ [74.125.82.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hpk9rgudf-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 02 Nov 2026 08:32:08 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id
+ 5a478bee46e88-313c7315becso385647eec.2
+ for <qemu-riscv@nongnu.org>; Mon, 02 Nov 2026 00:32:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793607280; x=1794212080; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=0OtuaZMe0CqsdOvccgbHu77IDAKVYqccVN+GRC3Ga+o=;
- b=MgKSjsNoWnKnAAHNtNtnO0r+xErWoPjECetH961TA+vC2xqWIhHyK96DoWCD2cqNKl
- ayHFrkijGxUAjKfkCnopmUdZKDQhuBt6Uu64MI5v4XLEXF+qw8DEpa//uBJRltnk+7El
- CF+F6cjeCc8XotN78KycbDxj+H7sISKfTDJ9OJOainHu2cZe6z3SMOpuVSkvVAb/wGqJ
- Hag1l00LaUhKTd8pOvf2cmxboAdsquUm9iVI0OoB3TzsdMWbGTD55IPQ0tx+dmAIhBek
- bRtUvUa63y3Q1k5XvavEoUy5JYly/ieNpFDm1Uy8EiNnUXpVAxqhQStF0d00ctrHFyt3
- qGgQ==
+ d=oss.qualcomm.com; s=google; t=1793608328; x=1794213128; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=ivvhCDRbOVetdcS8+AMHEf47qp6RPR8TxQCc5w+GuC8=;
+ b=VkpQxXeZy4WhvBiV9ND6TcMq8YI1jRziUUruCh6dk6i7ssOS46O3gpRO4JnHdV7ceo
+ pHBrkCABWyjy1xJklLu+IkYEQMgDhXHsP/h6DI5GTU5Ix8RUW+rHceDQmwpl9rfjJoLl
+ dghredwc5FaGtbbrsLD7f1aZbR7sMvYH2yz5opkWCzjjoakHqEKPIAMJtXzWIEvLE5Mh
+ aWe5CxYmkS6up9gXErP82y8+EAHiHSqT05O18stWaLq2sf8fuknP9mQDv3qO4FGgpim8
+ 069QPEdZVIJndcGsmOXM3To+gqHPcY4xqMcX4sl2N/Nf2kRHL6GiakAFaZABfx7rTA86
+ yYBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793607280; x=1794212080;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=0OtuaZMe0CqsdOvccgbHu77IDAKVYqccVN+GRC3Ga+o=;
- b=Ud1DuIBd3S2bqUoqfImLrj+n3+4U2EBor+ymVbNMvr2sV9B/5lMdcAlMcPi89lecFx
- ScY9Tz+SgIEPLcsNKH7qtxkkG0qULVIyqxuBdTCJxR3d7Qulr1om7tABsoDlDLZpBr3R
- FCojCmh+ck1+bLcfJtLfg1OlPAwVfRWDSuFjNw6HiEVHiktT0FuYQTX88ArWPwq1H0bh
- PScsEsaEPySMpQksx4IwJgOMaUf6HrbMf8RF5D42b5trBq7bcvSeQagxnNCrBawWXYe9
- WE+brBYzC9akH5TkGA5k4qu7mUPyshcyY6295Jgc/bvh4ertjgjESRovkViazRRfiU7W
- 0fKg==
-X-Gm-Message-State: APuU4Z9dRWu7g+yd7cy8o2W+d+PJbkeHJuSbc+kJ5yclMcQcB6Qd4jD3
- 7QxoxckxYu+xbqwQkFSOejRaNaVIpdeXcX84PKjVLMUM+LOJlYi1PRzv
-X-Gm-Gg: AYBFou0npI138IapES1cJuY4Efw07C0FssUNLiPHLoYo4Jdp8SOzbgPk07cRJuRE1FY
- xAPFssBToDwHLC63WadXgqhLlSt0DZPPRO+SMdz/bKGNxUojkWuf1a7wRSp56rsdj0wsD/b9yae
- uWPMi6eybWFhhjeGaytcovIxWodobdbuKSg8hXqSy8jUiRMECYmG/JOc37Jw2Dwc4cOFJoujeS2
- rZnCLZVkBNFMefWTvyFCgwvQzmT6/1n3W3axqabKSpQBrd7K8d8ppFKuOQATs6aBgr7F72BF0lO
- 5G1iUzxWEsspqb2QWYWziNJTxUECRy95Wza61fU3Ff7EC4jIXo+zoDubQLvUJY0qrSBdM0aN5kS
- wU6IkT8c9wJW2R0y+3RUWgbgZVC1RYCny/s2n87xpPw1pO7FiVFHjEdRI7weU/kIpk7yirENebP
- xgPcDtXoJ/zrxL6voKzGUlypeY5KAgS3WPmSk/oj2bTTQDqI4sqKKctIR6JVf5DfDCCzICL+aUy
- HAU4ewa00B5g1yR2Z1wUIs+x0B9381n8HtBhBqRN90YE4KF0pDRGmhoQnDCmyv53iK8yts76hSU
- jhPdtbcS+Fkbn8OkRXcLmeM2q59N8Pk+ij1Tjk/1QQE3El7ci8kDoa1LaQE=
-X-Received: by 2002:a17:90b:2ecd:b0:3ab:b39f:41ca with SMTP id
- 98e67ed59e1d1-3ae8979834cmr4832078a91.31.1793607279703; 
- Mon, 02 Nov 2026 00:14:39 -0800 (PST)
-Received: from Dell-WorkStation.localdomain ([185.244.208.247])
+ d=1e100.net; s=20260707; t=1793608328; x=1794213128;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ivvhCDRbOVetdcS8+AMHEf47qp6RPR8TxQCc5w+GuC8=;
+ b=m1gcWy1V1L7k4WZdrUKHayTZ1PFc6gAMkpetR5CTODZDTEP9TdGL6d07oi7qqQ82BH
+ LvZKPlTS/u8W38gAu/fKu4n5rUQDjJiiItMroryi0/5RyJAUeHXTQ3iLI7PP8P3/7hkV
+ 6fc48/1GaByzU1xpyrhLKmIaMZ9M8PDl2i7/FCEsdYbnWtwqkr35qkyhVrZwbpjCaWYi
+ kRCGvhC/6/mISfxhacOblRU5MnZMI55u1WD7N3d+kRaqTfhRDbN7SRRfBR2tO740PCvX
+ ue0vfdnb3GQ5R2tbAJnwSkTgUP/nsAoRvkY9P9MeAemLjMDELa1H6vnR/975WLQ52XNv
+ N42A==
+X-Gm-Message-State: AFq9FYI3it52HTncOZ4+FfAfr+by/KTcoiPLgSw8bu0ZggyET6oAjVa4
+ vxk9rGafvp0VEkcJQEcIEzn3gLU6+/y+K/cX0Nw9GSmzUm3bvkYaZbAvKQouV9Nhm2GZVZoLRvk
+ R+vpWFvYcY4sHNhHsnWg81u6BfyOqMy1Q4lACEVPZ7zaOnYqVKtQTbEYoKQ==
+X-Gm-Gg: AYBFou3XNhtA6HEITn1SVZAoktn1au2pCayJxuOkYZ0nMGu4RLEIyQAtVJQ3344bG0Q
+ rB8RZRR73xbQel1Fv51Cfgh+M1rcpdJsAWVN3r09UOvkED3KxUKE4DhMBC7kK7NH+LFixZddtt8
+ naB6+4rlikIMbPo33jRK3LJdRBREzx9BdLpW2BUyKSpeAVV8OkDRC3qWyKy48c6GB6chW6MaSVG
+ mCwgwACeqi/lNduLHrTm34hLeXG2so7rVF2KMqigtrKmJox7VMXYwER4AsmhGZ4RH0NLPIxWFCI
+ x1sKYrY0BOMgCozwo+RzQKj0ugU1x0kg6xV37AbUnulKjV/S3fI9l1LosvObI37Asm60u8GSarc
+ 6H9gTTCkp4tg9KjD6bQ4HZUFTro5A4K1F/fpY9DXwP+JgXEkKxfh0tB+D+pjxoSId61iGSBSZ6g
+ CPYuJS5++GZky66+UDTSEA8w1LBSJTFcr0ARlsonq61z82qAZ/GlWqc7olnUDQaaygcVT5S9I0F
+ yJAX8At
+X-Received: by 2002:a05:7022:f903:b0:16b:4f52:a08 with SMTP id
+ a92af1059eb24-1ac4fd01f92mr23325827c88.0.1793608327705; 
+ Mon, 02 Nov 2026 00:32:07 -0800 (PST)
+X-Received: by 2002:a05:7022:f903:b0:16b:4f52:a08 with SMTP id
+ a92af1059eb24-1ac4fd01f92mr23325760c88.0.1793608326846; 
+ Mon, 02 Nov 2026 00:32:06 -0800 (PST)
+Received: from hu-slingapp-blr.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3ae6e9bc6f7sm17199233a91.16.2026.11.02.00.14.34
+ a92af1059eb24-1b106edc7f8sm15083213c88.9.2026.11.02.00.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Nov 2026 00:14:39 -0800 (PST)
-From: Zephyr Li <fritchleybohrer@gmail.com>
+ Mon, 02 Nov 2026 00:32:06 -0800 (PST)
+From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com, farosas@suse.de,
- lvivier@redhat.com, pbonzini@redhat.com,
- Zephyr Li <fritchleybohrer@gmail.com>
-Subject: [PATCH v2] hw/riscv/iommu-sys: honor MSI vector masks
-Date: Mon,  2 Nov 2026 16:14:21 +0800
-Message-ID: <20261102081421.31332-1-fritchleybohrer@gmail.com>
+Cc: qemu-riscv@nongnu.org,
+ Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Subject: [PATCH v13 00/10] riscv: add initial RPMI virt support
+Date: Mon,  2 Nov 2026 14:01:48 +0530
+Message-ID: <20261102083159.3383468-1-subrahmanya.lingappa@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::5;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x05.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+X-Proofpoint-ORIG-GUID: 2LhkNgtHMo0dkRkq289tnueYpLZf9Inb
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAyMDAzMyBTYWx0ZWRfXzsI2yIWsfTyt
+ 0Wxk9aHcIj69luqwCc1VR5FAdxlVWlA8DeeoCi8V0tuxyxD2SgVFKd86itJgevGJfm2DhaJx8tQ
+ HaNz+fta26E/32dDe40m7cwOBZK028Zsa/VYs4Xg6s6YvRYmGagjssk1mrdXw6F3VaPdAoc7sJ/
+ yJm1VOZdzB+V8f30Jf3JJytF7GVa5hFEqrqvmzl7kZ0M5Hqn8+QeBHvyWElI1xn5VpT0T0ccuPs
+ ncoFWAz1bUQEuGKuMQ4Ys3z9JKOCvEotvO7Y4oHEtLOZh/Al1us6kj/fyeF8DPOKi9QYARj26UZ
+ Rz+lkY1P1+mCG8rF0SYwbVNKOmb25FvWSIiWP0Z2FiXsWseeR8Z1TuWKvvvLunLPykBJMNhfykx
+ GZgGPET7bdlo6tAbm9MVfaACRbTpiKITANxxG12Py8czhyUBe3UcEwvgIbiTchFWfTcXWoekQWj
+ R8IOsupxfljZS4zG9zA==
+X-Proofpoint-GUID: 2LhkNgtHMo0dkRkq289tnueYpLZf9Inb
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAyMDAzMyBTYWx0ZWRfX0KslXtfm9KO/
+ aabuxREefnMgDwAAsvyx9I7uniTFKxgZ9UdToWNpuBKqXV5ua+Bc3SFZMJzQZot7BlNaygvf+/a
+ YOvcsKxPb/k7OS/U7pgXnqWWV7mGr7w=
+X-Authority-Analysis: v=2.4 cv=LvwHWXdc c=1 sm=1 tr=0 ts=6ae84a88 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=NEAV23lmAAAA:8 a=HAtRXJe3qvw1RctvmaQA:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-02_02,2026-10-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
+ phishscore=0 priorityscore=1501 adultscore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611020033
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -98,728 +147,317 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The system IOMMU currently sends MSIs without checking the
-corresponding vector mask bit in the MSI configuration table.
+This series adds initial librpmi-backed RPMI support for the RISC-V virt
+machine. It covers the optional librpmi build dependency, RPMI transport
+and Base support, virt FDT wiring, System Reset, HSM, System Suspend,
+documentation, qtests, and a Linux guest smoke test.
 
-Implement per-vector masking and maintain a separate pending flag
-for each vector. Notifications generated while masked are deferred
-and coalesced. Unmasking a vector delivers one pending MSI, if any,
-and reset clears all pending flags.
+librpmi provides the host-side RPMI service-group implementation used by
+this QEMU device model:
 
-Keep the pending state separate from msix_pba because the current
-PBA MMIO mapping overlaps the reserved RISC-V IOMMU register space.
+  https://github.com/riscv-software-src/librpmi
 
-Do not release deferred MSIs while FCTL.WSI selects wired interrupt mode.
-When switching back to MSI mode, release unmasked pending vectors and
-retain masked ones until unmask.
+Dependencies:
+- librpmi 1.0.0 or newer, available from the upstream repository above or
+  from the distribution packages documented in docs/system/riscv/virt.rst.
+- A RISC-V toolchain and the firmware/kernel/rootfs artifacts required by
+  the functional guest smoke test.
 
-Add qtests covering masked and unmasked delivery, vector isolation,
-MSI configuration updates, wired interrupt delivery, mode
-transitions, and reset.
+Changes since v12:
+- Series-wide:
+  - Fix HSM stop completion after guest tests exposed divergence between
+    cached RPMI hart state and actual WFI state, including HART_STOP failures
+    after suspend/wakeup.
+  - Fold post-v12 review fixes and build corrections into their owning
+    commits; retain the v12 FDT hierarchy/schema fix and earlier fixes.
+  - Drop earlier Reviewed-by tags from the materially rewritten HSM,
+    System Suspend, and qtest patches.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Keep librpmi calls under existing BQL ownership because its environment
+    lock hooks are no-ops.
+  - Remove unrelated global event polling from doorbell handling; service
+    state transitions now drive their own event processing.
+  - Reject request queues too small to hold queue metadata and a data slot.
+  - Name the minimum queue size RPMI_DATA_SLOT_SIZE instead of repeating
+    the head, tail, and data-slot size expression in queue validation.
+- [03/10] hw/riscv: add RPMI FDT helpers:
+  - Remove duplicate helper arguments by passing the service configuration
+    directly, and allow Base-only callers to omit the mailbox phandle.
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - Keep this intermediate commit independently buildable before the reset
+    service lands; retain legacy reset nodes until [05/10].
+  - Keep queue sizing local, drop the unused MSI phandle argument, and
+    document the librpmi and TCG requirements.
+- [05/10] riscv: add RPMI system reset service:
+  - Include the runstate API here so the callback-introducing commit builds
+    independently.
+  - Preserve little-endian responses without alignment-unsafe buffer casts.
+- [06/10] riscv: add RPMI HSM service:
+  - Complete accepted stop and suspend requests only when the target hart
+    actually enters WFI; no later RPMI request is needed to publish the new
+    state.
+  - Observe WFI persistently and replay the observer on the target CPU so
+    stop requests arriving after WFI are not missed.
+  - Run HART_START on the target CPU, keep stopped harts off until that
+    request, publish RPMI state under the BQL, and drain target-CPU work
+    during teardown.
+  - Reconstruct HSM state on machine reset to avoid stale service state.
+- [07/10] riscv: add RPMI system suspend service:
+  - Align suspend completion and wakeup with the corrected HSM transitions;
+    process only its accepted event and avoid stale wakeup work on teardown.
+  - Recreate the suspend group around HSM reset reconstruction.
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Remove the obsolete RFC caveat now that the binding names are settled.
+- [09/10] tests/qtest: cover initial RISC-V RPMI services:
+  - Match the non-executing qtest accelerator: expect pending states, reject
+    HART_START while stop is pending, and check reset recovery.
+  - Remove an invalid target-PC assertion and use the negotiated response
+    slot for variable-length replies.
+- [10/10] tests/functional: add initial RPMI virt guest smoke:
+  - Bound the wait for online after CPU death: Linux's offline mask can
+    precede firmware STOPPED. Keep transient errors visible and require
+    eventual successful start; STOP_PENDING start rejection remains tested.
+  - Verify completed stop/start transitions, repeated stops, busy-hart stop,
+    reboot recovery, and HSM operation after suspend/wakeup.
+  - Tighten console checks to prevent echoed commands or stale prompts from
+    producing false passes, and fail on fatal firmware HSM diagnostics.
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4444
-Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
----
-Changes in v2:
-- Document why the MSI pending state is kept separate from msix_pba.
-- Add RISC-V IOMMU specification references for the reserved MMIO
-  region and PCIe MSI-X PBA.
-- Add a qtest ensuring pending MSIs are not exposed through the
-  reserved MSI-X PBA MMIO region.
-- Rebase onto the latest QEMU master.
+Changes since v11:
+- Series-wide:
+  - Rebase the complete series onto QEMU master at
+    d73149283205645625bfa9fe029cfb68e4c4a9ae.
+  - Fold the FDT/schema review fix into the original commits.
+- [03/10] hw/riscv: add RPMI FDT helpers:
+  - Emit RPMI service nodes as /soc siblings of the shared-memory mailbox.
+  - Remove shmem_base from the FDT service helper API.
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - Update virt FDT wiring for the sibling service-node layout.
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Document the sibling service-node hierarchy and updated helper behavior.
+- [09/10] tests/qtest: cover initial RISC-V RPMI services:
+  - Add DTB regression checks for sibling paths, mailbox phandles, service
+    IDs, and rejection of the old mailbox-child hierarchy.
+- [10/10] tests/functional: add initial RPMI virt guest smoke:
+  - Revalidate librpmi and no-librpmi builds, RPMI qtests, and real guest
+    smoke tests after the FDT/schema fix.
 
- hw/riscv/riscv-iommu-sys.c     |  83 +++++-
- hw/riscv/riscv-iommu.c         |  12 +
- hw/riscv/riscv-iommu.h         |   3 +
- tests/qtest/iommu-riscv-test.c | 469 +++++++++++++++++++++++++++++++++
- 4 files changed, 565 insertions(+), 2 deletions(-)
+Changes since v10:
+- Series-wide:
+  - Fold the post-v10 mailing-list review fixes into the original commits.
+- [01/10] build: add optional librpmi dependency:
+  - Add Reviewed-by tags from Alistair Francis and Sunil V L.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Replace legacy physical-memory helpers with QEMU address-space APIs.
+  - Propagate failed shared-memory transactions as RPMI_ERR_IO.
+  - Use address_space_set() for bulk shared-memory fills.
+  - Log failures from the void librpmi_env_writel() hook.
+  - Document the external librpmi_env.h environment-hook contract.
 
-diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
-index 258c171efd..f849b7a763 100644
---- a/hw/riscv/riscv-iommu-sys.c
-+++ b/hw/riscv/riscv-iommu-sys.c
-@@ -52,8 +52,66 @@ struct RISCVIOMMUStateSys {
-     MemoryRegion msix_pba_mmio;
-     uint8_t *msix_table;
-     uint8_t *msix_pba;
-+    /*
-+     * Keep MSI pending state separate from msix_pba.
-+     *
-+     * The msix_pba MMIO region is mapped at offset 0x400, which is
-+     * within the RISC-V IOMMU reserved register space (0x400-0xfff).
-+     * Reads from this reserved region must return zero. Using msix_pba
-+     * to track pending MSIs would expose non-zero bits through MMIO.
-+     *
-+     * The specification describes the MSI-X PBA in the context of
-+     * PCIe IOMMU integration, while this device is a SysBus device.
-+     * Therefore, maintain pending MSIs independently without updating
-+     * msix_pba.
-+     *
-+     * See:
-+     * https://docs.riscv.org/reference/iommu/v20260222/iommu_registers.html
-+     * https://docs.riscv.org/reference/iommu/v20260222/iommu_hw_guidelines.html
-+     */
-+    bool msi_pending[RISCV_IOMMU_PCI_MSIX_VECTORS];
- };
- 
-+static void riscv_iommu_sysdev_send_MSI_unmasked(RISCVIOMMUStateSys *s,
-+                                                 uint32_t vector);
-+
-+static bool riscv_iommu_sysdev_msi_masked(RISCVIOMMUStateSys *s,
-+                                          uint32_t vector)
-+{
-+    uint8_t *table_entry;
-+
-+    g_assert(vector < RISCV_IOMMU_PCI_MSIX_VECTORS);
-+    table_entry = s->msix_table + vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    return pci_get_long(table_entry + PCI_MSIX_ENTRY_VECTOR_CTRL) &
-+           PCI_MSIX_ENTRY_CTRL_MASKBIT;
-+}
-+
-+static void riscv_iommu_sysdev_release_pending(RISCVIOMMUStateSys *s,
-+                                              uint32_t vector)
-+{
-+    /* Retain deferred MSI messages until MSI mode is restored. */
-+    if (riscv_iommu_reg_get32(&s->iommu, RISCV_IOMMU_REG_FCTL) &
-+        RISCV_IOMMU_FCTL_WSI) {
-+        return;
-+    }
-+
-+    if (s->msi_pending[vector] &&
-+        !riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        s->msi_pending[vector] = false;
-+        riscv_iommu_sysdev_send_MSI_unmasked(s, vector);
-+    }
-+}
-+
-+static void riscv_iommu_sysdev_msi_enabled(RISCVIOMMUState *iommu)
-+{
-+    RISCVIOMMUStateSys *s = container_of(iommu, RISCVIOMMUStateSys, iommu);
-+
-+    for (unsigned vector = 0; vector < ARRAY_SIZE(s->msi_pending); vector++) {
-+        riscv_iommu_sysdev_release_pending(s, vector);
-+    }
-+}
-+
- static uint64_t msix_table_mmio_read(void *opaque, hwaddr addr,
-                                      unsigned size)
- {
-@@ -67,9 +125,17 @@ static void msix_table_mmio_write(void *opaque, hwaddr addr,
-                                   uint64_t val, unsigned size)
- {
-     RISCVIOMMUStateSys *s = opaque;
-+    uint32_t vector = addr / PCI_MSIX_ENTRY_SIZE;
-+    bool was_masked;
- 
-     g_assert(addr + size <= RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_ENTRY_SIZE);
-+
-+    was_masked = riscv_iommu_sysdev_msi_masked(s, vector);
-     pci_set_long(s->msix_table + addr, val);
-+
-+    if (was_masked && !riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        riscv_iommu_sysdev_release_pending(s, vector);
-+    }
- }
- 
- static const MemoryRegionOps msix_table_mmio_ops = {
-@@ -134,8 +200,8 @@ static void riscv_iommu_sysdev_init_msi(RISCVIOMMUStateSys *s,
-                                 &s->msix_pba_mmio);
- }
- 
--static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
--                                        uint32_t vector)
-+static void riscv_iommu_sysdev_send_MSI_unmasked(RISCVIOMMUStateSys *s,
-+                                                 uint32_t vector)
- {
-     uint8_t *table_entry = s->msix_table + vector * PCI_MSIX_ENTRY_SIZE;
-     uint64_t msi_addr = pci_get_quad(table_entry + PCI_MSIX_ENTRY_LOWER_ADDR);
-@@ -160,6 +226,17 @@ static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
-     }
- }
- 
-+static void riscv_iommu_sysdev_send_MSI(RISCVIOMMUStateSys *s,
-+                                        uint32_t vector)
-+{
-+    if (riscv_iommu_sysdev_msi_masked(s, vector)) {
-+        s->msi_pending[vector] = true;
-+        return;
-+    }
-+
-+    riscv_iommu_sysdev_send_MSI_unmasked(s, vector);
-+}
-+
- static void riscv_iommu_sysdev_notify(RISCVIOMMUState *iommu,
-                                       unsigned vector)
- {
-@@ -194,6 +271,7 @@ static void riscv_iommu_sys_realize(DeviceState *dev, Error **errp)
-     }
- 
-     s->iommu.notify = riscv_iommu_sysdev_notify;
-+    s->iommu.msi_enabled = riscv_iommu_sysdev_msi_enabled;
- 
-     /* 4 IRQs are defined starting from s->base_irq */
-     for (int i = 0; i < RISCV_IOMMU_INTR_COUNT; i++) {
-@@ -255,6 +333,7 @@ static void riscv_iommu_sys_reset_hold(Object *obj, ResetType type)
-     RISCVIOMMUState *iommu = &sys->iommu;
- 
-     riscv_iommu_reset(iommu);
-+    memset(sys->msi_pending, 0, sizeof(sys->msi_pending));
- 
-     trace_riscv_iommu_sys_reset_hold(type);
- }
-diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 0e6970773a..5209ed2c23 100644
---- a/hw/riscv/riscv-iommu.c
-+++ b/hw/riscv/riscv-iommu.c
-@@ -2424,6 +2424,7 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
-     RISCVIOMMUState *s = opaque;
-     uint32_t regb = addr & ~3;
-     uint32_t busy = 0;
-+    uint32_t old_fctl = 0;
-     uint64_t val = 0;
-     bool cy_inh = false;
- 
-@@ -2439,6 +2440,10 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
- 
-     /* Track actionable MMIO write. */
-     switch (regb) {
-+    case RISCV_IOMMU_REG_FCTL:
-+        old_fctl = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL);
-+        break;
-+
-     case RISCV_IOMMU_REG_DDTP:
-     case RISCV_IOMMU_REG_DDTP + 4:
-         process_fn = riscv_iommu_process_ddtp;
-@@ -2515,6 +2520,13 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
-      */
-     riscv_iommu_write_reg_val(s, &s->regs[addr], addr, size, data);
- 
-+    if (regb == RISCV_IOMMU_REG_FCTL && s->msi_enabled &&
-+        (old_fctl & RISCV_IOMMU_FCTL_WSI) &&
-+        !(riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL) &
-+          RISCV_IOMMU_FCTL_WSI)) {
-+        s->msi_enabled(s);
-+    }
-+
-     /* Busy flag update, MSB 4-byte register. */
-     if (busy) {
-         uint32_t rw = ldl_le_p(&s->regs[regb]);
-diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-index 403d10b321..e9c520981a 100644
---- a/hw/riscv/riscv-iommu.h
-+++ b/hw/riscv/riscv-iommu.h
-@@ -61,6 +61,9 @@ struct RISCVIOMMUState {
-     /* interrupt notifier */
-     void (*notify)(RISCVIOMMUState *iommu, unsigned vector);
- 
-+    /* Optional platform callback when FCTL switches from WSI to MSI. */
-+    void (*msi_enabled)(RISCVIOMMUState *iommu);
-+
-     /* IOMMU target address space */
-     AddressSpace *target_as;
-     MemoryRegion *target_mr;
-diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
-index 1cd753c4f2..0c05b3bd1b 100644
---- a/tests/qtest/iommu-riscv-test.c
-+++ b/tests/qtest/iommu-riscv-test.c
-@@ -25,6 +25,28 @@
- #define DBG_TRANSLATED_PA       0x90000000ull
- #define DBG_NESTED_GPA          0x200000ull
- 
-+#define RISCV_IOMMU_SYS_MSI_TARGET0  (QRIOMMU_SPACE_OFFS + 0x03000000ull)
-+#define RISCV_IOMMU_SYS_MSI_TARGET1  (RISCV_IOMMU_SYS_MSI_TARGET0 + 4)
-+#define RISCV_IOMMU_SYS_CQ_BASE      \
-+    (QRIOMMU_SPACE_OFFS + QRIOMMU_CQ_BASE_ADDR)
-+#define RISCV_IOMMU_SYS_MSI_DATA0    0x12345678
-+#define RISCV_IOMMU_SYS_MSI_DATA1    0xa5a55a5a
-+
-+/* RISC-V virt machine PLIC, hart 0 M-mode context. */
-+#define RISCV_PLIC_BASE             0x0c000000
-+#define RISCV_PLIC_PENDING          (RISCV_PLIC_BASE + 0x1000)
-+#define RISCV_PLIC_ENABLE           (RISCV_PLIC_BASE + 0x2000)
-+#define RISCV_PLIC_THRESHOLD        (RISCV_PLIC_BASE + 0x200000)
-+#define RISCV_PLIC_CLAIM            (RISCV_PLIC_THRESHOLD + 4)
-+#define RISCV_IOMMU_SYS_IRQ_BASE    36
-+
-+#define PCI_TESTDEV_TEST             0
-+#define PCI_TESTDEV_WIDTH            1
-+#define PCI_TESTDEV_OFFSET           4
-+#define PCI_TESTDEV_DATA             8
-+#define PCI_TESTDEV_COUNT            12
-+#define PCI_TESTDEV_NO_EVENTFD       0
-+
- /* RISC-V virt machine PCI configuration */
- #define RISCV_GPEX_PIO_BASE        0x3000000
- #define RISCV_BUS_PIO_LIMIT        0x10000
-@@ -451,6 +473,432 @@ static void test_riscv_iommu_dbg(gconstpointer data)
-     riscv_iommu_test_teardown(&state);
- }
- 
-+static void riscv_iommu_sys_set_wsi(QTestState *qts, bool wsi)
-+{
-+    uint64_t base = VIRT_RISCV_IOMMU_BASE;
-+    uint32_t fctl;
-+
-+    /* Feature changes require Off mode and all in-memory queues disabled. */
-+    g_assert_cmphex(qtest_readq(qts, base + RISCV_IOMMU_REG_DDTP) &
-+                    (RISCV_IOMMU_DDTP_MODE | RISCV_IOMMU_DDTP_BUSY),
-+                    ==, RISCV_IOMMU_DDTP_MODE_OFF);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_CQCSR) &
-+                    (RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CQON |
-+                     RISCV_IOMMU_CQCSR_BUSY), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_FQCSR) &
-+                    (RISCV_IOMMU_FQCSR_FQEN | RISCV_IOMMU_FQCSR_FQON |
-+                     RISCV_IOMMU_FQCSR_BUSY), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_PQCSR) &
-+                    (RISCV_IOMMU_PQCSR_PQEN | RISCV_IOMMU_PQCSR_PQON |
-+                     RISCV_IOMMU_PQCSR_BUSY), ==, 0);
-+
-+    fctl = qtest_readl(qts, base + RISCV_IOMMU_REG_FCTL);
-+    fctl = (fctl & ~RISCV_IOMMU_FCTL_WSI) |
-+           (wsi ? RISCV_IOMMU_FCTL_WSI : 0);
-+    qtest_writel(qts, base + RISCV_IOMMU_REG_FCTL, fctl);
-+    g_assert_cmphex(qtest_readl(qts, base + RISCV_IOMMU_REG_FCTL) &
-+                    RISCV_IOMMU_FCTL_WSI, ==, fctl & RISCV_IOMMU_FCTL_WSI);
-+}
-+
-+static QTestState *riscv_iommu_sys_test_init(const char *extra_args)
-+{
-+    QTestState *qts;
-+    uint64_t cap;
-+    uint32_t igs;
-+
-+    if (!qtest_has_machine("virt")) {
-+        g_test_skip("virt machine not available");
-+        return NULL;
-+    }
-+
-+    qts = qtest_initf("-machine virt,aia=none,acpi=off,iommu-sys=on "
-+                      "-cpu max -smp 1 -m 512 -net none -nodefaults %s",
-+                      extra_args ? extra_args : "");
-+
-+    cap = qtest_readq(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CAP);
-+    igs = (cap & RISCV_IOMMU_CAP_IGS) >> 28;
-+    g_assert_cmpuint(igs, <=, RISCV_IOMMU_CAP_IGS_BOTH);
-+    g_assert_cmpuint(igs, !=, RISCV_IOMMU_CAP_IGS_WSI);
-+
-+    riscv_iommu_sys_set_wsi(qts, false);
-+
-+    return qts;
-+}
-+
-+static QPCIDevice *riscv_iommu_sys_init_msi_sink(QTestState *qts,
-+                                                  QGenericPCIBus *gbus,
-+                                                  QPCIBar *bar,
-+                                                  uint64_t *target,
-+                                                  uint32_t *data)
-+{
-+    QPCIDevice *dev = NULL;
-+    uint32_t offset;
-+
-+    qpci_init_generic(gbus, qts, NULL, false);
-+    riscv_config_qpci_bus(gbus);
-+    qpci_device_foreach(&gbus->bus, PCI_VENDOR_ID_REDHAT,
-+                        PCI_DEVICE_ID_REDHAT_TEST, save_fn, &dev);
-+    g_assert(dev);
-+
-+    qpci_device_enable(dev);
-+    *bar = qpci_iomap(dev, 0, NULL);
-+    g_assert_false(bar->is_io);
-+
-+    qpci_io_writeb(dev, *bar, PCI_TESTDEV_TEST, PCI_TESTDEV_NO_EVENTFD);
-+    g_assert_cmpuint(qpci_io_readb(dev, *bar, PCI_TESTDEV_WIDTH), ==, 1);
-+    offset = qpci_io_readl(dev, *bar, PCI_TESTDEV_OFFSET);
-+    *data = qpci_io_readl(dev, *bar, PCI_TESTDEV_DATA);
-+    *target = bar->addr + offset;
-+    g_assert_cmpuint(qpci_io_readl(dev, *bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    return dev;
-+}
-+
-+static void riscv_iommu_sys_program_msi(QTestState *qts, unsigned vector,
-+                                        uint64_t target, uint32_t data,
-+                                        bool masked)
-+{
-+    uint64_t entry = VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_MSI_CONFIG +
-+                     vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    qtest_writeq(qts, entry + PCI_MSIX_ENTRY_LOWER_ADDR, target);
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_DATA, data);
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_VECTOR_CTRL,
-+                 masked ? PCI_MSIX_ENTRY_CTRL_MASKBIT : 0);
-+}
-+
-+static void riscv_iommu_sys_set_mask(QTestState *qts, unsigned vector,
-+                                     bool masked)
-+{
-+    uint64_t entry = VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_MSI_CONFIG +
-+                     vector * PCI_MSIX_ENTRY_SIZE;
-+
-+    qtest_writel(qts, entry + PCI_MSIX_ENTRY_VECTOR_CTRL,
-+                 masked ? PCI_MSIX_ENTRY_CTRL_MASKBIT : 0);
-+}
-+
-+static void riscv_iommu_sys_setup_cq(QTestState *qts)
-+{
-+    uint64_t cqb = (RISCV_IOMMU_SYS_CQ_BASE >> 12) << 10;
-+    uint32_t cqcsr;
-+
-+    qtest_writeq(qts, RISCV_IOMMU_SYS_CQ_BASE, UINT64_MAX);
-+    qtest_writeq(qts, RISCV_IOMMU_SYS_CQ_BASE + 8, 0);
-+    qtest_writeq(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQB, cqb);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 0);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR,
-+                 RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CIE);
-+
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CQON,
-+                    ==, RISCV_IOMMU_CQCSR_CQON);
-+}
-+
-+static void riscv_iommu_sys_trigger_cq_irq(QTestState *qts)
-+{
-+    uint32_t cqcsr;
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 1);
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CMD_ILL,
-+                    ==, RISCV_IOMMU_CQCSR_CMD_ILL);
-+}
-+
-+static void riscv_iommu_sys_rearm_cq_irq(QTestState *qts)
-+{
-+    uint32_t cqcsr;
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQT, 0);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR,
-+                 RISCV_IOMMU_CQCSR_CQEN | RISCV_IOMMU_CQCSR_CIE |
-+                 RISCV_IOMMU_CQCSR_CMD_ILL);
-+    cqcsr = qtest_readl(qts,
-+                        VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR);
-+    g_assert_cmphex(cqcsr & RISCV_IOMMU_CQCSR_CMD_ILL, ==, 0);
-+
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_IPSR,
-+                 RISCV_IOMMU_IPSR_CIP);
-+    g_assert_cmphex(qtest_readl(qts, VIRT_RISCV_IOMMU_BASE +
-+                               RISCV_IOMMU_REG_IPSR) & RISCV_IOMMU_IPSR_CIP,
-+                    ==, 0);
-+}
-+
-+static void test_riscv_iommu_sys_msi_unmasked(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, false);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_masked(void)
-+{
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_program_msi(qts, 0, sink_target, sink_data, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    /*
-+     * Pending MSIs must not be exposed through the reserved
-+     * MSI-X PBA MMIO region.
-+     */
-+    g_assert_cmphex(qtest_readl(qts, VIRT_RISCV_IOMMU_BASE + 0x400),
-+                    ==, 0);
-+
-+    riscv_iommu_sys_rearm_cq_irq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_config_update(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+
-+    /* Updating a masked entry must not release the deferred message. */
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET1,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, true);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+
-+    /* Release uses the current address and data, rather than a snapshot. */
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA1);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_vector_isolation(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET1, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_program_msi(qts, 1, RISCV_IOMMU_SYS_MSI_TARGET1,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, false);
-+    riscv_iommu_sys_setup_cq(qts);
-+
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1), ==, 0);
-+
-+    riscv_iommu_sys_rearm_cq_irq(qts);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_ICVEC, 1);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET1),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA1);
-+
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0),
-+                    ==, RISCV_IOMMU_SYS_MSI_DATA0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_wsi_switch(const void *opaque)
-+{
-+    bool unmask_in_wsi = GPOINTER_TO_INT(opaque);
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    g_assert_cmpuint((qtest_readq(qts, VIRT_RISCV_IOMMU_BASE +
-+                                 RISCV_IOMMU_REG_CAP) &
-+                      RISCV_IOMMU_CAP_IGS) >> 28,
-+                     ==, RISCV_IOMMU_CAP_IGS_BOTH);
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_program_msi(qts, 0, sink_target, sink_data, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    /* Stop the CQ before changing FCTL, preserving the deferred message. */
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    if (unmask_in_wsi) {
-+        riscv_iommu_sys_set_mask(qts, 0, false);
-+    }
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT),
-+                     ==, unmask_in_wsi ? 1 : 0);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+
-+    /* Repeated mode changes and unmask writes must not replay the MSI. */
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 1);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_wsi_delivery(void)
-+{
-+    const unsigned vector = 1;
-+    const unsigned irq = RISCV_IOMMU_SYS_IRQ_BASE + vector;
-+    const uint32_t irq_bit = 1U << (irq % 32);
-+    const unsigned irq_word = (irq / 32) * 4;
-+    QGenericPCIBus gbus;
-+    QPCIBar sink_bar;
-+    QPCIDevice *sink;
-+    QTestState *qts = riscv_iommu_sys_test_init("-device pci-testdev");
-+    uint64_t sink_target;
-+    uint32_t sink_data;
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    sink = riscv_iommu_sys_init_msi_sink(qts, &gbus, &sink_bar,
-+                                         &sink_target, &sink_data);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    /* The MSI vector mask must not suppress delivery through the wire. */
-+    riscv_iommu_sys_program_msi(qts, vector, sink_target, sink_data, true);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_ICVEC, vector);
-+
-+    qtest_writel(qts, RISCV_PLIC_BASE + irq * 4, 1);
-+    qtest_writel(qts, RISCV_PLIC_ENABLE + irq_word, irq_bit);
-+    qtest_writel(qts, RISCV_PLIC_THRESHOLD, 0);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word), ==, 0);
-+    g_assert_cmpuint(qtest_readl(qts, RISCV_PLIC_CLAIM), ==, 0);
-+
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    /* The PLIC latches the pulse after the device's wire returns low. */
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word),
-+                    ==, irq_bit);
-+    g_assert_cmpuint(qtest_readl(qts, RISCV_PLIC_CLAIM), ==, irq);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_PLIC_PENDING + irq_word), ==, 0);
-+    qtest_writel(qts, RISCV_PLIC_CLAIM, irq);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+
-+    /* A WSI event must not become a deferred MSI after switching modes. */
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    riscv_iommu_sys_set_mask(qts, vector, false);
-+    g_assert_cmpuint(qpci_io_readl(sink, sink_bar, PCI_TESTDEV_COUNT), ==, 0);
-+    g_free(sink);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_wsi_reset(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    qtest_writel(qts, VIRT_RISCV_IOMMU_BASE + RISCV_IOMMU_REG_CQCSR, 0);
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+
-+    qtest_system_reset(qts);
-+    /* Reprogram valid MSI state without depending on table reset values. */
-+    riscv_iommu_sys_set_wsi(qts, true);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA1, false);
-+    riscv_iommu_sys_set_wsi(qts, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    riscv_iommu_sys_set_mask(qts, 0, true);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    qtest_quit(qts);
-+}
-+
-+static void test_riscv_iommu_sys_msi_reset(void)
-+{
-+    QTestState *qts = riscv_iommu_sys_test_init(NULL);
-+
-+    if (!qts) {
-+        return;
-+    }
-+
-+    qtest_writel(qts, RISCV_IOMMU_SYS_MSI_TARGET0, 0);
-+    riscv_iommu_sys_program_msi(qts, 0, RISCV_IOMMU_SYS_MSI_TARGET0,
-+                                RISCV_IOMMU_SYS_MSI_DATA0, true);
-+    riscv_iommu_sys_setup_cq(qts);
-+    riscv_iommu_sys_trigger_cq_irq(qts);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+
-+    qtest_system_reset(qts);
-+    riscv_iommu_sys_set_mask(qts, 0, false);
-+    g_assert_cmphex(qtest_readl(qts, RISCV_IOMMU_SYS_MSI_TARGET0), ==, 0);
-+    qtest_quit(qts);
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -468,5 +916,26 @@ int main(int argc, char **argv)
- 
-         qtest_add_data_func(path, &debug_tests[i], test_riscv_iommu_dbg);
-     }
-+
-+    qtest_add_func("/riscv-iommu-sys/msi/unmasked",
-+                   test_riscv_iommu_sys_msi_unmasked);
-+    qtest_add_func("/riscv-iommu-sys/msi/masked",
-+                   test_riscv_iommu_sys_msi_masked);
-+    qtest_add_func("/riscv-iommu-sys/msi/config-update",
-+                   test_riscv_iommu_sys_msi_config_update);
-+    qtest_add_func("/riscv-iommu-sys/msi/vector-isolation",
-+                   test_riscv_iommu_sys_msi_vector_isolation);
-+    qtest_add_data_func("/riscv-iommu-sys/msi/wsi-switch-unmasked",
-+                        GINT_TO_POINTER(true),
-+                        test_riscv_iommu_sys_msi_wsi_switch);
-+    qtest_add_data_func("/riscv-iommu-sys/msi/wsi-switch-masked",
-+                        GINT_TO_POINTER(false),
-+                        test_riscv_iommu_sys_msi_wsi_switch);
-+    qtest_add_func("/riscv-iommu-sys/wsi/delivery",
-+                   test_riscv_iommu_sys_wsi_delivery);
-+    qtest_add_func("/riscv-iommu-sys/msi/wsi-reset",
-+                   test_riscv_iommu_sys_msi_wsi_reset);
-+    qtest_add_func("/riscv-iommu-sys/msi/reset",
-+                   test_riscv_iommu_sys_msi_reset);
-     return g_test_run();
- }
+Changes since v9:
+- Series-wide:
+  - Rebase on current QEMU master, commit 0a1ebd448b38.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Move the no-librpmi riscv_rpmi_create() stub into this patch where
+    the public RPMI device API is introduced.
+  - Use enum rpmi_servicegroup_id for service-group identifiers from
+    the first RPMI config definition, with no-librpmi fallback enum
+    values for optional builds.
+- [03/10] hw/riscv: add RPMI FDT helpers:
+  - Move the no-librpmi RPMI FDT helper stub into this patch where
+    the helper prototypes are introduced.
+- [05/10] riscv: add RPMI system reset service:
+  - Use the librpmi RPMI_SRVGRP_SYSTEM_RESET value directly instead of
+    a QEMU-local service-group alias.
+  - Introduce the service-ops dispatch table in this patch, with the
+    initial System Reset entry.
+- [06/10] riscv: add RPMI HSM service:
+  - Use the librpmi RPMI_SRVGRP_HSM value directly instead of a
+    QEMU-local service-group alias.
+  - Add only the HSM service entry on top of the System Reset service
+    ops infrastructure.
+- [07/10] riscv: add RPMI system suspend service:
+  - Use the librpmi RPMI_SRVGRP_SYSTEM_SUSPEND value directly instead
+    of a QEMU-local service-group alias.
+- [09/10] tests/qtest: cover initial RISC-V RPMI services:
+  - Drop future/unimplemented service-group definitions and probes from
+    the qtest coverage. The test now covers only the initial Base,
+    System Reset, HSM and System Suspend services.
+
+Changes since v8:
+- Series-wide:
+  - Rebase on current QEMU master, commit 539bc315538a.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Update the RPMI transport shared-memory helpers for the current
+    physical_memory_read()/physical_memory_write() APIs.
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Add qtest coverage documentation alongside the existing firmware
+    and guest smoke test notes.
+
+Changes since v7:
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Drop the redundant internal RiscvRpmiServiceKind field from
+    RiscvRpmiServiceConfig and use service_group as the single dispatch
+    and FDT service identifier.
+- [05/10] riscv: add RPMI system reset service:
+  - Move the RiscvRpmiServiceOps table and service_group lookup
+    infrastructure into this patch, so the HSM and System Suspend
+    patches only add their own service entries.
+- [06/10] riscv: add RPMI HSM service:
+  - Build on the System Reset patch's service_group lookup
+    infrastructure instead of introducing it here.
+
+Changes since v6:
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - When RPMI is enabled, advertise reboot and shutdown through the
+    RPMI System Reset service instead of the syscon reset nodes.
+- [10/10] tests/functional: add initial RPMI virt guest smoke:
+  - Extend the functional guest smoke test to check the RPMI reboot
+    and shutdown devices reported by firmware and exercise reboot.
+
+Changes since v5:
+- [01/10] build: add optional librpmi dependency:
+  - Fix the librpmi configure probe to check the system suspend service
+    group API used by this initial series instead of the later logging API.
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - Keep later SBI MPXY/FDT stubs out of the initial no-librpmi stub
+    file; those stubs now live in the later stack layer where their
+    prototypes are introduced.
+
+Changes since v4:
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - Drop the unused machine-opaque argument from the RPMI machine
+    callback API.
+  - Move the no-librpmi riscv_rpmi_create() fallback out of the public
+    header into hw/misc/riscv_rpmi-stub.c.
+  - Add a matching RPMI FDT helper stub for no-librpmi builds, while
+    keeping the real rpmi-fdt.c source gated on CONFIG_RISCV_RPMI.
+- [05/10] riscv: add RPMI system reset service:
+  - Drop the unused machine-opaque argument from the callback API.
+- [06/10] riscv: add RPMI HSM service:
+  - Drop the unused machine-opaque argument from the callback API.
+- [07/10] riscv: add RPMI system suspend service:
+  - Drop the unused machine-opaque argument from the callback API.
+
+Changes since v3:
+- [01/10] build: add optional librpmi dependency:
+  - Use "RPMI support" for librpmi-related Meson option and summary text.
+  - Add Reviewed-by tags from Daniel Henrique Barboza and Philippe
+    Mathieu-Daude.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Use the Resettable API instead of device_class_set_legacy_reset().
+- [03/10] hw/riscv: add RPMI FDT helpers:
+  - Gate the RPMI FDT helper source on CONFIG_RISCV_RPMI.
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [04/10] hw/riscv/virt: add opt-in RPMI base support:
+  - Mark no-librpmi stub parameters with G_GNUC_UNUSED.
+- [05/10] riscv: add RPMI system reset service:
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [06/10] riscv: add RPMI HSM service:
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [07/10] riscv: add RPMI system suspend service:
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [09/10] tests/qtest: cover initial RISC-V RPMI services:
+  - Add Reviewed-by from Daniel Henrique Barboza.
+- [10/10] tests/functional: add initial RPMI virt guest smoke:
+  - Drop the stale Ventana copyright line.
+
+Changes since v2:
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Document how to obtain and install librpmi for QEMU builds,
+    including source builds, Debian/RPM packages, pkg-config setup,
+    and the minimum librpmi version.
+
+Changes since v1:
+- Series-wide:
+  - Fold reviewer fixes into the original commits.
+- [02/10] hw/misc: add RISC-V RPMI transport and Base support:
+  - Move Base service configuration into the Base support commit.
+- [08/10] docs/system/riscv: document initial virt RPMI support:
+  - Document the RPMI v1.0 ratified context and specification references.
+
+Testing:
+- qemu-system-riscv64 builds with and without librpmi: passed.
+- HSM and System Suspend commit-boundary builds with librpmi: passed.
+- RPMI virt qtest at [09/10]: 19/19 subtests passed, including DT layout
+  and migration-policy checks.
+- Without librpmi, virt,rpmi=on rejects with the expected unsupported-build
+  error; virt,rpmi=off realizes successfully.
+- Final RPMI virt guest suite: 6/6 passed twice on November 2, including
+  the bounded CPU-online wait in [10/10]. Coverage includes service
+  enumeration, repeated and busy-hart HSM stop/start, stopped-hart reboot
+  recovery, reset/poweroff, and suspend/wakeup followed by HSM stop/start.
+
+Subrahmanya Lingappa (10):
+  build: add optional librpmi dependency
+  hw/misc: add RISC-V RPMI transport and Base support
+  hw/riscv: add RPMI FDT helpers
+  hw/riscv/virt: add opt-in RPMI base support
+  riscv: add RPMI system reset service
+  riscv: add RPMI HSM service
+  riscv: add RPMI system suspend service
+  docs/system/riscv: document initial virt RPMI support
+  tests/qtest: cover initial RISC-V RPMI services
+  tests/functional: add initial RPMI virt guest smoke
+
+ Kconfig.host                               |   3 +
+ MAINTAINERS                                |   3 +
+ docs/system/riscv/virt.rst                 |  79 +++
+ hw/misc/Kconfig                            |   4 +
+ hw/misc/meson.build                        |   6 +
+ hw/misc/riscv_rpmi-stub.c                  |  16 +
+ hw/misc/riscv_rpmi.c                       | 599 ++++++++++++++++++
+ hw/misc/riscv_rpmi_hsm.c                   | 359 +++++++++++
+ hw/misc/riscv_rpmi_internal.h              |  43 ++
+ hw/misc/riscv_rpmi_sysreset.c              | 185 ++++++
+ hw/misc/riscv_rpmi_syssusp.c               | 175 ++++++
+ hw/riscv/Kconfig                           |   1 +
+ hw/riscv/fdt-common.c                      |   8 +-
+ hw/riscv/meson.build                       |   3 +
+ hw/riscv/rpmi-fdt-stub.c                   |  24 +
+ hw/riscv/rpmi-fdt.c                        |  92 +++
+ hw/riscv/server_platform_ref.c             |   2 +-
+ hw/riscv/virt.c                            | 143 ++++-
+ include/hw/misc/riscv_rpmi.h               | 112 ++++
+ include/hw/riscv/fdt-common.h              |   3 +-
+ include/hw/riscv/rpmi-fdt.h                |  34 +
+ include/hw/riscv/virt.h                    |   3 +
+ meson.build                                |  14 +
+ meson_options.txt                          |   2 +
+ scripts/meson-buildoptions.sh              |   3 +
+ target/riscv/cpu-qom.h                     |  16 +
+ target/riscv/cpu.c                         |  61 ++
+ target/riscv/cpu.h                         |   7 +
+ target/riscv/tcg/op_helper.c               |   4 +
+ target/riscv/tcg/tcg-cpu.c                 |   1 +
+ tests/functional/riscv64/meson.build       |   2 +
+ tests/functional/riscv64/test_rpmi_virt.py | 268 ++++++++
+ tests/qtest/meson.build                    |   3 +
+ tests/qtest/riscv-rpmi-test.c              | 685 +++++++++++++++++++++
+ 34 files changed, 2959 insertions(+), 4 deletions(-)
+ create mode 100644 hw/misc/riscv_rpmi-stub.c
+ create mode 100644 hw/misc/riscv_rpmi.c
+ create mode 100644 hw/misc/riscv_rpmi_hsm.c
+ create mode 100644 hw/misc/riscv_rpmi_internal.h
+ create mode 100644 hw/misc/riscv_rpmi_sysreset.c
+ create mode 100644 hw/misc/riscv_rpmi_syssusp.c
+ create mode 100644 hw/riscv/rpmi-fdt-stub.c
+ create mode 100644 hw/riscv/rpmi-fdt.c
+ create mode 100644 include/hw/misc/riscv_rpmi.h
+ create mode 100644 include/hw/riscv/rpmi-fdt.h
+ create mode 100644 tests/functional/riscv64/test_rpmi_virt.py
+ create mode 100644 tests/qtest/riscv-rpmi-test.c
+
+
+base-commit: d73149283205645625bfa9fe029cfb68e4c4a9ae
 -- 
 2.43.0
 
