@@ -1,151 +1,104 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F459606A336
-	for <qemu-riscv@archiver.kernel.org>; Mon,  2 Nov 2026 19:52:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55659606A329
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Nov 2026 07:30:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=v+Jkhe9q
+	dkim=pass (2048-bit key, unprotected) header.d=theorem-dev.20260707.gappssmtp.com header.i=@theorem-dev.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=WSketthn
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xNy5B-0008UY-9h; Mon, 02 Nov 2026 14:52:41 -0500
+	id 1xO8yD-000331-VN; Tue, 03 Nov 2026 02:30:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNy59-0008TS-KW
- for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 14:52:39 -0500
-Received: from mail-ed1-x529.google.com ([2a00:1450:4864:20::529])
+ (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
+ id 1xO8yC-00032V-C2
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 02:30:12 -0500
+Received: from mail-dl2-x03.google.com ([2607:f8b0:4864:38::3])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xNy57-0004PJ-5K
- for qemu-riscv@nongnu.org; Mon, 02 Nov 2026 14:52:39 -0500
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-6acb9c018ffso5014319a12.1
- for <qemu-riscv@nongnu.org>; Mon, 02 Nov 2026 11:52:36 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793649155; cv=none;
- d=google.com; s=arc-20260327;
- b=rUcwBfn9ZLrQV9Y/gGX3Gzq/coTlQj39Rk7srZZ1XGdJWUss4YG5boCvJwLTLttKRQ
- wKQfqjwjdBiSReh0qoBDWO7YXU9A38OU94uQz9uw5JmuwJejR59UhhHjfC5x6X99wAxq
- X5b44Tzhn8vU0aociAJr9K8PsMnihNgeKgu1eVeMeBUF0sE33H1hKmov4GHXk4dy3nHR
- EUQ1R0xX1RpxXjsMlK7n6WRR0ffIthKGQHYbZkMeL9Pr4pFkDYWJPUzCCdseN7b9TE1i
- gFXfJTooyGItfopq5D4o44vayzmIxmDmmucT/+VAj2hDFcSCUfTYLHeG2m/hQc2QZKgZ
- u6cw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :reply-to:in-reply-to:references:mime-version:dkim-signature;
- bh=WQTIbX5JdTUQVlGtexv/4WqWe1FMQgrYxHR6l5IOF+E=;
- fh=p7Tbr+Q5p2M5mhom0u2RmoWNZINqSPVxq7Dm3Tf+u7A=;
- b=OSQdQKZydYim6HGhJi+eOYlcFR+/4+25BQC0/DwFT8CwIb1p3XhZUOB+9bY76i20xi
- +Qo7lyRivAAaFEqBFgfBHnBeVYDRjvUBcGOnojxlJb7I7+frj/OKilUrFmSpGHuvjIkR
- XxUcP27sS051XTiqk6g3KEvOTnMpDQGg4m8dOhZ2JxSmKLoGOscyfdlwM+ctQbKzZine
- cBeCqS6OJ6+DXAeRLwT+x2Rn7AeCJlmHsSoZwgXq9FycFMU1v7iTXv9oOn68ayEu1L2V
- 5fgWGPLWTD2C8jz7PtLB/bbyu5CZTSmHZthTJXngVeHUzEE6xX8n079fLTDqZn3X32iT
- lAxA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <tewaro@theorem.dev>)
+ id 1xO8yA-00068i-Dh
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 02:30:12 -0500
+Received: by mail-dl2-x03.google.com with SMTP id
+ a92af1059eb24-1b22fcac215so43283c88.0
+ for <qemu-riscv@nongnu.org>; Mon, 02 Nov 2026 23:30:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793649155; x=1794253955; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=WQTIbX5JdTUQVlGtexv/4WqWe1FMQgrYxHR6l5IOF+E=;
- b=v+Jkhe9q7nXe3eKPuaLmUp4Ui6tfEFTiy5UQFj9Er5rJJ3UU/4C3l+8LO5/eAljpe7
- 8kVM0hzjUd6XM8PU9aIxmzR+hECfh+SIbcwXprxWWjGCKhUcDhq69MXuSdRkNrJTvMOi
- vfhUjTEUWxu59WS65TVeoOHct/3hLQvnfFqHVZUJNgN+q4Dx3mMHITnd7DixPIO264ng
- 2JK78KFssrbZ8OP4XdK3/7vj366djqv0gcYhv0/yseO2NqTMCZlW6K08wVAnuCq+oB2y
- bzWXyyi4ZZnFx2pIN34ieT9e4od3XCLPhCgIooeU6jSWnCKx15coW7L1JeuAOTPmU0q3
- F48A==
+ d=theorem-dev.20260707.gappssmtp.com; s=20260707; t=1793691009; x=1794295809;
+ darn=nongnu.org; 
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=uMDgBHFCfShr3L6FJGE9YvoXrYO8PUeN2gLlvwmxBXw=;
+ b=WSketthnBtHAdY6DOg43+bAdjqwp+8agAIlah6EseUfmcB6ejyaWaAh1kSFWxc8JUV
+ S8RItEmIx8vdHY45b/R6HM9RPDjR4bE+73yJOeNf0RWM+Iz30B5b5bvXXVC5jGCwRGN9
+ NA4V4/EeBt3LddTB7I3lI38fmfO2N5SHHbY0d+r2gC1FKau1Jm6rea72ekeWZMmYyngM
+ XXnQCMbfFvmbCz3o6r5XxwLneQfN5jwvmYv5s0GUr/jMHxgKttgII44lKcBPzCetmRJn
+ n4QUjngPsLaBVZtyEyPqvNxfCsTxGXqXrtJUvpVkjWStAHkGtt0wMNYWvhqGm/D2BU3G
+ S1LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793649155; x=1794253955;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:reply-to:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=WQTIbX5JdTUQVlGtexv/4WqWe1FMQgrYxHR6l5IOF+E=;
- b=h65O8czhR7U08jxFLv/lxbJQBMag4bx3KSlF80wFm7lZ6gX3i47+/g+klCbgABsRbn
- NWsBk8Be7HM/lvpTTU698/hMeK85lpjNj0uo+b5NWXHUsTpzUKzg+t5P77IE4tUrw7Ia
- kBb5N7DjUc/WpliopsN83ChLBcY9iWp2veWUNI7mw0hBpYQ0mHQOQ5B3tS8hLSDO6Wyq
- DfzVfw+aAUNPZ66dCnCVINm/qrWZy9yyFS/A3qRowHeEKLxDd14KcNShNWFO9DY2rBSu
- GLMXE/0tGmMerjdhhlbLn+ec3s+0h+yVIEy8uRBA7FCm5Nyyt0e7i8w5H4p5+o09Odu0
- r0cA==
+ d=1e100.net; s=20260707; t=1793691009; x=1794295809;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=uMDgBHFCfShr3L6FJGE9YvoXrYO8PUeN2gLlvwmxBXw=;
+ b=ZPNANKzJ1B+VnKbIBntxqHqUjQKVJHfiGbNV/7H9mYwFDbkKh1YRJmlHkEYsnOFbFS
+ QylkVupedzoULN9cknNPbJOhAxedyqHgPhc73rOA+jd6OvhMo7KS6NokItx35dvivaKZ
+ JrYC7RK9+QffS23GWSk1M4zatDNpCED8GjrNwMncldU4H2zK8v0yxmu2DeDRrbW/oHJh
+ K+1L9c80Yc+bbzC1xCvrxjPSNQQtBmCWrW5CUZ/YYd4hgAItD3wBprDccUsKLmuftAKt
+ Oys8TLJitd7fRBPlBErxMSjx9VI3Jg/Oziv5ZIgXXMUhp7PFRefAw95ULygU/UuBddRg
+ r/dQ==
 X-Forwarded-Encrypted: i=1;
- AKwUvByCHKjxV2XNRv1jJZnLHwofjsVjqB+SCJ+3jQF2X55r0r5ZOONfZJ5PQ7832+Ozq3MJzHwz3rSLoQ8+@nongnu.org
-X-Gm-Message-State: APuU4Z8/r8cMQ+voz4o4sl5IzkT+9H1MLG2v5/yl/2qn2i9cZ43uqaFp
- wD9TQRJU/I0wKXk9JPCXHHq++Btm0HEfUb5aaiSWI30/VkqDui3xB3BrUg49zBNgcLNXlifCHCH
- 7C2vplMNaCLy/Rba8UDaytXM5k+dJpEA=
-X-Gm-Gg: AYBFou28i5q4LlM9qZaEW/tQ9iR7iOGKp/7IPyeP+hUQsG+qDWPCf5W84Sx7G+OWaxs
- nx0MDGUMqe9QLN1DB5RZ7QY47ZTYiUDHv189AFWBY58oy1IjmQg8JaaqJJK/v2SR3Rl+kvzI5Fn
- UyLSPMWd0hbv/0P1rSmcZeJOZlqh2fAWLuhdUfwE2GsRwWB/b+Uh6z5Kn87rkg1iRGsyy68txQ7
- deAcC7bzRYnJVfs/QPWOvNEg4xEI2kVkqhk8JgMYnW1JIx9d9xXDEgKuBSvNzc9+GbIhnB8Wgqh
- kgAfgKyTMwbGQgSQVOlzyuYHKL9kENJiw4PY7MJyhwtrtn7Rejvr5CiFtM/qR6qIQ03jmAOdRjB
- KeI4ZD/pb/iNAg0gkUKRIR8TKXm0br23Q6loj
-X-Received: by 2002:a05:6402:3053:10b0:6b1:b9e9:6cfe with SMTP id
- 4fb4d7f45d1cf-6b4b0bececdmr8268993a12.14.1793649155279; Mon, 02 Nov 2026
- 11:52:35 -0800 (PST)
+ AKwUvBzWFovNW33CvCITGuz+n/Ovn+GLt5zlzate+P9S6AMr5lcKkEqaaNY/zCzcgSlU11uoc1vRPQQomz4s@nongnu.org
+X-Gm-Message-State: APuU4Z813ebWd5hEXQgRbJHPpsIlP+KlqmZEYZeWbpvSII6Tu5aryB7U
+ fty5nbcd7iFZ516B8FVMgEFk9uX8H+E5bHEo/+Czp7ne31umtfWLVmblDbx7TlY9J36vi/f7VQv
+ zv+1Onz0rb3Sk
+X-Gm-Gg: AYBFou3o+PWj/aYegTnrpODp/zS949zreOsPVnCz0EPEfK4MyIW07IHc+BXM1jLgxKt
+ 7iIXIxKBy/CTa/blM0QNDtmT9J4q4Ze1MKKYMPmUCRPwKqrMN4Snx17333ibnEXEZoDGPfI8cig
+ m5//Sx98W7aI3+HSdo+fwSE+hGtnA+tJMQYPl2GRL8iJWHXxYWqQJxPmPQWKY9xGuOv/GJXF9Er
+ I3QUMIoVC+ibQmBmbGmKosdH7thFrQTaRDakr53gNqMdBGhKXQ3NkSMWa8uFrmFFtIW7KwXpFCa
+ BLj/wB3hu0aRhq42XRkJN+uXPeu/Xa1lup/0H0upjWqLc+oaNVzvQ6zni2GsTwa3j9s4LnQF6cA
+ 3BCen6f3NP3/6eZnw8y3ALj9dj72iiKXQoh8ArXk+DX49fAYDWZ+eOZnQGVffHcpjYf7TOxTumz
+ jifRs1mILnaQUk5soabbcGmho/+1wHO6DbisoWvbMCGLsCRJRU8H14W2zJPdPYF4LDy6PVb9+QT
+ NDINZ/ZJ4QULhhY8tgaygQm1Q2tSIIaV3uEqLrq1N3YsxlYrMWxhDwBEDiKKT/slb3etuHKsknz
+ v5MnKBL22b4NXHa+tvP4ZrFReUTMpz2zQKH5Pkh1BO956za4ajKfjE+MK4+6aMy/PRj4EVk=
+X-Received: by 2002:a05:7023:903:b0:17f:7280:1332 with SMTP id
+ a92af1059eb24-1ac5c92f6e4mr20648389c88.40.1793691008732; 
+ Mon, 02 Nov 2026 23:30:08 -0800 (PST)
+Received: from tewaros-MacBook-Pro.local
+ ([2601:647:6300:1230:9da3:3d82:7292:c937])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1b106edc7f8sm23226592c88.9.2026.11.02.23.30.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Nov 2026 23:30:07 -0800 (PST)
+From: tewaro <tewaro@theorem.dev>
+To: qemu-devel@nongnu.org
+Cc: disclosures@theorem.dev, tewaro <tewaro@tewaro.org>, imaginos32@gmail.com,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH 1/2] target/riscv: report the write pseudoinstruction for a
+ failed VS-stage A/D update
+Date: Mon,  2 Nov 2026 23:29:52 -0800
+Message-ID: <d14b2d1dcfa4eddff7d3bde86cb560130fd07877.1793677944.git.tewaro@theorem.dev>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <cover.1793677944.git.tewaro@theorem.dev>
+References: <20260705140508.17692-1-imaginos32@gmail.com>
+ <cover.1793677944.git.tewaro@theorem.dev>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261030151539.1872-1-luoyonggang@gmail.com>
- <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
- <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
- <ba106173-fca3-6019-3028-122831887921@eik.bme.hu>
- <CAE2XoE9cR_X0kkDfGTU4Mt_5Hc3WZ8K5rghw2AeL4Vh=eugGag@mail.gmail.com>
- <bf45a858-db07-de03-70ea-ca0061d7a5d1@eik.bme.hu>
- <CAE2XoE9_b5UiE2+BXFRqB3RPv=M+8jr1HQy7rEFVEb6w1DdoGg@mail.gmail.com>
- <a479df5b-721d-c357-5c69-c3760a73e521@eik.bme.hu>
- <CAE2XoE-2w3A4=BeskGgp7NYUtkRVNkNufu4SZjW_OQ-KAQZvhg@mail.gmail.com>
- <6efa9f73-75dd-efd0-3fd9-6b2654b69737@eik.bme.hu>
- <CAE2XoE8pNaP3rAR5Y2BpUZ2vSu-UC-wG9V9U7gPXrEGY=kx0RA@mail.gmail.com>
- <e5ce0ea8-7e97-aa76-6384-025fc43cb85a@eik.bme.hu>
-In-Reply-To: <e5ce0ea8-7e97-aa76-6384-025fc43cb85a@eik.bme.hu>
-From: Yonggang Luo <luoyonggang@gmail.com>
-Date: Tue, 3 Nov 2026 03:52:22 +0800
-X-Gm-Features: AclHuK82GezjZPRO-2ox9Q6IyePg8CIOMyNBfIjTMU_9_XCKLkBdJwkzzFN--44
-Message-ID: <CAE2XoE-459vCeK1O__iCs_hgMfMEQHWf_f_=hXG4ZhMJ1Z4aBw@mail.gmail.com>
-Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
- registration
-To: BALATON Zoltan <balaton@eik.bme.hu>
-Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-devel@nongnu.org,
- Anthony PERARD <anthony@xenproject.org>, Felipe Balbi <balbi@kernel.org>, 
- Aleksandar Rikalo <arikalo@gmail.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>, 
- Antony Pavlov <antonynpavlov@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Stefano Stabellini <sstabellini@kernel.org>,
- Subbaraya Sundeep <sundeep.lkml@gmail.com>, 
- =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, 
- Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank <nieklinnenbank@gmail.com>, 
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org, 
- Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org, 
- Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>,
- Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Strahinja Jankovic <strahinja.p.jankovic@gmail.com>, 
- =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- Thomas Huth <th.huth+qemu@posteo.eu>,
- =?UTF-8?Q?Cl=C3=A9ment_Chigot?= <chigot@adacore.com>, 
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Yoshinori Sato <yoshinori.sato@nifty.com>, 
- Frederic Konrad <konrad.frederic@yahoo.fr>, Palmer Dabbelt <palmer@dabbelt.com>,
- Peter Maydell <peter.maydell@linaro.org>,
- Chao Liu <chao.liu@processmission.com>, 
- Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
- Alistair Francis <alistair@alistair23.me>, 
- Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>, 
- Gaurav Sharma <gaurav.sharma_7@nxp.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Alistair Francis <alistair.francis@wdc.com>, 
- Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::529;
- envelope-from=luoyonggang@gmail.com; helo=mail-ed1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+Received-SPF: pass client-ip=2607:f8b0:4864:38::3;
+ envelope-from=tewaro@theorem.dev; helo=mail-dl2-x03.google.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,299 +109,107 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-To: luoyonggang@gmail.com
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 2, 2026 at 10:56=E2=80=AFPM BALATON Zoltan <balaton@eik.bme.hu>=
- wrote:
->
-> On Mon, 2 Nov 2026, Yonggang Luo wrote:
-> > On Mon, Nov 2, 2026 at 4:57=E2=80=AFAM BALATON Zoltan <balaton@eik.bme.=
-hu> wrote:
-> >>
-> >> On Sun, 1 Nov 2026, Yonggang Luo wrote:
-> >>> On Sun, Nov 1, 2026 at 7:29=E2=80=AFAM BALATON Zoltan <balaton@eik.bm=
-e.hu> wrote:
-> >>>>
-> >>>> On Sun, 1 Nov 2026, Yonggang Luo wrote:
-> >>>>> On Sun, Nov 1, 2026 at 1:06=E2=80=AFAM BALATON Zoltan <balaton@eik.=
-bme.hu> wrote:
-> >>>>>>
-> >>>>>> On Sat, 31 Oct 2026, Yonggang Luo wrote:
-> >>>>>>> On Sat, Oct 31, 2026 at 8:42=E2=80=AFPM BALATON Zoltan <balaton@e=
-ik.bme.hu> wrote:
-> >>>>>>>>
-> >>>>>>>> On Fri, 30 Oct 2026, Pierrick Bouvier wrote:
-> >>>>>>>>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
-> >>>>>>>>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
-> >>>>>>>>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo =
-and the
-> >>>>>>>>>>> type_init
-> >>>>>>>>>>> function that calls type_register_static(). A later change ne=
-eds to
-> >>>>>>>>>>> pass a
-> >>>>>>>>>>
-> >>>>>>>>>> That's the point of the macro to hide the boiler plate code.
-> >>>>>>>>>>
-> >>>>>>>>>>> target mask into that registration, and the macros have no pa=
-rameter
-> >>>>>>>>>>> for it.
-> >>>>>>>>>>
-> >>>>>>>>>> Couldn't you just change the macros to take that parameter ins=
-tead of
-> >>>>>>>>>> expanding it everywhere?
-> >>>>>>>>>>
-> >>>>>>>>>
-> >>>>>>>>> Problem of macros is that they don't have default parameters, s=
-o you
-> >>>>>>>>> need variants for everything:
-> >>>>>>>>>
-> >>>>>>>>> DEFINE_MACHINE
-> >>>>>>>>> DEFINE_MACHINE_EXTENDED
-> >>>>>>>>> DEFINE_MACHINE_WITH_INTERFACES
-> >>>>>>>>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
-> >>>>>>>>> and now would need a new variant, with variant for other existi=
-ng ones.
-> >>>>>>>>>
-> >>>>>>>>> In the end, it's just simpler to remove this and add the boiler=
-plate.
-> >>>>>>>>> It's written once and never modified, so using a macro just sav=
-e typing
-> >>>>>>>>> those lines once.
-> >>>>>>>>>
-> >>>>>>>>>> Regards,
-> >>>>>>>>>> BALATON Zoltan
-> >>>>>>>>>>
-> >>>>>>>>>>> This series expands every caller first, with no behavior chan=
-ge, so the
-> >>>>>>>>>>> follow-up only replaces the type_register_static() call.
-> >>>>>>>>>>>
-> >>>>>>>>>>> Each machine file gains a class_init function, a TypeInfo, an=
-d a
-> >>>>>>>>>>> type_init
-> >>>>>>>>>>> function that calls type_register_static(). The last patch re=
-moves
-> >>>>>>>>>>> DEFINE_MACHINE* and DEFINE_SECURE_MACHINE* from include/hw/co=
-re/boards.h.
-> >>>>>>>>
-> >>>>>>>> Macros help reading the code not saving typing. If the actual
-> >>>>>>>> functionality is buried in a lot of boiler plate it's harder to =
-understand
-> >>>>>>>> and spot bugs so putting the unintresting boiler plate behind a =
-macro is
-> >>>>>>>> better even if you need a separate version for different cases. =
-Then the
-> >>>>>>>> code that uses the macro will be much more obvious and not just =
-a lot of
-> >>>>>>>
-> >>>>>>> I think mainly because DEFINE_MACHINE* and DEFINE_SECURE_MACHINE*=
- are
-> >>>>>>> not defined properly
-> >>>>>>> that causes them to not be extended easily.
-> >>>>>>>
-> >>>>>>> DEFINE_TYPES is another example, use them can extend easily, how =
-about
-> >>>>>>> always use DEFINE_TYPES?
-> >>>>>>> Or add a DEFINE_TYPE to replace DEFINE_MACHINE* and DEFINE_SECURE=
-_MACHINE*?
-> >>>>>>
-> >>>>>> Maybe I'm missing the problem but DEFINE_MACHINE macros are just
-> >>>>>> convenience wrappers around DEFINE_MACHINE_EXTENDED. So why can't =
-you add
-> >>>>>> the needed parameter to DEFINE_MACHINE_EXTENDED and use that for m=
-achines
-> >>>>>> that need it, or if it's needed by all machines then make the new
-> >>>>>> parameter required and add it to all convenience wrappers too so y=
-ou can
-> >>>>>> keep using DEFINE_MACHINE* and just need to add one parameter to i=
-t in
-> >>>>>> machines?
-> >>>>>
-> >>>>> That's the issue, add parameter to DEFINE_MACHINE_EXTENDED means al=
-l
-> >>>>> calls to it also need
-> >>>>> to be changed, that means touch many $target_arch files. currently
-> >>>>> it's 13. But after these
-> >>>>
-> >>>> That's not different from expanding the macro which would touch the =
-same
-> >>>> files.
-> >>>>
-> >>>>> changes, there will be much more usage on it, and if we want to add
-> >>>>> more parameters or attributes
-> >>>>> to it, it will be a new tree-wide change.
-> >>>>
-> >>>> Do you expect to need more parameters? Can't you add them at once th=
-en?
-> >>>>
-> >>>>> And DEFINE_TYPES do not suffer from such issues. As the TypeInfo[] =
-is
-> >>>>> explicit defined for
-> >>>>> DEFINE_TYPES
-> >>>>
-> >>>> My point is that keeping the boiler plate as little as possible make=
-s the
-> >>>> code more readable. DEFINE_TYPES hides some of the boiler plate,
-> >>>> DEFINE_MACHINE hides even more so converting to DEFINE_TYPES would e=
-xpose
-> >>>> some even if it's better than no macro at all.
-> >>>>
-> >>>> What exactly are the parameters missing from DEFINE_MACHINE_EXTENDED=
- that
-> >>>> need to be added?
-> >>>
-> >>> Hi BALATON
-> >>> the things we faced is we first is to add TypeInfo::is_available para=
-meter to
-> >>> DEFINE_MACHINE_EXTENDED, and have more usage of it.
-> >>> Then we will add targets:uint64_t parameter to DEFINE_MACHINE_EXTENDE=
-D, this is
-> >>> a prepare to remove TypeInfo::is_available parameter from
-> >>> DEFINE_MACHINE_EXTENDED,
-> >>>
-> >>> And finally, once all usage of TypeInfo::is_available can be replaced=
- with
-> >>> targets:uint64_t, then we finally need to remove
-> >>> TypeInfo::is_available parameter from DEFINE_MACHINE_EXTENDED,
-> >>
-> >> Is there a way to avoid the temporary is_available churn and introduce=
- the
-> >> targets:uint64_t right away? (I'm not following this so I don't really
-> >> know what you're talking about just looks like there's some churn here
-> >> which might be good to awoid anyway independent of these macros.)
-> >>
-> >>> That's what I am facing now. And the explicit
-> >>> static const TypeInfo xxx_machine_typeinfo =3D {
-> >>>    .name       =3D MACHINE_TYPE_NAME("xxx"),
-> >>>    .parent     =3D TYPE_MACHINE,
-> >>>    .class_init =3D xxx_machine_class_init,
-> >>> };
-> >>>
-> >>> Will help me avoid the issue. And I think this is a little boilerplat=
-e
-> >>> and very explicit.
-> >>
-> >> That's not all DEFINE_MACHINE hides though. It's longer with .abstract=
-,
-> >> .secure and .iterfaces plus the machine initfn that would also need to=
- be
-> >> expanded if you used DEFINE_TYPES.
-> >>
-> >> Is this conversion needed for all machines using all DEFINE_MACHINE
-> >
-> > At the end, only "none" machine do not have targets parameter or
-> > (QEMU_ARCH_ALL), as that's the sole
-> > machine that supports all targets.
-> >
-> >> variants or only some of them? If the latter why not convert those to
-> >
-> >
-> >
-> >
-> >> DEFINE_MACHINE_EXTENDED and then only that macro needs to be changed w=
-ith
-> >> other wrappers passing a default value without needing a new parameter=
-.
-> >> That does not work if all machines need to do this but even then, keep=
-ing
-> >> the macro and adding a new required parameter is better in my opinion =
-as
-> >> it keeps boiler plate hidden.
-> >
-> > Another option is keep DEFINE_MACHINE and introduce DEFINE_MACHINE_TARG=
-ETS
-> > and remove DEFINE_MACHINE_EXTENDED, and we only use DEFINE_MACHINE for
-> > simple case,
-> > that is parent is TYPE_MACHINE and have no custom type and no more
-> > attributes assigned.
-> > DEFINE_MACHINE_EXTENDED is too verbose, when calling it, it less clear
-> > than calling to DEFINE_MACHINE.
-> > And if we want to set more attributes to TypeInfo, just expand it to
-> > use type_init or DEFINE_TYPES, how about this way.
-> >
-> > This will be something like:
-> >
-> > #define DEFINE_MACHINE_TARGETS(namestr, machine_initfn, targets) \
-> >    static void machine_initfn##_class_init(ObjectClass *oc, const void =
-*data) \
-> >    { \
-> >        MachineClass *mc =3D MACHINE_CLASS(oc); \
-> >        machine_initfn(mc); \
-> >    } \
-> >    static const TypeInfo machine_initfn##_typeinfo =3D { \
-> >        .name       =3D MACHINE_TYPE_NAME(namestr), \
-> >        .parent     =3D TYPE_MACHINE, \
-> >        .class_init =3D machine_initfn##_class_init, \
-> >    }; \
-> >    static void machine_initfn##_register_types(void) \
-> >    { \
-> >        type_register_targets(&machine_initfn##_typeinfo, targets); \
-> >    } \
-> >    type_init(machine_initfn##_register_types)
-> >
-> > /* Implicitly insecure */
-> > #define DEFINE_MACHINE(namestr, machine_initfn) \
-> >    DEFINE_MACHINE_TARGETS(namestr, machine_initfn, QEMU_ARCH_ALL) \
-> >
-> > As the many call is to DEFINE_MACHINE.
-> >
-> > And after all conversion, all existing usage of DEFINE_MACHINE will be
-> > converted to
-> > DEFINE_MACHINE_TARGETS.
-> > DEFINE_MACHINE will be called for ('none') machine or future heterogene=
-ous
-> > machines
-> >
-> >
-> > Either way, these patches will be dropped. We will introduce
-> > DEFINE_MACHINE_TARGETS first.
->
-> I think I'm lost and cannot follow what you want. As far as I understood
-> you want to add a new field "target" to machine TypeInfo but instead of
-> adding that straight away you proposed to first add is_available then
-> later replace that with target. I asked why do you need is_available and
-> not add target right away?
->
-> Then if this target parameter will be needed for all machines why can't
-> you add that to all DEFINE_MACHINE macros as a required parameter and set
-> it for all machines passing it through to DEFINE_MACHINE_EXTENDED which
-> sets in the TypeInfo. That way no machines need changing other than addin=
-g
-> the target parameter to the existing DEFINE_MACHINE calls.
->
-> What am I missing?
-Or sorry, I did not explain well.
+When a G-stage fault is taken during a VS-stage page-table walk,
+riscv_cpu_do_interrupt() writes a pseudoinstruction to mtinst/htinst.
+This instruction says if the walk's access was a read (0x3000) or a
+write (0x3020) of the PTE [1]. Commit 366b4fba0fae made the A/D update
+check G-stage write permission, and sets the write bit when the trap
+cause is a store guest-page fault.
 
-I means reshape DEFINE_MACHINE like
+The trap cause is the wrong signal. The cause follows the original
+access [2], but the pseudoinstruction describes the implicit access
+that failed. The two disagree in two cases:
 
-https://lore.kernel.org/qemu-devel/20261102194826.1298-1-luoyonggang@gmail.=
-com/T/#u
+  original access   failed access   Spike reports   QEMU reports
+  load or fetch     A/D write       0x3020          0x3000
+  store             PTE read        0x3000          0x3020
 
-basically every call to DEFINE_MACHINE needs the targets parameter.
-So we can always passing targets parameter for DEFINE_MACHINE.
+They agree only for a store that fails on the A/D write, which is the
+case 366b4fba0fae was tested with.
 
-And I think we can remove DEFINE_MACHINE_EXTENDED, as the call to it is ver=
-bose
+Record in the CPU state that the G-stage fault came from the A/D
+write, and use that for both the data and the instruction tinst
+sites. Clear it on entry to riscv_cpu_tlb_fill() and after the trap.
 
+[1] Privileged ISA v1.12, 8.6.3, Table 8.12
+[2] Privileged ISA v1.12, 8.5.1 "Guest Physical Address Translation"
+https://github.com/riscv/riscv-isa-manual/releases/tag/Priv-v1.12
 
+Fixes: 366b4fba0fae ("target/riscv: check G-stage write permission for VS-stage A/D updates")
+Signed-off-by: tewaro <tewaro@theorem.dev>
+---
+ target/riscv/cpu.h            | 1 +
+ target/riscv/tcg/cpu_helper.c | 8 +++++++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
 
->
-> Regards,
-> BALATON Zoltan
+diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+index 49a1186bdb..d56566d8c8 100644
+--- a/target/riscv/cpu.h
++++ b/target/riscv/cpu.h
+@@ -445,6 +445,7 @@ struct CPUArchState {
+      * address translation for the VS-stage page table walk.
+      */
+     bool two_stage_indirect_lookup;
++    bool two_stage_indirect_write;
+ 
+     uint32_t scounteren;
+     uint32_t mcounteren;
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 58e98e975c..063525cfc5 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -1544,6 +1544,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+                 if (fault_pte_addr) {
+                     *fault_pte_addr = pte_gpa >> 2;
+                 }
++                env->two_stage_indirect_write = true;
+                 return TRANSLATE_G_STAGE_FAIL;
+             }
+         }
+@@ -1785,6 +1786,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+     hwaddr tlb_size = TARGET_PAGE_SIZE;
+ 
+     env->guest_phys_fault_addr = 0;
++    env->two_stage_indirect_write = false;
+ 
+     qemu_log_mask(CPU_LOG_MMU, "%s ad %" VADDR_PRIx " rw %d mmu_idx %d\n",
+                   __func__, address, access_type, mmu_idx);
+@@ -2233,7 +2235,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                  */
+                 tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
+ 
+-                if (cause == RISCV_EXCP_STORE_GUEST_AMO_ACCESS_FAULT) {
++                if (env->two_stage_indirect_write) {
+                     tinst |= 0x20;
+                 }
+             } else {
+@@ -2256,6 +2258,9 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+                  * doing VS-stage page table walk.
+                  */
+                 tinst = (riscv_cpu_xlen(env) == 32) ? 0x00002000 : 0x00003000;
++                if (env->two_stage_indirect_write) {
++                    tinst |= 0x20;
++                }
+             }
+             break;
+         case RISCV_EXCP_ILLEGAL_INST:
+@@ -2506,6 +2511,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+ 
+     env->two_stage_lookup = false;
+     env->two_stage_indirect_lookup = false;
++    env->two_stage_indirect_write = false;
+ }
+ 
+ #endif /* !CONFIG_USER_ONLY */
+-- 
+2.54.0 (Apple Git-157)
 
-
-
---=20
-         =E6=AD=A4=E8=87=B4
-=E7=A4=BC
-=E7=BD=97=E5=8B=87=E5=88=9A
-Yours
-    sincerely,
-Yonggang Luo
 
