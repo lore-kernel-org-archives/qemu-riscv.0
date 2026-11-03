@@ -1,146 +1,64 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8562606D80C
-	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Nov 2026 11:44:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB861606A327
+	for <qemu-riscv@archiver.kernel.org>; Tue,  3 Nov 2026 12:23:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=F0/Zwb1M;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QsJF8FxR
+	dkim=pass (2048-bit key, unprotected) header.d=lanxincomputing-com.20200927.dkim.feishu.cn header.i=@lanxincomputing-com.20200927.dkim.feishu.cn header.a=rsa-sha256 header.s=s1 header.b=CHZRELdR
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOCwX-0002BT-7o; Tue, 03 Nov 2026 06:44:45 -0500
+	id 1xODXk-0007G7-Pv; Tue, 03 Nov 2026 07:23:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xOCwV-000277-Ut
- for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 06:44:44 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xOCwU-0007yr-Ay
- for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 06:44:43 -0500
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A3ABXqf2002738
- for <qemu-riscv@nongnu.org>; Tue, 3 Nov 2026 11:44:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Yf5eZ/RWWCS7C6KKz+3lLZnvJElJVariyFpxgmpUdmc=; b=F0/Zwb1MQbnFG4e5
- ERyL4/smLvMSE1ixciX8bvTwxyAz2AISnwWxcNVVLpZdfhP5Qcr/5xKN8JlE7PBf
- C1Wm0zvQoA47toksx3WKQxMw0eJ0hVeHOfE/IE8JaUmgyF6z0km2sbJiL8hAi0jo
- l9rRVsP4YTs8hVl9FkO7vRDrQ2+dE7hwi6UEGhy2K9exB3+vZd9IrN9x01bEKpEI
- d2+pSGM9FhR30Thmj0kuNCeRKdX5sY4MHdi+mKgdI2hj41eHX6eljAh8KcOVqEJU
- xz3aZkvAd8hUeRR9ZvRZS/lvFJuZtiSnSw8vUqZKMdvZZUUksn+tgzu/TlhTNEEZ
- llybdQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hq7ycstn2-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 11:44:40 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-93f62934ef6so853343485a.3
- for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 03:44:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793706280; x=1794311080; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Yf5eZ/RWWCS7C6KKz+3lLZnvJElJVariyFpxgmpUdmc=;
- b=QsJF8FxRkRGDYy2pMN57rDUhDPrkK+NBVguyVb6N76xXTwnl9JWc3nOjaItfWNqWNY
- Fp/srDHQQTDGXZ39gz2vaX4HoimHbyc2GN9B2OEQZ9dH3CiPxYlX8J8i0d5+LGNxDFR8
- 76U5H+tXGlJz99xmIrLAk9JoQqFXFuPfdxxSEhIBUEz8exaypYLChtT2XtPUl0GjKgrt
- 0Q2XWObm966B/rLJMvW+gjIqahlQ9OTFlRDK1dG551ZSWhOazfRV9r7sd0EPBCm6tI5/
- wmy3Z94Hyjwgu/1bm5QU7LFJkje8ScvI7j20Dqhb76yxZ7fmpgCw270GaaKye1yC5j9U
- caRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793706280; x=1794311080;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Yf5eZ/RWWCS7C6KKz+3lLZnvJElJVariyFpxgmpUdmc=;
- b=SULRg0OUKYVlhZib5hoHqXsPRk/uawUItYYA+UeVesGxtnJsq0aEtaqvp6L/oHvTdI
- 57nor2aHS31vly+8V5d3FSjWYF4vYC7ApQXdxgYowk0Ab40h48mJ1ogX9zrvMrR/bl1m
- AhWolSF9G9cqpTsRdExhRHM0Owr5bGrfdpBoV7kpttt1dDGYDcWiVoFdZrxajLYosj3+
- k6+5dSztCPWhUw9x9H9h4rDb+6rpGeQpJxbJFA813Ld/00+yGuy0yi0TsqAPUc3UZWoJ
- jqpc3l6TYSEBmRqUJa+Mp3GbHfZTbLCbs8MfaLyX282EloDVPJwMrb9gnfc5nQoAnQS/
- fz1A==
-X-Gm-Message-State: APuU4Z8V/ClqyObdT/jVQ3T9g/pclmDRdEzJOFkWuk6bOdVATKwkHI0H
- HZawmcqpRn7RxUiju/1+vL4Vptl32KlmARLvAD3u+sJm0AS5Na065/xBvTLbD02Np5mHtQrY6zW
- CZ1+6Q8NVRWxcR1Un8MHJ05GywAJzDcp7C6K/z3L25PjRJUpu6oENMdq7VA==
-X-Gm-Gg: AYBFou3fUdoDpqGlt2ZY5VFIoysT7rFjFWEO8QaE2wfg2uXj/n23khjpmCnD70wsh8x
- mnFAF9JqJr2tiE4cP3cIbr/6AATcilqbwnyVVQt94z8KE/RQ8weP4L5rCum4C0CklJBRh510wRl
- M9zc0XbtqnPxSl8Qvw7/CHxSmtMC3D3SOZpbmbAGC25fEeF07a0iG2txRLvTBlzVUoWlrC9GWpm
- of173srW4C71rqcr54er89/TildL4LKGJ/uj715Vj3BnVIgjhCxhbSFwf/5SPCOUlSF1WnpxDWt
- UTlqLG4tCgd9nj7ymxvGn+bvH6h2Uk4YXK3QqnUXY86f9KbkR4rqRl/owzQOSo3g57oy76NBT48
- ju4Dlqc2Pd/DfOmv7qPqQOme41Z1lHwnd18gGWsXGuzdFFHUbQa3HPOBBDvs/5VDHjgaQUj3TcM
- w2iBoltQ==
-X-Received: by 2002:a05:620a:440b:b0:93e:c12c:f142 with SMTP id
- af79cd13be357-94421807ad9mr2142107685a.76.1793706279740; 
- Tue, 03 Nov 2026 03:44:39 -0800 (PST)
-X-Received: by 2002:a05:620a:440b:b0:93e:c12c:f142 with SMTP id
- af79cd13be357-94421807ad9mr2142104085a.76.1793706279187; 
- Tue, 03 Nov 2026 03:44:39 -0800 (PST)
-Received: from [192.168.15.12] ([187.56.223.122])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-94425852274sm1067113885a.19.2026.11.03.03.44.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Nov 2026 03:44:38 -0800 (PST)
-Message-ID: <717db136-e5ca-4185-873c-82ca6c343115@oss.qualcomm.com>
-Date: Tue, 3 Nov 2026 08:44:32 -0300
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1xODXf-0007Fk-N2
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 07:23:09 -0500
+Received: from va-2-27.ptr.blmpb.com ([209.127.231.27])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1xODXZ-0004Mg-59
+ for qemu-riscv@nongnu.org; Tue, 03 Nov 2026 07:23:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1793708563;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=rWsXrmq+yxuJqEYK7uMUXFPVf6JuAdwdS1+fAz4stSA=;
+ b=CHZRELdR9NR4ietmBg07fYSfOktAUVhsacRpiDgjyGbe/d/Nmfx8amxPHyC5g8oWRuuqtc
+ j1wsfsYwnQbZtb7I9ZjBdXtehyt6co4mTyitjJiTMCfsKf/dFlw8vUqlSI+ShRLdapgbZ2
+ CtUjl5Pcd0a6aey9YbVhJaRVTkUE0sB7J1O4MVNNu8+u63EePD6OlJsqGFciABQi/1RWao
+ +H4ZKkbgbOsOnhG9RsYTVgcCZom8mRgj1ccpB8LCXQI7/rrMkm7JLJfLXppEK16FSWn7wB
+ HHfj/mB5kCOA7cdgeA/5zQpff6vLTmR3mh9u/q4CtAzjiHWeAm8Qf1EI5z9Cog==
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] hw/riscv: Select SSI for IBEX
-To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-References: <20261101031547.125591-1-tanchi25@mails.ucas.ac.cn>
- <20261101031547.125591-6-tanchi25@mails.ucas.ac.cn>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: <alistair.francis@wdc.com>, <liwei1518@gmail.com>, 
+ <zhiwei_liu@linux.alibaba.com>, <chao.liu@processmission.com>, 
+ <anup@brainfault.org>, <qemu-riscv@nongnu.org>
+Subject: Re: [PATCH] hw/intc/aplic: Fix msicfgaddrH in split mode
+Date: Tue, 3 Nov 2026 20:22:37 +0800
+Message-Id: <fb0bb624-ac07-4362-b0b9-5372633da4f1@lanxincomputing.com>
+X-Archived-By: <archiver.kernel.org>
+Mime-Version: 1.0
+X-Lms-Return-Path: <lba+26ae9d211+33db13+nongnu.org+xiangwencheng@lanxincomputing.com>
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <bb98a0dd-d550-48fa-a713-2688ef06f3b9@oss.qualcomm.com>
+Received: from [127.0.0.1] ([123.120.5.129]) by smtp.feishu.cn with ESMTPS;
+ Tue, 03 Nov 2026 20:22:40 +0800
+X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
+To: "Daniel Henrique Barboza" <daniel.barboza@oss.qualcomm.com>, 
+ <palmer@dabbelt.com>
+From: "BillXiang" <xiangwencheng@lanxincomputing.com>
 Content-Language: en-US
-In-Reply-To: <20261101031547.125591-6-tanchi25@mails.ucas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=V7foQuni c=1 sm=1 tr=0 ts=6ae9c928 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=bus90iwuyia7r0C3gDGjVg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=uaJWICHtPDjwm8IFUgYA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: vxGDvvt4L0XZOD9yiVfP9rPd0gagAWHd
-X-Proofpoint-GUID: vxGDvvt4L0XZOD9yiVfP9rPd0gagAWHd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTAzMDA0NiBTYWx0ZWRfX7Ts6JuS/iFUm
- hTlfH2zN505VY8zrf7zFXoVRgtw46kjlFf1TCopL/95JdEuK7wjpjr1GXHqJ7LDrFz5wFAsynfx
- aqTBxBWqN0trdNTkbABVjOuImpiOVzrD/+6p1quY90sC4Hinzzq/4cSOScALxfGif4gAvBJJ0G9
- s1a9CTpiL/MqlhCI+7YUxnM+OUuaQx2xz2IgjUzdk4U+e+YMWh738lve/9ca2pKELar2/h8svUQ
- Mg9DtVzQpJ586SoUuOnIfeKQ/uhrhkrMszi/QklNK5mhIL8DQb0IctA54kvBxa93ya3twz8PfQF
- BjK8OzBAnZnqhH0mcdlNmgmJDmW0w6oxA0+1pyyysfZftmdz0i31M9LBK7at9xkkDMNEYxpLWEC
- Dp9as1Yw/AVQuwTRAlHDTrF/FV+v4Tzfht7qCbSYB7/OExZF2T3i7lrVDZ+JxPQVHWSK+pk+e9T
- DVlywMUbEgalFg6yzhw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTAzMDA0NiBTYWx0ZWRfXwSzDMAG9YDCy
- yRLdEZJfvxyBQPZfNS52eSD1WTotLW3WWy2QR/RtDFsslaEM7pWKOhQCxbRmvgKEtYisLJ9BOX3
- 2fWZQlOg5zakHlnaLVDcqkLIvtuvWdc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-03_02,2026-11-02_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 spamscore=0 clxscore=1015 bulkscore=0
- adultscore=0 phishscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611030046
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+References: <20261102112256.848400-1-xiangwencheng@lanxincomputing.com>
+ <bb98a0dd-d550-48fa-a713-2688ef06f3b9@oss.qualcomm.com>
+Received-SPF: pass client-ip=209.127.231.27;
+ envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-27.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -152,46 +70,254 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi Daniel,
+
+Thank you for the review. I'll resend the patch as v2.
+
+Regarding splitting the patch: I'd prefer to keep it as a single patch,
+since the two changes are coupled and can't work without each other.
+
+Rationale (to be added to the commit message):
+
+static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
+                                  uint32_t hart_idx, uint32_t guest_idx,
+                                  uint32_t eiid)
+{
+     uint64_t addr;
+     MemTxResult result;
+     RISCVAPLICState *aplic_m;
+     uint32_t lhxs, lhxw, hhxs, hhxw, group_idx, msicfgaddr, msicfgaddrH;
+
+     ...
+
+     if (aplic->kvm_splitmode) {
+         msicfgaddr =3D aplic->kvm_msicfgaddr;
+1.        msicfgaddrH =3D ((uint64_t)aplic->kvm_msicfgaddrH << 32);
+     }
+     ...
+
+     lhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+             APLIC_xMSICFGADDRH_LHXS_MASK;
+     lhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXW_SHIFT) &
+             APLIC_xMSICFGADDRH_LHXW_MASK;
+     hhxs =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXS_SHIFT) &
+             APLIC_xMSICFGADDRH_HHXS_MASK;
+     hhxw =3D (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
+             APLIC_xMSICFGADDRH_HHXW_MASK;
+     ...
+
+     group_idx =3D hart_idx >> lhxw;
+
+     addr =3D msicfgaddr;
+2.    addr |=3D ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK))=
+=20
+<< 32;
+     addr |=3D ((uint64_t)(group_idx &=20
+APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw))) <<
+              APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs);
+3.    addr |=3D ((uint64_t)(hart_idx &=20
+APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw))) <<
+              APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs);
+4.    addr |=3D (uint64_t)(guest_idx & APLIC_xMSICFGADDR_PPN_HART(lhxs));
+     addr <<=3D APLIC_xMSICFGADDR_PPN_SHIFT;
+     ...
+}
+
+Since msicfgaddrH is left-shifted at (2), the left shift at (1) is=20
+redundant.
+
+At (3) and (4), hart_idx and guest_idx are masked/shifted using lhxw and=20
+lhxs, which are extracted from the LHXW/LHXS fields of msicfgaddrH.=20
+However, riscv_aplic_set_kvm_msicfgaddr() did not program the LHXW/LHXS=20
+fields into kvm_msicfgaddrH, so lhxs/lhxw always read as zero, and the=20
+hart/guest idxs were never encoded into the MSI address. Fix this by=20
+programming hart_bits (LHXW) and guest_bits (LHXS) into kvm_msicfgaddrH=20
+in riscv_aplic_set_kvm_msicfgaddr().
+
+Thanks,
+Bill
 
 
-On 11/1/2026 12:15 AM, Tan Chi wrote:
-> The Ibex SPI host controller uses the SSI bus infrastructure,
-> but CONFIG_IBEX does not select CONFIG_SSI.
-> 
-> This causes undefined references to SSI functions, including
-> ssi_transfer(), when building a minimal RV32 OpenTitan target
-> without default devices.
-> 
-> Select SSI from IBEX to ensure that the required bus
-> implementation is built.
-> 
-> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
-> ---
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
->   hw/riscv/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 27f03b687c..d99fee0fd7 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -6,6 +6,7 @@ config RISCV_NUMA
->   
->   config IBEX
->       bool
-> +    select SSI
->   
->   config RISCV_DEVICE_COMMON
->       bool
-
+On 11/3/2026 6:02 PM, Daniel Henrique Barboza wrote:
+>=20
+>=20
+> On 11/2/2026 8:22 AM, BillXiang wrote:
+>> Add hart_bits and guest_bits to msicfgaddrH in KVM irqchip
+>> split mode.
+>> Also remove the redundant left shift when loading
+>> kvm_msicfgaddrH in riscv_aplic_msi_send().
+>=20
+> I suggest doing two patches:=C2=A0 one for the hart_bits and guest_bits=
+=20
+> change and
+> another one for the left shift.=C2=A0=C2=A0 Unless the left shift became =
+redundant=20
+> because
+> of the hart_bits_and guest_bits made - then it's ok to keep it in a=20
+> single patch.
+>=20
+>>
+>> Signed-off-by: BillXiang <xiangwencheng@lanxincomputing.com>
+>> ---
+>> =C2=A0 hw/intc/riscv_aplic.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0 | 13 +++++++++----
+>> =C2=A0 hw/riscv/aia.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 6 +++++-
+>> =C2=A0 include/hw/intc/riscv_aplic.h |=C2=A0 3 ++-
+>> =C2=A0 3 files changed, 16 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+>> index 03a0852b8b..2b618e73df 100644
+>> --- a/hw/intc/riscv_aplic.c
+>> +++ b/hw/intc/riscv_aplic.c
+>> @@ -182,7 +182,8 @@ bool riscv_use_emulated_aplic(bool msimode)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return kvm_kernel_irqchip_split();
+>> =C2=A0 }
+>> -void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr=
+)
+>> +void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr=
+,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t=
+ hart_bits, uint32_t=20
+>> guest_bits)
+>> =C2=A0 {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (!kvm_enabled()) {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return;
+>> @@ -191,8 +192,12 @@ void=20
+>> riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (riscv_use_emulated_aplic(aplic->msimo=
+de)) {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 addr >>=3D APLIC_=
+xMSICFGADDR_PPN_SHIFT;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 aplic->kvm_msicfg=
+addr =3D extract64(addr, 0, 32);
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 aplic->kvm_msicfgaddrH =3D e=
+xtract64(addr, 32, 32) &
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 APLIC_MMSICFGADDRH_VALID_M=
+ASK;
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 aplic->kvm_msicfgaddrH =3D
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((ha=
+rt_bits & APLIC_xMSICFGADDRH_LHXW_MASK) <<
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 APLIC_xMSICFGADDRH_LHXW_SHIFT) |
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ((gu=
+est_bits & APLIC_xMSICFGADDRH_LHXS_MASK) <<
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 APLIC_xMSICFGADDRH_LHXS_SHIFT) |
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 (ext=
+ract64(addr, 32, 32) & APLIC_xMSICFGADDRH_BAPPN_MASK);
+>=20
+> Please add temporary variables like:
+>=20
+> uint64_t hart_bits_shift =3D ((hart_bits & APLIC_xMSICFGADDRH_LHXW_MASK)=
+=20
+> << APLIC_xMSICFGADDRH_LHXW_SHIFT)
+> uint64_t guest_bits_shift =3D (guest_bits & APLIC_xMSICFGADDRH_LHXS_MASK)=
+=20
+> << APLIC_xMSICFGADDRH_LHXS_SHIFT)
+>=20
+> And then use the temp variables for the kvm_msicfgaddrH calculation.
+>=20
+> Also, please explain the rationale used.=C2=A0 Can be in code comment for=
+mat=20
+> or in the
+> commit msg.
+>=20
+>=20
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> =C2=A0 }
+>> @@ -404,7 +409,7 @@ static void riscv_aplic_msi_send(RISCVAPLICState=20
+>> *aplic,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (aplic->kvm_splitmode) {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msicfgaddr =3D ap=
+lic->kvm_msicfgaddr;
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msicfgaddrH =3D ((uint64_t)a=
+plic->kvm_msicfgaddrH << 32);
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msicfgaddrH =3D aplic->kvm_m=
+sicfgaddrH;
+>=20
+> Same thing here.=C2=A0 I'm assuming that this is now irrelevant due to th=
+e=20
+> hart_bits and
+> guest_bits change, but instead of assuming it's better if you just=20
+> explain why is
+> this the case.
+>=20
+>=20
+> Thanks,
+> Daniel
+>=20
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 } else {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msicfgaddr =3D ap=
+lic_m->mmsicfgaddr;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msicfgaddrH =3D a=
+plic_m->mmsicfgaddrH;
+>> diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+>> index 56fc064533..bd608bd7a6 100644
+>> --- a/hw/riscv/aia.c
+>> +++ b/hw/riscv/aia.c
+>> @@ -38,6 +38,7 @@ DeviceState *riscv_create_aia(MemoryRegion *container,
+>> =C2=A0 {
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 int i;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hwaddr addr =3D 0;
+>> +=C2=A0=C2=A0=C2=A0 uint32_t hart_bits, guest_bits;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 DeviceState *aplic_s_dev =3D NULL;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 DeviceState *aplic_m_dev =3D NULL;
+>> @@ -93,7 +94,10 @@ DeviceState *riscv_create_aia(MemoryRegion *container=
+,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 msimode, false, a=
+plic_m_dev);
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 if (kvm_enabled() && msimode) {
+>> -=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 riscv_aplic_set_kvm_msicfgad=
+dr(RISCV_APLIC(aplic_s_dev), addr);
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hart_bits =3D imsic_num_bits=
+(hart_count);
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 guest_bits =3D imsic_num_bit=
+s(aia_guests + 1);
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 riscv_aplic_set_kvm_msicfgad=
+dr(RISCV_APLIC(aplic_s_dev), addr,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hart_bit=
+s, guest_bits);
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 }
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return kvm_enabled() ? aplic_s_dev : apli=
+c_m_dev;
+>> diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/=20
+>> riscv_aplic.h
+>> index 62d2b33ade..d3ee2e537a 100644
+>> --- a/include/hw/intc/riscv_aplic.h
+>> +++ b/include/hw/intc/riscv_aplic.h
+>> @@ -78,7 +78,8 @@ struct RISCVAPLICState {
+>> =C2=A0 void riscv_aplic_add_child(DeviceState *parent, DeviceState *chil=
+d);
+>> =C2=A0 bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
+>> =C2=A0 bool riscv_use_emulated_aplic(bool msimode);
+>> -void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr=20
+>> addr);
+>> +void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr=
+,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 uint32_t=
+ hart_bits, uint32_t=20
+>> guest_bits);
+>> =C2=A0 DeviceState *riscv_aplic_create(MemoryRegion *container,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 hwaddr addr, hwaddr size, uint32_t hartid=
+_base, uint32_t num_harts,
+>
 
