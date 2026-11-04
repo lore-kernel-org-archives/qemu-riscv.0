@@ -1,107 +1,134 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA87606A326
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 07:56:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97CD4606A32C
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 15:43:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UJ1lXWMl
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=vmx7DKPA
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOVqP-0005Be-FY; Wed, 04 Nov 2026 02:55:41 -0500
+	id 1xOd8U-0001Zb-J7; Wed, 04 Nov 2026 10:42:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xOVqN-0005Ao-FN
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 02:55:39 -0500
-Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xOVqJ-0000AU-V3
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 02:55:39 -0500
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-2e99b1e5b4cso2354845ad.0
- for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 23:55:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793778934; x=1794383734; darn=nongnu.org;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=FI1Dc+Zcf8G9GtH62lYeDaeCt1po3M2JxcIMockyW0g=;
- b=UJ1lXWMlxUot+bNk63CMZC9RC/neCv+GEdu3H7I+IfpdT9ASqu/IzJMyml5LHJIUXY
- YqaAJB6M6FtswnA0TE9cymyup1kTJLRwj5WX4JUHglaZ7cYKKqVgOODDu6YJt1x25MI6
- 3q44EgZfpHyAJqMmiD7KoWu1bm45dn44NqWbl1Aj1YfwFL7IfSdf2wqpCPCLQjo2iyt+
- YuUJ+lfLBz/Ck7wljGL6VLhaXo46f35tsEK64KzXhsklrK85q2lOKTFwEvYDkjLMF1Mq
- oCzEsHT4M/WfiagJnGeV9C6W2IBncT3lsLvFeR3weDnczgwzKfK3k0fDb6SEyz4QAK26
- Lafg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793778934; x=1794383734;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=FI1Dc+Zcf8G9GtH62lYeDaeCt1po3M2JxcIMockyW0g=;
- b=WhxrRyPtrS1ccYGO/GDtDNO3XtByAZz+wW1HABXm6IAZ30mNKYpKeqaqLYNVMw1uX2
- zoNdo/2M7oY7dOQwUD2oznkxVmx+j1XM2aK85RD6ohSYcMLvORPbYBPHZgi/0YlyB5QB
- ykTNe3eKCR1IASTOmtg4EWPcsPMbk1ThsEo+58Lia+yTzx050AQ+qX8dTTXAFqh/DEBe
- vnA6jL2oNJJoDMLY5hSZE+Ha+2mIaq27thIpTpJyQD9WXIQ0LLpo3fTSaxC9ooJxUdWa
- avzUWZ1DdZX92lmW4Vx3VycySG0fiOtt6BriKtr0LrV58mpV+++hrGuiLWJQnbnIAncP
- rWag==
-X-Gm-Message-State: APuU4Z9KrquQXhky+BcUGFayboojWq2XIcAVZ5oeP4b6lJYujQBY/j8x
- 4UbsRVIlFUnroj+MOIfv/AJbDjtRzGm4dt41HvDP1YyZeTMNhI4G2egs
-X-Gm-Gg: AYBFou3TDpNYazNBnvx/E7gMmxcbAzfhEu3JUWhSvoDaKwkn9fmWh7gta5kQFNdCVMS
- v3p900uqxrvV43S1q4luOWKWqjNCWirEJw1ypbckKw0c+cHj20X9UzHYQoUdTWRvB/l1dRixTvb
- qN8KUGFfkxKtsHftAh37zotHvPdhNC6V0hsjTuM85v5ppxfz06yK197b8+egJAMmZ/Uy5a/Vl94
- KeE80bLRlY82yrsjzsmx4plGE8aAEM56JTV4tca/xf/xLwQE9eKByuCnpz5nlYDDT+2aUqiqnQe
- oe+cXGomg4BUlggCeywwez2uNPCmKqgbmoVN+20ZQiu6JSxFKZe4eruMSCz9RZKkU42BjgPf6Zq
- WY7O+nWb6quq6n+sA/eZ2W9/KJX9m8/pRd1WV8cPijw6PTLJy2sInzEBJRsViyiq6KB9eVBn68f
- 8VfU9YumrDN0qTK6oqDbNVIAx6tta3RbuJL2xIbYBQmD7YfCY1YEWOmlhlml+dTF1H1CVkCPBIp
- qYWQMy8tojn/beED+pqA9+ejvPKXsQSK4Px6bBgboP1OWDT+d27uEwAt9LxOF9QjYl/CfoEvmCx
- r1IhqJ33AuvIrVDY3HNJ0FBTfa91
-X-Received: by 2002:a17:90b:3c44:b0:3ad:77fd:c3d8 with SMTP id
- 98e67ed59e1d1-3ae8957cb1dmr12214798a91.1.1793778934228; 
- Tue, 03 Nov 2026 23:55:34 -0800 (PST)
-Received: from [127.0.1.1] ([2406:da18:807:8900:4cee:6ca:4323:84f7])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b096b72d5asm1071112a91.4.2026.11.03.23.55.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 23:55:33 -0800 (PST)
-From: WX Chen <wxchen0913@gmail.com>
-Date: Wed, 04 Nov 2026 15:55:24 +0800
-Subject: [PATCH] target/riscv: use gen_goto_tb for vsetvli
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1xOd8P-0001Uy-3m; Wed, 04 Nov 2026 10:42:46 -0500
+Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
+ ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
+ id 1xOd8M-0001E6-Jo; Wed, 04 Nov 2026 10:42:44 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=d7Cdresnq0GVdeSODNbQtkjdNHngIPvrSC7hZYKaCWlY9AMpiOJt41dActJovcHdWHwjzMWa++3KWQFxqiHzG8N7xtoCMHZ1WfWuTzm3v4gAIES/ictYptb3Ko13H9JRe5fOn5kvB4kLzW/3M6c40a2SleXnj1W+jgIED5EriWdyEis6waYbEximDDgUpshVSiXW+tJ98lh0KOE+FuMFdHTdwCn0Ftf9+M1AnMVY8hiRSmUydMBjWNEZggH4x9y3kUsXFEBOswP8R48sGyFCNGmAlbOCWZPj8bSB0TTR0CId2kfJrZ6eFFIQ4Czy28IukVa8I6EMG8MzlV6LuGjhnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NgOg1SeUFNyFz0MaHsS02cHwZx1U+Ia7KQ95lh8G358=;
+ b=b0F9h+2F6QkrKj4v7sWXBHOZUrTCPLwIJUD3wvUuLZLugdDY9OF3gEfVwMXlx9YPDzN8p27TB2yfTwazei+1k6+9wufBVafDZc4DqcSvL7enihWG+E0VxhpXETwlHuu0YEfYb6niiA/UltanE8nbdCnQingH7sRngj5+m0I4X0XpBK76aEexJwZkvqBsJHtvHYoJv1RkYuv6g2K7B+q/r7zyJPdcq0k49jmUOn19GeFJmO+RhlhiyeI/kLagv5IRvIJZ5anE1XAyUUKeQUKLT4n/Xmzo6+XNMdYa3sPa6asvezJLWAEmGuK++FnWSHfcYHI9VkExodS5eEFmYb/Aug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NgOg1SeUFNyFz0MaHsS02cHwZx1U+Ia7KQ95lh8G358=;
+ b=vmx7DKPAQrlA1LHs8pIvZkfUD/TfJe/Sm2t5LtWEPLtGWhuJGladUHOJ4R8ic3JbeycUjSU5nmqXGNuKtLXdQHhas1l69cxpnZU0Ll4AbAFH6yh0HQs1pd1c2KV0zvrdz/YL7PeHJOSwZEuge35ZjpIesfY+I5f1l4DXZ/28TluToEM7E9TMwI/4RGO3HtX6eTGdTDhYAjPceaosX4j6tyvIVMXzRwC9lR2/9FNmLgqBTjQtOR4Vy4fwtiyD22dJZmOaG+/zwvEfshjxipp4rS22T65mZXZTywVe2Jvs1vlt0evAyG5as/ZYvNKUwope8AaOuRd6N+WezoyUE50maA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from TYZPR02MB7121.apcprd02.prod.outlook.com (2603:1096:405:2c::12)
+ by SEYPR02MB9159.apcprd02.prod.outlook.com (2603:1096:101:302::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Wed, 4 Nov 2026
+ 15:42:29 +0000
+Received: from TYZPR02MB7121.apcprd02.prod.outlook.com
+ ([fe80::5d81:393:2e5b:6e10]) by TYZPR02MB7121.apcprd02.prod.outlook.com
+ ([fe80::5d81:393:2e5b:6e10%5]) with mapi id 15.21.0592.009; Wed, 4 Nov 2026
+ 15:42:29 +0000
+From: Bin Meng <bin.meng@processmission.com>
+To: QEMU <qemu-devel@nongnu.org>
+Cc: Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Conor Dooley <conor.dooley@microchip.com>, Conor Dooley <conor@kernel.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-riscv@nongnu.org
+Subject: [PATCH v5 02/26] hw/riscv: pfsoc: Map the L2 zero device window
+Date: Wed,  4 Nov 2026 23:41:29 +0800
+Message-ID: <20261104154207.641511-3-bin.meng@processmission.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261104154207.641511-1-bin.meng@processmission.com>
+References: <20261104154207.641511-1-bin.meng@processmission.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4P301CA0056.JPNP301.PROD.OUTLOOK.COM
+ (2603:1096:405:36b::16) To TYZPR02MB7121.apcprd02.prod.outlook.com
+ (2603:1096:405:2c::12)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261104-research-vsetvli-direct-chain-20261104-v1-1-7d5737100a27@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAOvk6moC/z2NywrCMBBFf6XM2kCadBLjr4iLPKZ2QKJMShFK/
- 93owt09cDh3h0bC1OAy7CC0ceNn7TCeBshLrHdSXDqD0caNo56UUKMoeVFbo3V7sCoslFfVba7
- qrxntUjZ9lZKgx15CM79/R9db5xQbqSSx5uWbjxYdBuuTDd6HMpH1ejLhrAPO6Bx5xBALWjiOD
- 6CCFmqzAAAA
-X-Change-ID: 20261104-research-vsetvli-direct-chain-20261104-206bc2104ddb
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, WX Chen <wxchen0913@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793778927; l=4977;
- i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
- bh=xBJfjaj+wBVfGkm+n0ulxhPZW21JQW7JVUCqKssFaNI=;
- b=TV6Pm+m4kpkXB9lNnQqImYWZXEH7MmnSGWyR4Gcuay9jlamgbIm6XFzBJVfcT5bOCfuqc9SLV
- 1jDIJ4y+AEKCJDuHdNNJt6ouGlCQzwWWJb4+vzE0wgVwSjtbN/5/b51
-X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
- pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
- envelope-from=wxchen0913@gmail.com; helo=mail-pl1-x632.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYZPR02MB7121:EE_|SEYPR02MB9159:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7784c848-751e-45ae-774a-08df3a8a3b72
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|23010399003|7416014|366016|261022115727099003|56012099006|261021123027099003|261022075727099003|261021121427099003|261009223027099003|261102123227099003|261022105027099003|261028144727099003|261026140227099003|261026121527099003|10067099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: aJMtkAtZCIYCrmSEkun99qxfW4ne3dbGM0lqCRGRQgdLtzjuQuBG+mSBQbHoEcT+9P0YFbqTeT1RpQ8YJat+V900PJEXJ5JQQ6n2GHl0ihIkQYngl6Cu1C4yYbL8Igw4wLvY8o/4C5vaLGJx4AcTPSOVXU8HMrgN+R0xflkF+WD7gBZL16dRJm9KUpmF3QcsH/pgBGStxi8qfKVHif4H/j3R5FLoQ1e5aAmbCAsvQsLlScJ2JORIUBo9N8/POUD+SeSUjKyF7Z7ntYTlvLkNOsI2yr83i+8n2vSH35oOOmiR6MI5qj7gq5Vd8EBtBHpl+YYY2J6FHfSPf0rKvTLVkkebub8Ufed+vXZXy26I9mLbAH3efY8xV3P8jrVkqqSCrdMOXNIAE6Kbx7Fu0PZLjU8gEsmR7PKbxqfaK1Nn7ogvb1EtlHnk7s/avSsk2QZA8E2L9JcEecJ1v9koYNtdh9UapFoZhNjm9R28FdpMOl7Mk0JfHCROM12o/b2IEw842XVbhenSKZzH3mWa8jUOhB5+fWNoTy8NaOBqwZytVNiTIpLTcq8rGColhQv3IphWdDHO6kJcczS0u4yJKjybFHUyN3FVKtQ3i+sWN5kY0nsg3JmQIhiHXJ5TVLPJUr6g62Q5m3p28rncyMpekREBzxkHZJZ5BExNvdms0vuYTDE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYZPR02MB7121.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(23010399003)(7416014)(366016)(261022115727099003)(56012099006)(261021123027099003)(261022075727099003)(261021121427099003)(261009223027099003)(261102123227099003)(261022105027099003)(261028144727099003)(261026140227099003)(261026121527099003)(10067099003)(22082099003)(18002099003)(6133799003);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?cUJ912Q/P3YQjhgabVvjfXutMBzUGHX1EuBx3BLKpSEwz94ZD75oyhlqRrPp?=
+ =?us-ascii?Q?Ts94quVMwMihGvgQeluY82IsVU1Rvie6sleEjL/BfpzdCgMgk2QBVfMH9Equ?=
+ =?us-ascii?Q?v/izjTY0Idl8ZEP716vEmZ5pBSecImNyIyOhmj7bHchYx5bVVLRAVp/mXuRo?=
+ =?us-ascii?Q?3o85pjBpfLn7rEG2FgTMr0yOWWeFA324s3C0c48XTFKXvvB/y7RUe8OHpxam?=
+ =?us-ascii?Q?4AuA+Ztio+ovRSArMzZuh5QC4pYuM1dRjYt+VGTRCHgV3mhBatk+N+rPCv4Q?=
+ =?us-ascii?Q?n9DxbIdteD83tnzImDlmQ7APchE4TS2LM+JFLsXzbYu/P+e2uz30nyjAqMtN?=
+ =?us-ascii?Q?kx3K+AsICxxJ25pL1ncJcTrd5JhNL62pqvnq5Rb3zCmR4H4GlijucnzD8+g6?=
+ =?us-ascii?Q?8thAFaZVFavtFE5I3D6dnTq4JQjdjJZ64O71q+eg8ZOVXmiNIEsp94NiEvlx?=
+ =?us-ascii?Q?pUNtEnbZHlf9BU2MhqHf9qnUgzxAhcxKcIZKpt3HnKTOShZWq/N86Hh+OEbG?=
+ =?us-ascii?Q?OsDKS8wk75EcpzRNubbnzJd0o9A0VvV+eoJDdk7Fo1jh+2N3rg9Pu2cbHpRA?=
+ =?us-ascii?Q?Br1iN9WW1BEUAh4eqtvQSVGHIPKljBDqn2CUYQwwl3iZmuI7PkTZgesoo9SA?=
+ =?us-ascii?Q?O/pUoSD30leMHDimceSMEI+HvNixIY0vdJpbsaa3qVov15oagW/fFyomt6Ii?=
+ =?us-ascii?Q?nLms1PqDLVAw1CvRQ71RFiOx0Qr6VrYnWS5L0Ujl5gsoiN4lqVExvzZN/vqJ?=
+ =?us-ascii?Q?34JcIDb9xbtctNg78Q92EUcoNjFGkqyLl71011ch9aVxTKj6ILtxynQupWhd?=
+ =?us-ascii?Q?rRcp2JzmbzdOE9/n2vSbmYJRzzyv2lK2p5yFTeRlYiOYBfraTLTWzETJWkmc?=
+ =?us-ascii?Q?7qZxcY0yJcQ42GpC7eQUoCh6d8tsTOCDV2KxHmUcuBcm+GTBsH+MShmwmwuq?=
+ =?us-ascii?Q?OIwhEyOaXQUgB0xFdNbBFqN3E11o746JHP5PoQ9MjHT6578lmcnExynjXeHp?=
+ =?us-ascii?Q?Ozs7cdOJ5ouC+tO+TSxfbUozAybONsMIB3QZxTegqAPw/st54wotxRRA7OzH?=
+ =?us-ascii?Q?CLo3v6VFhgOvJ/x6AbRRXmGx80gEVMVhg/Z/xn4qvPf7ib2s5oxT38o3pozZ?=
+ =?us-ascii?Q?YbhI6xO2o2/rSoWHPd0J3Nii9QcpLnSlBCfM9XO+0EaU7JB5r230mCyj6kxM?=
+ =?us-ascii?Q?VFIdfZTL9KhBkDnP3F3Jjef7Le/gXnaN6If+fWiVUHc0ljsb76VosnGo5pMr?=
+ =?us-ascii?Q?RduBR8PmfGYJQ1aJzQDj9fg7L6/MTIUMJ8qfWbqUw3o9VouDt4EnMtCbO5Ay?=
+ =?us-ascii?Q?LM8EIvU8UyqnR9W0jq7RGcKxrFI5N0PkvrUF4GIRLsSCj5CiXPIHCJbdS7NA?=
+ =?us-ascii?Q?EJemlGrYl7OmuGjug7a/E49Z2lsJAmnG1RfWlmq+AgPG20tftnlCNxCFhtxM?=
+ =?us-ascii?Q?S8N5iB/pi2h9SGVvi+t8OeOLcGdT+nynsv7FllvW3/EtNV6Op71xt7ibvv3s?=
+ =?us-ascii?Q?uTwiDvv+NoHmXAPYOTTaU9XGxRj58LplI6OqZUOKt5NuLIiwMwP+FKa9RpH0?=
+ =?us-ascii?Q?AnjMxypT2ggQWb5hu8GljkK/MphW4+06Uh7Fg3IwVglMgzmIO7pAQg4X1LdH?=
+ =?us-ascii?Q?ea+FRVM2ACmkvjU7xykc2fcz/V+iVdmNUb9RywvzRQnS7ET38DwkDzJX/wIU?=
+ =?us-ascii?Q?k34IQBj0MEuVdvgxr5u08LVve4Uu0SekOUOQhCsIJIzmqpj6ENCRfbTKuR3v?=
+ =?us-ascii?Q?AheqxDbI6dE0P3z5VnI+HFDBu4GEDIU=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7784c848-751e-45ae-774a-08df3a8a3b72
+X-MS-Exchange-CrossTenant-AuthSource: TYZPR02MB7121.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 15:42:28.9181 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: pRyUvvTGxeyZI6CPg8t2qOpIvA/TA70bfkALCOF8FLdnwNjtFAILhEc91kcsXldKUagyy35AQeeUKkwKpi5Zcmmd+mPSO/reIay17LOwIYY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB9159
+Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
+ envelope-from=bin.meng@processmission.com;
+ helo=SEYPR02CU001.outbound.protection.outlook.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -114,130 +141,85 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This patch uses gen_goto_tb() to reduce the overhead of the
-unconditional lookup_and_goto_ptr() exit currently generated
-for vsetvli.
+HSS uses a window at 0x0a000000 while setting up the L2 cache,
+decompressing its runtime image, and executing that image.
+The missing mapping causes the E51 to trap before firmware can
+initialize its UART.
 
-The shared do_vsetvl() function handles both vsetvl and vsetvli.
-The two instructions differ primarily in the source of their vtype
-operand: vsetvl takes it from a register, while vsetvli provides it
-as an immediate.
+Represent the window with RAM to provide its persistent read,
+write, and execute effects without claiming to model the L2
+cache itself.
 
-When translating vsetvli, the immediate vtype provides information
-that can be used to optimize the exit generated by do_vsetvl().
-
-To use gen_goto_tb(), each jump slot must correspond to a deterministic
-successor-TB lookup key (pc, flags, cflags, cs_base) for a given source
-TB. The relevant state changes are confined to the vector-related
-translation state: VILL, SEW, ALTFMT, VSTART_EQ_ZERO, VS, LMUL, VTA,
-VMA, and VL_EQ_VLMAX.
-
-For the vsetvli forms optimized by this patch, given the CPU
-configuration and source TB context, the immediate vtype and existing
-state update flow determine the other relevant translation state.
-Only VL_EQ_VLMAX can vary with AVL. This patch therefore uses separate
-jump slots depending on whether the returned VL equals VLMAX,
-enabling direct TB linking after vsetvli.
-
-The register-vtype vsetvl instruction retains the existing lookup
-path, as its vtype is not known at translation time.
-
-Measured on an AMD Ryzen AI 9 H 365 (x86-64) host, using qemu-riscv64
-with -cpu rv64,v=true,vlen=128,elen=64. A RISC-V GCC 14.2.0 cc1 built
-for rv64gcv compiles the packages with
--O2 -g0 -march=rv64gcv -mabi=lp64d. Only cc1 runs under emulation;
-make, the compiler driver and cross-binutils run on the host.
-
-Each variant is warmed up once, followed by three paired clean builds
-in AB/BA/AB order, using -j1 and fixed host CPU affinity (CPU 7).
-The SQLite workload builds the amalgamation and command-line shell.
-Median build wall times are:
-
-                    Before (s)    After (s)    Wall time reduction
-    LZ4 1.10.0         125.120      123.867                  1.00%
-    zlib 1.3.1          70.269       69.911                  0.51%
-    SQLite 3.45.1      438.322      433.213                  1.17%
-
-In a separate untimed test, a loop executes two vsetvli instructions
-per iteration for 37 iterations. Host-side GDB entry breakpoints show
-that helper_lookup_tb_ptr() entries at the two sequential successor
-PCs fall from 74 to 0.
-
-Signed-off-by: WX Chen <wxchen0913@gmail.com>
+Signed-off-by: Bin Meng <bin.meng@processmission.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
+Acked-by: Alistair Francis <alistair.francis@wdc.com>
+Tested-by: Conor Dooley <conor.dooley@microchip.com>
 ---
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..5e9a861b6af1565485e9be89b393d0d64080a662 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -191,7 +191,8 @@ static bool require_noover(const int8_t dst, const int8_t dst_lmul,
-     return !is_overlapped(dst, dst_size, src, src_size);
- }
+(no changes since v1)
+
+ include/hw/riscv/microchip_pfsoc.h |  1 +
+ hw/riscv/microchip_pfsoc.c         | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/include/hw/riscv/microchip_pfsoc.h b/include/hw/riscv/microchip_pfsoc.h
+index a30b944afa..612fd2b69c 100644
+--- a/include/hw/riscv/microchip_pfsoc.h
++++ b/include/hw/riscv/microchip_pfsoc.h
+@@ -90,6 +90,7 @@ enum {
+     MICROCHIP_PFSOC_L2CC,
+     MICROCHIP_PFSOC_DMA,
+     MICROCHIP_PFSOC_L2LIM,
++    MICROCHIP_PFSOC_L2ZERO,
+     MICROCHIP_PFSOC_PLIC,
+     MICROCHIP_PFSOC_MMUART0,
+     MICROCHIP_PFSOC_WDOG0,
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index c6b76fa3c2..a91ca951de 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -97,6 +97,7 @@ static const MemMapEntry microchip_pfsoc_memmap[] = {
+     [MICROCHIP_PFSOC_L2CC] =            {  0x2010000,       0x1000 },
+     [MICROCHIP_PFSOC_DMA] =             {  0x3000000,     0x100000 },
+     [MICROCHIP_PFSOC_L2LIM] =           {  0x8000000,     0x200000 },
++    [MICROCHIP_PFSOC_L2ZERO] =          {  0xa000000,     0x200000 },
+     [MICROCHIP_PFSOC_PLIC] =            {  0xc000000,    0x4000000 },
+     [MICROCHIP_PFSOC_MMUART0] =         { 0x20000000,       0x1000 },
+     [MICROCHIP_PFSOC_WDOG0] =           { 0x20001000,       0x1000 },
+@@ -201,6 +202,7 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+     MemoryRegion *rsvd0_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *e51_dtim_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *l2lim_mem = g_new(MemoryRegion, 1);
++    MemoryRegion *l2zero_mem = g_new(MemoryRegion, 1);
+     MemoryRegion *envm_data = g_new(MemoryRegion, 1);
+     MemoryRegion *qspi_xip_mem = g_new(MemoryRegion, 1);
+     char *plic_hart_config;
+@@ -278,6 +280,17 @@ static void microchip_pfsoc_soc_realize(DeviceState *dev, Error **errp)
+                                 memmap[MICROCHIP_PFSOC_L2LIM].base,
+                                 l2lim_mem);
  
--static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
-+/* A negative vtype denotes the register-supplied form. */
-+static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2, int vtype)
- {
-     TCGv s1, dst;
- 
-@@ -215,8 +216,22 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
-     gen_set_gpr(s, rd, dst);
-     finalize_rvv_inst(s);
- 
--    gen_update_pc(s, s->cur_insn_len);
--    lookup_and_goto_ptr(s);
-+    if (vtype >= 0 && (rd != 0 || rs1 != 0)) {
-+        uint32_t vsew = FIELD_EX32(vtype, VTYPE, VSEW);
-+        int8_t lmul = sextract32(FIELD_EX32(vtype, VTYPE, VLMUL), 0, 3);
-+        uint32_t vlmax = vext_get_vlmax(s->cfg_ptr->vlenb, vsew, lmul);
-+        target_ulong pc_save = s->pc_save;
-+        TCGLabel *not_vlmax = gen_new_label();
++    /*
++     * HSS decompresses into the L2 zero-device window and executes there.
++     * Model it as RAM because QEMU does not model the backing L2 cache.
++     */
++    memory_region_init_ram(l2zero_mem, NULL, "microchip.pfsoc.l2zero",
++                           memmap[MICROCHIP_PFSOC_L2ZERO].size,
++                           &error_fatal);
++    memory_region_add_subregion(system_memory,
++                                memmap[MICROCHIP_PFSOC_L2ZERO].base,
++                                l2zero_mem);
 +
-+        tcg_gen_brcondi_tl(TCG_COND_NE, dst, vlmax, not_vlmax);
-+        gen_goto_tb(s, 0, s->cur_insn_len);
-+        s->pc_save = pc_save;
-+        gen_set_label(not_vlmax);
-+        gen_goto_tb(s, 1, s->cur_insn_len);
-+    } else {
-+        gen_update_pc(s, s->cur_insn_len);
-+        lookup_and_goto_ptr(s);
-+    }
-     s->base.is_jmp = DISAS_NORETURN;
-     return true;
- }
-@@ -244,13 +259,13 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
- static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
- {
-     TCGv s2 = get_gpr(s, a->rs2, EXT_ZERO);
--    return do_vsetvl(s, a->rd, a->rs1, s2);
-+    return do_vsetvl(s, a->rd, a->rs1, s2, -1);
- }
+     /* create PLIC hart topology configuration string */
+     plic_hart_config = riscv_plic_hart_config_string(ms->smp.cpus);
  
- static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
- {
-     TCGv s2 = tcg_constant_tl(a->zimm);
--    return do_vsetvl(s, a->rd, a->rs1, s2);
-+    return do_vsetvl(s, a->rd, a->rs1, s2, a->zimm);
- }
- 
- static bool trans_vsetivli(DisasContext *s, arg_vsetivli *a)
-
----
-base-commit: a3565937b39779d4e3704298095f566e7559ad53
-change-id: 20261104-research-vsetvli-direct-chain-20261104-206bc2104ddb
-
-Best regards,
 -- 
-WX Chen <wxchen0913@gmail.com>
+2.53.0
 
 
