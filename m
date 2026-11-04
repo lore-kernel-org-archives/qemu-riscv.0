@@ -1,149 +1,106 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 952F4606D839
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 05:46:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FA87606A326
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 07:56:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=hotmail.com header.i=@hotmail.com header.a=rsa-sha256 header.s=selector1 header.b=jTEFfROv
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UJ1lXWMl
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOTpZ-00075y-JV; Wed, 04 Nov 2026 00:46:41 -0500
+	id 1xOVqP-0005Be-FY; Wed, 04 Nov 2026 02:55:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xOTpA-0006rq-0y; Wed, 04 Nov 2026 00:46:16 -0500
-Received: from mail-japanwestazolkn190120001.outbound.protection.outlook.com
- ([2a01:111:f403:d406::1] helo=OS8PR02CU002.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <nutty.liu@hotmail.com>)
- id 1xOTp8-0005i5-Ho; Wed, 04 Nov 2026 00:46:15 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TW1P2D2CdOsHSDXyIbeouqOZzQmQQirmPdR1BRryMZ/5ox1P2e3z1E5NFuNXgJ8Tvvg/fzQnRyWm7odAXkVsaX7C9KVFwB7KmZunsiQAPlqjb7HxSI46CJl9LXr+X2NP6zKJYqsrA6yh1tgE8FLiGW+hQ9lxbZzrhHlPi/VNj1OOfZSgKe+USykqs/yMCqEskzSjK+MLSU65mskbLXqjXJ0PKEZBj39We3peV1vTMgteHwrSkChQ9MabZ3upWKwpydAr1njYxEnPQDCJEhulx6jsbSvSnktCLGMLIsGyL9NyTMuJlgdu2HA5uBmxb5bnejYnmz9W5OQyiaEbQ/q3Uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2KMc/81PxqmqiFm1yLs2DsT6IZjXZKy+vGwoapyT5Po=;
- b=jG9pDn/ze0XFJnltPLWOIXpqzRTa5CQQD+04VWh/xBMczhRcE/KNMQL8C34UgbKWhNnmw9pGOSuOq7fBnb5CaephwHbLBnWOdJx430Rk34CScpb/nzLgaloIWO4Is9JcH0F3AnK2+oInfWabmip6zpXNDPcyU7niMjONuolZhlBLz78cQJXvzoISUvAroyESEhl2GJG9qo8M+QCY96kRrsZLLrSklzBdezR/aBOMGtZDTYRROzOVForkJQiBmPstrfmXdEuMuHUulXg94FgRnLUTeJsbGyofdIMYyaPOZUaVvpfzCxE03dvFnOq874R2x/EkBO98HbAn5JNHIXsfYQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2KMc/81PxqmqiFm1yLs2DsT6IZjXZKy+vGwoapyT5Po=;
- b=jTEFfROvF97VO87izMt781F3i+AWPp5umcQLODhq3aFlndErjI8bdi6gIBKIxbDkptjFeF41x20qoxNTU8JoET7BuEWBBrSorn8USm7HXzf+fgCICpf5MgEgyvNyLeTbVFiyKhkfU3rEYDSroqC+3Qbr1pZvk70+E0PwHczz8VcNrqnzGXeM2ZAn6AJzOovFOSavnWLiiIT2MgxlQJ+MdwM2J42LBpG0Erbk5KZU61Dll66dE0SavAqpQBC4VN4it+luwvnd/d5Ko6/4dF9RXwY2rPjw+jsNYxw8GYJA9GXBNnccBR69OAwbSLehJqDkn8YNJiwMvF/Lk+odmvTD1g==
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com (2603:1096:405:40::7)
- by SEZPR04MB6353.apcprd04.prod.outlook.com (2603:1096:101:cd::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.12; Wed, 4 Nov
- 2026 05:46:01 +0000
-Received: from TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230]) by TYZPR04MB7491.apcprd04.prod.outlook.com
- ([fe80::a450:2576:3b21:6230%3]) with mapi id 15.21.0592.007; Wed, 4 Nov 2026
- 05:46:00 +0000
-Message-ID: <TYZPR04MB749138D338B5192F7E092ECBF3682@TYZPR04MB7491.apcprd04.prod.outlook.com>
-Date: Wed, 4 Nov 2026 13:45:52 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 5/5] hw/riscv: Select SSI for IBEX
-To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, pbonzini@redhat.com, palmer@dabbelt.com,
- alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com
-References: <20261101031547.125591-1-tanchi25@mails.ucas.ac.cn>
- <20261101031547.125591-6-tanchi25@mails.ucas.ac.cn>
-Content-Language: en-US
-From: "Nutty.Liu" <nutty.liu@hotmail.com>
-In-Reply-To: <20261101031547.125591-6-tanchi25@mails.ucas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TY6P301CA0003.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:3be::9) To TYZPR04MB7491.apcprd04.prod.outlook.com
- (2603:1096:405:40::7)
-X-Microsoft-Original-Message-ID: <54171755-08d6-449b-903f-1ff351017f67@hotmail.com>
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xOVqN-0005Ao-FN
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 02:55:39 -0500
+Received: from mail-pl1-x632.google.com ([2607:f8b0:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xOVqJ-0000AU-V3
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 02:55:39 -0500
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-2e99b1e5b4cso2354845ad.0
+ for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 23:55:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1793778934; x=1794383734; darn=nongnu.org;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=FI1Dc+Zcf8G9GtH62lYeDaeCt1po3M2JxcIMockyW0g=;
+ b=UJ1lXWMlxUot+bNk63CMZC9RC/neCv+GEdu3H7I+IfpdT9ASqu/IzJMyml5LHJIUXY
+ YqaAJB6M6FtswnA0TE9cymyup1kTJLRwj5WX4JUHglaZ7cYKKqVgOODDu6YJt1x25MI6
+ 3q44EgZfpHyAJqMmiD7KoWu1bm45dn44NqWbl1Aj1YfwFL7IfSdf2wqpCPCLQjo2iyt+
+ YuUJ+lfLBz/Ck7wljGL6VLhaXo46f35tsEK64KzXhsklrK85q2lOKTFwEvYDkjLMF1Mq
+ oCzEsHT4M/WfiagJnGeV9C6W2IBncT3lsLvFeR3weDnczgwzKfK3k0fDb6SEyz4QAK26
+ Lafg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793778934; x=1794383734;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=FI1Dc+Zcf8G9GtH62lYeDaeCt1po3M2JxcIMockyW0g=;
+ b=WhxrRyPtrS1ccYGO/GDtDNO3XtByAZz+wW1HABXm6IAZ30mNKYpKeqaqLYNVMw1uX2
+ zoNdo/2M7oY7dOQwUD2oznkxVmx+j1XM2aK85RD6ohSYcMLvORPbYBPHZgi/0YlyB5QB
+ ykTNe3eKCR1IASTOmtg4EWPcsPMbk1ThsEo+58Lia+yTzx050AQ+qX8dTTXAFqh/DEBe
+ vnA6jL2oNJJoDMLY5hSZE+Ha+2mIaq27thIpTpJyQD9WXIQ0LLpo3fTSaxC9ooJxUdWa
+ avzUWZ1DdZX92lmW4Vx3VycySG0fiOtt6BriKtr0LrV58mpV+++hrGuiLWJQnbnIAncP
+ rWag==
+X-Gm-Message-State: APuU4Z9KrquQXhky+BcUGFayboojWq2XIcAVZ5oeP4b6lJYujQBY/j8x
+ 4UbsRVIlFUnroj+MOIfv/AJbDjtRzGm4dt41HvDP1YyZeTMNhI4G2egs
+X-Gm-Gg: AYBFou3TDpNYazNBnvx/E7gMmxcbAzfhEu3JUWhSvoDaKwkn9fmWh7gta5kQFNdCVMS
+ v3p900uqxrvV43S1q4luOWKWqjNCWirEJw1ypbckKw0c+cHj20X9UzHYQoUdTWRvB/l1dRixTvb
+ qN8KUGFfkxKtsHftAh37zotHvPdhNC6V0hsjTuM85v5ppxfz06yK197b8+egJAMmZ/Uy5a/Vl94
+ KeE80bLRlY82yrsjzsmx4plGE8aAEM56JTV4tca/xf/xLwQE9eKByuCnpz5nlYDDT+2aUqiqnQe
+ oe+cXGomg4BUlggCeywwez2uNPCmKqgbmoVN+20ZQiu6JSxFKZe4eruMSCz9RZKkU42BjgPf6Zq
+ WY7O+nWb6quq6n+sA/eZ2W9/KJX9m8/pRd1WV8cPijw6PTLJy2sInzEBJRsViyiq6KB9eVBn68f
+ 8VfU9YumrDN0qTK6oqDbNVIAx6tta3RbuJL2xIbYBQmD7YfCY1YEWOmlhlml+dTF1H1CVkCPBIp
+ qYWQMy8tojn/beED+pqA9+ejvPKXsQSK4Px6bBgboP1OWDT+d27uEwAt9LxOF9QjYl/CfoEvmCx
+ r1IhqJ33AuvIrVDY3HNJ0FBTfa91
+X-Received: by 2002:a17:90b:3c44:b0:3ad:77fd:c3d8 with SMTP id
+ 98e67ed59e1d1-3ae8957cb1dmr12214798a91.1.1793778934228; 
+ Tue, 03 Nov 2026 23:55:34 -0800 (PST)
+Received: from [127.0.1.1] ([2406:da18:807:8900:4cee:6ca:4323:84f7])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3b096b72d5asm1071112a91.4.2026.11.03.23.55.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Nov 2026 23:55:33 -0800 (PST)
+From: WX Chen <wxchen0913@gmail.com>
+Date: Wed, 04 Nov 2026 15:55:24 +0800
+Subject: [PATCH] target/riscv: use gen_goto_tb for vsetvli
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYZPR04MB7491:EE_|SEZPR04MB6353:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4be6f4f-86ad-4429-ffc6-08df3a36e808
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|8060799015|4140399003|25010399006|12121999013|19110799012|22091999003|6090799003|15080799012|5072599009|24121999003|23021999003|55001999006|19101099003|51005399006|40105399003|3412199025|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NjRlYWlIN1RQYnVmSThHa0FVZ1FHWDVMNmp6bVZJbW1nY0E5ajRiNEhrNW8r?=
- =?utf-8?B?cFdQUlNBOVBRanlsVUVjQzhGcldRUkpSRXZ6NUd0WnVWYk1haDQvckRmaXFv?=
- =?utf-8?B?eWs3NFhPb2trV3VYUDBEb2s1azJoT3hYOTF2SVBVdzdnUzkrVEtXTGxpU0xm?=
- =?utf-8?B?NDVYSkpOcW83aVZMa1Y3ZHZwbG1SQ0ZKWU4zQVQ2c3h5dlA3Mm5TekpNUDZm?=
- =?utf-8?B?cU5xZlZUYzNBcVdQMFkvNmt5dzJETHB4amJmK3VpVmtndlFaY2xlV0JPVUYv?=
- =?utf-8?B?cThvY1J5REEyakpKWUZ6S1VFOVNnNXhETXBWYnFTRTdUWTFzWVhUM2czZzU2?=
- =?utf-8?B?Njg5Ym1EM05zVDEyWGI3N1hCMi8wODVzTlRTS3dRaTFlZmFVTnB5UVplOG9k?=
- =?utf-8?B?RXdDZmlYYUcvVVdYZVlWRDlEd0RjZ1JUcFFMNlpzNC9ZWGZ1azVnbFo4ZGJZ?=
- =?utf-8?B?N1U3Ykg2dDBUaDI4SVdaWk5iazlpNjE1QmlKRGVTbFRFZTg0bTZnVjUzNXAx?=
- =?utf-8?B?VlJxQkU0U0F1NUZFSEJPR0ZaVTNndDV6Sy9zUW1Uc2pYT0Ivb0hCY3JxVUsz?=
- =?utf-8?B?Vm5IT29yNjZ5OFVFY3dSOUdlS3pMZG9rTlV4UzdxTkx1bUdkTmVvVXU3WHFq?=
- =?utf-8?B?dkViTXJOUzFUSUNweEo2UDdVM0V3Ry94dThFa0J4dzRNUkVkUFpUL0NjMnM4?=
- =?utf-8?B?bEdsK1FWYTQzemthZWtCV0hVaDByT21kSU5tY1hQRHJXQmpBQUdlV2o3dHlt?=
- =?utf-8?B?WTh2TlRXR0E5MUM2c2V3UlZPczRZTTNNbGRicDhTMGJzYWNmL1lNL2FHekRV?=
- =?utf-8?B?elRqUE5sVW5VbkducWNERjUvSStXZHRUR0dvNVpseDVHbUFzdjBhSUhmZE82?=
- =?utf-8?B?dWROcmFFcXpnVmdnWDNPMC9CaEJQTW9BKzV0clBhL0hxV2FEOEtpbG9rcDN2?=
- =?utf-8?B?VWRkTTh3T1ZyeUw0YnowYUp6L2p5aWpSQ1VqVlVzV1llall3ek9INlRkMGxV?=
- =?utf-8?B?WGNsRWJYU2ZTQysyWnlGOWJDLzloVC9qYi8vWW1JVnlUODYraTN6czAxbEIr?=
- =?utf-8?B?elJnRHhMTHVPeDIxcWtqTzJoOVpCTFpsck8xZDl0UTEwcGVOZXVhZ3FnRXh2?=
- =?utf-8?B?b2k4V0hhOXdNcndIU3M0bWFNcGlseHVsa0dsZHVMRStGNTVqL1ZGSko3c0g3?=
- =?utf-8?B?YktnUXJDVFNpNGVHUXAvVi9kZUhTWkZSMXUxM1dXMHJnVUVsa1RUL0hQVlJs?=
- =?utf-8?B?akhSV3ArNzlzVDVaK00yVm43eE5VQzBnSWtsenBsZGJTQ25qdEgxUHZLRW1M?=
- =?utf-8?B?cmFCRkFnWE80SnB4TkwwRHFjaTBHbWRKd1VUS0VvSlRUVWxtc2RKMHFkU0Zp?=
- =?utf-8?B?OTB4Yng4QjRpbnZ1NUcwb01FVzlrRnB5M2x5K2tyL0xONHF2dVJhbkZhbkln?=
- =?utf-8?B?ODVUcFRNc1ZhK3lKT0MzSFhRSW4rcmNpS3dPbG1RPT0=?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Q1VNYUdISHROam1nUThsbTgxbGdQMUlBL2Fhd01VVmhtMVdjNGlpQVVGeEZw?=
- =?utf-8?B?VDhISjI0WUlWVGFZd0djOXUvZkNpOVdOVWl3Q0xiWmphUXcrdVFSQUJ1TEdX?=
- =?utf-8?B?SEtzcE5YWVppZU5xdWJLcEJJMGhxeVlOSkplc0ZaQnNINHVWMDZJU0lTSVdm?=
- =?utf-8?B?Y1JJRnRmMFUzaHJucWFid0hFMFduV0Q5ekdHL1BobVdMU3VHakhzTjExZGd0?=
- =?utf-8?B?VWlDQUdhVHJsdTV6VWVIR0w5UlRuZU51NWtzNFZad205Njloa2MyZnB5Qnlk?=
- =?utf-8?B?ODlSWVJSdlhXclA3QzZ6OGNkWjYxenk4T2ZUV3JkMWs1SVE5aXhnY2huanBp?=
- =?utf-8?B?VjUrSFIwMWRKN2IvU1dNSEpXa2tkN2xXaVF0b1ZXQlNjWWN4Z01rTDhmWkRY?=
- =?utf-8?B?dlA3K0hOcyt4SWJqcVowWVM3QXA3ZkdsQnhXanJyWTFKUEVkRWlqeC83Ym1R?=
- =?utf-8?B?MzByZU1TOEZmdTUrUVkzSFFZbCtsSEpIRzlnaEl3SW1uWUxWckJvcmptalBv?=
- =?utf-8?B?NUZCdmhRR0g1c2ZicUZmeVY0dVhJZWdBWExQNXQ0TFBZMG5CUG44MkZxa1Ew?=
- =?utf-8?B?QnFicWFSV3RwaFJlVHIyb0lBc1JhUmc2bG52ZDZDcldvWXkwSEJsZEtkSHNM?=
- =?utf-8?B?dC93ckZZOEY4NkUya09KWkN1TmdYUWpFYXZxQWhxNUczQ01lVlRpSXgzL25o?=
- =?utf-8?B?dUNtTWJ3LzJyVlBZZmVFZzgzclhHVHh2YlJHT0FNZ1lqbVh3KzlsWlN6anMx?=
- =?utf-8?B?bG1oYjZ2ZDNPbUNYNWV6K25WSkM3SzNEUDEyTWM1NU5CSC9LS1EzUzBTcVhj?=
- =?utf-8?B?U3ErbDZKb0x4dVRIUkErUFEvR09IZVN5OCszS21IM2hXUzE1ZS9yaEhaVGlv?=
- =?utf-8?B?VjhwMmd4ZitrVW1tY0dxdnVTbGJ1SVAva3VYRXFwcks2WUhsZ1FkRkFzRVBV?=
- =?utf-8?B?Z1ZXQzVaZHNaOG1oUTd4aUFoTDZQYWc5QmF5VU1IRjd4N1AzTTVBcGdTWklV?=
- =?utf-8?B?V1VzR1Vma0NuMlI4U25HbHBRMzI0MzNFSkhqTDZGQUhpQ0tKTVBsMDhoUU51?=
- =?utf-8?B?YlJ5eXNCTWhteVZHMTJVTlJtYk4zTzV4SnJ2OFh1VEhRNWpHbGJNY1FUVksw?=
- =?utf-8?B?NURCQ3NnZ04zWi9SUnpXQVY3cVoxVmVQaTM0NzM4K3dSOEJZYkdUNytHKzR1?=
- =?utf-8?B?dzlaR1ROdWM0RFlCd1d5N3dnUHYrRDRjbDRiaU1aNnlkeml1bC80OTY0QzFo?=
- =?utf-8?B?aklSeFlzakJtNkxtNEVMMmI0Z09qYzEwWmhWTmNFbWlhUTBBSVhTMEdKMnZq?=
- =?utf-8?B?Y1pEd3duQkdJVGxvU3JTdCtCVW9kTUVIMEE4c0w1TzMydkJNL3ZWNHBnZDg5?=
- =?utf-8?B?ZkQ1OHVweDVKRDFadWpUUTNZcFFUSlFnRHdyMEtwaC81R2wxNkt4dVp5V0pp?=
- =?utf-8?B?S3B1cThzMS9XM1ZiazZ3em5oQWNzeXUvZ1lHQ2t4cHhSWkEyTzVkRWpxbTVR?=
- =?utf-8?B?ekI0eTlYVVBMbC9BcmYyVnl5aEpBWG9Mdnc0aEJBNDhZQUdNRGRHKzBrdlhs?=
- =?utf-8?B?Q2dsVWRkRnlPNExlOVMwclR3bnlXcVVEdGFiZmVXdys3c0ZFamRyYnRxQ1hL?=
- =?utf-8?B?RlM5MkRNMjMzeWhGblNSSzM3RzNWU2hqYTI0anZEZGFienE2dFBSMkdvWWg2?=
- =?utf-8?B?SkIvejRhNmY1WmU2WnpXMk1rWnZmNFV3aGZsbVRpZDNrUW40SG85L0NNbDVU?=
- =?utf-8?B?RXRCWmdNMTlSQ2xwTldRdU9kbHBuNnpEV0h2RXF0eHFuK1NmaFF0cE5uY09n?=
- =?utf-8?B?Z3BJTkN5SXd4OWNQK2Y4WlN3bGg5S3NISFhPY2RrLzFaUlhNRnlscjRLN00v?=
- =?utf-8?Q?y2qinrW+6nWIh?=
-X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-c3e7a.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4be6f4f-86ad-4429-ffc6-08df3a36e808
-X-MS-Exchange-CrossTenant-AuthSource: TYZPR04MB7491.apcprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 05:46:00.7807 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEZPR04MB6353
-Received-SPF: pass client-ip=2a01:111:f403:d406::1;
- envelope-from=nutty.liu@hotmail.com;
- helo=OS8PR02CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261104-research-vsetvli-direct-chain-20261104-v1-1-7d5737100a27@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAOvk6moC/z2NywrCMBBFf6XM2kCadBLjr4iLPKZ2QKJMShFK/
+ 93owt09cDh3h0bC1OAy7CC0ceNn7TCeBshLrHdSXDqD0caNo56UUKMoeVFbo3V7sCoslFfVba7
+ qrxntUjZ9lZKgx15CM79/R9db5xQbqSSx5uWbjxYdBuuTDd6HMpH1ejLhrAPO6Bx5xBALWjiOD
+ 6CCFmqzAAAA
+X-Change-ID: 20261104-research-vsetvli-direct-chain-20261104-206bc2104ddb
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, WX Chen <wxchen0913@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793778927; l=4977;
+ i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
+ bh=xBJfjaj+wBVfGkm+n0ulxhPZW21JQW7JVUCqKssFaNI=;
+ b=TV6Pm+m4kpkXB9lNnQqImYWZXEH7MmnSGWyR4Gcuay9jlamgbIm6XFzBJVfcT5bOCfuqc9SLV
+ 1jDIJ4y+AEKCJDuHdNNJt6ouGlCQzwWWJb4+vzE0wgVwSjtbN/5/b51
+X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
+ pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
+Received-SPF: pass client-ip=2607:f8b0:4864:20::632;
+ envelope-from=wxchen0913@gmail.com; helo=mail-pl1-x632.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
@@ -157,45 +114,130 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-14.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+This patch uses gen_goto_tb() to reduce the overhead of the
+unconditional lookup_and_goto_ptr() exit currently generated
+for vsetvli.
 
-On 11/1/2026 11:15 AM, Tan Chi wrote:
-> The Ibex SPI host controller uses the SSI bus infrastructure,
-> but CONFIG_IBEX does not select CONFIG_SSI.
->
-> This causes undefined references to SSI functions, including
-> ssi_transfer(), when building a minimal RV32 OpenTitan target
-> without default devices.
->
-> Select SSI from IBEX to ensure that the required bus
-> implementation is built.
->
-> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+The shared do_vsetvl() function handles both vsetvl and vsetvli.
+The two instructions differ primarily in the source of their vtype
+operand: vsetvl takes it from a register, while vsetvli provides it
+as an immediate.
 
-Thanks,
-Nutty
-> ---
->   hw/riscv/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
->
-> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-> index 27f03b687c..d99fee0fd7 100644
-> --- a/hw/riscv/Kconfig
-> +++ b/hw/riscv/Kconfig
-> @@ -6,6 +6,7 @@ config RISCV_NUMA
->   
->   config IBEX
->       bool
-> +    select SSI
->   
->   config RISCV_DEVICE_COMMON
->       bool
+When translating vsetvli, the immediate vtype provides information
+that can be used to optimize the exit generated by do_vsetvl().
+
+To use gen_goto_tb(), each jump slot must correspond to a deterministic
+successor-TB lookup key (pc, flags, cflags, cs_base) for a given source
+TB. The relevant state changes are confined to the vector-related
+translation state: VILL, SEW, ALTFMT, VSTART_EQ_ZERO, VS, LMUL, VTA,
+VMA, and VL_EQ_VLMAX.
+
+For the vsetvli forms optimized by this patch, given the CPU
+configuration and source TB context, the immediate vtype and existing
+state update flow determine the other relevant translation state.
+Only VL_EQ_VLMAX can vary with AVL. This patch therefore uses separate
+jump slots depending on whether the returned VL equals VLMAX,
+enabling direct TB linking after vsetvli.
+
+The register-vtype vsetvl instruction retains the existing lookup
+path, as its vtype is not known at translation time.
+
+Measured on an AMD Ryzen AI 9 H 365 (x86-64) host, using qemu-riscv64
+with -cpu rv64,v=true,vlen=128,elen=64. A RISC-V GCC 14.2.0 cc1 built
+for rv64gcv compiles the packages with
+-O2 -g0 -march=rv64gcv -mabi=lp64d. Only cc1 runs under emulation;
+make, the compiler driver and cross-binutils run on the host.
+
+Each variant is warmed up once, followed by three paired clean builds
+in AB/BA/AB order, using -j1 and fixed host CPU affinity (CPU 7).
+The SQLite workload builds the amalgamation and command-line shell.
+Median build wall times are:
+
+                    Before (s)    After (s)    Wall time reduction
+    LZ4 1.10.0         125.120      123.867                  1.00%
+    zlib 1.3.1          70.269       69.911                  0.51%
+    SQLite 3.45.1      438.322      433.213                  1.17%
+
+In a separate untimed test, a loop executes two vsetvli instructions
+per iteration for 37 iterations. Host-side GDB entry breakpoints show
+that helper_lookup_tb_ptr() entries at the two sequential successor
+PCs fall from 74 to 0.
+
+Signed-off-by: WX Chen <wxchen0913@gmail.com>
+---
+ target/riscv/tcg/insn_trans/trans_rvv.c.inc | 25 ++++++++++++++++++++-----
+ 1 file changed, 20 insertions(+), 5 deletions(-)
+
+diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..5e9a861b6af1565485e9be89b393d0d64080a662 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+@@ -191,7 +191,8 @@ static bool require_noover(const int8_t dst, const int8_t dst_lmul,
+     return !is_overlapped(dst, dst_size, src, src_size);
+ }
+ 
+-static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
++/* A negative vtype denotes the register-supplied form. */
++static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2, int vtype)
+ {
+     TCGv s1, dst;
+ 
+@@ -215,8 +216,22 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+     gen_set_gpr(s, rd, dst);
+     finalize_rvv_inst(s);
+ 
+-    gen_update_pc(s, s->cur_insn_len);
+-    lookup_and_goto_ptr(s);
++    if (vtype >= 0 && (rd != 0 || rs1 != 0)) {
++        uint32_t vsew = FIELD_EX32(vtype, VTYPE, VSEW);
++        int8_t lmul = sextract32(FIELD_EX32(vtype, VTYPE, VLMUL), 0, 3);
++        uint32_t vlmax = vext_get_vlmax(s->cfg_ptr->vlenb, vsew, lmul);
++        target_ulong pc_save = s->pc_save;
++        TCGLabel *not_vlmax = gen_new_label();
++
++        tcg_gen_brcondi_tl(TCG_COND_NE, dst, vlmax, not_vlmax);
++        gen_goto_tb(s, 0, s->cur_insn_len);
++        s->pc_save = pc_save;
++        gen_set_label(not_vlmax);
++        gen_goto_tb(s, 1, s->cur_insn_len);
++    } else {
++        gen_update_pc(s, s->cur_insn_len);
++        lookup_and_goto_ptr(s);
++    }
+     s->base.is_jmp = DISAS_NORETURN;
+     return true;
+ }
+@@ -244,13 +259,13 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+ static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
+ {
+     TCGv s2 = get_gpr(s, a->rs2, EXT_ZERO);
+-    return do_vsetvl(s, a->rd, a->rs1, s2);
++    return do_vsetvl(s, a->rd, a->rs1, s2, -1);
+ }
+ 
+ static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
+ {
+     TCGv s2 = tcg_constant_tl(a->zimm);
+-    return do_vsetvl(s, a->rd, a->rs1, s2);
++    return do_vsetvl(s, a->rd, a->rs1, s2, a->zimm);
+ }
+ 
+ static bool trans_vsetivli(DisasContext *s, arg_vsetivli *a)
+
+---
+base-commit: a3565937b39779d4e3704298095f566e7559ad53
+change-id: 20261104-research-vsetvli-direct-chain-20261104-206bc2104ddb
+
+Best regards,
+-- 
+WX Chen <wxchen0913@gmail.com>
+
 
