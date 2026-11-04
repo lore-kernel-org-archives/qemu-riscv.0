@@ -1,74 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 661FA607264F
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 19:45:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F15F8607382A
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 19:45:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=ESPOr1Yp
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=FMaR5l7o
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOgtD-0002se-Ao; Wed, 04 Nov 2026 14:43:19 -0500
+	id 1xOguF-0006sv-HQ; Wed, 04 Nov 2026 14:44:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xOgt4-0002kD-NT
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:43:10 -0500
-Received: from mail-dy1-x1334.google.com ([2607:f8b0:4864:20::1334])
+ id 1xOguA-0006ZB-I0
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:44:18 -0500
+Received: from mail-dl1-x1236.google.com ([2607:f8b0:4864:20::1236])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xOgt2-0002Tl-OY
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:43:10 -0500
-Received: by mail-dy1-x1334.google.com with SMTP id
- 5a478bee46e88-36a18fc7a38so310831eec.1
- for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 11:43:08 -0800 (PST)
+ id 1xOgu7-0002i8-Cw
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:44:17 -0500
+Received: by mail-dl1-x1236.google.com with SMTP id
+ a92af1059eb24-15dd124bbe7so2222681c88.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 11:44:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1793821387; x=1794426187; darn=nongnu.org;
+ d=sifive.com; s=google; t=1793821454; x=1794426254; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=8acSz67SEMp3v6xtI7qoWxZME8sNQUJ6Qw3trWuzqS4=;
- b=ESPOr1YpJUHbZOjw63CXMf6f+6dHhv/I0K2plRhf2Ch9x+WYroAT1tuNKig+yFFTWW
- 3PDropyINlzorJAvhTZBfmNwCDdW4kcyTxyiISo+GrefiKe0RWnfB8nIU09GSxJIgELE
- 2DJ1nOL4hoQtQb5qsiyehoz+7lbyTNAX2VoTLSr5y7bwxiEv9d3L7CAb8UeN23q3+U+t
- gQ7qqNvVGeEeZfW8IhAm5RpEkavF0iXHNqvp/HSnmO5+vSh5JiD8WKKHENBR6Qw2gyGZ
- YAVeMBGiSxa3nwAHzwGzrRZOpL1fGOFDZQti5HSlc7Tp9CSlL/76k+/xRa8e1Zp4ChnL
- mx4Q==
+ bh=JQDX0/TKOp3b6vjy3Rl0bo9AkbHlzgihMDugSDBnVKM=;
+ b=FMaR5l7oKOrSLrkvUw1p2r1syTjDiiHNRu7lHUU00v0x0fOkMMlFjzI8k11BTBlxKg
+ U1OXDahsZW75NWKb3iy4JxqstK1YM3eYdQRNEUIE1KQxBA1/v7cddOpO0b3LTbmJlLB5
+ yWICVRQWwkBd0y1oFsb1GqWwo6g5i2h9aIHg+xzlAlx5AWX5j+ATdwS9QSoPZSdCztpb
+ /f9Lo6RD3JkqFlomI/MyQbqbV8dHXmQfZ490KMNutZ0KukWu2/Zl6tnKUF1DuAncTQb6
+ icpAEHBFDw292yfZW/4xFtzaPisLflDxV6bZjVESFcPs1lwUpvIo1pITkU5KS3rLgjbP
+ rKjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793821387; x=1794426187;
+ d=1e100.net; s=20260707; t=1793821454; x=1794426254;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=8acSz67SEMp3v6xtI7qoWxZME8sNQUJ6Qw3trWuzqS4=;
- b=MlZnrGidgJZHAp7IvW/anMr14lWdMUMy5+2oY1YsADIVXeW01X/huI9rGOXDaduBSW
- BXnM0Xe6mgqgmzVhXCrZkSnwnmfSc8W/gkWeIyMYTn/Ws3NVMoMK3wOBehzoyPYKpuV/
- Ooik6hU/QSVrkw/swknJtLw6xNqKnTDTqhJUBa7ejk2peEnyEQTQfzeL150Jzj9G2xed
- Rig7qhQinlYAnwhMw4C0YFMKB/uTXfqB7w3HyLJ/9rGp/ZCB/PlyQkiVNxdJB8hHRp3x
- 3k89PzGUE5NGVk+CrzaVmVn53Adb1F3yXOVs+vZZlqo+6gC52bS5xBKEFEZBD4StF+Eh
- oZyA==
+ bh=JQDX0/TKOp3b6vjy3Rl0bo9AkbHlzgihMDugSDBnVKM=;
+ b=NuybdVGZpGFBT6wUuFMR2KPJq0uMfoVs2y7sR2ZsfNayk0mFkhyuqTHGloOzqKML/f
+ pp9ZCCOBXjJ4Srb5K8azHCkTb0F+MIj5NvO6vJjzVwLPru7lwGhZ7COKfnhAaUB/V5KZ
+ TLEYRMtjxItsrla4eSNQDO8lK1RtYhSqSRqLedYAQCdG5JjhV+HV7Aj7D7V+YZzWEeYo
+ tm62w6r4IJNcjGhYGWK+ThnjhhXXHSRWdVdmK8qSRoyx5sosG7S/X2UrrbYao8PxCXdJ
+ ISeGxXf3BOtkCCarFmxT5XBODVs9YzhGPm2fJ6NlacolLz6ZwLso6DwLOIMz+9++3au8
+ dOJw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBwU9YOIx8YRDOlilc8ZkQAi6U3NEbe+ZhcfP4LlhSqcEgtakVkBSPmPbtmHWRTukfARnUuGg/egcvM3@nongnu.org
-X-Gm-Message-State: APuU4Z9rjlcZnbktGDul9u81ifyhUgo8PFhF4fNCWrBBXunh89+hNVid
- QMlvp90TS+H+73ckM1JmvH0Wthr6TchBp8dKti75tyhTBoQrewyWFmisioijlK0Nhcp0QT1zghe
- TuKB/CP8=
-X-Gm-Gg: AYBFou1D6az5zHlm7UWwp2nVusMjojj3CJYiTmKl3n7dmKxZI4d/bkUzhu5+xYNW/CW
- 6iNNw9dYu5IMFNAfKAcrHiDuccN6GGIANdS3JwwlXKR3l43+jKSyZb2gEYQcXEhkla0tOjK+JnI
- JXVXctm2YIE+pNjCInXmKUBDWt1ptZBttnvnRRR+UicugD80yEsXhIO/EBA1e/eYv+b/KoHWDMY
- IAN9HDO3HJ/QuAgWbKRiBHf6N/1almSP2vZGqYF/t5ts3w+VGVU9I690revR3vV3Be/23u6EykB
- okgv2wWBP1xl4QB/3NU93zF4eCmgRK4rUlvoZ7IXOD8hnQTvdS/e4e66HlWiIVCHJVweRdY/dSs
- /ftE0lqMOIBDg/vhas21CQ3RIcZHij/uY+YXufy/oyqgbyGOI1bXVi99NDfZFB8R0aG8ijKqPnm
- gETrbwKe6QxYTA9ezkTjKlkM+c+aVESms7MU6jsn+CXa/AlJ/jUTUKCexomS6C0bNm+jB38sG4c
- iSkwVMDJfMg+/CuCUx+J2UOwVz/TcE7NWXTdDRDmBLNNEhUarjlI1r82u+tmrmU+2BkI45d8N8a
- ArR/jyKH87pSENbYz4n7RtBj0e2L2wVTiQpK8Qba484jiiWvBCwU/i+WV7WfqGNcTjzGeplQxmA
- mic8klLUO27oCoT5Ys2a7wxE+RK1l
-X-Received: by 2002:a05:693c:6092:b0:369:1084:8ee3 with SMTP id
- 5a478bee46e88-36a423e52c8mr29866359eec.23.1793821387091; 
- Wed, 04 Nov 2026 11:43:07 -0800 (PST)
+ AKwUvByyjgjwcDsjyeqTmTPFTbk4xWAIRC6EQ/5u0IM1CXlPQFWcLHnyonNUNWjc/KbB+XjDVvlyv2obnL5E@nongnu.org
+X-Gm-Message-State: APuU4Z95IRf4Ctch8xRPEEEfH2ixr5Plp03zUeFhzOoc1epwj0wXWQT0
+ ebX+Z9KGt8mkZeq7l1fPf7aBCHq7ALe62isZCEVmv7oB5goK0AWw+F7tmMDNA+Z6s5Q=
+X-Gm-Gg: AYBFou0blX/GZ+7fDGVCuIs+/jkc7D5228Nm+AkQmGdaCALUvOJ40IUwuD49+eJYIM+
+ 73KCPuqZdE6abAuZRjKm/k6vvgd37vt1jEGAovIUxqWkpEakLqAJ682kkihagwt6tn+wd+iUjZ0
+ WXQVjM+6JkZOdNxxi0qEgXFwYqzQ3tCNPb+DV+Xu8TGC/3l9PVndh/SClxkm+ZOvofStwspahUP
+ 2wJcMP5MO+8XMDB8PPuVeHdMGi3ZEVX3zgkWPEh/F7pFGcpGEGdp7nsxoz4/LDk+PAPdtimpMVw
+ TtWoDTz2LUY2/3kEPZJvEO7LYi7z89TaWZlwV5g24xZkROcRK35q03fZ1h4hdvY7yQ/dZjy8EGW
+ DnVEuJZaQvIEV9toxd72zMfEi9F7ZPd75O9TmAB4Kws53GDq+msIDpDKa2IRlvWJZzz36w8f4F8
+ XPB26g5K9gHD4iayT5DjqEm9zXpDVNk4/bi1pF8dhAgDzHnZv/gwdClSwOaBg+0S/hQK742Ks7q
+ SFJYUuHYL9mSm7IxWwHoSSQNGaU0sE4e6/UFtFO7e6jvqIc+JGhgscJERvQngtGTFOuiT79fl9F
+ petq1O3dkiNhaHKFwaH8uTkrWk9LKXfsqcARKD7hvtMeWy6P4y+wVKNQjpPInzSCMc+bYnxlqtJ
+ 6eQgwXCqBOxY2yJ+qAWwYG//gDOBh
+X-Received: by 2002:a05:7022:281:20b0:1ac:91b6:8dfd with SMTP id
+ a92af1059eb24-1ade9e3e335mr24473074c88.31.1793821453533; 
+ Wed, 04 Nov 2026 11:44:13 -0800 (PST)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36ca38d36a1sm11299527eec.12.2026.11.04.11.43.04
+ 5a478bee46e88-36ca38d36a1sm11299527eec.12.2026.11.04.11.44.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 11:43:06 -0800 (PST)
+ Wed, 04 Nov 2026 11:44:13 -0800 (PST)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -81,18 +80,18 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, Max Chou <max.chou@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [RFC PATCH 17/38] target/riscv: rvv: Implement Zvfqwdota8f
- instructions
-Date: Thu,  5 Nov 2026 03:41:32 +0800
-Message-ID: <20261104194155.679241-18-max.chou@sifive.com>
+Subject: [RFC PATCH 38/38] tests/tcg/riscv64: Add test for Zvdota/Zvbdota
+ extensions
+Date: Thu,  5 Nov 2026 03:41:53 +0800
+Message-ID: <20261104194155.679241-39-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261104194155.679241-1-max.chou@sifive.com>
 References: <20261104194155.679241-1-max.chou@sifive.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1334;
- envelope-from=max.chou@sifive.com; helo=mail-dy1-x1334.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1236;
+ envelope-from=max.chou@sifive.com; helo=mail-dl1-x1236.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -111,179 +110,394 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=unavailable
-	autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Implements the Zvfqwdota8f OCP FP8 dot-product instructions:
-- vfqwdota.vv: vs2 is E4M3, vs1 format selected by altfmt (0=E4M3, 1=E5M2)
-- vfqwdota.alt.vv: vs2 is E5M2, vs1 format selected by altfmt (0=E4M3, 1=E5M2)
+Add a test that exercises the RISC-V Zvdota/Zvbdota instructions.
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
- target/riscv/helper.h                       |  5 ++
- target/riscv/insn32.decode                  |  4 ++
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 47 ++++++++++++++++
- target/riscv/tcg/vector_helper.c            | 62 +++++++++++++++++++++
- 4 files changed, 118 insertions(+)
+ tests/tcg/riscv64/system/meson.build |  12 +
+ tests/tcg/riscv64/test-zvdota.S      | 343 +++++++++++++++++++++++++++
+ 2 files changed, 355 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-zvdota.S
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 918ff21b3e2..48c64f45748 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -1395,6 +1395,11 @@ DEF_HELPER_6(vqwdotas_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
- 
- /* Zvfwdota16bf - BF16 Dot Product */
- DEF_HELPER_6(vfwdota_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+
-+/* Zvfqwdota8f - OCP FP8 Dot Product */
-+DEF_HELPER_6(vfqwdota_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+DEF_HELPER_6(vfqwdota_alt_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+
- /* SiFive Custom int8 Matrix-Multiply */
- DEF_HELPER_5(sf_vqmaccu_4x8x4, void, ptr, ptr, ptr, env, i32)
- DEF_HELPER_5(sf_vqmacc_4x8x4, void, ptr, ptr, ptr, env, i32)
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index d800ad99451..def5785f8e2 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -1104,3 +1104,7 @@ vqwdotas_vv  100111 . ..... ..... 000 ..... 1110111 @r_vm
- 
- # *** Zvfwdota16bf BF16 Dot-Product Extension ***
- vfwdota_vv  100100 . ..... ..... 001 ..... 1110111 @r_vm
-+
-+# *** Zvfqwdota8f OCP FP8 Dot-Product Extension ***
-+vfqwdota_vv     100110 . ..... ..... 001 ..... 1110111 @r_vm
-+vfqwdota_alt_vv 100111 . ..... ..... 001 ..... 1110111 @r_vm
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index c50f863ea0b..6eb22494838 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -4242,3 +4242,50 @@ static bool trans_vfwdota_vv(DisasContext *s, arg_rmrr * a)
-     }
-     return false;
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e9..01370badb0d 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -89,6 +89,18 @@ tests += {
+   }
  }
-+
-+/* Zvfqwdota8f OCP FP8 Dot-Product Extension */
-+static bool vext_vfqwdota_check(DisasContext *s, arg_rmrr *a)
-+{
-+    return s->mstatus_fs != EXT_STATUS_DISABLED &&
-+           vext_zvdota_base_check(s, a) &&
-+           (s->cfg_ptr->ext_zvfqwdota8f && s->sew == MO_8);
+ 
++dot_cpu = ('rv64,v=true,vlen=512' +
++           ',x-zvqwdota8i=true,x-zvqwdota16i=true' +
++           ',x-zvqwbdota8i=true,x-zvqwbdota16i=true' +
++           ',x-zvfwdota16bf=true,x-zvfwbdota16bf=true' +
++           ',x-zvfqwdota8f=true,x-zvfqwbdota8f=true,x-zvfbdota32f=true')
++tests += {
++  'test-zvdota.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', dot_cpu, qemu_args],
++  }
 +}
 +
-+#define GEN_ZVDOTA_FP8_TRANS(NAME, CHECK)                               \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                  \
-+{                                                                       \
-+    if (CHECK(s, a)) {                                                  \
-+        TCGv_ptr dest, src1, src2, mask;                                \
-+        TCGv_i32 desc;                                                  \
-+        uint32_t data = 0;                                              \
-+                                                                        \
-+        gen_set_rm(s, RISCV_FRM_DYN);                                   \
-+                                                                        \
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);                      \
-+        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);                  \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);                    \
-+        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);  \
-+                                                                        \
-+        dest = tcg_temp_new_ptr();                                      \
-+        mask = tcg_temp_new_ptr();                                      \
-+        src1 = tcg_temp_new_ptr();                                      \
-+        src2 = tcg_temp_new_ptr();                                      \
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,            \
-+                                          s->cfg_ptr->vlenb, data));    \
-+                                                                        \
-+        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));            \
-+        tcg_gen_addi_ptr(src1, tcg_env, vreg_ofs(s, a->rs1));           \
-+        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));           \
-+        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));                \
-+                                                                        \
-+        gen_helper_##NAME(dest, mask, src1, src2, tcg_env, desc);       \
-+                                                                        \
-+        finalize_rvv_inst(s);                                           \
-+                                                                        \
-+        return true;                                                    \
-+    }                                                                   \
-+    return false;                                                       \
-+}
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-zvdota.S b/tests/tcg/riscv64/test-zvdota.S
+new file mode 100644
+index 00000000000..eefb615088f
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zvdota.S
+@@ -0,0 +1,343 @@
++/*
++ * Test the Zvdota/Zvbdota extensions
++ *
++ * Each dot has four input pairs. Integer inputs distinguish all four
++ * signedness combinations; the -7 accumulator also exercises wraparound.
++ * Floating inputs represent A = [1, -2, 0.5, 4] and column n of B =
++ * [n + 1, -2, 3, 0.5]. With accumulator 1.5, C[n] = n + 10 exactly.
++ * Separate BF16 cases check round-to-odd in the final accumulator addition.
++ *
++ * Poisoned source tails must not contribute. Destination prestart/tail
++ * elements and masked-off batched outputs must remain undisturbed (tu/mu).
++ * The test requires VLEN 512, which also exercises ci = 8.
++ *
++ * Exit status is zero on success or the numbered check on failure, including
++ * unexpected traps.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-+GEN_ZVDOTA_FP8_TRANS(vfqwdota_vv, vext_vfqwdota_check)
-+GEN_ZVDOTA_FP8_TRANS(vfqwdota_alt_vv, vext_vfqwdota_check)
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index a4c52ed296a..5cb44326200 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -6075,3 +6075,65 @@ void HELPER(vfwdota_vv)(void *vd, void *v0, void *vs1, void *vs2,
-         vext_set_elems_1s(vd, vta, 1 * 4, total_elems * 4);
-     }
- }
++	.option arch, +v
++	.option norvc
++	.option norelax
++
++/* ci is an element index; its encoding is the index divided by eight. */
++#define DOT(f6, f3, vm, ci) \
++    (((f6) << 26) | ((vm) << 25) | ((8 | ((ci) / 8)) << 20) | \
++     (1 << 15) | ((f3) << 12) | (16 << 7) | 0x77)
++
++	.text
++
++/* Load four elements per source, leaving all remaining elements poisoned. */
++.macro LOAD_INPUT sew, a, b
++	vsetvli t0, zero, e\sew, m1, tu, mu
++	vmv.v.i v1, -1
++	.irp reg, 8, 9, 10, 11, 12, 13, 14, 15
++	vmv.v.i v\reg, -1
++	.endr
++	li	t0, 4
++	vsetvli t0, t0, e\sew, m1, tu, mu
++	la	t1, \a
++	vle\sew\().v v1, (t1)
++	la	t1, \b
++	.irp reg, 8, 9, 10, 11, 12, 13, 14, 15
++	vle\sew\().v v\reg, (t1)
++	addi	t1, t1, \sew / 2
++	.endr
++.endm
 +
 +/*
-+ * Zvfqwdota8f: OCP FP8 Dot Product with Accumulation
++ * Initialize an m4 destination at its output width, execute with the input
++ * vtype, and compare the whole m4 group (including untouched registers).
++ * v0 contains repeating 0xaa55: scalar dots mask inputs, batched dots outputs.
++ * Nonzero-ci cases give prestart elements a different accumulator seed.
 + */
-+#define GEN_VEXT_ZVDOTA_FP8(NAME, TYPE_VS2)                              \
-+void HELPER(NAME)(void *vd, void *v0, void *vs1, void *vs2,              \
-+                  CPURISCVState *env, uint32_t desc)                     \
-+{                                                                        \
-+    uint32_t vlmax = vext_max_elems(desc, ctzl(sizeof(uint8_t)));        \
-+    uint32_t vm = vext_vm(desc);                                         \
-+    uint32_t vl = env->vl;                                               \
-+    uint32_t vta = vext_vta(desc);                                       \
-+    uint32_t vta_all_1s = vext_vta_all_1s(desc);                         \
-+    uint32_t total_elems = riscv_cpu_cfg(env)->vlenb >> 2;               \
-+    uint32_t altfmt = FIELD_EX64(env->vtype, VTYPE, ALTFMT);             \
-+    uint32_t i;                                                          \
-+    uint8_t *a_vec, *b_vec;                                              \
-+    uint32_t dot_result, acc;                                            \
-+                                                                         \
-+    VSTART_CHECK_EARLY_EXIT(env, vl);                                    \
-+                                                                         \
-+    a_vec = g_new0(uint8_t, vlmax);                                      \
-+    b_vec = g_new0(uint8_t, vlmax);                                      \
-+                                                                         \
-+    for (i = 0; i < vl; i++) {                                           \
-+        if (!vm && !vext_elem_mask(v0, i)) {                             \
-+            continue;                                                    \
-+        }                                                                \
-+        a_vec[i] = *((uint8_t *)vs2 + H1(i));                            \
-+        b_vec[i] = *((uint8_t *)vs1 + H1(i));                            \
-+    }                                                                    \
-+                                                                         \
-+    FloatExceptionFlags pre_fflag =                                      \
-+        get_float_exception_flags(&env->fp_status);                      \
-+    FloatSNaNRule pre_snan_rule = get_snan_rule(&env->fp_status);        \
-+    set_snan_rule(float_snan_never, &env->fp_status);                    \
-+    if (altfmt == 0) {                                                   \
-+        dot_result = rvbna_dot_float8_##TYPE_VS2##_float8_e4m3(          \
-+            a_vec, b_vec, vlmax, &env->fp_status);                       \
-+    } else {                                                             \
-+        dot_result = rvbna_dot_float8_##TYPE_VS2##_float8_e5m2(          \
-+            a_vec, b_vec, vlmax, &env->fp_status);                       \
-+    }                                                                    \
-+    set_snan_rule(pre_snan_rule, &env->fp_status);                       \
-+                                                                         \
-+    acc = *((uint32_t *)vd + H4(0));                                     \
-+    *((uint32_t *)vd + H4(0)) = rvbna_final_f32_add(dot_result, acc,     \
-+                                                    &env->fp_status);    \
-+    riscv_cpu_check_fflags(env, pre_fflag);                              \
-+                                                                         \
-+    g_free(a_vec);                                                       \
-+    g_free(b_vec);                                                       \
-+                                                                         \
-+    env->vstart = 0;                                                     \
-+                                                                         \
-+    if (vta_all_1s) {                                                    \
-+        vext_set_elems_1s(vd, vta, 1 * 4, total_elems * 4);              \
-+    }                                                                    \
-+}
++.macro RUN id, f6, f3, type, eew, exp, batch=0, vm=1, vl=4, ci=0
++	li	t6, \id
++	vsetvli s0, zero, e\eew, m4, tu, mu
++	.if \f3
++	li	s1, 0x3fc00000	/* FP32 accumulator = 1.5. */
++	.else
++	li	s1, -7
++	.endif
++	vmv.v.x v16, s1
++	.if \ci
++	li	t0, \ci
++	vsetvli t0, t0, e\eew, m4, tu, mu
++	addi	t0, s1, 1
++	vmv.v.x v16, t0
++	.endif
++	li	t1, \vl
++	li	t2, \type
++	vsetvl	t0, t1, t2
++	bne	t0, t1, fail
++	.word	DOT(\f6, \f3, \vm, \ci)
++	csrr	t0, vstart
++	bnez	t0, fail
++	csrr	t0, fflags
++	bnez	t0, fail
++	vsetvli t0, zero, e\eew, m4, tu, mu
++	la	a0, result
++	vse\eew\().v v16, (a0)
++	la	a1, \exp
++	mv	a2, s0
++	li	a3, \ci
++	.if \vl == 0
++	li	a4, 0
++	.elseif \batch
++	li	a4, 8
++	.else
++	li	a4, 1
++	.endif
++	li	a5, \eew / 8
++	mv	a6, s1
++	.if \batch && !\vm
++	li	a7, (0xaa55 >> \ci) & 0xff
++	.else
++	li	a7, 0xff
++	.endif
++	call	check_result
++.endm
 +
-+GEN_VEXT_ZVDOTA_FP8(vfqwdota_vv, e4m3)
-+GEN_VEXT_ZVDOTA_FP8(vfqwdota_alt_vv, e5m2)
++/* The trap handler verifies the cause, faulting PC and instruction bits. */
++.macro ILLEGAL id, f6, f3, type, start=0
++	li	t6, \id
++	li	t1, 4
++	li	t2, \type
++	vsetvl	t0, t1, t2
++	li	t0, \start
++	csrw	vstart, t0
++	la	s2, 1f
++	li	s3, DOT(\f6, \f3, 1, 0)
++1:	.word	DOT(\f6, \f3, 1, 0)
++	bnez	s2, fail	/* Must have taken the expected trap. */
++.endm
++
++	.global _start
++_start:
++	li	t6, 44		/* Setup failure. */
++	li	s2, 0		/* No trap expected outside ILLEGAL. */
++	la	t0, trap_handler
++	csrw	mtvec, t0
++	li	t0, (1 << 9) | (1 << 13)
++	csrs	mstatus, t0
++	csrw	fcsr, zero
++	csrr	t0, vlenb
++	li	t1, 64		/* VLEN 512 only. */
++	bne	t0, t1, fail
++	vsetvli t0, zero, e16, m1, tu, mu
++	li	t0, 0xaa55
++	vmv.v.x v0, t0
++
++	/* Integer scalar dots: vs2 signedness in opcode, vs1 in altfmt. */
++	LOAD_INPUT 8, a_i8, b_i8
++	RUN	1, 0x26, 0, 0x000, 32, exp_i8_uu
++	RUN	2, 0x27, 0, 0x000, 32, exp_i8_us
++	RUN	3, 0x26, 0, 0x100, 32, exp_i8_su
++	RUN	4, 0x27, 0, 0x100, 32, exp_i8_ss
++	RUN	5, 0x26, 0, 0x000, 32, exp_i8_mask, vm=0
++	RUN	6, 0x26, 0, 0x000, 32, exp_i8_uu, vl=0
++	LOAD_INPUT 16, a_i16, b_i16
++	RUN	7, 0x26, 0, 0x008, 64, exp_i16_uu
++	RUN	8, 0x27, 0, 0x008, 64, exp_i16_us
++	RUN	9, 0x26, 0, 0x108, 64, exp_i16_su
++	RUN	10, 0x27, 0, 0x108, 64, exp_i16_ss
++
++	/* Batched dots use all eight columns, even though vl is only four. */
++	LOAD_INPUT 8, a_i8, b_i8
++	RUN	11, 0x2e, 0, 0x000, 32, exp_i8_uu, batch=1
++	RUN	12, 0x2f, 0, 0x000, 32, exp_i8_us, batch=1
++	RUN	13, 0x2e, 0, 0x100, 32, exp_i8_su, batch=1
++	RUN	14, 0x2f, 0, 0x100, 32, exp_i8_ss, batch=1
++	RUN	15, 0x2e, 0, 0x000, 32, exp_i8_uu, batch=1, vm=0
++	RUN	16, 0x2e, 0, 0x000, 32, exp_i8_uu, batch=1, vl=0
++	LOAD_INPUT 16, a_i16, b_i16
++	RUN	17, 0x2e, 0, 0x008, 64, exp_i16_uu, batch=1
++	RUN	18, 0x2f, 0, 0x008, 64, exp_i16_us, batch=1
++	RUN	19, 0x2e, 0, 0x108, 64, exp_i16_su, batch=1
++	RUN	20, 0x2f, 0, 0x108, 64, exp_i16_ss, batch=1
++
++	/* BF16 requires SEW=16, altfmt=1. */
++	LOAD_INPUT 16, a_bf16, b_bf16
++	RUN	21, 0x24, 1, 0x108, 32, exp_fp
++	RUN	22, 0x24, 1, 0x108, 32, exp_fp_mask, vm=0
++	RUN	23, 0x2c, 1, 0x108, 32, exp_fp, batch=1
++	RUN	24, 0x2c, 1, 0x108, 32, exp_fp, batch=1, vm=0
++
++	/* OFP8: ordinary/alt opcode selects vs2, altfmt selects vs1. */
++	LOAD_INPUT 8, a_e4m3, b_e4m3
++	RUN	25, 0x26, 1, 0x000, 32, exp_fp
++	RUN	29, 0x26, 1, 0x000, 32, exp_fp_mask, vm=0
++	RUN	30, 0x2e, 1, 0x000, 32, exp_fp, batch=1
++	RUN	34, 0x2e, 1, 0x000, 32, exp_fp, batch=1, vm=0
++	LOAD_INPUT 8, a_e4m3, b_e5m2
++	RUN	26, 0x27, 1, 0x000, 32, exp_fp
++	RUN	31, 0x2f, 1, 0x000, 32, exp_fp, batch=1
++	LOAD_INPUT 8, a_e5m2, b_e4m3
++	RUN	27, 0x26, 1, 0x100, 32, exp_fp
++	RUN	32, 0x2e, 1, 0x100, 32, exp_fp, batch=1
++	LOAD_INPUT 8, a_e5m2, b_e5m2
++	RUN	28, 0x27, 1, 0x100, 32, exp_fp
++	RUN	33, 0x2f, 1, 0x100, 32, exp_fp, batch=1
++
++	LOAD_INPUT 32, a_fp32, b_fp32
++	RUN	35, 0x2b, 1, 0x010, 32, exp_fp, batch=1
++	RUN	36, 0x2b, 1, 0x010, 32, exp_fp, batch=1, vm=0
++
++	/* 1.5 + 2^-24 rounds to odd (0x3fc00001), without setting NX. */
++	LOAD_INPUT 16, a_tiny, b_tiny
++	RUN	37, 0x24, 1, 0x108, 32, exp_odd
++	RUN	38, 0x2c, 1, 0x108, 32, exp_odd, batch=1
++
++	LOAD_INPUT 8, a_i8, b_i8
++	RUN	39, 0x2e, 0, 0x000, 32, exp_i8_uu, batch=1, ci=8
++	RUN	40, 0x2e, 0, 0x000, 32, exp_i8_uu, batch=1, vm=0, ci=8
++	ILLEGAL 41, 0x26, 0, 0x000, start=1	/* Nonzero vstart. */
++	ILLEGAL 42, 0x2e, 0, 0x001		/* Batched LMUL=2. */
++	ILLEGAL 43, 0x24, 1, 0x008		/* BF16 altfmt=0. */
++	li	a0, 0
++	j	_exit
++
++	.balign 4
++trap_handler:
++	beqz	s2, fail
++	csrr	t0, mcause
++	li	t1, 2		/* Illegal instruction. */
++	bne	t0, t1, fail
++	csrr	t0, mtval
++	bne	t0, s3, fail
++	csrr	t0, mepc
++	bne	t0, s2, fail
++	addi	t0, t0, 4
++	csrw	mepc, t0
++	csrw	vstart, zero
++	li	s2, 0
++	mret
++
++/*
++ * a0=result, a1=expected body, a2=total elements, a3=first body element,
++ * a4=body count, a5=element bytes, a6=seed, a7=active body mask.
++ * Prestart elements use seed + 1; masked-off body and tail elements use seed.
++ */
++check_result:
++	li	t0, 0
++1:	mv	t3, a6
++	bltu	t0, a3, 6f
++	sub	t1, t0, a3
++	bgeu	t1, a4, 3f
++	srl	t2, a7, t1
++	andi	t2, t2, 1
++	beqz	t2, 3f
++	mul	t2, t1, a5
++	add	t2, a1, t2
++	li	t3, 8
++	beq	a5, t3, 2f
++	lw	t3, 0(t2)
++	j	3f
++2:	ld	t3, 0(t2)
++3:	li	t2, 8
++	beq	a5, t2, 4f
++	lw	t2, 0(a0)
++	j	5f
++4:	ld	t2, 0(a0)
++5:	bne	t2, t3, fail
++	add	a0, a0, a5
++	addi	t0, t0, 1
++	bltu	t0, a2, 1b
++	ret
++6:	addi	t3, a6, 1
++	j	3b
++
++fail:
++	mv	a0, t6
++_exit:
++	la	a1, semiargs
++	li	t0, 0x20026
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20
++	.balign 16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign 8
++semiargs:
++	.space 16
++result:
++	.space 256	/* m4 at VLEN 512. */
++
++a_i8:
++	.byte 0xfe, 0x82, 2, 3
++b_i8:
++	.irp n, 0, 1, 2, 3, 4, 5, 6, 7
++	.byte 0xff - \n, 0x80 + \n, 3, 7
++	.endr
++	.balign 2
++a_i16:
++	.half 0xfffe, 0x8002, 2, 3
++b_i16:
++	.irp n, 0, 1, 2, 3, 4, 5, 6, 7
++	.half 0xffff - \n, 0x8000 + \n, 3, 7
++	.endr
++
++a_bf16:
++	.half 0x3f80, 0xc000, 0x3f00, 0x4080
++b_bf16:
++	.irp bits,0x3f80,0x4000,0x4040,0x4080,0x40a0,0x40c0,0x40e0,0x4100
++	.half \bits, 0xc000, 0x4040, 0x3f00
++	.endr
++a_e4m3:
++	.byte 0x38, 0xc0, 0x30, 0x48
++b_e4m3:
++	.irp bits, 0x38, 0x40, 0x44, 0x48, 0x4a, 0x4c, 0x4e, 0x50
++	.byte \bits, 0xc0, 0x44, 0x30
++	.endr
++a_e5m2:
++	.byte 0x3c, 0xc0, 0x38, 0x44
++b_e5m2:
++	.irp bits, 0x3c, 0x40, 0x42, 0x44, 0x45, 0x46, 0x47, 0x48
++	.byte \bits, 0xc0, 0x42, 0x38
++	.endr
++	.balign 4
++a_fp32:
++	.float 1.0, -2.0, 0.5, 4.0
++b_fp32:
++	.irp n, 1, 2, 3, 4, 5, 6, 7, 8
++	.float \n, -2.0, 3.0, 0.5
++	.endr
++a_tiny:
++	.half 0x3f80, 0, 0, 0
++b_tiny:
++	.rept 8
++	.half 0x3380, 0, 0, 0
++	.endr
++
++/* Suffixes describe vs1 then vs2; -7 + A dot B, modulo output width. */
++.macro EXPECT_INT name, width, a0, a1, b0, b1
++\name:
++	.irp n, 0, 1, 2, 3, 4, 5, 6, 7
++	.\width -7 + (\a0) * ((\b0) - \n) + (\a1) * ((\b1) + \n) + 2 * 3 + 3 * 7
++	.endr
++.endm
++	.balign 8
++	EXPECT_INT exp_i8_uu, word, 254, 130, 255, 128
++	EXPECT_INT exp_i8_us, word, 254, 130, -1, -128
++	EXPECT_INT exp_i8_su, word, -2, -126, 255, 128
++	EXPECT_INT exp_i8_ss, word, -2, -126, -1, -128
++	EXPECT_INT exp_i16_uu, dword, 65534, 32770, 65535, 32768
++	EXPECT_INT exp_i16_us, dword, 65534, 32770, -1, -32768
++	EXPECT_INT exp_i16_su, dword, -2, -32766, 65535, 32768
++	EXPECT_INT exp_i16_ss, dword, -2, -32766, -1, -32768
++exp_i8_mask:
++	.word -7 + 254 * 255 + 2 * 3
++exp_fp:
++	.float 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0
++exp_fp_mask:
++	.float 4.0
++exp_odd:
++	.rept 8
++	.word 0x3fc00001
++	.endr
 -- 
 2.56.0
 
