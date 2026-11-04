@@ -1,30 +1,30 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E8412606A31B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 15:43:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15E48606A328
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 15:43:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=Mrd5Zhga
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=JQsrBStt
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOd8T-0001Xa-HM; Wed, 04 Nov 2026 10:42:49 -0500
+	id 1xOd8T-0001XU-AJ; Wed, 04 Nov 2026 10:42:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xOd8P-0001V6-QX; Wed, 04 Nov 2026 10:42:47 -0500
+ id 1xOd8F-0001Sg-DY; Wed, 04 Nov 2026 10:42:36 -0500
 Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
  ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <bin.meng@processmission.com>)
- id 1xOd8N-0001DQ-E6; Wed, 04 Nov 2026 10:42:45 -0500
+ id 1xOd8C-0001DQ-Mg; Wed, 04 Nov 2026 10:42:35 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vhg/FRVDVLnHBDqzd848GCi6E1/tyG+vQKpG5ZikLaZIWLDLk0fNvE5yhQqSOqmF5TqaAlPzRESG8gyos0mEBwNpHY/+1QodyXhFhZCsVcUIKQXn+ABmNuqwn+r0H1YBKDXkEFNSIUTa3BUMGZHjVpbVA0UTe4eFQekH9E0vOWA9sue3S6FJUnpi3NZiql36ZnCsIDk60mnuspFItK9qxU5Ii8qBPehUxN3+CrGd+5+yyDyih7VxvOHsCLpaANwK+PISj4pDJfd9IeBVEI2gpvpLPiPcLehuhrQ/zB1gyv3zMCwgWdxWZwe7ix8niq/WSNUn+swsK+g/o68OuCdvUA==
+ b=Jy7mggcB6i1eX7iTfiElLzAdyupdYXjoX/C2TU62NpC0d8d+2iNb36Nbj9bdW5MJUy1f3Lynxp5fTrSxEV7H5TjZbVeTlW2i3lhEQNtUQWjhR8zZrg5CR+BlCfcJCMofatw7GNJc41IpmWnTabUFDmtBNp7dO7koAJ0xlYuKSNeGzwDCuocC5fbMBlb3hhpmmjfTLqKm7FFsU8UA6/QZmuhxljsC3qRX75fg0CUVMEydY302fIA2C2NzDRIitybNSjcd1RPgaN13xkdNpja6B3nuMdB5KlI3mtPBkofG1JTX0XLJAcq435D2EoTF2tMXauNdB561FLiqnltIfzHsQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kPTF7dDM4nT74FKWWWp80ZucSCvvMYMcR7tG99I0Foc=;
- b=zFDAwp2XvgyxhTEzyYSom+vDP+s2q8I1CzzqBW6j/3o0JCqm0KUcUNP34/mLgY9oUsHky0aVOvEnRMmA5TD4ymKGwQudzXeYiopcZKJEBUpNHhVL+qudhJwjbDfjAQS+frZO418MHAlgaXCxib5+d3hBvpuS9QcaUKcxCjC2dXGPbjFPqZUsChrSfiMt94JJCCvHJlnktClVFLXgCLkmQsEAwvMb2//y4BnDnQmrYIulO5KVdd8uYAEGE8u8cFARA0Hexk0qHujDyaWSlcrZ+otQipO+KLu7FMwn4x5Vuon9dMkw/+XxpuPIBpbTJQLR1cG0Mz38+sASr7p7Vu/xnQ==
+ bh=ys7g47W7H29g7iLNgy5CfGDeAz6RLzvYlguodITz990=;
+ b=m1fdFK7LfgoNHhMDMg69AWj3Xc8mfj0cpJNCoX64pkhvut9+A8ToPWOJpkEFbKzFwvf+GizNkiVULDJxRw++dixqNIqARbXp72kZ/HcUL3tHbVGcLgNXx02iAd/139/KZhrEC6mZIePzPp2Rs5lT/YN8AGzAfaFnZ86IgffQTTE/G4L5PwSX1WwBELJ8cmKpWEG1EuV78t5bkJCxCvX4zDlHDfmteS1TcmFW4mnq/KNhI5VK85o7UFIf3GtqSXsW98X7fnQECtggDwsS2xJXkMtFbUErUY9/pkFhEAWyfmiSMTiryAy9PB3kdgjTHSTVOoVZFO1E+cvXV84PdO+ISA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -32,31 +32,42 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kPTF7dDM4nT74FKWWWp80ZucSCvvMYMcR7tG99I0Foc=;
- b=Mrd5ZhgamGDNAt6Mjja4WONvrEOxfkmyE3bH/E/pYin1s/4xWfd10a2zyQg2JuaZi4G0C4nTFheWYP3LdI2BszcfNdChJyWMSqBQVge0tdwObxoMl3lrH2BhqLpoRlwk8s4/f6E+BVSXLXTaESuy6/w8kS/XjfMBHexLC2FKNqHkMliISiDUBynDzuAInFgdgSg/hfVp0qhXMWTzd03vLarAMnP7mRBY1gW9BRdOgxviUi1qh6KDpQ4mssDDongs6iw6BDGJU3ydEMdXcSRgKPMJMbaRlimc/NKwEC7Itcs+aL1gXtses9h+IDvkJCwQlGfK/Pp0xCc7CBFCgUG8sA==
+ bh=ys7g47W7H29g7iLNgy5CfGDeAz6RLzvYlguodITz990=;
+ b=JQsrBStthcNwshr7o0Z70JHrBYqhRYdzOwBtYe9xHu+Z/G33Gwb1GeYBbrvzgyjw3nFnZqFra0z1sfnHMfGt8WbRiqz24VacHMlKGjJajJ5jIIvKg5liBSYTKCL6HQCraOSuRwsV7t1gEoMSNcx/xbp3jmJCEtFfkiD8Tj0Swa0IlfJ4qunFXwzA7DoUFQ8tzhlHHwVJJ4vKRKsqr4oONDdWQlMcT7tAjzGpgql4h32uiaLN+wiytGRedmtilmYmMTu/K7atQzeLFo3DewkUqYUkCCQrsjtCg6JjJ7fhKk6BzqaG9gtgwOPGVO/JMBZIqCMpMwe3oQCT/MKD8YMenA==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from TYZPR02MB7121.apcprd02.prod.outlook.com (2603:1096:405:2c::12)
  by SEYPR02MB9159.apcprd02.prod.outlook.com (2603:1096:101:302::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.8; Wed, 4 Nov 2026
- 15:42:32 +0000
+ 15:42:24 +0000
 Received: from TYZPR02MB7121.apcprd02.prod.outlook.com
  ([fe80::5d81:393:2e5b:6e10]) by TYZPR02MB7121.apcprd02.prod.outlook.com
  ([fe80::5d81:393:2e5b:6e10%5]) with mapi id 15.21.0592.009; Wed, 4 Nov 2026
- 15:42:32 +0000
+ 15:42:24 +0000
 From: Bin Meng <bin.meng@processmission.com>
 To: QEMU <qemu-devel@nongnu.org>
-Cc: Conor Dooley <conor.dooley@microchip.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-riscv@nongnu.org
-Subject: [PATCH v5 04/26] hw/misc: Add SiFive L2 cache controller model
-Date: Wed,  4 Nov 2026 23:41:31 +0800
-Message-ID: <20261104154207.641511-5-bin.meng@processmission.com>
+Cc: Alistair Francis <Alistair.Francis@wdc.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Alistair Francis <alistair@alistair23.me>, Bin Meng <bmeng.cn@gmail.com>,
+ Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, qemu-arm@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PATCH v5 00/26] hw/riscv: Restore Microchip PolarFire SoC Icicle Kit
+ firmware boot
+Date: Wed,  4 Nov 2026 23:41:27 +0800
+Message-ID: <20261104154207.641511-1-bin.meng@processmission.com>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261104154207.641511-1-bin.meng@processmission.com>
-References: <20261104154207.641511-1-bin.meng@processmission.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: TY4P301CA0056.JPNP301.PROD.OUTLOOK.COM
@@ -66,56 +77,56 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TYZPR02MB7121:EE_|SEYPR02MB9159:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9d8cf8e9-680f-4b84-5f60-08df3a8a3d77
+X-MS-Office365-Filtering-Correlation-Id: 2703772c-5451-4609-a035-08df3a8a38d4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|23010399003|366016|260925022911599003|260925021311599003|260925021911599003|56012099006|261009221727099003|261009220027099003|261021123027099003|261022075727099003|261021121427099003|261009223027099003|261009221227099003|261021135927099003|261102123227099003|261102130727099003|261022105027099003|261028144727099003|261026140227099003|261009223327099003|261026121527099003|10067099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info: lbm+aPvO5erfnenvJiqkkOZgQkwG8MnvLKbvpwS0lMWqP3pxTbvPq++o49EtqZipYlRzchgxRYyWQbQ7XY5NWxbW7ef7nGJdGFVub2JUHoFIjU3zMoLrZ8HQEWLFHRt8VRIW8Ni9LUn2FbYnwGQjJbfEY1BeNREF1Hx/BALO0G4R/Ky+LL33CgW+eS1Hk4FuAj90CxKFHKJJo3eqg9ii1j0Yd2ORHVvXrqZ1BAWsX3dAzZyqKFFjMzzq+qKzdcawByaAryx/OWS1W9w9D6FLlOQE3CaGyXZXQAZm01FPfvWM9Z7UDPbCytVbJkMNF+H9KWXPJNRoyiU45KKA2UpX+lwPHQDi88v01+jGejcVsXednS+XeWMlbOtDg9wCYKBOiDSN0Vt4u5CfSN7YLcPesFlijwi+Snn6VsMprDvl7d5Tl6paKpvCv9sJMAcakgf0o9H6dDgG2Y3SWANZ+tRAWXXiq5CmB0IOcXYWCr3lk5JYYx8iAYbu4de/yPBmLdmvEYJtEMcAZmCWoisk20IbvEL6X3sTbXsjbCfBC175t0YsIBxdIvksp96CR76ztzEKJaYsq8M8Z6Jsl0h6vhcxqP7t5BUhzJSGbJblD4YVXczWYRwRZO5DjscYFwqcp/4SwXIFz1+klu4qgGlUHbmnoVKaoMOalrAzsApzVlRTjss=
+ ARA:13230040|376014|1800799024|23010399003|7416014|366016|261022115727099003|5023799004|56012099006|261021123027099003|261022075727099003|261021121427099003|261009223027099003|261102123227099003|261022105027099003|261028144727099003|261026140227099003|261026121527099003|10067099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info: B93hod/7TKtlSp0cNyWRDM0f5BxTkhMqVTzkHUNj2p9Shzm5RB+/6q1jlPPG6WK5DSU3eRjURVa9Zn3rumGQOX0hP8ZbkkzuHHq+14s/6Ef3qM2Xe+t0DiSC/WQ1vcOkq5CFKI3SvI/zuvC7JudYRRojCSqA7Kgb4oVYQ/wPzVYp0At61m51xG0WErHyhrNtAD/W5XIE7VXO+3uMXGO/QXQiZOJkWnwWgtwBsinL2MsbqaBZdw6faN81LFIOiypt/8TEPPgS8l8XFQPrfJzwaR/URUaS5uqLHi8PImRCmJ/lhPhPznXCbEbuZLTorEp5ngJRwI/H2ERktf+oVOTMF2myhygEEY91zJHuepIyVo7pYlZcv6tnhcu67cxVsA8neN0AuDbOMdbcp2vigvjh/m19QkYcP3kPNGqeWWYsqARGMBUutV1Y6x8MZDdMxcj5k2NJpE4tPHqtG6hjp4K+VF3zEO9tNcQOQQfV5uTgvWLc8AORjUTFcxu3x2aHtDOZPnvQxgl5dbs22XoWqFz4WYE+llDe3ySc2XEvtIeLbUQrG1nViSWGKit5h3RzWyfpJ546RuRNnS7YNrTXIveLcXi8816Irhq+P6WhBqHwHcVVQ8VHTIftvCl2muo4WT7Jxq44sBZgDSGN+mO6ELcHov5ded0pPgNIhC4GUHr0rsg=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYZPR02MB7121.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(260925022911599003)(260925021311599003)(260925021911599003)(56012099006)(261009221727099003)(261009220027099003)(261021123027099003)(261022075727099003)(261021121427099003)(261009223027099003)(261009221227099003)(261021135927099003)(261102123227099003)(261102130727099003)(261022105027099003)(261028144727099003)(261026140227099003)(261009223327099003)(261026121527099003)(10067099003)(22082099003)(18002099003)(6133799003);
+ SFS:(13230040)(376014)(1800799024)(23010399003)(7416014)(366016)(261022115727099003)(5023799004)(56012099006)(261021123027099003)(261022075727099003)(261021121427099003)(261009223027099003)(261102123227099003)(261022105027099003)(261028144727099003)(261026140227099003)(261026121527099003)(10067099003)(18002099003)(6133799003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?0G6Kv0kZMnGX4EjwFbHj8zGGq5LUoyY367zFV/T2ejw/df6xPrW6zSLPsrCh?=
- =?us-ascii?Q?F/UCPWohGTZbwJ8cn10MrZT92Q5UUiFRL5lvJ83EPXTeAIMqCSvfWmBdSByY?=
- =?us-ascii?Q?97uBedIk0YlYs9BjCtkY5gqfezmJ0aM/o094kBsZsVd6542ilv48U0rb7vvT?=
- =?us-ascii?Q?zmQAXF/tIraICcVyDIHwYsu+AF2uGh2gc4Q49mpu+SdykbkEz4b0tBw9WEqJ?=
- =?us-ascii?Q?9Kn3RZhZWwKaMZ5TBTs60RKMDEvyMcIkNdj8A0csY9754CImT9BokfouA/jT?=
- =?us-ascii?Q?lyYag9O3uPusfaw7s0nN8bfTeOpb02qcN3ZV4V4FLgUov+JIiftWsljXK+B0?=
- =?us-ascii?Q?8KwUvwO1U49H00yOefovxas6jTRS7g0plk5CmUVuo00wBLzVpI8AUmyeRKSL?=
- =?us-ascii?Q?kUIQ6RU9eeh0FR7iplpkiEMxePlNnHqLLnYFZ6NKgVUxBYMh2kCjtP7x26Sd?=
- =?us-ascii?Q?GoqWr8Hn6L9GE2QHMB44BsH8nWJ3xOlf+cjLA4TQBmXBJDedNaw71m3HfWtV?=
- =?us-ascii?Q?BhCeiiEUIVAJbWZYwgtiPQCggJvL1WaXaYuJTTuTg7EOkPaUq1n/cH1n1lNT?=
- =?us-ascii?Q?UZAPz22xrfPx8sQT3DZ9pdIwwv0Sk8GF2F9CAUT8+mWQEnFz3KAavejVqFF6?=
- =?us-ascii?Q?QZtIUbpjAux6b8NnAkKRErKmTmKSPXyMRImzSByGg7694deCwVKbkHgjtA1X?=
- =?us-ascii?Q?wkDAIe5kjXZ3UEj+n+tKxB1z0LM2SRBhrDimEPVWnccgvt6oszfc7j3y4KRv?=
- =?us-ascii?Q?fm32G/7Ff0fxvTZSfQK4G5e+7cEkcKO/txE/0o9mAoFr54XB7Gfsi1SAJtQP?=
- =?us-ascii?Q?BU+2VP0yg1WZ5yIhC2820IrcLVn9wxdIs/xTrimQw/0VJayUui4iitY1jvE5?=
- =?us-ascii?Q?VfDckO2yoYg2nUbk0O2chVgN8RX51II7c+XjeW5Z+ITJlzjMz3ZKvVvUetfA?=
- =?us-ascii?Q?0FJsQyTh9ZHhB9wLcxmtlMTVguHgGqmPP+BKrBsCzLCAPea2/AQbGc0Garee?=
- =?us-ascii?Q?37KhDHter3eYrgIT3yNgW9sZaE5LdRiSM0HVvbPEzZkmJtPB+EYVfN45PM7j?=
- =?us-ascii?Q?GbjfgIAcWxDilaRGMI0hYIMFpX54oNK76t/B2x8KzPeUkwLezbauKHSU12rV?=
- =?us-ascii?Q?gyYvnH3KlQ0GwHJnJf29PW9k3kDqmP7Ce+7qe+5OCy2s1JU26FuiI693lUgz?=
- =?us-ascii?Q?WViCIUiOuZ+IcQiJtweESj9HQC8dZZvnkF5asHbPasSJEcRdoafc3FZzLvoV?=
- =?us-ascii?Q?G/h4cyO5uNPuOT7pMK06MaHRBiYFsLZpgil7nvUP8K9mqHpJmv7ZJ2Us8O9F?=
- =?us-ascii?Q?gY1eUY3dJVaj+m3D2UGnLrcbdm9LC3QC8COTfRxVgVv+7tNiYtfZpq6rkFM6?=
- =?us-ascii?Q?3bV4s1sWP43/8iS6nVaWiAG0yxn4D39YAqreM+qgAaBvbFRrsSI/BC5NU0K3?=
- =?us-ascii?Q?xWSUI70aiqqAIZAAelu/jDmdGsUfSdAeDl1unIeq6cQfdbUcoHSOu4F/BjrO?=
- =?us-ascii?Q?thNVaGQOVE+j5HC2A08Hydp7CzIs3OogGAL8w7fWNzDchbtFfAbteFrR8YAr?=
- =?us-ascii?Q?sXlocKyxtZnEJVG2mFCkOChTpA4uxRKWs7Q54dp9GHwgPnxUVq2R1yFEUK4B?=
- =?us-ascii?Q?9kjHs5jtqYISRQHpYQAjg0ciLqWrbUPmBFzWjmjBuUy4ylNrF9Uxk4QX1mr6?=
- =?us-ascii?Q?djUExVCkGoWjHnFCV8U+9mdamwj0rOPO0UOwkkP/UZLE6uCqDJJrSauvKEsF?=
- =?us-ascii?Q?skZsDPVUktHhYd29D+nuzZ+q3yIrRm8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pjbMq+EMqELh48gGuDSTwfKkSgzxsNMusxNSMLm9Z7fZG1f73Zpvb5ZxKEsw?=
+ =?us-ascii?Q?MFZx9GKxyR8xbqrSiCpEUlRMV8phiMQiawFLY7iFrTTsHGReyTDMjywLFSYE?=
+ =?us-ascii?Q?q/bUR/wWoLa4C/aJ4IjuqUDx2RsYPJKkITqit+iryZlIx1OLRTKZ58uXPUJP?=
+ =?us-ascii?Q?HGO2C6G2a4VH+fz7MPeLHF5eDjKDnpNkqMtMuOkAVKvDBUL+GOqXfu0VQiKC?=
+ =?us-ascii?Q?euPpa4GmxArcj+16s45K6qEPOJI+sin0DArwTeNGjFrCM+VWW3TkkIrSms0n?=
+ =?us-ascii?Q?P8v4tCfAimAuMa4Q/NnZ6OeV8z+pBIqdpmoZ9nlyw3EBS7Q+yqN6vsjig6q4?=
+ =?us-ascii?Q?dQ0YcnqUR6HBW/n69k2E2CrkQ3hYbMNL84JqIyZxJ1mPj3pcFA4aA6l/i4Rc?=
+ =?us-ascii?Q?g768JiluDPu+Jv0HGiX4p+sPOpU/6Ms46DQX0PCkMXaINYhwdxlqiUKz88xb?=
+ =?us-ascii?Q?W7X8xEZbiAZn3FqxMmnVbfzC4OHzbKc/tKyfZECNk6q55Pbhe2+GbaPXj0aa?=
+ =?us-ascii?Q?ps0XpAWRR11a+vg62F8YcU5pY2czf2OevnTHaAlzM3epcmdu9/4qP4Ebsw5I?=
+ =?us-ascii?Q?w9SRE7rLhllLmJFq5aZwh8SyMKE6eFFZzW4UmVyinKPYqUMitVBhM1czavgD?=
+ =?us-ascii?Q?KD3O5D4rNye/Ql8xNarJItqH6zwCrG6yh1xxJtND36Dpd2mXOmJ+8c1sKvQF?=
+ =?us-ascii?Q?lN7LQrkRSSN8IMJMhHFmaMKZK97wAsZu1RlEnoE+hkthiC/HvYa/FPgNWHrd?=
+ =?us-ascii?Q?CxyXfebGvjJFalWJel9oDLLzHVGfgwUJ0T2HJmeK+8dhGVH+dMdBmt8nJtmQ?=
+ =?us-ascii?Q?9kAkzlgPFIAGdH+CDqKI3xoXjhS8UH8HQODGGtfbBBgSd4JdAvqQ7PvwDWIk?=
+ =?us-ascii?Q?9o+l6hHPKZkgGIOTLg4BEz9Ez0DgsqdYa+pKz9lkomMEFkIbfc4gyusuIut/?=
+ =?us-ascii?Q?dq/4bNT64MKi4k5rKryqKvqwnYrzT2CoIxFFd2XY9HIDAyhR0fcHMO4d1wLb?=
+ =?us-ascii?Q?kEDTjlr71Dkgvqe9H2rMNrviReHrlU+tqBY4oHJaFGZhlt7NooIyBN9/Man7?=
+ =?us-ascii?Q?gczxmiLMbMMvit5uTn9ujqrzw8m0m5WqJ4FKVqx/k+9OJ0COm742maLu/NNS?=
+ =?us-ascii?Q?F6PkfyLTnTa0E6PTBk8Ze7LrWYJIX0h56W2FL1fwdQtdHlQ8othl4hW2huFx?=
+ =?us-ascii?Q?T7y0QWvOLpwbOPEXBO903WVQ1RpdAL6eBv90hpGQGgUp/TfiLqadkobiSRUh?=
+ =?us-ascii?Q?CWlvUxJqFk09nVfiLfWX5ogtPi1KM3viCTA0Ja5tSZu+7NI6CXIoG+BvW5YZ?=
+ =?us-ascii?Q?0Q68dEzVGnUHZ31Hq00TEJS3gBCNm1XPyGs5hKLtBeaPKys2Eglkd9i4kbwL?=
+ =?us-ascii?Q?6pL8d+QSuYooap2HMBJgiClupgg0DxvnupMLyPSmhGdAtZ0DeeTSltnE4o2p?=
+ =?us-ascii?Q?5FIplmt3T5TRDS33v3qilucJXIccBJ2yDs8DNIpV34ePp97WBi2RQzHWA7dq?=
+ =?us-ascii?Q?GVdxdk54CjziZAWvq4lU1KmDqUnHTpb8DElPhscyhTUfzpP9sjOSZlbTbKkq?=
+ =?us-ascii?Q?+9OCo5MwnYR+HQMiB3TiwnK63oy46pMETHrsy6ewmRcG2cEED++5cBtcF+S2?=
+ =?us-ascii?Q?bX//aJSuhbPhmmgz/MFzcNwknbeQbMSWckVA2vAUhQGhMTF546C2r7xTGffL?=
+ =?us-ascii?Q?UcpyEFjitw3UmhMQLpg3+tZDUeO2aDG/SYHb9gwXKHLtjxkpSpOI6ZUgTv5a?=
+ =?us-ascii?Q?vGvISw5i+beD1CtPlTGOaslKpIYqRRU=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9d8cf8e9-680f-4b84-5f60-08df3a8a3d77
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2703772c-5451-4609-a035-08df3a8a38d4
 X-MS-Exchange-CrossTenant-AuthSource: TYZPR02MB7121.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 15:42:32.2445 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2026 15:42:24.4948 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YCVPqBYqIT9kerJMYHzf8eyTJ8dZXHPeN2zL+YmdlC1oPSTKOMtm2nPIeq9uNOvq28rzhBBu0046sMaHNOhNbQxaDBzlxFa2663V55j6vBE=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1BE0gU7ceSD/BJaY1fjQ0NSq4OgWkWD8f6oRGxaO53S1tZENsVuDsLpI7uHJX2mJpR3nYplAWu7BcFOpejwJGWKeL+6JqP3LXd/mHCVW9r0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR02MB9159
 Received-SPF: pass client-ip=2a01:111:f403:c405::5;
  envelope-from=bin.meng@processmission.com;
@@ -139,32 +150,87 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-FU540 and PolarFire use the same SiFive L2 configuration and way-control
-interface. Implement Config, monotonic WayEnable, and indexed WayMask
-registers with a configurable master count for the 21-master FU540 and
-15-master PolarFire integrations.
+The microchip-icicle-kit machine was originally validated with an older
+Hart Software Services (HSS) firmware stack. HSS v2026.04.1 cannot boot
+through U-Boot to Linux because several firmware-visible parts of the
+PolarFire SoC are missing or incomplete.
 
-Own the fixed 2 MiB SRAM backing inside the controller and expose the
-remaining LIM ways through a resizable alias. Also expose a separately
-sized L2 Zero window backed by RAM to approximate scratchpad accesses.
-The Zero aperture is independent of the cache/LIM way partition; cache
-allocation, replacement, coherence, and ECC remain unimplemented.
+The first failure occurs before the UART is initialized because the L2
+zero window is not mapped. HSS then needs additional L2 cache controller
+and DDR training behavior. Later boot stages exercise system services,
+the RTC, SDHC version 4 DMA, and high-capacity SD card block sizing,
+along with the complete DDR aliases. The existing models ither reject
+these accesses or expose behavior that does not match the hardware
+specifications.
 
-Export register, LIM, and Zero windows for the SoC to map.
+This series restores the complete firmware boot flow. With these
+changes, QEMU boots the HSS v2026.04.1 eNVM image, loads its U-Boot
+payload from an SD card, and reaches the Buildroot 2026.05 Linux
+login prompt.
 
-Signed-off-by: Bin Meng <bin.meng@processmission.com>
-Tested-by: Conor Dooley <conor.dooley@microchip.com>
+The changes are organized around the firmware boot sequence:
 
----
+* Correct the L2-LIM size, map the L2 zero window, and provide the DMC
+  status transitions required by HSS DDR initialization.
+* Model the documented L2CC Config, WayEnable, and WayMask registers,
+  and resize L2-LIM as cache ways are enabled.
+* Complete SDHCI version 4 support used by the Cadence controller,
+  including Host Control 2, SDMA system addressing, 64-bit ADMA2
+  descriptors, and SDMA boundary continuation.
+* Run ADMA from a bounded timer-driven engine instead of performing work
+  from command or unrelated MMIO accesses.  This keeps DMA progress
+  independent of guest register traffic and avoids consuming a polling
+  deadline inside the command write.
+* Advertise the Cadence controller's 64-bit system bus support.
+* Add the PolarFire SoC serial-number system service and RTC, and honor
+  the system-service notification control bit.
+* Correct the DDR aliases and fix the board topology at its physical
+  configuration of 2 GiB of RAM and five harts.
+* Document direct and HSS boot, add focused qtests and a full firmware
+  functional test, and restore the machine's Supported maintainer
+  status.
+
+Testing performed:
+
+* Built qemu-system-riscv64 and the documentation.
+* Passed various newly added qtests.
+* Booted HSS v2026.04.1, U-Boot, and Buildroot 2026.05 Linux to
+  the login prompt using the functional-test image.
+
+The functional test uses the processmission/qemu-machine-images release
+v1.1.1 tarball:
+
+https://github.com/processmission/qemu-machine-images/releases/download/
+v1.1.1/riscv64-microchip-icicle-kit-v1.1.1.tar.zst
+
+When restoring the HSS boot support, 3 potential bugs were identified in
+the upstream HSS source codes that either blocks the DDR training from
+succeed or traps in a multi-core race at the very beginning or after
+a succesfully DDR training but stuck at OpenSBI/U-Boot hand-off. There
+are already bug reports filed aginst various upstream projects.
 
 Changes in v5:
 - Select REGISTER to fix riscv32-softmmu link failures
+- Rebase onto origin/master
+- Drop the high-capacity SD block-size fix already merged upstream
+
+Changes in v4:
+- Drop the unused ADMA callback forward declaration
+- Move helper definitions before the data-transfer declaration
+- Merge the ADMA timer callback and batch routine
+- Use HSS v2026.04.1 and the v1.1.1 test-image recipe
+- Select the SoftConsole toolchain explicitly
+- Use the generated complete boot-mode-1 eNVM binary
+- Use the v1.1.1 test images with HSS v2026.04.1
+- Add the execution bit to the python script
+- Collect Conor Dooley's Tested-by for the complete series
+- Collect Bernhard Beschow's Tested-by for the ADMA patch
 
 Changes in v3:
 - Name the QOM parent field parent_obj
@@ -172,381 +238,119 @@ Changes in v3:
 - Use the shared SiFive name and indexed WayMask registers
 - Parameterize master count and the RAM-backed Zero aperture
 - Resize a LIM alias while keeping its SRAM backing fixed
+- Configure and instantiate the shared SiFive L2CC
+- Map the register, LIM, and Zero windows exposed by the controller
+- Remove the external RAM allocations and l2-lim link
+- Keep the PolarFire master count and modeled Zero aperture unchanged
+- hw/riscv: sifive_u: Correct the L2LIM maximum mapped size
+- hw/riscv: sifive_u: Use the shared SiFive L2 cache controller
+- Rename the test for the shared SiFive L2CC model
+- Exercise 15 masters on PolarFire and 21 masters on FU540
+- Decode the seven-bit opcode and nine-bit mailbox word offset
+- Bound serial-number responses to the documented 2 KiB mailbox
+- Mirror the current control flags in the status register
+- Use default access sizing for the control and mailbox windows
+- Split the NOTIFY fix from interrupt acknowledgement wiring
+- Separate interrupt state ownership from the NOTIFY fix
+- Link SYSREG to IOSCB for MESSAGE_INT reads and writes
+- Support both clearing and setting the MESSAGE_INT pending bit
+- Update commit message to mention the DDR aliases is modeled following
+  the Icicle Kit reference design
+- Change only the default hart count and retain the minimum of two
+- Document reduced topologies and matching firmware requirements
+- Include the DDR pattern-test patch used by the functional-test image
+- Document the image-only FPGA programming tool check
+- Describe startup-race symptoms and link the firmware investigations
+- Explain how reduced hart topologies change the CLINT DTB tuples
 
 Changes in v2:
 - Use the Resettable API instead of a legacy reset handler
+- tests/qtest: add Cadence SDHCI ADMA pacing/MMIO reproducer
+- Assert bounded ADMA pacing and MMIO-independent progress
+- Reuse existing SDHCI definitions and command helpers
+- Verify transferred data against a known image pattern
+- Make 64-bit system bus support a device property
+- hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+- Reset the RTC to the documented hardware values
+- Expect the documented hardware state after RTC reset
+- MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
 
- include/hw/misc/sifive_l2cc.h |  42 +++++
- hw/misc/sifive_l2cc.c         | 282 ++++++++++++++++++++++++++++++++++
- hw/misc/Kconfig               |   4 +
- hw/misc/meson.build           |   1 +
- 4 files changed, 329 insertions(+)
+Bin Meng (25):
+  hw/riscv: pfsoc: Correct the L2LIM maximum mapped size
+  hw/riscv: pfsoc: Map the L2 zero device window
+  hw/misc: pfsoc: Support DDR training with newer HSS
+  hw/misc: Add SiFive L2 cache controller model
+  hw/riscv: pfsoc: Map the SiFive L2CC memory windows
+  hw/riscv: sifive_u: Correct the L2LIM maximum mapped size
+  hw/riscv: sifive_u: Use the shared SiFive L2 cache controller
+  tests/qtest: Add SiFive L2 cache controller coverage
+  hw/sd: sdhci: Run ADMA independently of MMIO
+  hw/sd: cadence: Add 64-bit system bus property
+  hw/riscv: pfsoc: Enable 64-bit SDHCI system bus support
+  hw/rtc: Add PolarFire SoC RTC model
+  hw/riscv: pfsoc: Add PolarFire SoC RTC to Icicle Kit
+  tests/qtest: Add PolarFire SoC RTC coverage
+  hw/misc: pfsoc: Model PolarFire SoC serial number service
+  hw/misc: pfsoc: Honor service notification requests
+  hw/misc: pfsoc: Let IOSCB own service interrupt state
+  hw/riscv: pfsoc: Correct PolarFire SoC DDR aliases
+  hw/riscv: pfsoc: Fix Icicle Kit RAM size at 2 GiB
+  hw/riscv: pfsoc: Default Icicle Kit to five harts
+  docs/system/riscv: Document Icicle Kit HSS boot
+  docs/system/riscv: pfsoc: Document CLINT topology for direct Linux
+    boot
+  tests/functional/riscv64: Add Icicle Kit firmware boot test
+  MAINTAINERS: Add PolarFire SoC Icicle Kit maintainer
+  MAINTAINERS: Move Conor Dooley to PolarFire SoC reviewer
+
+Wadim Mueller (1):
+  tests/qtest: add Cadence SDHCI ADMA pacing/MMIO reproducer
+
+ MAINTAINERS                                   |  11 +-
+ docs/system/riscv/microchip-icicle-kit.rst    | 162 +++++-
+ docs/system/riscv/sifive_u.rst                |   2 +-
+ include/hw/misc/mchp_pfsoc_dmc.h              |   6 +
+ include/hw/misc/mchp_pfsoc_ioscb.h            |  10 +
+ include/hw/misc/mchp_pfsoc_sysreg.h           |   3 +-
+ include/hw/misc/sifive_l2cc.h                 |  42 ++
+ include/hw/riscv/microchip_pfsoc.h            |   7 +
+ include/hw/riscv/sifive_u.h                   |   3 +
+ include/hw/rtc/mchp_pfsoc_rtc.h               |  46 ++
+ include/hw/sd/cadence_sdhci.h                 |   1 +
+ hw/misc/mchp_pfsoc_dmc.c                      | 273 +++++++++-
+ hw/misc/mchp_pfsoc_ioscb.c                    | 174 ++++++-
+ hw/misc/mchp_pfsoc_sysreg.c                   |  37 +-
+ hw/misc/sifive_l2cc.c                         | 282 +++++++++++
+ hw/riscv/microchip_pfsoc.c                    |  91 ++--
+ hw/riscv/sifive_u.c                           |  32 +-
+ hw/rtc/mchp_pfsoc_rtc.c                       | 477 ++++++++++++++++++
+ hw/sd/cadence_sdhci.c                         |  11 +
+ hw/sd/sdhci.c                                 | 146 +++---
+ tests/qtest/cadence-sdhci-test.c              | 282 +++++++++++
+ tests/qtest/mchp_pfsoc_rtc_test.c             | 315 ++++++++++++
+ tests/qtest/sifive_l2cc_test.c                | 306 +++++++++++
+ hw/misc/Kconfig                               |   4 +
+ hw/misc/meson.build                           |   1 +
+ hw/riscv/Kconfig                              |   3 +
+ hw/rtc/Kconfig                                |   3 +
+ hw/rtc/meson.build                            |   1 +
+ tests/functional/riscv64/meson.build          |   2 +
+ .../riscv64/test_microchip_icicle_kit.py      |  56 ++
+ tests/qtest/meson.build                       |   8 +
+ 31 files changed, 2615 insertions(+), 182 deletions(-)
  create mode 100644 include/hw/misc/sifive_l2cc.h
+ create mode 100644 include/hw/rtc/mchp_pfsoc_rtc.h
  create mode 100644 hw/misc/sifive_l2cc.c
+ create mode 100644 hw/rtc/mchp_pfsoc_rtc.c
+ create mode 100644 tests/qtest/cadence-sdhci-test.c
+ create mode 100644 tests/qtest/mchp_pfsoc_rtc_test.c
+ create mode 100644 tests/qtest/sifive_l2cc_test.c
+ create mode 100755 tests/functional/riscv64/test_microchip_icicle_kit.py
 
-diff --git a/include/hw/misc/sifive_l2cc.h b/include/hw/misc/sifive_l2cc.h
-new file mode 100644
-index 0000000000..b1cd9c4054
---- /dev/null
-+++ b/include/hw/misc/sifive_l2cc.h
-@@ -0,0 +1,42 @@
-+/*
-+ * SiFive L2 cache controller
-+ *
-+ * Copyright (c) 2026 Process Mission
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@processmission.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef SIFIVE_L2CC_H
-+#define SIFIVE_L2CC_H
-+
-+#include "hw/core/register.h"
-+#include "hw/core/sysbus.h"
-+
-+#define SIFIVE_L2CC_REG_SIZE    0x1000
-+#define SIFIVE_L2CC_REG_NUM     (SIFIVE_L2CC_REG_SIZE / 8)
-+#define SIFIVE_L2CC_MAX_MASTERS 21
-+
-+enum {
-+    SIFIVE_L2CC_MMIO_REGS,
-+    SIFIVE_L2CC_MMIO_LIM,
-+    SIFIVE_L2CC_MMIO_ZERO,
-+};
-+
-+typedef struct SiFiveL2CCState {
-+    SysBusDevice parent_obj;
-+    uint64_t regs[SIFIVE_L2CC_REG_NUM];
-+    RegisterInfo regs_info[SIFIVE_L2CC_REG_NUM];
-+    MemoryRegion lim_ram;
-+    MemoryRegion lim;
-+    MemoryRegion zero;
-+    uint32_t num_masters;
-+    uint64_t zero_size;
-+} SiFiveL2CCState;
-+
-+#define TYPE_SIFIVE_L2CC "sifive.l2cc"
-+OBJECT_DECLARE_SIMPLE_TYPE(SiFiveL2CCState, SIFIVE_L2CC)
-+
-+#endif
-diff --git a/hw/misc/sifive_l2cc.c b/hw/misc/sifive_l2cc.c
-new file mode 100644
-index 0000000000..f99c44b301
---- /dev/null
-+++ b/hw/misc/sifive_l2cc.c
-@@ -0,0 +1,282 @@
-+/*
-+ * SiFive L2 cache controller
-+ *
-+ * Copyright (c) 2026 Process Mission
-+ *
-+ * Author:
-+ *   Bin Meng <bin.meng@processmission.com>
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/log.h"
-+#include "qemu/units.h"
-+#include "qapi/error.h"
-+#include "hw/core/qdev-properties.h"
-+#include "hw/core/register.h"
-+#include "hw/core/registerfields.h"
-+#include "hw/misc/sifive_l2cc.h"
-+#include "migration/vmstate.h"
-+
-+REG64(L2_CONFIG, 0x000)
-+    FIELD(L2_CONFIG, BANKS, 0, 8)
-+    FIELD(L2_CONFIG, WAYS, 8, 8)
-+    FIELD(L2_CONFIG, LG_SETS, 16, 8)
-+    FIELD(L2_CONFIG, LG_BLOCK_BYTES, 24, 8)
-+REG64(L2_WAY_ENABLE, 0x008)
-+    FIELD(L2_WAY_ENABLE, VALUE, 0, 8)
-+REG64(L2_WAY_MASK, 0x800)
-+
-+#define L2_CONFIG_RESET         0x06091004
-+#define L2_LIM_WAY_COUNT        15
-+#define L2_WAY_SIZE             (128 * KiB)
-+#define L2_CACHE_SIZE           (2 * MiB)
-+#define L2_ZERO_MAX_SIZE        (32 * MiB)
-+
-+static void sifive_l2cc_update_l2lim(SiFiveL2CCState *s, uint64_t way_enable)
-+{
-+    uint64_t l2lim_size;
-+
-+    if (way_enable >= L2_LIM_WAY_COUNT) {
-+        l2lim_size = 0;
-+    } else {
-+        l2lim_size = (L2_LIM_WAY_COUNT - way_enable) * L2_WAY_SIZE;
-+    }
-+
-+    memory_region_transaction_begin();
-+    memory_region_set_size(&s->lim, l2lim_size);
-+    memory_region_set_enabled(&s->lim, l2lim_size != 0);
-+    memory_region_transaction_commit();
-+}
-+
-+static uint64_t sifive_l2cc_way_enable_pre_write(RegisterInfo *reg,
-+                                                 uint64_t value)
-+{
-+    uint64_t current = *(uint64_t *)reg->data;
-+
-+    return MAX(current, value);
-+}
-+
-+static void sifive_l2cc_way_enable_post_write(RegisterInfo *reg,
-+                                              uint64_t value)
-+{
-+    SiFiveL2CCState *s = SIFIVE_L2CC(reg->opaque);
-+
-+    sifive_l2cc_update_l2lim(s, value);
-+}
-+
-+#define WAY_MASK_REGISTER(_id)                  \
-+    {                                           \
-+        .name = "WAY_MASK_" #_id,               \
-+        .addr = A_L2_WAY_MASK + 8 * (_id),       \
-+        .reset = UINT64_MAX,                    \
-+    }
-+
-+static const RegisterAccessInfo sifive_l2cc_regs_info[] = {
-+    {
-+        .name = "CONFIG",
-+        .addr = A_L2_CONFIG,
-+        .reset = L2_CONFIG_RESET,
-+        .ro = UINT64_MAX,
-+    }, {
-+        .name = "WAY_ENABLE",
-+        .addr = A_L2_WAY_ENABLE,
-+        .rsvd = ~R_L2_WAY_ENABLE_VALUE_MASK,
-+        .pre_write = sifive_l2cc_way_enable_pre_write,
-+        .post_write = sifive_l2cc_way_enable_post_write,
-+    },
-+    WAY_MASK_REGISTER(0),
-+    WAY_MASK_REGISTER(1),
-+    WAY_MASK_REGISTER(2),
-+    WAY_MASK_REGISTER(3),
-+    WAY_MASK_REGISTER(4),
-+    WAY_MASK_REGISTER(5),
-+    WAY_MASK_REGISTER(6),
-+    WAY_MASK_REGISTER(7),
-+    WAY_MASK_REGISTER(8),
-+    WAY_MASK_REGISTER(9),
-+    WAY_MASK_REGISTER(10),
-+    WAY_MASK_REGISTER(11),
-+    WAY_MASK_REGISTER(12),
-+    WAY_MASK_REGISTER(13),
-+    WAY_MASK_REGISTER(14),
-+    WAY_MASK_REGISTER(15),
-+    WAY_MASK_REGISTER(16),
-+    WAY_MASK_REGISTER(17),
-+    WAY_MASK_REGISTER(18),
-+    WAY_MASK_REGISTER(19),
-+    WAY_MASK_REGISTER(20),
-+};
-+
-+static bool sifive_l2cc_register_implemented(SiFiveL2CCState *s,
-+                                             hwaddr offset)
-+{
-+    if (offset == A_L2_CONFIG || offset == A_L2_WAY_ENABLE) {
-+        return true;
-+    }
-+
-+    return offset >= A_L2_WAY_MASK &&
-+           offset < A_L2_WAY_MASK + 8 * s->num_masters && !(offset & 7);
-+}
-+
-+static uint64_t sifive_l2cc_read(void *opaque, hwaddr offset,
-+                                 unsigned size)
-+{
-+    RegisterInfoArray *reg_array = opaque;
-+    SiFiveL2CCState *s = SIFIVE_L2CC(reg_array->r[0]->opaque);
-+
-+    if (sifive_l2cc_register_implemented(s, offset)) {
-+        return register_read_memory(opaque, offset, size);
-+    }
-+
-+    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device read "
-+                  "(size %u, offset 0x%" HWADDR_PRIx ")\n",
-+                  __func__, size, offset);
-+    return 0;
-+}
-+
-+static void sifive_l2cc_write(void *opaque, hwaddr offset,
-+                              uint64_t value, unsigned size)
-+{
-+    RegisterInfoArray *reg_array = opaque;
-+    SiFiveL2CCState *s = SIFIVE_L2CC(reg_array->r[0]->opaque);
-+
-+    if (sifive_l2cc_register_implemented(s, offset)) {
-+        register_write_memory(opaque, offset, value, size);
-+        return;
-+    }
-+
-+    qemu_log_mask(LOG_UNIMP, "%s: unimplemented device write "
-+                  "(size %u, value 0x%" PRIx64
-+                  ", offset 0x%" HWADDR_PRIx ")\n",
-+                  __func__, size, value, offset);
-+}
-+
-+static const MemoryRegionOps sifive_l2cc_ops = {
-+    .read = sifive_l2cc_read,
-+    .write = sifive_l2cc_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = { .min_access_size = 1, .max_access_size = 8 },
-+    .impl = { .min_access_size = 1, .max_access_size = 8 },
-+};
-+
-+static void sifive_l2cc_reset_hold(Object *obj, ResetType type)
-+{
-+    SiFiveL2CCState *s = SIFIVE_L2CC(obj);
-+    size_t i;
-+
-+    memset(s->regs, 0, sizeof(s->regs));
-+    for (i = 0; i < 2 + s->num_masters; i++) {
-+        hwaddr addr = sifive_l2cc_regs_info[i].addr;
-+
-+        register_reset(&s->regs_info[addr / sizeof(uint64_t)]);
-+    }
-+}
-+
-+static void sifive_l2cc_init(Object *obj)
-+{
-+    SiFiveL2CCState *s = SIFIVE_L2CC(obj);
-+    RegisterInfoArray *reg_array;
-+
-+    reg_array = register_init_block64(
-+        DEVICE(obj), sifive_l2cc_regs_info,
-+        ARRAY_SIZE(sifive_l2cc_regs_info), s->regs_info, s->regs,
-+        &sifive_l2cc_ops, false, SIFIVE_L2CC_REG_SIZE);
-+    sysbus_init_mmio(SYS_BUS_DEVICE(obj), &reg_array->mem);
-+}
-+
-+static void sifive_l2cc_realize(DeviceState *dev, Error **errp)
-+{
-+    SiFiveL2CCState *s = SIFIVE_L2CC(dev);
-+    SysBusDevice *sbd = SYS_BUS_DEVICE(dev);
-+
-+    if (!s->num_masters || s->num_masters > SIFIVE_L2CC_MAX_MASTERS) {
-+        error_setg(errp, "num-masters must be between 1 and %u",
-+                   SIFIVE_L2CC_MAX_MASTERS);
-+        return;
-+    }
-+    if (!s->zero_size || s->zero_size > L2_ZERO_MAX_SIZE) {
-+        error_setg(errp, "zero-size must be between 1 byte and 32 MiB");
-+        return;
-+    }
-+
-+    /* Keep the SRAM backing fixed while WayEnable changes the LIM alias */
-+    if (!memory_region_init_ram(&s->lim_ram, OBJECT(dev),
-+                                TYPE_SIFIVE_L2CC ".lim-ram",
-+                                L2_CACHE_SIZE, errp)) {
-+        return;
-+    }
-+    memory_region_init_alias(&s->lim, OBJECT(dev), TYPE_SIFIVE_L2CC ".lim",
-+                             &s->lim_ram, 0, L2_LIM_WAY_COUNT * L2_WAY_SIZE);
-+    sysbus_init_mmio(sbd, &s->lim);
-+
-+    /*
-+     * L2 Zero allocates into enabled cache ways without external memory
-+     * backing. Use a separate RAM stand-in because QEMU does not model
-+     * cache allocation, replacement, or coherence. Its aperture size is
-+     * independent of the cache/LIM way partition.
-+     */
-+    if (!memory_region_init_ram(&s->zero, OBJECT(dev),
-+                                TYPE_SIFIVE_L2CC ".zero",
-+                                s->zero_size, errp)) {
-+        return;
-+    }
-+    sysbus_init_mmio(sbd, &s->zero);
-+
-+    sifive_l2cc_update_l2lim(s, s->regs[R_L2_WAY_ENABLE]);
-+}
-+
-+static const Property sifive_l2cc_properties[] = {
-+    DEFINE_PROP_UINT32("num-masters", SiFiveL2CCState, num_masters,
-+                       SIFIVE_L2CC_MAX_MASTERS),
-+    DEFINE_PROP_SIZE("zero-size", SiFiveL2CCState, zero_size,
-+                     L2_ZERO_MAX_SIZE),
-+};
-+
-+static int sifive_l2cc_post_load(void *opaque, int version_id)
-+{
-+    SiFiveL2CCState *s = opaque;
-+
-+    sifive_l2cc_update_l2lim(s, s->regs[R_L2_WAY_ENABLE]);
-+    return 0;
-+}
-+
-+static const VMStateDescription vmstate_sifive_l2cc = {
-+    .name = TYPE_SIFIVE_L2CC,
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .post_load = sifive_l2cc_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT32_EQUAL(num_masters, SiFiveL2CCState),
-+        VMSTATE_UINT64_EQUAL(zero_size, SiFiveL2CCState),
-+        VMSTATE_UINT64_ARRAY(regs, SiFiveL2CCState, SIFIVE_L2CC_REG_NUM),
-+        VMSTATE_END_OF_LIST()
-+    },
-+};
-+
-+static void sifive_l2cc_class_init(ObjectClass *klass, const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+
-+    rc->phases.hold = sifive_l2cc_reset_hold;
-+    device_class_set_props(dc, sifive_l2cc_properties);
-+    dc->realize = sifive_l2cc_realize;
-+    dc->vmsd = &vmstate_sifive_l2cc;
-+}
-+
-+static const TypeInfo sifive_l2cc_info = {
-+    .name = TYPE_SIFIVE_L2CC,
-+    .parent = TYPE_SYS_BUS_DEVICE,
-+    .instance_size = sizeof(SiFiveL2CCState),
-+    .instance_init = sifive_l2cc_init,
-+    .class_init = sifive_l2cc_class_init,
-+};
-+
-+static void sifive_l2cc_register_types(void)
-+{
-+    type_register_static(&sifive_l2cc_info);
-+}
-+
-+type_init(sifive_l2cc_register_types)
-diff --git a/hw/misc/Kconfig b/hw/misc/Kconfig
-index 685b7ff1e7..9bd417af82 100644
---- a/hw/misc/Kconfig
-+++ b/hw/misc/Kconfig
-@@ -239,6 +239,10 @@ config MCHP_PFSOC_IOSCB
- config MCHP_PFSOC_SYSREG
-     bool
- 
-+config SIFIVE_L2CC
-+    bool
-+    select REGISTER
-+
- config SIFIVE_TEST
-     bool
- 
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index fc3800baec..a1118e583f 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -33,6 +33,7 @@ system_ss.add(when: 'CONFIG_K230', if_true: files('k230_ddr.c'))
- system_ss.add(when: 'CONFIG_MCHP_PFSOC_DMC', if_true: files('mchp_pfsoc_dmc.c'))
- system_ss.add(when: 'CONFIG_MCHP_PFSOC_IOSCB', if_true: files('mchp_pfsoc_ioscb.c'))
- system_ss.add(when: 'CONFIG_MCHP_PFSOC_SYSREG', if_true: files('mchp_pfsoc_sysreg.c'))
-+system_ss.add(when: 'CONFIG_SIFIVE_L2CC', if_true: files('sifive_l2cc.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_TEST', if_true: files('sifive_test.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_PRCI', if_true: files('sifive_e_prci.c'))
- system_ss.add(when: 'CONFIG_SIFIVE_E_AON', if_true: files('sifive_e_aon.c'))
+---
+base-commit: f29ccc287a6cfdd51d3a4fd17fbe9af3310a0ac5
+branch: icicle-kit
+
 -- 
 2.53.0
 
