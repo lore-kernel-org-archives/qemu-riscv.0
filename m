@@ -1,73 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22B8F606A861
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 19:47:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 78B38606A879
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 19:47:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=XqfuX6ur
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=K5ORCwDX
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOgth-0004ER-Cf; Wed, 04 Nov 2026 14:43:49 -0500
+	id 1xOgtI-00034M-U0; Wed, 04 Nov 2026 14:43:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xOgtf-00048t-JC
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:43:47 -0500
-Received: from mail-dy1-x1329.google.com ([2607:f8b0:4864:20::1329])
+ id 1xOgst-0002V4-1K
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:42:59 -0500
+Received: from mail-dl1-x122b.google.com ([2607:f8b0:4864:20::122b])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
- id 1xOgtd-0002cI-JF
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:43:47 -0500
-Received: by mail-dy1-x1329.google.com with SMTP id
- 5a478bee46e88-3550c917fd3so1610188eec.0
- for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 11:43:45 -0800 (PST)
+ id 1xOgsr-0002S3-5F
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 14:42:58 -0500
+Received: by mail-dl1-x122b.google.com with SMTP id
+ a92af1059eb24-1aefd1bf74aso978704c88.1
+ for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 11:42:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1793821424; x=1794426224; darn=nongnu.org;
+ d=sifive.com; s=google; t=1793821376; x=1794426176; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wbh56d/pOn2MjN0iy7iGhATtIRZG9ILXVONxj3+pGlM=;
- b=XqfuX6urDuOVmwBHKTIvp8QYsO6yZxvPYV9zJ4xV7W9KUlrUomvPx2sO/ya7Qqho9c
- U6xTnVx/U8tTj0kgG3H8HP2YWC0exqfWD2xdwDJ3qHjdOydZrf/Th511cjqr+38YCQFm
- xABOHZ4UmLsQ3xZosMFS8Nl6QN46dohKSx66azi2YkCVDxrzIQfnoDtRV3aHdOl/z4oo
- ehsuCI73vGVvrKdvzNyNVrJQpL2Q89/hNvhM8+FEj39u4EV0212UG5rXefYZNcSOFYhy
- rEjPAAj5OjD5P54VymWnF9ybavHdobHF/vlR+pvqbputbavDmgI3CpznudiH575143Qu
- +dFg==
+ bh=ddXskcSP4FOaR2ojnycYDtZw7pbeJlnYbPdLt5Tk3oM=;
+ b=K5ORCwDXGydQpEiHPTY9rmnJP47Pwn3pJ05EZHrZzY6TO1jtCZ8pODNow8DlIh9cIH
+ K095iKvR9wB9VD75OWIujvJdgr/RZokna42ZiDRrAJAKW/PlQxsoRXB0xqkEZzl5RAy/
+ uKoK1b+5eyYpnrejkHweYO+RVG49Ttzw2Q2vkz1MzInz0VMTYvWjAI+Lr2C4IZ0LprDr
+ HUH6QevSoOrD+C68by5h9lpRtN9YjapeDyJQaaodA21CGkMzVuJtT/o/hycuSbIGmqMW
+ zeoKV8EWaSowRP3pLAoKc55R6bGYLedxAAluiCff0VF1oA/WyVgjAyUB6KlKR7nyvdE/
+ 1j8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793821424; x=1794426224;
+ d=1e100.net; s=20260707; t=1793821376; x=1794426176;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=wbh56d/pOn2MjN0iy7iGhATtIRZG9ILXVONxj3+pGlM=;
- b=nS/4MSxyUeaOmH3CjLHtdl1POEcWkNooFuqDCwbdl9S0vl4bRyQbDBBo3IczDsGxfI
- ZsJbrjb3uatYFXoKRjuJl1te3saN4eqJyNHTizljcwOLc2vqmxwYzbyOYMAqsZQB1dps
- ZRhsZfKTl8DnD0iziAx7whCBiTEFeXjeZgWTb5owdrvqUMlrUvJbkp0hk6S9QeZz+T/E
- aVq+OVO6ZaKbMk6xXipFnEeRm6whrNmL6UV3CKIzZ9PzWmabgi9edPlO6rpeXXgOMMxJ
- T6v118yWzUNMFenOmaLweRZ/tIpD2jTm5PUErHBT1u6/sHAklmRiXnZCKyh2GFWwVs5I
- K+Fw==
+ bh=ddXskcSP4FOaR2ojnycYDtZw7pbeJlnYbPdLt5Tk3oM=;
+ b=K9yd/avxn8mGo6kbHf5pSs/yCO7S8+W/wbNuVwdUNTz2h23PrehRbq06YKI15Irm9A
+ Bb8FFVXOl9UCudl+fumqgDauUfYBssjtgK4f5+3LdJup98GAep0MMASNMltPxjGskugE
+ q6lhVcEQG8FNGBcC6HAxuFL52+nGh9iDy/nd8BUxIeZC+0Mmp7+0hHdhSo2dpaQJLk8a
+ B1/uPJ1Ea5jP+E4GGI7J9k/uaT1E4GwylQr3rlKuGoWwAoHM7GVXLwcoZCc+CKb0gNwa
+ uLdIGVWmweXw7cUB23XsxqQvw5SAD6MvF2p1ydx0JVwvO9n69W+3+2iEpbNyal2IUjM3
+ LBCA==
 X-Forwarded-Encrypted: i=1;
- AKwUvBySlZGMOYJ2yESp7+RsPXSdtIyaWFiRYFhw9vrZF4rFrcSpyzH4tJcw/7eZ14zB3SZKfkPVf20Kly0m@nongnu.org
-X-Gm-Message-State: APuU4Z9HkTtDfl5upuAlqCzKgmzpCwnfNP9rFKEFmBKpX6S3bB/So5GW
- QizvHZDD0sIb1KRG/ptaIXkR6TtaKgIqcJPm+SPk5JPnyWgHAIou4IR5k0mXTEycDPw=
-X-Gm-Gg: AYBFou3TnXHJK1kuClaHxqirMQn5HtWK2gc9tPQdpMsgrQj02aGyiRySpUSB1FYRkrh
- yAxRdsxhZJEM7/QBYDnd9tHjx4bVY+QdXVFcpmkRqmkELOEtZlBfs8/nSt2W42rRiNX1BfuAaI+
- dsF/RL25S1HfzeHpMNU5JR277snIhDQd+2YuYrHqOlm3fnpy/wVbSYb/MaJL0fFEaHYBNXRiDCM
- cmHpaVVLavLAwxKwzppAYuygXvxQAw98Uu2C+5JtIGe/ZOvpN9HDVE9WWQtmyeZSEElGxp0wsbi
- M144ljL9XxWgBgKeGHZo1/uy4F5fs01dEofn9IzcBN3VsAjMM6VQuVBAnOrJtzO5L45aqKGUduC
- HL/4K4hN/a7GCGe66JaOfnoctIDsDAub7nBdc2Og/Epqmj5xPnH1QMnjLfLNxPvm/JM0z16/6Cd
- oM24HkPytGVZWwcDKJbLMFLeGOXtAsBS0w7QSyUyU0vz1SiXMuxaSaP+L0SAn1cqkh7OKMgDmqt
- Zt1Nt4hVT/Ntc3VSsAwF9f63x3DH0CvLLaPwGBMEW4gLWYobzK2NQAXZmRmAtso80+3eK2Uxr2Q
- o2dz0ThNkak+I7E+Ovn1LgG+GR/OcpCv7QZ+u/QO7nuuFMzXU3AYZhFan5TvgUkia1IHicktr4K
- 7As6hNHHttKuGclHU4ACiAkwZievJcg==
-X-Received: by 2002:a05:693c:60c9:b0:36c:a390:8907 with SMTP id
- 5a478bee46e88-36ca3908cb8mr5450772eec.21.1793821424089; 
- Wed, 04 Nov 2026 11:43:44 -0800 (PST)
+ AKwUvBzqVUMuopN6qx1eHyV7jtehwNux/u8wUxgSW88vK+7SShbZmS4q+OgbYnt3ucOhczvplu0PgY22RCmE@nongnu.org
+X-Gm-Message-State: APuU4Z/ZswW9dmefd1V+KPYzvjz9itFEudRdmOIuLxoQ9Czc80Smdjca
+ 4U5cuGCpijJZ/442E7/Pn/zfHsoCN9vFVvRft5AtDfp7uXxwggIzimbAv1c6GOkZYXA=
+X-Gm-Gg: AYBFou318fVt28bMEJNujiAn5n3wQg5jZcabV3uX7aBkUXU1QKI2Xl9BI09x4QOyyTX
+ OhAWDXQF/+dUQA9pv/Gv5zyg8ok2wJ/iM7oYKcHCyg4xbFF26jBW0jL9AfG7RYVjk2C4tkW1SKT
+ Im1PlBS6ABB+x7ZOPb+RsbIhayHap/jg2uyawyVB0i9KkpJiP9XWB/FsJBA7yKInEchyOJTKLwi
+ CpcKZLnNI5G8gadRWXmQAsRcjSp9DmTSMGzbb1pswy6I/qJwRSU8e6Oi4i/SmsvNMPorxGfrgHd
+ Db9EibsKRkds9E2DDnKzPFIvCT+l7nxZLVz0b5DUqx0LVbUHRcVrHs6EX4J+dIOheeHEGXu5lfD
+ sF80jN+5oTdy3UK6GvdsAaofmjofyJt8CFse58GEpP9fX/fd1PpwfBsGxUJmT7bwLQOJSHKp0N8
+ 3fR5tjcpCUSa+YHvJNVgJ8Rb4zGqsgWDcCXHylIQMovncRN7ZXtJbjYuFQb6aCdqe8u3xC5t5S/
+ 6idSMEOK0ZzgCxGd3cvSSGwwCw2J+y67eiRt0HjXbsyHmRQKBF91J98dqtpR8jiDtqJfPnB44kc
+ SoYrWEhZgk9d41ugAuye7nJnp7jD9HutkGT0vKeTqi80r0ZaWBCNIsI9uzB0vekxMsnDKrlX1mg
+ cafCnIs2vdAKcg+zMmyYm9qnt32PG
+X-Received: by 2002:a05:7022:b881:b0:145:ac96:3917 with SMTP id
+ a92af1059eb24-1b24f4d380fmr554337c88.21.1793821375642; 
+ Wed, 04 Nov 2026 11:42:55 -0800 (PST)
 Received: from duncan.localdomain (114-35-142-126.hinet-ip.hinet.net.
  [114.35.142.126]) by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36ca38d36a1sm11299527eec.12.2026.11.04.11.43.41
+ 5a478bee46e88-36ca38d36a1sm11299527eec.12.2026.11.04.11.42.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Nov 2026 11:43:43 -0800 (PST)
+ Wed, 04 Nov 2026 11:42:55 -0800 (PST)
 From: Max Chou <max.chou@sifive.com>
 To: qemu-devel@nongnu.org,
 	qemu-riscv@nongnu.org
@@ -80,18 +80,18 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, Max Chou <max.chou@sifive.com>,
  Alistair Francis <alistair.francis@wdc.com>
-Subject: [RFC PATCH 28/38] target/riscv: rvv: Implement Zvfwbdota16bf
+Subject: [RFC PATCH 13/38] target/riscv: rvv: Implement Zvfwdota16bf
  instruction
-Date: Thu,  5 Nov 2026 03:41:43 +0800
-Message-ID: <20261104194155.679241-29-max.chou@sifive.com>
+Date: Thu,  5 Nov 2026 03:41:28 +0800
+Message-ID: <20261104194155.679241-14-max.chou@sifive.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261104194155.679241-1-max.chou@sifive.com>
 References: <20261104194155.679241-1-max.chou@sifive.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1329;
- envelope-from=max.chou@sifive.com; helo=mail-dy1-x1329.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::122b;
+ envelope-from=max.chou@sifive.com; helo=mail-dl1-x122b.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -113,161 +113,142 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-14.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=unavailable
+	SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Implement the vfwbdota.vv instruction from the Zvfwbdota16bf
-extension.
-This instruction performs a batched dot-product operation on BF16
-vectors, accumulating into FP32
+Implement the vfwdota.vv instruction from the Zvfwdota16bf extension.
+This instruction computes a dot product between two BF16 vectors,
+accumulating into an FP32 scalar in vd[0].
 
 Signed-off-by: Max Chou <max.chou@sifive.com>
 ---
  target/riscv/helper.h                       |  2 +
  target/riscv/insn32.decode                  |  3 ++
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 52 +++++++++++++++++++
- target/riscv/tcg/vector_helper.c            | 55 +++++++++++++++++++++
- 4 files changed, 112 insertions(+)
+ target/riscv/tcg/insn_trans/trans_rvv.c.inc | 42 ++++++++++++++++++
+ target/riscv/tcg/vector_helper.c            | 48 +++++++++++++++++++++
+ 4 files changed, 95 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 84571a999f4..1f2dfd6d557 100644
+index 23d3e9b3c43..918ff21b3e2 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1395,6 +1395,8 @@ DEF_HELPER_6(vqwdotas_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+@@ -1393,6 +1393,8 @@ DEF_HELPER_6(vqwdotas_vv_b, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vqwdotau_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_6(vqwdotas_vv_h, void, ptr, ptr, ptr, ptr, env, i32)
  
- /* Zvfwdota16bf - BF16 Dot Product */
- DEF_HELPER_6(vfwdota_vv, void, ptr, ptr, ptr, ptr, env, i32)
-+/* Zvfwbdota16bf - BF16 Batched Dot Product */
-+DEF_HELPER_7(vfwbdota_vv, void, ptr, ptr, ptr, ptr, i32, env, i32)
- 
- /* Zvfqwdota8f - OCP FP8 Dot Product */
- DEF_HELPER_6(vfqwdota_vv, void, ptr, ptr, ptr, ptr, env, i32)
++/* Zvfwdota16bf - BF16 Dot Product */
++DEF_HELPER_6(vfwdota_vv, void, ptr, ptr, ptr, ptr, env, i32)
+ /* SiFive Custom int8 Matrix-Multiply */
+ DEF_HELPER_5(sf_vqmaccu_4x8x4, void, ptr, ptr, ptr, env, i32)
+ DEF_HELPER_5(sf_vqmacc_4x8x4, void, ptr, ptr, ptr, env, i32)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 8a06547a570..00ed64b73fd 100644
+index b8a5d0567b1..d800ad99451 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -1105,6 +1105,9 @@ vqwdotas_vv  100111 . ..... ..... 000 ..... 1110111 @r_vm
- # *** Zvfwdota16bf BF16 Dot-Product Extension ***
- vfwdota_vv  100100 . ..... ..... 001 ..... 1110111 @r_vm
- 
-+# *** Zvfwbdota16bf BF16 Batched Dot-Product Extension ***
-+vfwbdota_vv 101100 . ..... ..... 001 ..... 1110111 @r_vm
+@@ -1101,3 +1101,6 @@ vwabdau_vx    111110 . ..... ..... 100 ..... 1010111 @r_vm
+ # *** Zvqwdota8i/Zvqwdota16i Integer Dot-Product Extension ***
+ vqwdotau_vv  100110 . ..... ..... 000 ..... 1110111 @r_vm
+ vqwdotas_vv  100111 . ..... ..... 000 ..... 1110111 @r_vm
 +
- # *** Zvfqwdota8f OCP FP8 Dot-Product Extension ***
- vfqwdota_vv     100110 . ..... ..... 001 ..... 1110111 @r_vm
- vfqwdota_alt_vv 100111 . ..... ..... 001 ..... 1110111 @r_vm
++# *** Zvfwdota16bf BF16 Dot-Product Extension ***
++vfwdota_vv  100100 . ..... ..... 001 ..... 1110111 @r_vm
 diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 650affc045b..d4678171ac5 100644
+index fcff472a2ea..c50f863ea0b 100644
 --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
 +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -4365,3 +4365,55 @@ static bool trans_##NAME(DisasContext *s, arg_rmrr *a)                   \
+@@ -4200,3 +4200,45 @@ GEN_ABD_OPIVX_WIDEN_TRANS(vwabdau_vx, vwabd_vx_check)
  
- GEN_ZVBDOTA_INT_TRANS(vqwbdotau_vv, vext_vqwbdota_check)
- GEN_ZVBDOTA_INT_TRANS(vqwbdotas_vv, vext_vqwbdota_check)
+ GEN_ZVDOTA_INT_TRANS(vqwdotau_vv, vext_vqwdota_check)
+ GEN_ZVDOTA_INT_TRANS(vqwdotas_vv, vext_vqwdota_check)
 +
-+/* Zvfwbdota16bf BF16 Batched Dot-Product Extension */
-+static bool vext_vfwbdota_check(DisasContext *s, arg_rmrr * a)
++static bool vext_vfwdota_check(DisasContext *s, arg_rmrr * a)
 +{
-+    int32_t sew = s->sew;
-+    int32_t vd_eew = sew + 1;
 +    return s->mstatus_fs != EXT_STATUS_DISABLED &&
-+           vext_zvbdota_base_check(s, a, vd_eew) &&
-+           (s->cfg_ptr->ext_zvfwbdota16bf && s->sew == MO_16 && s->altfmt == 1);
++           vext_zvdota_base_check(s, a) &&
++           (s->cfg_ptr->ext_zvfwdota16bf && s->sew == MO_16 && s->altfmt == 1);
 +}
 +
-+#define GEN_ZVBDOTA_FP_TRANS(NAME, CHECK, EEW_VD)                       \
-+static bool trans_##NAME(DisasContext *s, arg_rmrr * a)                 \
-+{                                                                       \
-+    if (CHECK(s, a)) {                                                  \
-+        TCGv_ptr dest, src1, src2, mask;                                \
-+        TCGv_i32 ci, desc;                                              \
-+        uint32_t data = 0;                                              \
-+        uint32_t vlenb = s->cfg_ptr->vlenb;                             \
-+        int32_t vd_emul = MAX(0, EEW_VD + 3 - ctzl(vlenb));             \
-+                                                                        \
-+        gen_set_rm(s, RISCV_FRM_DYN);                                   \
-+                                                                        \
-+        data = FIELD_DP32(data, VDATA, VM, a->vm);                      \
-+        data = FIELD_DP32(data, VDATA, LMUL, vd_emul);                  \
-+        data = FIELD_DP32(data, VDATA, VMA, s->vma);                    \
-+        data = FIELD_DP32(data, VDATA, VTA, s->vta);                    \
-+        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);  \
-+                                                                        \
-+        dest = tcg_temp_new_ptr();                                      \
-+        mask = tcg_temp_new_ptr();                                      \
-+        src1 = tcg_temp_new_ptr();                                      \
-+        src2 = tcg_temp_new_ptr();                                      \
-+        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb,            \
-+                                          s->cfg_ptr->vlenb, data));    \
-+        ci = tcg_constant_i32((a->rs2 & 0x7) << 3);                     \
-+                                                                        \
-+        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));            \
-+        tcg_gen_addi_ptr(src1, tcg_env, vreg_ofs(s, a->rs1));           \
-+        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2 & ~0x7));    \
-+        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));                \
-+                                                                        \
-+        gen_helper_##NAME(dest, mask, src1, src2, ci, tcg_env, desc);   \
-+                                                                        \
-+        finalize_rvv_inst(s);                                           \
-+                                                                        \
-+        return true;                                                    \
-+    }                                                                   \
-+    return false;                                                       \
-+}
++static bool trans_vfwdota_vv(DisasContext *s, arg_rmrr * a)
++{
++    if (vext_vfwdota_check(s, a)) {
++        TCGv_ptr dest, src1, src2, mask;
++        TCGv_i32 desc;
++        uint32_t data = 0;
 +
-+GEN_ZVBDOTA_FP_TRANS(vfwbdota_vv, vext_vfwbdota_check, MO_32)
++        gen_set_rm(s, RISCV_FRM_DYN);
++
++        data = FIELD_DP32(data, VDATA, VM, a->vm);
++        data = FIELD_DP32(data, VDATA, LMUL, s->lmul);
++        data = FIELD_DP32(data, VDATA, VTA, s->vta);
++        data = FIELD_DP32(data, VDATA, VTA_ALL_1S, s->cfg_vta_all_1s);
++
++        dest = tcg_temp_new_ptr();
++        mask = tcg_temp_new_ptr();
++        src1 = tcg_temp_new_ptr();
++        src2 = tcg_temp_new_ptr();
++        desc = tcg_constant_i32(simd_desc(s->cfg_ptr->vlenb, s->cfg_ptr->vlenb,
++                                          data));
++
++        tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, a->rd));
++        tcg_gen_addi_ptr(src1, tcg_env, vreg_ofs(s, a->rs1));
++        tcg_gen_addi_ptr(src2, tcg_env, vreg_ofs(s, a->rs2));
++        tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
++
++        gen_helper_vfwdota_vv(dest, mask, src1, src2, tcg_env, desc);
++
++        finalize_rvv_inst(s);
++
++        return true;
++    }
++    return false;
++}
 diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index 873adf4d7a6..51170625aad 100644
+index 41b526d25ef..5947427b6b4 100644
 --- a/target/riscv/tcg/vector_helper.c
 +++ b/target/riscv/tcg/vector_helper.c
-@@ -6201,3 +6201,58 @@ GEN_VEXT_ZVBDOTA_INT(vqwbdotau_vv_b, 32, 8, uint8_t, H4, H1)
- GEN_VEXT_ZVBDOTA_INT(vqwbdotas_vv_b, 32, 8, int8_t, H4, H1)
- GEN_VEXT_ZVBDOTA_INT(vqwbdotau_vv_h, 64, 16, uint16_t, H8, H2)
- GEN_VEXT_ZVBDOTA_INT(vqwbdotas_vv_h, 64, 16, int16_t, H8, H2)
+@@ -6025,3 +6025,51 @@ GEN_VEXT_ZVDOTA_INT(vqwdotau_vv_b, 32, 8, uint8_t, H4, H1)
+ GEN_VEXT_ZVDOTA_INT(vqwdotas_vv_b, 32, 8, int8_t, H4, H1)
+ GEN_VEXT_ZVDOTA_INT(vqwdotau_vv_h, 64, 16, uint16_t, H8, H2)
+ GEN_VEXT_ZVDOTA_INT(vqwdotas_vv_h, 64, 16, int16_t, H8, H2)
 +
 +/*
-+ * Zvfwbdota16bf: BF16 Batched Dot Product with Accumulation
++ * Zvfwdota16bf: BF16 Dot Product with Accumulation
 + */
-+void HELPER(vfwbdota_vv)(void *vd, void *v0, void *vs1, void *vs2, uint32_t ci,
-+                         CPURISCVState *env, uint32_t desc)
++void HELPER(vfwdota_vv)(void *vd, void *v0, void *vs1, void *vs2,
++                        CPURISCVState *env, uint32_t desc)
 +{
++    uint32_t vlmax = vext_max_elems(desc, 1);
 +    uint32_t vm = vext_vm(desc);
 +    uint32_t vl = env->vl;
 +    uint32_t vta = vext_vta(desc);
 +    uint32_t vta_all_1s = vext_vta_all_1s(desc);
-+    uint32_t vlenb = riscv_cpu_cfg(env)->vlenb;
-+    uint32_t vd_emul = vext_lmul(desc);
-+    uint32_t log_esz = 2;
-+    uint32_t total_elems = (vlenb << vd_emul) >> log_esz;
-+    uint32_t vlmax = vlenb >> MO_16;
-+    uint32_t n, k;
++    uint32_t total_elems = riscv_cpu_cfg(env)->vlenb >> 2;
++    uint32_t i;
 +    bfloat16 *a_vec, *b_vec;
-+    float32 acc, dot_result;
++    uint32_t dot_result, acc;
 +
 +    VSTART_CHECK_EARLY_EXIT(env, vl);
 +
 +    a_vec = g_new0(bfloat16, vlmax);
 +    b_vec = g_new0(bfloat16, vlmax);
 +
-+    FloatExceptionFlags pre_fflag = get_float_exception_flags(&env->fp_status);
-+    for (n = 0; n < 8; n++) {
-+        if (!vm && !vext_elem_mask(v0, ci + n)) {
++    for (i = 0; i < vl; i++) {
++        if (!vm && !vext_elem_mask(v0, i)) {
 +            continue;
 +        }
-+
-+        for (k = 0; k < vl; k++) {
-+            a_vec[k] = *((bfloat16 *)vs2 + n * vlmax + H2(k));
-+            b_vec[k] = *((bfloat16 *)vs1 + H2(k));
-+        }
-+
-+        dot_result = rvbna_dot_bfloat16_bfloat16(a_vec, b_vec, vlmax,
-+                                                 &env->fp_status);
-+        acc = *((float32 *)vd + H4(ci + n));
-+        *((float32 *)vd + H4(ci + n)) = rvbna_final_f32_add(dot_result, acc,
-+                                                            &env->fp_status);
++        a_vec[i] = *((uint16_t *)vs1 + H2(i));
++        b_vec[i] = *((uint16_t *)vs2 + H2(i));
 +    }
++
++    FloatExceptionFlags pre_fflag = get_float_exception_flags(&env->fp_status);
++    dot_result = rvbna_dot_bfloat16_bfloat16(a_vec, b_vec, vlmax,
++                                             &env->fp_status);
++
++    acc = *((uint32_t *)vd + H4(0));
++    *((uint32_t *)vd + H4(0)) = rvbna_final_f32_add(dot_result, acc,
++                                                    &env->fp_status);
 +    riscv_cpu_check_fflags(env, pre_fflag);
 +
 +    g_free(a_vec);
@@ -275,10 +256,8 @@ index 873adf4d7a6..51170625aad 100644
 +
 +    env->vstart = 0;
 +
-+    if (ci + 8 < total_elems) {
-+        if (vta_all_1s) {
-+            vext_set_elems_1s(vd, vta, (ci + 8) * 4, total_elems * 4);
-+        }
++    if (vta_all_1s) {
++        vext_set_elems_1s(vd, vta, 1 * 4, total_elems * 4);
 +    }
 +}
 -- 
