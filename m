@@ -1,139 +1,144 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CE66606A31B
-	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 05:08:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDD13606A31B
+	for <qemu-riscv@archiver.kernel.org>; Wed,  4 Nov 2026 05:09:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VOYqeE5o;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DC3Z6Mo1
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=KRXyR2oV;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=W5P/QILN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOTDy-0007p3-2C; Wed, 04 Nov 2026 00:07:51 -0500
+	id 1xOTDm-0007Q9-KE; Wed, 04 Nov 2026 00:07:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1xOTDb-00078C-OZ
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 00:07:28 -0500
+ id 1xOTDW-00071Y-Hr
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 00:07:23 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1xOTDY-0002Oc-Hc
- for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 00:07:27 -0500
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1xOTDU-0002NZ-0L
+ for qemu-riscv@nongnu.org; Wed, 04 Nov 2026 00:07:22 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A40RwPI3868170
- for <qemu-riscv@nongnu.org>; Wed, 4 Nov 2026 05:07:13 GMT
+ 6A40RJ8C1191364
+ for <qemu-riscv@nongnu.org>; Wed, 4 Nov 2026 05:07:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=SGycZXPNcBS
- IGWZ+hW/wn9bQMgEs/bok5AsCj9Myge4=; b=VOYqeE5oKHJmOGHc+OUSrgqMG2e
- mzuSMiVM0A5YKOnJVQ796a7pUGaAKpYj8TPOV+EFt4jEjIat9wWnbXCz3xxv1BJM
- jSq1Z86x2v3KrPlDXIhPT1aUDEBiXY8cWSgzTGaeCq6naOWv7ZTHsaH/w+3gzFl4
- BALZZHmWGysnRKUPLlUrNrDfDQUGWrBZNE0nVV58XTXecFs0IsQ0acD9Bu2pKrfO
- Ey/Bg5ruAld+cMSKSWfrf/WdXrZakwytEmH+kPNrHEnk+Axe9Q6elM2NZZN76Zj2
- ZW2zzAWUbKjayjTi37t8EpdNkdSwky6/WqQosDmUOg8NSt91KJZB3eQagZw==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqn8y208q-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=r6R+UUUvhrh
+ YJnIEc1Pf7KpsFIokkfUlH1xaKKIUlyY=; b=KRXyR2oVZqb+MXwEg9kMIluKN4a
+ 0fNjS7tTDN2bemMn/X7vhkoe5D8i80sr8umfTp+ASGEQ783GmWQYRiNjvUGKquQL
+ FUQJFxYylUDMggsiTle2WzG3U27qRG1vZ/VKxPsEhpW6kUksZq812u2f0aIclUSJ
+ BDG7Md/tZM8p9ueoL6QYjDX9Kkck+/kq6AsAsK6miof9hhYNl61PZHMeDADs7tL4
+ vKHdwwOcdoRUvtu94hVRYLn97sKVmYmkmlAelPJ0aYXZPz5TOV6xJBh4nPrHja0r
+ p5pzon0cZU0/LbNl8FCTl+lWiga7q84SG+XbzvOb9j4aBd01ViH826/PJIg==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com
+ [74.125.82.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hqm2pjbn3-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 05:07:12 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id
- a92af1059eb24-137ec776b84so36477c88.0
- for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 21:07:12 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 04 Nov 2026 05:07:08 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-313b1501a0aso55725eec.0
+ for <qemu-riscv@nongnu.org>; Tue, 03 Nov 2026 21:07:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793768832; x=1794373632; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1793768828; x=1794373628; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=SGycZXPNcBSIGWZ+hW/wn9bQMgEs/bok5AsCj9Myge4=;
- b=DC3Z6Mo1TJl+Og7lxXdHWkLqh4X6kJDWPq3xTuhpqzF/PFP4T1I6DVHwh+HvbG5bID
- G8LHN9+QFb37rKcbXGG5q36cwrGclTysO/u77KoOG0xHAWCw7udBLUA4GMpVA9afkL3P
- 9I/OAN/w/o8wWPsLLAIBfQjUCtRy8GaxWeqnTvGpUnLE388Qok5mpINTvYAS0J/xYrFh
- wwR2vsj8VgfCtlgrOP0xEJVmapxvUeqkaj2URd4TuRM6TtgLHuBEUL4upJB57At5RYFQ
- vKOIHFFvlJAhdobprOpu6DAsAVGIMCf0SLnoCGGSXtHBn5yAfNOJ+j/2DyrUyigF9llm
- RSsQ==
+ bh=r6R+UUUvhrhYJnIEc1Pf7KpsFIokkfUlH1xaKKIUlyY=;
+ b=W5P/QILNnFDL0gcFhlvzJRik4OrfreShZzu6wQwd3MlVvIWLsY/yPMh15vvdNvUNPU
+ LdRwTOYCsjhbiyGYqZBe03frRXbGdIZ3wmhifCzcoWGO8+Yzkye2mqpNM1voysPCnYOm
+ t/xgqAaNJao6Ggncr0TvrveN2/1m9ROSvrZZV/NkakJoGKJfz9V9Bnyb3vgls5skpuNk
+ Hl3JK45pxc1qT7Vx3dLKsYx9yINAmRqFCbpmyWMafA5l+IgVsb7F9jV2xf6nTEatA7yB
+ DY4alJ/ovFNSdEac350vOD8zX//Wr3djk6K0pnqAumySTEpGx+fGJtJaQM/ArfsA8Sxv
+ O2tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793768832; x=1794373632;
+ d=1e100.net; s=20260707; t=1793768828; x=1794373628;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=SGycZXPNcBSIGWZ+hW/wn9bQMgEs/bok5AsCj9Myge4=;
- b=KYUPwhMYVGiaz/RjrU6V9yXRAqK+QBVHgPT1mspT0Z4iyJ7+vMMiF5+wuVDreTb1gL
- ErapaGEuDqK7EDABCqUAkRCnD0b3JrmsI1GlE3FVdRyyBPnSo6mlkL1en40uXB5txcjc
- +Q5EPZlT31B4UCeTI+caoUSeK3aJEylNzwrmRej7mWzWJoFEOFYLyQl2AcyIiQwwahZU
- OziMNr1hCzThNpbnZ6H+bSlBC+ZNLZxqTWVvO549voIEPxlEW9X61/g36Bo1k6kHUOrO
- +8rBd4bC6oR05aBfzW+sZzTq6EsnhwYq9Ii4FZiIhNp/o7XOpBwsRzqASAv9dOH1XS1E
- pAKw==
-X-Gm-Message-State: APuU4Z8ua8HIAolTkOjnczfwReqQn0XAbnFFuqL6No3WX5Fk6tyN9ho6
- 49U/pZZuWn+fY6XTRKL+VUdNmvZW4EI5iIrffjNWSyJu+yeaE/JZ+/vg1w5Sa0hZzbBc1GSSr4X
- xuv+z7UAUs3guGwh2eRT234btrWJc7oS90BLQdQrTHrWTgj7IQwefI8sIhA==
-X-Gm-Gg: AYBFou20RTvzpJup9sw6pce+P1F7df/umqjReei0CQAellLBxF3c3JIVZWxFOLkwBZX
- o74XvR08SLeN38lGv9Ej67IIcfVX8SJbCvxY0ORgrywpoix19N3y1ohDGZB5L8Cnt0O2YkAuNPP
- F1OohwcS4aQQy4nSOyQ/Sc69jK7G8yKQYraZli7U6KIezsNm25u4+r2Zf11GDN6vMoyLkYCVe0E
- 3gy5SqzvYm4TfBJWHpUGjlqVUD/UZok4wPG8MQDJql4gMc0kup8h8WNwgDnCFiFpdPVgzinNwof
- RiVmnC4WyYua6Da0M/AHCfUWtJOxvVdsJdP+a/lhT9pxo95KaylNUf3nDQUf0d8qk1Z1ZNlhrLz
- vOi8UVYvNoC9CbZhbVVI8xzhZacu1mU69iGmB8VnTXGWg3dT7wCVePk+HUCbKr43Va/JlSrZyQW
- FnK1Yq/WuXy0u2B2xsHfSGfmi/I/b4njKbRVUk1sBonwFLoud7N8ca5J3jWFw4Epjcocg8did+/
- GUvgoY=
-X-Received: by 2002:a05:7300:d090:b0:36a:e7a:e89 with SMTP id
- 5a478bee46e88-36a4239cc86mr33463911eec.2.1793768831807; 
- Tue, 03 Nov 2026 21:07:11 -0800 (PST)
-X-Received: by 2002:a05:7300:d090:b0:36a:e7a:e89 with SMTP id
- 5a478bee46e88-36a4239cc86mr33463838eec.2.1793768831080; 
- Tue, 03 Nov 2026 21:07:11 -0800 (PST)
+ bh=r6R+UUUvhrhYJnIEc1Pf7KpsFIokkfUlH1xaKKIUlyY=;
+ b=uVqgiequ2kV8+d3Jp9C3pfNfJHKn5ES3nXMn/l75ElrGy5Ao+muuD6nETEjJ1XBDs4
+ wjBn29LwS7mdQBLX4b4USNwP2pNE7jflDz3gCHpSmkRlw8HK9m+MO2zPPTDnlkxpRwEu
+ xrVacxiYH8SNbGns3NcEqd1d0ABluVguJbpNo+Gp9yMkYy9TONx61B7NWka/UO2ZbFWI
+ aKqfPkbEQYvIPC4N6qQ+3EkkJVt38nptSoVlP0NqnjTKJLY3gsaSWofNS90qD4MEmPhK
+ c7PzplPPJQHHGfjmdQo68IaXOsXEEh5BdLrpxNTX0N38K7kY+KrN4g4R1S6Zkzmc7veR
+ iF4g==
+X-Gm-Message-State: APuU4Z/WYOATcfbu6Js79ZGbwhfW1GVCEaaFMLcX7bJAS8GdMAyYjg66
+ 84FwLD6Dy9F2d1vNMN7bnJisk/SHRV9P9BGME8JNpxg3vaZIw/u8XoIxgKVWw/QTqIh6ofIoot1
+ Fcey1VSyGEKljEb2b3tv5Pit24tP9JrW8SpKCjwXB8qGTV12Wp7YANVX0Lg==
+X-Gm-Gg: AYBFou3EgmmAj15sR1sELVXCcB8wxigV2/U8dn3uxHb9K50tKzxdKK4UlOaS//ez4rF
+ fq6td0qeyrQMECaVGIRfKhw1axebzWFbHqTvR1XFndjs6H7wwXKtg+Tctul6+VLvXaWTSUlLJwg
+ dPqzN2VBnzaMwxjBssonnZ6cJF0Ehh4AOlgGOiikwTzls0ejXKEN5cv7djWJLZrUA5mhqHtAY2A
+ BY6KAwsGjE/hz1SacXcpHBZ+FC20YQOBVzMlWgXn3+5EORGC4PsL3fJjCIkHWpkQLGU7VAQMqLB
+ b8JVKQxrVlW+B1j/Dzuxuu1r8Ws3fvrPwj5jPpfjM+RfTinmJjI7WtyVjkA9+IVehSAa9h0aFQG
+ hcCQykbvytpI+XXIGA3Ulh4u9vuQKzSGQrzjKkOMofkbOb7+DgabtxYbWFVsykLxrFvaJVijx32
+ 9v2l69ZECjgC1OvsIxlbniguAj/z3zFqVWWFa6UTLtuUimY8ZVI9YBmkfH4zp34/C48F0tZQOVo
+ l3R47w=
+X-Received: by 2002:a05:693c:87c2:10b0:36c:a1bc:6114 with SMTP id
+ 5a478bee46e88-36ca1bc69bamr3773527eec.0.1793768827374; 
+ Tue, 03 Nov 2026 21:07:07 -0800 (PST)
+X-Received: by 2002:a05:693c:87c2:10b0:36c:a1bc:6114 with SMTP id
+ 5a478bee46e88-36ca1bc69bamr3773432eec.0.1793768826599; 
+ Tue, 03 Nov 2026 21:07:06 -0800 (PST)
 Received: from hu-slingapp-blr.qualcomm.com
  (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
  by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-36ca38d3580sm3639698eec.10.2026.11.03.21.07.07
+ 5a478bee46e88-36ca38d3580sm3639698eec.10.2026.11.03.21.07.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 03 Nov 2026 21:07:10 -0800 (PST)
+ Tue, 03 Nov 2026 21:07:06 -0800 (PST)
 From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org,
  Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
- Fabiano Rosas <farosas@suse.de>, Laurent Vivier <lvivier@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>
-Subject: [PATCH v4 2/2] tests/qtest: cover server reference platform RPMI
-Date: Wed,  4 Nov 2026 10:36:50 +0530
-Message-ID: <20261104050650.776580-3-subrahmanya.lingappa@oss.qualcomm.com>
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH v4 1/2] hw/riscv: add RPMI support for server reference
+ platform
+Date: Wed,  4 Nov 2026 10:36:49 +0530
+Message-ID: <20261104050650.776580-2-subrahmanya.lingappa@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261104050650.776580-1-subrahmanya.lingappa@oss.qualcomm.com>
 References: <20261104050650.776580-1-subrahmanya.lingappa@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: Npa8s9z2Cg3xKkKVdP1ecHNv7ZGUkoSD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAyMCBTYWx0ZWRfX5d1wZXcJk57g
- uxn6/nnqDu7qO7XobKHpsWwQ4jKcAPSfvESVhyoYDfGH0X+QEBNzjFH33pD10Nj1MFfZyI4CS3h
- AFULflszYjTtlHoexYrcYkAQkuZNgFzOg2wJJvv/JfEIC4VBthQsO1C+mKS9z0OfsMX8Ebi0qEs
- aomr6VBtae3KCjYXnz4jbeRupQhbhnvHJtaNiAu59QKRes1ogPDUoOqUyBStH2qD1JISlPPhwv8
- 8jExlQmCXonevxD6wPIByHJNM4zPClZs+ms+EXh72P1Q4W5Hu2fO9mUlMw50URIeGGumdBzQuoW
- qjermfMN9ta2BVd9FDjJ3Xv7ctPDiWXKsWY9+E1UbHKDAqIpV4k+ultRbx9g4ZMkDEabpZfyvXQ
- HeAYpn8hdxLTcEtQIgyMB0NuRJRlaBpwhYlwWjukMU+e8nMnMBsjfyiWWw3OosZ6JWs0LwRbc/i
- z8dU7M2Ryop63dPAdeQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAyMCBTYWx0ZWRfX0v6F7/93MXQo
- F+zwo3rYx6XkN49xLB+43Mw3zE8640W1n1FKzWOx8i8hQLGFSwJcw9bw5vnmuUzGvAUcW2OFGkg
- EJ8MWP8WITzspcCx6XG/ApeBnKfex4Q=
-X-Proofpoint-ORIG-GUID: Npa8s9z2Cg3xKkKVdP1ecHNv7ZGUkoSD
-X-Authority-Analysis: v=2.4 cv=NP5AaE6g c=1 sm=1 tr=0 ts=6aeabd80 cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA0MDAyMCBTYWx0ZWRfX1sUMX/Mh3FTx
+ 8jneb7XB7+v3DqAFO079UzujIGMM2j2uVK3z7I5k2v8j6RleWLiTtUE5VgoC39w2XuWyZ6ffdND
+ Y76dbmdHdLlXqhHw0j3NBrbBfRqk8UMj8Ejh/xMRLQiHYPy7GHIoOB8HLysXF+2hozCh/q+NsKM
+ dcnEszfDae+7b9EKfq6icsRgKw1pacbbqXLSDmjDs26X2almfIy8r4xKdIRuUnXmvKuq+I+HQwb
+ 32+4G+n7B+/jAlSabmURnE7iI3YAh+cc2bdCE5u6i79um76S5LiLb8Qf9mtBeMB0GtY0SzKer4y
+ 6hzLT45Wvq3jFqXlCV4WQ4O3HNPtlFZ0W0LoFHv2TRtGikloUUy5pWLI/ofkecxl63c2pbqtvuB
+ Uiv0n9MhwfP54DZ9Cru7Qk4WqULLZek5lD0JMSoCCKrZr56tSlOkR6A5pBmI0k2AsV6Q2383Mr8
+ Cplvzgo8y1B+r0qQ6mA==
+X-Proofpoint-GUID: -5zLfMQnALnVbjEEGf0wOUsS7rsSOV6Z
+X-Proofpoint-ORIG-GUID: -5zLfMQnALnVbjEEGf0wOUsS7rsSOV6Z
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA0MDAyMCBTYWx0ZWRfX58LDo1vOkdl+
+ /3dqUGMq68MVvghDGOmcyfiOY+6aCh0HwZDhUPjWLwsIDKtof6VFS0CKs0OP4+qOklfouFCNPAe
+ IGVXDjiPJXcSEg9VtJUGyl+qdJwhzVk=
+X-Authority-Analysis: v=2.4 cv=c64+0h9l c=1 sm=1 tr=0 ts=6aeabd7c cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=dDrmHaMEVB_NiFHh1N0A:9 a=Fk4IpSoW4aLDllm1B1p-:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=NEAV23lmAAAA:8
+ a=NLiCwHATAAAA:8 a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8 a=yZPtaupRBgCef42CRQIA:9
+ a=6Ab_bkdmUrQuMsNx7PHu:22 a=F9tHCgz3TLBaZgltkx5D:22 a=bA3UWDv6hWIuX7UZL3qL:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-04_01,2026-11-03_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0
- phishscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611040020
+ impostorscore=0 spamscore=0 adultscore=0 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 phishscore=0 suspectscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
+ definitions=main-2611040020
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
  helo=mx0a-0031df01.pphosted.com
@@ -143,7 +148,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -155,695 +160,371 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Exercise the server-reference RPMI policy alongside the shared
-protocol tests. Cover explicit and default RPMI-off realization,
-RPMI-on service discovery, FDT layouts, and migration behavior for
-both property states.
+Add opt-in RPMI platform management to the riscv-server-ref machine for
+firmware clients that use the RPMI transport.
 
-The FDT checks verify mailbox phandles, service IDs, sibling
-placement, and preservation of the legacy syscon nodes when RPMI is
-disabled.
+RPMI is disabled by default so the existing board remains migratable and
+retains its legacy reset and poweroff device-tree nodes. The rpmi=on option
+realizes the unmigratable RPMI device, advertises the Base, System Reset,
+HSM, and System Suspend services, and omits those legacy nodes.
 
-The RPMI-off migration check is a policy smoke test that verifies
-command acceptance only; it does not restore a destination VM.
-
-Use per-machine queue sizes in the shared protocol harness so
-the enlarged virt queues and existing server queues both retain
-correct acknowledgement offsets and ring wraparound.
+Explicit RPMI enablement rejects KVM and builds without librpmi. Document
+the property, migration restriction, build requirements, and both
+device-tree layouts.
 
 Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 ---
- tests/qtest/riscv-rpmi-test.c | 434 ++++++++++++++++++++++++++--------
- 1 file changed, 336 insertions(+), 98 deletions(-)
+ docs/system/riscv/riscv-server-ref.rst |  43 +++++++
+ hw/riscv/Kconfig                       |   1 +
+ hw/riscv/server_platform_ref.c         | 149 ++++++++++++++++++++++++-
+ meson.build                            |   4 +
+ 4 files changed, 195 insertions(+), 2 deletions(-)
 
-diff --git a/tests/qtest/riscv-rpmi-test.c b/tests/qtest/riscv-rpmi-test.c
-index 318c66b426..9cece1e939 100644
---- a/tests/qtest/riscv-rpmi-test.c
-+++ b/tests/qtest/riscv-rpmi-test.c
-@@ -16,13 +16,16 @@
+diff --git a/docs/system/riscv/riscv-server-ref.rst b/docs/system/riscv/riscv-server-ref.rst
+index da043ed096..32c3201404 100644
+--- a/docs/system/riscv/riscv-server-ref.rst
++++ b/docs/system/riscv/riscv-server-ref.rst
+@@ -28,6 +28,7 @@ The main features included in the riscv-server-ref board are:
+ * No fw_cfg device
+ * No ACPI table
+ * Minimal device tree nodes
++* RISC-V RPMI platform management
  
- #define RPMI_SHMEM_BASE 0x10200000ULL
- #define RPMI_DOORBELL_BASE 0x10230000ULL
-+#define RVSERVER_RPMI_SHMEM_BASE 0x110000ULL
-+#define RVSERVER_RPMI_DOORBELL_BASE 0x140000ULL
- #define RPMI_SLOT_SIZE 64
--#define RPMI_QUEUE_SIZE 0x7800
--#define RPMI_QUEUE_DATA_SLOTS (RPMI_QUEUE_SIZE / RPMI_SLOT_SIZE - 2)
-+#define RPMI_VIRT_QUEUE_SIZE 0x7800
-+#define RPMI_RVSERVER_QUEUE_SIZE 0x400
-+#define RPMI_QUEUE_DATA_SLOTS (rpmi_queue_size / RPMI_SLOT_SIZE - 2)
+ There are multiple ways of using this reference board.  The spec compliant way
+ is using an EDK2 image and a TPM device.  The board was tested with the TPM
+@@ -60,6 +61,48 @@ And then start QEMU with:
+      -netdev user,id=net0 -device e1000e,netdev=net0 \
+      -nographic
  
--#define RPMI_A2P_HEAD RPMI_SHMEM_BASE
--#define RPMI_A2P_TAIL (RPMI_SHMEM_BASE + RPMI_SLOT_SIZE)
--#define RPMI_A2P_SLOT0 (RPMI_SHMEM_BASE + 2 * RPMI_SLOT_SIZE)
-+#define RPMI_A2P_HEAD rpmi_shmem_base
-+#define RPMI_A2P_TAIL (rpmi_shmem_base + RPMI_SLOT_SIZE)
-+#define RPMI_A2P_SLOT0 (rpmi_shmem_base + 2 * RPMI_SLOT_SIZE)
- 
- #define RPMI_SRVGRP_BASE 0x0001
- #define RPMI_SRVGRP_SYSTEM_RESET 0x0003
-@@ -61,53 +64,65 @@
- #define RPMI_HSM_TEST_START_ADDR 0x80000000ULL
- #define RPMI_HSM_TEST_RESUME_ADDR 0x80001000ULL
- 
--#define RPMI_P2A_ACK_BASE (RPMI_SHMEM_BASE + RPMI_QUEUE_SIZE)
-+#define RPMI_P2A_ACK_BASE (rpmi_shmem_base + rpmi_queue_size)
- #define RPMI_P2A_ACK_HEAD RPMI_P2A_ACK_BASE
- #define RPMI_P2A_ACK_TAIL (RPMI_P2A_ACK_BASE + RPMI_SLOT_SIZE)
- 
--static uint64_t rpmi_response_base;
--
--static uint64_t rpmi_queue_slot(uint64_t queue_base, uint32_t index)
--{
--    return queue_base + (index + 2) * RPMI_SLOT_SIZE;
--}
--
--static void rpmi_send_request(QTestState *qts, uint16_t service_group,
--                              uint8_t service_id, uint8_t request_type,
--                              const uint32_t *data, size_t data_words)
--{
--    uint32_t tail = qtest_readl(qts, RPMI_A2P_TAIL);
--    uint64_t slot = rpmi_queue_slot(RPMI_SHMEM_BASE, tail);
--    size_t i;
--
--    qtest_writew(qts, slot, service_group);
--    qtest_writeb(qts, slot + 2, service_id);
--    qtest_writeb(qts, slot + 3, request_type);
--    qtest_writew(qts, slot + 4, data_words * sizeof(*data));
--    qtest_writew(qts, slot + 6, RPMI_TOKEN);
--
--    for (i = 0; i < data_words; i++) {
--        qtest_writel(qts, slot + 8 + i * sizeof(*data), data[i]);
--    }
--
--    g_test_message(
--        "RPMI_A2P_REQ shmem=0x%016" PRIx64 " doorbell=0x%016" PRIx64
--        " group=0x%04x service=0x%02x type=0x%02x data_len=%zu"
--        " token=0x%04x a2p_tail=%u slot=0x%016" PRIx64,
--        (uint64_t)RPMI_SHMEM_BASE, (uint64_t)RPMI_DOORBELL_BASE,
--        service_group, service_id, request_type, data_words * sizeof(*data),
--        RPMI_TOKEN, tail, slot);
--
--    qtest_writel(qts, RPMI_A2P_TAIL, (tail + 1) % RPMI_QUEUE_DATA_SLOTS);
--    qtest_writel(qts, RPMI_DOORBELL_BASE, 1);
--}
--
--static uint32_t rpmi_response_word(QTestState *qts, unsigned int word)
--{
--    return qtest_readl(qts, rpmi_response_base + 8 + word * sizeof(uint32_t));
--}
--
--static void test_rpmi_virt_fdt_service_nodes(void)
-+typedef struct RiscvRpmiQTestMachine {
-+    const char *machine_opts;
-+    uint64_t shmem_base;
-+    uint64_t doorbell_base;
-+    uint32_t queue_size;
-+    const char *platform_info;
-+    const char *reset_node;
-+    const char *poweroff_node;
-+} RiscvRpmiQTestMachine;
++RPMI support
++------------
 +
-+static const RiscvRpmiQTestMachine virt_rpmi_machine = {
-+    .machine_opts = "virt,rpmi=on",
-+    .shmem_base = RPMI_SHMEM_BASE,
-+    .doorbell_base = RPMI_DOORBELL_BASE,
-+    .queue_size = RPMI_VIRT_QUEUE_SIZE,
-+    .platform_info = "QEMU RISC-V virt RPMI",
-+    .reset_node = "/reboot",
-+    .poweroff_node = "/poweroff",
-+};
++The ``riscv-server-ref`` machine exposes RISC-V RPMI platform management when
++the ``rpmi=on`` machine option is selected and QEMU is built with librpmi
++support.  RPMI is disabled by default.  ``rpmi=off`` preserves the legacy
++device tree and keeps the board migratable.  An RPMI-enabled machine contains
++an unmigratable RPMI device, so live migration is unavailable while
++``rpmi=on`` is selected.  RPMI is unavailable with KVM and requires a build
++with librpmi.
 +
-+static const RiscvRpmiQTestMachine rvserver_ref_rpmi_machine = {
-+    .machine_opts = "riscv-server-ref,rpmi=on",
-+    .shmem_base = RVSERVER_RPMI_SHMEM_BASE,
-+    .doorbell_base = RVSERVER_RPMI_DOORBELL_BASE,
-+    .queue_size = RPMI_RVSERVER_QUEUE_SIZE,
-+    .platform_info = "QEMU RISC-V server-ref RPMI",
-+    .reset_node = "/reboot",
-+    .poweroff_node = "/poweroff",
-+};
++The initial ``riscv-server-ref`` RPMI implementation exposes Base, System
++Reset, HSM, and System Suspend service groups.  System Reset handles guest
++shutdown and cold reboot requests through RPMI.
++HSM uses the machine hart IDs for hart discovery, status, start, stop, and
++suspend commands.  System Suspend uses QEMU's suspend and wakeup path.
 +
-+static const RiscvRpmiQTestMachine rvserver_ref_legacy_machine = {
-+    .machine_opts = "riscv-server-ref,rpmi=off",
-+    .shmem_base = RVSERVER_RPMI_SHMEM_BASE,
-+    .doorbell_base = RVSERVER_RPMI_DOORBELL_BASE,
-+    .queue_size = RPMI_RVSERVER_QUEUE_SIZE,
-+    .platform_info = "QEMU RISC-V server-ref RPMI",
-+    .reset_node = "/reboot",
-+    .poweroff_node = "/poweroff",
-+};
++When ``rpmi=on`` is selected, the generated device tree advertises reset,
++shutdown, HSM, and suspend through RPMI service nodes and omits the legacy
++syscon reboot and poweroff nodes.  With the default ``rpmi=off`` setting, the
++generated device tree retains the legacy syscon reboot and poweroff nodes.
++RPMI is currently described through FDT only; this machine does not emit ACPI
++tables for the RPMI transport or service groups.
 +
-+static const RiscvRpmiQTestMachine rvserver_ref_default_machine = {
-+    .machine_opts = "riscv-server-ref",
-+    .shmem_base = RVSERVER_RPMI_SHMEM_BASE,
-+    .doorbell_base = RVSERVER_RPMI_DOORBELL_BASE,
-+    .queue_size = RPMI_RVSERVER_QUEUE_SIZE,
-+    .platform_info = "QEMU RISC-V server-ref RPMI",
-+    .reset_node = "/reboot",
-+    .poweroff_node = "/poweroff",
-+};
++RPMI support targets the RISC-V Platform Management Interface (RPMI)
++Specification v1.0 Ratified (`server-ref RPMI v1.0 specification`_).  The
++build dependency is provided by `server-ref librpmi`_.  After installing
++librpmi, configure QEMU with ``--enable-librpmi`` or ``-Dlibrpmi=enabled`` to
++make the build fail if librpmi is unavailable.
 +
-+static QTestState *rpmi_qtest_init(const RiscvRpmiQTestMachine *machine,
-+                                   const char *extra_args);
++.. code-block:: bash
 +
-+static void rpmi_test_fdt_service_nodes(
-+    const RiscvRpmiQTestMachine *machine)
- {
-     static const struct {
-         const char *name;
-@@ -118,6 +133,7 @@ static void test_rpmi_virt_fdt_service_nodes(void)
-         { "suspend", RPMI_SRVGRP_SYSTEM_SUSPEND },
-     };
-     g_autofree char *dtb_path = NULL;
-+    g_autofree char *mailbox_path = NULL;
-     g_autofree char *dtb = NULL;
-     gsize dtb_size;
-     const fdt32_t *prop;
-@@ -128,7 +144,7 @@ static void test_rpmi_virt_fdt_service_nodes(void)
++ qemu-system-riscv64 -M riscv-server-ref,rpmi=on \
++     -bios fw_dynamic.bin \
++     -kernel EDK2.fd \
++     -drive file=nvme_disk.ext2,format=raw,id=hd0,if=none \
++     -device ahci,id=ahci \
++     -device ide-hd,drive=hd0,bus=ahci.0 \
++     -nographic
++
  
-     dtb_path = g_strdup_printf("%s/riscv-rpmi-fdt-%u.dtb",
-                                g_get_tmp_dir(), (unsigned)getpid());
--    qts = qtest_init("-machine virt,rpmi=on -display none -S");
-+    qts = rpmi_qtest_init(machine, " -display none -S");
-     qtest_qmp_assert_success(qts,
-                              "{ 'execute': 'dumpdtb', 'arguments': "
-                              "{ 'filename': %s } }", dtb_path);
-@@ -137,15 +153,17 @@ static void test_rpmi_virt_fdt_service_nodes(void)
-     g_assert_true(g_file_get_contents(dtb_path, &dtb, &dtb_size, NULL));
-     g_assert_cmpint(fdt_check_header(dtb), ==, 0);
+ .. _spec: https://github.com/riscv-non-isa/riscv-server-platform
+ .. _tpm: https://qemu-project.gitlab.io/qemu/specs/tpm.html
++.. _server-ref RPMI v1.0 specification: https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/riscv-rpmi.pdf
++.. _server-ref librpmi: https://github.com/riscv-software-src/librpmi
+diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+index 28d108faf8..cae3de6993 100644
+--- a/hw/riscv/Kconfig
++++ b/hw/riscv/Kconfig
+@@ -86,6 +86,7 @@ config RISCV_SERVER_PLATFORM_REF
+     select RISCV_IOMMU
+     select RISCV_NUMA
+     select SERIAL_MM
++    select RISCV_RPMI if LIBRPMI
  
--    mailbox_offset = fdt_path_offset(dtb, "/soc/mailbox@10200000");
-+    mailbox_path = g_strdup_printf("/soc/mailbox@%" PRIx64,
-+                                   machine->shmem_base);
-+    mailbox_offset = fdt_path_offset(dtb, mailbox_path);
-     g_assert_cmpint(mailbox_offset, >=, 0);
-     prop = fdt_getprop(dtb, mailbox_offset, "reg", &phandle_len);
-     g_assert_nonnull(prop);
-     g_assert_cmpint(phandle_len, >=, 8 * sizeof(*prop));
-     for (unsigned int queue = 0; queue < 2; queue++) {
-         g_assert_cmphex(fdt32_to_cpu(prop[4 * queue + 1]), ==,
--                        RPMI_SHMEM_BASE + queue * RPMI_QUEUE_SIZE);
--        g_assert_cmphex(fdt32_to_cpu(prop[4 * queue + 3]), ==, RPMI_QUEUE_SIZE);
-+                        machine->shmem_base + queue * machine->queue_size);
-+        g_assert_cmphex(fdt32_to_cpu(prop[4 * queue + 3]), ==, machine->queue_size);
-     }
-     prop = fdt_getprop(dtb, mailbox_offset, "phandle", &phandle_len);
-     g_assert_nonnull(prop);
-@@ -170,9 +188,111 @@ static void test_rpmi_virt_fdt_service_nodes(void)
-                         services[i].service_group);
-     }
+ config SHAKTI_C
+     bool
+diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
+index d18550b48d..ea580e475f 100644
+--- a/hw/riscv/server_platform_ref.c
++++ b/hw/riscv/server_platform_ref.c
+@@ -29,18 +29,20 @@
+ #include "hw/riscv/device-common.h"
+ #include "hw/riscv/fdt-common.h"
+ #include "hw/riscv/numa.h"
++#include "hw/riscv/rpmi-fdt.h"
+ #include "hw/riscv/iommu.h"
+ #include "hw/riscv/riscv-iommu.h"
+ #include "hw/riscv/riscv-iommu-bits.h"
++#include "hw/misc/riscv_rpmi.h"
+ #include "hw/intc/riscv_aclint.h"
+ #include "hw/intc/riscv_aplic.h"
+ #include "hw/intc/riscv_imsic.h"
+ #include "chardev/char.h"
+ #include "hw/char/serial-mm.h"
+ #include "system/device_tree.h"
++#include "system/kvm.h"
+ #include "system/runstate.h"
+ #include "system/system.h"
+-#include "system/kvm.h"
+ #include "system/qtest.h"
+ #include "system/tcg.h"
+ #include "kvm/kvm_riscv.h"
+@@ -68,6 +70,9 @@
  
-+    g_assert_cmpint(fdt_path_offset(dtb, machine->reset_node), ==,
-+                    -FDT_ERR_NOTFOUND);
-+    g_assert_cmpint(fdt_path_offset(dtb, machine->poweroff_node), ==,
-+                    -FDT_ERR_NOTFOUND);
+ #define RVSERVER_PLATFORM_BUS_NUM_IRQS         8
+ 
++#define RVSERVER_RPMI_A2P_REQ_SIZE (16 * RPMI_QUEUE_SLOT_SIZE)
++#define RVSERVER_RPMI_P2A_REQ_SIZE 0
 +
-     g_assert_cmpint(g_remove(dtb_path), ==, 0);
+ #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
+ OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
+ 
+@@ -83,6 +88,7 @@ struct RISCVServerRefMachineState {
+ 
+     int fdt_size;
+     int aia_guests;
++    bool have_rpmi;
+     const MemMapEntry *memmap;
+ 
+     DeviceState *platform_bus_dev;
+@@ -93,6 +99,8 @@ enum {
+     RVSERVER_RESET_SYSCON,
+     RVSERVER_RTC,
+     RVSERVER_IOMMU_SYS,
++    RVSERVER_RPMI_SHMEM,
++    RVSERVER_RPMI_DOORBELL,
+     RVSERVER_ACLINT,
+     RVSERVER_APLIC_M,
+     RVSERVER_APLIC_S,
+@@ -143,6 +151,8 @@ static const MemMapEntry rvserver_ref_memmap[] = {
+     [RVSERVER_RESET_SYSCON] =   {   0x100000,        0x1000 },
+     [RVSERVER_RTC] =            {   0x101000,        0x1000 },
+     [RVSERVER_IOMMU_SYS] =      {   0x102000,        0x1000 },
++    [RVSERVER_RPMI_SHMEM] =     {   0x110000,       0x20000 },
++    [RVSERVER_RPMI_DOORBELL] =  {   0x140000,        0x1000 },
+     [RVSERVER_ACLINT] =         {  0x2000000,       0x10000 },
+     [RVSERVER_PCIE_PIO] =       {  0x3000000,       0x10000 },
+     [RVSERVER_PLATFORM_BUS] =   {  0x4000000,     0x2000000 },
+@@ -283,6 +293,81 @@ static void create_fdt_sockets(RISCVServerRefMachineState *s,
+     riscv_socket_fdt_write_distance_matrix(ms);
  }
  
-+static void test_rpmi_virt_fdt_service_nodes(void)
++#ifdef CONFIG_LIBRPMI
++static const RiscvRpmiServiceConfig rvserver_ref_rpmi_services[] = {
++    {
++        .node_name = "sysreset",
++        .compatible = "riscv,rpmi-system-reset",
++        .service_group = RPMI_SRVGRP_SYSTEM_RESET,
++    },
++    {
++        .node_name = "hsm",
++        .compatible = "riscv,rpmi-hsm",
++        .service_group = RPMI_SRVGRP_HSM,
++    },
++    {
++        .node_name = "suspend",
++        .compatible = "riscv,rpmi-system-suspend",
++        .service_group = RPMI_SRVGRP_SYSTEM_SUSPEND,
++    },
++};
++
++static void rvserver_ref_rpmi_system_reset(void)
 +{
-+    rpmi_test_fdt_service_nodes(&virt_rpmi_machine);
++    qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
 +}
 +
-+static void test_rpmi_rvserver_ref_fdt_service_nodes(void)
++static void rvserver_ref_rpmi_system_shutdown(void)
 +{
-+    rpmi_test_fdt_service_nodes(&rvserver_ref_rpmi_machine);
++    qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
 +}
 +
-+static void rpmi_test_fdt_legacy_nodes(
-+    const RiscvRpmiQTestMachine *machine)
++static const RiscvRpmiMachineOps rvserver_ref_rpmi_machine_ops = {
++    .system_reset = rvserver_ref_rpmi_system_reset,
++    .system_shutdown = rvserver_ref_rpmi_system_shutdown,
++};
++
++static RiscvRpmiConfig rvserver_ref_rpmi_config(
++    RISCVServerRefMachineState *s, const uint32_t *hart_ids,
++    uint32_t hart_count)
 +{
-+    g_autofree char *dtb_path = NULL;
-+    g_autofree char *dtb = NULL;
-+    gsize dtb_size;
-+    QTestState *qts;
-+
-+    dtb_path = g_strdup_printf("%s/riscv-rpmi-fdt-legacy-%u.dtb",
-+                               g_get_tmp_dir(), (unsigned)getpid());
-+    qts = rpmi_qtest_init(machine, " -display none -S");
-+    qtest_qmp_assert_success(qts,
-+                             "{ 'execute': 'dumpdtb', 'arguments': "
-+                             "{ 'filename': %s } }", dtb_path);
-+    qtest_quit(qts);
-+
-+    g_assert_true(g_file_get_contents(dtb_path, &dtb, &dtb_size, NULL));
-+    g_assert_cmpint(fdt_check_header(dtb), ==, 0);
-+    g_assert_cmpint(fdt_path_offset(dtb, machine->reset_node), >=, 0);
-+    g_assert_cmpint(fdt_path_offset(dtb, machine->poweroff_node), >=, 0);
-+    g_assert_cmpint(fdt_path_offset(dtb, "/soc/mailbox@110000"), ==,
-+                    -FDT_ERR_NOTFOUND);
-+    g_assert_cmpint(fdt_path_offset(dtb, "/soc/sysreset"), ==,
-+                    -FDT_ERR_NOTFOUND);
-+    g_assert_cmpint(g_remove(dtb_path), ==, 0);
++    return (RiscvRpmiConfig) {
++        .doorbell_base = s->memmap[RVSERVER_RPMI_DOORBELL].base,
++        .shmem_base = s->memmap[RVSERVER_RPMI_SHMEM].base,
++        .shmem_size = s->memmap[RVSERVER_RPMI_SHMEM].size,
++        .a2p_req_size = RVSERVER_RPMI_A2P_REQ_SIZE,
++        .p2a_req_size = RVSERVER_RPMI_P2A_REQ_SIZE,
++        .platform_info = "QEMU RISC-V server-ref RPMI",
++        .machine_ops = &rvserver_ref_rpmi_machine_ops,
++        .hart_ids = hart_ids,
++        .hart_count = hart_count,
++        .services = rvserver_ref_rpmi_services,
++        .service_count = ARRAY_SIZE(rvserver_ref_rpmi_services),
++    };
 +}
 +
-+static void test_rpmi_rvserver_ref_fdt_legacy_nodes(void)
++static void create_fdt_rpmi(RISCVServerRefMachineState *s, uint32_t *phandle)
 +{
-+    rpmi_test_fdt_legacy_nodes(&rvserver_ref_legacy_machine);
-+}
++    uint32_t rpmi_mbox_handle;
++    RiscvRpmiFdtMboxConfig cfg = {
++        .shmem_base = s->memmap[RVSERVER_RPMI_SHMEM].base,
++        .doorbell_base = s->memmap[RVSERVER_RPMI_DOORBELL].base,
++        .a2p_req_size = RVSERVER_RPMI_A2P_REQ_SIZE,
++        .p2a_req_size = RVSERVER_RPMI_P2A_REQ_SIZE,
++        .doorbell_size = s->memmap[RVSERVER_RPMI_DOORBELL].size,
++    };
 +
-+static uint64_t rpmi_shmem_base = RPMI_SHMEM_BASE;
-+static uint64_t rpmi_doorbell_base = RPMI_DOORBELL_BASE;
-+static uint32_t rpmi_queue_size = RPMI_VIRT_QUEUE_SIZE;
-+static uint64_t rpmi_response_base;
++    riscv_rpmi_fdt_add_mbox(MACHINE(s)->fdt, &cfg, phandle,
++                            &rpmi_mbox_handle);
 +
-+static QTestState *rpmi_qtest_init(const RiscvRpmiQTestMachine *machine,
-+                                   const char *extra_args)
-+{
-+    rpmi_shmem_base = machine->shmem_base;
-+    rpmi_doorbell_base = machine->doorbell_base;
-+    rpmi_queue_size = machine->queue_size;
-+
-+    return qtest_initf("-machine %s%s", machine->machine_opts, extra_args);
-+}
-+
-+static uint64_t rpmi_queue_slot(uint64_t queue_base, uint32_t index)
-+{
-+    return queue_base + (index + 2) * RPMI_SLOT_SIZE;
-+}
-+
-+static void rpmi_send_request(QTestState *qts, uint16_t service_group,
-+                              uint8_t service_id, uint8_t request_type,
-+                              const uint32_t *data, size_t data_words)
-+{
-+    uint32_t tail = qtest_readl(qts, RPMI_A2P_TAIL);
-+    uint64_t slot = rpmi_queue_slot(rpmi_shmem_base, tail);
-+    size_t i;
-+
-+    qtest_writew(qts, slot, service_group);
-+    qtest_writeb(qts, slot + 2, service_id);
-+    qtest_writeb(qts, slot + 3, request_type);
-+    qtest_writew(qts, slot + 4, data_words * sizeof(*data));
-+    qtest_writew(qts, slot + 6, RPMI_TOKEN);
-+
-+    for (i = 0; i < data_words; i++) {
-+        qtest_writel(qts, slot + 8 + i * sizeof(*data), data[i]);
-+    }
-+
-+    g_test_message(
-+        "RPMI_A2P_REQ shmem=0x%016" PRIx64 " doorbell=0x%016" PRIx64
-+        " group=0x%04x service=0x%02x type=0x%02x data_len=%zu"
-+        " token=0x%04x a2p_tail=%u slot=0x%016" PRIx64,
-+        (uint64_t)rpmi_shmem_base, (uint64_t)rpmi_doorbell_base,
-+        service_group, service_id, request_type, data_words * sizeof(*data),
-+        RPMI_TOKEN, tail, slot);
-+
-+    qtest_writel(qts, RPMI_A2P_TAIL, (tail + 1) % RPMI_QUEUE_DATA_SLOTS);
-+    qtest_writel(qts, rpmi_doorbell_base, 1);
-+}
-+
-+static uint32_t rpmi_response_word(QTestState *qts, unsigned int word)
-+{
-+    return qtest_readl(qts, rpmi_response_base + 8 + word * sizeof(uint32_t));
-+}
-+
- static void rpmi_expect_ack(QTestState *qts, uint16_t service_group,
-                             uint8_t service_id, uint16_t data_len)
- {
-@@ -194,7 +314,7 @@ static void rpmi_expect_ack(QTestState *qts, uint16_t service_group,
-         " group=0x%04x service=0x%02x type=0x%02x data_len=%u"
-         " token=0x%04x p2a_head=%u slot=0x%016" PRIx64
-         " status=0x%08x",
--        (uint64_t)RPMI_SHMEM_BASE, service_group, service_id,
-+        (uint64_t)rpmi_shmem_base, service_group, service_id,
-         RPMI_MSG_ACKNOWLEDGEMENT, data_len, RPMI_TOKEN, head,
-         rpmi_response_base,
-         data_len >= sizeof(uint32_t) ? rpmi_response_word(qts, 0) : 0);
-@@ -255,30 +375,41 @@ static void test_rpmi_machine_rejects_too_many_harts(void)
-         "max CPUs supported by machine 'virt' is 512");
- }
- 
--static void test_rpmi_base_platform_info(void)
-+static void rpmi_check_platform_info(QTestState *qts, const char *expected)
- {
--    static const char expected[] = "QEMU RISC-V virt RPMI";
--    QTestState *qts;
-+    size_t expected_len = strlen(expected) + 1;
-     size_t i;
- 
--    qts = qtest_init("-machine virt,rpmi=on");
-     rpmi_send_request(qts, RPMI_SRVGRP_BASE,
-                       RPMI_BASE_SRV_GET_PLATFORM_INFO,
-                       RPMI_MSG_NORMAL_REQUEST, NULL, 0);
- 
-     rpmi_expect_ack(qts, RPMI_SRVGRP_BASE,
-                     RPMI_BASE_SRV_GET_PLATFORM_INFO,
--                    2 * sizeof(uint32_t) + sizeof(expected));
-+                    2 * sizeof(uint32_t) + expected_len);
-     g_assert_cmphex(rpmi_response_word(qts, 0), ==, 0);
--    g_assert_cmphex(rpmi_response_word(qts, 1), ==, sizeof(expected));
--    for (i = 0; i < sizeof(expected); i++) {
-+    g_assert_cmphex(rpmi_response_word(qts, 1), ==, expected_len);
-+    for (i = 0; i < expected_len; i++) {
-         g_assert_cmphex(qtest_readb(qts, rpmi_response_base + 16 + i), ==,
-                         expected[i]);
-     }
-+}
-+
-+static void rpmi_test_platform_info(const RiscvRpmiQTestMachine *machine)
-+{
-+    QTestState *qts;
-+
-+    qts = rpmi_qtest_init(machine, "");
-+    rpmi_check_platform_info(qts, machine->platform_info);
- 
-     qtest_quit(qts);
- }
- 
-+static void test_rpmi_base_platform_info(void)
-+{
-+    rpmi_test_platform_info(&virt_rpmi_machine);
-+}
-+
- static void rpmi_probe_group(QTestState *qts, uint32_t service_group,
-                              bool present)
- {
-@@ -297,11 +428,8 @@ static void rpmi_probe_group(QTestState *qts, uint32_t service_group,
-     }
- }
- 
--static void test_rpmi_base_probe_service_groups(void)
-+static void rpmi_check_service_groups(QTestState *qts)
- {
--    QTestState *qts;
--
--    qts = qtest_init("-machine virt,rpmi=on,aia=aplic-imsic");
-     rpmi_probe_group(qts, RPMI_SRVGRP_BASE, true);
-     qtest_system_reset(qts);
-     rpmi_probe_group(qts, RPMI_SRVGRP_SYSTEM_RESET, true);
-@@ -309,10 +437,88 @@ static void test_rpmi_base_probe_service_groups(void)
-     rpmi_probe_group(qts, RPMI_SRVGRP_HSM, true);
-     qtest_system_reset(qts);
-     rpmi_probe_group(qts, RPMI_SRVGRP_SYSTEM_SUSPEND, true);
-+}
-+
-+static void rpmi_test_service_groups(const RiscvRpmiQTestMachine *machine,
-+                                     const char *extra_args)
-+{
-+    QTestState *qts;
-+
-+    qts = rpmi_qtest_init(machine, extra_args);
-+    rpmi_check_service_groups(qts);
-+
-+    qtest_quit(qts);
-+}
-+
-+static void test_rpmi_base_probe_service_groups(void)
-+{
-+    rpmi_test_service_groups(&virt_rpmi_machine, ",aia=aplic-imsic");
-+}
-+
-+static void test_rpmi_rvserver_ref_machine_realize_off(void)
-+{
-+    QTestState *qts;
-+
-+    qts = rpmi_qtest_init(&rvserver_ref_legacy_machine, "");
-+    qtest_quit(qts);
-+}
-+
-+static void test_rpmi_rvserver_ref_machine_realize_default(void)
-+{
-+    QTestState *qts;
-+
-+    qts = rpmi_qtest_init(&rvserver_ref_default_machine, "");
-+    qtest_quit(qts);
-+}
-+
-+static void test_rpmi_rvserver_ref_fdt_default_nodes(void)
-+{
-+    rpmi_test_fdt_legacy_nodes(&rvserver_ref_default_machine);
-+}
-+
-+static void test_rpmi_rvserver_ref_platform_info(void)
-+{
-+    rpmi_test_platform_info(&rvserver_ref_rpmi_machine);
-+}
-+
-+static void test_rpmi_rvserver_ref_probe_service_groups(void)
-+{
-+    rpmi_test_service_groups(&rvserver_ref_rpmi_machine, "");
-+}
-+
-+static void rpmi_check_hsm_hart_list(QTestState *qts, uint32_t hart_count)
-+{
-+    uint32_t start_index = 0;
-+
-+    rpmi_send_request(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_HART_LIST,
-+                      RPMI_MSG_NORMAL_REQUEST, &start_index, 1);
-+
-+    rpmi_expect_ack(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_HART_LIST,
-+                    (3 + hart_count) * sizeof(uint32_t));
-+    g_assert_cmphex(rpmi_response_word(qts, 0), ==, 0);
-+    g_assert_cmphex(rpmi_response_word(qts, 1), ==, 0);
-+    g_assert_cmphex(rpmi_response_word(qts, 2), ==, hart_count);
-+    for (uint32_t i = 0; i < hart_count; i++) {
-+        g_assert_cmphex(rpmi_response_word(qts, i + 3), ==, i);
++    for (uint32_t i = 0; i < ARRAY_SIZE(rvserver_ref_rpmi_services); i++) {
++        riscv_rpmi_fdt_add_service_node(MACHINE(s)->fdt,
++                                        &rvserver_ref_rpmi_services[i],
++                                        rpmi_mbox_handle);
 +    }
 +}
++#endif
 +
-+static void rpmi_test_hsm_hart_list(const RiscvRpmiQTestMachine *machine,
-+                                    const char *extra_args)
-+{
-+    QTestState *qts;
-+
-+    qts = rpmi_qtest_init(machine, extra_args);
-+    rpmi_check_hsm_hart_list(qts, 4);
- 
-     qtest_quit(qts);
- }
- 
-+static void test_rpmi_rvserver_ref_hsm_hart_list(void)
-+{
-+    rpmi_test_hsm_hart_list(&rvserver_ref_rpmi_machine, " -smp 4");
-+}
-+
- static void test_rpmi_sysreset_attrs(void)
+ static void finalize_fdt(RISCVServerRefMachineState *s)
  {
-     static const struct {
-@@ -325,7 +531,7 @@ static void test_rpmi_sysreset_attrs(void)
-     };
-     QTestState *qts;
+     uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+@@ -307,10 +392,16 @@ static void finalize_fdt(RISCVServerRefMachineState *s)
+                           irq_pcie_phandle, msi_pcie_phandle,
+                           iommu_sys_phandle, RVSERVER_PCIE_IRQ);
  
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     for (size_t i = 0; i < ARRAY_SIZE(cases); i++) {
-         if (i) {
-             qtest_system_reset(qts);
-@@ -348,7 +554,7 @@ static void test_rpmi_sysreset_shutdown(void)
- {
-     QTestState *qts;
++#ifdef CONFIG_LIBRPMI
++    if (s->have_rpmi) {
++        create_fdt_rpmi(s, &phandle);
++    }
++#endif
+     riscv_create_fdt_syscon(ms->fdt, &phandle,
+                             rvserver_ref_memmap[RVSERVER_RESET_SYSCON].base,
+                             rvserver_ref_memmap[RVSERVER_RESET_SYSCON].size,
+-                            SYSCON_RESET, SYSCON_POWEROFF, false, true);
++                            SYSCON_RESET, SYSCON_POWEROFF, false,
++                            !s->have_rpmi);
  
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     rpmi_send_sysreset(qts, RPMI_SYSRST_TYPE_SHUTDOWN,
-                        RPMI_MSG_POSTED_REQUEST);
-     qtest_qmp_eventwait(qts, "SHUTDOWN");
-@@ -359,7 +565,7 @@ static void test_rpmi_sysreset_cold_reboot(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on -no-reboot");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -no-reboot");
-     rpmi_send_sysreset(qts, RPMI_SYSRST_TYPE_COLD_REBOOT,
-                        RPMI_MSG_POSTED_REQUEST);
-     qtest_qmp_eventwait(qts, "SHUTDOWN");
-@@ -370,7 +576,7 @@ static void test_rpmi_sysreset_invalid_type(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     rpmi_send_sysreset(qts, RPMI_SYSRST_TYPE_INVALID,
-                        RPMI_MSG_NORMAL_REQUEST);
- 
-@@ -387,7 +593,7 @@ static void test_rpmi_repeated_reset_after_traffic(void)
-     QTestState *qts;
-     uint32_t reset_type = RPMI_SYSRST_TYPE_SHUTDOWN;
- 
--    qts = qtest_init("-machine virt,rpmi=on,aia=aplic-imsic");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, ",aia=aplic-imsic");
-     for (uint32_t i = 0; i < 5; i++) {
-         rpmi_send_request(qts, RPMI_SRVGRP_SYSTEM_RESET,
-                           RPMI_SYSRST_SRV_GET_ATTRIBUTES,
-@@ -406,7 +612,7 @@ static void test_rpmi_reset_clears_transport(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     rpmi_send_sysreset(qts, RPMI_SYSRST_TYPE_INVALID,
-                        RPMI_MSG_NORMAL_REQUEST);
-     rpmi_expect_ack(qts, RPMI_SRVGRP_SYSTEM_RESET,
-@@ -425,7 +631,7 @@ static void test_rpmi_doorbell_invalid_access(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     qtest_writeb(qts, RPMI_DOORBELL_BASE, 1);
-     qtest_writel(qts, RPMI_DOORBELL_BASE + 4, 1);
-     g_assert_cmphex(qtest_readl(qts, RPMI_DOORBELL_BASE), ==, 0);
-@@ -437,7 +643,7 @@ static void test_rpmi_queue_bounds(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, "");
-     qtest_writel(qts, RPMI_A2P_TAIL, RPMI_QUEUE_DATA_SLOTS);
-     qtest_writel(qts, RPMI_DOORBELL_BASE, 1);
-     g_assert_cmphex(qtest_readl(qts, RPMI_A2P_HEAD), ==, 0);
-@@ -463,7 +669,7 @@ static void test_rpmi_migration_blocked(void)
-     QDict *error;
-     const char *desc;
- 
--    qts = qtest_init("-machine virt,rpmi=on -S");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -S");
-     error = qtest_qmp_assert_failure_ref(qts,
-         "{ 'execute': 'migrate',"
-         "  'arguments': { 'uri': 'exec:cat > /dev/null' } }");
-@@ -477,41 +683,50 @@ static void test_rpmi_migration_blocked(void)
-     qtest_quit(qts);
- }
- 
--static void rpmi_expect_hsm_hart_list(QTestState *qts)
-+static void test_rpmi_rvserver_ref_migration_blocked(void)
- {
--    uint32_t start_index = 0;
-+    QTestState *qts;
-+    QDict *error;
-+    const char *desc;
- 
--    rpmi_send_request(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_HART_LIST,
--                      RPMI_MSG_NORMAL_REQUEST, &start_index, 1);
-+    qts = rpmi_qtest_init(&rvserver_ref_rpmi_machine, " -S");
-+    error = qtest_qmp_assert_failure_ref(qts,
-+        "{ 'execute': 'migrate',"
-+        "  'arguments': { 'uri': 'exec:cat > /dev/null' } }");
-+    desc = qdict_get_try_str(error, "desc");
- 
--    rpmi_expect_ack(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_HART_LIST,
--                    7 * sizeof(uint32_t));
--    g_assert_cmphex(rpmi_response_word(qts, 0), ==, 0);
--    g_assert_cmphex(rpmi_response_word(qts, 1), ==, 0);
--    g_assert_cmphex(rpmi_response_word(qts, 2), ==, 4);
--    g_assert_cmphex(rpmi_response_word(qts, 3), ==, 0);
--    g_assert_cmphex(rpmi_response_word(qts, 4), ==, 1);
--    g_assert_cmphex(rpmi_response_word(qts, 5), ==, 2);
--    g_assert_cmphex(rpmi_response_word(qts, 6), ==, 3);
-+    g_assert_nonnull(desc);
-+    g_assert_nonnull(strstr(desc, "non-migratable device"));
-+    g_assert_nonnull(strstr(desc, "riscv-rpmi"));
-+
-+    qobject_unref(error);
-+    qtest_quit(qts);
- }
- 
--static void test_rpmi_hsm_hart_list(void)
-+static void test_rpmi_rvserver_ref_migration_command_accepted(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on -smp 4");
--    rpmi_expect_hsm_hart_list(qts);
--
-+    qts = rpmi_qtest_init(&rvserver_ref_legacy_machine, " -S");
-+    /* This is a policy smoke test; no migration destination is restored. */
-+    qtest_qmp_assert_success(qts,
-+        "{ 'execute': 'migrate',"
-+        "  'arguments': { 'uri': 'exec:cat > /dev/null' } }");
-     qtest_quit(qts);
- }
- 
-+static void test_rpmi_hsm_hart_list(void)
-+{
-+    rpmi_test_hsm_hart_list(&virt_rpmi_machine, " -smp 4");
-+}
-+
- static void test_rpmi_hsm_multi_socket_hart_list(void)
- {
-     QTestState *qts;
- 
--    qts = qtest_init("-machine virt,rpmi=on "
--                     "-smp 4,sockets=2,cores=2,threads=1");
--    rpmi_expect_hsm_hart_list(qts);
-+    qts = rpmi_qtest_init(&virt_rpmi_machine,
-+                          " -smp 4,sockets=2,cores=2,threads=1");
-+    rpmi_check_hsm_hart_list(qts, 4);
- 
-     qtest_quit(qts);
- }
-@@ -521,7 +736,7 @@ static void test_rpmi_hsm_hart_status(void)
-     QTestState *qts;
-     uint32_t hart_id = 3;
- 
--    qts = qtest_init("-machine virt,rpmi=on -smp 4");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -smp 4");
-     rpmi_send_request(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_HART_STATUS,
-                       RPMI_MSG_NORMAL_REQUEST, &hart_id, 1);
- 
-@@ -555,7 +770,7 @@ static void test_rpmi_hsm_hart_control(void)
-     uint32_t start_index = 0;
-     uint32_t suspend_type = 0;
- 
--    qts = qtest_init("-machine virt,rpmi=on -smp 2");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -smp 2");
-     rpmi_send_request(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_SUSPEND_TYPES,
-                       RPMI_MSG_NORMAL_REQUEST, &start_index, 1);
-     rpmi_expect_ack(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_GET_SUSPEND_TYPES,
-@@ -601,7 +816,7 @@ static void test_rpmi_hsm_hart_control(void)
- 
-     qtest_quit(qts);
- 
--    qts = qtest_init("-machine virt,rpmi=on -smp 2");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -smp 2");
-     rpmi_send_request(qts, RPMI_SRVGRP_HSM, RPMI_HSM_SRV_HART_SUSPEND,
-                       RPMI_MSG_NORMAL_REQUEST, suspend_request,
-                       ARRAY_SIZE(suspend_request));
-@@ -632,7 +847,7 @@ static void test_rpmi_syssusp_attrs_and_suspend(void)
-     uint32_t suspend_type = 0;
-     uint32_t suspend_request[] = { 0, 0, 0x80000000, 0 };
- 
--    qts = qtest_init("-machine virt,rpmi=on -smp 1");
-+    qts = rpmi_qtest_init(&virt_rpmi_machine, " -smp 1");
-     rpmi_send_request(qts, RPMI_SRVGRP_SYSTEM_SUSPEND,
-                       RPMI_SYSSUSP_SRV_GET_ATTRIBUTES,
-                       RPMI_MSG_NORMAL_REQUEST, &suspend_type, 1);
-@@ -755,5 +970,28 @@ int main(int argc, char **argv)
-                        test_rpmi_syssusp_attrs_and_suspend);
+     riscv_create_fdt_uart(ms->fdt, &rvserver_ref_memmap[RVSERVER_UART0],
+                           RVSERVER_UART0_IRQ, AIA_TYPE_APLIC_IMSIC,
+@@ -516,6 +607,17 @@ static void rvserver_ref_machine_init(MachineState *machine)
      }
  
-+    if (qtest_has_machine("riscv-server-ref")) {
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/machine/realize-off",
-+                       test_rpmi_rvserver_ref_machine_realize_off);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/machine/realize-default",
-+                       test_rpmi_rvserver_ref_machine_realize_default);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/fdt/service-nodes",
-+                       test_rpmi_rvserver_ref_fdt_service_nodes);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/fdt/legacy-nodes",
-+                       test_rpmi_rvserver_ref_fdt_legacy_nodes);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/fdt/default-nodes",
-+                       test_rpmi_rvserver_ref_fdt_default_nodes);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/rpmi/platform-info",
-+                       test_rpmi_rvserver_ref_platform_info);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/base/probe-service-groups",
-+                       test_rpmi_rvserver_ref_probe_service_groups);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/hsm/hart-list",
-+                       test_rpmi_rvserver_ref_hsm_hart_list);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/migration/blocked",
-+                       test_rpmi_rvserver_ref_migration_blocked);
-+        qtest_add_func("/riscv/rpmi/rvserver-ref/migration/command-accepted",
-+                       test_rpmi_rvserver_ref_migration_command_accepted);
+     imsic_bits = imsic_num_bits(s->aia_guests + 1);
++    if (s->have_rpmi) {
++#ifndef CONFIG_LIBRPMI
++        error_report("RISC-V RPMI support is not compiled in");
++        exit(1);
++#else
++        if (kvm_enabled()) {
++            error_report("RISC-V RPMI support is not available with KVM");
++            exit(1);
++        }
++#endif
 +    }
+ 
+     /* Initialize sockets */
+     mmio_irqchip = pcie_irqchip = NULL;
+@@ -598,6 +700,28 @@ static void rvserver_ref_machine_init(MachineState *machine)
+                                 memmap[RVSERVER_RESET_SYSCON].base,
+                                 reset_syscon_io);
+ 
++#ifdef CONFIG_LIBRPMI
++    if (s->have_rpmi) {
++        MachineClass *mc = MACHINE_GET_CLASS(machine);
++        const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(machine);
++        g_autofree uint32_t *rpmi_hart_ids =
++            g_new0(uint32_t, machine->smp.cpus);
++        RiscvRpmiConfig rpmi_cfg;
++        Error *local_err = NULL;
 +
-     return g_test_run();
++        for (i = 0; i < machine->smp.cpus; i++) {
++            rpmi_hart_ids[i] = possible_cpus->cpus[i].arch_id;
++        }
++
++        rpmi_cfg = rvserver_ref_rpmi_config(s, rpmi_hart_ids,
++                                            machine->smp.cpus);
++        if (!riscv_rpmi_create(&rpmi_cfg, &local_err)) {
++            error_report_err(local_err);
++            exit(1);
++        }
++    }
++#endif
++
+     riscv_gpex_pcie_init(system_memory, pcie_irqchip,
+                          &rvserver_ref_memmap[RVSERVER_PCIE_ECAM],
+                          &rvserver_ref_memmap[RVSERVER_PCIE_MMIO],
+@@ -652,6 +776,7 @@ static void rvserver_ref_machine_instance_init(Object *obj)
+                                      "pflash1", RVSERVER_FLASH_SECTOR_SIZE);
+ 
+     s->aia_guests = RVSERVER_IRQCHIP_DEFAULT_AIA_GUESTS;
++    s->have_rpmi = false;
  }
+ 
+ static void rvserver_ref_machine_instance_finalize(Object *obj)
+@@ -687,6 +812,20 @@ static void rvserver_ref_set_aia_guests(Object *obj, const char *val,
+     }
+ }
+ 
++static bool rvserver_ref_get_rpmi(Object *obj, Error **errp)
++{
++    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(obj);
++
++    return s->have_rpmi;
++}
++
++static void rvserver_ref_set_rpmi(Object *obj, bool value, Error **errp)
++{
++    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(obj);
++
++    s->have_rpmi = value;
++}
++
+ static const HotplugHandler *
+ rvserver_machine_get_hotplug_handler(MachineState *ms, DeviceState *dev)
+ {
+@@ -747,6 +886,12 @@ static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
+                  "should be between 0 and %d.", RVSERVER_IRQCHIP_MAX_GUESTS);
+     object_class_property_set_description(oc, "aia-guests", str);
+ 
++    object_class_property_add_bool(oc, "rpmi", rvserver_ref_get_rpmi,
++                                   rvserver_ref_set_rpmi);
++    object_class_property_set_description(
++        oc, "rpmi", "Set on/off to enable/disable RISC-V RPMI devices; "
++        "requires librpmi and is unavailable with KVM");
++
+     assert(!mc->get_hotplug_handler);
+     mc->get_hotplug_handler = rvserver_machine_get_hotplug_handler;
+     hc->plug = rvserver_machine_device_plug_cb;
+diff --git a/meson.build b/meson.build
+index 434a193efe..41f6bcb676 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3444,6 +3444,10 @@ foreach target : target_dirs
+     foreach k, v: config_devices
+       config_devices_data.set(k, 1)
+     endforeach
++    if target == 'riscv64-softmmu' and get_option('default_devices') and \
++       not librpmi.found()
++      warning('riscv-server-ref machine will be built without RPMI support; install librpmi and configure with --enable-librpmi to enable RPMI')
++    endif
+     config_devices_mak_list += config_devices_mak
+     config_devices_h += {target: configure_file(output: target + '-config-devices.h',
+                                                 configuration: config_devices_data)}
 
