@@ -1,102 +1,101 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3096B606A31B
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 12:57:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14D52606A31B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 12:57:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dUiDkfUD;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=A6Y50l0H
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TyrwqkBE;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=JyY5uFo6
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOx1s-0007on-4X; Thu, 05 Nov 2026 07:57:20 -0500
+	id 1xOx1v-000891-Bs; Thu, 05 Nov 2026 07:57:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xOwzP-0004mM-29
- for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 07:54:48 -0500
+ id 1xOwzX-00056f-Pj
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 07:54:59 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xOwzM-0005w3-89
- for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 07:54:46 -0500
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1xOwzV-0005wn-01
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 07:54:55 -0500
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A59tehv1028357
- for <qemu-riscv@nongnu.org>; Thu, 5 Nov 2026 12:54:33 GMT
+ 6A59tQR1433380
+ for <qemu-riscv@nongnu.org>; Thu, 5 Nov 2026 12:54:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- q1+PZ9TlhscobZjeFY3tiHwZEPcW3uLOVSsV7DZ4XJw=; b=dUiDkfUD4c2ZxmgK
- GZ4m150wadnsTEPZXOQh0XGW+nxDNwPWpaQlsBsfNNILyzfZEWBvHoH064ggUyie
- o5tMncjrFPc7/cFL0iW7KeFAzJUiOj3SVuQw878bWCFqvIb2p8jK/bGevQWo41b6
- f66XITEtga2XBT46AJ1agQh7u+/sX+GFP/qeqhuHDFq7Qzi+YCS0c2kJ8qT32kI+
- 3g+lVRRHIAMtGfoQ78/sZ7yPjqLTgLmuQrNwvxsEs7Tweu83KwtzbbJfKmBDoRYD
- XpzTpwxCxEWVBMonDvLrfMpKQYPSTYiDX/yvYwjDmTVghEb3LUnwQxCvAl/nRy01
- DKAaAQ==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrkaq9uta-1
+ 54Wj8Ze5ODDpotjXvWsGMuJa2158rPlapy7ZWwi5knQ=; b=TyrwqkBE25IQ9hhX
+ yUN6zte3DGG5lyLeeyOJ8EF+38xYdMfYSVdJB22NAjlHxHnu92Yn4brQXgxwo+y+
+ Yvdi1k4zz9U6q5f58iWrSUrdOb7AB8ON2suIHNZcsdgeti4HCBKou78z/P0TLFDJ
+ cSWzA3JndGiCW3SGnS1IoWoEZiDkqBprs2zLNjfzgeDoPEnb2oQRObAeVBZD9pKS
+ 337Rholj3kcQWiy6H7yyp/tNMWW60tayMOfBP1p8Jg9tBJCStlIDAsIEwLKYYm5I
+ p0YkCN9Qp0lEj2uDCsQGVvVBt9tXK2mm7snZz96KQ2e2xCsSykRjRRnGiWO6dx0e
+ JpjPGw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrmcd9khs-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 12:54:32 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-944101e6367so123828485a.1
- for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 04:54:32 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 12:54:41 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93f32050e72so563547485a.1
+ for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 04:54:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793883272; x=1794488072; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1793883281; x=1794488081; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=q1+PZ9TlhscobZjeFY3tiHwZEPcW3uLOVSsV7DZ4XJw=;
- b=A6Y50l0HIg6l9ORe0aZ0hCOLGb+kg/jfOVOXwg8JxrEree+XqnAoziLkX58L3I/cwk
- oLc3G+5F7Q6afpfZ5JieL7xuyLACAc7jY49VoI2rZXwi87KE/WoJGsd2yWRWlp139QrD
- lZ1kc2FbTec4Seu9qnHPbg8AMBnuk8HWVKna7RW8EvbBEtgkuP8sShGzYjDPU594Fn/m
- 3B4hWR7WtzYLEUFI49Klm4ZVbiGX+sZv9eIeAbMyCFq/+LVmuNd3kCUyuoGC+hIYBeWa
- aIxanjaNiBZUQUe5noWMRKgFVvceKZUmAIGJeB6XOOQW83lTJBMEFYnHGSef283SS4Hi
- PJ2g==
+ bh=54Wj8Ze5ODDpotjXvWsGMuJa2158rPlapy7ZWwi5knQ=;
+ b=JyY5uFo6pKJs5lrCCCO85ApEK8gO7epVirTgtce+3ybhO3qeZbUmX75s5j2whbHVda
+ 7EoXQ3jrsOZswQIbDay1bqo872X6Phmm/wEAzFhvRBbrbIX9mPGyJ5IKoHwZvj849ffH
+ AvLJqU/X/z24YwSjZHykOUcnMzma2HipC0p4CVmt5tlwQAZ5ZszhlxBNvfe5KPElGlOf
+ v2B2ZhWtvnF+saLeoZ51IYUYkf2+MN5A2rYNyCeFyZ2eniNuX3fMq0JHZ94G6uBNQwK6
+ /0DWnry9CN0ELsVpHM5bj0NtJeZRhwZC9ahw+AcuJGPKxnQBPZJDdA4004hwtHGg6RmY
+ OeVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793883272; x=1794488072;
+ d=1e100.net; s=20260707; t=1793883281; x=1794488081;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=q1+PZ9TlhscobZjeFY3tiHwZEPcW3uLOVSsV7DZ4XJw=;
- b=sHlmXA07aUS3iW8fxsbCWCmquz9gTlN1Wo6yVItOBauE8V5BXqa+TDKPomki2LXFiU
- h+eV/jKP1U4G4xcoDR25S7uOUkAJZ1wm4L8GhXcCm95pOatA7Beck0K/roC56TanCX6c
- iFW/9DPY9eCyVtZmgaqzoqOPCk4HoubkwIt3i7Ovqwl6QrVV9iWoSZ/8xg+I7XZaOtOm
- wFkhpTvYpnEvya9yLxGDmGgGCqO/H/AYm1cQXs2BBZfXUR54zq7wWueg1AYMaJHCatoY
- vo88MMrortEbqboSsRyB3xvg0ulDp9qzVjkKZWTyP+qAXRTUj49pVw3nuipHJOI86jle
- zV9g==
-X-Gm-Message-State: APuU4Z/jRmXU5igKWoaGIGuIheQvo6oMLP94xSA2OUr6bXb7caOa5DEN
- XiD5XpPfFVxWSzmO0AvC8xNH98fQgARZgDJdLMJ361necFAoFwXUbLXPdTDd30C/aVdgV5g2pz9
- O7bOz9bx+s3c9Ojvj2IX0v2h7ghMsy1J5ocC3DjowbCn+qggQ03qymr9ZDA==
-X-Gm-Gg: AYBFou0mQeBqAFW7Dz0rNuSYOQfPLD+VW/KkF5AcH3g44DW39sZEbYcVqcmp6TkMqUi
- WvEbrtHPct7nIkKCpgY0uNZt1xOK5zgskLcKOnioUHzxssS+w3iponhi8xoUp5wlaFQl70yOh/V
- faSfQ0buMd5uYbtm1Ywk3WZ/JguaccfSgPxMVv6X0KdtdrzeeCVeaPMTf9B4+l7E03AVyaYGqgM
- kaqC6lGVhrUziQQ7cdRrNrrk86ccu43LJqCBItxJ6pZoKEaME8AgUOScof/kajskgOz6+jZJ65m
- 4yBMuLywkHu8angQFoLPdjR9cTKInsVm82CpkoP6fpxF6OmJCBeKyBcLiqD5pvLNfottyJqYl/o
- 6EYG/ajCT/7EYgymCL84FpdzIZrxZIdVkL4rwRyrlhmMh6F4cyxdNQ5CVHXpX8rQU95PLRycciC
- orP7lNQFtBRQY102WqvrTOqFKinGFklw==
-X-Received: by 2002:a05:620a:6085:b0:93f:22af:ccdc with SMTP id
- af79cd13be357-945e159682fmr374300785a.4.1793883272148; 
- Thu, 05 Nov 2026 04:54:32 -0800 (PST)
-X-Received: by 2002:a05:620a:6085:b0:93f:22af:ccdc with SMTP id
- af79cd13be357-945e159682fmr374297985a.4.1793883271704; 
- Thu, 05 Nov 2026 04:54:31 -0800 (PST)
+ bh=54Wj8Ze5ODDpotjXvWsGMuJa2158rPlapy7ZWwi5knQ=;
+ b=gvF91KS91f2KzYr5VunP77aiGydNfQQupJSFWYFSQXi8ivd/DhM0a+15LJfDcMrz24
+ TQehm85a2jmsgjc85QFX12pMLaFceZI1qxaKqFSPxVIBxBBYgboNpMf1xBYIojL0544j
+ lnX5rBHGAFw0P2NJ44Vy2rL7lBcB+/HqdF5+nFgws4uAY/qUxKwjO0SmYOoBknN70p20
+ UG5JK/vLcHOY4dnYDA2QJucjtOznMbrV+b5G2sl3+K5+IpkrXQR5OYJzncI+1tRUeGa3
+ jA627ZAqRxHQWdWh98QxRNKbjpkh4M7NS4TUeVxG76qpqRIoYHmg5nI9sTWlIr/Q3Brx
+ 1+Fg==
+X-Gm-Message-State: APuU4Z+4yHQvZHn1L4jq1Fvg2ortwVO9KISV9p57BIp7I0zUdu8ndIPK
+ c6DgN4nu64OqaIZmTU/pg+5y2pIDgzEVgEhOeeJ3AVJ9W4i/U6VWVxIJOKdEtwYNgXeLqAsNz4n
+ 2Bxs+ofSoeQIJ0OG5Z0EfxgfYD6dfoH6D1/a9vykNxGgmgrs+bsD8wXaJgQ==
+X-Gm-Gg: AYBFou3xcuABdXQyWVM8xMOI5Jk74e437FpFAJ72qEznyFfxAZ74YEI04IptxpgQIiH
+ C6vSw6Vnlqa7gBdlU+mCi13nI8Tk+PmgWUV/BJg7kk9zmR3qfYlJ00id+q4T7z85FizdoPWpopo
+ AbhrEk8HmqdRRIdb8MZbnK/vEVruNr4zCoMBakr/8vcML2nXgmLCoYLxqKX9Bd3E3gFqWOrrGIv
+ JcJtp1t18tjx2fk2AryGeBF4mpD5nOcYWij5YHwGJo/7O7BmYeQIv8RhfONPvuHLfTrYh0jB11G
+ AZACIuzvQ4NKJgJ9+p65ad/THHvpeFc2nTfqMoLfOKT+miZda9e22RGl+uOlR6i6y2zdP1U71Mk
+ dMyLScMme5yuUznxxdG5bBssdKYYNITuvRJUOqIeWj+wxSzTAXbHw4DeLr0z+BhrsIRgSGtRhJZ
+ iFFCHPzSFu5vDfIjkKloYUWZTRaLTVrg==
+X-Received: by 2002:a05:620a:8809:b0:93f:34c9:924d with SMTP id
+ af79cd13be357-94421695deamr2916897085a.35.1793883281110; 
+ Thu, 05 Nov 2026 04:54:41 -0800 (PST)
+X-Received: by 2002:a05:620a:8809:b0:93f:34c9:924d with SMTP id
+ af79cd13be357-94421695deamr2916894085a.35.1793883280618; 
+ Thu, 05 Nov 2026 04:54:40 -0800 (PST)
 Received: from localhost.localdomain (104.171.88.92.rev.sfr.net.
  [92.88.171.104]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b577ed823asm754033a12.21.2026.11.05.04.54.30
+ a640c23a62f3a-c4d0e4a49fasm166564966b.82.2026.11.05.04.54.39
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 05 Nov 2026 04:54:30 -0800 (PST)
+ Thu, 05 Nov 2026 04:54:39 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Yoshinori Sato <yoshinori.sato@nifty.com>
-Subject: [PATCH v2 15/17] target/rx: Replace deprecated sprintf() with
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
+Subject: [PATCH v2 16/17] libdecnumber: Replace deprecated sprintf() with
  snprintf()
-Date: Thu,  5 Nov 2026 13:52:00 +0100
-Message-ID: <20261105125203.40320-16-philmd@oss.qualcomm.com>
+Date: Thu,  5 Nov 2026 13:52:01 +0100
+Message-ID: <20261105125203.40320-17-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261105125203.40320-1-philmd@oss.qualcomm.com>
 References: <20261105125203.40320-1-philmd@oss.qualcomm.com>
@@ -104,32 +103,32 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: WNPcIGexA6Zmst0aA3PdEb9ep176bMdd
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA1MSBTYWx0ZWRfX7rsr6ItBovau
- DpDhN3xBTIgYKYAkb3T52d/OmXc0n3Gxv4R2XCN1E987oxuIupTBVm9qV7d57zZkH7FrwkNV4b9
- rXC1Lx/22FO0DUC8xlC5ayAtTTZ0OPA=
-X-Proofpoint-ORIG-GUID: WNPcIGexA6Zmst0aA3PdEb9ep176bMdd
-X-Authority-Analysis: v=2.4 cv=OZoNnRTY c=1 sm=1 tr=0 ts=6aec7c88 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=pBdeej1U2jlWEHTh2vTwjw==:17
+X-Authority-Analysis: v=2.4 cv=EOGTQFZC c=1 sm=1 tr=0 ts=6aec7c92 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=pBdeej1U2jlWEHTh2vTwjw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=emZr8bwPc9v7Of-wci8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA1MSBTYWx0ZWRfXyZy+7ExtMPpK
- 5JqLfpeclyskbR7vaGraS4/Sil9CDg/4l6oXpzTmSXDW7nrb39E9aHTOe5XaAwP82c3FTWYuxsx
- 4vEoHSYuHvti1xKzymMtAiuv0oHOONfqaV0/nC8CKtmnsrcNrOLW0T/ifnDsxcPSo5HoNysDSaT
- SzVHCyCK1S1MePGm7K2HR4TXdhLG4sWSpD3G7hL9NVpZMO4V7W0CeZvKW9IGbT6Bl2axNC+goPl
- Q0riromquZhw+h8Y/wVxtXk0GhtS5gI8ReeKvekHoIpuq6uCUpOJhdjfUfRsl2Gtvpp7E394Jx/
- 8t5Sz/Esv5q/nFsRkl84YumKjX0zBMoGjQ2Uw0e/qENoqx8rBZPZQ0369MYwGWlRvlOnc2vSe2r
- V/7APf7ScgKydr/37Rx0PXUm3XszTK4Z577YmWsicBvsKGUAi0pzVqTfWnIGbE4Rt/HKy/IPuEz
- S2x4Zdfed2/vDfDQ1Xw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=kSs1XlKta5HeGRuTdXcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: td8DKBNFMnlGfF-bn_fNUSLGBFa49w-3
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDA1MSBTYWx0ZWRfX3G5WTevULZzd
+ 4GZau+gkHzcD+9mhyusE/mhuUnOR90+KJMneH1DkFHBtq+PemYUiNLdCZOsFqjuRSq+8uGCLfBC
+ sVoGqKUNyw5+RTEN7XDGO3BeX+YLiPI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDA1MSBTYWx0ZWRfX6ZqWABEqsS0O
+ 4HBJsT4rzoqBzViNqGzVXQcvMt0EfaV0e1RigiBZdLDkR5iczTTf+/WKVsae+XlpRGbpi3Z6r7f
+ ShURV3nEaDxVBgFqFbr+OV+WeadpJpt5isLVPDcDOH6kfwOilqTbnEjDRXJqKERduOS9sUtto+N
+ MXPr7x58KxRQaC88vL9RHIki/vXcW3+er8OD+fgStOA8PxBresXp1mx6IjWXR/s0WnjxAkesPhY
+ BxPyO1VowmxPx66S++ci6ji+6XkOjkA0honGsdi9Qgh+gKcRX3FipLaIuSXm4smS9vu+goNOFIt
+ U4jX8kwPfoQIvTq8aRUFr6umPAqrJH251LT8nVDSIze5UlxPi1bb5F0oL98kt9yZFlkGo2Z8apZ
+ 5Q7Kc7/CXCf+fHz25Sw/5zMFST9GdiK5F4TP7IgJO1J77SePBWAQJhz64hTRK6aAxdXxuVX5iT6
+ OTE5/xkXABhHQtbomPw==
+X-Proofpoint-ORIG-GUID: td8DKBNFMnlGfF-bn_fNUSLGBFa49w-3
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-05_03,2026-11-04_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 bulkscore=0 clxscore=1015 malwarescore=0
- suspectscore=0 lowpriorityscore=0 impostorscore=0 priorityscore=1501
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ adultscore=0 clxscore=1015 suspectscore=0 bulkscore=0 phishscore=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610300000
  definitions=main-2611050051
 Received-SPF: pass client-ip=205.220.180.131;
@@ -159,28 +158,83 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Replace sprintf() by safer snprintf() to format dissassembly
-index, silencing -Wdeprecated-declarations produced by Apple
+Replace sprintf() by safer snprintf() to format hexadecimal
+debug, silencing -Wdeprecated-declarations produced by Apple
 clang 17.0.0.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- target/rx/disas.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ libdecnumber/dpd/decimal128.c | 4 ++--
+ libdecnumber/dpd/decimal32.c  | 4 ++--
+ libdecnumber/dpd/decimal64.c  | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/target/rx/disas.c b/target/rx/disas.c
-index 0eb2ee6f4507..2a67ecfd2fa3 100644
---- a/target/rx/disas.c
-+++ b/target/rx/disas.c
-@@ -167,7 +167,7 @@ static void rx_index_addr(DisasContext *ctx, char out[8], int ld, int mi)
-         g_assert_not_reached();
+diff --git a/libdecnumber/dpd/decimal128.c b/libdecnumber/dpd/decimal128.c
+index 1064fb25e01d..e4ff39c90bd2 100644
+--- a/libdecnumber/dpd/decimal128.c
++++ b/libdecnumber/dpd/decimal128.c
+@@ -543,7 +543,7 @@ void decimal128Show(const decimal128 *d128) {
+ 
+   if (DECLITEND) {
+     for (i=0; i<DECIMAL128_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d128->bytes[15-i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d128->bytes[15-i]);
+       }
+     printf(" D128> %s [S:%d Cb:%02x Ec:%02x] LittleEndian\n", buf,
+ 	   d128->bytes[15]>>7, (d128->bytes[15]>>2)&0x1f,
+@@ -552,7 +552,7 @@ void decimal128Show(const decimal128 *d128) {
      }
+    else {
+     for (i=0; i<DECIMAL128_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d128->bytes[i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d128->bytes[i]);
+       }
+     printf(" D128> %s [S:%d Cb:%02x Ec:%02x] BigEndian\n", buf,
+ 	   decimal128Sign(d128), decimal128Comb(d128),
+diff --git a/libdecnumber/dpd/decimal32.c b/libdecnumber/dpd/decimal32.c
+index 34ff0fe95991..bc16361c82de 100644
+--- a/libdecnumber/dpd/decimal32.c
++++ b/libdecnumber/dpd/decimal32.c
+@@ -470,7 +470,7 @@ void decimal32Show(const decimal32 *d32) {
  
--    sprintf(out, "%u", dsp << (mi < 3 ? mi : 4 - mi));
-+    snprintf(out, 8, "%u", dsp << (mi < 3 ? mi : 4 - mi));
- }
+   if (DECLITEND) {
+     for (i=0; i<DECIMAL32_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d32->bytes[3-i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d32->bytes[3-i]);
+       }
+     printf(" D32> %s [S:%d Cb:%02x Ec:%02x] LittleEndian\n", buf,
+ 	   d32->bytes[3]>>7, (d32->bytes[3]>>2)&0x1f,
+@@ -478,7 +478,7 @@ void decimal32Show(const decimal32 *d32) {
+     }
+    else {
+     for (i=0; i<DECIMAL32_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d32->bytes[i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d32->bytes[i]);
+       }
+     printf(" D32> %s [S:%d Cb:%02x Ec:%02x] BigEndian\n", buf,
+ 	   decimal32Sign(d32), decimal32Comb(d32), decimal32ExpCon(d32));
+diff --git a/libdecnumber/dpd/decimal64.c b/libdecnumber/dpd/decimal64.c
+index 11e0674fa7c8..18438c1de1c3 100644
+--- a/libdecnumber/dpd/decimal64.c
++++ b/libdecnumber/dpd/decimal64.c
+@@ -530,7 +530,7 @@ void decimal64Show(const decimal64 *d64) {
  
- static void prt_ldmi(DisasContext *ctx, const char *insn,
+   if (DECLITEND) {
+     for (i=0; i<DECIMAL64_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d64->bytes[7-i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d64->bytes[7-i]);
+       }
+     printf(" D64> %s [S:%d Cb:%02x Ec:%02x] LittleEndian\n", buf,
+ 	   d64->bytes[7]>>7, (d64->bytes[7]>>2)&0x1f,
+@@ -538,7 +538,7 @@ void decimal64Show(const decimal64 *d64) {
+     }
+    else { /* big-endian */
+     for (i=0; i<DECIMAL64_Bytes; i++, j+=2) {
+-      sprintf(&buf[j], "%02x", d64->bytes[i]);
++      snprintf(&buf[j], sizeof(buf) - j, "%02x", d64->bytes[i]);
+       }
+     printf(" D64> %s [S:%d Cb:%02x Ec:%02x] BigEndian\n", buf,
+ 	   decimal64Sign(d64), decimal64Comb(d64), decimal64ExpCon(d64));
 -- 
 2.55.0
 
