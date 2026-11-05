@@ -1,130 +1,134 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1DC6606A32C
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 07:09:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD565606A326
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 07:42:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kaod.org header.i=@kaod.org header.a=rsa-sha256 header.s=ovhmo393970-selector1 header.b=UuPZRUKj
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=PkqHwYvi
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOrb3-0005Ok-KB; Thu, 05 Nov 2026 02:09:17 -0500
+	id 1xOs6b-0007Hq-2g; Thu, 05 Nov 2026 02:41:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1xOraw-0005Mz-Az; Thu, 05 Nov 2026 02:09:10 -0500
-Received: from smtpout1.mo2.mail-out.ovh.net ([79.137.123.219])
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xOs6Y-0007HE-Uh; Thu, 05 Nov 2026 02:41:50 -0500
+Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
+ ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <clg@kaod.org>)
- id 1xOrau-0002aT-Ls; Thu, 05 Nov 2026 02:09:10 -0500
-Received: from director1.derp.mail-out.ovh.net
- (director1.derp.mail-out.ovh.net [79.137.60.221])
- by mo2.mail-out.ovh.net (Postfix) with ESMTPS id 4jKthS1Jt4z41qW;
- Thu,  5 Nov 2026 07:08:55 +0000 (UTC)
-Received: from director1.derp.mail-out.ovh.net
- (director1.derp.mail-out.ovh.net. [127.0.0.1])
- by director1.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <jamin_lin@aspeedtech.com>; Thu,  5 Nov 2026 07:08:55 +0000 (UTC)
-Received: from mta6.priv.ovhmail-u2.ea.mail.ovh.net (unknown [10.110.96.187])
- by director1.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4jKthR2cCMz6NCm; Thu,  5 Nov 2026 07:08:55 +0000 (UTC)
-Received: from kaod.org (unknown [10.1.6.6])
- (Authenticated sender: clg@kaod.org)
- by mta6.priv.ovhmail-u2.ea.mail.ovh.net (Postfix) with ESMTPSA id 710011B43BFE;
- Thu,  5 Nov 2026 07:08:52 +0000 (UTC)
-Authentication-Results: garm.ovh; auth=pass
- (GARM-112S00680b72f4a-3594-49bb-814c-083d2effd0ee,
- 55F4AE82A352CC4A4912F42944C0BD1B07566F15) smtp.auth=clg@kaod.org
-X-OVh-ClientIp: 82.64.250.170
-Message-ID: <d9865aab-7e92-48f9-a628-3c1d63cf3b16@kaod.org>
-Date: Thu, 5 Nov 2026 08:08:51 +0100
+ (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
+ id 1xOs6V-0006yX-Ub; Thu, 05 Nov 2026 02:41:50 -0500
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=c6Z7i6yjlyPci2lpTy9tZIbjnsnYePufY1EqDWMakQzbRj7jxUgpLZg6qegGUTr4TuH+Kjttof9Twv7HBuXH02r2li7a6ofCrkT75lYuoGZS84K/EWZ3jt4e/dpjh9yLTtpxYfREeEnCUbXzHd0IaH2Ro5PxoAE3V5ogPFNUcZdfTViuawVbrhT8ndhQgg56/XtC2LzA8bTD6SCOtO4mEV2ksDYit5e2r612gkCFUJ5t1kAnj3J28rHySXW/3Zbnaimc1LD5RRs5ymIyqnhhr9x15p2QmnYwsvW4oR15CFnBdeVBIAA2JiQwfoHH2gdvOtHYX2DiqfnJHF6gU8V3GQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eP63kEllUrcbgZaQlDpIbQGMxtiinIzvznAhSfRP6Zc=;
+ b=OO3cCxHT3cWkq/uodsEHPUrG8YKTUt42lvmHyMubSWV7m7wU/10t/w1Rhv93htLKI7WyQyuZ+8UKUqqgrqQ8VLYQgp9mTHRV7ZII7t1B6cqaic23Uw4wuWgt8CWn0Er0UO93cJrNfKkMrYH4AwcSqa1SuoGz5LcBNwh3UsJjtxbGSXwaqk1WicWDsQnEifjVarxL4g0BkYDIdzK7DWO08D77VXY43OBlPdXPa7VCJN/C6tWvTh2ZaEmtIMmgSK2i8iKZyNI7kWGKp0zwF0UJnuGaNoUTMNncHCex7vK1mNRab74eu9M6mnoA9mUBd3ta7dkEnR4NqYnEYFT9ZTTQXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eP63kEllUrcbgZaQlDpIbQGMxtiinIzvznAhSfRP6Zc=;
+ b=PkqHwYviWmZ8k4Zh9xDgtyOb/7rXQz7dpMcIY8ZTC/eDRlDm8+cg6gsycO2xCxV8Mco95BMDAcxbYlNREu1Wt564hFBmaHm+0NNiGotO0/C6+HbQ92YYG8Iv+I1svvC5oBYOj+RxJVhlJCwncDBXmr/StsUIh9lnS2Zqjc3rWO6LPd3xM+ZZuSgrtY4sGhkCPhrTiMOfS0xKavGeCGApQvD0gfy3bjLboSR4H0Nk0PziHFtvfUYgwYzziUcVw8Hd3NvuRN66hVVOvZ/hYENQkUM33KYnkfg5nlbopWS3ZKEFh20zR2NLFEMr0iHKvbZRY9un1YhPtYARNh/0s9uBUg==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
+ by KL1PR02MB6569.apcprd02.prod.outlook.com (2603:1096:820:ee::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.9; Thu, 5 Nov 2026
+ 07:41:37 +0000
+Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
+ ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0592.009; Thu, 5 Nov 2026
+ 07:41:35 +0000
+From: Chao Liu <chao.liu@processmission.com>
+To: WX Chen <wxchen0913@gmail.com>
+Cc: Chao Liu <chao.liu@processmission.com>, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH] target/riscv: use gen_goto_tb for vsetvli
+Date: Thu,  5 Nov 2026 15:41:07 +0800
+Message-ID: <20261105074115.99275-1-chao.liu@processmission.com>
+X-Mailer: git-send-email 2.56.0
+In-Reply-To: <20261104-research-vsetvli-direct-chain-20261104-v1-1-7d5737100a27@gmail.com>
+References: 
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PH8PR07CA0036.namprd07.prod.outlook.com
+ (2603:10b6:510:2cf::9) To TYNPR02MB9351.apcprd02.prod.outlook.com
+ (2603:1096:405:3d0::15)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/50] Aspeed: I2C device models and the Minerva BMC
- machine
-To: Emmanuel Blot <emmanuel.blot@free.fr>, qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Steven Lee <steven_lee@aspeedtech.com>, Troy Lee <leetroy@gmail.com>,
- Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Joel Stanley <joel@jms.id.au>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, qemu-arm@nongnu.org,
- Patrick Leis <venture@google.com>, Fabiano Rosas <farosas@suse.de>,
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- qemu-ppc@nongnu.org, qemu-riscv@nongnu.org,
- =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Jamin Lin <jaminlin1207@gmail.com>, =?UTF-8?Q?C=C3=A9dric_Le_Goater?=
- <clg@redhat.com>, Bernhard Beschow <sgentey@gmail.com>,
- Glenn Miles <milesg@linux.ibm.com>
-References: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
-From: =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>
-Content-Language: en-US, fr
-Autocrypt: addr=clg@kaod.org; keydata=
- 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
-In-Reply-To: <20261015-bmc-minerva-v3-0-7d50c8a108e5@free.fr>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-x-ovh-tracer-id: 3136475665727728685
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTEdTYUAP8KEUvCi930cdxMIhoZaXpe+NULV0y2JocmafdcfvTMiF/01r5Jd7zFZJYeIW3BdcfhioKuxVNn8h9/hXtpa4Av+vceDfFOOFLRrJbMmGdC755VtB3L4ug6dXaGDMrb5zG/ItyCnqhwtiSyMmBAeGqzo7ZMiw5isiHG3lpv80iNF/SIm1+SUPRZLMc5lRqUa6qWc3Pydz9mlrk1R5ABdya9Sv6RyHWaSw7s2egL3xhobm+XLyi7Cl4Ox1LxNmUn7EGiNMuT9Ea3wnZeF8qswZ9mcMxqiQVPrjMNG6tE+fgoom+6VxiClYiFarmpJSdXekj6HQDiSfcgPJWdxaenMQdqgt3RP0PEZvkB5FqGsOOjYuqIYJoQdZAuyVUixP82rX86rv0C05brrSBhMqhHYMyt/b04U69dL1s+LI2lljrHQ/ZCJNYDvx732/r+s+msqtpm+TvI+To5FAiCcnA8dU+dOFEF/2AufXTcnPsczwu++au7IfR4U8zqVPBy0RJpQJ4p076AkdCnYCe+jm6A0D/PKvug2GA9zh6nUXvH/+kLa+xOh2ZWpxCKPsQ+aaiPQoIztMcbqV6RtJaRJCjeEfVB/IJl/SRRR6OxdGn7/19bZCczGdzSifj802ccf6bD1bdEA6MZgb0ByEOvm8qXYSzGhMgm5gGueaBjscA
-DKIM-Signature: a=rsa-sha256; bh=jrv2EicpyiaSUQuBol8nAUD8dSXvYSHsk3kF4O1QjIA=; 
- c=relaxed/relaxed; d=kaod.org; h=From; s=ovhmo393970-selector1;
- t=1793862538; v=1;
- b=UuPZRUKj5L9BSLcbMUu2UATryp/F6XXXQdHa1TFQDCXXX6Qi2/rUlgVgow3x8MmznSj/rJTU
- 9dj3L8uI+9oznnHqr1EpCYkZe3QFgX06NeouhSjQl6GEfpINItuqP+tDd5w8MFmE7w9sUBTH1ow
- /nJMPxcszXfQkeEI7InUFbEANgKprXqC+q/MeAx5Wd5HMq7dfycQ+wYEj+hEngnvJ0KyQ2h/2d6
- ReXHkedltzN5wsC2q3lU/Bf8H9uZ/zg1CFqRk7+3KBQh98oM71+qdTOS7EYr4oNVqrYc4Vb7+Dz
- ov3Jftrxl/xVhnxRasLsTCjUWrbwmR3IT4LABGlb5uCBQ==
-Received-SPF: pass client-ip=79.137.123.219; envelope-from=clg@kaod.org;
- helo=smtpout1.mo2.mail-out.ovh.net
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|KL1PR02MB6569:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4bce1876-6b9e-4d7c-b49c-08df3b1037f5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|23010399003|366016|1800799024|260925021311599003|260925021911599003|260925022911599003|56012099006|261021123027099003|261021121427099003|261009223027099003|261022105027099003|261102123227099003|261022075727099003|261026140227099003|261026121527099003|261028144727099003|10067099003|22082099003|18002099003|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info: quKRSp0AhuyLkCztOCDhermYYOdhwJ5aqBFsj9SEykFjbN2CyHnIg3PVcAW7lunnzy5AS1Kvw1jjq4axm/W5D5P4PBr8hgc4VLRZrNxTvwxIPUJlq3tzBGzHye9+GRzkYHEqETcQhPBVPMf8zlEBhkrAyEkLUWbWr/buB2WWpiUGxu8DaYVm1nJjp9Yyc/VSqkS3CK8lKcJ17Pwa80o4ScPKjiX+8Aqrd9Q+zrCQ7NAF28HT9F903NNgvui03PsNXkrKw3J7h9gPLPQ2T908m28EU82lpHkQxf44qJCdZwYwkSDBO6kNVJS5vYMpVmv7O1pRaS7UIeOCJ8ar5Gf/PMqA5rZjsqMv408N3ThP1wuoZdvUQCKOC8H9I1fBXJBWEkcCaduquaS12p7lIDe1YVNGc2dkyQiydiIKsdIjkD4ILtl2v9iWcxiOczSp7cIPt5od9EdwwBGTvx6l89Wnl7jvcVsQ8KWDPtVuFqzDZiKO15p54OewIdKi5r399cdzWcmSHmSpxtn1bi3mJ19VgOq4SOMEt/8hsNWIxh60NzzqHR7J8u5RMJ6JHNg7vewIleJuoENz5jW2lWHc46zVV92mCa64wXethXzJGFGEWLFoIsZo2WS5iPp6eoBB8QL42ObSjqvav7E8zXFh1fS89o1FtX4jOYvOkqbB3mE5GUE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(260925021311599003)(260925021911599003)(260925022911599003)(56012099006)(261021123027099003)(261021121427099003)(261009223027099003)(261022105027099003)(261102123227099003)(261022075727099003)(261026140227099003)(261026121527099003)(261028144727099003)(10067099003)(22082099003)(18002099003)(6133799003)(3023799007);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?OcGl3v/vqAGV1knya/LrchZmDAbPGQhAZMkz0Ck0vCbrhwVGejiUHgW65toC?=
+ =?us-ascii?Q?+PmfUuHj+daC2WP5FlHQbhbXsq7SArf/qhiJyHGBqApKTFc3/gjURNCO4eS1?=
+ =?us-ascii?Q?tWvPQIT5jpkVzLBmZIAs7p6KKTZ152p+DVg83tyg37vlmAHH4t8Ry6tHtQtS?=
+ =?us-ascii?Q?3uDRwyjazEdGou4YR/ziVUcCcAlfGGhEM9s/EuK/E5PIntM7z4e2CTlpL76u?=
+ =?us-ascii?Q?quWnnY0CxRBlPpkkAmp+nco1SzQ/PHlicnYIrj5oDVUEf5amhmtXooT+UGd4?=
+ =?us-ascii?Q?J0eIU3iEGanCnIFFqGGfTxRLr/yApYr0m0uws/fFL4IqnHlJlruFbFvrn1D+?=
+ =?us-ascii?Q?x6es9j0kX/zDENlQwvVX48IyyQvuW+BW3512ujcVCkASu5PoCUCdWXr8WbE5?=
+ =?us-ascii?Q?OvoEK164/wib8/DT8D1F/PHjMtqSLBMpIGOcx4CXyEbWxJ4pbnK5nCtsyPb2?=
+ =?us-ascii?Q?sLryjt4gSH2nBwY4YYYNZTBNXtEuSQEhFF3GdiUM4wCQjxK45PMDyxRKIIaJ?=
+ =?us-ascii?Q?nx4frlX9+uLMoOV3zjrZ2IzwF+0O2GRBH3YSQyTDOdbHYCzSRJ98mj4c9mQJ?=
+ =?us-ascii?Q?l/hQLYEvH4RF2WHl4tbYgyhoPOvDwO/KCZQSP7nA38Ywrx4aEc4XmF115yHv?=
+ =?us-ascii?Q?EZjWxVBtrztVrR52cHr1NKs7/nvWDOdzxlmJWips+ljijbjRNy8MsBGhxGSx?=
+ =?us-ascii?Q?vMvBwDzIVkRHqFw+ECkxjrszRtBNWmpkGY48KY8lqUuTkjQo6nLff+L5MZYi?=
+ =?us-ascii?Q?PrwmJfce3+7DNPx+yHEL51VhvIrkgkZmVr40QUzDTdbLRdJJztyEsu5aCz1s?=
+ =?us-ascii?Q?trTUHuiBR7Uq4FBvxFzqBQOYa21M8ei7C6EwEtebLChKB5yFLRfqo3GncsDn?=
+ =?us-ascii?Q?qNfLWrmzeChGYGw4nKDeI5s3o+7NbqgvRdz+KLpc96z0ORGWAsuwRi8600o3?=
+ =?us-ascii?Q?VMTvTWX/A283L6D8HdF0+sTRPujrmc+BOSqqujdAhM+1+i7XjA0d9Xxu/SLv?=
+ =?us-ascii?Q?n578xaT0+oi1vZ1Z22j7awAb0KaL196oKBq7HXx+8HQeU3IqjR9biuM+PupT?=
+ =?us-ascii?Q?GKsRIrExtkq03mEQw36FzZ4+bT2/TizWOTU3JvNNyV+W7N4wSHcy4/m0SzUB?=
+ =?us-ascii?Q?NtOriyT7ivQd/3wV6ThfIzS4shNOtShYaCyval1RPeNbnGZDpBUBybe4HYtu?=
+ =?us-ascii?Q?83i3DMwbdclmDsg4q5NhlydEVLNyiCwcQaPZMJLcSj1s4b6XdDkZ0DKBRALO?=
+ =?us-ascii?Q?eQDQd/UN3GEj+oH104l3bogIOxHJ9NS6dz10URRMEBSd4KsTadcBGL5i2Wik?=
+ =?us-ascii?Q?l77o6D9W1yw+IcfKPj44gP7YniMknxrcvg5B9G4TE4j0caUscnF7TsQah2kO?=
+ =?us-ascii?Q?oLeosmSjx9GiSSYxND15dnInaW+B70AQpGDq3RZk0+YyAeZh8wKid7l8NTBG?=
+ =?us-ascii?Q?1PFb2rxH6nJ1RL7N/PEAbF0UMfxXaLxo4uEP/oyBAwJwwCqc8fLfh2J8eG2L?=
+ =?us-ascii?Q?yriGJ02zwzxZgjOfRVsiD2k/wFsK1ewdL05tQ26ALVdZd954mOuD5tE9vI1k?=
+ =?us-ascii?Q?O0HBKfU4+5QuIhzQjWQYTAKkuRYVDq7c3Vbj8rtdts73e5ZAvgkE/mJG/H5x?=
+ =?us-ascii?Q?ZHuOqnJPKM018ru18ctEL3s11sXd3BW/DMED0h2enRxLoR9cdjH0sJgzMqmP?=
+ =?us-ascii?Q?WCfFOcSTLk2Zd/KFfdxoUEGr6fySy8yT/VSZbKxtpcLw5lynre7J1mP1BxpO?=
+ =?us-ascii?Q?B9hmvutUaiagMW8qgonLszwmHB50efg=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4bce1876-6b9e-4d7c-b49c-08df3b1037f5
+X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 07:41:35.6292 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Ow0Ex4Xv65QYJiSVOQSgbRxugw6K5P8cweySjFAtppYSBHB/HugNSHaRoq2TrkWoDqLE5Bnf9Bf7caPXMkXgjFZGqOH5/05nUARt1dwmSXk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KL1PR02MB6569
+Received-SPF: pass client-ip=2a01:111:f403:c405::5;
+ envelope-from=chao.liu@processmission.com;
+ helo=TYPPR03CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,46 +140,219 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello Emmanuel,
+Hi Wu Xing,
 
-On 10/15/26 11:27, Emmanuel Blot wrote:
-> Add the minerva-bmc machine and the I2C device models it needs.
+Thanks for the contribution! I have few comments for you.
+
+On Wed, 04 Nov 2026 15:55:24 +0800 WX Chen <wxchen0913@gmail.com> wrote:
+
+> This patch uses gen_goto_tb() to reduce the overhead of the
+> unconditional lookup_and_goto_ptr() exit currently generated
+> for vsetvli.
 > 
-> Based on master, at:
->    615ece3c40 ("Merge tag 'for-upstream' of
->    https://gitlab.com/bonzini/qemu into staging")
+> The shared do_vsetvl() function handles both vsetvl and vsetvli.
+> The two instructions differ primarily in the source of their vtype
+> operand: vsetvl takes it from a register, while vsetvli provides it
+> as an immediate.
 > 
-> New models:
+> When translating vsetvli, the immediate vtype provides information
+> that can be used to optimize the exit generated by do_vsetvl().
 > 
->    INA230   TI 36V current-shunt and power monitor
->    INA238   TI 85V current-shunt, power and temperature monitor
+> To use gen_goto_tb(), each jump slot must correspond to a deterministic
+> successor-TB lookup key (pc, flags, cflags, cs_base) for a given source
+> TB. The relevant state changes are confined to the vector-related
+> translation state: VILL, SEW, ALTFMT, VSTART_EQ_ZERO, VS, LMUL, VTA,
+> VMA, and VL_EQ_VLMAX.
+> 
+> For the vsetvli forms optimized by this patch, given the CPU
+> configuration and source TB context, the immediate vtype and existing
+> state update flow determine the other relevant translation state.
+> Only VL_EQ_VLMAX can vary with AVL. This patch therefore uses separate
+> jump slots depending on whether the returned VL equals VLMAX,
+> enabling direct TB linking after vsetvli.
+> 
+> The register-vtype vsetvl instruction retains the existing lookup
+> path, as its vtype is not known at translation time.
+> 
+> Measured on an AMD Ryzen AI 9 H 365 (x86-64) host, using qemu-riscv64
+> with -cpu rv64,v=true,vlen=128,elen=64. A RISC-V GCC 14.2.0 cc1 built
+> for rv64gcv compiles the packages with
+> -O2 -g0 -march=rv64gcv -mabi=lp64d. Only cc1 runs under emulation;
+> make, the compiler driver and cross-binutils run on the host.
+> 
+> Each variant is warmed up once, followed by three paired clean builds
+> in AB/BA/AB order, using -j1 and fixed host CPU affinity (CPU 7).
+> The SQLite workload builds the amalgamation and command-line shell.
+> Median build wall times are:
+> 
+>                     Before (s)    After (s)    Wall time reduction
+>     LZ4 1.10.0         125.120      123.867                  1.00%
+>     zlib 1.3.1          70.269       69.911                  0.51%
+>     SQLite 3.45.1      438.322      433.213                  1.17%
+> 
+> In a separate untimed test, a loop executes two vsetvli instructions
+> per iteration for 37 iterations. Host-side GDB entry breakpoints show
+> that helper_lookup_tb_ptr() entries at the two sequential successor
+> PCs fall from 74 to 0.
+> 
+> Signed-off-by: WX Chen <wxchen0913@gmail.com>
+> ---
+>  target/riscv/tcg/insn_trans/trans_rvv.c.inc | 25 ++++++++++++++++++++-----
+>  1 file changed, 20 insertions(+), 5 deletions(-)
+> 
+> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..5e9a861b6af1565485e9be89b393d0d64080a662 100644
+> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+> @@ -191,7 +191,8 @@ static bool require_noover(const int8_t dst, const int8_t dst_lmul,
+>      return !is_overlapped(dst, dst_size, src, src_size);
+>  }
+>  
+> -static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+> +/* A negative vtype denotes the register-supplied form. */
+> +static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2, int vtype)
+I suggested that we replace `int vtype` with `uint32_t vtype` and `bool vtype_is_imm`:
 
-The series has been broken by recent changes. Need a resend. You
-can keep the Reviewed-by.
+static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2,
+                      uint32_t vtype, bool vtype_is_imm)
 
->    DS1339   RTC, a DS1338 variant
+>  {
+>      TCGv s1, dst;
+>  
+> @@ -215,8 +216,22 @@ static bool do_vsetvl(DisasContext *s, int rd, int rs1, TCGv s2)
+>      gen_set_gpr(s, rd, dst);
+>      finalize_rvv_inst(s);
+>  
+> -    gen_update_pc(s, s->cur_insn_len);
+> -    lookup_and_goto_ptr(s);
+> +    if (vtype >= 0 && (rd != 0 || rs1 != 0)) {
+I would like to discuss this a bit further. In fact, we can divide this into
+five cases:
 
-Please send in a separate series.
+   Case                    Condition                Current implementation
+------------------------------------------------------------------------------
+1. vsetvl  rd, rs1, rs2    vtype from rs2 register  keep lookup_and_goto_ptr()
+2. vsetvli x0, x0,  imm    rd == 0 && rs1 == 0      keep lookup_and_goto_ptr()
+3. vsetvli rd, rs1, imm    rd != 0 && rs1 != 0      new path
+4. vsetvli x0, rs1, imm    rd == 0 && rs1 != 0      new path
+5. vsetvli rd, x0,  imm    rd != 0 && rs1 == 0      new path
 
->    PCA9545  4-channel I2C mux with per-channel interrupt inputs
+Currently there are two TB exit forms:
 
-That's merged now.
+ - Case1 and Case2 is the existing lookup_and_goto_ptr() exit.
+ - Case3 ~ Case5 is the new split exit, which compares the returned VL against
+   VLMAX and uses two goto_tb slots.
 
-As said to Alexander, there is not much point in adding new machines
-types (we have tons already) without the sensors and tests. So sensor
-should be reviewed first.
+The new path can be improved. For rs1 == 0 a single gen_goto_tb() call is
+enough, because the successor TB lookup key cannot change between executions.
 
+So, We give three exit forms:
+
+  1. lookup: keep lookup_and_goto_ptr()
+  2. single: one gen_goto_tb() slot
+  3. split: compare VL against VLMAX and use two gen_goto_tb() slots
+
+The cases map to the exit forms as follows:
+
+  Case   Exit form
+  --------------------------------------
+  1      lookup
+  2      lookup
+  3      split, or single when maxsz < 8
+  4      split, or single when maxsz < 8
+  5      single
+
+For cases 3 and 4, we care about the case where VL is not equal to
+VLMAX. To explain this, let us look at VL_EQ_VLMAX first. It is computed
+in riscv_get_tb_cpu_state() in target/riscv/tcg/tcg-cpu.c:
+
+  vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) && (maxsz >= 8)
+
+In two cases, the AVL comes from a GPR rather than an immediate, so
+VL may or may not equal VLMAX. Using the split exit is fine in that
+situation. When maxsz < 8, however, VL_EQ_VLMAX is forced to zero. In
+that case, both VL values map to the same successor key during the TB
+lookup, so a single slot is enough.
+
+> +        uint32_t vsew = FIELD_EX32(vtype, VTYPE, VSEW);
+> +        int8_t lmul = sextract32(FIELD_EX32(vtype, VTYPE, VLMUL), 0, 3);
+> +        uint32_t vlmax = vext_get_vlmax(s->cfg_ptr->vlenb, vsew, lmul);
+> +        target_ulong pc_save = s->pc_save;
+> +        TCGLabel *not_vlmax = gen_new_label();
+> +
+> +        tcg_gen_brcondi_tl(TCG_COND_NE, dst, vlmax, not_vlmax);
+> +        gen_goto_tb(s, 0, s->cur_insn_len);
+> +        s->pc_save = pc_save;
+> +        gen_set_label(not_vlmax);
+> +        gen_goto_tb(s, 1, s->cur_insn_len);
+> +    } else {
+> +        gen_update_pc(s, s->cur_insn_len);
+> +        lookup_and_goto_ptr(s);
+> +    }
+The following code is for your reference:
+
+    if (!vtype_is_imm || (rd == 0 && rs1 == 0)) {
+        gen_update_pc(s, s->cur_insn_len);
+        lookup_and_goto_ptr(s);
+    } else {
+        uint32_t vsew = FIELD_EX32(vtype, VTYPE, VSEW);
+        int8_t lmul = sextract32(FIELD_EX32(vtype, VTYPE, VLMUL), 0, 3);
+        uint32_t vlmax = vext_get_vlmax(s->cfg_ptr->vlenb, vsew, lmul);
+
+        if ((rs1 == 0) || ((vlmax << vsew) < 8)) {
+            gen_goto_tb(s, 0, s->cur_insn_len);
+        } else {
+            target_ulong pc_save = s->pc_save;
+            TCGLabel *not_vlmax = gen_new_label();
+
+            tcg_gen_brcondi_tl(TCG_COND_NE, dst, vlmax, not_vlmax);
+            gen_goto_tb(s, 0, s->cur_insn_len);
+            s->pc_save = pc_save;
+            gen_set_label(not_vlmax);
+            gen_goto_tb(s, 1, s->cur_insn_len);
+        }
+    }
 
 Thanks,
+Chao
+>      s->base.is_jmp = DISAS_NORETURN;
+>      return true;
+>  }
+> @@ -244,13 +259,13 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
+>  static bool trans_vsetvl(DisasContext *s, arg_vsetvl *a)
+>  {
+>      TCGv s2 = get_gpr(s, a->rs2, EXT_ZERO);
+> -    return do_vsetvl(s, a->rd, a->rs1, s2);
+> +    return do_vsetvl(s, a->rd, a->rs1, s2, -1);
+>  }
+>  
+>  static bool trans_vsetvli(DisasContext *s, arg_vsetvli *a)
+>  {
+>      TCGv s2 = tcg_constant_tl(a->zimm);
+> -    return do_vsetvl(s, a->rd, a->rs1, s2);
+> +    return do_vsetvl(s, a->rd, a->rs1, s2, a->zimm);
+>  }
+>  
+>  static bool trans_vsetivli(DisasContext *s, arg_vsetivli *a)
+> 
+> ---
+> base-commit: a3565937b39779d4e3704298095f566e7559ad53
+> change-id: 20261104-research-vsetvli-direct-chain-20261104-206bc2104ddb
+> 
+> Best regards,
+> -- 
+> WX Chen <wxchen0913@gmail.com>
+> 
+> 
+> 
 
-C.
-
+Sent using hkml (https://github.com/sjp38/hackermail)
 
