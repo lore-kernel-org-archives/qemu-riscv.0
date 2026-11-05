@@ -1,130 +1,184 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D3BD606A331
-	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 07:56:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E06CC606A31B
+	for <qemu-riscv@archiver.kernel.org>; Thu,  5 Nov 2026 08:28:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fiiXmDmo;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=KcXSKfoN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xOsKs-00047s-Vz; Thu, 05 Nov 2026 02:56:39 -0500
+	id 1xOsoy-0006Ys-NM; Thu, 05 Nov 2026 03:27:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xOsJD-0003Py-2w; Thu, 05 Nov 2026 02:55:03 -0500
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xOsos-0006X8-MU
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 03:27:38 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xOsJ9-0002yM-Cb; Thu, 05 Nov 2026 02:54:54 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lRzQk00nXDR/fUZMKPcA2FFn+IcQrC/0nrefXuZy3uoOagNJvNv6FlzgCeunFWcF9eppMNiLJ8nvMdviBI4XO9nu4iHOFpevPH5EWDn5gSoqH6Cw9VAMHxcFuudjH4U8yGAbB4GwJ6m6nrfV8/b+N5DG7SWtVw7qyfPsxdYbi8wD0yI0QWKLbyAP+/t4SODLlIqeGOkioR0Lyvbhj9m0QUCG/2qw7OFfA59DnUVJnWqDuEszzs+SkVMiYlwkbbHlEh1FP/DWGCKYM83E/PkyB1yI25rpea3ylHC9hPmHOh3lrIXxz8kuwXACA91r41MaOMtMiQjr32ZF9OD0jEgfPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gcaVt7f6cJgCjyt5671miY+AJCb9YYwLUBG0G0tpkpo=;
- b=QqUBhM9WyQVVF1Wz3nwy3X7WRM6VkslRqQ1KB9H1+pB9JcqYdIElfH2E/GwiQAKkeSObXSi40rz8XyJRswLwecAMZS/hHbk2NxAl+LLSh6VVp0wEiQWk2AzfW4bkeQfb0nId3cIB+sy/yU9w0GYyA72qudR7XY1k6WBecl29hLtkw33t/GcB2+EUaOk+xIhIksHwTmvrNN2gpWFzT5BmY1sxDNxr+6Gr0NGUwwz+xemtXgJn1dw8AQftvDWhiIV2UyUT9Vnq+hzexPOt68ih3zlcQOXzXqJc6ADVZ/6Y9V4mqaYkHebOEw6Eq8JHwC6RfHZVhvemRH6MN03u+KVHsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gcaVt7f6cJgCjyt5671miY+AJCb9YYwLUBG0G0tpkpo=;
- b=YIkuuWhrP+Nq9cZiYFrQE+clvpZjDUX1OEiO5IITDglyKmJ3T1b9CWYllXlCBuHT3OrnPRExjFyDrkNe1LQ8IPTexIfs0HrWqWFqKJrQX4S47j8OsCDqwxsqQmWVs8wz5zoE93ePIAOXtk1F89mZD5OprUFtPHz+BJtftpnfqxoVzaG5V65vlpGH8lyccuZvX2AlO7NhgmqW0u00y1oAslcFsatI/l7eFVZ/oSftXnG2TZ9pF5hYGs8DtMzYeJDxhI/Mm482NdKWB9fEV89oUnOQEA6xvgxEqpRUHnt7avTDuDZaqQK3zqBlJKwCfvC9huHkv1GqBqMl2V7XxMdIXA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TYZPR02MB6593.apcprd02.prod.outlook.com (2603:1096:405:1e::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.10; Thu, 5 Nov
- 2026 07:54:23 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0592.009; Thu, 5 Nov 2026
- 07:54:23 +0000
-From: Chao Liu <chao.liu@processmission.com>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: Chao Liu <chao.liu@processmission.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH 6/6] MAINTAINERS: add contact for the RISC-V server-ref
- machine
-Date: Thu,  5 Nov 2026 15:54:01 +0800
-Message-ID: <20261105075404.9239-1-chao.liu@processmission.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261023160913.24992-7-daniel.barboza@oss.qualcomm.com>
-References: 
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0230.namprd03.prod.outlook.com
- (2603:10b6:a03:39f::25) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
+ id 1xOsoi-0000a6-Ga
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 03:27:31 -0500
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A56U3IO4139212
+ for <qemu-riscv@nongnu.org>; Thu, 5 Nov 2026 08:27:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ AGN8kwgakg5OiXRUbfKCSwJgdB2YehlHkW5tpwLRG6c=; b=fiiXmDmoIyy24Bni
+ sMCaR5DgQufd1AUeMVRlvmqfRCx8usfGB/QhBBG5YCSJI+amrKGxMYhG6O0Lfbrm
+ Fji8kOAzlF+ZdqUe/A/kQ2VdNM+ZO22eEgzSvneoa38hqfAuj6+4ckBwOB3NdJQm
+ tFAe4IDNJO13LKqvQTEJ8rQOfDD0I/KRu26xcG/k4tQDrM9mFlXQCo2zM6kLWD+K
+ xzMK54S8Lm3BUwfg2aL5lk48KFDcUlmD8/TnJhUVBuRDJnca0LzP+89ndGyA8IZm
+ vvkjGPKEifcaYAJFz+yndkyYVxyH/6NsDQEY1ltb0UsVv4Kar4dwiojBS+ST9qqh
+ iR7seg==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hrm9v0he4-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 08:27:24 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id
+ a92af1059eb24-1383723dfddso2861922c88.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 00:27:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1793867244; x=1794472044; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=AGN8kwgakg5OiXRUbfKCSwJgdB2YehlHkW5tpwLRG6c=;
+ b=KcXSKfoNAIxUQk01dWvsQEjF7Mm8L9KFjqVckjPyKBXKmI2HTDdbIl7XlWsGcgX6Vs
+ HZ6vc0q4N1lR/zyepFW3oFJTw/4hOAD0kTfjfsPNYozweOfRCq5ne0syJvlC/ctR4Jy8
+ oPVO1xfQD8/lp4iKUdJGgE5qtEVI3/Xdq8gvHpJVCojzS6t0k25zPlF7AfM6X3UjZ9hP
+ zCc9NvgfRUhQlz2oa7YxtCUpXuTewE04kpuK7OrLYQS/HFYkDzfpIPiQiRsHBq3Q1VSf
+ V35V0+NN/OH32F9ADb9Wba/I+9LqUq+XWf4FlETeV/macVLitdvMhp8tCqZCeL3a2FUE
+ af/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1793867244; x=1794472044;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=AGN8kwgakg5OiXRUbfKCSwJgdB2YehlHkW5tpwLRG6c=;
+ b=Lx+yGb9AJdINo2dtkIWtGZSi6AclThPEqUh0QvPuT/xfkEv+6MJQd1hzIh4Jix9KwH
+ J5o0oeDZwn0wsdrWo9Xu2A5N9YQd7CzKJXOASUcBhs8OcgX0PUKPJBUFfInpIZYpLskH
+ d7+anZ2h1KzLUR6rVfdV8oPGOPLJexrSry7C23Ki87BszmPZq7kJ7Plzfr/fyWl8P5Q7
+ msmc5v+1QlKZoCbKUytKyJu/nqUeX8F9qrV8E9nE3Th4dRrY4q0lBgU5kVLuC2utxxvQ
+ 8rfyRLpATJ3u1t0USXB24iyFBjL39nLAx1XWsaZQ25cIDotEyfhlsYe8n3uyF18ZeghH
+ 8FIA==
+X-Forwarded-Encrypted: i=1;
+ AKwUvBwhHnwLxlI8LTODH+klZpFN6+QhchX8smij2/NROKljbOsr385V9Tu0WIZDDmIL0SVCOXpa2hhBJSRP@nongnu.org
+X-Gm-Message-State: APuU4Z/QrSeuOJudGfufoKyX6mFMi0yI0oT/HP6M81AUfDShDAjy06d8
+ /q0mKzf0098HuUG/h4tIWSD1ARkK/G6QbvzZc0v5nrGCY8VSA41x4ur4Mw7Au+tZFynHOPDoVnx
+ ym9ltn4tm6gDuL2SbqAANxGrS8Dza4dgK+Xqw4i+wqaLdAg18gr36Zx0HmA==
+X-Gm-Gg: AYBFou0NYfol9dX1mU8hzkA7Vsm9M46tpZ5zYSZpHO6SQIWjmuv/2XviBp0eRDZfCc7
+ Y8MS3NwJTylwU36P8wTeLHeWOeNYPQZHwcF50ykJVjHwv8Pd9qNrBNpj9nJ3N4LqTWCtt5qzcOG
+ NOliPjPOlSrMyQaWR9WzbjOoCEIUpVzBt67LuXEMmxB86rU6fGZjBxZ0uYr8W5bItAlU3jEkUAr
+ Flimm3/1TMyvnVNrq59O7IMVucIp+iP+17GT5fgqPEO3355y5omPWBK35gtmKLYbZqJfi/pdATw
+ pk1ZrenR0HEK+UbPP1spYE+xdmllIvEr4fmOj8C87YhWFAgFYaCue1Di6oo7yqGrxCmZPINbzmR
+ iciwvgKGN9+SZhInxUgmR5/uHuDJORlX1YfCccH1UbGO9bHJzhhinLS/ed39Fa7zv1Ku8H2EEw+
+ xW0Z8d5mwUhuRi1uPHgz/LWPPjIWaW4sxLyw8RRxunjw==
+X-Received: by 2002:a05:7022:92b:b0:144:fb42:52 with SMTP id
+ a92af1059eb24-1ac5de4e892mr32994059c88.28.1793867243832; 
+ Thu, 05 Nov 2026 00:27:23 -0800 (PST)
+X-Received: by 2002:a05:7022:92b:b0:144:fb42:52 with SMTP id
+ a92af1059eb24-1ac5de4e892mr32993931c88.28.1793867242680; 
+ Thu, 05 Nov 2026 00:27:22 -0800 (PST)
+Received: from [192.168.1.199] (192-80-163-190.dyn.novuscom.net.
+ [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1b245c1c127sm14154206c88.6.2026.11.05.00.27.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 05 Nov 2026 00:27:21 -0800 (PST)
+Message-ID: <45433754-3cea-41fc-9f45-65a328d0efca@oss.qualcomm.com>
+Date: Thu, 5 Nov 2026 00:27:18 -0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TYZPR02MB6593:EE_
-X-MS-Office365-Filtering-Correlation-Id: ebbe324a-a82e-4958-2eba-08df3b120157
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|23010399003|376014|1800799024|366016|56012099006|261021121427099003|261009223027099003|261022105027099003|261102123227099003|261022075727099003|261026140227099003|261028144727099003|261026121527099003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: JggDmfdSphVWKI2U/VL7PvooDxAbz38rcMXd0jjJmHUGfb/SjpZ/+x1qq+waBF2JeFiWCU8vpEtNmvK2iHsvO5KnVSIOmDp4Dq0CYgfGMMMkHmcyXA6PwDEq4cFD9g7h+VgEZQfAuvOh6fheoSTsOj5Ywe6+2y78LYmAK3+E3ClfHoOfVzFskqbJtphABp1Jxc1KBqq2P1khWR4bgIpSQQQgaA81uCXJrh0+aTTU9RPvmEHDFJGZt2Ow6ZjfxGJHX6HhaoFZFo1qIhiZmVaRoaIpxLXpe9EFrcy4xOft7FarKP4RVJKm5UpcuColYq+RK+eCprHbMerXY4wDM4GAKUJlhNZFiGCFV3SPHr5f16h1LYG8K3IL7OoHjq9fQbiNkdmKxFXkRxRKvX8xktbfzZmX5xI+nqSdls6aNm1ReChcICIpefieytUB+3oj3aL+db5Hvx2R3xWORCvL0mYKp4CroPYb3p+zR8Hg6+7YECyBQKEae20QRrX2sxLJcf6XpsToYwcCMMAgWv24g/Ko6vd5aSNsrUShCLoldtJN+fmCSU5CRYjd8JXomKvGKD745DNKCLNnxEE7y1pRgYy2WumovPTdN6Pz8ulDwOIuTEZDRbTV0VAh6VNqo+7+0fDVyG70/Mx5gBiMHQ5mn5R7LOba3cOyG4dAUwClxdQ76G4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(56012099006)(261021121427099003)(261009223027099003)(261022105027099003)(261102123227099003)(261022075727099003)(261026140227099003)(261028144727099003)(261026121527099003)(10067099003)(22082099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?sU0tS+5/MiIkBWJy84xPdq8n2kt/sYSL5x0xoaPcLq/QqPxIWKJb8y8e9Igv?=
- =?us-ascii?Q?TBYF1sR+ksNLF9Fy01NFbBKcdpm66DhiDJTtm5cTpBNce9hj2hPZM1AFBEwB?=
- =?us-ascii?Q?C27yWAshPf2oO2wG2f+OMJYDiQxenRcRqI738FxJJp7dzGC63cF5Abvp5daC?=
- =?us-ascii?Q?ofjzDkVfpOr3F+VCR1rmCYmIzqlXQN68faCgTzQQ2k81P4osN7OZLB9rTpAE?=
- =?us-ascii?Q?mNpFtDPV0buYmXO6xvegXdmOdJs6kh7uG6HTUedFijHN25JFsNK0XBdAKtCa?=
- =?us-ascii?Q?xzYMhU6vj8Ud7sMNZQiILS/aVTnVkT29mngS0aFDO/2WnI1y45LVE21JD66D?=
- =?us-ascii?Q?6+I3sUBpPXJp14Z/3LdChxOyuqXRIEb9s3B833qq0J/iM2GTqvHAdL8ae1Ze?=
- =?us-ascii?Q?wDvhK/1Z274uwSMh1qZ8s3SqQd3zEJ3fnKnhVZfoLhf3wNFLNE2aH+ZjltwJ?=
- =?us-ascii?Q?jzExp5bUaMLB1niPu5iirnIvI8xlRcnAAJ9F5Gwh+2eENdPHX/nsFBwzNsPp?=
- =?us-ascii?Q?KE1H/WAQs+DVKqRhxk0+wqA6pH0vELoR3G522+bGgDuakJiFosq3MwhlVS1N?=
- =?us-ascii?Q?3fnKb/AMbh4vlbBT5xAezAvvZLvJhA75UCbXU6cvDCvhc2mcTpJk5gQYX2ar?=
- =?us-ascii?Q?bpqtUddduKryDI3MTdHmnRiXgkh9fosE+CO5bB+0X8jJRRD8WjmmHLd5GltZ?=
- =?us-ascii?Q?KnSOIouoTjLynCXxny+hwZHvRNbNEUmSz538rYxny9SzL1oUop+QuaVcwjRT?=
- =?us-ascii?Q?O+zge93aWr4PpabKzW2kMosDqbG7vnygQJXgesR56aPS3s4ArDe3kqCehz7v?=
- =?us-ascii?Q?CLxVikVOtIWCX67VVksjhrjL/bQoEXbpsUV2Upj7vaA15aWnLQa3ZNlBbPfp?=
- =?us-ascii?Q?3O4qrRXEWZSASRKcZ4SYqtblCBR8+VIOD4LwnTa49MOLNuhYd/XGFzTZnF5t?=
- =?us-ascii?Q?d6wkkwuOktNh6PEGBUbph8gHHmWIY3lK/1bVchwGwwdPBq9aCksjhIw+CQWE?=
- =?us-ascii?Q?ereLhuHD7imnJaIi8G7Rl/3mJnrsBXr/DetLO8JeAqFDJ2XPBVqfOlMs5xkG?=
- =?us-ascii?Q?JcDNbTMyrpDVTkqOsb6U+iuQD5lyrGcdFrfGxS0PuoCQlY05Kn20YEWySBWN?=
- =?us-ascii?Q?fo67+aWQ9525V7VR5c6t3t/SdzaOcUDeRsbKscuZzsBYaKuLh3vVpJTSKH4h?=
- =?us-ascii?Q?PlCH1Wy01OM5dc5EAl5ELkBjCXoEk9KrVsuShYiuW3BNAipiqWNkilwGylhf?=
- =?us-ascii?Q?F4w3MHEWxon2QgsPmArQ9I6OFRotHRvY0KIxooFiGMqNuovrFWZYLNg6JEW+?=
- =?us-ascii?Q?i9etS2FUPRPKBQ06+OBhMpeP4fXq/Ff5oiYbttwQNzLTizcL4tWKap5lus7/?=
- =?us-ascii?Q?rzjfWmVLixR8N+hJ8OfePsv4JGShZk/hHxDLyqCPdi/zg/9XrYCZk/BmTD0n?=
- =?us-ascii?Q?su6CdaKrh5FRs/K4Cv2dxNz1wfgtwZ1NszYZCIDyJuR3KFzLjre0FKCgGm/L?=
- =?us-ascii?Q?ZggAp30/DDes/ywCGHx/mmv0M9yEJT1NDHtsh/LvZRNQcbKBLnVeb5aYj1fB?=
- =?us-ascii?Q?kmUEoPYl/vCWYTDWugnaKgWTYV4ya1J/GnzRmTfsVu3f6oA1fs02yTn7Lm81?=
- =?us-ascii?Q?CPC0zgtEAkDTPp7ulw94BeHK831D38UJmBCx3sBVsh8NPvHqL6fjV4L29Qgd?=
- =?us-ascii?Q?pK2cdYLT7mHY86oMvT0dz9C9XN7YAC+lQRvBojBfItTcKXM1q9ksAcz2zzKm?=
- =?us-ascii?Q?zpa+rDG4JnexiOPJxJvX3pEJs/IOQMQ=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ebbe324a-a82e-4958-2eba-08df3b120157
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Nov 2026 07:54:22.9965 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OAXQ+N74LyiP/nZFv06i5jBP2ScTe3Z3IECmlwsGrhHVNrktrADMJvWLSF+jI4HTrINvkqO5bKRceBYINTx9or53Q1u1fWVbufN4YB371Ag=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR02MB6593
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
- envelope-from=chao.liu@processmission.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/15] hw: expand DEFINE_MACHINE to explicit TypeInfo
+ registration
+To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+ Yonggang Luo <luoyonggang@gmail.com>
+Cc: BALATON Zoltan <balaton@eik.bme.hu>, qemu-devel@nongnu.org,
+ Anthony PERARD <anthony@xenproject.org>,
+ Felipe Balbi <balbi@kernel.org>, Aleksandar Rikalo <arikalo@gmail.com>,
+ Philippe Mathieu-Daude <philmd@mailo.com>,
+ Antony Pavlov <antonynpavlov@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Subbaraya Sundeep <sundeep.lkml@gmail.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Niek Linnenbank
+ <nieklinnenbank@gmail.com>,
+ xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ Jean-Christophe Dubois <jcd@tribudubois.net>, qemu-ppc@nongnu.org,
+ Alexandre Iooss <erdnaxe@crans.org>, Weiwei Li <liwei1518@gmail.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Strahinja Jankovic <strahinja.p.jankovic@gmail.com>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ Thomas Huth <th.huth+qemu@posteo.eu>, =?UTF-8?Q?Cl=C3=A9ment_Chigot?=
+ <chigot@adacore.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Yoshinori Sato <yoshinori.sato@nifty.com>,
+ Frederic Konrad <konrad.frederic@yahoo.fr>,
+ Palmer Dabbelt <palmer@dabbelt.com>, Peter Maydell
+ <peter.maydell@linaro.org>, Chao Liu <chao.liu@processmission.com>,
+ Sai Pavan Boddu <sai.pavan.boddu@amd.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Huacai Chen <chenhuacai@kernel.org>, Aurelien Jarno <aurelien@aurel32.net>,
+ Gaurav Sharma <gaurav.sharma_7@nxp.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Artyom Tarasenko <atar4qemu@gmail.com>, qemu-arm@nongnu.org
+References: <20261030151539.1872-1-luoyonggang@gmail.com>
+ <d1db54c6-b802-676a-7779-0c2c63f5f807@eik.bme.hu>
+ <aa70e94c-d9a8-41c9-850f-7ded87f7f327@oss.qualcomm.com>
+ <aumYOBw-nKQAWdYK@redhat.com>
+ <CAE2XoE8Xwevk523OfB+GgwbRu0iVnyD4VNOx81rj7J7F5aq=OA@mail.gmail.com>
+ <54851326-3627-2b86-57d6-c338ed4e4b50@eik.bme.hu>
+ <CAE2XoE_P2mZAT8wZwzFsTqJTK8nxNSSqJRrOM2T-AJkQjwJHBw@mail.gmail.com>
+ <aunnuwhsx9ZOOXBX@redhat.com>
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <aunnuwhsx9ZOOXBX@redhat.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA1MDAzMyBTYWx0ZWRfX5+IhNzD+ufl6
+ J5pxFMsnfroUuZtOjJno/q3FN0fDGTHcgsDalSGNqe18q0WguHeD9d9GTP70NWH4BvBUKX97VfP
+ ub1YwbUPNq5I0zjLr8RoBp89TB1Zmdo=
+X-Authority-Analysis: v=2.4 cv=KrHYSmWN c=1 sm=1 tr=0 ts=6aec3dec cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=20KFwNOVAAAA:8 a=sYqyBgSLRBUY3L6MHRUA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA1MDAzMyBTYWx0ZWRfX5HaWGXDZjjFA
+ I7u4YFZjwk0umzIvKq7hxfxvQBjUEGJ2dMEXtIPZQUmxJxtEBg/uU8NyyJ5Mcy9nPggjrusEUcf
+ U0W4wNdNY2YUiLPOvS+ceRyPuIp+L/QdtdWrPMkf0DJT0xCGoWVpfDd4noUwDp0s4vfFtt2KBLA
+ Yiu+LhUux1txVK+hgabbByTiHHJ14Ix4FY2PoP/cOrTZlO+JvMC9zKJhV9qMT5tgs529iCdVW6+
+ 11b9lbFKgx70EPwAd15o213Uzz20/LQF/pn1po41lc55ZtVqL8COmP1eUQRa5TATBbGlzTRnYkF
+ w96yXoscpMzpknQt7bg+GRGM/EobXl+WWeNUwM/jgNrXdlcTUkYkY+jI40tibBXa3GSKPwl5dn5
+ wNGKh0JkJ8Epvbc8W4sPW5II6E2lPwhux/PRhUCS+woLl3GgSQxRyHMYvFM1cnGXoKI1X21RbgE
+ hMvdIKbo0lsaWXKp7Vg==
+X-Proofpoint-GUID: KLxzYK7In75zhjAnUjoGo38qRuWUbXBz
+X-Proofpoint-ORIG-GUID: KLxzYK7In75zhjAnUjoGo38qRuWUbXBz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-05_02,2026-11-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 suspectscore=0
+ spamscore=0 phishscore=0 impostorscore=0 clxscore=1015 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610300000 definitions=main-2611050033
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=pierrick.bouvier@oss.qualcomm.com;
+ helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -136,49 +190,119 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 23 Oct 2026 13:09:13 -0300 Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com> wrote:
-
-> Make it clearer that this is a board that is actively maintained.
+On 11/3/2026 5:55 AM, Daniel P. Berrangé wrote:
+> On Tue, Nov 03, 2026 at 09:48:44PM +0800, Yonggang Luo wrote:
+>> On Tue, Nov 3, 2026 at 9:23 PM BALATON Zoltan <balaton@eik.bme.hu> wrote:
+>>>
+>>> On Tue, 3 Nov 2026, Yonggang Luo wrote:
+>>>> On Tue, Nov 3, 2026 at 4:16 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
+>>>>>
+>>>>> On Fri, Oct 30, 2026 at 05:51:44PM -0800, Pierrick Bouvier wrote:
+>>>>>> On 10/30/2026 4:09 PM, BALATON Zoltan wrote:
+>>>>>>> On Fri, 30 Oct 2026, Yonggang Luo wrote:
+>>>>>>>> DEFINE_MACHINE and DEFINE_MACHINE_EXTENDED hide the TypeInfo and the
+>>>>>>>> type_init
+>>>>>>>> function that calls type_register_static(). A later change needs to
+>>>>>>>> pass a
+>>>>>>>
+>>>>>>> That's the point of the macro to hide the boiler plate code.
+>>>>>>>
+>>>>>>>> target mask into that registration, and the macros have no parameter
+>>>>>>>> for it.
+>>>>>>>
+>>>>>>> Couldn't you just change the macros to take that parameter instead of
+>>>>>>> expanding it everywhere?
+>>>>>>>
+>>>>>>
+>>>>>> Problem of macros is that they don't have default parameters, so you
+>>>>>> need variants for everything:
+>>>>>>
+>>>>>> DEFINE_MACHINE
+>>>>>> DEFINE_MACHINE_EXTENDED
+>>>>>> DEFINE_MACHINE_WITH_INTERFACES
+>>>>>> DEFINE_MACHINE_WITH_INTERFACE_ARRAY
+>>>>>> and now would need a new variant, with variant for other existing ones.
+>>>>>>
+>>>>>> In the end, it's just simpler to remove this and add the boilerplate.
+>>>>>> It's written once and never modified, so using a macro just save typing
+>>>>>> those lines once.
+>>>>>
+>>>>> For each machine, it is only written once, but we add machines
+>>>>> over time, and every time a new machine is added the code style
+>>>>> is slightly different. We introduced all the variuos DEFINE_*
+>>>>> macros for QOM to better ensure consistent style and usage as
+>>>>> new code is added over time.
+>>>>
+>>>> I understand that the DEFINE_* macros are bloating because of this.
+>>>> Indeed currently the only two macros used are "DEFINE_MACHINE" and
+>>>> "DEFINE_MACHINE_EXTENDED"
+>>>
+>>> There are a few machines using some others but these are the most used.
+>>> That suggests maybe we should change the convenience wrappers to match
+>>> what machines need but DEFINE_MACHINE_EXTENDED is meant to be the one that
+>>> allows all parameters which should be rarely needed.
+>>>
+>>>> ; each time people want to add a new attribute, the macros is twiced.
+>>>
+>>> Not necessarily. The SECURE parameter did that to preserve previous
+>>> behaviour but if you add new parameter changing all callers (which is the
+>>> same as expanding the macro that would also change all callers) then it's
+>>> just a new parameter added not changing the number of DEFINE_MACHINE*
+>>> wrappers. Rearranging the wrappers to make DEFINE_MACHINE_EXTENDED used
+>>> less is an independent change.
+>>>
+>>>> And the usage of DEFINE_MACHINE_EXTENDED is rare and can be replaced
+>>>> with DEFINE_TYPES or TypeInfo
+>>>> and be more explicit. When we used as macro parameter, we need think
+>>>
+>>> But that defies the purpose of hiding the QOM boiler plate as much as
+>>> possible. New people are confused by QOM and it's easier for them to look
+>>> up documentation on the DEFINE_MACHINE* macros to see what parameter is
+>>> what and not care about how it's stored in QOM TypeInfo or what is that
+>>> at all.
+>>>
+>>>> what's that parameter means, and for
+>>>> TypeInfo, we can directly know what that member is about(because we
+>>>> are assigned with the member name).
+>>>
+>>> The parameter also has a name and documentation so it's not simpler to
+>>> look up TypeInfo than look at the macro definition or docs. In fact it's
+>>> harder to guess from TypeInfo as then you also need to get into QOM.
+>>>
+>>>> That's why I suggest keeping a single DEFINE_MACHINE, just like
+>>>> DEFINE_TYPES; as they are the most
+>>>> used macros(and simple enough), and won't suffer from changes much.
+>>>
+>>> That means exposing all the boiler plate for all machines other than the
+>>> simplest case. I think it would be better to keep DEFINE_MACHINE_EXTENDED
+>>> but maybe rethink the existing wrappers and drop unused ones and maybe add
+>>> new ones that reduce the usage of DEFINE_MACHINE_EXTENDED but still keep
+>>> the boiler plate hidden.
+>>
+>> Thanks, I'll go this way, remove unused macros, and keep DEFINE_MACHINE_EXTENDED
+>> and extend both DEFINE_MACHINE_EXTENDED DEFINE_MACHINE supports
+>> "targets" or "arch_mask" parameter.
 > 
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
+> Given that we don't need to do general per-arch type filtering in
+> QOM, we could just move 'is_available' out of TypeInfo, and into the
+> MachineClass, so it is a regular class level property, which can be
+> set in the class_init methods, and thus avoid any changes to the
+> DEFINE_MACHINE macros.
+>
 
-Thanks,
-Chao
+Some cpus need it also, and it's used for filtering purpose at this time
+(to avoid duplication at registration). We already depend on this behavior.
 
-> ---
->  MAINTAINERS | 8 ++++++++
->  1 file changed, 8 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index d9209f043f..146bdb587b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1897,6 +1897,14 @@ F: include/hw/riscv/cv1800b.h
->  F: tests/functional/riscv64/test_milkv_duo.py
->  F: tests/qtest/milkv-duo-test.c
->  
-> +RISC-V Server Reference Platform (riscv-server-ref) machines
-> +M: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> +L: qemu-riscv@nongnu.org
-> +S: Maintained
-> +F: docs/system/riscv/riscv-server-ref.rst
-> +F: hw/riscv/server_platform_ref.c
-> +F: tests/functional/riscv64/test_server_ref.py
-> +
->  RX Machines
->  -----------
->  rx-gdbsim
-> -- 
-> 2.43.0
+> With regards,
+> Daniel
 
-Sent using hkml (https://github.com/sjp38/hackermail)
+Regards,
+Pierrick
 
