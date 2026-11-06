@@ -1,84 +1,85 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3919E606A336
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:33:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50D4C606A32C
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:39:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=U9x3NPqx
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=e5QFp0tm
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPJ8O-0000yv-S8; Fri, 06 Nov 2026 07:33:35 -0500
+	id 1xPJDZ-00024s-Sv; Fri, 06 Nov 2026 07:38:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPJ7C-0000sE-GA
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:32:27 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPJD3-00022C-TN
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:38:23 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPJ78-0000Vu-7Z
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:32:17 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPJD1-00013y-6W
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:38:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793968332;
+ s=mimecast20190719; t=1793968697;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=YAPZH0vQIRyztFKnRkwFUzlKqJz+r6lodeZCg3ghSlY=;
- b=U9x3NPqx1Buxyipc+rDlNop4WbsDv+8xpyPebf9ToZAtluJio74Vv8f9gwg4O5ELQRDOt4
- so4rHrBhMO5vQzFGLRn5pisykluqb1Me7cxGkpKTKvjqzMJRiLaund//uHHzWcYflbowoN
- bzRW/ezZ/EyqBOHilLRWbDRSvkIrZu4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=p5zW4QfFAHTTA1kbcScUb2i0ypopriqFfz1j8LzLnZs=;
+ b=e5QFp0tmU0TN7BIkY59klepJ7UOgMRTjzi/janOnz1qCXiGxgajeZHz4S/JsDoQpzKbmNk
+ kotCgZAmZd2y2DbkoJo0Q4zgFrXEXzcIDlO2LyTjgt10Yc+1HSigS0vsv+SW/vHtDRLGs+
+ uUCQm5W7ILk/yqSx91y/VqrtJxdw7fo=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-61-qN8jnsf4OJ-ihyb2zuYeug-1; Fri, 06 Nov 2026 07:32:09 -0500
-X-MC-Unique: qN8jnsf4OJ-ihyb2zuYeug-1
-X-Mimecast-MFC-AGG-ID: qN8jnsf4OJ-ihyb2zuYeug_1793968328
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4a359c7f47bso6021235e9.2
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:32:08 -0800 (PST)
+ us-mta-151-c1jUbHx0PRSNRnPIzQvINQ-1; Fri, 06 Nov 2026 07:38:16 -0500
+X-MC-Unique: c1jUbHx0PRSNRnPIzQvINQ-1
+X-Mimecast-MFC-AGG-ID: c1jUbHx0PRSNRnPIzQvINQ_1793968695
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-4903fc8537aso469943f8f.0
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:38:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793968328; x=1794573128;
- h=content-transfer-encoding:content-type:in-reply-to:autocrypt
- :content-language:from:references:cc:to:subject:user-agent
- :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=YAPZH0vQIRyztFKnRkwFUzlKqJz+r6lodeZCg3ghSlY=;
- b=W7ycgEvsGs15bmRtwXqjoQGzJu0NhSO4m2qiEjJX4GA9OuI9UydQQ6eKxsAyKL158P
- CeY/Bqx49S9H9vbBstFGNYqRE3u5W1pFGvLr5Te2yU2Q+QwdVsgiIVbhGaMXy2qy1hnW
- PrSbaPBS0q2QtS1Tk5t8/nCjoQuhztC5VayxDRBkBO81l1RX3pzZuAiCE29FBcZMB/A6
- jNxyRAir9ANyzQblNsYivcMcRAgpwpQYroISIk7cH6b8DekLzeK32EDIovy7rEt+YM9N
- +IuEpvdtRYyiBPcwK88m58KBV9Q757QciKWGI9iPGgvDf4CGokmpRlYtcdQhVH6qdiTf
- Z9WA==
+ d=1e100.net; s=20260707; t=1793968695; x=1794573495;
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=p5zW4QfFAHTTA1kbcScUb2i0ypopriqFfz1j8LzLnZs=;
+ b=mBF/YG31GNF5eRYQ5I7JOF0mxTgxGXdQbsUW29y+uVlUq6aCssaKQeTynL5QyaA3ww
+ m9RqNb0wOrX7g7vrI1zMpoOXCSyakQX4MIGXjUddM4lVaylrVqDMuVNC7JmEj76BYArW
+ 2uQYNN/1Hmt7UvhFoajIJs85ww9Zdgd6suGdfU8vhORIRk62l1KJWp6OTW0Fz64RdUU2
+ 0ihmsMmbkybdeRSjcqCMl5+8a0vxkstOZmVxixzzOzWGvV1d5PzLynz7+s6/ryCpY6XW
+ TL0ZM6Uh6zY9sLvttJhrmb0BSZ8u3O/SQGU3p/lEKwqhhntCNtPLNsQLHLNZNhS/4vp8
+ zPaw==
 X-Forwarded-Encrypted: i=1;
- AKwUvByxID5C6qzaAFJBdCy/dEUns0xitIDRfQuq/mmZF+uFSIcWMSO7B6tN6f4uWtCTjOOzzwiji7kvXSzY@nongnu.org
-X-Gm-Message-State: APuU4Z9gk0h9clPeuciyqoyiAxZUNio/0Q4a1cyNuaMIb6bvvG4nCnnO
- rmaTSwHvYGaDOoINU5FsDRaOg3vGvL1azMtAeTNg978hMChFV/k+V1fvw2T6RlFukt/U38WBmU9
- 2j3Jbt3mzvI4EXx1EaRTl0QRJw5LReyOJKWuTs0s8jfEHE33FZRDHen+t
-X-Gm-Gg: AYBFou2lewPwDN9PGL4a3A9uK1nTvl69F7ZFDHzoGdaZneEmbWBLIO7byxdS5HXhFb7
- juLhYCt1aUUEfExuSGZCVhr/QJh78LPnbVF14BnlkR+4QXdvevKLYfNTeYPf85ORJ4dNyqKPk2y
- YbdWWt2FCm8/sOpN0JEUOc6H/KBcEPqA9gw0Ps+IO/OZPAwjpBshBB/aLHlkQep6aBGmEthFT+F
- B+505Y09fE4ZEh599Fa267Aev3rjV5khcXOVVxoqxnbJQZKR+aPyYkUuYsFzHFlLt+EBYOtsmnJ
- NuAAB3NL61XCkN6TN2E2kxgI2HQjD/wLV9m8htxr27Ak4dCfd1osZUSsRpAKvUZfQAnHJQAtvWL
- yvLbkbFcm4Sd3PAmmqUbxvzzoNrtKBtAWKmt6PWZIpJW/pLlu3NTi2tZYcp8kcb0ZwInXFWO5YN
- IjaDlwp+88wA==
-X-Received: by 2002:a05:600c:4e41:b0:4a1:f68a:9736 with SMTP id
- 5b1f17b1804b1-4b6dfe8f3c1mr39253645e9.26.1793968327749; 
- Fri, 06 Nov 2026 04:32:07 -0800 (PST)
-X-Received: by 2002:a05:600c:4e41:b0:4a1:f68a:9736 with SMTP id
- 5b1f17b1804b1-4b6dfe8f3c1mr39252205e9.26.1793968326910; 
- Fri, 06 Nov 2026 04:32:06 -0800 (PST)
+ AL+hErGRTFMJTK3Nbv6iJ6Vxcgg3nUYv5NTdtDNrmEw9gRJU1Jly9T3YqyVhQjAIQ6k+7+P792EfNuISA2FI@nongnu.org
+X-Gm-Message-State: APuU4Z8hCE0xY952ga4ePxwV7UesIsMQnilmfm1a3j43jdy9Nf2Ab715
+ aathjXaRu6BB904pHzlb6+dEFdmnDVoBW9hLAd2zaI4vDCZuKRVzr4/sle/mlxw8jkWBtZLkHib
+ W5ZBxEKRcGBbiTNZnQ5ReFjPDyOoFLKYK18GcWkaFBAeyBOIdOLbgU6uB
+X-Gm-Gg: AYBFou3BOw31KTmHiWd7HQ0h8dQDYXw8Bc3x81ZyZ61KOgRQHD+MdzKmyILPmXUtmuA
+ lhbOf2Pofa76utbnPYI0dJzAkmTl5kLKluS7gtWjDPMFOSwxfteINeXYMHnEaZTv7Yr8CdTjMCg
+ QbkEXp/v5vn9jVm1RaCCwuNd+i/vnK6Cfdrfb7eeRHiLudIcTQn4Zbv6fKBLljHYowgMG/KeXdw
+ FvtDaKS0czLs9rVGO9p7McL96hX52MJ8jMytUHdiWN9p4QoHRxqCJUdq/EPiyUeS9QUQhqEt8RS
+ JvLUNIEuy5dfEt7CV+QjJul71J9mOln1xQ0I/Ofbe0TkUn6gdivjIqWWFWdAWX87mtrNCK+jgCz
+ LGmHQpEHfu0ZrEAMgg9QQJVggVh8doVxbtYAdBT/bH+3cOwRsqOoXp3r7ivvyJffrUFzYmOpNi4
+ Nn4oSMoCBQxw==
+X-Received: by 2002:adf:e84c:0:b0:48d:e5c9:39a4 with SMTP id
+ ffacd0b85a97d-492775eef16mr3852329f8f.33.1793968694678; 
+ Fri, 06 Nov 2026 04:38:14 -0800 (PST)
+X-Received: by 2002:adf:e84c:0:b0:48d:e5c9:39a4 with SMTP id
+ ffacd0b85a97d-492775eef16mr3852286f8f.33.1793968694262; 
+ Fri, 06 Nov 2026 04:38:14 -0800 (PST)
 Received: from ?IPV6:2a01:599:b03:7322:436f:1f3:b26e:91b8?
  ([2a01:599:b03:7322:436f:1f3:b26e:91b8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4b571f46489sm132923805e9.3.2026.11.06.04.32.05
+ ffacd0b85a97d-492d84726basm3751753f8f.57.2026.11.06.04.38.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 04:32:06 -0800 (PST)
-Message-ID: <d21900c3-4c38-4fe5-b9fb-d1d27f84295b@redhat.com>
-Date: Fri, 6 Nov 2026 13:32:05 +0100
+ Fri, 06 Nov 2026 04:38:13 -0800 (PST)
+Message-ID: <6d195593-7cf4-40b2-8143-098771967876@redhat.com>
+Date: Fri, 6 Nov 2026 13:38:12 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/28] hw/ide: mark ICH9 and ide-hd/ide-cd as secure
+Subject: Re: [PATCH v2 14/28] hw/pci-host: mark common x86, ppc, arm and s390
+ PCI hosts as secure
 To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -86,9 +87,9 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  Paolo Bonzini <pbonzini@redhat.com>,
  =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
- qemu-s390x@nongnu.org
+ qemu-s390x@nongnu.org, Cornelia Huck <cohuck@redhat.com>
 References: <20261029131241.2275706-1-berrange@redhat.com>
- <20261029131241.2275706-13-berrange@redhat.com>
+ <20261029131241.2275706-15-berrange@redhat.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -132,9 +133,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20261029131241.2275706-13-berrange@redhat.com>
+In-Reply-To: <20261029131241.2275706-15-berrange@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: kmsaL3RlYw1CXAOn_XJ68aBZVAlRG-St-ZLtWRjXdlI_1793968328
+X-Mimecast-MFC-PROC-ID: gZBXhOOB8d0kwGKD6debMaMUQkYePBiQ6-AGlF79Xm0_1793968695
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -162,23 +163,161 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 29/10/2026 14.12, Daniel P. Berrangé wrote:
-> These have a long history of usage in virtualization scenarios on
-> x86, for OS which lack modern virtio drivers for storage, and thus
-> must be considered secure.
+> Mark the PCI hosts secure if they are used from machine types
+> that are considered for the virtualization use case.
+> 
+> There is also a special case for the 'remote' type and the
+> Xen passthrough type.
 > 
 > Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> Acked-by: Cornelia Huck <cohuck@redhat.com> #s390
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->   hw/ide/ich.c     | 1 +
->   hw/ide/ide-dev.c | 2 ++
->   hw/ide/piix.c    | 2 ++
->   3 files changed, 5 insertions(+)
-Reviewed-by: Thomas Huth <thuth@redhat.com>
+...
+> diff --git a/hw/pci-host/pnv_phb.c b/hw/pci-host/pnv_phb.c
+> index 0b556d1bf5c..bc8313d2cd0 100644
+> --- a/hw/pci-host/pnv_phb.c
+> +++ b/hw/pci-host/pnv_phb.c
+> @@ -333,6 +333,7 @@ static const TypeInfo pnv_phb_type_info = {
+>       .parent        = TYPE_PCIE_HOST_BRIDGE,
+>       .instance_size = sizeof(PnvPHB),
+>       .class_init    = pnv_phb_class_init,
+> +    .secure        = true,
+>   };
+>   
+>   static const TypeInfo pnv_phb_root_port_info = {
+> @@ -340,6 +341,7 @@ static const TypeInfo pnv_phb_root_port_info = {
+>       .parent        = TYPE_PCIE_ROOT_PORT,
+>       .instance_size = sizeof(PnvPHBRootPort),
+>       .class_init    = pnv_phb_root_port_class_init,
+> +    .secure        = true,
+>   };
+>   
+>   static void pnv_phb_register_types(void)
+> diff --git a/hw/pci-host/pnv_phb3.c b/hw/pci-host/pnv_phb3.c
+> index db061c134e9..abf43e3226d 100644
+> --- a/hw/pci-host/pnv_phb3.c
+> +++ b/hw/pci-host/pnv_phb3.c
+> @@ -910,6 +910,7 @@ static const TypeInfo pnv_phb3_iommu_memory_region_info = {
+>       .parent = TYPE_IOMMU_MEMORY_REGION,
+>       .name = TYPE_PNV_PHB3_IOMMU_MEMORY_REGION,
+>       .class_init = pnv_phb3_iommu_memory_region_class_init,
+> +    .secure = true,
+>   };
+>   
+>   /*
+> @@ -1123,6 +1124,7 @@ static const TypeInfo pnv_phb3_type_info = {
+>       .instance_size = sizeof(PnvPHB3),
+>       .class_init    = pnv_phb3_class_init,
+>       .instance_init = pnv_phb3_instance_init,
+> +    .secure        = true,
+>   };
+>   
+>   static void pnv_phb3_root_bus_get_prop(Object *obj, Visitor *v,
+> @@ -1186,6 +1188,7 @@ static const TypeInfo pnv_phb3_root_bus_info = {
+>       .parent = TYPE_PCIE_BUS,
+>       .instance_size = sizeof(PnvPHB3RootBus),
+>       .class_init = pnv_phb3_root_bus_class_init,
+> +    .secure = true,
+>   };
+>   
+>   static void pnv_phb3_register_types(void)
+> diff --git a/hw/pci-host/pnv_phb3_msi.c b/hw/pci-host/pnv_phb3_msi.c
+> index 66ba7b79134..5edc0d43eb0 100644
+> --- a/hw/pci-host/pnv_phb3_msi.c
+> +++ b/hw/pci-host/pnv_phb3_msi.c
+> @@ -306,6 +306,7 @@ static const TypeInfo phb3_msi_info = {
+>       .class_init = phb3_msi_class_init,
+>       .class_size = sizeof(ICSStateClass),
+>       .instance_init = phb3_msi_instance_init,
+> +    .secure = true,
+>   };
+>   
+>   static void pnv_phb3_msi_register_types(void)
+> diff --git a/hw/pci-host/pnv_phb3_pbcq.c b/hw/pci-host/pnv_phb3_pbcq.c
+> index 1f7a149580d..687c8325158 100644
+> --- a/hw/pci-host/pnv_phb3_pbcq.c
+> +++ b/hw/pci-host/pnv_phb3_pbcq.c
+> @@ -354,6 +354,7 @@ static const TypeInfo pnv_pbcq_type_info = {
+>       .instance_size = sizeof(PnvPBCQState),
+>       .instance_init = phb3_pbcq_instance_init,
+>       .class_init    = pnv_pbcq_class_init,
+> +    .secure        = true,
+>       .interfaces    = (const InterfaceInfo[]) {
+>           { TYPE_PNV_XSCOM_INTERFACE },
+>           { }
+> diff --git a/hw/pci-host/pnv_phb4.c b/hw/pci-host/pnv_phb4.c
+> index ac09a0b034d..1a652110f5d 100644
+> --- a/hw/pci-host/pnv_phb4.c
+> +++ b/hw/pci-host/pnv_phb4.c
+> @@ -1388,6 +1388,7 @@ static const TypeInfo pnv_phb4_iommu_memory_region_info = {
+>       .parent = TYPE_IOMMU_MEMORY_REGION,
+>       .name = TYPE_PNV_PHB4_IOMMU_MEMORY_REGION,
+>       .class_init = pnv_phb4_iommu_memory_region_class_init,
+> +    .secure = true,
+>   };
+>   
+>   /*
+> @@ -1729,13 +1730,13 @@ static const TypeInfo pnv_phb4_type_info = {
+>       .instance_init = pnv_phb4_instance_init,
+>       .instance_size = sizeof(PnvPHB4),
+>       .class_init    = pnv_phb4_class_init,
+> +    .secure        = true,
+>       .interfaces = (const InterfaceInfo[]) {
+>               { TYPE_XIVE_NOTIFIER },
+>               { },
+>       }
+>   };
+>   
+> -
+>   static void pnv_phb4_root_bus_get_prop(Object *obj, Visitor *v,
+>                                          const char *name,
+>                                          void *opaque, Error **errp)
+> @@ -1797,6 +1798,7 @@ static const TypeInfo pnv_phb4_root_bus_info = {
+>       .parent = TYPE_PCIE_BUS,
+>       .instance_size = sizeof(PnvPHB4RootBus),
+>       .class_init = pnv_phb4_root_bus_class_init,
+> +    .secure = true,
+>   };
+>   
+>   static void pnv_phb4_register_types(void)
+> diff --git a/hw/pci-host/pnv_phb4_pec.c b/hw/pci-host/pnv_phb4_pec.c
+> index ee5cdc3e450..280a15e8df1 100644
+> --- a/hw/pci-host/pnv_phb4_pec.c
+> +++ b/hw/pci-host/pnv_phb4_pec.c
+> @@ -388,6 +388,7 @@ static const TypeInfo pnv_pec_type_info = {
+>       .instance_size = sizeof(PnvPhb4PecState),
+>       .class_init    = pnv_pec_class_init,
+>       .class_size    = sizeof(PnvPhb4PecClass),
+> +    .secure        = true,
+>       .interfaces    = (const InterfaceInfo[]) {
+>           { TYPE_PNV_XSCOM_INTERFACE },
+>           { }
+
+The changes to the pnv* files are related to the powernv machine - which is 
+not covered by the virtualization use case. Please remove these from your patch.
+
+
+> diff --git a/hw/pci-host/remote.c b/hw/pci-host/remote.c
+> index 9ea95fac6e6..a58fc39bded 100644
+> --- a/hw/pci-host/remote.c
+> +++ b/hw/pci-host/remote.c
+> @@ -63,6 +63,7 @@ static const TypeInfo remote_pcihost_info = {
+>       .parent = TYPE_PCIE_HOST_BRIDGE,
+>       .instance_size = sizeof(RemotePCIHost),
+>       .class_init = remote_pcihost_class_init,
+> +    .secure = true,
+>   };
+This is part of the "remote" machine, isn't it? I don't think we cover this 
+in the virtualization use case, do we? Please remove this, too.
+
+  Thomas
+
 
 
