@@ -1,108 +1,95 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D0BF606A31B
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 02:41:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B199606A31B
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 03:36:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Vl9cUB4E
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qDXAg2Yj
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xP9sW-0006RM-48; Thu, 05 Nov 2026 21:40:32 -0500
+	id 1xPAjz-0007IM-MO; Thu, 05 Nov 2026 22:35:49 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xP9sH-0006BD-VN
- for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 21:40:21 -0500
-Received: from mail-dl1-x1235.google.com ([2607:f8b0:4864:20::1235])
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xPAji-0007Gk-VL
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 22:35:38 -0500
+Received: from mail-pj2-x01.google.com ([2607:f8b0:4864:39::1])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <luoyonggang@gmail.com>)
- id 1xP9sB-0005yQ-TU
- for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 21:40:14 -0500
-Received: by mail-dl1-x1235.google.com with SMTP id
- a92af1059eb24-15ea896ddc8so459565c88.0
- for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 18:40:00 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xPAjg-0002Sm-R5
+ for qemu-riscv@nongnu.org; Thu, 05 Nov 2026 22:35:30 -0500
+Received: by mail-pj2-x01.google.com with SMTP id
+ d9443c01a7336-2e96b8bfb43so600605ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 05 Nov 2026 19:35:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1793932800; x=1794537600; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=gq/d0KwPPYo52ABxaaA//hWxeVPvL++rdqpTw0UqREs=;
- b=Vl9cUB4EpG8B1J1qjuaoyH0tIV2jkuFle2SFmEWy5Zv17uWdGdow/Z/G3SY7nJlw8G
- Rce7DJcawTiP4sT/aU3Px5ZtsLO6M6ez6v7Yo0zzmUUARAvHCItGZYi9LyYBBJ/lGyOs
- CIu2a1n9vV3/B3bdzG9dcKODLIJOIzGWaaB4tDqpZKAzpGibRUbWwoKVO5JAanw7KPoL
- 2UJDc7XZKel6Oe275LpakJQOejgxsSoaqmzgdhdCxqsokUUd/rqWiRhEfeab9KN+LIO1
- SPPXQYwOBloFzGT/CmCPpKvTodxb6etBJnmkbWMGPR3IXbvHyFSmr8wG22QQV9TX5xws
- tcGw==
+ d=gmail.com; s=20260707; t=1793936126; x=1794540926; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=YIS+E3+btsO7UDQMTWL1Mt9cbImZr5tSnx37CZOyCmA=;
+ b=qDXAg2YjAuUEElAo7Sxs4qTAsBULh2bD1WSneMM1h9rraCB3HTA9nPdSMAis3Gc8TT
+ DRbf/aSnWfPnz2lEXtL2nwV1hFbwTUkWJGeYGF2n1B3ETW6RIC5TgVTES23PcUIgDGOg
+ 7vo0hlakHVJ0fMzbNANOMqOlFfuTqYQ1Q83DUUDDTbo28iaft0PgUvpoAnOVKTFnI8Al
+ STty6YEKCYM0zQPGr4V28XwcTHq12W9ujEwqEBA9rqBgVP8J0XlOhTGklc2YrcGPmuB+
+ QQPa/gmezJvmK0s6X3kEaL3DdssX0sx2VmBiJKk6MBVMtRHr+kbNQBdOK5At4rCTC+PF
+ tZSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793932800; x=1794537600;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=gq/d0KwPPYo52ABxaaA//hWxeVPvL++rdqpTw0UqREs=;
- b=weLWzxiPZEGrQv7LJU34Zfsv4h4fEKreO9drvpXpbTwLvMUZ2UDvfRhpC/7IIjudZR
- OFWBXS/8OyUOH5Xq0A9P10Pf/9hy4aN4bFV1JwUXyjTS66dquYvlF+pAdyDNdRcNmirb
- JxAnbPI/QrN6lGcw8AfWbwwCvmEYPj06jweZgpbRwjZCdCQNr9UQDeuBrWmo2FjOIq58
- tR3V5WtFJOiJGpifiMynEFFc9fVko8f3iA2WuixyQcDQdkqf0ZQAL9zgQhtETpTMTFBB
- AhJFHeGvaAXBpL+pggAPeK1umg9zwU5H5C2B2URYXxBHyEEW+uvjg35ZbY0lSbLwMjg4
- ZmCQ==
-X-Forwarded-Encrypted: i=1;
- AKwUvByAr3pVS7OLkONJMVVmf1Mhfh1mR47l+04/XuzYjHxBO+zIArLWczy5Gagh3h3XSDr5CjPRvBnlHOxY@nongnu.org
-X-Gm-Message-State: APuU4Z+1nuoBW3oHpufu6DNyvHi+fGBcgkGPJOxuYDWhaRzy0/49D73+
- WBC70053lKXv6STSAyoUlavT2hrbMYTfQD2Egmo2tQ6FB+RncBwQxyyC
-X-Gm-Gg: AYBFou0Vgqjiq4QDfoU+F0rgSddifdHc/eyrCNMm7PnHfDm9wYjnw1dmUedB4U2fuq0
- FyrsC0cZ4ZI+eZtfVIUUFT9pH1NupejmD8XKP3x0STHaGxdGM5u4iKln4gs5avwzAq9pPQI2wEd
- Gy2HcyaIzMcM5H/xBLJSqjmmobXF9b01EoIfJfISDD/jz0mAatnwVDA52K2nB2YntK5kqivfFgS
- JBlRSw83awMSf1ng29vVhxkggRSP2tY7Vha+kH3TJ5pO3m4YF6T94kvNyHTLBUK8WNCQ0nUT8LO
- sPtovQTx7GTbVCSKNblHZy4Cm1tX/S87eI5nRZ0dW79AwS7qkaYHMy73oUnele3t+/+ZxTF7GJw
- a1JqyEgOnZ8D1ETpowT7tDgOg39yPCl4WD5fzlh9+Gc1zblVxNLH0ovmDDyVql5LpANOmM/QZrc
- Ub/+Sc1FDHlP/Ij+LtSgb5atBZuAmN4jCLiDBsrzqL/NPX/OvLWBaw3POZwhIzOjhzhf/eC+2Rq
- TbMtBVpD9jXrHkOmhoyO8E+xKag5QYE75ERTvnV0//JYV4ucgdZ1UvY/s2OjXQMGPvX2k/A1wia
- 4Uj7VpolmiiHdi7R0dSCyvFjIh/Eu5cZoU0J4aD8qeaDXEb1
-X-Received: by 2002:a05:7022:3c08:b0:14a:8cff:fbb8 with SMTP id
- a92af1059eb24-1b25d31d662mr902654c88.28.1793932799300; 
- Thu, 05 Nov 2026 18:39:59 -0800 (PST)
-Received: from DESKTOP-Q716RM7 ([103.94.185.75])
- by smtp.googlemail.com with ESMTPSA id
- a92af1059eb24-1b25e4efa6fsm1108318c88.20.2026.11.05.18.39.54
+ d=1e100.net; s=20260707; t=1793936126; x=1794540926;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=YIS+E3+btsO7UDQMTWL1Mt9cbImZr5tSnx37CZOyCmA=;
+ b=dMPWhxcZcbDHZNyUeQyZeXTHjjxGIY5QRG6KdzMhdVSO9etY7c2O2fAv6WnwFb26ng
+ 0SQrV4RXv8C6R/Irn+RtqOnVQA0qstVKr5EPpRAoDoF+AakI9inaxKehJz0KpVaKcW5R
+ nSX9o6Qh7FO5uCCexDAV7ny4nGugJqK9+R3b+KHm4hJaRqDY+D2nBmkhKEwb7wRQdHAy
+ CjKI/I5atvcuSUwGSIsftK93MVbi+W+ctx4/lj3eRmk8ibp8EGOQiH9BHS/QQ83Q1loJ
+ SXty80q9fDfo11zb1mfpQ54EN1q7psFKYcim2f9NKMzYEuZQYecBUjrwcuPAJGhk7Dxf
+ +PDA==
+X-Gm-Message-State: APuU4Z/jyvkus5yqoksYJq93DbSxVTxyGVMwj+mHvROOcSxbo60GCUyD
+ wo04k9O/yElETksOuDzucaRMsj2hfW5A8VxtSOozy1nmJ4aUfZ1aY14n
+X-Gm-Gg: AYBFou0159VB0WFFLIOx+q7liJJsygYkn0tIm0xv1XbiWmjiGtPKApadUG6bUqVUn/L
+ 4f79WTSdO2lkT0Av9ECyVGN7L5FKqd//A4Kky5NXLcOjBZW2KVyzCtGDeqWu+iNfht3L3qoIHpt
+ ru3hHQ6J6D0b1NOPQmdqqH8IOqsBvDNFcQWrJ/Oh1OAjTJnJmxSun3eRqsgLmd5bfOLpBl5vuop
+ nPu6HgFUnHPqFWr/m8clPnK8NQNWXM9jTh21YVEg/EDRkCwRhK6wSoHiq5QFtPbzhCJkhA/cUML
+ RIgF3GiK6GsZ6G25nwnBi2J38rKvc7qd9tQ5LKVfd3WUxyInMbrdx9SnFVf4uaGlZNGhLpMyT07
+ jMmkxxfY8zSjDvK4HDswK8OP07Z6gKP0u0M7mlnA8phQaHeRChU383Rv+rajSTeRY1s7ZbnFcYo
+ /tQvn/PuveC1+Qhpko3Mypi9X4E1fzpdvQ0aw7kqgaYf2RKp0Ilx405kYL1+OjVliEKZaIwaTQW
+ C54HzuaT1ZfylYZzm/hYSZUQezDYnLYLJ4WwMJ5bSoSzzgMzf3P1bXTwbd6y7H59GN6yIhUAI8a
+ dWvdS85tZm8ALxsIdScCg4XGJ90Vgn8MI49Nzzs+ReHDCLGh8DCYSBZp
+X-Received: by 2002:a17:90b:1802:b0:3ac:80dc:f407 with SMTP id
+ 98e67ed59e1d1-3b0db71871fmr1157519a91.60.1793936125863; 
+ Thu, 05 Nov 2026 19:35:25 -0800 (PST)
+Received: from Dell-WorkStation.localdomain ([152.175.67.81])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3b0b32b6507sm6552930a91.16.2026.11.05.19.35.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Nov 2026 18:39:58 -0800 (PST)
-From: Yonggang Luo <luoyonggang@gmail.com>
+ Thu, 05 Nov 2026 19:35:25 -0800 (PST)
+From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
-Cc: Nicholas Piggin <npiggin@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Paolo Bonzini <pbonzini@redhat.com>,
- Chao Liu <chao.liu@processmission.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Chinmay Rath <rathc@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>,
- qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
- Zhao Liu <zhao1.liu@intel.com>, Weiwei Li <liwei1518@gmail.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Philippe Mathieu-Daude <philmd@mailo.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Harsh Prateek Bora <harshpb@linux.ibm.com>, qemu-riscv@nongnu.org,
- qemu-ppc@nongnu.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Subject: [PATCH v5 2/3] Revert "target/riscv/kvm: restrict kvm-accel-riscv-cpu
- to riscv targets"
-Date: Fri,  6 Nov 2026 10:39:34 +0800
-Message-ID: <20261106023936.772-3-luoyonggang@gmail.com>
-X-Mailer: git-send-email 2.55.0.windows.3
-In-Reply-To: <20261106023936.772-1-luoyonggang@gmail.com>
-References: <20261106023936.772-1-luoyonggang@gmail.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH v2] target/riscv: report WRS.NTO opcode in tval on illegal
+ instruction
+Date: Fri,  6 Nov 2026 11:34:57 +0800
+Message-ID: <20261106033457.79020-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1235;
- envelope-from=luoyonggang@gmail.com; helo=mail-dl1-x1235.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::1;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x01.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -114,45 +101,159 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is redundant now as all accel-$cpu_type parent is already registered.
+helper_wrs_nto() may raise an illegal or virtual-instruction exception.
+However, trans_wrs_nto() does not save the decoded opcode before calling
+the helper. As a result, exception unwinding leaves env->bins stale and
+trap handling reports an incorrect value in tval.
 
-This reverts commit 2d3e6b4003d5380c245ce8ffac4b8866f6d10a33.
+Call decode_save_opc() before the helper so the faulting instruction
+encoding is restored for trap handling.
 
-Reviewed-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+Add a TCG test that delegates the mstatus.TW-triggered illegal-instruction
+exception to S-mode and checks scause, sepc and stval.
+
+Fixes: b62e0ce76098 ("target/riscv: Raise exceptions on wrs.nto")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4080
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- target/riscv/kvm/kvm-cpu.c | 2 --
- 1 file changed, 2 deletions(-)
+Changes in v2:
+- Rebase onto current master.
+- Register the test in tests/tcg/riscv64/system/meson.build instead
+  of the removed Makefile.softmmu-target.
 
-diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
-index 5beb602338..aa28098e10 100644
---- a/target/riscv/kvm/kvm-cpu.c
-+++ b/target/riscv/kvm/kvm-cpu.c
-@@ -27,7 +27,6 @@
- #include "qapi/qapi-builtin-type-infos.h"
- #include "qemu/error-report.h"
- #include "qemu/main-loop.h"
--#include "qemu/target-info.h"
- #include "qapi/visitor.h"
- #include "system/system.h"
- #include "system/kvm.h"
-@@ -2241,7 +2240,6 @@ static const TypeInfo kvm_cpu_accel_type_info = {
+ .../riscv/tcg/insn_trans/trans_rvzawrs.c.inc  |  2 +
+ tests/tcg/riscv64/system/meson.build          |  1 +
+ tests/tcg/riscv64/test-zawrs-stval.S          | 87 +++++++++++++++++++
+ 3 files changed, 90 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-zawrs-stval.S
+
+diff --git a/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc b/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
+index 0eef033838..ecebec0eef 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvzawrs.c.inc
+@@ -54,6 +54,8 @@ static bool trans_wrs_nto(DisasContext *ctx, arg_wrs_nto *a)
+      * exception, as handled by the wrs.nto helper.
+      */
+ #ifndef CONFIG_USER_ONLY
++    /* Save the opcode in case the helper raises an exception. */
++    decode_save_opc(ctx, 0);
+     gen_helper_wrs_nto(tcg_env);
+ #endif
  
-     .parent = TYPE_ACCEL_CPU,
-     .class_init = kvm_cpu_accel_class_init,
--    .is_available = target_base_riscv,
-     .abstract = true,
- };
- static void kvm_cpu_accel_register_types(void)
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e..d1cbd1b97d 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -21,6 +21,7 @@ tests += {
+   'interruptedmemory.S': setup + {'plugin_test': {'plugin': 'discons'}},
+   'issue1060.S': setup,
+   'test-mepc-masking.S': setup,
++  'test-zawrs-stval.S': setup + {'qemu_args': ['-cpu', 'max', qemu_args]},
+   'test-crc32.S': setup + {'qemu_args': ['-cpu', 'rv64,xlrbr=true', qemu_args]},
+   'test-minstret-ecall.S': setup + {'qemu_args': ['-icount', 'shift=1', qemu_args]},
+   'test-minstret-wfi.S': setup + {'qemu_args': ['-icount', 'shift=1', qemu_args]},
+diff --git a/tests/tcg/riscv64/test-zawrs-stval.S b/tests/tcg/riscv64/test-zawrs-stval.S
+new file mode 100644
+index 0000000000..42a9901fa6
+--- /dev/null
++++ b/tests/tcg/riscv64/test-zawrs-stval.S
+@@ -0,0 +1,87 @@
++/*
++ * Test that WRS.NTO writes the instruction encoding to stval when
++ * mstatus.TW causes an illegal-instruction exception in S-mode.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++	.option	norvc
++
++	.text
++	.global	_start
++_start:
++	/* Unexpected traps to M-mode fail the test. */
++	lla	t0, machine_trap
++	csrw	mtvec, t0
++
++	/* Delegate illegal-instruction exceptions to S-mode. */
++	li	t0, 1 << 2
++	csrs	medeleg, t0
++
++	lla	t0, supervisor_trap
++	csrw	stvec, t0
++
++	/* Give S-mode read, write and execute access to all memory. */
++	li	t0, -1
++	csrw	pmpaddr0, t0
++	li	t0, 0xf
++	csrw	pmpcfg0, t0
++
++	/* Set mstatus.TW and select S-mode for mret. */
++	li	t0, 3 << 11
++	csrc	mstatus, t0
++	li	t0, (1 << 21) | (1 << 11)
++	csrs	mstatus, t0
++
++	lla	t0, supervisor_start
++	csrw	mepc, t0
++	mret
++
++supervisor_start:
++	/* WRS.NTO must trap because mstatus.TW is set. */
++	li	a0, 1
++wrs_nto:
++	.word	0x00d00073
++	j	_exit
++
++machine_trap:
++	li	a0, 2
++	j	_exit
++
++supervisor_trap:
++	li	a0, 3
++
++	csrr	t0, scause
++	li	t1, 2
++	bne	t0, t1, _exit
++
++	csrr	t0, sepc
++	lla	t1, wrs_nto
++	bne	t0, t1, _exit
++
++	csrr	t1, stval
++	lwu	t2, 0(t0)
++	bne	t1, t2, _exit
++	li	t2, 0x00d00073
++	bne	t1, t2, _exit
++
++	li	a0, 0
++
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
-2.55.0.windows.3
+2.43.0
 
 
