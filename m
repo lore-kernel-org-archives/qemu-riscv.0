@@ -1,47 +1,47 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37A74606A32C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A133606D805
 	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 16:20:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=univ-grenoble-alpes.fr header.i=@univ-grenoble-alpes.fr header.a=rsa-sha256 header.s=2020 header.b=G2n1ttxI
+	dkim=pass (2048-bit key, unprotected) header.d=univ-grenoble-alpes.fr header.i=@univ-grenoble-alpes.fr header.a=rsa-sha256 header.s=2020 header.b=Zrr5RxSH
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPMf2-0007aj-Jy; Fri, 06 Nov 2026 11:19:29 -0500
+	id 1xPMfc-0007yH-Ly; Fri, 06 Nov 2026 11:20:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1xPMeZ-0007EJ-AE; Fri, 06 Nov 2026 11:18:59 -0500
+ id 1xPMeX-0007Dt-Rq; Fri, 06 Nov 2026 11:18:57 -0500
 Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1)
  (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1xPMeV-0004E4-LH; Fri, 06 Nov 2026 11:18:58 -0500
+ id 1xPMeV-0004Di-MA; Fri, 06 Nov 2026 11:18:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1793981932;
- bh=70m9Os0id7lXuj2YS7O+SmI2K61D9n4d7lwY0rlz3cI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G2n1ttxI0s+YlsldjOf1Mg3wDAgkgurdLHmGyNhmqJ5aGxwxXnSdQD7Yyrz68c/Bp
- PNVXaI4qaGNIJSrWBVfAgaqRnobarR08GbG5+yXj/bmvL/wf0uFQzqRIuDismkvtXx
- 5xwr53an8Xw58o7FKIkkJ4W2iSNUM5dUONNYFpCMv9wM7cLQj3U472GIjcaPXuSAa7
- OcS7o9x73g8rDhhFAClME4jcRy/heMaWCRkrvW+JKYlcTljb339cX6d+HX6Xr2YDjb
- OQlTq/IWFyCC1FQOn2z8Q3fBl4KOVGfREmSaf187UWlG1xKDtwaKMiMWb+1nHZnkiP
- J6i2FWUegdAqQ==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 370B84029D;
- Fri,  6 Nov 2026 17:18:52 +0100 (CET)
+ d=univ-grenoble-alpes.fr; s=2020; t=1793981931;
+ bh=QxBrdvKzIIgdMiNL1E8tVT5VjQRr9ovEaCOim1wsUHw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Zrr5RxSHTbTG/hJnni073qM6Kv/Fc9VD2RAyWEVIUdeTaFBUr8HNv93y4RpUCRs/i
+ ybBt9tnJcFOSrjrZP6cRVIYC03urOCBYQjna3qegd6rgpAKhyOQZH3M5eNAEBcWEq0
+ hOPPFCxhP5dAZlkoObXOhhjHWg8bBUxmwAOfdhbXf73Tr9fwo5pp0OrW0mE9HiZB59
+ 4Tt4nrdn/6+hpDuybwabZfpHFD+uH/RsfDGFV1XWZSWiqQihjWMQN4t8VEVVXEgGMy
+ Mllw6NUfF/hUsu9Rql4jyTEwOZLcp7Wnjc9x+RBg44m+6KUThGepehqpUaN5FOj+l6
+ xlS7o+saHz5lw==
+Received: from mailhub-1.u-ga.fr (mailhub-1.u-ga.fr [129.88.178.98])
+ by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 7E66B4026F;
+ Fri,  6 Nov 2026 17:18:51 +0100 (CET)
 Received: from smtps.univ-grenoble-alpes.fr (smtps3.u-ga.fr [195.83.24.62])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id 3313BFF855;
- Fri,  6 Nov 2026 17:18:52 +0100 (CET)
+ by mailhub-1.u-ga.fr (Postfix) with ESMTP id 7A6D9FF853;
+ Fri,  6 Nov 2026 17:18:51 +0100 (CET)
 Received: from naga.tima.u-ga.fr (naga.tima.u-ga.fr [147.171.132.150])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 0002240056;
- Fri, 06 Nov 2026 17:18:51 +0100 (CET)
+ by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id 0FB9040056;
+ Fri, 06 Nov 2026 17:18:50 +0100 (CET)
 From: frederic.petrot@univ-grenoble-alpes.fr
 To: qemu-devel@nongnu.org
 Cc: peter.maydell@linaro.org, daniel.barboza@oss.qualcomm.com,
@@ -49,12 +49,10 @@ Cc: peter.maydell@linaro.org, daniel.barboza@oss.qualcomm.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  qemu-riscv@nongnu.org, =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
  <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v3 3/4] target/riscv: Update machine state
-Date: Fri,  6 Nov 2026 17:18:42 +0100
-Message-ID: <20261106161843.2075117-4-frederic.petrot@univ-grenoble-alpes.fr>
+Subject: [PATCH v3 0/4] target/riscv: Correct undefined behaviors in x-rv128
+Date: Fri,  6 Nov 2026 17:18:39 +0100
+Message-ID: <20261106161843.2075117-1-frederic.petrot@univ-grenoble-alpes.fr>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261106161843.2075117-1-frederic.petrot@univ-grenoble-alpes.fr>
-References: <20261106161843.2075117-1-frederic.petrot@univ-grenoble-alpes.fr>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -82,55 +80,53 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
 
-Addition of the interrupt flags of the cause registers into
-machine migration state.
+Peter reported undefined behaviors in x-rv128 pmp configuration
+registers accesses detected by the clang sanitizer.
+This series introduces a 128-bit version of these accesses, and
+corrects other out-of-bound shifts within the handling of interrupts
+that were triggered afterwards.
 
-Signed-off-by: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
----
- target/riscv/machine.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Changes in v3:
+- Extract the "interrupt" bitfield in the different versions of the
+  cause register in a separate field of cpu.h and build the cause
+  registers value on demand,
+- Add these new fields into the machine migration state,
+- Check that the pmp registers used in rv128 are only those allowed,
+- Add tcg tests for mcause and scause accesses.
 
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 0de06e9588..080a983a19 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -114,6 +114,7 @@ static const VMStateDescription vmstate_hyper = {
-         VMSTATE_UINT64(env.vsscratch, RISCVCPU),
-         VMSTATE_UINT64(env.vsepc, RISCVCPU),
-         VMSTATE_UINT64(env.vscause, RISCVCPU),
-+        VMSTATE_UINT64(env.vscause_int, RISCVCPU),
-         VMSTATE_UINT64(env.vstval, RISCVCPU),
-         VMSTATE_UINT64(env.vsatp, RISCVCPU),
-         VMSTATE_UINT16(env.vsiselect, RISCVCPU),
-@@ -126,6 +127,7 @@ static const VMStateDescription vmstate_hyper = {
-         VMSTATE_UINT64(env.sscratch_hs, RISCVCPU),
-         VMSTATE_UINT64(env.sepc_hs, RISCVCPU),
-         VMSTATE_UINT64(env.scause_hs, RISCVCPU),
-+        VMSTATE_UINT64(env.scause_int_hs, RISCVCPU),
-         VMSTATE_UINT64(env.stval_hs, RISCVCPU),
-         VMSTATE_UINT64(env.satp_hs, RISCVCPU),
-         VMSTATE_UINT64(env.mstatus_hs, RISCVCPU),
-@@ -615,9 +617,11 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINT64(env.stvec, RISCVCPU),
-         VMSTATE_UINT64(env.sepc, RISCVCPU),
-         VMSTATE_UINT64(env.scause, RISCVCPU),
-+        VMSTATE_UINT64(env.scause_int, RISCVCPU),
-         VMSTATE_UINT64(env.mtvec, RISCVCPU),
-         VMSTATE_UINT64(env.mepc, RISCVCPU),
-         VMSTATE_UINT64(env.mcause, RISCVCPU),
-+        VMSTATE_UINT64(env.mcause_int, RISCVCPU),
-         VMSTATE_UINT64(env.mtval, RISCVCPU),
-         VMSTATE_UINT16(env.miselect, RISCVCPU),
-         VMSTATE_UINT16(env.siselect, RISCVCPU),
+Changes in v2:
+- I messed up and directly assigned a 0 to an Int128, so v2 corrects
+  that.
+
+Frédéric Pétrot (4):
+  target/riscv: fix pmp sanitize error for x-rv128
+  target/riscv: fix riscv_cpu_do_interrupt sanitize error for x-rv128
+  target/riscv: Update machine state
+  target/riscv: [ms]cause tcg tests for x-rv128
+
+ target/riscv/cpu.c                    |   1 +
+ target/riscv/cpu.h                    |   4 +
+ target/riscv/machine.c                |   4 +
+ target/riscv/tcg/cpu_helper.c         |  20 +++-
+ target/riscv/tcg/csr.c                | 131 +++++++++++++++++++++-----
+ target/riscv/tcg/csr.h                |   3 +
+ target/riscv/tcg/pmp.c                |  38 ++++++++
+ tests/tcg/riscv64/system/meson.build  |  14 +++
+ tests/tcg/riscv64/test-rv128-mcause.S | 101 ++++++++++++++++++++
+ tests/tcg/riscv64/test-rv128-scause.S |  94 ++++++++++++++++++
+ 10 files changed, 382 insertions(+), 28 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-rv128-mcause.S
+ create mode 100644 tests/tcg/riscv64/test-rv128-scause.S
+
 -- 
 2.43.0
 
