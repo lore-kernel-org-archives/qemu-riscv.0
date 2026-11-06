@@ -1,107 +1,114 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EAF99606A326
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 14:53:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26713606A329
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 16:03:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Q/DlNYMx
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=E+z0Wq5h
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPLJA-0003Pj-VU; Fri, 06 Nov 2026 09:52:48 -0500
+	id 1xPMOy-0003x7-PF; Fri, 06 Nov 2026 11:02:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlureau@redhat.com>)
- id 1xPLJ9-0003Nq-8n
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 09:52:47 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <mlureau@redhat.com>)
- id 1xPLJ7-0002GB-Mz
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 09:52:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793976764;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=+hAG1lMR6EpyUF8Mo/bczfeHpe//nmcoFZfecTgTJ8Q=;
- b=Q/DlNYMxQqX98EVo75AvyGqJKelWdeREUYYUlGDKc0ihZ0b3XpHKTQ3PtPNowdb9j1qgiM
- 5kcUUh4tKLS9d6ChqxJrOcH/yLlKu2GIQjfZhONCT1SgfExgYaPPpxgd7+8oAeVxOCOegm
- yeXLJbOdk0UvGQrAfDPqlAeUU6eNldo=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-561-6PWAVhNfM46u_1J-nNSyJQ-1; Fri, 06 Nov 2026 09:52:40 -0500
-X-MC-Unique: 6PWAVhNfM46u_1J-nNSyJQ-1
-X-Mimecast-MFC-AGG-ID: 6PWAVhNfM46u_1J-nNSyJQ_1793976760
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-2ea446ea8c9so14628395ad.0
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 06:52:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1xPMOc-0003uz-KP
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 11:02:32 -0500
+Received: from mail-yw1-x112c.google.com ([2607:f8b0:4864:20::112c])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
+ id 1xPMOa-00023c-L6
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 11:02:29 -0500
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-8b0db268bd8so5512097b3.1
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 08:02:25 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1793980944; cv=none;
+ d=google.com; s=arc-20260327;
+ b=ZkLn1JDO4xA0fvOOXdq7LuL2KTanbf17E5t95TTiCZRPsT+7TlkdtpTxaWiTPCytTM
+ Zs3o1I79tV6paIXVUvTX46FyvRe5auNlhvTcKvudHuKW4OIVTr11w1UP2dHYktjZI3HD
+ TSdiuvq+WRa2MTTfjEObGixQ58OkDJC3sTj6mMv4aYLJYSm46OBni52etgOPIib/jp3W
+ g3Di7rywqeJdc2jFvTQ0ZHvApq4iAhEOJqQjuCGVYrBYwp6zxpzUf6oqJS4jtzXmrjdB
+ hi/KQM5uC+t2jiYGFynwCKEeRUjgUqHf8jTZbKKVT5BpLvjw3H47HQuTVDJzZUPJhsrf
+ ue+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=kZCBSloje9XqtTEpv7EcNMvQtBKDJh6EPwCU600igOY=;
+ fh=4ivWkEUXY+NVQ+qfVi6UGWDLLuIKvydXpLYI5isBRQw=;
+ b=nqIFg3ivkEzM24U53D84VN8pTIdsJFPGoxa8S13hCVj/GrHQ25puYeS0eTuris0gEK
+ VIQ9suKfSWIcfQKij/RX7d5usZymO1TyoF6x+hI67jdNV7cnlP3tphl+s9EXjOeELCt+
+ E0h2S3LSldHLC03WGnUliGM+GFxPI6zLqdCeSOJgsX8jaXahP5iXyLUnt2j1NQhmK9hQ
+ GVh+42INBwswff3Uf5ySEGy9BasivTjOO3O6e9MwZmDQvmxOScueEqK0tPhA7+s/wkUs
+ u+gu/qup/iLdjZF+e7K4XwNXPQpIiLn/5Oj1ZVxsEyynMkKJ8fFGeP3VUMGXBlsyuTOc
+ rKDA==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1793980944; x=1794585744; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=kZCBSloje9XqtTEpv7EcNMvQtBKDJh6EPwCU600igOY=;
+ b=E+z0Wq5hYM2dwqThCFuhhet7H0P2HbDdUsa8R1vkISm/vBdaWtoG8NZGn9T8/etvni
+ aCBzlsDLSh1sCDATb3DwpSAFKoLu5bDaA0RjE6O5mTZFt96a2EfT1gkmXy62UXAhn295
+ j7duoypqi0Ij4Oe70adLpXL0EpMggSshElEAb2uDWZQnSDKEqtynMhGNLlpg/kW1Uxkp
+ iSMVmlhNOQ9f3Vtc1rnbD2rZf59UYql0IKpP+mDRI5d1FiRlYFEPbnv0Li6ulsTBMGoc
+ XpBLL3v3dx1fU1iocbLXe4W+Lq015e5dSraRty6vGY/gADfTLikaM//bDawMYIRQJXBH
+ lEkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793976760; x=1794581560;
+ d=1e100.net; s=20260707; t=1793980944; x=1794585744;
  h=content-transfer-encoding:content-type:cc:to:subject:message-id
  :date:from:in-reply-to:references:mime-version:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=+hAG1lMR6EpyUF8Mo/bczfeHpe//nmcoFZfecTgTJ8Q=;
- b=V+muXtwZbmOvw4ZE2Xti1CUY2r+qWawdKelFvAkqfja7AsTJaE0Kg/gbsF6UAXKfzi
- 17epVfm/29ikDhBytRKXsPXSgwDcx1D6NmeFRBjaXigpAtQSId3KhMqgGNYS7jxHhfZI
- 2blxUyr73HtjS1ycLvY4ltww1UmnHMzOhP+aksf356CiD6l/j8hrJU5rt8Nzyr3oNFXO
- 0t12yXXmqH48yYKOXGaVU3uBKrVdBut0t6JUS917I3bBT042dF5EW1M1QNmMOigPwwoj
- +Sbm3QA+sd2+D4eHC1M0GRjUWfg4+a9gJMqXVAbjbUTom35+yFnIezhlcux1dMqCjIZi
- xk7w==
+ bh=kZCBSloje9XqtTEpv7EcNMvQtBKDJh6EPwCU600igOY=;
+ b=IgKUH1q78UV4vOewRq6ANJpsWYgIZyzRAqM/lhXqxK1wBLLTziSWcw7QWPEflEwkxZ
+ DOUKeMybHAuVcvxn4xiXThDcyiL+jbTDu+h6qFrePclL3nXoSdyuw0sj6PtjoCv8SBtn
+ R92SmeSsxmsvajaSE/79QzMRqtQSy1INcPt5RJTah44imlc1zQzQUZPlASA4st035esq
+ MIgqiRW4OTjGnCMJGUYWSlkJJtTos3yV/RHfehbwtrOXicZuJV2xn+7/4oa1AOrBwxdT
+ gry0KrVwVjIJQ9pgXN74cFXimvteNp6pyFq0RxoItGzYufkCPaio52bcYJOiMyR2v6Yn
+ sTMw==
 X-Forwarded-Encrypted: i=1;
- AL+hErESxaovDEJNanjvD25uaUn46xvQ9FzUl7ziH8JYGW52Epdp+WueXO5X6UKo37uFE5WGRhlslHR/Gpka@nongnu.org
-X-Gm-Message-State: APuU4Z8VaGPfHtJqweM/HuILBXt9xpGyk4aVVYfsSCZNAeacaHAGlII5
- DI72Or+lS5yyN6hSeIDMg1KFdFalO0Ep8SNbWTHEkTrwJd5nCJWRtOW/UdvB4/bOnmKmb+AS9tB
- InAoFzvK5iT5RU0RQMetzbBLmvP7PicACU9y0VQx1E9rDGdOEVDalbdkPIv0zAPhewvNLqhz0A1
- 32PJuRzs3xq3uF2hBhhN4i/ZrZ2djppKc=
-X-Gm-Gg: AYBFou2abhUapDgoJ+uVmnxq60CFklbtgl3o4+/QTVE3zONT8U1SDmr5Hcpb0pkO7QO
- z8fzQedBUSWyntNEbFsmQOEXPoDffoz6rp9ZWgZWlj151/tsjH+mSQhp7qfDEPjlQ9jnI2X+0tj
- wzVZf9eGTvyCxvMqtE7ctayHvSulU7quAJ9OQh3gmvsx5nfJ4n1HO4V6at/uJHZTdyF6mNy+Tdb
- izigBzMl/3ISQV8LERgbPS5jND8R2dLMVRo0GOhfRi6WNqDFw8znXHO7qM4jhaQDbEcev+ou3ou
- 7g==
-X-Received: by 2002:a17:90b:35c5:b0:3ad:677f:567f with SMTP id
- 98e67ed59e1d1-3b0db70daffmr1759560a91.40.1793976759693; 
- Fri, 06 Nov 2026 06:52:39 -0800 (PST)
-X-Received: by 2002:a17:90b:35c5:b0:3ad:677f:567f with SMTP id
- 98e67ed59e1d1-3b0db70daffmr1759539a91.40.1793976759161; Fri, 06 Nov 2026
- 06:52:39 -0800 (PST)
+ AL+hErG4wkR4fFb7fAs5x0ud/YgJjd0KvaanU2Kzngr0t3uPWPrEv+1ieI5BNQjoyeM9LnqJ7po0+NK19fDT@nongnu.org
+X-Gm-Message-State: APuU4Z+W/FIUqgONO96tLnCXQO5STHL7EVu+Lr3iOiN/uM/3ORrYLbRh
+ QLkBeHnjE6SRd8pYqiziEUrU4XA2/cly/I1x2QxZF8YEmXUe6irNGE95s2UF4Yg5mO4TLkpv2BA
+ 9CuKtdiBZz//WlgqIxAE5PA/zztH+x4HUadPRYx8RqA==
+X-Gm-Gg: AYBFou3a/aOvImk0cX3fR1ZJwdqcIWq+c7MhHkgvoEj3u1Awx27AvaY3uh29QDCRbSm
+ 8Tq0512o9N6IYjL0LWhMqU0Xi93uutMVrWdvTC0cJF3IJcVR+5d1hIwNeJLXOdbq/iE7Kf/f4UJ
+ IGd7OSOPKeAbHF3fEif5vLjxuv6BGsjxoZzuTyjGy5EM9AR+LiUYM1zztO5BVC2HB4exEJ1kWjZ
+ TthDSDGAqGL9T/mln+Y4cByNWkKGZSyue6nhKooH2+8aRHUpt+XD4r7wwbGCcXiB4u7KH8IbJyS
+ RojJNn6SHO+/5koXGhk2Rh3o++uY7Sw5imdABWcheTUn3txpdxAWx80VYPom7bDsxZ4/vHJCabp
+ weIFbeeDiWk+rW2UmWk6ttdzqTHnOxuL6O2mqEfntgjEmtdHq/xiy3vL2s62z4nVOaE1GjSm3GQ
+ xwyx99eDsLwQzpOaVZ0+5Q
+X-Received: by 2002:a05:690c:6605:b0:8b1:a3f3:7085 with SMTP id
+ 00721157ae682-8b3419c287dmr11732157b3.60.1793980944149; Fri, 06 Nov 2026
+ 08:02:24 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261029131241.2275706-1-berrange@redhat.com>
- <20261029131241.2275706-5-berrange@redhat.com>
- <fe7f7d29-8ca3-4ced-afcc-c768b84c4888@redhat.com>
- <CAMxuvazfhfGSZCiSi+viwJ7f7XDWAZfjmW39n3a7a-qQyw-YSA@mail.gmail.com>
- <au3mwO32b0-PSXKu@redhat.com>
-In-Reply-To: <au3mwO32b0-PSXKu@redhat.com>
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@redhat.com>
-Date: Fri, 6 Nov 2026 18:52:27 +0400
-X-Gm-Features: AclHuK8PkA73Zsh95_t7Twce7oOByDLrT6UMHFSQfVJqhUHCjhh81u-PlI46tLQ
-Message-ID: <CAMxuvayhYcOvH2QPptrKUQGFHoRxQcM1USF5OwuZYR_g2c4zgw@mail.gmail.com>
-Subject: Re: [PATCH v2 04/28] hw: mark all remaining virtio object types as
- secure
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org, qemu-arm@nongnu.org,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org, qemu-block@nongnu.org,
- qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: AyH__HUYg11oof6kqT241G6c3tpfibK6CDTJUPeLeFE_1793976760
-X-Mimecast-Originator: redhat.com
+References: <20261105125203.40320-1-philmd@oss.qualcomm.com>
+ <20261105125203.40320-2-philmd@oss.qualcomm.com>
+In-Reply-To: <20261105125203.40320-2-philmd@oss.qualcomm.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 6 Nov 2026 16:02:12 +0000
+X-Gm-Features: AclHuK8uvR8xxkXdSiK1iaQiEfbrGMfyI7ASL-Ch-aBtNpd1c9eXgL8t4kEBjpQ
+Message-ID: <CAFEAcA_kzBBUcyPEG3Cn8TnGqvqfOaq4_skEG+r1FXO0Q-n51g@mail.gmail.com>
+Subject: Re: [PATCH v2 01/17] tests/qtest: Use qemu_hexdump_to_buffer() in
+ qtest_memwrite()
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
+ qemu-ppc@nongnu.org, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=170.10.129.124; envelope-from=mlureau@redhat.com;
- helo=us-smtp-delivery-124.mimecast.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112c;
+ envelope-from=peter.maydell@linaro.org; helo=mail-yw1-x112c.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -113,57 +120,29 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
 	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi
+On Thu, 5 Nov 2026 at 12:53, Philippe Mathieu-Daud=C3=A9
+<philmd@oss.qualcomm.com> wrote:
+>
+> Replace sprintf("%02x) by equivalent qemu_hexdump_to_buffer()
+> helper and silent when using Apple clang 17.0.0:
+>
+>   ../tests/qtest/libqtest.c:1522:9: warning: 'sprintf' is deprecated:
+>     This function is provided for compatibility reasons only.
+>     Due to security concerns inherent in the design of sprintf(3),
+>     it is highly recommended that you use snprintf(3) instead.
+>     [-Wdeprecated-declarations]
+>
+> Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
 
-On Fri, Nov 6, 2026 at 6:40=E2=80=AFPM Daniel P. Berrang=C3=A9 <berrange@re=
-dhat.com> wrote:
->
-> On Fri, Nov 06, 2026 at 06:35:29PM +0400, Marc-Andr=C3=A9 Lureau wrote:
-> > Hi
-> >
-> > On Fri, Nov 6, 2026 at 3:53=E2=80=AFPM Thomas Huth <thuth@redhat.com> w=
-rote:
-> > >
-> > > On 29/10/2026 14.12, Daniel P. Berrang=C3=A9 wrote:
-> > > > These are all intended for use in a virtualization scenario and mus=
-t
-> > > > provide a security boundary.
-> > > >
-> > > > Acked-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
-> > > > Signed-off-by: Daniel P. Berrang=C3=A9 <berrange@redhat.com>
-> > > > ---
-> > > Reviewed-by: Thomas Huth <thuth@redhat.com>
-> > >
-> >
-> > I have a second thought about this, I'd like to exclude all
-> > gpu-accelerated paths for now. virgl/mesa/rutabaga expose a very large
-> > attack surface, so I'd like to drop them from the secure boundary
->
-> Rather than repost, please see my response for patch 2:
->
->   https://lists.gnu.org/archive/html/qemu-devel/2026-11/msg01530.html
->
-> TL;DR: we have already promised anything virtio related is in scope
-> for security handling for a long time, as they are all unambiguously
-> "virtualization use case".
->
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-the value of a secure policy enforcement is low if we know those
-devices are unsecure and don't have the resources to make them secure.
-
-> With regards,
-> Daniel
-> --
-> |: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-> |: https://libvirt.org          ~~          https://entangle-photo.org :|
-> |: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
->
-
+thanks
+-- PMM
 
