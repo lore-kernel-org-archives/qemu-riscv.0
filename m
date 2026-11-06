@@ -1,100 +1,90 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A61CA606A326
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 16:38:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDD8C606A326
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 17:34:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=VXTuNPaC
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=F4Ys98Vp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPMwt-0005tf-3D; Fri, 06 Nov 2026 11:37:55 -0500
+	id 1xPNp8-0005FJ-8e; Fri, 06 Nov 2026 12:33:58 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xPMw5-0005pS-Ub
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 11:37:11 -0500
-Received: from mail-wr1-x430.google.com ([2a00:1450:4864:20::430])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xPMw2-0006PP-Sj
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 11:37:04 -0500
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-490c1d337d8so575956f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 08:37:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1793983021; x=1794587821; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=EQXaPCL/hDktSfe0rSeHbVLMMpwdPDgo7ErChtSxbYs=;
- b=VXTuNPaCr13DtuSMx8npEYqyToLalDK6Y7ZCg2ysJqKWJX7dKo9o+YdW8g8uuYgMYN
- +4m4BwKm7p+xerMJINB9232/5Iua3EPVgstmmPgbpuQCcl0XMJw0UYTka++2laNDAE6U
- T6CkfumWA+Zl+CuP/rN4OGOJSyz/zDK1fYwgYc5sxGiZ8LJ6Rob/kT+TAipttmLz5+Vh
- RGVEt2vPnsjdyj/K/CsQRSubDOPcfb59b2fZF46t0/QNqQ0xGmw010gHuNDjF3O2HIIN
- 1PB7YPIh9tWSfdcXeesYBKA1mdSn+TxsVUaJL6tTGhCReFG8BDyuC65wSeO1h2jYwrUS
- hp+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793983021; x=1794587821;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=EQXaPCL/hDktSfe0rSeHbVLMMpwdPDgo7ErChtSxbYs=;
- b=Lg9ZcKxIV/z0ZCbnpI5TXCKJyDh2Omlz10zFxnKFU3sjCE7XttM7tTJ2h1ppd4qCAn
- XnIXF1vJhB7AZ7SXcrxxbIn9CRA9O1NZvWx/WDoWAnZCo2tRvrx9XzxLvGG8pJgWqsnz
- JtY2rBiDWxh06QZkUWwtw0vGik5JzEzv/Vn0nvRPrdv4vNq3sEbW3SjrRdqffsFZrD1R
- QF5TdCuCSYGdmsuOPRzpbboedaVFIXhixzY9vF3rAHR0b7eIjeLWCGdJPn/b9/vF2yqf
- pzdhBbOsBjQo5u0CMwGz5Hzmjo6wdmxXfXieC/d7AIAn0N2cXoGG/L44LskdHIope2KD
- sOSA==
-X-Gm-Message-State: APuU4Z/EsBTl+UT8oh3lI6k5I7rMbJBEJgkw+tdiOTblZhjj4OjksyRz
- u09sC1nQkcdQrhQ4fWbu+jSWCgNsryGv2BZ5id8ERAIdAZw0n6cECVJ7al5MrelppF5Vj08R+Qz
- I0KOAjlQ=
-X-Gm-Gg: AYBFou2zkWY9wbSAgAkFBy5LKW4wnpZDi3oa53jOwd0CS+h8yaG9w/yAR2AU1f6IzwB
- r+gGwkmzDMSfuLk82URKyVr7br2UOL9ptSzUFN9pCDjzCF1/s/tQQpnz7Kp6hFynn9fJpMLDNPl
- eVTmYfkWe1DlMzynnnL5b/7yOml9/q+JMvNiq0HAB0zNO1jEkHjY0a1ySW9tdqDd7zhRTboOZw5
- +Qih4qXxPgHinX0Y2xubm6Pxs0YOF/SItT4tQReLCuuxCxmO+k9n/ZfUjSDYzAa4uiY7qu/ihIG
- Lsz6OpNm8uloxMERI44Uak4DDontgaD2ksA9AWmIdaNbIWPYFpsm5jJScYApO5zyfx4izLFf3xI
- Th5eONZ9drSOVdO2PPxzeRp2SVyUP4W2pkJfXBb6LK/mPmSQHSNbbcmeSxDR9h7Rzpa43fLjtKD
- sATaGtsKrOc2JUzMk+uf4F5vHg+YLRB/QSpr9B7o2aOturrILm6SznxYVfaJwhJXw0BPk2lwmpk
- /eVLpT6hpUKR7UE+o3DFGheIEfBbtdcmiIQ1PobRBR0iLzgwgfpwBnYWhyeNEQSIrBwR1Hv5ivI
- LHQnlEZBZ+GWNbTd6BPJ2kwoxIv1I6fqe86Urg+oYkUBDpKERFqkfktvXdKGvYNhV3RP5EB8tnN
- g0Q4sSYw6r4+F9Mlu1VYqRDXWlTdcyCviKA==
-X-Received: by 2002:a5d:5e8e:0:b0:48c:5304:5e50 with SMTP id
- ffacd0b85a97d-49278174682mr5505960f8f.0.1793983021083; 
- Fri, 06 Nov 2026 08:37:01 -0800 (PST)
-Received: from lanath.. (wildly.archaic.org.uk. [81.2.115.145])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d3d60e78sm4517912f8f.1.2026.11.06.08.37.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Nov 2026 08:37:00 -0800 (PST)
-From: Peter Maydell <peter.maydell@linaro.org>
-To: qemu-arm@nongnu.org,
-	qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
- Chao Liu <chao.liu@processmission.com>,
- Alistair Francis <alistair@alistair23.me>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Bernhard Beschow <shentey@gmail.com>, Peter Xu <peterx@redhat.com>,
- Fabiano Rosas <farosas@suse.de>
-Subject: [PATCH v2 for-11.2 2/2] include/hw/core/ptimer.h: Fix 'version'
- argument of VMSTATE_PTIMER
-Date: Fri,  6 Nov 2026 16:36:57 +0000
-Message-ID: <20261106163657.3825938-3-peter.maydell@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261106163657.3825938-1-peter.maydell@linaro.org>
-References: <20261106163657.3825938-1-peter.maydell@linaro.org>
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xPNox-0005E6-PH
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 12:33:50 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xPNow-0004tB-6F
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 12:33:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1793986425;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SgNWBh5whufnh1RfN6VWrph1TlYC50rhVdGcVg//7Zg=;
+ b=F4Ys98VpaOA3WArbpSEASpCE3lsCNHAm09fzAJcsdZdfXUeEnna58P2Z+jQUC+yXZ5gKur
+ ADfoJXBKPPBJuGopBhWjrSLM6ZzUNSQJ1/09PbzKqcDkz4Xpob6ZImfEmkAkNZ8/YpWNyK
+ 1g8gpWnNMOJGti79oAK98OHxtR59fsc=
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-623-VSfcwTERNjuWWPRpuDy8hQ-1; Fri,
+ 06 Nov 2026 12:33:40 -0500
+X-MC-Unique: VSfcwTERNjuWWPRpuDy8hQ-1
+X-Mimecast-MFC-AGG-ID: VSfcwTERNjuWWPRpuDy8hQ_1793986418
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id ECBA41956089; Fri,  6 Nov 2026 17:33:37 +0000 (UTC)
+Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D0238195608B; Fri,  6 Nov 2026 17:33:34 +0000 (UTC)
+Date: Fri, 6 Nov 2026 17:33:31 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: Thomas Huth <thuth@redhat.com>, qemu-devel@nongnu.org,
+ qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, qemu-ppc@nongnu.org,
+ qemu-block@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: Re: [PATCH v2 04/28] hw: mark all remaining virtio object types as
+ secure
+Message-ID: <au4Pa4GFA4u-XQ7J@redhat.com>
+References: <20261029131241.2275706-1-berrange@redhat.com>
+ <20261029131241.2275706-5-berrange@redhat.com>
+ <fe7f7d29-8ca3-4ced-afcc-c768b84c4888@redhat.com>
+ <CAMxuvazfhfGSZCiSi+viwJ7f7XDWAZfjmW39n3a7a-qQyw-YSA@mail.gmail.com>
+ <au3mwO32b0-PSXKu@redhat.com>
+ <CAMxuvayhYcOvH2QPptrKUQGFHoRxQcM1USF5OwuZYR_g2c4zgw@mail.gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+In-Reply-To: <CAMxuvayhYcOvH2QPptrKUQGFHoRxQcM1USF5OwuZYR_g2c4zgw@mail.gmail.com>
+User-Agent: Mutt/2.4.3 (2026-10-09)
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: XUiWfAqVCPM2kqfXuDoE7LcZK1O8eOMMj2SRkxCRgUQ_1793986418
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::430;
- envelope-from=peter.maydell@linaro.org; helo=mail-wr1-x430.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: 5
+X-Spam_score: 0.5
+X-Spam_bar: /
+X-Spam_report: (0.5 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ RCVD_IN_SBL_CSS=3.335, SPF_HELO_PASS=-0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -105,107 +95,66 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The VMSTATE_PTIMER macro is defined to pass a 'version' argument of 1
-to VMSTATE_STRUCT_POINTER_TEST_V.  This means that the field will
-only be used in migration when the vmstate struct that uses
-VMSTATE_PTIMER has a version_id of at least 1.  This doesn't match
-how we define other VMSTATE_FOO which don't take an explicit
-version_id, which is to use a version argument of 0 (e.g. all the
-common macros like VMSTATE_UINT32 are written to pass 0 to their
-VMSTATE_UINT32_V counterparts, and so on). It also doesn't match
-how we define VMSTATE_PTIMER_ARRAY.
+On Fri, Nov 06, 2026 at 06:52:27PM +0400, Marc-André Lureau wrote:
+> Hi
+> 
+> On Fri, Nov 6, 2026 at 6:40 PM Daniel P. Berrangé <berrange@redhat.com> wrote:
+> >
+> > On Fri, Nov 06, 2026 at 06:35:29PM +0400, Marc-André Lureau wrote:
+> > > Hi
+> > >
+> > > On Fri, Nov 6, 2026 at 3:53 PM Thomas Huth <thuth@redhat.com> wrote:
+> > > >
+> > > > On 29/10/2026 14.12, Daniel P. Berrangé wrote:
+> > > > > These are all intended for use in a virtualization scenario and must
+> > > > > provide a security boundary.
+> > > > >
+> > > > > Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> > > > > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+> > > > > ---
+> > > > Reviewed-by: Thomas Huth <thuth@redhat.com>
+> > > >
+> > >
+> > > I have a second thought about this, I'd like to exclude all
+> > > gpu-accelerated paths for now. virgl/mesa/rutabaga expose a very large
+> > > attack surface, so I'd like to drop them from the secure boundary
+> >
+> > Rather than repost, please see my response for patch 2:
+> >
+> >   https://lists.gnu.org/archive/html/qemu-devel/2026-11/msg01530.html
+> >
+> > TL;DR: we have already promised anything virtio related is in scope
+> > for security handling for a long time, as they are all unambiguously
+> > "virtualization use case".
+> >
+> 
+> the value of a secure policy enforcement is low if we know those
+> devices are unsecure and don't have the resources to make them secure.
 
-The practical effect of this is that users of VMSTATE_PTIMER in
-vmstate structs which explicitly or implicitly have a version_id of 0
-were actually not getting their ptimers migrated.
+It isn't a great situation to be in, but we're already there for any
+virtio devices based on our existing policies for bug handling and
+security triage. We can't promise we'll get fixes for all CVEs quickly,
+but we will at least assign CVEs so that users are aware when there
+are known problems.
 
-This affects:
- vmstate_xlnx_csu_dma in wh/dma/xlnx_csu_dma.c
- vmstate_k230_wdt in hw/watchdog/k230_wdt.c
+This contrasts to other devices where problems will remain largely
+hidden for view, as we treat them as normal bugs and never call our
+security concerns when committing changes.
 
-which are used in:
- * Arm Xilinx versal and zynq machines
- * RISC-V K230 machine
-
-Most ptimer users are unaffected because they took the usual approach
-of explicitly setting their starting version_id to 1.
-
-Fix the version_id in this field.  This is a migration compatibility
-break for all the above listed devices/machines.  Since the timers
-involved are in devices where the timer is usually stopped (e.g.  the
-watchdogs only have the timer active when the watchdog is enabled and
-counting down), the consequences of the bug are likely not visible to
-most users.
-
-We could perhaps attempt to preserve migration compatibility here,
-but none of the affected machine types are versioned and so we do not
-promise cross-version compatibility, so do the simple thing.  Bump
-the version_id and version_id on the two affected vmstate structs so
-that attempted migration between old and new QEMU fails cleanly.
-
-Fixes: 852f771ec9e5c ("vmstate: port pmtimer")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4705
-Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
----
-Not cc: stable because it's a migration format change and we
-don't generally backport those
----
- include/hw/core/ptimer.h | 2 +-
- hw/dma/xlnx_csu_dma.c    | 4 ++--
- hw/watchdog/k230_wdt.c   | 2 ++
- 3 files changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/include/hw/core/ptimer.h b/include/hw/core/ptimer.h
-index 4dc02b0de47..8513f8917e3 100644
---- a/include/hw/core/ptimer.h
-+++ b/include/hw/core/ptimer.h
-@@ -300,7 +300,7 @@ void ptimer_stop(ptimer_state *s);
- extern const VMStateDescription vmstate_ptimer;
- 
- #define VMSTATE_PTIMER(_field, _state) \
--    VMSTATE_STRUCT_POINTER_V(_field, _state, 1, vmstate_ptimer, ptimer_state)
-+    VMSTATE_STRUCT_POINTER_V(_field, _state, 0, vmstate_ptimer, ptimer_state)
- 
- #define VMSTATE_PTIMER_ARRAY(_f, _s, _n)                                \
-     VMSTATE_ARRAY_OF_POINTER_TO_STRUCT(_f, _s, _n, 0,                   \
-diff --git a/hw/dma/xlnx_csu_dma.c b/hw/dma/xlnx_csu_dma.c
-index 436f9915e02..ea703dc00ce 100644
---- a/hw/dma/xlnx_csu_dma.c
-+++ b/hw/dma/xlnx_csu_dma.c
-@@ -679,8 +679,8 @@ static void xlnx_csu_dma_realize(DeviceState *dev, Error **errp)
- 
- static const VMStateDescription vmstate_xlnx_csu_dma = {
-     .name = TYPE_XLNX_CSU_DMA,
--    .version_id = 0,
--    .minimum_version_id = 0,
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-     .fields = (const VMStateField[]) {
-         VMSTATE_PTIMER(src_timer, XlnxCSUDMA),
-         VMSTATE_UINT16(width, XlnxCSUDMA),
-diff --git a/hw/watchdog/k230_wdt.c b/hw/watchdog/k230_wdt.c
-index 1f83b499e82..fba2013b8f3 100644
---- a/hw/watchdog/k230_wdt.c
-+++ b/hw/watchdog/k230_wdt.c
-@@ -234,6 +234,8 @@ static const MemoryRegionOps k230_wdt_ops = {
- 
- static const VMStateDescription vmstate_k230_wdt = {
-     .name = "k230.wdt",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-     .fields = (const VMStateField[]) {
-         VMSTATE_PTIMER(timer, K230WdtState),
-         VMSTATE_UINT32(cr, K230WdtState),
+With regards,
+Daniel
 -- 
-2.43.0
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
 
 
