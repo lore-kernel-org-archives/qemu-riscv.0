@@ -1,116 +1,152 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC434606A326
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 20:01:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 783B0606A326
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 20:21:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20260707 header.b=iLV8D9F7
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RECQqRwv;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XGzVxrqj
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPQ84-0002zQ-1S; Fri, 06 Nov 2026 15:01:40 -0500
+	id 1xPQQq-0000cZ-VE; Fri, 06 Nov 2026 15:21:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wuhaotsh@google.com>)
- id 1xPP2v-0006Vf-Tk
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 13:52:18 -0500
-Received: from mail-qt1-x82e.google.com ([2607:f8b0:4864:20::82e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wuhaotsh@google.com>)
- id 1xPP2t-0005wj-2P
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 13:52:17 -0500
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-533202fe429so97881cf.0
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 10:52:13 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1793991133; cv=none;
- d=google.com; s=arc-20260327;
- b=PwV9iPstFse2oiIeMcu3gcjYjPBCyguDg4d66+1xKDaQjpXTcKi45Hg1+s80W9Iv7U
- 3274gqWlU7+8R4pncrhJeYnFuAubSA6KWKnt4OeNB2yegBYUf+8DUaGA/AShHNBfiKdX
- QgqUyXH2P64Bqx8k3lvImdzEVwAxH+hDO5t7YS6ufTs+lmnHoPgqkerZVzjpdKYDu3Nq
- olvmqn+n47hejn4BA4jiM+LCsJFgvwNaOdj+NujD4JD9+TwKiLs1lgljWsXZKmIzVbHW
- is4SgOIrK8zBhLK/G+3POU0lQnLzcisMkYmhIevG2Y7a2i6oX2y2qiaVwOM59G63iBYJ
- 2sfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=VXXQyV9M1cTPcSVctanj7RtvMiEbV7DDmFFZfiz27bw=;
- fh=k6QPNVmw46NSP/MextcrLG9N8j0TyBxn2s/da2onDuc=;
- b=LXdYCmYjrADMebywYSny6Lgtw/Iswpkd89+co8sC5AvYGQ6cvdJHNSfaCYC4bcAddD
- h79zG1r5BARnRqUPydXoYWcIVJtUY7ispsBw5kZyfFfTxq692XQHhjX2GrtxlrTjI1i8
- SZZAbr8RxPNODoj5ovLOHtzWM1WxTTtzALAZRnNOy7FUvNBhfqq77+4f5dxY5YMtcOou
- D0jicGApaYOXdu9EDEsHP1wNq2qgnOTqkQxavuywQ6eXXPrkrkSfSOtNa0KVafwHLYdj
- BDWRygEvRpLdincdNoKLeTGsxojFFmYnnBGRn7NIOZ0jqhEpd0K8EnkcScn0ERuQ8tcJ
- MrFQ==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xPQQj-0000TY-Uj
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 15:20:58 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xPQQh-0006eZ-B0
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 15:20:57 -0500
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A6JL4BO1699895
+ for <qemu-riscv@nongnu.org>; Fri, 6 Nov 2026 20:20:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ aXBni1gmfYSsAQGyl8W0hOLEjjM986k5Se03Y+5HAE0=; b=RECQqRwvUuzBUt/e
+ XpsFH3RYwbO5JDwNufhMNrBfm+FGy0v7Y8s4jcZ52RBFG1CnrUkWrYWSUzCVlObC
+ eri3EU5C2VU9OqHs6UrC6CeSlw0U2RitX3Ri9NW1Jb8l94SVZ8vrL0fIMKln2mUN
+ 5sojOhD8zJHH3Xa9i9KbqK5rKyr5XNdrycGc8cRzwjsiUVKLazETGy+UyR4n84yT
+ jg7KrXo1wJ/owmtGsGLM0uuWdD2Ni63/9jYeZ3QPRw+ifnnRogY5kM/FB9KvOuUw
+ I3EPhcBAFSCAIRPcmRd6P7PtPZUMKGemGaYPUhgyQxj19qQk7oJb2ivJ+WG+mAIt
+ +xSx2w==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsmypg7cg-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 20:20:48 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-542fc619afaso12934361cf.2
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 12:20:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20260707; t=1793991133; x=1794595933; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=VXXQyV9M1cTPcSVctanj7RtvMiEbV7DDmFFZfiz27bw=;
- b=iLV8D9F7j+Qm1w+wrDvU4yhrfh5jCUroke+Mh6PzoSUegCwCMnw19F2KS97XNVp6LI
- f78Ya1IYt8UggIuhGrRpSeaEDUuLF2HiBledhGA0pjAVtZgxMz2OfJSSX/+kygJdObb7
- n/C0/UaCzILW/ZDYsYi54YCy86a8NO5PWef2rxQfv5QmQPWKnIAaa4XpX3jElbd1ho4S
- soIe48EpYOHuMZNdZq9h6EkdIlldapvC05oVrBEkH3SNwuDDkPpXsVKmc3K2DLAto9ha
- VfiTxBz1LYv2ZLXSWUi5u1pKLl4Xn2sO2lEWx68nIjlKMZDa6ool3NxEXOPfomhE3VOz
- xAYQ==
+ d=oss.qualcomm.com; s=google; t=1793996447; x=1794601247; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=aXBni1gmfYSsAQGyl8W0hOLEjjM986k5Se03Y+5HAE0=;
+ b=XGzVxrqjf13cgcRX6NJhUYPtT571tbVRrt96ffb7A+r+fYXJ3k4fZh0QPATjJiNjcb
+ aaD+kKHR0QtpkCu3kZaMtwmm2nio5rIZ+WkfyHmeXDIuF+QmlBP6vX60WyTJWZsQkX1Z
+ b1KeDlFXf32EhzbNoLSRjexx2WRa9x01z0ZHrlSudLuagJ2gUIK0yKqfNHMg9KFDcG/7
+ lV6NSpaC8L+gEPOWxV0ZzSNHHh3UwS0wpNiDohylWrkg3YppQ18IKWwFVa4sLG4DcXKi
+ hB2R5Jtqa9rCK54USprdBz6UgG2WMozD+nlSJb53522CRb8AO9JtXl8zAG32GMgSaBi6
+ vAmA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793991133; x=1794595933;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=VXXQyV9M1cTPcSVctanj7RtvMiEbV7DDmFFZfiz27bw=;
- b=axXXm8kBnPfBlTxehAUlvfBnbRgZqnZjArg2umb+IeRufbck0np1KP97HgUttp9uzF
- 74HDJ/KWJZPKZUk5aEY6aigupoyvVXK6dB8NEKSLYf8jS5o/ByWoJHs0mKMEYdMfCHdF
- JNZPDRfqQ/e1iocbbTibUoRXQOrMhRrZCgkEiiJBqXvL6YIHy3X2CWYs38xk8BzpSLyo
- 52NsgQ77q31t8sxbSnK9EQfVfFyA8JXvffodzaE4YNKrRjzWj5Ogzg9eiMdMmnBqIyiY
- MHUiI9+uluzNFjor3ZA8NppSRMdzLZi7SLlPMGWsreZHRSXHbAlin4I944mUlCnOJ2tP
- 0Sow==
+ d=1e100.net; s=20260707; t=1793996447; x=1794601247;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=aXBni1gmfYSsAQGyl8W0hOLEjjM986k5Se03Y+5HAE0=;
+ b=hn9ExcX1vIYzvb8V4imYUGv93DjwaPn1ua+C6pxycSjX6LD5fKE5o3zD8aoznz2ARw
+ XQaZk1cl+vfE33pQesV3FfWlJe29OwSXriQcysQj7GNS1IXdvK/jDOIY0kL92h7mrJSj
+ Oc4ibxrECCuSnioH0QA7prohNf6/0ufQbnXmJi/Wvk51gEOO0qO+oOIoDRqcz+vDs7HY
+ 3q2JZxRfudKmQ6l3nSkMNe/RO5e7h/MnbrxlbB5hd7fZETMMezW3o82YnTS5Ifxsn7FK
+ mJzk45SBQxLiJeWER3E82XAlb0IMzt8kWEgx9GqG2/WyhAmxwu2IQ7h7Qsh9UIYpOJEb
+ ++Zw==
 X-Forwarded-Encrypted: i=1;
- AKwUvBxQf0TouI5EH6qziqQa2lVagoPWdSBLEdFIshHO7+LvqkpSNsySPMxYBDuJaP+5Rmeh7dvesTDVOcjC@nongnu.org
-X-Gm-Message-State: APuU4Z/nh7TerypmPPrdg7Cm1jJpMrXd/PCFgERE9e1szJf1Sm/1iojR
- 6d/qS5+ppaLRj6JjwQg76hkOQzFYS/K9Mm+aT7Lec4VG7RvmOxgZkYaPdCpwgPaqZmsPj1erB74
- sX7L9vm6lkNGJxG2teL8Kx52IuS1JXeMPNYXsf9Fi
-X-Gm-Gg: AYBFou340uG0HPXdS+jf4gyL8NHt8ygPBsUkfBDaizC6V1mx4s4ZCFUj0PwZaA2qFpA
- mMRlN5TaS3i/vGmh7A4JrtGdUeDok10E22/3anULai9QtTutVmnfDo8wHcZvOHK7c6rVVQcJScc
- 1k5ccm3oGxIRv19IAVlATDSmnUpoAw8DBsnJ76mJ87Z/1TxTn1LWWsHemMXbnURulLbzZQSRN2T
- Qkb7207czBdvJjSmTdR5dBxwJpdVADsCdtErdyS9HwBA56fMUUiOCD728chCJB3/Yw0wavgfSuu
- T4B+H2OrAdGs41TP3/Mdib3HX+QfvfuhcRyF69m0eLhxSapLJxlSgQbesYTGbwN4hjLMH8yE+QM
- hQfZpJE7kq5PNUO3iFlIuGShFDXrfRj+tlrfLkbPH/IOLCETpBpIO8J1vHVQjYq+IKA==
-X-Received: by 2002:a05:622a:261b:b0:546:92f2:7830 with SMTP id
- d75a77b69052e-54f5ddb53e0mr4482831cf.6.1793991131920; Fri, 06 Nov 2026
- 10:52:11 -0800 (PST)
+ AKwUvBxPrDCZKsR6T1k3DZIWOGi3GF8zDSeAoybW4htM1fYgqk3tJ1LkYO6JpQZHlkxwyRoea71hB3yanS2w@nongnu.org
+X-Gm-Message-State: APuU4Z+cViUdvjn5WWsnjxS4ETTYhs55GLxaPZ5EMQvUII8g69vaxw3/
+ lqbBkp2iwr4MI0YwD8Qii90AbLjKWQvMIzdIg5zHIhHH7HrjtQfAb32+nB2B7RyYtHp4x9Uq0Kq
+ DTogIrQnWx5ZrMSXdeyhcKNWjBKYjGr3sDfoMLHfg5gvnC/2GpJbTh3BXMA==
+X-Gm-Gg: AYBFou2ztjV+S2RDtWveWZ+kK/bqXqm5+GK5+8Nm3i2fb1z9drIM607DlaQuEUy2Gwq
+ a2YqLO6QTD1WzoPNkSRRO6tmcQv0EBXPuLGOY1G8lrabzaqwaiTM041sIxE7Fo+kto2TG1lPFd8
+ YA5scCTvTDz3i4IyMnSip5V/ZhbmnzpP/IbSy51HJGanM7f7jKeDSbB1hpJZpflRJiRURlSI04L
+ u3LXmBqRExoR1R+9giSAW5mD22M258WBkjwDKuGZl/a6i5Lvct540t041bO2JVmDSfSvuO6nUeq
+ rrg7iR4QA1YZK/odBv75w3isIYvDKieI8F/FbswXqx8MgFjO80HTOgokGxzUjOkwvM4cHZokaXs
+ wvsRqFCSDo2rELZrLk7v+g8yh0ADFXHKctw6OSBHaZ7Esonc8hBCb4IeBzhVSnxUDiWkYdXE0ir
+ n+Xc7lYGTW
+X-Received: by 2002:a05:622a:1920:b0:533:8a63:1c52 with SMTP id
+ d75a77b69052e-54e15267f5cmr57897011cf.49.1793996446634; 
+ Fri, 06 Nov 2026 12:20:46 -0800 (PST)
+X-Received: by 2002:a05:622a:1920:b0:533:8a63:1c52 with SMTP id
+ d75a77b69052e-54e15267f5cmr57896451cf.49.1793996445806; 
+ Fri, 06 Nov 2026 12:20:45 -0800 (PST)
+Received: from [192.168.68.100] ([152.234.124.231])
+ by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-54f86ce2b24sm2978751cf.3.2026.11.06.12.20.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 06 Nov 2026 12:20:45 -0800 (PST)
+Message-ID: <e80b7ca5-39b4-424d-be45-44ade42af3da@oss.qualcomm.com>
+Date: Fri, 6 Nov 2026 17:20:41 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261105125203.40320-1-philmd@oss.qualcomm.com>
- <20261105125203.40320-3-philmd@oss.qualcomm.com>
- <87jymr6zc6.fsf@draig.linaro.org>
-In-Reply-To: <87jymr6zc6.fsf@draig.linaro.org>
-From: Hao Wu <wuhaotsh@google.com>
-Date: Fri, 6 Nov 2026 10:52:00 -0800
-X-Gm-Features: AclHuK9q5wox1xphTwrGgk65icFPF_MBSNTosjysXinwBG92Os4SIC9Mc8Q-vv8
-Message-ID: <CAGcCb122Ye_in-uZkXNgf6_qfiRCac1+eDspYY5JnnVvM6DfDA@mail.gmail.com>
-Subject: Re: [PATCH v2 02/17] tests/qtest/npcm7xx: Replace deprecated
- sprintf() with g_strdup_printf()
-To: =?UTF-8?B?QWxleCBCZW5uw6ll?= <alex.bennee@linaro.org>
-Cc: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- qemu-ppc@nongnu.org, Tyrone Ting <kfting@nuvoton.com>,
- Fabiano Rosas <farosas@suse.de>, 
- Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
-Content-Type: multipart/alternative; boundary="000000000000275e5c065fa01cd1"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82e;
- envelope-from=wuhaotsh@google.com; helo=mail-qt1-x82e.google.com
-X-Spam_score_int: -175
-X-Spam_score: -17.6
-X-Spam_bar: -----------------
-X-Spam_report: (-17.6 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_MED=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- ENV_AND_HDR_SPF_MATCH=-0.5, HTML_MESSAGE=0.001, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=unavailable autolearn_force=no
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/19] target/riscv: Add support for RISC-V P extension
+To: MOLLY CHEN <xiaoou@iscas.ac.cn>, palmer@dabbelt.com,
+ alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com
+Cc: nutty.liu@hotmail.com, max.chou@sifive.com, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org, Yin Zhang <zhangyin2018@iscas.ac.cn>,
+ Dajun Huang <djhuang_1@std.uestc.edu.cn>,
+ Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
+References: <20260916070721.3279229-1-xiaoou@iscas.ac.cn>
+ <28033024-7e39-4a29-8e59-82150130954e@iscas.ac.cn>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <28033024-7e39-4a29-8e59-82150130954e@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA4MSBTYWx0ZWRfX8UQs5Mmj4qnS
+ zysd8oVUkX2uViRze8iNtXTozKoVNxDBhqdVL0xmSpRGGHy8Qwe+THnY4WB930gwpGhizeoH9sK
+ nBzp/lXEKzzV0go6k3mb9eWvdghDg+2zJr0aPvAoYA8tyk+HpKwVo3B0gvGI62g+CNog2KVXtN+
+ 5R0/fSWr0RTotyX+AHCEp33JZ3q67zfLnxdt1uRasAcmHfwrqC/b4AdCDkG9ZM04gnia/i4/e49
+ deLQQftSPQ0pkiMsFAYOQiIwlomqLv5X4nR5H61LkrHY21R83JyrCM15onTSNFsQ63140ws3d5k
+ TsQQikgCdT1qachtFa3lddCNIMCQdpnfBlwSRuAjvtpxyJ68+hHCDu4pDvpH9hHFp4dy+QnP5q0
+ wnB4DIuWblv9QnAPjHfEcAShhjf2xpAzGb4ta/paop2nMs7B4M09hcAz2jZMBf9gedophIWQGO4
+ b66ZQahnTbbdZ/ws0JA==
+X-Proofpoint-GUID: Ni-hZ5G4o_njYKY_DWRpm6Digb6EyDJV
+X-Proofpoint-ORIG-GUID: Ni-hZ5G4o_njYKY_DWRpm6Digb6EyDJV
+X-Authority-Analysis: v=2.4 cv=TZ4DJhQh c=1 sm=1 tr=0 ts=6aee36a0 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=69wJf7TsAAAA:8 a=NEAV23lmAAAA:8 a=H5BWENXdsabB2_aDcNsA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22 a=Fg1AiH1G6rFz08G2ETeA:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA4MSBTYWx0ZWRfX11qgAFXIW/86
+ LY5FG5yoeV5MJ1vLmd9/uNu0qWUyrivWuEXhktwjdeglOuaiNhOVkYSdNNqJ37XSAuLxAlba15/
+ +f6BINNDYlopjugjpmH9i9wABlTqKNg=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-06_06,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 adultscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060081
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Fri, 06 Nov 2026 15:01:39 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -121,93 +157,218 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_IN_DEF_DKIM_WL autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---000000000000275e5c065fa01cd1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Molly,
 
-On Thu, Nov 5, 2026 at 8:02=E2=80=AFAM Alex Benn=C3=A9e <alex.bennee@linaro=
-.org> wrote:
+Can you please re-send the patches based with current master?  In particular
+due to changes in the meson framework for tcg tests.  Basically you'll need
+to change tests/tcg/riscv32/meson.build and tests/tcg/riscv64/meson.build
+instead of Makefile files.
 
-> Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com> writes:
->
-> > Replace sprintf() by safer g_strdup_printf() to fill the QOM path
-> > and property names. This silences when using Apple clang 17.0.0:
-> >
-> >   ../tests/qtest/npcm7xx_adc-test.c:140:5: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >   ../tests/qtest/npcm7xx_adc-test.c:322:9: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >   ../tests/qtest/npcm7xx_pwm-test.c:244:5: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >   ../tests/qtest/npcm7xx_pwm-test.c:245:5: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >   ../tests/qtest/npcm7xx_pwm-test.c:255:5: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >   ../tests/qtest/npcm7xx_pwm-test.c:256:5: warning: 'sprintf' is
-> deprecated [-Wdeprecated-declarations]
-> >
-> > Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@oss.qualcomm.com>
->
-> Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
->
-Reviewed-by: Hao Wu <wuhaotsh@google.com>
+You can then incorporate any changes to update the patches to the latest spec
+version available.
 
->
-> --
-> Alex Benn=C3=A9e
-> Virtualisation Tech Lead @ Linaro
->
+Thanks,
+Daniel
 
---000000000000275e5c065fa01cd1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On 10/23/2026 6:10 AM, MOLLY CHEN wrote:
+> Hi all,
+> 
+> Gentle ping on the v3 series. Any review or feedback would be much
+> appreciated.
+> 
+> A quick update on the P extension: the Task Group approved the
+> Development Milestone on September 28, 2026, and the specification
+> version has been updated to v0.6. This version includes a minor change
+> to the semantics of psshlr.*, which I will incorporate into the next
+> revision of this series.
+> 
+> In the meantime, feedback on the current v3 would be very helpful.
+> 
+> v3: https://lists.nongnu.org/archive/html/qemu-riscv/2026-09/msg00523.html
+> 
+> Thanks!
+> 
+> On 2026/9/16 15:07, Molly Chen wrote:
+>> This series adds support for the RISC-V Packed SIMD (P) extension for
+>> RV32 and RV64.
+>>
+>> The P extension defines packed-SIMD fixed-point operations intended for
+>> DSP workloads such as multimedia and signal processing. These
+>> instructions operate on packed subword elements in general-purpose
+>> registers, with register-pair forms for wider operands on RV32.
+>>
+>> The implementation targets the V0.21 development draft of the RISC-V P
+>> extension specification:
+>>
+>>    https://github.com/riscv/riscv-p-spec
+>>
+>> The local riscv-p-spec reference checkout is at commit:
+>>
+>>    71b78d2c8d1d41cc01a036d75dc001920b8ac22e
+>>
+>> P support is enabled with the experimental x-p CPU property. The series
+>> includes instruction decoding and translation, helpers, extension-state
+>> handling, and the specification-defined control of vxsat. The focus
+>> remains functional correctness and instruction coverage; performance
+>> optimization is left for future work.
+>>
+>> This revision adds in-tree TCG tests for RV32 and RV64 and addresses the
+>> review feedback on helper reuse, register overlap, shift semantics, and
+>> code readability. It also fixes additional issues found while testing,
+>> including zero register-pair handling and RV64 SHLR rounding.
+>>
+>> Thanks to Daniel Henrique Barboza, Nutty Liu, Chao Liu, and Max Chou for
+>> their reviews and suggestions.
+>>
+>> Changes in v3:
+>>
+>>    - Add descriptive commit messages explaining the purpose and behavior
+>>      of the patches, and document helper macro definitions, including
+>>      their interfaces and arithmetic semantics.
+>>
+>>    - Add RV32 and RV64 assembly tests under tests/tcg/riscv, with shared
+>>      test macros and integration into the TCG test Makefiles. Cover
+>>      arithmetic, shifts, multiplication, narrowing, saturation, register
+>>      overlap, and zero register-pair operands. The tests are freestanding
+>>      Linux-user programs and do not require a target libc. Set PSIMD_CC
+>>      to a P-capable Clang to build them; the assembler options use
+>>      rv32gp0p21 and rv64gp0p21. Enable previously disabled tests using the
+>>      P v0.21 mnemonics and update signed saturation immediate operands.
+>>
+>>    - Correct register-controlled packed byte and halfword shifts to use
+>>      the low five bits of rs2. Share the signed saturating/rounding shift
+>>      implementation between scalar and packed forms: psshar_hs,
+>>      psshar_ws, and sshar are all generated by GEN_PSIMD_VAR_SSHAR.
+>>      Return zero for oversized SSHAR/SHAR right shifts, and widen
+>>      rounding arithmetic before adding the rounding bit.
+>>
+>>    - Clamp unsigned rounding right shifts to the element width so that
+>>      the source MSB still participates in rounding for oversized shifts.
+>>      Apply this to PSSHLR/SSHLR and RV64 SHLR. Use a wider intermediate
+>>      for SHLR to preserve the carry when rounding UINT64_MAX right by
+>>      one bit, and add regression tests for these cases.
+>>
+>>    - Fix RV32 register-pair operations when the destination overlaps
+>>      the scalar source by completing both results before writeback.
+>>      Treat a zero register-pair selector as {x0, x0}, suppress both
+>>      destination writes for a zero pair, and preserve vxsat side effects.
+>>      Use tcg_gen_movi_i64() to initialize a zero source in narrowing
+>>      translations, with a dedicated regression test.
+>>
+>>    - Avoid undefined behavior in helper arithmetic by using unsigned
+>>      operations where wraparound is intended and wider intermediates
+>>      where needed. Handle oversized left shifts explicitly and handle
+>>      zero shifts in SLX/SRX without shifting by the operand width.
+>>
+>>    - Correct the RV32 REV encoding, reject unavailable translations
+>>      instead of accepting them without an operation, and fix lane
+>>      selection in PMQWACC.H and PMQRWACC.H.
+>>
+>>    - Reuse qemu/bitops.h extract64() for lane extraction, correct
+>>      misleading helper comments, and align macro continuation characters.
+>>
+>> Testing:
+>>
+>>    The P extension TCG tests were built with LLVM/Clang 24.0.0git
+>>    (/opt/llvm/bin/clang), llvm-project commit:
+>>
+>>      96295a1412f9afbee9d4a3c2701e83f5a529a9cc
+>>
+>>    Built qemu-riscv32, qemu-riscv64, qemu-system-riscv32, and
+>>    qemu-system-riscv64 successfully. Both P extension TCG suites pass
+>>    with the new regression cases:
+>>
+>>      make -C build/tests/tcg/riscv32-linux-user \
+>>          PSIMD_CC=/opt/llvm/bin/clang run-psimd-rv32
+>>      make -C build/tests/tcg/riscv64-linux-user \
+>>          PSIMD_CC=/opt/llvm/bin/clang run-psimd-rv64
+>>
+>>    The test targets enable x-p, zmmul, zba, and zbb on the corresponding
+>>    rv32 or rv64 CPU. The P-aware compiler path is configurable through
+>>    PSIMD_CC.
+>>
+>> Changes in v2:
+>>
+>>    - Refactored translation and helper code using macros for common
+>>      implementation patterns.
+>>    - Consolidated P extension prerequisite checks in
+>>      riscv_cpu_validate_p().
+>>    - Removed the Zbkb dependency to match the specification.
+>>    - Added the specification-defined vxsat control mechanism.
+>>
+>> Previous versions:
+>>
+>>    v2: https://lists.nongnu.org/archive/html/qemu-riscv/2026-07/msg00697.html
+>>    v1: https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html
+>>
+>> Feedback on the implementation and tests would be appreciated.
+>>
+>> Co-authored-by: Yin Zhang <zhangyin2018@iscas.ac.cn>
+>> Co-authored-by: Dajun Huang <djhuang_1@std.uestc.edu.cn>
+>> Co-authored-by: Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
+>>
+>> Molly Chen (19):
+>>    target/riscv: Add packed SIMD extension state
+>>    target/riscv: Add packed SIMD helper framework
+>>    target/riscv: Add packed SIMD arithmetic instructions
+>>    target/riscv: Add packed SIMD averaging and rounding instructions
+>>    target/riscv: Add packed SIMD absolute, difference, compare and mask
+>>      instructions
+>>    target/riscv: Add packed SIMD shift instructions
+>>    target/riscv: Add packed SIMD exchange instructions
+>>    target/riscv: Add packed SIMD horizontal reduction instructions
+>>    target/riscv: Add packed SIMD pack, merge and count-leading
+>>      instructions
+>>    target/riscv: Add packed SIMD pure multiplication instructions
+>>    target/riscv: Add packed SIMD multiply-accumulate instructions
+>>    target/riscv: Add packed SIMD Q-format multiplication instructions
+>>    target/riscv: Add packed SIMD Q-format MAC instructions
+>>    target/riscv: Add packed SIMD two-way multiply-add/subtract
+>>      instructions
+>>    target/riscv: Add packed SIMD four-way multiply-add instructions
+>>    target/riscv: Add packed SIMD load-replicate instructions
+>>    target/riscv: Add packed SIMD RV32 only instructions
+>>    target/riscv: Remove Zbkb dependency from P extension to align with
+>>      the spec
+>>    tests/tcg/riscv: Add tests for the P extension
+>>
+>>   target/riscv/cpu.c                          |    5 +-
+>>   target/riscv/cpu.h                          |    8 +
+>>   target/riscv/cpu_bits.h                     |    2 +
+>>   target/riscv/helper.h                       |  529 +++
+>>   target/riscv/insn32.decode                  |  830 +++++
+>>   target/riscv/machine.c                      |   19 +
+>>   target/riscv/tcg/csr.c                      |   39 +-
+>>   target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+>>   target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1439 ++++++++
+>>   target/riscv/tcg/meson.build                |    3 +-
+>>   target/riscv/tcg/psimd_helper.c             | 3536 +++++++++++++++++++
+>>   target/riscv/tcg/tcg-cpu.c                  |   46 +
+>>   target/riscv/tcg/translate.c                |    6 +
+>>   tests/tcg/riscv/psimd-common.S              | 1105 ++++++
+>>   tests/tcg/riscv/psimd-rv32.S                | 1256 +++++++
+>>   tests/tcg/riscv/psimd-rv64.S                |  578 +++
+>>   tests/tcg/riscv/psimd-test-macros.inc       |  952 +++++
+>>   tests/tcg/riscv32/Makefile.target           |   30 +
+>>   tests/tcg/riscv64/Makefile.target           |   25 +
+>>   19 files changed, 10406 insertions(+), 6 deletions(-)
+>>   create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
+>>   create mode 100644 target/riscv/tcg/psimd_helper.c
+>>   create mode 100644 tests/tcg/riscv/psimd-common.S
+>>   create mode 100644 tests/tcg/riscv/psimd-rv32.S
+>>   create mode 100644 tests/tcg/riscv/psimd-rv64.S
+>>   create mode 100644 tests/tcg/riscv/psimd-test-macros.inc
+>>   create mode 100644 tests/tcg/riscv32/Makefile.target
+>>
+>>
+>> base-commit: b23a62773a7856299cbb3782e64968b6a92c792f
+> 
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote g=
-mail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Nov 5, =
-2026 at 8:02=E2=80=AFAM Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@=
-linaro.org">alex.bennee@linaro.org</a>&gt; wrote:<br></div><blockquote clas=
-s=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid r=
-gb(204,204,204);padding-left:1ex">Philippe Mathieu-Daud=C3=A9 &lt;<a href=
-=3D"mailto:philmd@oss.qualcomm.com" target=3D"_blank">philmd@oss.qualcomm.c=
-om</a>&gt; writes:<br>
-<br>
-&gt; Replace sprintf() by safer g_strdup_printf() to fill the QOM path<br>
-&gt; and property names. This silences when using Apple clang 17.0.0:<br>
-&gt;<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_adc-test.c:140:5: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_adc-test.c:322:9: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_pwm-test.c:244:5: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_pwm-test.c:245:5: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_pwm-test.c:255:5: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;=C2=A0 =C2=A0../tests/qtest/npcm7xx_pwm-test.c:256:5: warning: &#39;spr=
-intf&#39; is deprecated [-Wdeprecated-declarations]<br>
-&gt;<br>
-&gt; Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:philm=
-d@oss.qualcomm.com" target=3D"_blank">philmd@oss.qualcomm.com</a>&gt;<br>
-<br>
-Reviewed-by: Alex Benn=C3=A9e &lt;<a href=3D"mailto:alex.bennee@linaro.org"=
- target=3D"_blank">alex.bennee@linaro.org</a>&gt;<br></blockquote><div>Revi=
-ewed-by: Hao Wu &lt;<a href=3D"mailto:wuhaotsh@google.com">wuhaotsh@google.=
-com</a>&gt;=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
-x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-<br>
--- <br>
-Alex Benn=C3=A9e<br>
-Virtualisation Tech Lead @ Linaro<br>
-</blockquote></div></div>
-
---000000000000275e5c065fa01cd1--
 
