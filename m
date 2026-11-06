@@ -1,85 +1,84 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBDC2606A339
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:06:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A1C8606A32E
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:15:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TtD3RxP3
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QSZ5h4s0
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPIhn-0003xo-1A; Fri, 06 Nov 2026 07:06:03 -0500
+	id 1xPIqj-0000H6-3C; Fri, 06 Nov 2026 07:15:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIh5-0003u1-95
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:05:23 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIqf-0008WS-LT
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:15:13 -0500
 Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIgz-0005if-VJ
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:05:17 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIqd-00070G-HH
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:15:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793966709;
+ s=mimecast20190719; t=1793967310;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=hyjqns5htKUY+IJdSt0djEtUfWUXLubOS6si5Rd/Xhw=;
- b=TtD3RxP3GMn3Jf07ZTemT9EPtQhdYNAUTAPXsWnwsOBqKj4+sLZynV3eBkz6JQGINlE2l8
- Nt406eeNFvDU4SkJsKMKng2X/XnoJgRkDo16EpwlR1Ar1DpipTaB6U2OxIzlvhHfe+1Bos
- XAa3vLN9sZAfZPpVUnPvHkuwqZi6TRA=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=gj8hMmQ2qGvr894SxcRYilzXBAxKdqiiz7fhFvhquQg=;
+ b=QSZ5h4s0YfIoEeF9CP6ZLQg6n8XT+rv7Zjx9nUCKGE5S/W7s8aO9CRW1Pr3pUk19a6HowK
+ GFEZu41PD1tLwS4AHHxm6sEc7ebMMYs4RnoYQlajw6uDr8tLdH5HVVKNMHHpkZIvKXlf0C
+ YOJRtkqhJmAm+l1inZXz19xKF0pyWNE=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-347-YvAaL-sjN2KA5yK3oVl6Zw-1; Fri, 06 Nov 2026 07:05:08 -0500
-X-MC-Unique: YvAaL-sjN2KA5yK3oVl6Zw-1
-X-Mimecast-MFC-AGG-ID: YvAaL-sjN2KA5yK3oVl6Zw_1793966707
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-49090fde23aso594760f8f.2
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:05:08 -0800 (PST)
+ us-mta-245-HpM6sTMXMNa_DdZp3efHDA-1; Fri, 06 Nov 2026 07:15:09 -0500
+X-MC-Unique: HpM6sTMXMNa_DdZp3efHDA-1
+X-Mimecast-MFC-AGG-ID: HpM6sTMXMNa_DdZp3efHDA_1793967308
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4a77c1cbd15so5944965e9.0
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:15:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793966707; x=1794571507;
- h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=hyjqns5htKUY+IJdSt0djEtUfWUXLubOS6si5Rd/Xhw=;
- b=hJkQkpwPpAfVzHEiODtcNyTeD1StCf3WkfwXKLdyZkZxKDLqsKhkAx8q+8ZMrKNE/Y
- zL2vrwi3+CWMAF2goLMRayqBdXL4sbkG6asEUhr+glbTgMFXFV4ABGTiSNkEfFS814bz
- q/yPiAueTAn5lJBZY2wMkg+bl63yafY/uyQUZbuSLZjMxld0pHQWH3XtprrNgturwKpk
- zSu8F48mgFSSokVAXEufyjLnphO3po0LR8lvPPIDiPlaSf7kPtFulqsPxl5C8QvFWeBG
- e4ytaAFoA8KS31P0wka1idTGvUFwvKA+F06bjHotlDcQINDVhPYzwj4BlcYzyTidzC5R
- UEbg==
+ d=1e100.net; s=20260707; t=1793967308; x=1794572108;
+ h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+ :content-language:from:references:cc:to:subject:user-agent
+ :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=gj8hMmQ2qGvr894SxcRYilzXBAxKdqiiz7fhFvhquQg=;
+ b=0+rr26XX2u/VfCdRaExCNflf9ncQsVndtMrUhdxr7ieInisyclpoNn8Z1yExspkKJE
+ u+gfzTP4ewqnh4/OoE+MUnrzTMWpztW9TmR+zWvv87uvRnJvoevxpzPHFoQUYmzlPc4/
+ AgMtM64oTQ/Sll6LE1rgFWY+XisZux/ZWxKlHPx2nsmHRH84HWXBYbHRHWBUGO/oe//A
+ lkYP1kK2Z3gzMwje6U3wpPxgMNz5RFwD/WhU63NSj1ccT7oWT539YKP9dSzjjUlMQptv
+ 3NvLOKry9c87VbPg46jgY1An9eWW+/vM+3FHyDfsqiKWsryWQfSl4WlFtIxn6B1dnpTI
+ E6KQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErEgjXxCRH+HHT6UJCci74OToHkvYL9xGIkkZWpf+bpjoVKz57qO26KvSEMuVkPdZF01WbCynLRCGVrX@nongnu.org
-X-Gm-Message-State: APuU4Z+smCkrHNYL9vPvTm2aFxuO0TzFHwQrSBcZD1mmSSFbYTTs45/a
- nX3USV9IqpSPDZK2CQQHQOEh/6d9dlvAhJHcju4PCyuaSB8xqnOMc8zsgZfUi9Klk+jsj7Dncph
- A1XuX7oztuFJaXANYnwUtHCSvHYJXThzVbd+z5Eku1vKHvjo0CiitNJ6u
-X-Gm-Gg: AYBFou2AT5BUk70IZRSQvNWz1T5wr6JFf9kMvG1vgWLomYp8rhiQEfWGjTqejGm51sg
- s+fnpxiodeeVSalD64GSOQR2mooZgPR6OkUu14s6R9Lit9L5r+CSYrS+b6xGY3Dume1kf09NCC/
- 7hg8h7R+MCepTvLOvLQZ8WGo3Hdxh5GwnUQ3hbRI/NlAPmfbIOl3Qc0dTgRcBjfXSh0iv5IVjWj
- Jlj5itbsj+fpk171qUHNC/NpV3gvKomUZyKquaSeenPlqGdBevYaGODujqQgbTEoIuKDB/KbYdG
- /V1cPWE2UvmTf4c8g8rsjzRggH1zd+sMOsiOlexE5KixcbSTKURblSuLM2C4Zm777aF+aiq7/80
- 1FPYk7YS1PM7P5tqWDjvQyp39coq0nW70TctUlUCEy9CCCODgkd/98YrXyind6II0l+yaSgIlrL
- 1HfVSfCZtr5A==
-X-Received: by 2002:a05:6000:4549:b0:490:1881:80ec with SMTP id
- ffacd0b85a97d-4927702e23bmr3389070f8f.36.1793966707279; 
- Fri, 06 Nov 2026 04:05:07 -0800 (PST)
-X-Received: by 2002:a05:6000:4549:b0:490:1881:80ec with SMTP id
- ffacd0b85a97d-4927702e23bmr3389028f8f.36.1793966706841; 
- Fri, 06 Nov 2026 04:05:06 -0800 (PST)
+ AKwUvBwZMtBbYV3tXpuImB5jV7d9r8BpQBYhVo4EQi7VVgiEcz5ZfHFVtsOXxyC8FHIldEtuz8EY+5wIZvnw@nongnu.org
+X-Gm-Message-State: APuU4Z9SS44rWpTe0DiGSZSSbVwCUcgfdqCi+kxNHV7jdGL1t5FfnaW9
+ /ADWE+6Cd4NSv7SD7zipIyeWTVUsa/C/H2excxESKjqZoTX5MiUp7sp7AXSULr0kv0kBQwtwh4y
+ 9GmkJbwWXkjVaVklpnnEFafvlR1y+HL09B/sxY0Mv923MYdaJrlEg5NV0
+X-Gm-Gg: AYBFou1kPbccvxbWAmNkJ+kaUaOCCnTilLxZjSzhT/Hvgy8LRaXut4+AEb497F86YkS
+ DMnRt/uvKGdFtTBwwQvqLpMcH9oT1RVwmTvatTShzmZ1OHo8f8A8lwtUUhxkIdeta2VYqqe1+Rt
+ Y/qO6/LqhwNmuS+KNJORxHxJ7Ngm0s2SkFY5zlDq4oftTr+p3cZX8+hjWqUcfSUU9aZtazr1abv
+ Pi3WXkq0rVJF7bvZo3BrweoBd94S4nkv91x3919z97FiVjkyuvfOm8B+G78q+OTDLe7PtF5gneW
+ db1XNUZfK9h0en2/CY2+zkiRUTvqR6M/gtMEjfC+NOKb3IFUkKC3WLBaT86iNGQRbnmfTVidnY4
+ cb46jQZU+OpBpidysfWiGq2/+/z4Row35HbnELvBezrVb7poZaRm3HWvP8p34glOdHOZORm3oR6
+ UJh2PnCNnC/w==
+X-Received: by 2002:a05:600c:8b45:b0:4b3:ad9d:e21 with SMTP id
+ 5b1f17b1804b1-4b6df11dd57mr37875435e9.12.1793967307738; 
+ Fri, 06 Nov 2026 04:15:07 -0800 (PST)
+X-Received: by 2002:a05:600c:8b45:b0:4b3:ad9d:e21 with SMTP id
+ 5b1f17b1804b1-4b6df11dd57mr37874945e9.12.1793967307255; 
+ Fri, 06 Nov 2026 04:15:07 -0800 (PST)
 Received: from ?IPV6:2a01:599:b03:7322:436f:1f3:b26e:91b8?
  ([2a01:599:b03:7322:436f:1f3:b26e:91b8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d72333f9sm3395074f8f.29.2026.11.06.04.05.05
+ 5b1f17b1804b1-4b6e168f73fsm57802835e9.5.2026.11.06.04.15.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 04:05:06 -0800 (PST)
-Message-ID: <31de7814-4be9-4224-9659-854cdffe409f@redhat.com>
-Date: Fri, 6 Nov 2026 13:05:05 +0100
+ Fri, 06 Nov 2026 04:15:06 -0800 (PST)
+Message-ID: <87375890-eb39-42b7-aa17-40a9416ea279@redhat.com>
+Date: Fri, 6 Nov 2026 13:15:05 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/28] hw/usb: mark commonly used USB devices/hosts as
- secure
+Subject: Re: [PATCH v2 10/28] hw/scsi: mark spapr SCSI controller as secure
 To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -89,7 +88,7 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20261029131241.2275706-1-berrange@redhat.com>
- <20261029131241.2275706-9-berrange@redhat.com>
+ <20261029131241.2275706-11-berrange@redhat.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -133,9 +132,9 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20261029131241.2275706-9-berrange@redhat.com>
+In-Reply-To: <20261029131241.2275706-11-berrange@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: wg0qb4XLtbEblMbYnIfSu7ZADG30bbbic6Q5quJyMQY_1793966707
+X-Mimecast-MFC-PROC-ID: 4xDxWahC-QjP-JP2qg7ZtAflDsLlhteiZQu5hNGzcUk_1793967308
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
@@ -163,68 +162,34 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 29/10/2026 14.12, Daniel P. Berrangé wrote:
-> Modern virtualized guests are expected to be deployed with the
-> XHCI controller which supports all of USB 1, 2 and 3, so should
-> be declared secure.
+> The spapr vscsi controller is used by default with spapr machines
+> in a virtualization use case.
 > 
-> The "NEC" XHCI variant is slightly non-standard, but since it is
-> a trivial sub-class of the generic XHCI, there's no reason to
-> exclude it.
-> 
-> The set of devices that are expected to be used is HID (mouse,
-> tablet, keyboard), host passthrough, CCID (smartcard), hub,
-> storage and the redirect tunnelling.
-> 
+> Acked-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->   hw/usb/ccid-card-emulated.c   | 1 +
->   hw/usb/ccid-card-passthru.c   | 1 +
->   hw/usb/dev-hid.c              | 3 +++
->   hw/usb/dev-hub.c              | 1 +
->   hw/usb/dev-smartcard-reader.c | 2 ++
->   hw/usb/dev-storage-bot.c      | 1 +
->   hw/usb/dev-storage-classic.c  | 1 +
->   hw/usb/hcd-xhci-nec.c         | 1 +
->   hw/usb/hcd-xhci-pci.c         | 1 +
->   hw/usb/hcd-xhci-sysbus.c      | 3 ++-
->   hw/usb/hcd-xhci.c             | 1 +
->   hw/usb/host-libusb.c          | 1 +
->   hw/usb/redirect.c             | 1 +
->   13 files changed, 17 insertions(+), 1 deletion(-)
-...
-> diff --git a/hw/usb/dev-storage-bot.c b/hw/usb/dev-storage-bot.c
-> index a7f8d80c17a..b156f1c5c9a 100644
-> --- a/hw/usb/dev-storage-bot.c
-> +++ b/hw/usb/dev-storage-bot.c
-> @@ -52,6 +52,7 @@ static const TypeInfo bot_info = {
->       .name          = "usb-bot",
->       .parent        = TYPE_USB_STORAGE,
->       .class_init    = usb_msd_class_bot_initfn,
+>   hw/scsi/spapr_vscsi.c | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/hw/scsi/spapr_vscsi.c b/hw/scsi/spapr_vscsi.c
+> index 7ec780da79e..eedae00273e 100644
+> --- a/hw/scsi/spapr_vscsi.c
+> +++ b/hw/scsi/spapr_vscsi.c
+> @@ -1312,6 +1312,7 @@ static const TypeInfo spapr_vscsi_info = {
+>       .parent        = TYPE_VIO_SPAPR_DEVICE,
+>       .instance_size = sizeof(VSCSIState),
+>       .class_init    = spapr_vscsi_class_init,
 > +    .secure        = true,
 >   };
 >   
->   static void register_types(void)
-> diff --git a/hw/usb/dev-storage-classic.c b/hw/usb/dev-storage-classic.c
-> index 977151c4a08..7e0699cb518 100644
-> --- a/hw/usb/dev-storage-classic.c
-> +++ b/hw/usb/dev-storage-classic.c
-> @@ -133,6 +133,7 @@ static const TypeInfo msd_info = {
->       .parent        = TYPE_USB_STORAGE,
->       .class_init    = usb_msd_class_storage_initfn,
->       .instance_init = usb_msd_instance_init,
-> +    .secure        = true,
->   };
-Can we exclude usb-bot and usb-storage from the secure list? I've never seen 
-them really being used for real virtualization installations, and I think 
-they are not that well tested?
+>   static void spapr_vscsi_register_types(void)
 
-With those two hunks being removed:
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
