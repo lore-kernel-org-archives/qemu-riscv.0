@@ -1,84 +1,83 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4900D606A326
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:20:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A45B606A326
+	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 12:21:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=d64mgL7L
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=d0qSawT0
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPIv3-00031D-2f; Fri, 06 Nov 2026 07:19:45 -0500
+	id 1xPIwB-00042D-Vu; Fri, 06 Nov 2026 07:20:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIv0-0002ze-PB
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:19:42 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIvp-0003nP-Fe
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:20:33 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIuz-0007QJ-6p
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:19:42 -0500
+ (Exim 4.90_1) (envelope-from <thuth@redhat.com>) id 1xPIvm-0007q6-90
+ for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 07:20:31 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1793967580;
+ s=mimecast20190719; t=1793967628;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
- bh=E66+2hYgpzZKUNNeBE2CQr7cNiXnuVWs/cIg8tZQJpU=;
- b=d64mgL7LXNGQQ/L+bFerjDP5YDW+qe3UtCCcjid9e7VYlpmKxlpqyqNR8zyEIroJ5/9g4k
- Bh3ONjELkEuc9BfYd2Twb8pstZ3Xm2o+cMF+8csYQsVkNDgKMoo4W3ilEKk9+0yQp3awIJ
- WO5hHwt9y7xRuNI5KUn4JeI/zuAM+Cs=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=cqcg8FflfFk0KsQkfU1sHiREKKapMM9PlLOcj/lVGFQ=;
+ b=d0qSawT0zhcvhkCUg/XUiC6xwZvDTemQq4Ao5RDgatEdHwyFSrYaB1kV9bAJyEV1q2OkuC
+ n61y1vY29UKO9W2X7G62K90GvqZ/uz5UcWVK7f/j9rU+cDh96AE2dzqo5R98mV24VmjcFE
+ cbJUZixPdoi23R2etLkZB2EYid3s1kc=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-84-3kSXPIwVPACNCVPPwAswNA-1; Fri, 06 Nov 2026 07:19:39 -0500
-X-MC-Unique: 3kSXPIwVPACNCVPPwAswNA-1
-X-Mimecast-MFC-AGG-ID: 3kSXPIwVPACNCVPPwAswNA_1793967578
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-4923b9fdd43so491576f8f.3
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:19:39 -0800 (PST)
+ us-mta-63-GmjFxRdBNUmjUGlLvA3ozg-1; Fri, 06 Nov 2026 07:20:25 -0500
+X-MC-Unique: GmjFxRdBNUmjUGlLvA3ozg-1
+X-Mimecast-MFC-AGG-ID: GmjFxRdBNUmjUGlLvA3ozg_1793967624
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-48e0ef019a4so539140f8f.3
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 04:20:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793967578; x=1794572378;
+ d=1e100.net; s=20260707; t=1793967624; x=1794572424;
  h=content-transfer-encoding:content-type:in-reply-to:autocrypt
  :content-language:from:references:cc:to:subject:user-agent
  :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=E66+2hYgpzZKUNNeBE2CQr7cNiXnuVWs/cIg8tZQJpU=;
- b=pnASjLy0k9bLqANhEEA7XNz6fPIJ+HgsslroHLAvZA+TH/dQAOTscGc8q5m3r1LkmQ
- oS7ntT7L22vmbb2X2YFqSGheWmSpFWvhJH18ntwOm9DMFjleXh5G1wb9FPQKuEeeTblV
- pe/LEgzpcmpJiAjDCU68CUDh8RdSQFF2R5goPCXrCU5f0uNxl8Pu753HKkpcQ39KWvWB
- zJdih15Y7ZmbWBBPxIaCeC+lJK67CIbqDD7xCy3xnFBhxpz7pvF8Idi+zhnNirxeLziS
- /T4nq4syC2Vb0Qxm3aDwBQS3tFHoRAKqkKqkKoUDfAwKEjmA3FLAXDowxUM8oICP3WDp
- ypnw==
+ bh=cqcg8FflfFk0KsQkfU1sHiREKKapMM9PlLOcj/lVGFQ=;
+ b=hkZ1a7gGoyM4cS7SKHqBIllFl4afkqIAqQtI+feISR2lAJN27Gnm1HUgyWtsdqdk0A
+ HOfHVWw5UO7aC33qrPGQTawKEKxe3NTOQ9Xxhu+m9xx9NxYHpwZA9BtDl4K/ySYriuRA
+ dxGgRojTCmVT4v5pBbgjTI3t3gVxfMApBTLD32t5ie6U0hPgCLXPjHiCAVAb3hdGvViY
+ CF00PIctdjqx7sZxeyd01OohFMBp0ogug6yICaVJ2/ISt9ej93etafrIih9iSXArrMRS
+ 8s4tQrLZxAymKBaOjXB7h2WBJjsMGBFJDc9aRidka/pLy6ttRPVIY4OUy58lA9Q5YBWP
+ 2WRQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErHiDDy8ClNCWsDC0CkgzsqHuHdKklVrQbPjVi/vL2Hbls0TnubGQKvpTAZF4ud39qBgjg/k43WLjdW5@nongnu.org
-X-Gm-Message-State: APuU4Z+tWtmvbM+3GOe3+M4eGLeCZGV7kOC8mVFRM/SRpZ3V+fPi+ISW
- bDKrd1LaqHA60RPQlejcxCk55OPkYI3a3qO/z+zScSPLdNBHluJ5/z5L+z/bPnCb8Jc6Fh1E96B
- Z4AIkxiw4wF1qve1nkWr1rcICdef+jSssXH54c4ZD6Wea2zkHcJ2Dyba2
-X-Gm-Gg: AYBFou0u2h/lL/QOxORrAODOF48oN/Bj/cqVMoYZqH8oSGEanrG3gy+9BqTr6VJXiNK
- IctOhpKLVTlH1jbMJaWV1cRq1P1TNB+PSfQ52BL7jPtvdkC8FJdA8iCB1tadanEHyeCmQqG2HQ4
- LU3zYvSen0wocF7Zo4ZRlhHG/0l9pGEn4RwNe1BKW/vXMRgsZAozOchpPc5r2cmFYdNjgO7xSea
- 5t4uTuOMFl33SjW1earcmDdd4c0bfHUjpDLDESeg4mRUQwdzoS4T75XRWwGF3mPFFF9CkCy2pUS
- Tr2DyDgIdKj63zpWJr90DdWvTB3bEghX/rUtKPf0yQC0/8TBve7OOUCZLD78EDrLKhC6ZgtAehw
- 89195S5v1mIEoGP4AIG5UXaKCf+hp8/u9Fj0kxx8kxEZTTmF59ckXsto7RLkE3PqiUlL/i7BQU5
- 7O7+SRuTH9pA==
-X-Received: by 2002:a05:6000:460c:b0:48f:bb92:c5a7 with SMTP id
- ffacd0b85a97d-49275373a03mr4476564f8f.9.1793967578281; 
- Fri, 06 Nov 2026 04:19:38 -0800 (PST)
-X-Received: by 2002:a05:6000:460c:b0:48f:bb92:c5a7 with SMTP id
- ffacd0b85a97d-49275373a03mr4476515f8f.9.1793967577892; 
- Fri, 06 Nov 2026 04:19:37 -0800 (PST)
+ AL+hErFj7OHSLoynmvagXCdBok71bueygTJLQ4jSwMgmX+OWaEK1fvmxnF05sXiDnkY4FxmwUpmkXySUzybp@nongnu.org
+X-Gm-Message-State: APuU4Z80di+SguDh5vJujCDtvozFdl2qcHlm8hPcfXgq7P91JtP2DdWf
+ HSfT8WiX80g3h/YCkKECFwJw+OQvrlpYleFEFzTO8O0JydkNik/UGKRqSvRbwE+Hg8aRUSmLHxb
+ x+NUbleCWXLEHb4P1N6lqlgUB9NnYaJhSyO78EkA8VP2puqNVSWzBg3/d
+X-Gm-Gg: AYBFou2qsFpDMnVof6L84AcUbCKUrl5bd4tnO1F4dIpZaXQPuAVpoibkQJHlH+KNEBQ
+ 6eWLZR7K1lPaHmd22yOHdx21fSlO40/TB0i0KeS/AQlTkfw5E2xG4XJ7tcc6tnfBT5HX6Xdh3pE
+ aRXYddeBCetfgKQ5VNFRJN6nIeoBddBhOlXMM9hROKb5W1KVbfAhZRKnThBbCwr3j/HwkB9XswB
+ JprRLGtN2kR+S6nfzLIxqcCmUVe3KShunpTxentvcmLovM2ZBjVUfNAzlBTtSwIYqAbcFTAbwWm
+ 2tVBu9d7p2v6KYEv73Fd+VxOyTFE1jKoj4F8Zw5ADQ37RK/3nlbtgrHseUGa8CRoefDKHCfJ/2I
+ 3jqqtbgynPRUemtd3G2fqY3pH5QED1G8MUmVlDuLNsarDjTJEitl/k3YdLohuJEr10MZ5DrM=
+X-Received: by 2002:a05:6000:470e:b0:492:20e0:f666 with SMTP id
+ ffacd0b85a97d-492707c3b8cmr4880611f8f.0.1793967624427; 
+ Fri, 06 Nov 2026 04:20:24 -0800 (PST)
+X-Received: by 2002:a05:6000:470e:b0:492:20e0:f666 with SMTP id
+ ffacd0b85a97d-492707c3b8cmr4880558f8f.0.1793967623904; 
+ Fri, 06 Nov 2026 04:20:23 -0800 (PST)
 Received: from ?IPV6:2a01:599:b03:7322:436f:1f3:b26e:91b8?
  ([2a01:599:b03:7322:436f:1f3:b26e:91b8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-492d7cc5e23sm3657084f8f.45.2026.11.06.04.19.36
+ ffacd0b85a97d-492d809dae9sm3290194f8f.52.2026.11.06.04.20.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 04:19:37 -0800 (PST)
-Message-ID: <6d17cbb0-6518-4dba-9118-eff838590e2d@redhat.com>
-Date: Fri, 6 Nov 2026 13:19:36 +0100
+ Fri, 06 Nov 2026 04:20:23 -0800 (PST)
+Message-ID: <e81da370-9301-4d9c-9037-4961ddd896b9@redhat.com>
+Date: Fri, 6 Nov 2026 13:20:22 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/28] hw: define most common PCI types as secure
+Subject: Re: [PATCH v2 15/28] hw/display: mark bochs, ramfb and VGA as secure
 To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
  qemu-devel@nongnu.org
 Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
@@ -88,7 +87,7 @@ Cc: qemu-arm@nongnu.org, Peter Maydell <peter.maydell@linaro.org>,
  qemu-ppc@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org
 References: <20261029131241.2275706-1-berrange@redhat.com>
- <20261029131241.2275706-14-berrange@redhat.com>
+ <20261029131241.2275706-16-berrange@redhat.com>
 From: Thomas Huth <thuth@redhat.com>
 Autocrypt: addr=thuth@redhat.com; keydata=
  xsFNBFH7eUwBEACzyOXKU+5Pcs6wNpKzrlJwzRl3VGZt95VCdb+FgoU9g11m7FWcOafrVRwU
@@ -132,22 +131,22 @@ Autocrypt: addr=thuth@redhat.com; keydata=
  oiT+z+/E59qj/EKfyce3sbC9XLjXv3mHMrq1tKX4G7IJGnS989E/fg6crv6NHae9Ckm7+lSs
  IQu4bBP2GxiRQ+NV3iV/KU3ebMRzqIC//DCOxzQNFNJAKldPe/bKZMCxEqtVoRkuJtNdp/5a
  yXFZ6TfE1hGKrDBYAm4vrnZ4CXFSBDllL59cFFOJCkn4Xboj/aVxxJxF30bn
-In-Reply-To: <20261029131241.2275706-14-berrange@redhat.com>
+In-Reply-To: <20261029131241.2275706-16-berrange@redhat.com>
 X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: 0QNleL5wkHwZ-ZOLOSdbEIqe4o39ew0wHz_B5a_9M0o_1793967578
+X-Mimecast-MFC-PROC-ID: CLGB7LXGsMFIvtOUqgEYzGmi2qYwuqzeMpeFIH0U4og_1793967624
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=170.10.133.124; envelope-from=thuth@redhat.com;
+Received-SPF: pass client-ip=170.10.129.124; envelope-from=thuth@redhat.com;
  helo=us-smtp-delivery-124.mimecast.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
  DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -168,21 +167,18 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 29/10/2026 14.12, Daniel P. Berrangé wrote:
-> Essentially all PCI infrastructure is in scope for the virtualization
-> use case, aside from the niche simba bridge and the CXL related pieces.
+> Most of the display adapters are emulating old hardware which is not
+> relevant to virtualization use cases.
+> 
+> The clear exceptions are the generic, simple devices that should be
+> considered secure: Bochs, RAMFB, VGA (PCI, not MMIO / ISA).
 > 
 > Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 > ---
->   hw/pci-bridge/gen_pcie_root_port.c  | 1 +
->   hw/pci-bridge/i82801b11.c           | 1 +
->   hw/pci-bridge/ioh3420.c             | 1 +
->   hw/pci-bridge/pci_bridge_dev.c      | 2 ++
->   hw/pci-bridge/pci_expander_bridge.c | 5 +++++
->   hw/pci-bridge/pcie_pci_bridge.c     | 1 +
->   hw/pci-bridge/xio3130_downstream.c  | 1 +
->   hw/pci-bridge/xio3130_upstream.c    | 1 +
->   hw/pci/pci.c                        | 4 ++++
->   9 files changed, 17 insertions(+)
+>   hw/display/bochs-display.c    | 1 +
+>   hw/display/ramfb-standalone.c | 1 +
+>   hw/display/vga-pci.c          | 2 ++
+>   3 files changed, 4 insertions(+)
 Reviewed-by: Thomas Huth <thuth@redhat.com>
 
 
