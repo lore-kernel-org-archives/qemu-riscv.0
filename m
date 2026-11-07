@@ -1,149 +1,101 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67F89606A32C
-	for <qemu-riscv@archiver.kernel.org>; Fri,  6 Nov 2026 21:09:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1DC5606D816
+	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Nov 2026 05:29:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ea1w4fTy;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jSOs+Hsg
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fBruMbwQ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPRC1-0002NZ-Fy; Fri, 06 Nov 2026 16:09:50 -0500
+	id 1xPYzX-0002VN-Fm; Sat, 07 Nov 2026 00:29:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xPRBx-0002Mv-Ja
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 16:09:46 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xPRBv-00031l-Cp
- for qemu-riscv@nongnu.org; Fri, 06 Nov 2026 16:09:45 -0500
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A6JL0Ai1699040
- for <qemu-riscv@nongnu.org>; Fri, 6 Nov 2026 21:09:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- e2YrQjyFUxkII149OdfENGvKLB8j3GDSUxcOdOhJkGI=; b=ea1w4fTy3yYtDM52
- Yq00Fm2AcOZMgO581FiF0QCEgdo3qVHAPSfChPkIeliTSmO2vUVp3WSyscmJGUqf
- mZyJZScFw8/pV8DoxlIL5fzCdu6iFIFMar5JVk3nqRriikDkUlBiFsQsaSVBccjg
- J9oJbCPqpyFKrgMSmfA9fC2riIL65JOCJeM+3QUKm/iX89Fe7ylSpj1V/WN4HzEi
- MPLJy18y8Uqdm71tkoVm+pplKZidkPhX9HFba4kE9nRFMf+DxqnR95QrY1Odlmg0
- E0ik2ExHOSgqRDuXY4wgtO8czEhHXI22ztc/YdBgtDTUPPulzLTeiOH8PK2Ir6k3
- SOGmew==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsmypgcdd-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 21:09:40 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-91eacf20364so21417676d6.0
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 13:09:40 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xPYzT-0002Uy-NM
+ for qemu-riscv@nongnu.org; Sat, 07 Nov 2026 00:29:23 -0500
+Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xPYzS-0005YA-5R
+ for qemu-riscv@nongnu.org; Sat, 07 Nov 2026 00:29:23 -0500
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-3b0e61a4decso933664a91.2
+ for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 21:29:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1793999379; x=1794604179; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=e2YrQjyFUxkII149OdfENGvKLB8j3GDSUxcOdOhJkGI=;
- b=jSOs+HsgB6F+qvmoR6JXfOELFYF0t6c1pN13IPrbHYBvb9OgEHKF3+Lx1J1Pd4t3yy
- aVA/StxZbYsyzPzn9BXMJ251PQRA0Pqx8yjs9qcMsjNxGS4yfL/ralbbs6WvV8V5qJjx
- job1tbTQBXp8mPhKofwOIBz3COWMoMVKQVUJPDEq4jL8ZJB7xJcbbMo14BgIvJatuFoG
- +F5mFRCe4ZKK+wPWB0OqNQHSMHkL+SZWGf8/vNeH8X6rZl0pBAbhejbUkgsIFS4+HUya
- MUnTWWaPQRzqxBcbvFvftACj/VPQV6uZQ6uVbNxPVbcLxA/sT6cd6UKPmZUqW4SAG743
- 8bpA==
+ d=gmail.com; s=20260707; t=1794029360; x=1794634160; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=i/OaY7VBB3C3rPgl9fDtHdrR7oJN99XN5IQvvfdL8rg=;
+ b=fBruMbwQ4tx2I5S4lkFuH/Yr1g6qqITUPPHqp5T8SOTZRZu5NBkEIJnTRcfzAlr6LU
+ 03frtmFXN+iNii4g7hvnHCmYl7Phm0v378Ab9UEhC7MJBUj0JAZKEd+XJjdzVEotLyby
+ D5i7EHQskK+dXRJLzFQjX8xWAsKLfr2VtdsK+q3p+x0bJh2Eo5zjmJTWEQWjdnEmLmD0
+ jNjOtbC1UFyAhzuh5y5WvibI8yymm8IIIkO5DGEOS+9oFPPjVNXZIZB6q+MTOKf3uib1
+ CDqBwqKAdElBnVhicjC9pWkaEiaqI85hAlMn5jLQuHe0ZE2P7KdN1YkU0SDA39Bt07sf
+ htlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1793999379; x=1794604179;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1794029360; x=1794634160;
+ h=content-transfer-encoding:content-type:in-reply-to:from
+ :content-language:references:cc:to:subject:user-agent:mime-version
+ :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=e2YrQjyFUxkII149OdfENGvKLB8j3GDSUxcOdOhJkGI=;
- b=lVtJFTHfpUdUWbV7KinkjQL7jdjMQS+LegZxgaLdi2NFHRQzot5TIbXR8Ur0wRAC0l
- kZGdnwmUcsla3nEcjPH3T4cZbqneFn+bnT0Zlu9VFpSX4HLzZHUKqX/AyQvN8x0wsfaA
- 33HAja3sMjVpAvPGTLG5h0564HGU/BOzRri5tDWOqym9aGDliWt8vk+vUd3l29E2dzix
- CH6fSiqvkGAUR09OWfmzEM2h/CIYp07ivVL4DmWZFKXdvmQIBLNYTBQQ2hEcsoETbvyM
- YY1nifGZ7i82ZyOAHfOu/IzKVLorYr7FTXaE8EW6xqS3hW+OPWEm1kI0Y6Tf5AXgYgf3
- VI9g==
+ bh=i/OaY7VBB3C3rPgl9fDtHdrR7oJN99XN5IQvvfdL8rg=;
+ b=2EsJTyapK9g60xRCOnLYpZvUfAyzddgW0XAlBDEqFqXiaR1vd3cUEwpX1nYmF94Dqx
+ FDy0JD/kI+HFOR/HjrpMpfJuOq8HALtR+BgAfDaLxZo1OIRUna84rj5dfjTtdU5sMTA3
+ KbQLAnLjN4AJdF4zbITlgPWXJbgQSi2jrMA5YcbzJDOnqjWyPsCubVprm81RxLexnVrZ
+ CR+7s+ClSgQDR7jV2D2tWvPojJzfEpWkdRma2J4LUfLNyMvJh6vsGScVAzhGWQQqSHbU
+ xzTtsSoG31VGqTz4ZaF/03uVaiqSKCGPyKQuK1htEtF6/nGUZ5zh/75vBMS0Kk7J5Yb5
+ HZIg==
 X-Forwarded-Encrypted: i=1;
- AL+hErEL94cgeA2ZHj5atKZZGjnVLdBG/xUGexijQP5YbzBlnijvPugLkzo9XVa9RUXlkSBpgBbFzlVQxfTP@nongnu.org
-X-Gm-Message-State: APuU4Z9fxD06PgEH2hMlzTtENC1h9+RYa4bNLaSs0cJWOLzhjMwrl4Nd
- owDCRXvABKAiffxIV1uWKmeferelWtB52Crmm5uPS6tsE9K9x9oJJffB9yLwXKfEisWZGVjPM6a
- oyE0UVrDIkIRI7rTuN0PHDPWmkmDI91Sa81mAjkgZyU2oK0K6l9zXt1fQXg==
-X-Gm-Gg: AYBFou0Dhz8HP6Vh6RqVS7X37HMOSDU8ECE++j9W5TkJDz7hABj/NRsJIitjM1snt/v
- 8KeclN5qzbcttVRcfR77UP8RE09w6Sw6rYJw/QXzkbA0GZF+3XVoC+4WBr2vXAGVplGUsqKOcca
- nrF5q985lAy5v3r0eVo4jHXzMxY4R5XbL1aOjx5GgK0QmKtGO3yJE+jq7BQ8P6XZnfvNBeb40pb
- qsl+qiBqvn4Iu25QnCrtPZm0T7ArAUqAxX0+fIOG1TCguxwdLVQLwNY+n4llhq/9LoElei0hqNV
- D/ssj7icBEauVB5sfEpDhqNPiiv2+m6gT849k7LmhXrIPUsMx8Ij2+kpHROCH4t4aN48RmOgDR4
- wfnFWoZNHdftkhMLO0CYjRV3jtZRgdBe5VovsIQEjM+FAZf5/hksdCYBQf3DxaX75o6DDyyOna0
- 6+uIxpKXbW
-X-Received: by 2002:a05:6214:5099:b0:917:aa8e:474f with SMTP id
- 6a1803df08f44-91ea979271dmr53392696d6.23.1793999379396; 
- Fri, 06 Nov 2026 13:09:39 -0800 (PST)
-X-Received: by 2002:a05:6214:5099:b0:917:aa8e:474f with SMTP id
- 6a1803df08f44-91ea979271dmr53392316d6.23.1793999378952; 
- Fri, 06 Nov 2026 13:09:38 -0800 (PST)
-Received: from [192.168.68.100] ([152.234.124.231])
+ AL+hErHHLXKLZLCQ0TsoNzXF3etWVXy00YCV2bvovkb07LdiQcXk2A1SYuGihXapjxueJ9qXzNYjHCMmGUpw@nongnu.org
+X-Gm-Message-State: APuU4Z/VT82ucsl08DJUB+9azb72G3b0Rr8+fIR3ZVyAPwR1ctTkRBTq
+ cJSnSjd/eHG4myuZp+J4EBwe/mw0sRrs89kSLTW4coHDPSgNKlUNQ1hy
+X-Gm-Gg: AYBFou3cyNPm9FR3sV8WCE7Rk2P7/sXdXmnW8ju688L1Q/31cxOjTmcZxGzxHBHyJ0Q
+ LHFufcdLeuYywekdImN/+gkppimb+tUCl5Mk1r6RxwM9PQsbRIrVwzDJCgws2TWCS+GNKFBuFmT
+ unTdepynEU02z9Ai/RnX410ag+9xqajxwjIkuzFkFtw6OIjsxrhtEJVNia2tNHIdIbxMe08arL3
+ nmTAx/CwDMesKIax5NGxs9jXMeoF+kJKoWIgUpQ0r6vrYR7Dl+a2iHn01XK6W7DTpHM3Le96XN4
+ kiQKwq2L0H874vUgWFXqI1LJpTfafArc3MlOXcWq/IPnvJjfiY9xGQWZ4bfNRlhRniaZFme4XH5
+ Zj/S9Px5+u+FATxs4ETE3w4j1QeAgNbZeScm5f6BDZdzYgIzqyNaT0LfqT4j5QNqmQTQ4T5gWD5
+ UzAE/+YMPrwsA7M4HQK8QRiSS6jZ45JqplccS16Xoh+Qbz9Ic6XqVByje+dKxJZSlCmhjGEudkJ
+ Z41w5KppsGrpZ09CvT1jEC13xW4BExpc+mIm2KfbroQhs41be3SroJy5GhR1ABlGSF44pDbb4HV
+ rzMvfLkQH1jgf1jL06IfGaY+ltU=
+X-Received: by 2002:a17:90b:3890:b0:3ab:a3ee:33ad with SMTP id
+ 98e67ed59e1d1-3b0db6bbc23mr4962610a91.22.1794029359678; 
+ Fri, 06 Nov 2026 21:29:19 -0800 (PST)
+Received: from [28.0.0.1] ([2406:da18:294:1d00:2519:75b6:8407:b92c])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91ea6acc4a7sm28897936d6.44.2026.11.06.13.09.36
+ 98e67ed59e1d1-3b1058a7b29sm1762195a91.10.2026.11.06.21.29.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 13:09:37 -0800 (PST)
-Message-ID: <3f8c0c2c-208a-405e-9c7d-8a9fc90f9cfd@oss.qualcomm.com>
-Date: Fri, 6 Nov 2026 18:09:34 -0300
+ Fri, 06 Nov 2026 21:29:19 -0800 (PST)
+Message-ID: <f6bb05cb-a466-4247-ac2f-0ac9480dc820@gmail.com>
+Date: Sat, 7 Nov 2026 13:29:11 +0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 2/2] target/riscv: Capture Sspesa sample PC and
- counter ID on overflow
-To: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>, qemu-riscv@nongnu.org
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+Subject: Re: [PATCH] target/riscv: use gen_goto_tb for vsetvli
+To: Chao Liu <chao.liu@processmission.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>
-References: <20261029131011.3715081-1-mayuresh.chitale@oss.qualcomm.com>
- <20261029131011.3715081-3-mayuresh.chitale@oss.qualcomm.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+ <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
+References: <20261105074115.99275-1-chao.liu@processmission.com>
 Content-Language: en-US
-In-Reply-To: <20261029131011.3715081-3-mayuresh.chitale@oss.qualcomm.com>
+From: WX Chen <wxchen0913@gmail.com>
+In-Reply-To: <20261105074115.99275-1-chao.liu@processmission.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA2MDA4NCBTYWx0ZWRfXxK5MxWXJU/kw
- AW7+mAiWQAK+iH7Y3xfhCz/NV3SbDOJnip8r4nzFqj1nhQvNZclvJSeeYM/wDBtWSJELTXJi1x/
- +CMrF7kw4B04P2Fmi+Es/3rsoiN+V9tEJzxYNqjt7/4oLzGOSalMXXFW3iuSjP5+5Nyk7QYyGZS
- ZRsufgFTjOvKBfYbCeqDatdLSM5fdEH19fnCtvJ52b0r/OetfCB83gTeJ6tIx5po61WdExgrafl
- fmIKlX4Xug7IG+JZldI2s9VvNNH6F+qdN1159W3sigdulwVeVN5capUio4IUJ096zHlGLAaozbH
- bNZ9fk2SnQuIs5ELin3s+pnojQmHEcNx1WaRWvaQB4zJU4Pd4dTcNdRSBFK6TL7Ww3TQAlI/mDO
- Aw0WRgJgdLj6SwbTnpgjFU7rycLwQQ+ImULR79c1ulJ/uqmBx94ZF1ztmOeoPFvsVTGlKfZjMaf
- Es8eg0oIhxGJ1eIEcew==
-X-Proofpoint-GUID: LnwS0p1anXn-kGim-lx5z-zt7yAYjq8o
-X-Proofpoint-ORIG-GUID: LnwS0p1anXn-kGim-lx5z-zt7yAYjq8o
-X-Authority-Analysis: v=2.4 cv=TZ4DJhQh c=1 sm=1 tr=0 ts=6aee4214 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=q22TOjIvAmAaVgBwKQYA:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA2MDA4NCBTYWx0ZWRfXzf8Xsu6DTtDM
- gfBnfUBdPUQ4/gLcLLIi432aqzU6wZh4RKbnUx5s7h76pLBx6vF1Y4jo2Q4Zg2WVCetNquD0SO3
- yihjTK9Vchnfv0HjIdBWUf3lSBIQ7v8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-06_06,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 impostorscore=0 adultscore=0 priorityscore=1501 clxscore=1015
- lowpriorityscore=0 phishscore=0 suspectscore=0 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611060084
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
+ envelope-from=wxchen0913@gmail.com; helo=mail-pj1-x1036.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -156,141 +108,74 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
-
-On 10/29/2026 10:10 AM, Mayuresh Chitale wrote:
-> Capture shpmspc and shpmsdata just before updating mip.LCOFIP.
-> As required by the spec, record the current PC, counter ID and effective
-> privilege mode. When supervisor counter delegation is enabled,
-> only overflows of delegated counters update the sample CSRs.
-> 
-> Preserve shpmspc and shpmsdata while LCOFIP remains pending so later
-> overflows do not replace the pending sample. Currently, cntrid is not
-> updated if two counters overflow simultaneously.
-> 
-> The captured PC is QEMU's current env->pc, so it provides best-effort
-> attribution rather than guaranteed precise attribution.
-> 
-> Signed-off-by: Mayuresh Chitale <mayuresh.chitale@oss.qualcomm.com>
-> ---
->   target/riscv/cpu_bits.h |  3 +--
->   target/riscv/tcg/pmu.c  | 39 +++++++++++++++++++++++++++++++++++++++
->   2 files changed, 40 insertions(+), 2 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 61258ce6e1..e99da434d5 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -642,9 +642,8 @@
->   #define SHPMSDATA_CNTRID    0x1f
->   #define SHPMSDATA_MODE      0x60
->   #define SHPMSDATA_V         0x80
-> -#define SHPMSDATA_MODE_U    0x00
-> -#define SHPMSDATA_MODE_S    0x20
-
-These 2 macros were added in patch 1, never used there, and are now being removed
-here.  Let's remove them in patch 1 instead (i.e. never add them in the first
-place).
-
-
-
->   #define SHPMSDATA_VALID_MASK (SHPMSDATA_CNTRID | SHPMSDATA_MODE | SHPMSDATA_V)
-> +#define SHPMSDATA_MODE_SHIFT 5
->   
->   /* Crypto Extension */
->   #define CSR_SEED            0x015
-> diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
-> index 1a4658319b..31edd31117 100644
-> --- a/target/riscv/tcg/pmu.c
-> +++ b/target/riscv/tcg/pmu.c
-> @@ -178,6 +178,43 @@ void riscv_pmu_decr_instret(CPURISCVState *env)
->       env->pmu_ctrs[2].mhpmcounter_prev++;
->   }
->   
-> +static void riscv_pmu_sspesa_capture(CPURISCVState *env, uint32_t ctr_idx)
-> +{
-> +    RISCVCPU *cpu = env_archcpu(env);
-
-I believe this is something we should document somewhere, but env_archcpu() is a
-not the nicest call to make and we would like to avoid it every time we can.  One
-of its main usages back in 2023 was to access the cpu->cfg pointer to check if a
-given extension is available.  We ended up creating an inline called riscv_cpu_cfg()
-to allow access to the CFG struct without having to call env_archcpu().
-
-So, if the code doesn't do anything else with the RISCVCPU pointer aside from reading
-cpu->cfg, we recommend using riscv_cpu_cfg() instead.
-
-For this code I suggest not using env_archcpu() and:
-
-> +    target_ulong sdata;
-> +    bool cde, ctr_enabled;
-> +
-> +    if (!cpu->cfg.ext_sspesa) {
-
-     if (!riscv_cpu_cfg(env)->ext_sspesa) {
-        return;
-     }
+On 11/5/26 15:41, Chao Liu wrote:
+> I would like to discuss this a bit further. In fact, we can divide this into
+> five cases:
+>
+>     Case                    Condition                Current implementation
+> ------------------------------------------------------------------------------
+> 1. vsetvl  rd, rs1, rs2    vtype from rs2 register  keep lookup_and_goto_ptr()
+> 2. vsetvli x0, x0,  imm    rd == 0 && rs1 == 0      keep lookup_and_goto_ptr()
+> 3. vsetvli rd, rs1, imm    rd != 0 && rs1 != 0      new path
+> 4. vsetvli x0, rs1, imm    rd == 0 && rs1 != 0      new path
+> 5. vsetvli rd, x0,  imm    rd != 0 && rs1 == 0      new path
+>
+> Currently there are two TB exit forms:
+>
+>   - Case1 and Case2 is the existing lookup_and_goto_ptr() exit.
+>   - Case3 ~ Case5 is the new split exit, which compares the returned VL against
+>     VLMAX and uses two goto_tb slots.
+>
+> The new path can be improved. For rs1 == 0 a single gen_goto_tb() call is
+> enough, because the successor TB lookup key cannot change between executions.
+>
+> So, We give three exit forms:
+>
+>    1. lookup: keep lookup_and_goto_ptr()
+>    2. single: one gen_goto_tb() slot
+>    3. split: compare VL against VLMAX and use two gen_goto_tb() slots
+>
+> The cases map to the exit forms as follows:
+>
+>    Case   Exit form
+>    --------------------------------------
+>    1      lookup
+>    2      lookup
+>    3      split, or single when maxsz < 8
+>    4      split, or single when maxsz < 8
+>    5      single
+>
+> For cases 3 and 4, we care about the case where VL is not equal to
+> VLMAX. To explain this, let us look at VL_EQ_VLMAX first. It is computed
+> in riscv_get_tb_cpu_state() in target/riscv/tcg/tcg-cpu.c:
+>
+>    vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) && (maxsz >= 8)
+>
+> In two cases, the AVL comes from a GPR rather than an immediate, so
+> VL may or may not equal VLMAX. Using the split exit is fine in that
+> situation. When maxsz < 8, however, VL_EQ_VLMAX is forced to zero. In
+> that case, both VL values map to the same successor key during the TB
+> lookup, so a single slot is enough.
 
 
-Thanks,
-Daniel
+Hi Chao:
+Thanks for the detailed review! I hadn't noticed the maxsz >= 8 
+condition for VL_EQ_VLMAX.
 
-> +        return;
-> +    }
-> +
-> +    /*
-> +     * When supervisor counter delegation is enabled only overflows of
-> +     * delegated counters update the sample CSRs.
-> +     */
-> +    cde = get_field(env->menvcfg, MENVCFG_CDE);
-> +    ctr_enabled = get_field(env->mcounteren, BIT(ctr_idx));
-> +    if (cde && !ctr_enabled) {
-> +        return;
-> +    }
-> +
-> +    sdata = ctr_idx;
-> +    sdata |= env->priv << SHPMSDATA_MODE_SHIFT;
-> +    if (env->virt_enabled) {
-> +        sdata |= SHPMSDATA_V;
-> +    }
-> +
-> +    /*
-> +     * Only the first overflow that raises LCOFIP updates the sample PC and
-> +     * metadata.  Currently updating CNTRID on simultaneous overflows is
-> +     * not supported.
-> +     */
-> +    if (!(env->mip & MIP_LCOFIP)) {
-> +        env->shpmspc = env->pc;
-> +        env->shpmsdata = sdata;
-> +    }
-> +}
-> +
->   int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
->   {
->       uint32_t ctr_idx;
-> @@ -211,6 +248,7 @@ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
->           /* Generate interrupt only if OF bit is clear */
->           if (!(env->mhpmevent_val[ctr_idx] & MHPMEVENT_BIT_OF)) {
->               env->mhpmevent_val[ctr_idx] |= MHPMEVENT_BIT_OF;
-> +            riscv_pmu_sspesa_capture(env, ctr_idx);
->               riscv_cpu_update_mip(env, MIP_LCOFIP, BOOL_TO_MASK(1));
->           }
->       } else {
-> @@ -403,6 +441,7 @@ static void pmu_timer_trigger_irq(RISCVCPU *cpu,
->   
->       if (cpu->pmu_avail_ctrs & BIT(ctr_idx)) {
->           if (pmu_hpmevent_set_of_if_clear(env, ctr_idx)) {
-> +            riscv_pmu_sspesa_capture(env, ctr_idx);
->               riscv_cpu_update_mip(env, MIP_LCOFIP, BOOL_TO_MASK(1));
->           }
->       }
+Thanks for pointing that out!
+
+I'll take this condition into account in v2.
+
+Best regards,
+WX Chen
 
 
