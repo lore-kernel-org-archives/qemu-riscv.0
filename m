@@ -1,102 +1,61 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1DC5606D816
-	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Nov 2026 05:29:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=fBruMbwQ
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CA67606D803
+	for <qemu-riscv@archiver.kernel.org>; Sat,  7 Nov 2026 13:16:02 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xPYzX-0002VN-Fm; Sat, 07 Nov 2026 00:29:27 -0500
+	id 1xPgGw-0007l6-Ks; Sat, 07 Nov 2026 08:15:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xPYzT-0002Uy-NM
- for qemu-riscv@nongnu.org; Sat, 07 Nov 2026 00:29:23 -0500
-Received: from mail-pj1-x1036.google.com ([2607:f8b0:4864:20::1036])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xPYzS-0005YA-5R
- for qemu-riscv@nongnu.org; Sat, 07 Nov 2026 00:29:23 -0500
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-3b0e61a4decso933664a91.2
- for <qemu-riscv@nongnu.org>; Fri, 06 Nov 2026 21:29:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794029360; x=1794634160; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=i/OaY7VBB3C3rPgl9fDtHdrR7oJN99XN5IQvvfdL8rg=;
- b=fBruMbwQ4tx2I5S4lkFuH/Yr1g6qqITUPPHqp5T8SOTZRZu5NBkEIJnTRcfzAlr6LU
- 03frtmFXN+iNii4g7hvnHCmYl7Phm0v378Ab9UEhC7MJBUj0JAZKEd+XJjdzVEotLyby
- D5i7EHQskK+dXRJLzFQjX8xWAsKLfr2VtdsK+q3p+x0bJh2Eo5zjmJTWEQWjdnEmLmD0
- jNjOtbC1UFyAhzuh5y5WvibI8yymm8IIIkO5DGEOS+9oFPPjVNXZIZB6q+MTOKf3uib1
- CDqBwqKAdElBnVhicjC9pWkaEiaqI85hAlMn5jLQuHe0ZE2P7KdN1YkU0SDA39Bt07sf
- htlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794029360; x=1794634160;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=i/OaY7VBB3C3rPgl9fDtHdrR7oJN99XN5IQvvfdL8rg=;
- b=2EsJTyapK9g60xRCOnLYpZvUfAyzddgW0XAlBDEqFqXiaR1vd3cUEwpX1nYmF94Dqx
- FDy0JD/kI+HFOR/HjrpMpfJuOq8HALtR+BgAfDaLxZo1OIRUna84rj5dfjTtdU5sMTA3
- KbQLAnLjN4AJdF4zbITlgPWXJbgQSi2jrMA5YcbzJDOnqjWyPsCubVprm81RxLexnVrZ
- CR+7s+ClSgQDR7jV2D2tWvPojJzfEpWkdRma2J4LUfLNyMvJh6vsGScVAzhGWQQqSHbU
- xzTtsSoG31VGqTz4ZaF/03uVaiqSKCGPyKQuK1htEtF6/nGUZ5zh/75vBMS0Kk7J5Yb5
- HZIg==
-X-Forwarded-Encrypted: i=1;
- AL+hErHHLXKLZLCQ0TsoNzXF3etWVXy00YCV2bvovkb07LdiQcXk2A1SYuGihXapjxueJ9qXzNYjHCMmGUpw@nongnu.org
-X-Gm-Message-State: APuU4Z/VT82ucsl08DJUB+9azb72G3b0Rr8+fIR3ZVyAPwR1ctTkRBTq
- cJSnSjd/eHG4myuZp+J4EBwe/mw0sRrs89kSLTW4coHDPSgNKlUNQ1hy
-X-Gm-Gg: AYBFou3cyNPm9FR3sV8WCE7Rk2P7/sXdXmnW8ju688L1Q/31cxOjTmcZxGzxHBHyJ0Q
- LHFufcdLeuYywekdImN/+gkppimb+tUCl5Mk1r6RxwM9PQsbRIrVwzDJCgws2TWCS+GNKFBuFmT
- unTdepynEU02z9Ai/RnX410ag+9xqajxwjIkuzFkFtw6OIjsxrhtEJVNia2tNHIdIbxMe08arL3
- nmTAx/CwDMesKIax5NGxs9jXMeoF+kJKoWIgUpQ0r6vrYR7Dl+a2iHn01XK6W7DTpHM3Le96XN4
- kiQKwq2L0H874vUgWFXqI1LJpTfafArc3MlOXcWq/IPnvJjfiY9xGQWZ4bfNRlhRniaZFme4XH5
- Zj/S9Px5+u+FATxs4ETE3w4j1QeAgNbZeScm5f6BDZdzYgIzqyNaT0LfqT4j5QNqmQTQ4T5gWD5
- UzAE/+YMPrwsA7M4HQK8QRiSS6jZ45JqplccS16Xoh+Qbz9Ic6XqVByje+dKxJZSlCmhjGEudkJ
- Z41w5KppsGrpZ09CvT1jEC13xW4BExpc+mIm2KfbroQhs41be3SroJy5GhR1ABlGSF44pDbb4HV
- rzMvfLkQH1jgf1jL06IfGaY+ltU=
-X-Received: by 2002:a17:90b:3890:b0:3ab:a3ee:33ad with SMTP id
- 98e67ed59e1d1-3b0db6bbc23mr4962610a91.22.1794029359678; 
- Fri, 06 Nov 2026 21:29:19 -0800 (PST)
-Received: from [28.0.0.1] ([2406:da18:294:1d00:2519:75b6:8407:b92c])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b1058a7b29sm1762195a91.10.2026.11.06.21.29.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 06 Nov 2026 21:29:19 -0800 (PST)
-Message-ID: <f6bb05cb-a466-4247-ac2f-0ac9480dc820@gmail.com>
-Date: Sat, 7 Nov 2026 13:29:11 +0800
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xPgGn-0007kT-SA; Sat, 07 Nov 2026 08:15:45 -0500
+Received: from smtp81.cstnet.cn ([159.226.251.81] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xPgGk-0005jQ-4M; Sat, 07 Nov 2026 08:15:44 -0500
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-03 (Coremail) with SMTP id rQCowADn9ZZgJO9qRbN+AA--.22918S2;
+ Sat, 07 Nov 2026 21:15:21 +0800 (CST)
+From: Tan Chi <tanchi25@mails.ucas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Tan Chi <tanchi25@mails.ucas.ac.cn>
+Subject: [PATCH] hw/riscv: Synchronize IOMMU FCTL state after MMIO writes
+Date: Sat,  7 Nov 2026 21:15:10 +0800
+Message-ID: <20261107131510.102469-1-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: use gen_goto_tb for vsetvli
-To: Chao Liu <chao.liu@processmission.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-References: <20261105074115.99275-1-chao.liu@processmission.com>
-Content-Language: en-US
-From: WX Chen <wxchen0913@gmail.com>
-In-Reply-To: <20261105074115.99275-1-chao.liu@processmission.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1036;
- envelope-from=wxchen0913@gmail.com; helo=mail-pj1-x1036.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: rQCowADn9ZZgJO9qRbN+AA--.22918S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7tFyxXw4xWw43Gry8XrWrKrg_yoW8GryfpF
+ 4rur4avr1rJr4ftFy3t3WxCF48J3ykWrWavr1akan8Wa4jyrWUJan8t3yjyr4DGFy8u3WS
+ vw45Cr4DAF4jvrUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9m14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+ 6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+ Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+ 0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
+ 1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
+ rcIFxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_Xr4l42xK82IYc2Ij64vIr41l4I
+ 8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
+ xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
+ AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8I
+ cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
+ 1j6r4UYxBIdaVFxhVjvjDU0xZFpf9x0JU3uc_UUUUU=
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.81;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -108,74 +67,53 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-4.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+MMIO writes to FCTL only update the register storage, leaving
+s->fctl unchanged. As a result, setting FCTL.GXL does not enable
+Sv32x4 translation in the page-table walkers.
 
-On 11/5/26 15:41, Chao Liu wrote:
-> I would like to discuss this a bit further. In fact, we can divide this into
-> five cases:
->
->     Case                    Condition                Current implementation
-> ------------------------------------------------------------------------------
-> 1. vsetvl  rd, rs1, rs2    vtype from rs2 register  keep lookup_and_goto_ptr()
-> 2. vsetvli x0, x0,  imm    rd == 0 && rs1 == 0      keep lookup_and_goto_ptr()
-> 3. vsetvli rd, rs1, imm    rd != 0 && rs1 != 0      new path
-> 4. vsetvli x0, rs1, imm    rd == 0 && rs1 != 0      new path
-> 5. vsetvli rd, x0,  imm    rd != 0 && rs1 == 0      new path
->
-> Currently there are two TB exit forms:
->
->   - Case1 and Case2 is the existing lookup_and_goto_ptr() exit.
->   - Case3 ~ Case5 is the new split exit, which compares the returned VL against
->     VLMAX and uses two goto_tb slots.
->
-> The new path can be improved. For rs1 == 0 a single gen_goto_tb() call is
-> enough, because the successor TB lookup key cannot change between executions.
->
-> So, We give three exit forms:
->
->    1. lookup: keep lookup_and_goto_ptr()
->    2. single: one gen_goto_tb() slot
->    3. split: compare VL against VLMAX and use two gen_goto_tb() slots
->
-> The cases map to the exit forms as follows:
->
->    Case   Exit form
->    --------------------------------------
->    1      lookup
->    2      lookup
->    3      split, or single when maxsz < 8
->    4      split, or single when maxsz < 8
->    5      single
->
-> For cases 3 and 4, we care about the case where VL is not equal to
-> VLMAX. To explain this, let us look at VL_EQ_VLMAX first. It is computed
-> in riscv_get_tb_cpu_state() in target/riscv/tcg/tcg-cpu.c:
->
->    vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) && (maxsz >= 8)
->
-> In two cases, the AVL comes from a GPR rather than an immediate, so
-> VL may or may not equal VLMAX. Using the split exit is fine in that
-> situation. When maxsz < 8, however, VL_EQ_VLMAX is forced to zero. In
-> that case, both VL values map to the same successor key during the TB
-> lookup, so a single slot is enough.
+Synchronize s->fctl with the guest-visible FCTL register after
+MMIO writes, following the existing register processing mechanism.
 
+Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+---
+ hw/riscv/riscv-iommu.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-Hi Chao:
-Thanks for the detailed review! I hadn't noticed the maxsz >= 8 
-condition for VL_EQ_VLMAX.
-
-Thanks for pointing that out!
-
-I'll take this condition into account in v2.
-
-Best regards,
-WX Chen
+diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+index 3f999bf292..6ef2e3ae6f 100644
+--- a/hw/riscv/riscv-iommu.c
++++ b/hw/riscv/riscv-iommu.c
+@@ -2398,6 +2398,11 @@ static void riscv_iommu_process_dbg(RISCVIOMMUState *s)
+ 
+ typedef void riscv_iommu_process_fn(RISCVIOMMUState *s);
+ 
++static void riscv_iommu_process_fctl(RISCVIOMMUState *s)
++{
++    s->fctl = riscv_iommu_reg_get32(s, RISCV_IOMMU_REG_FCTL);
++}
++
+ static void riscv_iommu_update_icvec(RISCVIOMMUState *s, uint64_t data)
+ {
+     uint64_t icvec = 0;
+@@ -2538,6 +2543,10 @@ static MemTxResult riscv_iommu_mmio_write(void *opaque, hwaddr addr,
+ 
+     /* Track actionable MMIO write. */
+     switch (regb) {
++    case RISCV_IOMMU_REG_FCTL:
++        process_fn = riscv_iommu_process_fctl;
++        break;
++
+     case RISCV_IOMMU_REG_DDTP:
+     case RISCV_IOMMU_REG_DDTP + 4:
+         process_fn = riscv_iommu_process_ddtp;
+-- 
+2.53.0
 
 
