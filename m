@@ -1,101 +1,102 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 785D5606A334
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 20:20:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1F4D606A31C
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 20:21:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=jUTY5i9t;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BmzbPO/Y
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aP0+LRV7;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h25wNabD
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQVqx-0007Kt-BK; Mon, 09 Nov 2026 15:20:31 -0500
+	id 1xQVrI-0007cG-7g; Mon, 09 Nov 2026 15:20:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQVqv-0007KX-6n
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 15:20:29 -0500
+ id 1xQVrB-0007YL-Mp
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 15:20:46 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQVqt-00068s-HS
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 15:20:28 -0500
+ id 1xQVr9-0006Ad-SO
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 15:20:45 -0500
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A9HHRPJ876689
- for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 20:20:26 GMT
+ 6A9HHWW6877095
+ for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 20:20:43 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 6reDuVj5y8a5z6eEUR4mOox+pRjZIbEHjck8wUX3gnY=; b=jUTY5i9tuxb7bHaB
- cjGuqPNskSg7PvKhFq600nTYucIm9KiZX9pWlxZ/crn/Bi3VbSAGLTfZcQXC7Mvm
- ILEZbAG6QVMbN+VhVqMl7tdgQv0sF8uhUxgZGKkBStik4kSa/YwMeXFSKBI/BXty
- F6PhlSnLYO+Bxzjt3kGxwfMV/kncOrX0CGiRcutq2oOFu1s+7jkyNbwhOAmcgB3M
- 3HbVTG2GGa+Wt1S/Woc4CsnXFCV73TB6nKiOloCrKAmAC6zBWBiW1BdrNWZgzQGh
- 3j0nyK32VHpuyOjzTr007C63fxRNZCyWgMjxgKEMqOZD6hPlyZvME1WfLI7DkCti
- /XlbgQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hudf59x36-1
+ bzcRB8nKNy3mBV+RhJ2V1h0b1+47IRFDCbAlwArYWnw=; b=aP0+LRV7i2SOVnwG
+ lc0f/C1VfzQp//4+tA01WGdkY6JshHU/Rxy3zzn6LXbOTBIdkOnGdf3atm8twWv8
+ 2ZK5ya3K2KXYknZ1hJ+PNdMjlU3N68bC6Acll78tddx9Y5xNPsoHtMhwbA/dd+eY
+ 2RFw+kqffFe3vxdMlgbA4SC05x2R+SoJB2/VCe05O6yNc4VKpYmu/N3+dguHgGt9
+ 7d+CRqgg7VYTnPKxQllgUTPjprUbcxB2+3YtjuuoTghC3vUeOoirQNtOvOygELFz
+ 70A3hQms9PNJ0lnDG3QJfSB+gSf7ek6RdG3QqtVHYxNGahKiGKw2Yy6tEGw7Ivxq
+ A79gLQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hudf59x3w-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 20:20:26 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-91eb16ea5c3so37079736d6.2
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 12:20:26 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 20:20:42 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-534f3fe0236so28874831cf.2
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 12:20:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794255626; x=1794860426; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794255642; x=1794860442; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6reDuVj5y8a5z6eEUR4mOox+pRjZIbEHjck8wUX3gnY=;
- b=BmzbPO/YORGaqoYX7BWLXwouGwr3oPQTxkcKGcve7HTfEi+LrnHvAjWJUvVKoHrk1P
- p7Aw8xkjWhpn5JIcALPh0XwtgR85kbBCDT0MOsQVZcCmXS1dZalouOfa5FFN3VFWXZYD
- uHcwluM0fTmld0NgchtQo9u18667L+k67kQZA0z9KjXUfAlVOgL2+gIqWbLLX2O/SyNt
- W64INAVImA3WwjzXx7P66f52o0+bwYke7O4qKPcHMUeC+0Y0OSiwrQo9eoR1TuXTv1Dd
- NGTlUqNdEKGNOsNhy32LEllR4sc/PWR+205EpNn27Fr5mt8HRJ8MMccSAkxTZ/HtqC3k
- IZhw==
+ bh=bzcRB8nKNy3mBV+RhJ2V1h0b1+47IRFDCbAlwArYWnw=;
+ b=h25wNabD9OGmwi3+laJtCWjX8SMca4cdU0ZBGgqmIc6yzbcruPFaMG8a5338a5kprM
+ WkNTZOrIRoFKy1a2B5/foUkwsftfwwCS0TNepSJDMQwPcj7XaewrcRBgAYZz94BUEYJL
+ LWPr/rwpiIXVEB5EZlXnsETpMU9ajF4Q95iDZTQKjxC/7rgPANm/Y2SPgqwH3U/GZ3ii
+ jjdkAmLO69rKuefZtuX0kJIpVOXySuE00pb3XS9/8hB56/eKj14XNV7EXDX8lUMo3y2B
+ oKBmoJWTZXykgmIrG4t5Gk5vVdk+eyAPBKcTpbA5zXRkeGH09738NV2VftN+yCIhjWqo
+ YoiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794255626; x=1794860426;
+ d=1e100.net; s=20260707; t=1794255642; x=1794860442;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=6reDuVj5y8a5z6eEUR4mOox+pRjZIbEHjck8wUX3gnY=;
- b=EoVp0F4c6r7XedVDGsXaBoM6SSdSPTplG5r9TKzQVdzRhGIKJxB5qjN57vIBL5rRkI
- 7KooUoeD2V+fypiSvLfSQuvfAvGKNwx2QDjYgdylnBPyXsnpb0bGRzajwB/LNIuCQtRl
- Cd/3JcJul2Mnt+pBx/fC7ub3fGaK2NIFDep6pDPbedxB9D3QkneHrbsvSLwx3Urs/x0z
- X/NnwtYDmhszhezsbIzH95A5jybu16yuONhAdPvaHaXHqajydNuWsw26cZ9C5eDrceMW
- jaRD1JgSIaQdzSC/SXBQbd6LtApuodL4iats2OGKebzfBJshqhoL4ryBOy3NP8n8hIVf
- qiAA==
+ bh=bzcRB8nKNy3mBV+RhJ2V1h0b1+47IRFDCbAlwArYWnw=;
+ b=hTD+2a4IeofUCKMikvf97HKzjnhVrcA1/gRovo32G4IoBiScxxr+NjClB9lylig/6j
+ EBtpHNIfsnemdPYhQptQny1lTJH8GOmGJF4jK1tX1Wyp3iwwf+uuFBOTmeR49FqMFOuj
+ TKFH9NucMcahtF/41tUdPKRrJDtBp3zifdhOUya6LsfI0XfdCrvLUzwnO0P922Ymcim3
+ du8N82p1dIJkjNg0R7OvGP/cOwEWR+uBuZIhZHEp3jNM9mk1/acPwQ3qoSsOLBUYmd5t
+ N50OsiXG2H97dImg3+J7gGiNzEkkoKBPPEPxPFzcq3qiauIh7CkTXw9NDaFhbd6vaU8O
+ 9BbA==
 X-Forwarded-Encrypted: i=1;
- AL+hErHScVVpYAFgOKdnP6wrPILVLXs1KxDaeOBrzxJvmMA167Ec0o8c5WqxM6g4bKq/CAH2q4Gy9ZBy0F14@nongnu.org
-X-Gm-Message-State: APuU4Z/GggzvQFX1UlGY7rMexEn2sJfPi8iRU6Yd5l3z6OIBqvdATrq3
- RA+piR35RZXg6FT96vwyIRwYMMzJE2gKchh3xUKRI79Nte02GtjeQQKtdhxKIb1Ufqdn2R0xGLp
- Pb/g7rDWgjKtH6c0l9jwCAUi6Z2D3mCbh/w23YOnFfB6IMbjR6/S8hYWZkA==
-X-Gm-Gg: AYBFou09N1Zm3AqvSCk6OOx4bCDxCtZBj78zx2DQYtsKAElULrAG3frwjS5UXehHbjK
- OwF24ai8/lhjj+hkcVaxuegMDawN2szXVnbIiLaFwOYVg05P0Rm09DkbZfqE1Dx952/un3bF6jE
- sm1wrbhDxcE6oZBNyE5iXETAmCvrShfUBkR3U2DFMztUUYvThQMIeFcGUbdeBxp3OTJ8A7Afdyi
- 7nZwbMWW/Q1jpQKqt+vwJ5CitUwgZtQ1FjikK73BcAdAzCaMV/OpwjlHRn4q1Lbi9lObad1dNE7
- f1wKms2HMmPzRxM6LeZ/9uBsr4bJDGShBKZpzUAGQRTpHfILC4IccTW9palYrlFF5bcML+ptpT2
- SJXL9tVfWoFTErm/x5SZl0kuO9QCud1J1IWYmz1GTRQlje80gIpwIMA/w9G7Xaw1ITY6wvPMwOk
- JrLON3Fx2M
-X-Received: by 2002:a05:6214:8403:b0:91c:7c1c:da3d with SMTP id
- 6a1803df08f44-91eef8662bcmr8858826d6.43.1794255625681; 
- Mon, 09 Nov 2026 12:20:25 -0800 (PST)
-X-Received: by 2002:a05:6214:8403:b0:91c:7c1c:da3d with SMTP id
- 6a1803df08f44-91eef8662bcmr8858526d6.43.1794255624986; 
- Mon, 09 Nov 2026 12:20:24 -0800 (PST)
+ AL+hErEYvTJmFnk//2VtHdvdCZQS9yITvSfI1YOqjs88krgng4cJM69YyV8rYEgiv6OgyqJ3o7pmoJIgu04+@nongnu.org
+X-Gm-Message-State: APuU4Z9ZhDpC0a/5I6VMe+FtWYUw+MlRS6+A07tc+ptvd1NZziU+Fuoz
+ YfdXH5y+Joj5qqXd2Md1WsOU2SaAk7dZzprLF37+k6B2RdKuP0VUHmhiJ1sChQyj2VlBXSMvO8J
+ tljb9Q165M9thY9VO0r83roEOA9tj5cW0qjzHpaXL1Bb8b19FBGYDlZz+qg==
+X-Gm-Gg: AYBFou3eljh2XvOS701ecr8zx+Z8hUFqUzDEWALfnJufJ7DqTAII+3z/H/yVe8S4IEd
+ 9/3T8p4qqVMHs5G+DtfjaAZU2uCqZEfuoVTDAC7c29PpFoN9UOZRD+WZYEgoWOeoAGZx8gCL4cb
+ eAbfCZfwj2n7Ry83q1Sm7ouerct4ITq2hl4Um/2CIi/o/JIKy8WRAGGSO6aRTGyX1cX12iWNm7H
+ hU2pOibtC8za85qbdaxmEuojKhUR8xuJ8wd9n4TbawKGbOURKW0oliA8l721zr4wqvrqpK6w4bL
+ Tj+N1kNxYawcTSjEtekIl1LkSjHD8UXAJvZlzqfd0U0MmnI8+7vHXT/0r3m0exikWeBIOjy8uyV
+ iL/UddO+x1ma2UN8oYb111gpa2NUV3shHcEPc5d1KrwEirDMbaAZWF429mdNVN9oA4XhbXWv9wO
+ 0kUbHrqy9n
+X-Received: by 2002:ac8:5755:0:b0:535:2314:626d with SMTP id
+ d75a77b69052e-55527133976mr7864271cf.13.1794255641928; 
+ Mon, 09 Nov 2026 12:20:41 -0800 (PST)
+X-Received: by 2002:ac8:5755:0:b0:535:2314:626d with SMTP id
+ d75a77b69052e-55527133976mr7863831cf.13.1794255641347; 
+ Mon, 09 Nov 2026 12:20:41 -0800 (PST)
 Received: from [192.168.68.100] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91ef052383asm4045306d6.35.2026.11.09.12.20.22
+ d75a77b69052e-5550b942e83sm5744411cf.18.2026.11.09.12.20.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 12:20:24 -0800 (PST)
-Message-ID: <29e5d5da-efc6-4829-aece-d9f516179b0e@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 17:20:21 -0300
+ Mon, 09 Nov 2026 12:20:40 -0800 (PST)
+Message-ID: <c474fa18-4c4f-4c8f-b6bf-43f74284e1f5@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 17:20:36 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 18/38] disas/riscv: Support Zvfqwdota8f extension
+Subject: Re: [RFC PATCH 19/38] target/riscv: Add cfg property for Zvqwbdota8i
+ extension
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -106,31 +107,31 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>
 References: <20261104194155.679241-1-max.chou@sifive.com>
- <20261104194155.679241-19-max.chou@sifive.com>
+ <20261104194155.679241-20-max.chou@sifive.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261104194155.679241-19-max.chou@sifive.com>
+In-Reply-To: <20261104194155.679241-20-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: tql0LnklfVWmuki2uTVXoYekDugYG3lJ
-X-Proofpoint-GUID: tql0LnklfVWmuki2uTVXoYekDugYG3lJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA4MSBTYWx0ZWRfX9GIn4Llw0hwJ
- HpSJK7gzpeq7mpPlrsMdgiKGuJSZy+D+v3IBaW8g0gncxgAgN/pnA5yAKEjS/J9ISgibEYJ9HvH
- wbTqmp4hyvQ6Eas//sZ/ntoAmJ+crS8=
-X-Authority-Analysis: v=2.4 cv=bar+w+PB c=1 sm=1 tr=0 ts=6af22b0a cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Proofpoint-ORIG-GUID: tR975LACZH8vzxCbEnuQMCMUaAMDndUN
+X-Proofpoint-GUID: tR975LACZH8vzxCbEnuQMCMUaAMDndUN
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA4MSBTYWx0ZWRfX3/kDu8szIdhT
+ HvIU/tz6m32ayndDkpd2EVUf5c2pVPGlwPB/7lfdXCM5CDQGd38nNuo4+3bLV2wc8DClUEjWsMw
+ 54DNo+ghpbQWz4cqemxth6ak6pUmyxI=
+X-Authority-Analysis: v=2.4 cv=bar+w+PB c=1 sm=1 tr=0 ts=6af22b1a cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=pFyQfRViAAAA:8 a=EUspDBNiAAAA:8 a=JQTPU3wg1eTVZYZx9qIA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22 a=oJz5jJLG1JtSoe7EL652:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA4MSBTYWx0ZWRfXyYeE97XPJiSd
- yVtTEEL5yQjVefePehImeltLa02mvwhaBiUuHWknlHJ7ADReflQU44LRbYlS3tak/hP8kuK89OF
- I/FO+UgN/3eca0MlbSGplGAjQ1GjfKiejofHIY4Juvb90yVZdJgNxd1qsyA0EF57hJVhd0F9yPq
- dA4/jZNdMLhyr22y5hxAn2m2eXE+nhfTFQ5zuP7IW0o6pTClsHWbfSm/q6ARZWTkCKeI6L93MGp
- AynrU0V5blMGnqCBFfMuGF0/MIloVoIDVAyhE9tzVdDd2ej7TJP8Wz7V6JZD550H7pyQvQAVk76
- if/djyBrzgVOi3juNBGbiHEto07iSHmIn1d+gd/D7QQgRYDyYuXiLiOVLPhhcaJ7SrH4qxJgSpP
- PSq4Wf8qRJTKE3R2WxAUgD5rNdNcWEt4pCUwxxlAWQjtP9fA0mb/6PhQ6lvOLrN8xdQga0BaWOu
- COpErBYfLLlW0Gh/RpQ==
+ a=pFyQfRViAAAA:8 a=EUspDBNiAAAA:8 a=XBAgjMVXaL5moyl4Vc0A:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22 a=oJz5jJLG1JtSoe7EL652:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA4MSBTYWx0ZWRfX+3YpvR/QKjJ6
+ ev8AGpYOxPSr+7l2Lraktn8UQMY+8n0OJe7ukGsp15CGJGWSHemsxgx7YNkNI4LQyGAyPKlJOGw
+ IYZcEnx/0BJetTOctgz18rfDEsfY0huXIivD9nDl6A8RXiSZW68oJrR7Cu3VidWKnoDkTus7rvx
+ Qoq4ScMV1mXgsWIvK6qe4KhdtERd3rc4MHqB9FRGbB9FAP1P2gT7tmqiRmrNb3XT8ofkYeilKBa
+ 4k2T1Uo2JvdgDs328/IdDq22ZQi5fjulH9TUZcwSDS/oQ11iM+GEW0S/h5ERsIOKd7Dnp454cz9
+ aa131eGNNFJZNt2QJhiIJyrqap9Zs0SbhWzoZ6bR8BcQNwF5tQE5W91kHbQMb+QbvbmedJBSebP
+ 87AYBTqWwFYIKXfmeeMImkyRrz5iJuYzVOf+NmluVNhH75BsOlml4VgOkHNVz46uii+8oaMM9md
+ 5/Gi/tUtPaJs9J6fSvQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-09_06,2026-11-06_01,2025-10-01_01
@@ -170,51 +171,81 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 On 11/4/2026 4:41 PM, Max Chou wrote:
-> Adds support to disassemble Zvfqwdota8f instructions.
-> - vfqwdota.vv
-> - vfqwdota.alt.vv
+> Add CPU configuration for the Zvqwbdota8i extension which depends on the
+> Zve32x extension per the specification.
 > 
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   disas/riscv-op.c.inc | 2 ++
->   disas/riscv.c        | 9 ++++++---
->   2 files changed, 8 insertions(+), 3 deletions(-)
+
+>   target/riscv/cpu.c                | 2 ++
+>   target/riscv/cpu_cfg_fields.h.inc | 1 +
+>   target/riscv/tcg/tcg-cpu.c        | 5 +++++
+>   target/riscv/tcg/vector_helper.c  | 2 ++
+>   4 files changed, 10 insertions(+)
 > 
-> diff --git a/disas/riscv-op.c.inc b/disas/riscv-op.c.inc
-> index aeb9423f130..5ba29f52976 100644
-> --- a/disas/riscv-op.c.inc
-> +++ b/disas/riscv-op.c.inc
-> @@ -583,6 +583,8 @@ OP(vfnmsac_vf, "vfnmsac.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm)
->   OP(vfnmsac_vv, "vfnmsac.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm)
->   OP(vfnmsub_vf, "vfnmsub.vf", rv_codec_v_r, rv_fmt_vd_fs1_vs2_vm)
->   OP(vfnmsub_vv, "vfnmsub.vv", rv_codec_v_r, rv_fmt_vd_vs1_vs2_vm)
-> +OP(vfqwdota_alt_vv, "vfqwdota.alt.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-> +OP(vfqwdota_vv, "vfqwdota.vv", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
->   OP(vfrdiv_vf, "vfrdiv.vf", rv_codec_v_r, rv_fmt_vd_vs2_fs1_vm)
->   OP(vfrec7_v, "vfrec7.v", rv_codec_v_r, rv_fmt_vd_vs2)
->   OP(vfredmax_vs, "vfredmax.vs", rv_codec_v_r, rv_fmt_vd_vs2_vs1_vm)
-> diff --git a/disas/riscv.c b/disas/riscv.c
-> index 62feb4c653e..0f609cc06b4 100644
-> --- a/disas/riscv.c
-> +++ b/disas/riscv.c
-> @@ -2640,9 +2640,12 @@ static const rv_opcode_data *decode_inst_opcode(rv_decode *dec, rv_isa isa)
->                   case 39: return &op_vqwdotas_vv;
->                   }
->               }
-> -            if (((inst >> 12) & 0b111) == 1 &&
-> -                ((inst >> 26) & 0b111111) == 36) {
-> -                return &op_vfwdota_vv;
-> +            if (((inst >> 12) & 0b111) == 1) {
-> +                switch ((inst >> 26) & 0b111111) {
-> +                case 36: return &op_vfwdota_vv;
-> +                case 38: return &op_vfqwdota_vv;
-> +                case 39: return &op_vfqwdota_alt_vv;
-> +                }
->               }
->               if (((inst >> 25) & 1) == 1 && ((inst >> 12) & 0b111) == 2) {
->                   switch ((inst >> 26) & 0b111111) {
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 6c09685bd4b..9271f79d1b6 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -254,6 +254,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>       ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
+>       ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
+>       ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+> +    ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvqwbdota8i, PRIV_VERSION_1_13_0,
+> +                                    ext_zvqwbdota8i),
+>       ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvqwdota16i, PRIV_VERSION_1_13_0,
+>                                       ext_zvqwdota16i),
+>       ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvqwdota8i, PRIV_VERSION_1_13_0,
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index b18abdd8b9b..3d822432d48 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -108,6 +108,7 @@ BOOL_FIELD(ext_zvfh)
+>   BOOL_FIELD(ext_zvfhmin)
+>   BOOL_FIELD(ext_zvfqwdota8f)
+>   BOOL_FIELD(ext_zvfwdota16bf)
+> +BOOL_FIELD(ext_zvqwbdota8i)
+>   BOOL_FIELD(ext_zvqwdota16i)
+>   BOOL_FIELD(ext_zvqwdota8i)
+>   BOOL_FIELD(ext_sdext)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 72ce0b4fbd0..782e38b608e 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -711,6 +711,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>           return;
+>       }
+>   
+> +    if (cpu->cfg.ext_zvqwbdota8i && !cpu->cfg.ext_zve32x) {
+> +        error_setg(errp, "Zvqwbdota8i extension depends on Zve32x extension");
+> +        return;
+> +    }
+> +
+>       if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
+>           error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
+>           return;
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index 5cb44326200..b1ca584f9ef 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -42,6 +42,7 @@ static target_ulong vtype_reserved(CPURISCVState *env, target_ulong vtype)
+>       if (riscv_cpu_cfg(env)->ext_zvfbfa ||
+>           riscv_cpu_cfg(env)->ext_zvfqwdota8f ||
+>           riscv_cpu_cfg(env)->ext_zvfwdota16bf ||
+> +        riscv_cpu_cfg(env)->ext_zvqwbdota8i ||
+>           riscv_cpu_cfg(env)->ext_zvqwdota16i ||
+>           riscv_cpu_cfg(env)->ext_zvqwdota8i) {
+>           reserved = vtype & MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
+> @@ -94,6 +95,7 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+>       case MO_8:
+>           ill_altfmt &= !(cpu->cfg.ext_zvfbfa ||
+>                           cpu->cfg.ext_zvfqwdota8f ||
+> +                        cpu->cfg.ext_zvqwbdota8i ||
+>                           cpu->cfg.ext_zvqwdota8i);
+>           break;
+>       case MO_16:
 
 
