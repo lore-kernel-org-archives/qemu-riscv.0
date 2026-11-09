@@ -1,67 +1,93 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3141A606A321
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 07:36:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47C21606A325
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 07:46:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=jNBa1hIr
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vg9wDT9e
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQJvD-0004ZY-8S; Mon, 09 Nov 2026 02:36:07 -0500
+	id 1xQK5R-0006Jb-OG; Mon, 09 Nov 2026 02:46:41 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xQJvA-0004ZI-LF; Mon, 09 Nov 2026 02:36:04 -0500
-Received: from [115.124.30.132] (helo=out30-132.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xQJv3-00014x-Ft; Mon, 09 Nov 2026 02:36:04 -0500
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xQK5P-0006Ia-SC
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 02:46:39 -0500
+Received: from mail-dl2-x05.google.com ([2607:f8b0:4864:38::5])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
+ id 1xQK5O-0002BD-3U
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 02:46:39 -0500
+Received: by mail-dl2-x05.google.com with SMTP id
+ a92af1059eb24-1ac216daf7dso349207c88.1
+ for <qemu-riscv@nongnu.org>; Sun, 08 Nov 2026 23:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1794209724; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=D+uUsGRuT1paoUbMiiuxN/A4xE8CkH5qkRVmmRNVqsw=;
- b=jNBa1hIrD8EQWDM9dSZyXJlHZVvSjrWSmpUdfIylYxMn8hgLCexJCD2UBdZMji0EVgmZvncrHwJ/BAJcbVqZ1PLR0iIu3uI96UjUV0/WXM53bdEtmItF8RoV9R6Xl49s8iSptMp49rFWrEnATZL1Tefy4tVpkjgvjnivanYhyy8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037033178;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0XELaL.z_1794209722; 
-Received: from 30.166.64.195(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0XELaL.z_1794209722 cluster:ay36) by smtp.aliyun-inc.com;
- Mon, 09 Nov 2026 15:35:23 +0800
-Message-ID: <f742d921-b9e7-40e3-b70f-9d70804a9bcd@linux.alibaba.com>
-Date: Mon, 9 Nov 2026 15:35:21 +0800
+ d=gmail.com; s=20260707; t=1794210396; x=1794815196; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=j7pq3oFVitV/j8rb8dSvVqow8VZ/BdDLrwNb0ix4g7U=;
+ b=vg9wDT9eurNJkqu3Dqkg2qREGdtXTGGdrqN9xIyXTrLQ9mS/KUkOgrYAmoliEXR9YV
+ LkiXDya967laltZEX+XChCtI8+ysEZDO3Rsxo46nIstYgpsQdrxuw/KV43aBxhwapb7d
+ frtXdm2bPCnYO5kW+D14jIpZtrOG06AlFBzxVStJgYUcAqXrZ2wqxnVTgnKPmBW9MQyg
+ yztS6dfeKTiZNtjp+pboJs0LRcTfcUhNWhkSevgU3tX0NgSwseyAgtSIhXZ3R6p/WSJ+
+ p6icfN4+JuYvdPYyeeHYIx6fYSwFv+ouCF79gXlLKCBGGhujxCsRY33TFVYjb/XZEBZ6
+ /GSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794210396; x=1794815196;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=j7pq3oFVitV/j8rb8dSvVqow8VZ/BdDLrwNb0ix4g7U=;
+ b=x6VE06Dg1p5Q1zzBj7WJkUpIfRo62zeCjuqqJ/WNJXDjiXodHaUbFPFE0uJWEOQDM0
+ sPzcmZu/vhJKb9yTNUd55TedZ4tkfIh7qBFdDmFjOVA/RjxBlGDXJAf0Q6BZtScs65Aa
+ eJpRcAG9eHdm8zYNQoNN0h1IvbTr5iu3deJQY+o8CoxUX0MrWOj7o/MGwXgs4gCrjg3i
+ hcJrQ0X7ulNgGtmC2m6hl7c1E8HA2KpcJIWD3IsPKc4V9+gp1/NxMvbYxgcqtcL1NRCA
+ rZukgcYK+MRHRNG6YePzpC8SJqc9BjY1YfR/H23jeQ3e5ZuBAjp3MJ1v2OnF8tZFuUDY
+ 7+Zg==
+X-Forwarded-Encrypted: i=1;
+ AL+hErGY58GTBw8sOHpgagLFhEaB/V4ijC54FAgS+WxADj8v/qsyXVpclyF39L5JExtunLbljlZH4Lp52+5b@nongnu.org
+X-Gm-Message-State: APuU4Z+7OYGG29z+NM5oEfIKg5YrEOrLh0PBGno4Urqa1i/4K68yZ150
+ EYEGoFxkwfmJ5XWSafDIXlklB1kA0Gtb39XGW4GdB0muhEJSoVI/8pSQ
+X-Gm-Gg: AYBFou28ehbL6fB/JYSQRPhEKIsih6DJzk4DTiQjIB4vWbljmM06Ioarx6S1yPu1wEG
+ pHV7i5KZf8wRfiwk0kA1D/E/paQ+hkbWY2Miy8s0ifSs6/cjUq3XVAJ1oylspjxiRz72OAiHii8
+ oHfxdcw8N/z+Fp6VbeVA/zKufrOADmiHqxeVWNfKmcicmveiftGYXocJG5SXQeLylJP4QUbY43G
+ QTFm5zqDAQcVC4P59d4zqg0zncYwq6J/DvAeXpA1uMqo586oulJrY9FO7QghznZnjkYZLMlIkyh
+ ak1Pd/xvU+O7uygC2gXtRYUohcGWiNtnnjMA3awB8amQZjBWBc16d1Ke9Ok+UtD70FGL5sotXQT
+ D79DLmMc7IN5Y2g8MQIl4/cGeo04aHDsoYrlcBNS/HjfBxP0TJL/DIfAtmy/YBLIrLxBnmzNT6h
+ BWpMukoOrSyYcKPm8/EHCd0ShjITHfRK9/08+L4W6HhIzCT/lHSggKQhwYe13Oq5jZ//EWBHjNf
+ wrlnlfzoNcyuTG5CpRB+gzjSlcolCGOLtFh1gwnramJQq3XaQmrrfHG0p6z3Ux2DJ+Bpd7WbF4y
+ nm23oqUn9yzucJBrvcaCJsDhyy5Z+vJzWM1tuhcH62YLypxXzD/r9qI=
+X-Received: by 2002:a05:7022:1505:b0:1b2:cb38:5412 with SMTP id
+ a92af1059eb24-1b39fed4847mr6202526c88.42.1794210395505; 
+ Sun, 08 Nov 2026 23:46:35 -0800 (PST)
+Received: from Dell-WorkStation.localdomain ([138.2.118.134])
+ by smtp.gmail.com with ESMTPSA id
+ a92af1059eb24-1b3771f0e0fsm15460069c88.20.2026.11.08.23.46.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Nov 2026 23:46:34 -0800 (PST)
+From: Zephyr Li <fritchleybohrer@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
+ chao.liu@processmission.com, qemu-riscv@nongnu.org,
+ Zephyr Li <fritchleybohrer@gmail.com>
+Subject: [PATCH] target/riscv/kvm: Handle SBI console backend failures
+Date: Mon,  9 Nov 2026 15:46:07 +0800
+Message-ID: <20261109074608.34915-1-fritchleybohrer@gmail.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 00/11] target/riscv: Implement Smsdid and Smmpt
- extension
-To: Rahul Pathak <rahul@summations.net>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- chao.liu.zevorn@gmail.com, liwei1518@gmail.com, qemu-riscv@nongnu.org,
- xiangyi.zeng@linux.alibaba.com, cxx194832@alibaba-inc.com
-References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
- <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
- <397f4ece-067b-4714-93f3-082e07fad06d@linux.alibaba.com>
- <CABdD5xku3v1hGGHQA=WNiB-zTYkHdg=Pou5nci7ShUyERLp-CA@mail.gmail.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <CABdD5xku3v1hGGHQA=WNiB-zTYkHdg=Pou5nci7ShUyERLp-CA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.132 (deferred)
-Received-SPF: pass client-ip=115.124.30.132;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Received-SPF: pass client-ip=2607:f8b0:4864:38::5;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-dl2-x05.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -73,209 +99,158 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-24.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1,USER_IN_DEF_DKIM_WL autolearn=ham
-	autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+The serial backend is optional, for example when QEMU is started with
+-serial none. The legacy SBI console and DBCN handlers nevertheless
+dereference serial_hd(0)->fe without checking whether the chardev or
+its frontend exists, causing QEMU to crash on a guest console call.
+DBCN also terminates QEMU when an existing backend reports an I/O error.
 
-On 10/30/26 6:45 PM, Rahul Pathak wrote:
-> Hi Zhiwei,
->
-> The SMMPT spec has been updated following the ARC comments
->   and the big change is the merging of both SMSDID and SMMPT
->   sub extensions into one with new name "SMSD" which is much better now.
->
-> https://github.com/riscv/riscv-smmtt/commit/ff5069fa99fc1fdd97c9fb8d96329e13afa82712
->
-> Can you please update this series.
-Hi Rahul and Daniel,
+Resolve the frontend once per SBI exit and check it before use. Discard
+legacy output and return -1 for legacy input when no console is available.
+Explicitly return zero from legacy console putchar as required by SBI.
 
-I see the latest specification is v0.9.0 now. Supporting v0.4.9 is not 
-necessary. I will update this patch set to v0.9.0 together with updated 
-test cases.
+For DBCN, return SBI_ERR_DENIED with a zero value when the frontend is
+missing, before allocating a buffer or accessing guest memory. Convert
+backend I/O errors to SBI_ERR_FAILED instead of exiting QEMU, and do not
+copy a failed read into guest memory. Treat an incomplete single-byte
+write as a failure too, since that call must write the specified byte.
 
-Thanks,
-Zhiwei
+Preserve successful zero-length reads and writes, partial bulk transfers,
+and the unsupported-function response.
 
->
-> Thanks
-> Rahul
->
-> On Sat, Oct 10, 2026 at 12:13 PM LIU Zhiwei
-> <zhiwei_liu@linux.alibaba.com> wrote:
->>
->> On 10/8/26 10:42 AM, Daniel Henrique Barboza wrote:
->>> Hi Zhiwei,
->>>
->>>
->>> Sorry from taking this long to take a look at this work.  I am afraid
->>> I'll
->>> need to ask you to send a v9 due to the following upstream changes, aside
->>> from some review comments I made:
->>>
->>> - upstream changed how tcg tests are invoked (we use meson now), i.e. you
->>> need to add changes in tests/tcg/riscv64/system/meson.build instead of
->>> Makefile.softmmu-target;
->>>
->>> - upstream also changed how we declare things in disas/riscv.c.
->>>
->>>
->>> If you send a v9 I'll prioritize it for review.  We can get this done for
->>> 11.2.
->>>
->> Hi Daniel,
->>
->> Thank you for taking the time to review this! No worries about the delay.
->>
->> I appreciate the heads-up on the upstream changes. I will update the
->> patch accordingly:
->>
->> Switch from Makefile.softmmu-target to
->> tests/tcg/riscv64/system/meson.build for the TCG test invocation;
->> Update the declarations in disas/riscv.c to align with the latest
->> upstream changes.
->> I will send out v9 as soon as possible. Really glad to hear we can
->> target 11.2 for this — I'll make sure to prioritize it on my end as well.
->>
->> Thanks again for the review and for keeping this moving!
->>
->> Best regards,
->> Zhiwei
->>> Cheers,
->>> Daniel
->>>
->>> On 7/23/2026 5:03 PM, LIU Zhiwei wrote:
->>>> This patch set introduces support for the RISC-V Smsdid and Smmpt
->>>> (Supervisor Domain Identifier and Memory Protection Table) extensions
->>>> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
->>>> Smmpt provides a hardware mechanism for fine-grained memory protection,
->>>> checked after address translation, which is particularly useful for
->>>> supervisor-level sandboxing and security monitoring.
->>>>
->>>> The rfc patch set:
->>>> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
->>>>
->>>> Rahul Pathak is working on SMMPT OpenSBI support -
->>>> https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
->>>>
->>>> based on his QEMU SMMPT branch -
->>>> https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
->>>>
->>>> As we all agree -
->>>> https://patchew.org/QEMU/20260715145016.17369-1-zhiwei._5Fliu@linux.alibaba.com/
->>>>
->>>> , we will collaborate on this work and not duplicate efforts. Rahul will
->>>> focus on OpenSBI upstream and I will update the QEMU patch set to v8.
->>>>
->>>> Xiangyi will review the OpenSBI SMMPT patch set and may collaborate to
->>>> upstream the other parts, such as SMSDIA and IOMPT.
->>>>
->>>> v7->v8:
->>>>       1. Update the mfence.pa and minval.pa instruction encodings to
->>>> match the
->>>>          upstream riscv-opcodes definition
->>>>          (https://github.com/riscv/riscv-opcodes/pull/389/): mfence.pa
->>>> now uses
->>>>          funct7=0b0011001 and minval.pa uses funct7=0b0011011. The
->>>> decoder,
->>>>          disassembler and the system test are updated accordingly.
->>>>
->>>> v6->v7:
->>>>       The implementation is updated from the v0.3.4 specification to
->>>>       v0.4.9. The main changes are:
->>>>       1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
->>>>       2. Update the mmpt register layout: the SDID and PPN field
->>>> positions
->>>>          changed and the RV64 PPN is now 44 bits.
->>>>       3. Rework the MPTE format: the N (NAPOT) bit now lives at bit 2,
->>>> the
->>>>          non-leaf NAPOT form is removed, NAPOT leaf entries encode a
->>>> single
->>>>          XWR tuple plus a G granularity field, and non-NAPOT leaf entries
->>>>          hold per-page XWR tuples.
->>>>       4. Treat XWR=000 as "no access" and a non-leaf entry with N=1 as a
->>>>          fault.
->>>>       5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits zero).
->>>>       6. Rename the fence instructions mfence.spa/minval.spa to
->>>>          mfence.pa/minval.pa.
->>>>       7. Drop stale Reviewed-by tags on the substantially reworked
->>>> patches.
->>>>       8. Introduce the configurable "smmpt-sdidlen" CPU property.
->>>>       9. Add disassembly support for the Smmpt.
->>>>       10. Add bare-metal M-mode system tests.
->>>>       11. Rebase to master.
->>>>
->>>> v5->v6:
->>>>       1. Use explicitly bit fields extract instead of mpte_union_t.
->>>>       2. Use the same exception behavior for MPT valiation as PMP
->>>>          valiation.
->>>>       3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
->>>>       4. Use address_space_*_le instead of address_space_* for SMMPT.
->>>>       5. Only print SMMPT address check log when SMMPT is enabled.
->>>>       6. Add implied rule for SMMPT as it depends on SMSDID.
->>>>       7. Rebase to master.
->>>>
->>>> v4->v5:
->>>>       1. Rebase to master.
->>>> v3->v4:
->>>>       1. Add missing review tags.
->>>> v2->v3:
->>>>       1. Fix build error in patch 2.
->>>>       2. Rebase to master.
->>>>
->>>> rfc->v2:
->>>>       1. When ext_smmpt is false or BARE mode, make other fields in mmpt
->>>>          CSR zero.
->>>>       2. Add patch 5 to fix smrnmi ISA string order.
->>>>       3. Fix patch 6 smmpt and smsdid ISA string order.
->>>>       4. Make smmpt and smsdid experiment extensions.
->>>>       5. Add review tags.
->>>>
->>>> LIU Zhiwei (11):
->>>>     target/riscv: Add basic definitions and CSRs for SMMPT
->>>>     target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
->>>>     target/riscv: Implement core SMMPT lookup logic
->>>>     target/riscv: Integrate SMMPT checks into MMU and TLB fill
->>>>     target/riscv: Implement SMMPT fence instructions
->>>>     target/riscv: Fix smrnmi isa alphabetical order
->>>>     target/riscv: Add disassembly for Smmpt instructions and CSRs
->>>>     target/riscv: Enable SMMPT extension
->>>>     target/riscv: Add system test for SMMPT extension
->>>>     target/riscv: Add system tests for Smmpt52 and Smmpt64
->>>>     target/riscv: Add system test for Smmpt34
->>>>
->>>>    disas/riscv.c                                 |   9 +-
->>>>    target/riscv/cpu.c                            |  60 +++-
->>>>    target/riscv/cpu.h                            |   8 +
->>>>    target/riscv/cpu_bits.h                       |  27 ++
->>>>    target/riscv/cpu_cfg_fields.h.inc             |   3 +
->>>>    target/riscv/insn32.decode                    |   2 +
->>>>    target/riscv/meson.build                      |   1 +
->>>>    target/riscv/riscv_smmpt.c                    | 339 ++++++++++++++++++
->>>>    target/riscv/riscv_smmpt.h                    |  26 ++
->>>>    target/riscv/tcg/cpu_helper.c                 | 119 +++++-
->>>>    target/riscv/tcg/csr.c                        | 106 ++++++
->>>>    .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
->>>>    target/riscv/tcg/pmp.h                        |   3 +
->>>>    tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
->>>>    tests/tcg/riscv64/smmpt-common.S              | 257 +++++++++++++
->>>>    tests/tcg/riscv64/test-smmpt.S                |  85 +++++
->>>>    tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
->>>>    tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
->>>>    tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
->>>>    19 files changed, 1354 insertions(+), 19 deletions(-)
->>>>    create mode 100644 target/riscv/riscv_smmpt.c
->>>>    create mode 100644 target/riscv/riscv_smmpt.h
->>>>    create mode 100644 tests/tcg/riscv64/smmpt-common.S
->>>>    create mode 100644 tests/tcg/riscv64/test-smmpt.S
->>>>    create mode 100644 tests/tcg/riscv64/test-smmpt34.S
->>>>    create mode 100644 tests/tcg/riscv64/test-smmpt52.S
->>>>    create mode 100644 tests/tcg/riscv64/test-smmpt64.S
->>>>
->>>>
->>>> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+Fixes: 4eb471258bd0 ("target/riscv: Handle KVM_EXIT_RISCV_SBI exit")
+Fixes: a6b53378f537 ("target/riscv/kvm: implement SBI debug console (DBCN) calls")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4430
+Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+---
+ target/riscv/kvm/kvm-cpu.c | 53 ++++++++++++++++++++++++++------------
+ 1 file changed, 36 insertions(+), 17 deletions(-)
+
+diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
+index 5beb602..0ebade6 100644
+--- a/target/riscv/kvm/kvm-cpu.c
++++ b/target/riscv/kvm/kvm-cpu.c
+@@ -1686,7 +1686,8 @@ bool kvm_arch_stop_on_emulation_error(CPUState *cs)
+     return true;
+ }
+ 
+-static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
++static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run,
++                                      CharFrontend *fe)
+ {
+     const MemTxAttrs attrs = MEMTXATTRS_UNSPECIFIED;
+     g_autofree uint8_t *buf = NULL;
+@@ -1707,6 +1708,12 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+             break;
+         }
+ 
++        if (!fe) {
++            run->riscv_sbi.ret[0] = SBI_ERR_DENIED;
++            run->riscv_sbi.ret[1] = 0;
++            break;
++        }
++
+         addr = run->riscv_sbi.args[1];
+ 
+         /*
+@@ -1720,22 +1727,22 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+         buf = g_malloc0(num_bytes);
+ 
+         if (run->riscv_sbi.function_id == SBI_EXT_DBCN_CONSOLE_READ) {
+-            ret = qemu_chr_fe_read_all(serial_hd(0)->fe, buf, num_bytes);
++            ret = qemu_chr_fe_read_all(fe, buf, num_bytes);
+             if (ret < 0) {
+-                error_report("SBI_EXT_DBCN_CONSOLE_READ: error when "
+-                             "reading chardev");
+-                exit(1);
++                run->riscv_sbi.ret[0] = SBI_ERR_FAILED;
++                run->riscv_sbi.ret[1] = 0;
++                break;
+             }
+ 
+             address_space_write(cs->as, addr, attrs, buf, ret);
+         } else {
+             address_space_read(cs->as, addr, attrs, buf, num_bytes);
+ 
+-            ret = qemu_chr_fe_write_all(serial_hd(0)->fe, buf, num_bytes);
++            ret = qemu_chr_fe_write_all(fe, buf, num_bytes);
+             if (ret < 0) {
+-                error_report("SBI_EXT_DBCN_CONSOLE_WRITE: error when "
+-                             "writing chardev");
+-                exit(1);
++                run->riscv_sbi.ret[0] = SBI_ERR_FAILED;
++                run->riscv_sbi.ret[1] = 0;
++                break;
+             }
+         }
+ 
+@@ -1743,13 +1750,19 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+         run->riscv_sbi.ret[1] = ret;
+         break;
+     case SBI_EXT_DBCN_CONSOLE_WRITE_BYTE:
++        if (!fe) {
++            run->riscv_sbi.ret[0] = SBI_ERR_DENIED;
++            run->riscv_sbi.ret[1] = 0;
++            break;
++        }
++
+         ch = run->riscv_sbi.args[0];
+-        ret = qemu_chr_fe_write_all(serial_hd(0)->fe, &ch, sizeof(ch));
++        ret = qemu_chr_fe_write_all(fe, &ch, sizeof(ch));
+ 
+-        if (ret < 0) {
+-            error_report("SBI_EXT_DBCN_CONSOLE_WRITE_BYTE: error when "
+-                         "writing chardev");
+-            exit(1);
++        if (ret != sizeof(ch)) {
++            run->riscv_sbi.ret[0] = SBI_ERR_FAILED;
++            run->riscv_sbi.ret[1] = 0;
++            break;
+         }
+ 
+         run->riscv_sbi.ret[0] = SBI_SUCCESS;
+@@ -1762,15 +1775,21 @@ static void kvm_riscv_handle_sbi_dbcn(CPUState *cs, struct kvm_run *run)
+ 
+ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+ {
++    Chardev *chr = serial_hd(0);
++    CharFrontend *fe = chr ? chr->fe : NULL;
+     int ret = 0;
+     unsigned char ch;
++
+     switch (run->riscv_sbi.extension_id) {
+     case SBI_EXT_0_1_CONSOLE_PUTCHAR:
+         ch = run->riscv_sbi.args[0];
+-        qemu_chr_fe_write(serial_hd(0)->fe, &ch, sizeof(ch));
++        if (fe) {
++            qemu_chr_fe_write(fe, &ch, sizeof(ch));
++        }
++        run->riscv_sbi.ret[0] = 0;
+         break;
+     case SBI_EXT_0_1_CONSOLE_GETCHAR:
+-        ret = qemu_chr_fe_read_all(serial_hd(0)->fe, &ch, sizeof(ch));
++        ret = fe ? qemu_chr_fe_read_all(fe, &ch, sizeof(ch)) : 0;
+         if (ret == sizeof(ch)) {
+             run->riscv_sbi.ret[0] = ch;
+         } else {
+@@ -1779,7 +1798,7 @@ static int kvm_riscv_handle_sbi(CPUState *cs, struct kvm_run *run)
+         ret = 0;
+         break;
+     case SBI_EXT_DBCN:
+-        kvm_riscv_handle_sbi_dbcn(cs, run);
++        kvm_riscv_handle_sbi_dbcn(cs, run, fe);
+         break;
+     default:
+         qemu_log_mask(LOG_UNIMP,
+-- 
+2.43.0
+
 
