@@ -1,144 +1,144 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0FE23606A321
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 14:19:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4319606A322
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 14:56:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PKoLBMQ6;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OcyDlAcj
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YDXFi50x;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=etiNJ+aB
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQQDx-0001lv-Jr; Mon, 09 Nov 2026 09:19:53 -0500
+	id 1xQQml-0006Y7-9v; Mon, 09 Nov 2026 09:55:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQQDa-0001TJ-GS
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 09:19:38 -0500
+ id 1xQQme-0006Xe-7r
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 09:55:44 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQQDW-0002Lb-QT
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 09:19:30 -0500
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1xQQmc-00074t-G5
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 09:55:43 -0500
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A9DFHYE985148
- for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 14:19:26 GMT
+ 6A9DFBwk022887
+ for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 14:55:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Oep3lZ5Z+HiQoInTclSYD+FhmXKAKMUQTFGLIXW+AQQ=; b=PKoLBMQ6WKB2OIy5
- 0Cf8ai82PerUxZQB1lrHWfEu56nfCLQA8ZVcrsbfY23giaqJhOXKeVD+pXalPGK9
- R4OtZ0hFSMggs2MxIM4WMracY9QDFQnGMelRMfQ8iEYwcxWYx37XivSK5mGV4VbW
- lkDDoI2HZHBlrGH1FweAUSG/QVLGaGclRoObUOoOS8WjICFYLWc418maoRguRhlw
- fWFFtUwTABVSb7AjiuOXDaotR0tfIJAP875+KzYZPN5zixOR7VfUVkZKscOFhM0Y
- OvNV2+RSKiwoHHx3ZbiFfFAlln1+4Rq5is8FcHfIKHplkszzkB26lpzRbQfJ3t2l
- TXEjfQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hsujxera9-1
+ 0+IFDq/PmlEGOuxxFyftK8bgVsCMdJc+vZ+YTw+yiJA=; b=YDXFi50xJjuN/49E
+ FtYSnNrqSkXLXuJpg6bWCFlNSQJmUpl0u8Dpw+1PbL0W99ax59Y2DycIUHvz2Oao
+ itu0PUZecPHJD6/he8d6RWQSRUu6j7Bp635uF4C8fGcBXCEQ+hgxjzhwVaxrHRZk
+ n7anq5DjgD7+ue3yujwi+Lqo7ugpvl2qePhWYHTIEik9iYLjP41fpOr/3ZdK2sH1
+ XdvHVko2fbr4KD+7p/CE00DWtA+KydC2tn8HMou1x7svfAMeWPn1/0BGGXdcmS+p
+ Xmxs2Y5sqEDD0CJzPhed4IFyexsbpNR6gEy8tLF+V1YY9vDxt3NIEUTES7w4xp6U
+ D77cew==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucydgtrb-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 14:19:24 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-93f37c94ceeso181293985a.1
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 06:19:24 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 14:55:37 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-5363763b556so19066621cf.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 06:55:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794233964; x=1794838764; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794236137; x=1794840937; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Oep3lZ5Z+HiQoInTclSYD+FhmXKAKMUQTFGLIXW+AQQ=;
- b=OcyDlAcjhpUugdi+olJ2M5RYtdAiPnp3DnbXbxpkL0skSiiLIuTCMwaW5ErT/HqlCW
- 9kTcof6YOPqmzh02cIwI6mfqTy+oVDpG4PBGkZX2QiVW7oeLndJpXpxYBS6Yv3JI6NK/
- o62zVJ+PKaOOScv08VsMfAkl7Z3bbN1U+imP+x9PR7+uJoOCetK6J766eiNzYbOGORRC
- Wz+ZoJkp0BWmXckhywu2sqJvHSkMsrY/LZp8cYNzkRvByyFJnQwBlRqedtXgKiiRUbi9
- J5vRJGJTJsZydXOC1fLmylZQoi0S2/M4Ale6kLbbSW5cAl7VQk1M1IpdDqZUmuOvmCAI
- V3Mg==
+ bh=0+IFDq/PmlEGOuxxFyftK8bgVsCMdJc+vZ+YTw+yiJA=;
+ b=etiNJ+aB/JeoXZMtXZ65nwLXvP8W/3AxyxD+sRTPVdjnfaDEcWEq11icC2Zr7PP+yC
+ DSJE8dH6UtgXF3LhE1LyOLRFUlNO55Hchx26EOV7V+7i0iMwo0I7smyJFblZZQ0zKYos
+ VqgFlcm5pX976hwWBi1JruTMpSAoO1nY3/DZAYHYSPGHj41OZfvT6HZwOVGMWNpytGR8
+ fQKunwpv2/CkNzLuF5Y0R/SjwErf/T1L5kJfdad1E/0eJsyk+m3y8QD9XqVBHLc9Aa/i
+ QTJPG/9alBi89gZWSddUgPObjt+97+fmRRFeNE+TVpyyYLey5f9DzD3uEpPL4CUM2SBP
+ rWqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794233964; x=1794838764;
+ d=1e100.net; s=20260707; t=1794236137; x=1794840937;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Oep3lZ5Z+HiQoInTclSYD+FhmXKAKMUQTFGLIXW+AQQ=;
- b=u/QQd69CLdKC79tXKLGczZDba6R+82mjE0jq9K86aDB8FhocwCGu9KVWm7Awv7mpno
- paogAqLKVs0GYx519g+ZYifm6h1dg7hWyCvxTkIKc9gl/ukBplUMjz6tmjllhAYeYm3O
- KERSZM2W+CuxcoFdz5B6qaoGDCjYEQYfnTY+CThBVnPcerYWJJXGDNG71dMNHMPbp7X0
- KimAOrpoMcsJ5Q4RwGsnKkH481c55AKLP5FWEANADVfsqCms4LiM/XtGNnB2FjC5yP2V
- SDxCed5BMWMpuMCBFbFgTFPck2WKD+Pd0ftI5zFtNF75YNnYIAnJrkB+JoRKDVA5xyUN
- 4Whw==
+ bh=0+IFDq/PmlEGOuxxFyftK8bgVsCMdJc+vZ+YTw+yiJA=;
+ b=UEVIrxzsJBCsLthzKtFZETyURYcf+8hx92oxOPm4DdZ5qcxky+Lc6aWG/OaumYAk69
+ YnBogMxXwHA9uaK9mkbLSEFW8iFO6htO6gZokYIi/HdWi6SNh3Fe2K6NKT+fUYA8q5qz
+ lawJ1iyqIAh+SqD6Qy6C3Ua+0LS83Y47ddlmMrITP0J5S4bPJjbkbDTG8w9HVrCRtutv
+ HuM71T7LwoaH/yh/ydesxhhWaygUX6mbwoFaXF1qFe+O6W9ZjO5Yt+hGxmlJIOjXS1/G
+ 2pceHEm+bA9ruz7dKWhdvH7lV5G6+KcJ2Lu1iN4P4C3QphbOgOmxqXOz2axWS/vPZaOu
+ iQcg==
 X-Forwarded-Encrypted: i=1;
- AL+hErEcWDaz/CAzX89SuMgds2VvoqZl1X/3tg/AAiAz9rEXPfLUxt0wclALRDa78WooLz3a/4akyZ7C5RQh@nongnu.org
-X-Gm-Message-State: APuU4Z93TtBMLs1zqEJLwkvFQyprZNWw8NZpC5wvLkDMUJzUyiUT6oRQ
- XgPOOkQFYONS8dLlH0UrowMssXNxrMa4R9Nk1qOwBy3Kc8k7PvDS7kceffSqu/OoOOkO/BilIWG
- As9kuwd6oG4fJ/X1tN4uQyxV754SkfZSbbAoJyWypl4LE2kMF9AomPEslIw==
-X-Gm-Gg: AYBFou1XxVpw/x+cdmyMfM6N3LNI2pY2nrgSWxuvv32E41JPS3ecdebgmAjOu2Qe1G9
- ggpNjrBLA8/AseZ4qCJIvRDl06fQ1n8pLlumk3naf4ue8hHWsuUbYmcRlO1YKcQ8o5NdIGdPjhs
- UG45qk5axBREmA2c42d4IK1LAIJXowMU9gfj7xkS4b7toR2g68DQHvPJmMSpViqkyUCsW2h6Otk
- kKL0l8jsJoEY6nuvYc1FOrjqqbnJLQ4TlP4ZYQRPpt/oTdOioXr3rrJSnvvxZZYZeEoVHkG+8hb
- XGf4s4JVfg1Bp8KXL/lfTdfAhwOtC6vRgJkBGRj8MmPuDOZtYXEHysEbfKwERtrpqYIKwbr7oZ+
- F1yRYPIwAIdRlv5mz6BF1hjcw1UU+uFQBsFnYj1hBDwsiksjCawRWOOo5aJgLVksouIKln4zhoj
- Z522D8Xz8Z
-X-Received: by 2002:a05:620a:1a1a:b0:944:1e9b:e674 with SMTP id
- af79cd13be357-94604d56beemr1191355985a.17.1794233964000; 
- Mon, 09 Nov 2026 06:19:24 -0800 (PST)
-X-Received: by 2002:a05:620a:1a1a:b0:944:1e9b:e674 with SMTP id
- af79cd13be357-94604d56beemr1191348285a.17.1794233963384; 
- Mon, 09 Nov 2026 06:19:23 -0800 (PST)
+ AL+hErE/xFKpC0rFsWJDtWasgjTjQ78EFjI3EoHHKX4rw+pEIwtceDc8pFl6Ynm6rawtdLCDfmV8XqsiGsI1@nongnu.org
+X-Gm-Message-State: APuU4Z8/Lt9kd1vcjHDwcel8BFtiJlokkTwRSUvRAbaxyDAk9z9hsQPy
+ ld/JUA3G9zqlBbb+4Brho9kras1LG043+9ZmokAXbgUiBEeFRRPW/q1zVWqhi9aT+32CYpuYh/K
+ 9/4Pk/xomTIep9WE/e1smqpjZIdfoe27xfVUB35mRNx822qyqtgMVZkwqAQ==
+X-Gm-Gg: AYBFou3/XZ5WTyu+hu/Fes0CxVZ4P5khN3UHR5Ab+4ykDpGw/WGb0fKNu2/OCC/7Siy
+ 3aR1le9WipNTiawUdaS0Q4qCoerL97xZho/wY1CovjJ/KCCwTb18ysMGOgeFwNxsx6geqQS/jBL
+ xVz8n/YT9e9qChAyxt+0ibHdAUxttIhGoIKLD6hXdx49Kt2pJWNYhFECy7a+E0Ya+KJ9OHfatOY
+ Dn6wU7OgGWzPC2ADlGEXcU74XcUUieLcDatVo05gcmBYQZ9LPrcJVQM4d35zt8y5iNmMorTI2xm
+ uXBCsF+MikPtdgs+oivDDAQQMBmkISudvNUaCmlpxdDj0Z4l+iRht08ByoIOKsMoT+1+AcJUCLX
+ M9JZirr7GJp5oPcUEFChDESplYJTSuuR4IFtRLRYyLfw9oYaTXFTYesVBx0+flQuBLfXqyPDtaX
+ QsyttTBtn8
+X-Received: by 2002:a05:622a:138c:b0:535:a5f9:752c with SMTP id
+ d75a77b69052e-552a5d63060mr64973641cf.75.1794236136543; 
+ Mon, 09 Nov 2026 06:55:36 -0800 (PST)
+X-Received: by 2002:a05:622a:138c:b0:535:a5f9:752c with SMTP id
+ d75a77b69052e-552a5d63060mr64973051cf.75.1794236135918; 
+ Mon, 09 Nov 2026 06:55:35 -0800 (PST)
 Received: from [192.168.68.100] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-94782ccaea3sm484662285a.4.2026.11.09.06.19.20
+ d75a77b69052e-552638912a0sm42210861cf.9.2026.11.09.06.55.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 06:19:22 -0800 (PST)
-Message-ID: <b6ce619a-7968-4edd-991d-0a27a374e857@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 11:19:19 -0300
+ Mon, 09 Nov 2026 06:55:35 -0800 (PST)
+Message-ID: <6f668743-7f33-4bf4-ba08-dbdba650de8f@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 11:55:32 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] tests/tcg/riscv64: test faults on implicit VS-stage
- page-table accesses
+Subject: Re: [PATCH 1/2] target/riscv: write mstatus.GVA on every trap into
+ M-mode
 To: tewaro <tewaro@theorem.dev>, qemu-devel@nongnu.org
-Cc: disclosures@theorem.dev, tewaro <tewaro@tewaro.org>, imaginos32@gmail.com, 
+Cc: disclosures@theorem.dev, tewaro <tewaro@tewaro.org>,
  Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>,
  "open list:RISC-V TCG CPUs" <qemu-riscv@nongnu.org>
-References: <20260705140508.17692-1-imaginos32@gmail.com>
- <cover.1793677944.git.tewaro@theorem.dev>
- <32390ac8968372d34e299974d20db5fe25bbe2f1.1793677944.git.tewaro@theorem.dev>
+References: <cover.1793677945.git.tewaro@theorem.dev>
+ <9c108816bf40bd4023f23ecc32527a7fc92c1747.1793677944.git.tewaro@theorem.dev>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <32390ac8968372d34e299974d20db5fe25bbe2f1.1793677944.git.tewaro@theorem.dev>
+In-Reply-To: <9c108816bf40bd4023f23ecc32527a7fc92c1747.1793677944.git.tewaro@theorem.dev>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: bSD0tcGlkZpd7uLqshJfB4X5Xf_AG8In
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA1NiBTYWx0ZWRfX/+2uC7EaKvTu
- W8AO5VEdx38IVdH3vKaQ8ru5OVm0dyRJhCB0BRo2vduRvDQ1C58rclJ6MBSUkHU5IzpedwMmyDu
- +UXrgd0O3ykVrwCyBXE4pKwruMQlQ3Y+KvPcbHBB2ND6Q3GuTWn3dQfj0Dllo0q8CrdctlCEQqM
- AVb7rE08hzqIdl2W0FisTP+gtX9RgrtMUXFhIu7TX//XYpoFa775twxPhf9pcBgIfG86oau3gHE
- aNabfqoeHdow5kfsUDW9kI4GXP8aDOPN6BwLQvvk6djzb1kcOJ70fluzIyTMFyAwoDG5zjdOPDZ
- zyk18vS1LyXjCBrhC4qyMce76WbyXTDqchCWFKP+gOiKzGgOMjSFT4EhDqNrENrRfd2YA9DBtAO
- Td+tu68LgZfYcyAOrvtlfRBSpZ0iEH4aZj2rXagNMkgkGKeLoB8WZHsGgsi9rkzrJx0IhurofyZ
- 5nq7hfut8fFx92URt2Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA1NiBTYWx0ZWRfX40QV6k1A07qs
- E7WKrXvutt015Z/kpSzqb39n7nYBPFLYrsu3QV50iY3jONTy12lOErQiwUuQR6/NkbusqYvl1Dz
- f5dAqZ//Xqi4WY1+ValyX8lX2f4wpm0=
-X-Authority-Analysis: v=2.4 cv=TeIDJhQh c=1 sm=1 tr=0 ts=6af1d66d cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA1OSBTYWx0ZWRfX2ahm1YEuPSOA
+ tj8F8K+0w4kzf8Yp9eSKLPCmGA9zDu1ZCmBeOG169ADQBmaotbZrW4OqijqULHeWOCYmHHtrg1N
+ iGrL9Jq0lyLvUktEHtQQQbNErFn3Mmk=
+X-Proofpoint-GUID: mbGQJE0ZNf_5AAa0pMWT2txNNYN94G9D
+X-Proofpoint-ORIG-GUID: mbGQJE0ZNf_5AAa0pMWT2txNNYN94G9D
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA1OSBTYWx0ZWRfX56fITKFlHClD
+ cw/6Y6dmatFeZKYQ7OpXmloayy9GzuK94IUk3QX5wVfsJuqnXWRrh0dQJ7VtfIwH33CLtzDOHbp
+ stxAQQ1uDdJrwIkvPOpf0ijeJwO6L750JElWE4SSAu6v/P19GbDUexUmgz31QiDR36JWJxL+22R
+ eL5rV9TGGDttX1QMRMXEClA8obk5E4sxlSJhI766RxC1xkf4EzXIGgNCBGrdhT6FTjfe/zzLK0J
+ s0yyN2jYTVsjLcue3m5Rqc6+fhbRoAKLPGzWTaCRVJ5sZMGPOpOW+OhWP52Duf44jB5mHZ20FCG
+ ItlKYNOitf59uBBAqx6wGA/HEMX0e/kXFdIeCi3rcf+wT21cOgoYAiIqMK4wtk5LKgvkwSnv3kT
+ 0evyBJYH9j9YTQRaTzubG82M6sVfiU0we3O5fn3Hj3sTfICwBL7JFDHlFWWEvzW6rmUen+pPvo/
+ puLUu7Fgt7I6fYT+a/g==
+X-Authority-Analysis: v=2.4 cv=XuRvqlF9 c=1 sm=1 tr=0 ts=6af1dee9 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=5jPfotcHxaXWx8lUfTYA:9 a=OodHsDdFA-Wr_Rxq:21
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: bSD0tcGlkZpd7uLqshJfB4X5Xf_AG8In
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=xvfqbYfxAAAA:20 a=p0WdMEafAAAA:8 a=EUspDBNiAAAA:8 a=rNDt8dwyJFNyhbOj3TAA:9
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22 a=bA3UWDv6hWIuX7UZL3qL:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-09_05,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 bulkscore=0 adultscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090056
+ phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0
+ suspectscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611090059
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -147,7 +147,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -159,503 +159,56 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/3/2026 4:29 AM, tewaro wrote:
-> When a guest accesses memory, the hardware walks the guest's page tables.
-> The guest reads the entries and, with Svadu, writes the A/D bits. The
-> G-stage checks these reads and writes like any other guest access. If it
-> refuses one, the guest-page fault reports:
+On 11/3/2026 4:42 AM, tewaro wrote:
+> On every trap into M-mode, mstatus.GVA should be set to 1 if mtval
+> holds a guest virtual address and to 0 otherwise [1].
+> riscv_cpu_do_interrupt() only ever sets it, and only when V = 1 and
+> tval is nonzero. That has two effects:
 > 
-> - cause: the type of the guest's original access
-> - mtval2/htval: the guest-physical address of the entry, >> 2
-> - mtinst/htinst: 0x3000 if the walk was reading, 0x3020 if writing
+> - GVA is never cleared. After one guest-page fault, every later trap
+>    into M-mode, including an ecall, reports GVA = 1.
+> - GVA stays 0 when HLV, HLVX or HSV faults, because those run with
+>    V = 0. The spec names this case ("SPV=0 but GVA=1").
 > 
-> test-gstage-tinst checks 19 cases:
+> The HS-mode path already computes write_gva for hstatus.GVA. Use it
+> for mstatus.GVA too.
 > 
->    case          access  from  G-stage refuses  reports
->    ------------  ------  ----  ---------------  -----------------
->    load          ld      VS    A write          load GPF, 0x3020
->    fetch         jr      VS    A write          fetch GPF, 0x3020
->    store         sd      VS    D write          store GPF, 0x3020
->    store-ad      sd      VS    A/D write        store GPF, 0x3020
->    amo           amoadd  VS    D write          store GPF, 0x3020
->    load-4k       ld      VS    A write          load GPF, 0x3020
->    load-1g       ld      VS    A write          load GPF, 0x3020
->    load-vu       ld      VU    A write          load GPF, 0x3020
->    hlv           hlv.d   HS    A write          load GPF, 0x3020
->    hsv           hsv.d   HS    D write          store GPF, 0x3020
->    load-hs       ld      VS    A write          load GPF, 0x3020
->    store-hs      sd      VS    D write          store GPF, 0x3020
->    hlv-noread    hlv.d   HS    root PTE read    load GPF, 0x3000
->    hsv-noread    hsv.d   HS    root PTE read    store GPF, 0x3000
->    fetch-noread  fetch   VS    root PTE read    fetch GPF, 0x3000
->    noadue-h      ld      VS    -                load PF
->    noadue-m      ld      VS    -                load PF
->    noadue-store  sd      VS    -                store PF
->    control       sd      VS    the store        store GPF
+> [1] Privileged ISA v1.12, 8.2.1
+> https://github.com/riscv/riscv-isa-manual/releases/tag/Priv-v1.12
 > 
-> - Leaves are 2 MiB, except in load-4k and load-1g.
-> - Faults trap to M-mode, except in load-hs and store-hs.
-> - The noadue cases turn ADUE off, so nothing is written and the fault
->    is an ordinary page fault.
-> - In control the guest itself stores into its read-only tables. That
->    is not a walk, so tinst must be neither 0x3000 nor 0x3020.
-
-A good test coverage is always appreciated.
-
-> 
-> Booting, the page tables and entering the guest are in hyp-guest.h and
-> hyp-guest.S, for reuse by other hypervisor tests. The trap handlers,
-> which make the checks, are in the test.
-> 
-> Each case is its own test, built with the -D flags listed in
-> meson.build, and exits with 0 or the number of the first check that
-> failed. Happy to test in a different way if that is desired.
-> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4594
 > Signed-off-by: tewaro <tewaro@theorem.dev>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   tests/tcg/riscv64/hyp-guest.S         | 110 +++++++++++++++++++++
->   tests/tcg/riscv64/hyp-guest.h         |  71 ++++++++++++++
->   tests/tcg/riscv64/system/meson.build  |  77 +++++++++++++++
->   tests/tcg/riscv64/test-gstage-tinst.S | 135 ++++++++++++++++++++++++++
->   4 files changed, 393 insertions(+)
->   create mode 100644 tests/tcg/riscv64/hyp-guest.S
->   create mode 100644 tests/tcg/riscv64/hyp-guest.h
->   create mode 100644 tests/tcg/riscv64/test-gstage-tinst.S
+>   target/riscv/tcg/cpu_helper.c | 4 +---
+>   1 file changed, 1 insertion(+), 3 deletions(-)
 > 
-> diff --git a/tests/tcg/riscv64/hyp-guest.S b/tests/tcg/riscv64/hyp-guest.S
-> new file mode 100644
-> index 0000000000..31dc37810c
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/hyp-guest.S
-> @@ -0,0 +1,110 @@
-> +/*
-> + * Routines for the riscv64 hypervisor-extension system tests targeting
-> + * page-table translations between the host and guest.
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +#include "hyp-guest.h"
-> +
-> +#define FLUSH fence rw, rw; sfence.vma; hfence.vvma; hfence.gvma; fence.i
-> +
-> +        .option norvc
-> +        .text
-> +        .global _start, set_tables_perm, run_guest, exit
-> +_start:
-> +        lla     sp, stack_top
-> +        lla     t0, trap
-> +        csrw    mtvec, t0
-> +        lla     t0, hs_trap
-> +        csrw    stvec, t0
-> +        li      t0, -1                  /* no PMP restrictions */
-> +        csrw    pmpaddr0, t0
-> +        li      t0, 0x1f
-> +        csrw    pmpcfg0, t0
-> +        li      t0, ADUE                /* hardware A/D updating */
-> +        csrw    menvcfg, t0
-> +        csrw    henvcfg, t0
-> +        li      t0, 0x100               /* hstatus.SPVP: hlv/hsv act as VS */
-> +        csrs    hstatus, t0
-> +
-> +        /* G-stage: regions 0-24, 1:1, all accessible */
-> +        li      t0, G_ROOT + 2 * 8
-> +        li      t1, table(G_L1)
-> +        sd      t1, 0(t0)
-> +        li      t0, G_L1
-> +        li      t1, leaf(REGION(0), G_RW)
-> +        li      t2, 0x200000 >> 2
-> +        li      t3, 25
-> +1:      sd      t1, 0(t0)
-> +        add     t1, t1, t2
-> +        addi    t0, t0, 8
-> +        addi    t3, t3, -1
-> +        bnez    t3, 1b
-> +
-> +        /* guest: the code, the code again for VU, the 4 KiB table */
-> +        li      t0, VS_ROOT + 2 * 8
-> +        li      t1, table(VS_L1)
-> +        sd      t1, 0(t0)
-> +        li      t0, VS_L1
-> +        li      t1, leaf(REGION(0), G_RW & ~PTE_U)
-> +        sd      t1, 0(t0)
-> +        li      t1, leaf(REGION(0), G_RO & ~PTE_W)
-> +        sd      t1, 24 * 8(t0)
-> +        li      t1, table(VS_L0)
-> +        sd      t1, 8 * 8(t0)
-> +
-> +        li      t0, (8 << 60) | (G_ROOT >> 12)
-> +        csrw    hgatp, t0
-> +        li      t0, (8 << 60) | (VS_ROOT >> 12)
-> +        csrw    vsatp, t0
-> +        FLUSH
-> +
-> +        call    test
-> +        li      a0, 1                   /* test returned: no trap */
-> +
-> +/* exit through semihosting with status a0 */
-> +exit:
-> +        lla     a1, semiargs
-> +        li      t0, 0x20026             /* ADP_Stopped_ApplicationExit */
-> +        sd      t0, 0(a1)
-> +        sd      a0, 8(a1)
-> +        li      a0, 0x20                /* SYS_EXIT_EXTENDED */
-> +        .balign 16
-> +        slli    zero, zero, 0x1f
-> +        ebreak
-> +        srai    zero, zero, 0x7
-> +1:      j       1b
-> +
-> +set_tables_perm:
-> +        li      t0, leaf(REGION(2), 0)
-> +        or      t1, a0, t0
-> +        li      t0, G_L1 + 2 * 8
-> +        sd      t1, 0(t0)
-> +        FLUSH
-> +        ret
-> +
-> +/* mret into the mode: mstatus.MPV = 1 for a guest, MPP = S or U */
-> +run_guest:
-> +        li      t0, (3 << 11) | (1 << 39)
-> +        csrc    mstatus, t0
-> +        li      t0, HS
-> +        beq     a2, t0, 2f
-> +        li      t0, 1 << 39             /* MPV: a guest mode */
-> +        csrs    mstatus, t0
-> +        li      t0, VU
-> +        bne     a2, t0, 2f
-> +        li      t0, REGION(24) - REGION(0)      /* VU: the user copy */
-> +        add     a1, a1, t0
-> +        j       3f
-> +2:      li      t0, 1 << 11             /* MPP = S */
-> +        csrs    mstatus, t0
-> +3:      csrw    mepc, a1
-> +        mret
-> +
-> +        .data
-> +        .balign 8
-> +semiargs:       .dword 0, 0
-> +        .bss
-> +        .balign 16
-> +        .space  4096
-> +stack_top:
-> diff --git a/tests/tcg/riscv64/hyp-guest.h b/tests/tcg/riscv64/hyp-guest.h
-> new file mode 100644
-> index 0000000000..20ecef70a5
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/hyp-guest.h
-> @@ -0,0 +1,71 @@
-> +/*
-> + * Shared definitions for the riscv64 hypervisor-extension system tests,
-> + * whose routines are in hyp-guest.S. hyp-guest.S:
-> + *
-> + * 1. Boots the machine in M-mode, sets up the stack and tells the CPU
-> + *    which trap handlers to use.
-> + * 2. Builds the guest's page tables and the G-stage (host) page tables.
-> + * 3. Calls `test`, which starts the test.
-> + *
-> + * The test file provides:
-> + * - test: where the test starts, called by _start after setup
-> + * - trap: the M-mode trap handler
-> + * - hs_trap: the HS-mode trap handler
-> + *
-> + * Helpers a test can call:
-> + * - set_tables_perm(a0): set what the G-stage lets the guest do to its
-> + *   own page tables. a0 is G_RW, G_RO or G_NOREAD.
-> + * - run_guest(a0, a1, a2): run the code at address a1 in mode a2 (VS, VU
-> + *   or HS), with a0 passed on to it in a0. It does not return: the
-> + *   code's trap goes to the test's handler.
-> + * - exit(a0): end the test with status a0, 0 for a pass, otherwise the
-> + *   number of the check that failed.
-> + *
-> + * Memory is split into 2 MiB regions; region n starts at
-> + * REGION(n) = 0x80000000 + n * 2 MiB. Both stages map each region to
-> + * itself.
-> + *
-> + *   0     code and the G-stage page tables
-> + *   1     data and the stack
-> + *   2     the guest's page tables
-> + *   3-23  free for the test
-> + *   24    region 0's code again, user-accessible, for VU-mode
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#define PTE_V 0x01
-> +#define PTE_R 0x02
-> +#define PTE_W 0x04
-> +#define PTE_X 0x08
-> +#define PTE_U 0x10
-> +#define PTE_A 0x40
-> +#define PTE_D 0x80
-> +#define leaf(pa, flags) (((pa) >> 2) | PTE_V | (flags))
-> +#define table(pa) (((pa) >> 2) | PTE_V)
-> +
-> +#define REGION(n) (0x80000000 + (n) * 0x200000)
-> +#define G_ROOT  0x80104000
-> +#define G_L1    0x80108000
-> +#define VS_ROOT 0x80400000
-> +#define VS_L1   0x80401000
-> +#define VS_L0   0x80402000      /* 4 KiB table for region 8 */
-> +
-> +/* G-stage permission of the guest's tables */
-> +#define G_RW    (PTE_R | PTE_W | PTE_X | PTE_U | PTE_A | PTE_D)
-> +#define G_RO    (G_RW & ~PTE_W)
-> +#define G_NOREAD (G_RO & ~PTE_R)
-> +
-> +/* run_guest modes */
-> +#define VU 0
-> +#define HS 1
-> +#define VS 2
-> +
-> +#define LOAD_PF 13
-> +#define STORE_PF 15
-> +#define FETCH_GPF 20
-> +#define LOAD_GPF 21
-> +#define STORE_GPF 23
-> +#define TINST_READ 0x3000       /* walk was reading a page-table entry */
-> +#define TINST_WRITE 0x3020      /* walk was writing A/D */
-> +#define ADUE (1 << 61)
-> diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-> index 3c8b018d9e..05ed8b4c8f 100644
-> --- a/tests/tcg/riscv64/system/meson.build
-> +++ b/tests/tcg/riscv64/system/meson.build
-> @@ -53,6 +53,83 @@ tests += {
->     }
->   }
+> diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+> index 063525cfc5..55b370294a 100644
+> --- a/target/riscv/tcg/cpu_helper.c
+> +++ b/target/riscv/tcg/cpu_helper.c
+> @@ -2416,9 +2416,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+>               }
+>               env->mstatus = set_field(env->mstatus, MSTATUS_MPV,
+>                                        env->virt_enabled);
+> -            if (env->virt_enabled && tval) {
+> -                env->mstatus = set_field(env->mstatus, MSTATUS_GVA, 1);
+> -            }
+> +            env->mstatus = set_field(env->mstatus, MSTATUS_GVA, write_gva);
 >   
-> +hyp_guest = files('../hyp-guest.S')[0]
-> +
-> +# test-gstage-tinst.S: one build per case; the flags are documented there
-> +gstage_tinst = {
-> +  # the guest's tables are read-only, so the walk's A/D write is refused
-> +  'load':      ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)', '-DREG=3',
-> +                '-DFLAGS=PTE_R', '-DCAUSE=LOAD_GPF'],
-> +  'fetch':     ['-DMODE=VS', '-DACCESS=jr a0', '-DREG=4',
-> +                '-DFLAGS=(PTE_R|PTE_X)', '-DCAUSE=FETCH_GPF'],
-> +  'store':     ['-DMODE=VS', '-DACCESS=sd zero, 0(a0)', '-DREG=5',
-> +                '-DFLAGS=(PTE_R|PTE_W|PTE_A)',
-> +                '-DCAUSE=STORE_GPF'],
-> +  'store-ad':  ['-DMODE=VS', '-DACCESS=sd zero, 0(a0)', '-DREG=6',
-> +                '-DFLAGS=(PTE_R|PTE_W)',
-> +                '-DCAUSE=STORE_GPF'],
-> +  'amo':       ['-DMODE=VS', '-DACCESS=amoadd.d t0, zero, (a0)', '-DREG=7',
-> +                '-DFLAGS=(PTE_R|PTE_W|PTE_A)',
-> +                '-DCAUSE=STORE_GPF'],
-> +  'load-4k':   ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)', '-DREG=8',
-> +                '-DPTE_ADDR=VS_L0', '-DFLAGS=PTE_R',
-> +                '-DCAUSE=LOAD_GPF'],
-> +  'load-1g':   ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)',
-> +                '-DADDR=(0xC0000000+9*0x200000)', '-DPTE_ADDR=(VS_ROOT+3*8)',
-> +                '-DPTE_PA=REGION(0)', '-DFLAGS=PTE_R',
-> +                '-DCAUSE=LOAD_GPF'],
-> +  'load-vu':   ['-DMODE=VU', '-DACCESS=ld t0, 0(a0)', '-DREG=10',
-> +                '-DFLAGS=(PTE_R|PTE_U)', '-DCAUSE=LOAD_GPF'],
-> +  'hlv':       ['-DMODE=HS', '-DACCESS=hlv.d t0, (a0)', '-DREG=11',
-> +                '-DFLAGS=PTE_R', '-DCAUSE=LOAD_GPF'],
-> +  'hsv':       ['-DMODE=HS', '-DACCESS=hsv.d zero, (a0)', '-DREG=12',
-> +                '-DFLAGS=(PTE_R|PTE_W|PTE_A)',
-> +                '-DCAUSE=STORE_GPF'],
-> +  'load-hs':   ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)', '-DREG=13',
-> +                '-DFLAGS=PTE_R', '-DCAUSE=LOAD_GPF',
-> +                '-DTO_HS'],
-> +  'store-hs':  ['-DMODE=VS', '-DACCESS=sd zero, 0(a0)', '-DREG=14',
-> +                '-DFLAGS=(PTE_R|PTE_W|PTE_A)',
-> +                '-DCAUSE=STORE_GPF', '-DTO_HS'],
-> +  # the tables are unreadable, so the walk fails reading root entry 2
-> +  'hsv-noread': ['-DMODE=HS', '-DACCESS=hsv.d zero, (a0)', '-DREG=15',
-> +                 '-DFLAGS=(PTE_R|PTE_W|PTE_A)', '-DPERM=G_NOREAD',
-> +                 '-DENTRY=(VS_ROOT+2*8)', '-DCAUSE=STORE_GPF',
-> +                 '-DTINST=TINST_READ'],
-> +  'hlv-noread': ['-DMODE=HS', '-DACCESS=hlv.d t0, (a0)', '-DREG=16',
-> +                 '-DFLAGS=(PTE_R|PTE_A)', '-DPERM=G_NOREAD',
-> +                 '-DENTRY=(VS_ROOT+2*8)', '-DCAUSE=LOAD_GPF',
-> +                 '-DTINST=TINST_READ'],
-> +  'fetch-noread': ['-DMODE=VS', '-DREG=17', '-DADDR=probe',
-> +                   '-DFLAGS=(PTE_R|PTE_X|PTE_A)', '-DPERM=G_NOREAD',
-> +                   '-DENTRY=(VS_ROOT+2*8)', '-DCAUSE=FETCH_GPF',
-> +                   '-DTINST=TINST_READ'],
-> +  # A/D updating off: an ordinary page fault, nothing written
-> +  'noadue-h':  ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)', '-DREG=21',
-> +                '-DFLAGS=PTE_R', '-DHENVCFG=0', '-DCAUSE=LOAD_PF',
-> +                '-DENTRY=0', '-DTINST_NOT_WALK'],
-> +  'noadue-m':  ['-DMODE=VS', '-DACCESS=ld t0, 0(a0)', '-DREG=22',
-> +                '-DFLAGS=PTE_R', '-DMENVCFG=0', '-DCAUSE=LOAD_PF',
-> +                '-DENTRY=0', '-DTINST_NOT_WALK'],
-> +  'noadue-store': ['-DMODE=VS', '-DACCESS=sd zero, 0(a0)', '-DREG=23',
-> +                   '-DFLAGS=(PTE_R|PTE_W|PTE_A)', '-DHENVCFG=0',
-> +                   '-DCAUSE=STORE_PF', '-DENTRY=0', '-DTINST_NOT_WALK'],
-> +  # control: the guest itself stores into its read-only tables
-> +  'control':   ['-DMODE=VS', '-DACCESS=sd zero, 0(a0)', '-DREG=2',
-> +                '-DFLAGS=(PTE_R|PTE_W|PTE_A|PTE_D)', '-DADDR=(VS_ROOT+0x800)',
-> +                '-DENTRY=(VS_ROOT+0x800)', '-DCAUSE=STORE_GPF',
-> +                '-DTINST_NOT_WALK'],
-> +}
-> +foreach name, flags : gstage_tinst
-> +  tests += {
-> +    'test-gstage-tinst.S': {
-> +      'exe_name': 'test-gstage-tinst-' + name,
-> +      'cflags': cflags + ['-march=rv64gch', hyp_guest] + flags,
-> +      'qemu_args': ['-cpu', 'rv64,h=true,svadu=true', qemu_args],
-> +    }
-> +  }
-> +endforeach
-> +
->   tests += {
->     'test-vle32ff.S': {
->       'cflags': cflags + ['-march=rv64gcv'],
-> diff --git a/tests/tcg/riscv64/test-gstage-tinst.S b/tests/tcg/riscv64/test-gstage-tinst.S
-> new file mode 100644
-> index 0000000000..8c9c7b831f
-> --- /dev/null
-> +++ b/tests/tcg/riscv64/test-gstage-tinst.S
-> @@ -0,0 +1,135 @@
-> +/*
-> + * Test what a fault reports when the G-stage refuses the guest's
-> + * page-table walk: its read of a page-table entry, or its write of the
-> + * A/D bits.
-> + *
-> + * Each build is one case, set by -D flags in meson.build:
-> + * - MODE: VS, VU or HS (HS runs hlv/hsv on the guest's behalf)
-> + * - ACCESS: the instruction run on ADDR
-> + * - REG: the region accessed; ADDR defaults to its start
-> + * - FLAGS: the guest's page-table entry for ADDR
-> + * - PERM: the G-stage permission of the guest's tables (default G_RO)
-> + * - TO_HS: take the fault in HS-mode instead of M-mode
-> + * - MENVCFG, HENVCFG: turn ADUE off
-> + * - PTE_ADDR, PTE_PA: where the entry is and where it points, for the
-> + *   4 KiB and 1 GiB cases
-> + * - CAUSE, ENTRY, TINST, TINST_NOT_WALK: what the fault must report
-> + *
-> + * The trap handler checks, and the exit status is the first that fails:
-> + *   1  cause  CAUSE
-> + *   2  tval   ADDR
-> + *   3  tval2  ENTRY >> 2, the entry the walk failed on (default: the
-> + *             guest's entry for ADDR)
-> + *   4  tinst  TINST: 0x3020 if the walk was writing A/D (default),
-> + *             0x3000 if reading; with TINST_NOT_WALK, neither
-> + *   5  the entry is unchanged, so the refused A/D write did not happen
-> + *
-> + * `trap` checks a fault taken in M-mode. `hs_trap` checks one taken in
-> + * HS-mode, using scause, stval, htval and htinst.
-> + *
-> + * Privileged ISA v1.12: 8.5.1, 8.6.3 Table 8.12.
-> + *
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +#include "hyp-guest.h"
-> +
-> +/* exit with status n unless reg == want */
-> +#define CHECK(n, reg, want) li t6, want; li a0, n; bne reg, t6, exit
-> +
-> +#ifdef REG
-> +#ifndef ADDR
-> +#define ADDR REGION(REG)
-> +#endif
-> +#ifndef PTE_ADDR
-> +#define PTE_ADDR (VS_L1 + (REG) * 8)
-> +#endif
-> +#ifndef PTE_PA
-> +#define PTE_PA REGION(REG)
-> +#endif
-> +#endif
-> +#ifndef ENTRY
-> +#define ENTRY PTE_ADDR
-> +#endif
-> +#ifndef PERM
-> +#define PERM G_RO
-> +#endif
-> +#ifndef TINST
-> +#define TINST TINST_WRITE
-> +#endif
-> +
-> +        .option norvc
-> +        .text
-> +        .global test, trap, hs_trap
-> +test:
-> +#ifdef MENVCFG
-> +        li      t0, MENVCFG             /* A/D updating off */
-> +        csrw    menvcfg, t0
-> +#endif
-> +#ifdef HENVCFG
-> +        li      t0, HENVCFG
-> +        csrw    henvcfg, t0
-> +#endif
-> +#ifdef TO_HS
-> +        li      t0, 1 << CAUSE
-> +        csrw    medeleg, t0
-> +#endif
-> +        li      t0, PTE_ADDR            /* the guest's entry for ADDR */
-> +        li      t1, leaf(PTE_PA, FLAGS)
-> +        sd      t1, 0(t0)
-> +#if REG >= 3
-> +        li      t0, REGION(REG)         /* an ecall for a jump to land on */
-> +        li      t1, 0x00000073
-> +        sw      t1, 0(t0)
-> +#endif
-> +        li      a0, PERM
-> +        call    set_tables_perm
-> +
-> +        ld      a0, addr
-> +        lla     a1, probe
-> +        li      a2, MODE
-> +        call    run_guest
-> +
-> +probe:
-> +#ifdef ACCESS
-> +        ACCESS
-> +#endif
-> +        ecall
-> +
-> +/* the fault, as reported by CSRs cause, tval, tval2 and tinst */
-> +.macro check_fault cause, tval, tval2, tinst
-> +        csrr    t5, \cause
-> +        CHECK(1, t5, CAUSE)
-> +        csrr    t5, \tval
-> +        ld      t6, addr
-> +        li      a0, 2
-> +        bne     t5, t6, exit
-> +        csrr    t5, \tval2
-> +        CHECK(3, t5, (ENTRY) >> 2)
-> +        csrr    t5, \tinst
-> +#ifdef TINST_NOT_WALK
-> +        li      a0, 4
-> +        li      t6, TINST_READ
-> +        beq     t5, t6, exit
-> +        li      t6, TINST_WRITE
-> +        beq     t5, t6, exit
-> +#else
-> +        CHECK(4, t5, TINST)
-> +#endif
-> +        li      t0, PTE_ADDR
-> +        ld      t5, 0(t0)
-> +        CHECK(5, t5, leaf(PTE_PA, FLAGS))
-> +        li      a0, 0
-> +        j       exit
-> +.endm
-> +
-> +        .balign 4
-> +trap:
-> +        check_fault mcause, mtval, mtval2, mtinst
-> +
-> +        .balign 4
-> +hs_trap:
-> +        check_fault scause, stval, htval, htinst
-> +
-> +        .data
-> +        .balign 8
-> +addr:   .dword ADDR
+>               mtval2 = env->guest_phys_fault_addr;
+>   
 
 
