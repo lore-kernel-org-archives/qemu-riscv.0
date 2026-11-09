@@ -1,119 +1,158 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8F78606D813
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 09:15:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B04A606A323
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 13:10:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=summations.net header.i=@summations.net header.a=rsa-sha256 header.s=google header.b=KNZhi+V/
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Ilj0TYSf;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WiBhsR/F
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQLTP-0008Nj-9b; Mon, 09 Nov 2026 04:15:31 -0500
+	id 1xQP84-0007kn-38; Mon, 09 Nov 2026 08:09:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <rahul@summations.net>)
- id 1xQLSq-0008Ch-6o
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 04:15:07 -0500
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <rahul@summations.net>)
- id 1xQLSm-0003kV-L0
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 04:14:55 -0500
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-8b315dd057bso3460217b3.1
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 01:14:51 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794215690; cv=none;
- d=google.com; s=arc-20260327;
- b=WBb/YdOFOL+GV4xNw0jxEskVh2gthdW00Xoh/muztN7Dbx5S0UrMIDsNaABM04KaZF
- Bk6a4e0Em3kEc92Dsgii3rjv4R9oIS/UK9Cg9HxWRYqF28TjY2BA9ForzqfIRRpH+Hf+
- kK3WaLRKENS/yUmm9ltGO92SGHXo3H0UKNOwQMPuYiiIMQ1dIzNiHRuV9S9E3rGso1Rp
- VsgV3SDvH1robtuspn6Q+7GiRVkTBRdqNEReE+cVvNZ9FyTJFhQ7utYISWKsVdctxClg
- SRGL1sAtCnaWo2Ax4n+d6JOxERCbhd4hTZbuNAYeOYIp94NdWsy9rDA1wb9Q/BrS+zP9
- 2aXQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=Pr5mkg+z9Zmb0BcJ7NiDS8DqyWBc9okrtwtlDgfvwtU=;
- fh=OjWqa19ACLRv6LmzPAh3bX6ow0EIyIsi3epIKmJoURs=;
- b=lkQKIsf34AI3lkaoWownCirLUEecki6i6zAXx96AdNwvVJ4ulLvUFHTC5px/fRM7DB
- NSbA3kR3mr+fZAS//D9guIbVwTp5Cp8wqVybmjWRbV7tvoqAqorwe4Ratu8d6BayQVMV
- V76onxEcOmwcxMVe/4vZ8GeutRcvuhYcCyD8Ia1GtCBNPiZxxz0PA58tBEl5kuHLENRK
- dIW0yV0rsBYMCRAAj6ygvTA6ZsgD1PSxKkOFL814TJ4xvsQfewHkWWWCjkejJXy6VkeP
- QmypWLireVZYup62Gbd3heDXT+hkMfRPO7MCU2eWKX/8gfNcgmLZscxhOkQ1Nx0uDSR2
- LznA==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xQP81-0007kF-9y
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 08:09:41 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xQP7y-0002B0-7S
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 08:09:40 -0500
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6A9Aug8H034222
+ for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 13:09:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ mWLN6obTMtnFC76B2TIOQRwG3bz7kYSQfu/y3ryaxZg=; b=Ilj0TYSfItUjs7ZT
+ w3yrvbAi3KjBsGLMmGMzlRIVbZI/ywBpXgiqN+LYxjboEDyp9hxEZQUUFsRzerQb
+ cmbA7/cFE9UpquINZ+ahJwzaNW/aT2Fu3621SdtX8hTdcWcaqMaDhcQMF1NGaTos
+ 4UGnx+VqcEEWcj03vx8ICNeP9iyKh9gloSip5AUHH4pQDxRA0Pv/dcHDBg7CoqO0
+ GkfHX+GAHURth4okVte/c8Ru3iBnBTg4iHjjnN4TKFtACJDPEjbvMvmdk9RikueG
+ 1bnTzi7davDtbJ0GzuaUXOVN7hHHfIpT63G083ZDx/2rVMLcyiuD2X7JVTCEwhz8
+ /J56UQ==
+Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com
+ [209.85.217.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucr5rebj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 13:09:36 +0000 (GMT)
+Received: by mail-vs1-f72.google.com with SMTP id
+ ada2fe7eead31-7d2d5cc693fso125146137.3
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 05:09:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=summations.net; s=google; t=1794215690; x=1794820490; darn=nongnu.org;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=Pr5mkg+z9Zmb0BcJ7NiDS8DqyWBc9okrtwtlDgfvwtU=;
- b=KNZhi+V/9nWdRiaoNpTZMt5VHFroGqnK5B+6i2D49Qmf9aKCPR2+5ZeM6kQWJ6egnJ
- NBlWoVC4bQkfevixYf4NYnZuQmLvXSxKabcb9suHplu434DtyXkkXPMkRxdLDbQV1fjC
- HtYwomkr/q/OMy0bs0M3FvhQTIedmCkBkLt4jIZLM8T5Sq6YiGOfIuhejlcj+WX3kZHw
- LLOdFi2LWc4onlsxsbwnhgKSRpl++tPdRbPul5dRjGkL7v6lnrRmKttQLQLcJ56wCql0
- hx/LOWDC5fUGlz3EOLSxU1cE3KfncEPWjHiskZX5uk2qW59isrhJq72UZ9r2pfUT+ylQ
- yjJQ==
+ d=oss.qualcomm.com; s=google; t=1794229775; x=1794834575; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=mWLN6obTMtnFC76B2TIOQRwG3bz7kYSQfu/y3ryaxZg=;
+ b=WiBhsR/FUddgEd0QIjUXG2+PS7r22xmJQlL+zqt6jh8Pxq1Zib5tt3mDiVAyWmZKZ+
+ xAkeQJKLgWxfRjKzZEqT+m4C3Tpcf4U1ddLxiKIG846rcn/HzJRzvob++02XAoRMEwaJ
+ O3Mey9IIZiQEO7Vk8/NffBBIiYzOXi9yL7xOG9t5aKAgUbhHzE2WMmBsrptGvFayfhvh
+ MTfdbReSFv0rYDO3/OnELa0tggSF0dCYC1KCX2qod/e0FzZgnkEylijZJOH0MHeKy3Dp
+ 8+fTGBZplLVvY9fArk32mOCjGhIICkezYl/8/5PwUZrNWo+M/E+ExEaLCv71Kz/3r44L
+ 0Btg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794215690; x=1794820490;
- h=content-transfer-encoding:content-type:cc:to:subject:message-id
- :date:from:in-reply-to:references:mime-version:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=Pr5mkg+z9Zmb0BcJ7NiDS8DqyWBc9okrtwtlDgfvwtU=;
- b=MDVvNSqOnqQbwVWTsQiyHprNTpsUtTV2dCN7SNL9cI2yMTR7IOpdd8WI7RxMQXuVtL
- Wm2iMd6uvJU1tXjW+yKu0j/iOi2D2m520dtrduNqDwR6qxt3I8ju6qlh0/snmxGfhCmZ
- TZzPesbBqGXbxGhKimM/VHulTNXdzdciknkwq55MNu5IVCiBwSWhEHaez4S8HABjlozi
- VBCLTcbrvzgYTjlx4hZ9JiVQuzSYHeADZPzEiATOekzgf31c3pL3/8WBkER3D/49olNj
- xzNuPawWQraZ0KGh5h+aREwdwW8qKoI6MAvnp4tZ2THsCfNUtykFRmuh5suFQ6vrVRMz
- wHWg==
-X-Forwarded-Encrypted: i=1;
- AL+hErFCsr8lJWrLzBIg32MPEL3EUr9cfaZCBeBohr0HFFC96wxWPh+HlPIfGnogS0PmeK3BjX8ohUpuwN9S@nongnu.org
-X-Gm-Message-State: APuU4Z+nH6iq3Gn2eaNtnjJpIzg1gbZSMyQ40a49wDtBJSkJv40y1BYP
- KY8g7bPfmYpTewbGtoiVxGj4MaAbbC/TylZPfAy+0zTcK6HYs6c4wYQAS5KMr0azUddjlvJfS/1
- +RUBvktUAHfJM2PpxEfMP0012APDQUK3C6MeG2lDKc8k=
-X-Gm-Gg: AYBFou3sNS3UViHTm1RFbwHCOzoMj4hdrHefNhUgtGQGavsjOLOO88jaAGyA/oRRKpA
- i4cad4peRUKVbdzC+pWYTcjqQRTJdPv3qfdjcljTA7jnjKTW+caW3jg7MBdDC5F+cSGd+D1xxMJ
- 7ZGOCN62LWw9pTCKj6NrEwhsaQmcLpwd9Go43sfYuEmSIx5e/0bYr6Q4/f65TUhYGPKRxSIGboC
- HZWT5K+OLuWI2dHEXHmFOD4FTkWc68xQosy9NktnpyIWGMQyxqqUJR8QobJ1KQYz6OAUe8iyVGR
- jQkVF/w+HpydRg0DNlAEWjTn4FXXRyD4FEHPEUBfoIHs3AN2RiNZn9pH8Z3AABdiWIuxrPvEU07
- AeG1R2ZyZx2YDOkEP4lCEgrEM0GJUfVuFLHqQfgfvRxhgZW+mcEryzo5Zi5q3W8vnPekeZUmra9
- 0eKj/NLO9L5NRAzXk4UF95YZ7EsQ7li5nWjThQC7N1Gd6BLg==
-X-Received: by 2002:a05:690c:c50f:b0:8ab:48c5:cbce with SMTP id
- 00721157ae682-8b36cb913fcmr22906247b3.32.1794215690539; Mon, 09 Nov 2026
- 01:14:50 -0800 (PST)
+ d=1e100.net; s=20260707; t=1794229775; x=1794834575;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=mWLN6obTMtnFC76B2TIOQRwG3bz7kYSQfu/y3ryaxZg=;
+ b=I0k8Ai00PD94LUhfYFu9JGhJ0GYYEHCn5W9aOWqagiPTUZQPh/DISGpCJOAc/mttva
+ I66QovzI6CZhW712cFg206khGf/qHi5MMMgR3qKdUl5DyNf3i7WOe1smFdbsqJlacl3k
+ 1NO4jk0LxWbRsVRY2vEzDhDSn08zysuOetFEaVnAv2T+RWg3NQSeu+GvcUwBmPzh5Jhi
+ Il82mTT4bOYarqmWwY2eLI6AYJdQu5L/Jdym46eBh/24yOvvAquIKd3p4jN2maqQiJWk
+ YXgiJTFNkRKN9pFBLvBoHTpx2my+KfHgbtap96N9YkePe9qXwDpqSi23XnMQbvkAwXLQ
+ b6Hg==
+X-Gm-Message-State: APuU4Z9GkVyu1RnWb4zTc14fwTvumtFncUkyR2d2h/88dXhgdChPtpaH
+ 5SBYEVmvnFRGu6GCNLNRBP3WGoKYPTuQq05ZkOVAlcNZR34XJZGwhopJKsmgxx/f1Xdh2ViB/p7
+ 6Os12hRabdjJ0n20cYBiMRj/5fFYznINhMNL7VJmhIrqTsS2TWKUY/k9/rg==
+X-Gm-Gg: AYBFou0jK8tDAexbDFyd8roqiSSSaWl6xZ77PuOP4/rmBX0Snvr55PiK5FELUCJ1jBE
+ GXLgrwHB3+JuDgi+d+XB4TuNbENl2Zl5NsawgDnoe9e7JWyB++c6WwF1fhTSW3U8pPhA+fXG7ec
+ 46MBgcFvs8p+OJ9XXUSGRKKlbRHNFjXsJ58YEEwjCfZVY0UprZBp6MKX99hSZaehP7LszUXYlA3
+ 53soSdny8fTdgiusDwJMXlf2MY/5i2MoswL+iKShXlG1SBmBEJ8nOPikzou4NWO1LPCFlMAwmkt
+ jDbo2QGxmab1VEQHrRx+EcekHsu8CuEO5hMwWd4xLZmps3kSWWWd+15iwOIvuPFeQiL6mz4rZAK
+ AE346nGXTSUvFdtMtyOnDYN1pdhzQFJq+EsLvs7/71gmiBWxBwKg/IsHKdv7EVHgRzJFhe9VLMR
+ iU5hdJ5RGW
+X-Received: by 2002:a05:6102:4243:b0:7d2:76af:fcce with SMTP id
+ ada2fe7eead31-7d2daf13da1mr883789137.9.1794229775323; 
+ Mon, 09 Nov 2026 05:09:35 -0800 (PST)
+X-Received: by 2002:a05:6102:4243:b0:7d2:76af:fcce with SMTP id
+ ada2fe7eead31-7d2daf13da1mr883772137.9.1794229774711; 
+ Mon, 09 Nov 2026 05:09:34 -0800 (PST)
+Received: from [192.168.68.100] ([152.234.124.231])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-99c02aa78e9sm3820985241.12.2026.11.09.05.09.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 09 Nov 2026 05:09:34 -0800 (PST)
+Message-ID: <c9bc3a82-61ea-491a-ab1f-0e09e6d55a54@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 10:09:29 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20260723200325.24969-1-zhiwei_liu@linux.alibaba.com>
- <73bc69a4-a3e6-47c8-9c7f-92443706b250@oss.qualcomm.com>
- <397f4ece-067b-4714-93f3-082e07fad06d@linux.alibaba.com>
- <CABdD5xku3v1hGGHQA=WNiB-zTYkHdg=Pou5nci7ShUyERLp-CA@mail.gmail.com>
- <f742d921-b9e7-40e3-b70f-9d70804a9bcd@linux.alibaba.com>
-In-Reply-To: <f742d921-b9e7-40e3-b70f-9d70804a9bcd@linux.alibaba.com>
-From: Rahul Pathak <rahul@summations.net>
-Date: Mon, 9 Nov 2026 14:44:39 +0530
-X-Gm-Features: AclHuK8IMG3txV4EIVbeGdwA3sotK3LWfCa2v-kbgiecyzB8XpX4E7Xo-U2wwA4
-Message-ID: <CABdD5xmPcBg21buQU6L9VdGTu1AwyOD7iFNWa_kDv_rt71hZPg@mail.gmail.com>
-Subject: Re: [PATCH v8 00/11] target/riscv: Implement Smsdid and Smmpt
- extension
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- qemu-devel@nongnu.org, 
- palmer@dabbelt.com, alistair.francis@wdc.com, chao.liu.zevorn@gmail.com, 
- liwei1518@gmail.com, qemu-riscv@nongnu.org, xiangyi.zeng@linux.alibaba.com, 
- cxx194832@alibaba-inc.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=rahul@summations.net; helo=mail-yw1-x112e.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 4/6] hw/riscv: implement CBQRI bandwidth controller
+To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Sunil V L <sunilvl@oss.qualcomm.com>,
+ Anup Patel <anup.patel@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Nicolas Pitre <npitre@baylibre.com>,
+ =?UTF-8?Q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>,
+ Atish Patra <atish.patra@linux.dev>,
+ =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <radim.krcmar@oss.qualcomm.com>,
+ yunhui cui <cuiyunhui@bytedance.com>,
+ Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
+ liu.qingtao2@zte.com.cn
+References: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
+ <20261101-riscv-ssqosid-cbqri-v7-4-92d1aae43e48@kernel.org>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261101-riscv-ssqosid-cbqri-v7-4-92d1aae43e48@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA1MiBTYWx0ZWRfXy9dsJd14lpUg
+ TveHnCbOnTkyDCBbyCIVrpO5oeUyO12mEJp5CGumiXXtDnIgGvbbK92Ix6+rbAmnDadv+3xG8xX
+ Y+kB2TFKbB9uicGTo/5c9fmdtKt56C0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA1MiBTYWx0ZWRfX7K8OF0qXTDnI
+ TTEEyd9IRWA5t8nbBh4TBJGoCsqPjKTMROKdAtY9lBno2uesq8KRGpj62NwghSut2PWgGT13NF8
+ 3AKMhOMWo0ee4elMZ6wpRKwJbXd2qJFLj3fqiQ4DSS6jhgQiW+WQ2c/UAzbi14rb8aO+/8iwdYz
+ 1kCGRo5RFb4aHxCjuVIbjfl92k8RG1VVtVAZ2tkZXtPhmsk4ruUJAW0/lbJ2jJeTQhjFzos1YPA
+ i08z44fwLD0UkeuOfsSRzM5DAGZU2LoyvxEp9F9eqWz3CDiAuf+ClOqw1+QpAwbTvJRjOQ+bh3F
+ YplXO7xdooUGrBQs6fzAOW1FqBNrZQjMLW13B6HWzWLmjFnBPl2lPA+cP2jifSSXifVTxlEztHd
+ 4qd9WvyJBQufP6x391INfUHIr8CfCjxsRqa2QqM54s4MAtIcEZgCs6nFy2u04aJ/ihSNXt2zdWH
+ 932yKGMSXkuYICgBuqQ==
+X-Authority-Analysis: v=2.4 cv=ErlHPicA c=1 sm=1 tr=0 ts=6af1c610 cx=c_pps
+ a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=V1jnuoLLAAAA:20 a=IpJZQVW2AAAA:8 a=VwQbUJbxAAAA:8 a=69wJf7TsAAAA:8
+ a=qEgIt2FdfcJO6cqLVd8A:9 a=QEXdDO2ut3YA:10 a=-aSRE8QhW-JAV6biHavz:22
+ a=IawgGOuG5U0WyFbmm1f5:22 a=Fg1AiH1G6rFz08G2ETeA:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-ORIG-GUID: r_7BGaL9iI6LT87esFXMZrvXNRg2aZRZ
+X-Proofpoint-GUID: r_7BGaL9iI6LT87esFXMZrvXNRg2aZRZ
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-09_04,2026-11-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 malwarescore=0 spamscore=0 bulkscore=0
+ priorityscore=1501 suspectscore=0 impostorscore=0 lowpriorityscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611090052
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -125,239 +164,432 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Last week I have sent V7 of OpenSBI series which is based on V0.9
-version of SMMTT(SPDA) spec.
 
-https://patchwork.ozlabs.org/project/opensbi/list/?series=3D531089
 
-On Mon, Nov 9, 2026 at 1:05=E2=80=AFPM LIU Zhiwei <zhiwei_liu@linux.alibaba=
-.com> wrote:
->
->
-> On 10/30/26 6:45 PM, Rahul Pathak wrote:
-> > Hi Zhiwei,
-> >
-> > The SMMPT spec has been updated following the ARC comments
-> >   and the big change is the merging of both SMSDID and SMMPT
-> >   sub extensions into one with new name "SMSD" which is much better now=
-.
-> >
-> > https://github.com/riscv/riscv-smmtt/commit/ff5069fa99fc1fdd97c9fb8d963=
-29e13afa82712
-> >
-> > Can you please update this series.
-> Hi Rahul and Daniel,
->
-> I see the latest specification is v0.9.0 now. Supporting v0.4.9 is not
-> necessary. I will update this patch set to v0.9.0 together with updated
-> test cases.
->
-> Thanks,
-> Zhiwei
->
-> >
-> > Thanks
-> > Rahul
-> >
-> > On Sat, Oct 10, 2026 at 12:13=E2=80=AFPM LIU Zhiwei
-> > <zhiwei_liu@linux.alibaba.com> wrote:
-> >>
-> >> On 10/8/26 10:42 AM, Daniel Henrique Barboza wrote:
-> >>> Hi Zhiwei,
-> >>>
-> >>>
-> >>> Sorry from taking this long to take a look at this work.  I am afraid
-> >>> I'll
-> >>> need to ask you to send a v9 due to the following upstream changes, a=
-side
-> >>> from some review comments I made:
-> >>>
-> >>> - upstream changed how tcg tests are invoked (we use meson now), i.e.=
- you
-> >>> need to add changes in tests/tcg/riscv64/system/meson.build instead o=
-f
-> >>> Makefile.softmmu-target;
-> >>>
-> >>> - upstream also changed how we declare things in disas/riscv.c.
-> >>>
-> >>>
-> >>> If you send a v9 I'll prioritize it for review.  We can get this done=
- for
-> >>> 11.2.
-> >>>
-> >> Hi Daniel,
-> >>
-> >> Thank you for taking the time to review this! No worries about the del=
-ay.
-> >>
-> >> I appreciate the heads-up on the upstream changes. I will update the
-> >> patch accordingly:
-> >>
-> >> Switch from Makefile.softmmu-target to
-> >> tests/tcg/riscv64/system/meson.build for the TCG test invocation;
-> >> Update the declarations in disas/riscv.c to align with the latest
-> >> upstream changes.
-> >> I will send out v9 as soon as possible. Really glad to hear we can
-> >> target 11.2 for this =E2=80=94 I'll make sure to prioritize it on my e=
-nd as well.
-> >>
-> >> Thanks again for the review and for keeping this moving!
-> >>
-> >> Best regards,
-> >> Zhiwei
-> >>> Cheers,
-> >>> Daniel
-> >>>
-> >>> On 7/23/2026 5:03 PM, LIU Zhiwei wrote:
-> >>>> This patch set introduces support for the RISC-V Smsdid and Smmpt
-> >>>> (Supervisor Domain Identifier and Memory Protection Table) extension=
-s
-> >>>> v0.4.9(https://github.com/riscv/riscv-smmtt/releases/tag/v0.4.9).
-> >>>> Smmpt provides a hardware mechanism for fine-grained memory protecti=
-on,
-> >>>> checked after address translation, which is particularly useful for
-> >>>> supervisor-level sandboxing and security monitoring.
-> >>>>
-> >>>> The rfc patch set:
-> >>>> https://mail.gnu.org/archive/html/qemu-riscv/2025-09/msg00216.html
-> >>>>
-> >>>> Rahul Pathak is working on SMMPT OpenSBI support -
-> >>>> https://lists.infradead.org/pipermail/opensbi/2026-July/010235.html
-> >>>>
-> >>>> based on his QEMU SMMPT branch -
-> >>>> https://github.com/pathakraul/qemu/tree/rpathak_smmpt_v1
-> >>>>
-> >>>> As we all agree -
-> >>>> https://patchew.org/QEMU/20260715145016.17369-1-zhiwei._5Fliu@linux.=
-alibaba.com/
-> >>>>
-> >>>> , we will collaborate on this work and not duplicate efforts. Rahul =
-will
-> >>>> focus on OpenSBI upstream and I will update the QEMU patch set to v8=
-.
-> >>>>
-> >>>> Xiangyi will review the OpenSBI SMMPT patch set and may collaborate =
-to
-> >>>> upstream the other parts, such as SMSDIA and IOMPT.
-> >>>>
-> >>>> v7->v8:
-> >>>>       1. Update the mfence.pa and minval.pa instruction encodings to
-> >>>> match the
-> >>>>          upstream riscv-opcodes definition
-> >>>>          (https://github.com/riscv/riscv-opcodes/pull/389/): mfence.=
-pa
-> >>>> now uses
-> >>>>          funct7=3D0b0011001 and minval.pa uses funct7=3D0b0011011. T=
-he
-> >>>> decoder,
-> >>>>          disassembler and the system test are updated accordingly.
-> >>>>
-> >>>> v6->v7:
-> >>>>       The implementation is updated from the v0.3.4 specification to
-> >>>>       v0.4.9. The main changes are:
-> >>>>       1. Update the mmpt CSR number to 0x382 and msdcfg to 0x74E.
-> >>>>       2. Update the mmpt register layout: the SDID and PPN field
-> >>>> positions
-> >>>>          changed and the RV64 PPN is now 44 bits.
-> >>>>       3. Rework the MPTE format: the N (NAPOT) bit now lives at bit =
-2,
-> >>>> the
-> >>>>          non-leaf NAPOT form is removed, NAPOT leaf entries encode a
-> >>>> single
-> >>>>          XWR tuple plus a G granularity field, and non-NAPOT leaf en=
-tries
-> >>>>          hold per-page XWR tuples.
-> >>>>       4. Treat XWR=3D000 as "no access" and a non-leaf entry with N=
-=3D1 as a
-> >>>>          fault.
-> >>>>       5. Enforce the Smmpt64 root-table PPN alignment (low 3 bits ze=
-ro).
-> >>>>       6. Rename the fence instructions mfence.spa/minval.spa to
-> >>>>          mfence.pa/minval.pa.
-> >>>>       7. Drop stale Reviewed-by tags on the substantially reworked
-> >>>> patches.
-> >>>>       8. Introduce the configurable "smmpt-sdidlen" CPU property.
-> >>>>       9. Add disassembly support for the Smmpt.
-> >>>>       10. Add bare-metal M-mode system tests.
-> >>>>       11. Rebase to master.
-> >>>>
-> >>>> v5->v6:
-> >>>>       1. Use explicitly bit fields extract instead of mpte_union_t.
-> >>>>       2. Use the same exception behavior for MPT valiation as PMP
-> >>>>          valiation.
-> >>>>       3. Use PAGE_* instead of MPT_ACCESS_* as they have same value.
-> >>>>       4. Use address_space_*_le instead of address_space_* for SMMPT=
-.
-> >>>>       5. Only print SMMPT address check log when SMMPT is enabled.
-> >>>>       6. Add implied rule for SMMPT as it depends on SMSDID.
-> >>>>       7. Rebase to master.
-> >>>>
-> >>>> v4->v5:
-> >>>>       1. Rebase to master.
-> >>>> v3->v4:
-> >>>>       1. Add missing review tags.
-> >>>> v2->v3:
-> >>>>       1. Fix build error in patch 2.
-> >>>>       2. Rebase to master.
-> >>>>
-> >>>> rfc->v2:
-> >>>>       1. When ext_smmpt is false or BARE mode, make other fields in =
-mmpt
-> >>>>          CSR zero.
-> >>>>       2. Add patch 5 to fix smrnmi ISA string order.
-> >>>>       3. Fix patch 6 smmpt and smsdid ISA string order.
-> >>>>       4. Make smmpt and smsdid experiment extensions.
-> >>>>       5. Add review tags.
-> >>>>
-> >>>> LIU Zhiwei (11):
-> >>>>     target/riscv: Add basic definitions and CSRs for SMMPT
-> >>>>     target/riscv: Add smmpt-sdidlen property for the mmpt SDID field
-> >>>>     target/riscv: Implement core SMMPT lookup logic
-> >>>>     target/riscv: Integrate SMMPT checks into MMU and TLB fill
-> >>>>     target/riscv: Implement SMMPT fence instructions
-> >>>>     target/riscv: Fix smrnmi isa alphabetical order
-> >>>>     target/riscv: Add disassembly for Smmpt instructions and CSRs
-> >>>>     target/riscv: Enable SMMPT extension
-> >>>>     target/riscv: Add system test for SMMPT extension
-> >>>>     target/riscv: Add system tests for Smmpt52 and Smmpt64
-> >>>>     target/riscv: Add system test for Smmpt34
-> >>>>
-> >>>>    disas/riscv.c                                 |   9 +-
-> >>>>    target/riscv/cpu.c                            |  60 +++-
-> >>>>    target/riscv/cpu.h                            |   8 +
-> >>>>    target/riscv/cpu_bits.h                       |  27 ++
-> >>>>    target/riscv/cpu_cfg_fields.h.inc             |   3 +
-> >>>>    target/riscv/insn32.decode                    |   2 +
-> >>>>    target/riscv/meson.build                      |   1 +
-> >>>>    target/riscv/riscv_smmpt.c                    | 339 +++++++++++++=
-+++++
-> >>>>    target/riscv/riscv_smmpt.h                    |  26 ++
-> >>>>    target/riscv/tcg/cpu_helper.c                 | 119 +++++-
-> >>>>    target/riscv/tcg/csr.c                        | 106 ++++++
-> >>>>    .../tcg/insn_trans/trans_privileged.c.inc     |  30 ++
-> >>>>    target/riscv/tcg/pmp.h                        |   3 +
-> >>>>    tests/tcg/riscv64/Makefile.softmmu-target     |  12 +
-> >>>>    tests/tcg/riscv64/smmpt-common.S              | 257 +++++++++++++
-> >>>>    tests/tcg/riscv64/test-smmpt.S                |  85 +++++
-> >>>>    tests/tcg/riscv64/test-smmpt34.S              |  97 +++++
-> >>>>    tests/tcg/riscv64/test-smmpt52.S              |  91 +++++
-> >>>>    tests/tcg/riscv64/test-smmpt64.S              |  98 +++++
-> >>>>    19 files changed, 1354 insertions(+), 19 deletions(-)
-> >>>>    create mode 100644 target/riscv/riscv_smmpt.c
-> >>>>    create mode 100644 target/riscv/riscv_smmpt.h
-> >>>>    create mode 100644 tests/tcg/riscv64/smmpt-common.S
-> >>>>    create mode 100644 tests/tcg/riscv64/test-smmpt.S
-> >>>>    create mode 100644 tests/tcg/riscv64/test-smmpt34.S
-> >>>>    create mode 100644 tests/tcg/riscv64/test-smmpt52.S
-> >>>>    create mode 100644 tests/tcg/riscv64/test-smmpt64.S
-> >>>>
-> >>>>
-> >>>> base-commit: 499039798cdad7d86b787fec0eaf1da4151c0f05
+On 11/1/2026 5:25 PM, Drew Fustini wrote:
+> From: Nicolas Pitre <npitre@baylibre.com>
+> 
+> Implement a bandwidth controller according to the Capacity and Bandwidth
+> QoS Register Interface (CBQRI) which supports these capabilities:
+> 
+>    - Number of access types: 2 (code and data)
+>    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
+>    - Event IDs supported: None, Total read/write byte count, Total
+>                           read byte count, Total write byte count
+>    - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
+> 
+> The controller gives the Linux resctrl support for CBQRI a device to
+> configure and read back bandwidth limits per RCID on the virt machine.
+> Only the register interface is modeled. The configured limits are not
+> enforced and the monitoring counters are always marked INVALID because
+> QEMU does not model memory bandwidth usage.
+> 
+> Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+> Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
+> [fustini: add fields introduced in the ratified spec: rpfx and p]
+> Signed-off-by: Drew Fustini <fustini@kernel.org>
+> ---
+
+LGTM overall.  A few comments:
+
+>   MAINTAINERS                |   1 +
+>   hw/riscv/cbqri_bandwidth.c | 650 +++++++++++++++++++++++++++++++++++++++++++++
+>   2 files changed, 651 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index f230cdbbe1b8..6d68b839febc 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -408,6 +408,7 @@ M: Nicolas Pitre <npitre@baylibre.com>
+>   M: Drew Fustini <fustini@kernel.org>
+>   L: qemu-riscv@nongnu.org
+>   S: Supported
+> +F: hw/riscv/cbqri_bandwidth.c
+>   F: hw/riscv/cbqri_capacity.c
+>   F: include/hw/riscv/cbqri.h
+>   
+> diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
+> new file mode 100644
+> index 000000000000..57f8897252bd
+> --- /dev/null
+> +++ b/hw/riscv/cbqri_bandwidth.c
+> @@ -0,0 +1,650 @@
+> +/*
+> + * RISC-V Capacity and Bandwidth QoS Register Interface
+> + * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+> + *
+> + * Copyright (c) 2023 BayLibre SAS
+> + * SPDX-License-Identifier: GPL-2.0-or-later
+> + *
+> + * This file contains the Bandwidth-controller QoS Register Interface.
+> + */
+> +
+> +#include "qemu/osdep.h"
+> +#include "qapi/error.h"
+> +#include "qemu/error-report.h"
+> +#include "qemu/log.h"
+> +#include "qemu/module.h"
+> +#include "hw/core/qdev-properties.h"
+> +#include "hw/core/sysbus.h"
+> +#include "migration/vmstate.h"
+> +#include "target/riscv/cpu.h"
+> +#include "hw/riscv/cbqri.h"
+> +
+> +/* Encodings of `AT` field */
+> +enum {
+> +    BC_AT_DATA = 0,
+> +    BC_AT_CODE = 1,
+> +    BC_NB_ATS,
+> +};
+> +
+> +/* Capabilities */
+> +REG64(BC_CAPABILITIES, 0);
+> +FIELD(BC_CAPABILITIES, VER, 0, 8);
+> +FIELD(BC_CAPABILITIES, VER_MINOR, 0, 4);
+> +FIELD(BC_CAPABILITIES, VER_MAJOR, 4, 4);
+> +FIELD(BC_CAPABILITIES, NBWBLKS, 8, 16);
+> +FIELD(BC_CAPABILITIES, RPFX, 24, 1);
+> +FIELD(BC_CAPABILITIES, P, 25, 4);
+> +FIELD(BC_CAPABILITIES, MRBWB, 32, 16);
+> +
+> +/* Usage monitoring control */
+> +REG64(BC_MON_CTL, 8);
+> +FIELD(BC_MON_CTL, OP, 0, 5);
+> +FIELD(BC_MON_CTL, AT, 5, 3);
+> +FIELD(BC_MON_CTL, MCID, 8, 12);
+> +FIELD(BC_MON_CTL, EVT_ID, 20, 8);
+> +FIELD(BC_MON_CTL, ATV, 28, 1);
+> +FIELD(BC_MON_CTL, STATUS, 32, 7);
+> +FIELD(BC_MON_CTL, BUSY, 39, 1);
+> +
+> +/* Usage monitoring operations */
+> +enum {
+> +    BC_MON_OP_CONFIG_EVENT = 1,
+> +    BC_MON_OP_READ_COUNTER = 2,
+> +};
+> +
+> +/* Bandwidth monitoring event ID */
+> +enum {
+> +    BC_EVT_ID_None = 0,
+> +    BC_EVT_ID_RDWR_count = 1,
+> +    BC_EVT_ID_RDONLY_count = 2,
+> +    BC_EVT_ID_WRONLY_count = 3,
+> +};
+> +
+> +/* BC_MON_CTL.STATUS field encodings */
+> +enum {
+> +    BC_MON_CTL_STATUS_SUCCESS = 1,
+> +    BC_MON_CTL_STATUS_INVAL_OP = 2,
+> +    BC_MON_CTL_STATUS_INVAL_MCID = 3,
+> +    BC_MON_CTL_STATUS_INVAL_EVT_ID = 4,
+> +    BC_MON_CTL_STATUS_INVAL_AT = 5,
+> +};
+> +
+> +/* Monitoring counter value */
+> +REG64(BC_MON_CTR_VAL, 16);
+> +FIELD(BC_MON_CTR_VAL, CTR, 0, 62);
+> +FIELD(BC_MON_CTR_VAL, INVALID, 62, 1);
+> +FIELD(BC_MON_CTR_VAL, OVF, 63, 1);
+> +
+> +/* Bandwidth Allocation control */
+> +REG64(BC_ALLOC_CTL, 24);
+> +FIELD(BC_ALLOC_CTL, OP, 0, 5);
+> +FIELD(BC_ALLOC_CTL, AT, 5, 3);
+> +FIELD(BC_ALLOC_CTL, RCID, 8, 12);
+> +FIELD(BC_ALLOC_CTL, STATUS, 32, 7);
+> +FIELD(BC_ALLOC_CTL, BUSY, 39, 1);
+> +
+> +/* Bandwidth allocation operations */
+> +enum {
+> +    BC_ALLOC_OP_CONFIG_LIMIT = 1,
+> +    BC_ALLOC_OP_READ_LIMIT = 2,
+> +};
+> +
+> +/* BC_ALLOC_CTL.STATUS field encodings */
+> +enum {
+> +    BC_ALLOC_STATUS_SUCCESS = 1,
+> +    BC_ALLOC_STATUS_INVAL_OP = 2,
+> +    BC_ALLOC_STATUS_INVAL_RCID = 3,
+> +    BC_ALLOC_STATUS_INVAL_AT = 4,
+> +    BC_ALLOC_STATUS_INVAL_BLKS = 5,
+> +};
+> +
+> +/* Bandwidth allocation */
+> +REG64(BC_BW_ALLOC, 32);
+> +FIELD(BC_BW_ALLOC, Rbwb, 0, 16);
+> +FIELD(BC_BW_ALLOC, Mweight, 20, 8);
+> +FIELD(BC_BW_ALLOC, sharedAT, 28, 3);
+> +FIELD(BC_BW_ALLOC, useShared, 31, 1);
+> +
+> +
+> +typedef struct BandwidthAllocation {
+> +    uint32_t Rbwb:16;
+> +    uint32_t Mweight:8;
+> +    uint32_t sharedAT:3;
+> +    bool useShared:1;
+> +} BandwidthAllocation;
+> +
+> +typedef struct RiscvCbqriBandwidthState {
+> +    SysBusDevice parent_obj;
+> +    MemoryRegion mmio;
+> +
+> +    /* cached value of some registers */
+> +    uint64_t bc_mon_ctl;
+> +    uint64_t bc_mon_ctr_val;
+> +    uint64_t bc_alloc_ctl;
+> +
+> +    MonitorCounter *mon_counters;
+> +    BandwidthAllocation *bw_allocations;
+> +
+> +    /* properties */
+> +
+> +    uint64_t mmio_base;
+> +    uint16_t nb_mcids;
+> +    uint16_t nb_rcids;
+> +
+> +    uint16_t nbwblks;
+> +    uint16_t mrbwb;
+> +
+> +    bool supports_at_code;
+> +
+> +    bool supports_alloc_op_config_limit;
+> +    bool supports_alloc_op_read_limit;
+> +
+> +    bool supports_mon_op_config_event;
+> +    bool supports_mon_op_read_counter;
+> +
+> +    bool supports_mon_evt_id_none;
+> +    bool supports_mon_evt_id_rdwr_count;
+> +    bool supports_mon_evt_id_rdonly_count;
+> +    bool supports_mon_evt_id_wronly_count;
+> +} RiscvCbqriBandwidthState;
+> +
+
+I believe BandwidthAllocation could be renamed to RiscvCbrqiBandwidthAllocation for
+naming consistency.
+
+
+> +#define RISCV_CBQRI_BC(obj) \
+> +    OBJECT_CHECK(RiscvCbqriBandwidthState, (obj), TYPE_RISCV_CBQRI_BC)
+> +
+> +/*
+> + * All bandwidth allocation records are contiguous to simplify
+> + * allocation. The first one is used to hold the BC_BW_ALLOC register
+> + * content, followed by respective records for each AT per RCID.
+> + *
+> + * Records are indexed by the AT encoding, so each RCID has one record
+> + * per AT value whether or not the controller supports the code access
+> + * type. is_valid_at() rejects an unsupported AT before a record is
+> + * selected.
+> + */
+> +static unsigned int bw_alloc_index(uint32_t rcid, uint32_t at)
+> +{
+> +    assert(at < BC_NB_ATS);
+
+Please use g_assert() instead of assert().
+
+> +
+> +    return 1 + rcid * BC_NB_ATS + at;
+> +}
+> +
+> +static BandwidthAllocation *get_bw_alloc(RiscvCbqriBandwidthState *bc,
+> +                                         uint32_t rcid, uint32_t at)
+> +{
+> +    return &bc->bw_allocations[bw_alloc_index(rcid, at)];
+> +}
+> +
+
+
+[...]
+
+
+> +
+> +static void riscv_cbqri_bc_reset(DeviceState *dev)
+> +{
+> +    RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
+> +
+> +    bc->bc_mon_ctl = 0;
+> +    bc->bc_alloc_ctl = 0;
+> +}
+> +
+> +static const Property riscv_cbqri_bc_properties[] = {
+> +    DEFINE_PROP_UINT64("mmio_base", RiscvCbqriBandwidthState, mmio_base, 0),
+> +
+> +    DEFINE_PROP_UINT16("max_mcids", RiscvCbqriBandwidthState, nb_mcids, 256),
+> +    DEFINE_PROP_UINT16("max_rcids", RiscvCbqriBandwidthState, nb_rcids, 64),
+> +    DEFINE_PROP_UINT16("nbwblks", RiscvCbqriBandwidthState, nbwblks, 1024),
+> +    DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb, 819),
+> +
+> +    DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
+> +                     supports_at_code, true),
+> +
+> +    DEFINE_PROP_BOOL("alloc_op_config_limit", RiscvCbqriBandwidthState,
+> +                     supports_alloc_op_config_limit, true),
+> +    DEFINE_PROP_BOOL("alloc_op_read_limit", RiscvCbqriBandwidthState,
+> +                     supports_alloc_op_read_limit, true),
+> +
+> +    DEFINE_PROP_BOOL("mon_op_config_event", RiscvCbqriBandwidthState,
+> +                     supports_mon_op_config_event, true),
+> +    DEFINE_PROP_BOOL("mon_op_read_counter", RiscvCbqriBandwidthState,
+> +                     supports_mon_op_read_counter, true),
+> +
+> +    DEFINE_PROP_BOOL("mon_evt_id_none", RiscvCbqriBandwidthState,
+> +                     supports_mon_evt_id_none, true),
+> +    DEFINE_PROP_BOOL("mon_evt_id_rdwr_count", RiscvCbqriBandwidthState,
+> +                     supports_mon_evt_id_rdwr_count, true),
+> +    DEFINE_PROP_BOOL("mon_evt_id_rdonly_count", RiscvCbqriBandwidthState,
+> +                     supports_mon_evt_id_rdonly_count, true),
+> +    DEFINE_PROP_BOOL("mon_evt_id_wronly_count", RiscvCbqriBandwidthState,
+> +                     supports_mon_evt_id_wronly_count, true),
+> +};
+> +
+> +static const VMStateDescription vmstate_riscv_cbqri_bc = {
+> +    .name = "riscv-cbqri-bandwidth",
+> +    .unmigratable = 1,
+> +};
+> +
+> +static void riscv_cbqri_bc_class_init(ObjectClass *klass, const void *data)
+> +{
+> +    DeviceClass *dc = DEVICE_CLASS(klass);
+> +    dc->realize = riscv_cbqri_bc_realize;
+> +    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+> +    dc->desc = "RISC-V CBQRI Bandwidth Controller";
+> +    device_class_set_props(dc, riscv_cbqri_bc_properties);
+> +    dc->legacy_reset = riscv_cbqri_bc_reset;
+
+We're moving away from legacy_reset for new devices.  We're now declaring a Resettable
+interface and setting reset phases.
+
+For this device a simple way of doing it is to slightly change th reset callback params:
+
+
+static void riscv_cbqri_bc_reset(Object *obj, ResetType type)
+
+And then during class_init:
+
+     ResettableClass *rc = RESETTABLE_CLASS(klass);
+
+     rc->phases.hold = riscv_cbqri_bc_reset;
+
+
+
+> +    dc->vmsd = &vmstate_riscv_cbqri_bc;
+> +    dc->user_creatable = true;
+> +}
+> +
+> +static const TypeInfo riscv_cbqri_bc_info = {
+> +    .name          = TYPE_RISCV_CBQRI_BC,
+> +    .parent        = TYPE_SYS_BUS_DEVICE,
+> +    .instance_size = sizeof(RiscvCbqriBandwidthState),
+> +    .class_init    = riscv_cbqri_bc_class_init,
+> +};
+> +
+> +static void riscv_cbqri_bc_register_types(void)
+> +{
+> +    type_register_static(&riscv_cbqri_bc_info);
+> +}
+> +
+> +DeviceState *riscv_cbqri_bc_create(hwaddr addr,
+> +                                   const RiscvCbqriBandwidthCaps *caps)
+> +{
+> +    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_BC);
+> +
+> +    qdev_prop_set_uint64(dev, "mmio_base", addr);
+> +    qdev_prop_set_uint16(dev, "max_mcids", caps->nb_mcids);
+> +    qdev_prop_set_uint16(dev, "max_rcids", caps->nb_rcids);
+> +    qdev_prop_set_uint16(dev, "nbwblks", caps->nbwblks);
+> +    qdev_prop_set_uint16(dev, "mrbwb", caps->mrbwb);
+> +
+> +    qdev_prop_set_bit(dev, "at_code",
+> +                      caps->supports_at_code);
+> +    qdev_prop_set_bit(dev, "alloc_op_config_limit",
+> +                      caps->supports_alloc_op_config_limit);
+> +    qdev_prop_set_bit(dev, "alloc_op_read_limit",
+> +                      caps->supports_alloc_op_read_limit);
+> +    qdev_prop_set_bit(dev, "mon_op_config_event",
+> +                      caps->supports_mon_op_config_event);
+> +    qdev_prop_set_bit(dev, "mon_op_read_counter",
+> +                      caps->supports_mon_op_read_counter);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_none",
+> +                      caps->supports_mon_evt_id_none);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_rdwr_count",
+> +                      caps->supports_mon_evt_id_rdwr_count);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_rdonly_count",
+> +                      caps->supports_mon_evt_id_rdonly_count);
+> +    qdev_prop_set_bit(dev, "mon_evt_id_wronly_count",
+> +                      caps->supports_mon_evt_id_wronly_count);
+> +
+> +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
+> +
+> +    return dev;
+> +}
+
+We don't have any callers for riscv_cbqri_bc_create() in the series so I can't
+see how the intended use would be.  In particular with the RiscvCbqriBandwidthCaps *caps
+attribute.
+
+Note that riscv_cbqri_bc_create() is blindly applying all settings from 'caps' to
+the device.  This is fine, but note that extra care is required when retrieving 'caps'
+w.r.t the defaults established.
+
+E.g. in riscv_cbqri_bc_properties[] we have:
+
+ > +    DEFINE_PROP_UINT16("max_mcids", RiscvCbqriBandwidthState, nb_mcids, 256),
+
+ > +    DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb, 819),
+ > +
+ > +    DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
+ > +                     supports_at_code, true),
+
+
+Now let's say that we'll add the device in the 'virt' machine, and I want to change just
+nb_mcids to 512 and nothing else. If I do this:
+
+
+RiscvCbqriBandwidthCaps caps = {.nb_mcids = 512};
+
+(...)
+
+riscv_cbqri_bc_create(addr, &caps);
+
+
+
+I'll create a TYPE_RISCV_CBQRI_BC nb_mcids = 512 and everything else will be zeroed, disregarding
+all defaults from riscv_cbqri_bc_properties[].
+
+
+My suggestion here is to create a riscv_cbqri_bc_caps_init(RiscvCbqriBandwidthCaps *caps) helper
+that callers can use to set the struct defaults first.  We would then do:
+
+
+RiscvCbqriBandwidthCaps caps;
+
+riscv_cbqri_bc_caps_init(caps);
+caps.nb_mcids = 512;
+
+(...)
+
+riscv_cbqri_bc_create(addr, &caps);
+
+
+We have precedent for this pattern - most RISC-V boards use riscv_boot_info_init() to init
+a boot_info struct.
+
+
+Thanks,
+Daniel
+
+
+> +
+> +type_init(riscv_cbqri_bc_register_types)
+> 
+
 
