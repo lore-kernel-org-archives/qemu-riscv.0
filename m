@@ -1,102 +1,101 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07D8660A2638
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 19:53:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0102960A3802
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 19:54:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YpKY6nqU;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jeeFYxiC
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DVd9XQ/j;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PPRTbgvk
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQVQp-0000rb-O8; Mon, 09 Nov 2026 14:53:32 -0500
+	id 1xQVR8-0000un-Ie; Mon, 09 Nov 2026 14:53:50 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQVQn-0000qx-PN
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:53:29 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xQVR3-0000uB-Rl
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:53:46 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQVQl-0003YT-3F
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:53:29 -0500
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1xQVR2-0003ZZ-B3
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:53:45 -0500
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A9HH4tb846130
- for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 19:53:24 GMT
+ 6A9HHHqL4001652
+ for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 19:53:43 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- zuhZXa3YEjBQ0lGDqmRitdcnjeYDmHa6ZhKZeBX7ojY=; b=YpKY6nqUgNHDNZf0
- HHPBJ1oSZX0ewyriffzQbB+FPy6Zlvhxyx2faH5d+lurqtDfdggRLjIVeITeEWpB
- uk9kv27gENRhHNlAuQtT8t8an8Bjgn0qtINiC1ARumtnjcweT+W1Q7fr3yZVyJym
- fptie4ZN0X7QcdxlVUQC4hFZDJoMfTNFhN54CuRdx6KOrKpiR0X8TDMyVp7wBmnx
- vbvkYR6kT2PmE8UzBw0ozCJ2PqqJKtut+rz+24REb855ptCQg1eW6CYjVLb/wQS3
- y/hL0WpeqpTpZG4wR0dQ0eOgBIvkAS3jPV+XT8O3cwGZltYjy3QJDf9wyonF6JX9
- 28pbsw==
+ jQYcTnG4iDhqgGaWyx8t2CwjlEHzPUxM+vTs2eX9wjY=; b=DVd9XQ/jivjgUFor
+ r+rV9sAutJWeejAihcMOM8uV+NVfuJYZZy+Rifd9+qxqjYqe6ZmUfZ5MJfkzLPL8
+ zIlHqWXFnYHAH/I0IjVE4YsTTDqG5szRD+YhDwg0xxq6rWv8kNH4uefQa/WHHDDm
+ /zi8/2nSIINHcgXPkX8PE51zJIupN4d6I0Wto83MBFYqcMrkv7bGS9qBXl6hmPtx
+ Frcus+OsWFX6QfADVQMtxXA3++utrn0Owg0HTjk9bIKSzXKHEca4LgO1lAxj+1o4
+ CwiN9VKVxcCjyGhLCPAqo8zodXOuxI71pYdV7I5yg61eZT7wgeOSDh8+lTYI+fOY
+ zTJe0w==
 Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
  [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucapa170-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hue0rss39-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 19:53:24 +0000 (GMT)
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 19:53:42 +0000 (GMT)
 Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-532f343a55bso23168631cf.3
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 11:53:24 -0800 (PST)
+ d75a77b69052e-5338c215ed2so19345751cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 11:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794254003; x=1794858803; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794254022; x=1794858822; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=zuhZXa3YEjBQ0lGDqmRitdcnjeYDmHa6ZhKZeBX7ojY=;
- b=jeeFYxiCk9LdmXIyXN5XWGIQJ9Ag74inPn0tHy/RiA131rexhx/Db1DiFYILQBSc+B
- 8l3ePa6s0ltLjfBg4pksh4Cc3fqmCMOODbjUE41rSOLvA5SrBsx4/7eZr/ruBI86w/xU
- Jb37jycEbIpnipv1P6cDdYpHPRsgKWgXrUuGOHfsxmjBBWUq9IlvxwZoM8u7v9AnmDQs
- mecv1T7Nspw0xrrWslzOo2ItaykMHejd6Saq1wqINjZWHpRSGlNteA7ITaMcdB/bAcKZ
- KOU45W3BjXwwvgI9ze7eHmKpKETpDxQ6VsNdPGkDtRVSXUKAtEUM2ehTF4X/jsu1Scar
- 2DAQ==
+ bh=jQYcTnG4iDhqgGaWyx8t2CwjlEHzPUxM+vTs2eX9wjY=;
+ b=PPRTbgvkMvdpUB1uD94sG/g9+Aktb6Azyc1ViRgKzhtWsVsz3y7U1S22IZ2VwHZtqF
+ tTBt1ffUVr42HI3yjzWqBetUGTzXdRoKsW3yRfo+dC2+91MhIwrqXSRLH/9VRahldwRv
+ eNeFZJVoiPQgtBpOXG+dQFZx92iOIEcqXo4Eg+LAbAyQFuR0BUY4PB4ILkqQV9CX7xeS
+ 6R6A2CnUyZiPkF7sNceEhkGdFh7bT+3dEB7UmfRKKdCTYAxyhw3nEKiczBFpmQHaZ8EE
+ gozuWoFcEQ2zZGo4+ren651FSDG8vDDL3tsr3sIhb/tKQpYNgJvcP9TJovbBKQAGC7rE
+ 0LtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794254003; x=1794858803;
+ d=1e100.net; s=20260707; t=1794254022; x=1794858822;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=zuhZXa3YEjBQ0lGDqmRitdcnjeYDmHa6ZhKZeBX7ojY=;
- b=Y/cj1c8ExToHoYjyv+PrTDZHKUMKGfBVrhiBmzkrBcnqGcKQwTsrO4W431TydUWaL6
- 9BwszRHEEdTzlqveMS5aFoPB8kpT/2l2z/jWJ6pnbeX2swKQvQPiz6bPSM9JX4yy+WW/
- 7WNwG3uEaDKra0mMwMCNZD9zj+pcb91eb6FDqQXuhiPZKh9bTQ9Qce1B6coh4EC87uob
- A7SALfNXF/f1UHSyn/fzYIo9ht89brl7JGv3iut34cKUKWYvojZhnqQgfkl7yVVmilCK
- FP7M8y6HxIMZNld6mbFUxsXleCr2QFtaETNH1g1LgSmsnpm5xZ6qQBOtBpLHZRKaBxlc
- ehOw==
+ bh=jQYcTnG4iDhqgGaWyx8t2CwjlEHzPUxM+vTs2eX9wjY=;
+ b=HHFv/TelLxHOOCDXJOKx079oJXEHliZnPt4KQXog2+E0oiUaXvL/mDYWMqYc6H3Ghf
+ +UUfP85dh2Q52f0SH/g0iN8PshFb+Z6aU0TqwvV+y4/xPyBO52+XjZXc/NtsDPhg3qgA
+ 6g3D9ZCR872WMAf44z2uuXmQUEhAz7SkavtkJqWpDKcFWywvCT8MjL2tzsGjJMMF35A1
+ uM42+R6uA6QPsoshNedRpewcdeSWW+on7Vf6zt44lP7aRFyFo+K+uYlKYGETjW0yXQM1
+ 9Id+eXH/Q3pwEAAq3Ny6BxT0lRuBIEzkPt2LVMvOhG7nyR6IX8BER2zJKr3loZmWMH98
+ E7ng==
 X-Forwarded-Encrypted: i=1;
- AL+hErFY/3Ed/iYRgklAmnUKZCZOsD3zQqST7EopeKlxqHc/CbEsQ7rOoniGDl85p4SLeTfTMEpZranWZXIr@nongnu.org
-X-Gm-Message-State: APuU4Z891hbq/Sp8wr0s60DONx/dtBzuE9NbLXc8EUFzFIMt5LLTWfab
- YCLt9yOhKIZBtQai0dlJdLLv3AyorMNzKo4KKjL+t2XJldwhHGZNIkKTc9V99Lndz8Xk1TaC1J1
- FprPQdFu8Hr0QCEQfvsHPekh5E32/6scc25ejNpjePn0LSj8JQ/8LaVC3Wg==
-X-Gm-Gg: AYBFou3IiKbcf9pmroxuR8RX2hjc/SCWK+S1prJabRbfHE+vTrDDaVdqynKoURvq46m
- 4oBZVTzr3wC0cCHFVvi/FLGWkt8xnUT5vwHLwP5kaK6Ucg2Glb6B8H3+AOAvmU9CB8P1t6jbkyy
- IoJ27vUQ9OY8CjS2lBN+I3zw1/94qeeyGvgesy/r69XVbcTRaf0aTK/VPmbqKe8FYX86/nafM0L
- XjFVjYBePAt5GjF8pVRsE4xYVttxSo9IGGzxPfhUxUWTKjwB4QqWDELzvfLSiDlrPkQi6Qp5EM9
- aXIXlxO77ubVY3oGCj/uYb5U38NQ9gotJ4YqvbM2mtV4STIAAf1BBY558KHLCrG1RXpBufTYIwl
- pHHJ9PNArx3kd4a6CIZ2ve+LzqY2Fgzb2e1mqlRe4gtoy+plYXRgHujiim8DHxU5qXgYw9+hvuD
- XWXrNs2jf1
-X-Received: by 2002:a05:622a:1f8c:b0:536:4482:2c5d with SMTP id
- d75a77b69052e-555292bb79dmr5973501cf.19.1794254003267; 
- Mon, 09 Nov 2026 11:53:23 -0800 (PST)
-X-Received: by 2002:a05:622a:1f8c:b0:536:4482:2c5d with SMTP id
- d75a77b69052e-555292bb79dmr5973091cf.19.1794254002606; 
- Mon, 09 Nov 2026 11:53:22 -0800 (PST)
+ AL+hErHFQEelWB+ZhdgJm0XrarZeY0LMZg5xgLviIAMOmr3ury4xVVttGwRbFlPP6lwc5A5+ICTyZw+3vDPN@nongnu.org
+X-Gm-Message-State: APuU4Z9zK0mqHKXycIIfiMqmzweKQnGmvO1mRC8+AtVYdhS7gYn3GXBO
+ 3GgxPnP9QffBzGs8wml+yEL4w1avjHiX08wTVvUCWBDpLzgHNggbbBD3WdbniR5oj4TFa2f2ypw
+ 0/BeGXtK0LGSqpwP0b1+f0lSCa5Ql2ovmtfjMmu9QbPlLnkdGLX7eL46AUg==
+X-Gm-Gg: AYBFou0Zi5IYL3mMStbhoY7MfHW52ez5FAsRP499TxhXZjYtUjw5oDxPQM/DMvhn7os
+ e8N1E48aypcZLarpZNzvjuG1JRyK4pl49zEMCXNNyslPMrx2XNEGYVDp+9a2WmUUrPvM2OWgE1O
+ 1U5MR8FCzRpKP2MlmZWKcDUvAX2L+QrEXbvi3ElaiSPeQqyhTxj79s2C9nGlyTeXlxu/2sqZLVJ
+ 1oc6VP9YKhki/CJszqTGrFJ7zsK8p8flb64i8fGmAdzprpZebolp55PnodG+piFOFkHpAlNLVoB
+ xbyI4ksobLMpBGezMsfadOrrc6rv+y6eFU51GcnDsmyAM+jncvK+fW5sdO+BxRiUPnMPSUi4bJK
+ 9lW2cd0KMDusmZAgOd3qHqmnEBsCpqVK7+B2UibwvSw/4upQ0gftiGnqQDx+C/klG85AjpL1Oug
+ uel0I3CPGd
+X-Received: by 2002:a05:622a:506:b0:537:5488:ada1 with SMTP id
+ d75a77b69052e-55527a173a0mr6040211cf.32.1794254022184; 
+ Mon, 09 Nov 2026 11:53:42 -0800 (PST)
+X-Received: by 2002:a05:622a:506:b0:537:5488:ada1 with SMTP id
+ d75a77b69052e-55527a173a0mr6039721cf.32.1794254021735; 
+ Mon, 09 Nov 2026 11:53:41 -0800 (PST)
 Received: from [192.168.68.100] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-555091eb801sm5435591cf.2.2026.11.09.11.53.20
+ d75a77b69052e-5550af6096asm5256721cf.5.2026.11.09.11.53.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 11:53:22 -0800 (PST)
-Message-ID: <090e835e-ae47-46e3-b8e6-8639bd9db920@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 16:53:18 -0300
+ Mon, 09 Nov 2026 11:53:41 -0800 (PST)
+Message-ID: <11c1a22f-6773-4958-b04a-9f98d7b74781@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 16:53:38 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 01/38] fpu/softfloat: Support OCP(Open Compute
- Project) OFP8 checking functions
+Subject: Re: [RFC PATCH 02/38] target/riscv: Introduce riscv_init_fp_status
 To: Max Chou <max.chou@sifive.com>, qemu-devel@nongnu.org,
  qemu-riscv@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -107,41 +106,41 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>
 References: <20261104194155.679241-1-max.chou@sifive.com>
- <20261104194155.679241-2-max.chou@sifive.com>
+ <20261104194155.679241-3-max.chou@sifive.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261104194155.679241-2-max.chou@sifive.com>
+In-Reply-To: <20261104194155.679241-3-max.chou@sifive.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA3OCBTYWx0ZWRfXw/m0h/fDmls7
- WeTjSjWnnLzvdLqNgt6E81gZXPoZRXhHf+ak5f/C/bxt4/G2QcdUloeUk204YE1Z5BFVPOkMwhh
- EDGh5QRNbMrgNzNWvjx8HMWYIlWLpo8aYTWugLXajFz2mYchn8p+tT3rZ61QSrBblKBBrTFH7n0
- yQGC8npyvXJqVVfcAPK80CmV0RX6j9V2Rd2RZrKbzi3xidz12kTfRnUESd4bW4r71ewoSnAexRI
- kGCrWD7TOu+GGEMSbdPCdzgws//GX8Baas6LqUsgc7J8FPnvJ1Si1dK0Hkpz8p32R8WtbSRJlK/
- 35rXrlWdX40FkAvldyvbPzGoe6clKWG1R6Vtg+rlZw0AptvBpkmmjVcE+PQuHtgDVOx4snNQ57l
- M/o+1Tw4CeGxWCex9GthiKNIzv/LKdyTknpgmxczjuvt+XyMMJWPpBBEahsKzWH8vmkHv8sjbfU
- Bfyqy9BsbfnPdkAdirQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA3OCBTYWx0ZWRfX5Eu9/79Btwog
- 2AhFolqo8qShwFfTZFxu8wL0YGrli6sZbtxahpoMoCnZ8ouICvqtJvw7J/amd05wwuhZEvvfkX7
- 1o5ILfSdJ3Z+punxrX7DiciaOhE3s50=
-X-Proofpoint-ORIG-GUID: RpA9T2BF2JQocTxRFaua_ppABD6mkvOv
-X-Authority-Analysis: v=2.4 cv=TaQDJhQh c=1 sm=1 tr=0 ts=6af224b4 cx=c_pps
+X-Proofpoint-GUID: NcsuqmhZAjSnoSPgxwNPSQPg23i9Hpge
+X-Authority-Analysis: v=2.4 cv=MpfHeGae c=1 sm=1 tr=0 ts=6af224c6 cx=c_pps
  a=WeENfcodrlLV9YRTxbY/uA==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=pFyQfRViAAAA:8 a=EUspDBNiAAAA:8 a=FVchq9tdzEtsCYCC46gA:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=pFyQfRViAAAA:8 a=EUspDBNiAAAA:8 a=gYLf6MvG5Hm1zaHzDX4A:9 a=QEXdDO2ut3YA:10
  a=kacYvNCVWA4VmyqE58fU:22 a=oJz5jJLG1JtSoe7EL652:22
-X-Proofpoint-GUID: RpA9T2BF2JQocTxRFaua_ppABD6mkvOv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA3OCBTYWx0ZWRfX1iB8O88wUVWX
+ bgWKyH6DVhcGfXNv/phTT9AcUM4/hIuvP4dCIoyUyEogA39vbVrapjy/eGkvY8JKLXiBIQJlQok
+ imCIBkT4CeR7AKhEvc4CQow2ny51OLs50pGR5TSuZOi50fbnBaUKxqywaFwijQam6HypEtE+bZo
+ oib5xQkR2FrT2j2kdglZM/j1YSR57RStklxacv8CSj+1SfxmEM+wgH/1m2D3Sic6mP8OcCN5dQi
+ LDHLfCLr49y+DfxlpQ9MKwwI8uhWQRf6FN4MKzsysi0f4sKbzofn6LBXxXVx5z8pCY2o6lSUTsf
+ nmCG9VL+3E9dWrdkH6jp6GA67D0tmZV6sdBCqG51B4lm16ZbW/QgwpmEUaec867WiXQlyR3Exc6
+ wXZrWmXL0MnWgBcXKRbP4e2x2bU/qOfr7MT4MWQ6ocTmHMUU0FguQbbq6zijCw58HGqHamTfeMd
+ zwRpTfXVp5GKIXV4y8A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA3OCBTYWx0ZWRfX/69AidyttPQh
+ AGphAW9AElL5CRTuGqPWbVVDCwVzIPZCxWgFRqUoRuASDUHoJ+oIi7d0pqYI4kvZX53Rlxm7RtQ
+ 6HMuA+cjdsnYddhVKqQL8GxZzJtkcSA=
+X-Proofpoint-ORIG-GUID: NcsuqmhZAjSnoSPgxwNPSQPg23i9Hpge
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-09_06,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0
- malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 priorityscore=1501
+ spamscore=0 suspectscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
+ clxscore=1015 impostorscore=0 priorityscore=1501 phishscore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090078
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -171,175 +170,49 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 On 11/4/2026 4:41 PM, Max Chou wrote:
-> Include following checking functions liked other fp types:
-
-typo: s/liked/like
-
-> - *_nan_is_snan
-> - *_is_quiet_nan
-> - *_is_signaling_nan
-> - *_is_any_nan
-> - *_is_neg
-> - *_is_infinity
-> - *_is_zero
-> - *_is_zero_or_denormal
-> - *_is_normal
+> Create a function to set all default controls for the float_status.
+> And set e4m3_nan_is_snan to false to follow the RISC-V isa extensions.
 > 
 > Signed-off-by: Max Chou <max.chou@sifive.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   fpu/softfloat-specialize.c.inc | 55 ++++++++++++++++++++++++++
->   include/fpu/softfloat.h        | 70 ++++++++++++++++++++++++++++++++++
->   2 files changed, 125 insertions(+)
+>   target/riscv/cpu.c | 13 ++++++++++---
+>   1 file changed, 10 insertions(+), 3 deletions(-)
 > 
-> diff --git a/fpu/softfloat-specialize.c.inc b/fpu/softfloat-specialize.c.inc
-> index 8b765ef623f..22a3188f99b 100644
-> --- a/fpu/softfloat-specialize.c.inc
-> +++ b/fpu/softfloat-specialize.c.inc
-> @@ -255,6 +255,61 @@ floatx80 floatx80_default_inf(bool zSign, float_status *status)
->       return packFloatx80(zSign, 0x7fff, z ? 0 : (1ULL << 63));
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 362e5618091..53ecce8c398 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -978,6 +978,14 @@ static bool riscv_cpu_has_work(CPUState *cs)
 >   }
+>   #endif /* !CONFIG_USER_ONLY */
 >   
-> +/*----------------------------------------------------------------------------
-> +| Determine if a OCP FP8 E4M3 NaN is signaling NaN.
-> +| E4M3 has only one NaN encoding, so classification is policy-based.
-> +*----------------------------------------------------------------------------*/
-> +
-> +static bool float8_e4m3_nan_is_snan(float8_e4m3 a, float_status *status)
+> +static void riscv_init_fp_status(float_status *s)
 > +{
-> +    return get_float_e4m3_nan_is_snan(status);
+> +    set_default_nan_mode(1, s);
+> +    /* Default NaN value: sign bit clear, frac msb set */
+> +    set_float_default_nan_pattern(0b01000000, s);
+> +    set_float_e4m3_nan_is_snan(false, s);
 > +}
 > +
-> +/*----------------------------------------------------------------------------
-> +| Returns 1 if the OCP FP8 E4M3 value `a' is a quiet NaN; otherwise returns 0.
-> +*----------------------------------------------------------------------------*/
-> +
-> +bool float8_e4m3_is_quiet_nan(float8_e4m3 a_, float_status *status)
-> +{
-> +    return float8_e4m3_is_any_nan(a_) && !float8_e4m3_nan_is_snan(a_, status);
-> +}
-> +
-> +/*----------------------------------------------------------------------------
-> +| Returns 1 if the OCP FP8 E4M3 value `a' is a signaling NaN; otherwise 0.
-> +*----------------------------------------------------------------------------*/
-> +
-> +bool float8_e4m3_is_signaling_nan(float8_e4m3 a_, float_status *status)
-> +{
-> +    return float8_e4m3_is_any_nan(a_) && float8_e4m3_nan_is_snan(a_, status);
-> +}
-> +
-> +/*----------------------------------------------------------------------------
-> +| Determine if a OCP FP8 E5M2 NaN is signaling NaN.
-> +*----------------------------------------------------------------------------*/
-> +
-> +static bool float8_e5m2_nan_is_snan(float8_e5m2 a, float_status *status)
-> +{
-> +    return frac_msb_is_snan((a >> 1) & 1, status);
-> +}
-> +
-> +/*----------------------------------------------------------------------------
-> +| Returns 1 if the OCP FP8 E5M2 value `a' is a quiet NaN; otherwise returns 0.
-> +*----------------------------------------------------------------------------*/
-> +
-> +bool float8_e5m2_is_quiet_nan(float8_e5m2 a_, float_status *status)
-> +{
-> +    return float8_e5m2_is_any_nan(a_) && !float8_e5m2_nan_is_snan(a_, status);
-> +}
-> +
-> +/*----------------------------------------------------------------------------
-> +| Returns 1 if the OCP FP8 E5M2 value `a' is a signaling NaN; otherwise 0.
-> +*----------------------------------------------------------------------------*/
-> +
-> +bool float8_e5m2_is_signaling_nan(float8_e5m2 a_, float_status *status)
-> +{
-> +    return float8_e5m2_is_any_nan(a_) && float8_e5m2_nan_is_snan(a_, status);
-> +}
-> +
->   /*----------------------------------------------------------------------------
->   | Determine if a float16 NaN is signaling NaN.
->   *----------------------------------------------------------------------------*/
-> diff --git a/include/fpu/softfloat.h b/include/fpu/softfloat.h
-> index d48fc6b0437..4d91599e25d 100644
-> --- a/include/fpu/softfloat.h
-> +++ b/include/fpu/softfloat.h
-> @@ -222,6 +222,76 @@ bfloat16 float8_e5m2_to_bfloat16(float8_e5m2, float_status *status);
->   float8_e5m2 bfloat16_to_float8_e5m2(bfloat16, bool sat, float_status *status);
->   float8_e5m2 float32_to_float8_e5m2(float32, bool sat, float_status *status);
+>   static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>   {
+>       CPUState *cs = CPU(obj);
+> @@ -1095,11 +1103,10 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>       env->xl = riscv_cpu_mxl(env);
+>       cs->exception_index = RISCV_EXCP_NONE;
+>       env->load_res = -1;
+> -    set_default_nan_mode(1, &env->fp_status);
+> -    /* Default NaN value: sign bit clear, frac msb set */
+> -    set_float_default_nan_pattern(0b01000000, &env->fp_status);
+>       env->vill = true;
 >   
-> +/*----------------------------------------------------------------------------
-> +| OCP FP{4,8} classify operations.
-> +*----------------------------------------------------------------------------*/
+> +    riscv_init_fp_status(&env->fp_status);
 > +
-> +bool float8_e4m3_is_quiet_nan(float8_e4m3, float_status *status);
-> +bool float8_e4m3_is_signaling_nan(float8_e4m3, float_status *status);
-> +bool float8_e5m2_is_quiet_nan(float8_e5m2, float_status *status);
-> +bool float8_e5m2_is_signaling_nan(float8_e5m2, float_status *status);
-> +
-> +static inline bool float8_e4m3_is_any_nan(float8_e4m3 a)
-> +{
-> +    return ((a & ~0x80) == 0x7f);
-> +}
-> +
-> +static inline bool float8_e5m2_is_any_nan(float8_e5m2 a)
-> +{
-> +    return ((a & ~0x80) > 0x7c);
-> +}
-> +
-> +static inline bool float8_e4m3_is_neg(float8_e4m3 a)
-> +{
-> +    return a >> 7;
-> +}
-> +
-> +static inline bool float8_e5m2_is_neg(float8_e5m2 a)
-> +{
-> +    return a >> 7;
-> +}
-> +
-> +static inline bool float8_e4m3_is_infinity(float8_e4m3 a)
-> +{
-> +    return false;
-> +}
-> +
-> +static inline bool float8_e5m2_is_infinity(float8_e5m2 a)
-> +{
-> +    return (a & 0x7f) == 0x7c;
-> +}
-> +
-> +static inline bool float8_e4m3_is_zero(float8_e4m3 a)
-> +{
-> +    return (a & 0x7f) == 0;
-> +}
-> +
-> +static inline bool float8_e5m2_is_zero(float8_e5m2 a)
-> +{
-> +    return (a & 0x7f) == 0;
-> +}
-> +
-> +static inline bool float8_e4m3_is_zero_or_denormal(float8_e4m3 a)
-> +{
-> +    return (a & 0x78) == 0;
-> +}
-> +
-> +static inline bool float8_e5m2_is_zero_or_denormal(float8_e5m2 a)
-> +{
-> +    return (a & 0x7c) == 0;
-> +}
-> +
-> +static inline bool float8_e4m3_is_normal(float8_e4m3 a)
-> +{
-> +    uint8_t em = a & 0x7f;
-> +    return em >= 0x8 && em <= 0x7e;
-> +}
-> +
-> +static inline bool float8_e5m2_is_normal(float8_e5m2 a)
-> +{
-> +    return (((a >> 2) + 1) & 0x1f) >= 2;
-> +}
-> +
->   /*----------------------------------------------------------------------------
->   | Software half-precision conversion routines.
->   *----------------------------------------------------------------------------*/
+>   #ifndef CONFIG_USER_ONLY
+>   #ifdef CONFIG_TCG
+>       env->debug_mode = false;
 
 
