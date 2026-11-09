@@ -1,149 +1,154 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B8C260A3838
-	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 18:25:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1DF4B606A321
+	for <qemu-riscv@archiver.kernel.org>; Mon,  9 Nov 2026 19:15:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ME4w1f6G;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=S+ydmPKG
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=HbxOAIbc;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=gWHWxXKN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQU3g-0005l3-FP; Mon, 09 Nov 2026 13:25:32 -0500
+	id 1xQUpq-00071x-Gf; Mon, 09 Nov 2026 14:15:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQU3N-0005jC-0N
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 13:25:20 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xQUpj-0006yW-UR
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:15:12 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQU3K-00034v-Ds
- for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 13:25:11 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xQUpg-0008Db-Nf
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 14:15:11 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6A9HHK64562020
- for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 18:25:05 GMT
+ 6A9HH4Wh1865816
+ for <qemu-riscv@nongnu.org>; Mon, 9 Nov 2026 19:15:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- osiub48KcjmmDo5/nPyDvP2rfV6puvFo06w28EkFb4k=; b=ME4w1f6GgFbfsibj
- tjGGs+S3VnvSX32XhBurP1+YZ4WSeynZhtxCsANqReqIrC3bxAtjfelH41rS7ur7
- Av3E8KAL7SPAowmexjJdVfVXsWRPlSrRN0cymI0W8jvNnimV6vLloYuq+/ty0CLg
- wGp6/JC8/uf0NNoyOwC5BvJrpAQJHcUhBUHZSlyzBOFDjWUi5i0eEoJZ4QmEdR4x
- 3OhlTDNnd67gn4fM/Yp5K5MCZRVOfME5OQbmRPcB4CZMkA+1+l1W/EgMizrjkBfr
- 00B3D0ZqIqMjDm1uSvQ0qgIkAjDCbYDfTn6dOEF73ePG6kGMKOcwqK0kUuAqCLTN
- 5qNWSQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hucydhn8t-1
+ RJsJw/yTyfg1PMZ/TQYpbU7uysIal7ki9lqSVfzy85s=; b=HbxOAIbcnrrcK6gT
+ UCwvUGMh2uE+rO2bTIIQgH6GRoDGiTTpz3ZFf6g4YNTYu6sOMt00RJLBJcOCP0Du
+ MqrEkVfQ7CuSEAGVljTCFE7mrv1pKUO//eSIzX6R8kdRw1aEco73iJOaefdyo/wA
+ nyvC6uDE9YrXYD5rs7+wOXPEKTIafm0HPD97tYfGLSudNwQHrbRg62rENMiG0mPe
+ lc3a4J6tzwAkV9nx6C69I1vaPG3wKUmTqTr4unp8NH4kh11DdZfq2UaCKWCHK3Pl
+ mTDR2FVsSsyoMOvbiICWDtmuShIV/5ZmHDYN9RTPrYUcUT/A95H4AI3S8phj5MPp
+ tWxIBw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hue0qshqv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 18:25:05 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-535066512b0so22278441cf.0
- for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 10:25:05 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 19:15:05 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93f2c0e6653so227827785a.1
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 11:15:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794248705; x=1794853505; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794251705; x=1794856505; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=osiub48KcjmmDo5/nPyDvP2rfV6puvFo06w28EkFb4k=;
- b=S+ydmPKGuyXqzRqeS7DAnbsWUFgsGzMKAi2nRwLW4jNgUUOrmieeOHGpE8RW6L4QEl
- NpDxWzfhUqDnW3eZpTBYOmBREVWu/GbkjPHcKi5p3kimBjypLWFmZzvzlEdehip8iRtY
- ls95QWpS05ggvK0yYlLoq1B3JMlco45t5tpvZsbSY8Ozx+uMb/JkZq69pMxwuo0qb8xK
- Rvs0+5YRKfJEs8To2DdvNBRsiOTA8+FLqAYft3iHMf3e4n/U22Ah8WuAO06r3ThqEEf3
- QMqPMSO+X/3FTFbDmnpcme3cIOCIENtl8Ksz2uIP1epOBXYyxPd7UFpOIKdQg8LRKSf8
- oFoA==
+ bh=RJsJw/yTyfg1PMZ/TQYpbU7uysIal7ki9lqSVfzy85s=;
+ b=gWHWxXKN77Y6F1gpvfMShnJm5p+GYQrzOmLssFmvk+ypkHZggfa+pxmcIR/OKYhYe5
+ ncyrzCitVb4Jo5GfZNMxEemqXiEs6imAGSPOd2GvjI6i6CHmzYKERTWXkpvReTNtQZzu
+ 7jGXoh5sSAFmISZDn54Lm2Ea9auMoxNLDn15hJ1MveCjABOQyX1aQzaRioQj5ls+3d1U
+ qpZKJlO014PYn0FkQ8hVuX8mM75IABYvf6936aSkxuxyRbMUzYTwJZ0YbUvYxwmr3wKP
+ EpbL90RWVQhs/InFB77iiHY/9F59IvrxOII4YT2MAiBDE+wnTKaZHLFf8/lnCpVwBGkM
+ VhMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794248705; x=1794853505;
+ d=1e100.net; s=20260707; t=1794251705; x=1794856505;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=osiub48KcjmmDo5/nPyDvP2rfV6puvFo06w28EkFb4k=;
- b=UpGUm370woIFRI9kfGs0NgLvQ/ZMKMvOl1c2rhRias4ptLXwCB9wRF3rE/Fx2FAIJ1
- 9o836+DvlNs9L09BTPp9+LcJ47isfFQhOCrTFRjNNscTr9DCg/8Ex22U7u/L0cLjnwst
- GQbQBxg1+ZDxXbKMEQnQ/HJoCTamFiThr8jBecjZIXlH9aJMwpJpobYDIJhoHnyip81F
- bQpNq+EGPSVjjCDPLyxfzTA/3KkE7cWVy3a4OhujeUDC4KYp/MMQL2pKY3zhBxDEVDP2
- jhaq7IChHDIQAk7b7wsNlqwXWP+5rlZv5HEX+aygOagSCNlsLIRfLobxV4xEkxM/02oS
- XDFw==
-X-Forwarded-Encrypted: i=1;
- AL+hErHzjlIqbuRPCJVr05aeDhq8Zk/muzJs1snpY3zgX8G2ZEm0XCNqodfsLSgtx9dQY/8QbvNlaGNhaQSe@nongnu.org
-X-Gm-Message-State: APuU4Z85LRiylMIIo55nHDpkdmJqrxyomnCRunfIgtEybevQCphMX7Bj
- pnlbch7CtTlT4vqLDO3ds4PC839IHkrMpWV3FxBBy4u/XJapbGLS7j1dOAS2pdWdoLz4uFwroU/
- h9Tm1CYxuejKBPU+pOMUDuAR08xT6ScNLYPcSn8ewvZzliwGjWXdZqjFLtQ==
-X-Gm-Gg: AYBFou3jlQcz9ZeeGOcTnbjpl4am7kBHuKW+4nNgQrvqUZp9h++PGngbTIsgjTVvpjb
- rac++1nY+Af2vgs71jkPL5ClBuMYam6KuzOL5Xz7ig6aiujH4AWWMZ5DJ0YO00TRUo9teUUKL8i
- Zt2lSDKy6FwsvQXeFwyfx6kNngqDtikPAkB/iCrfIPXLhC/PJfJ/Ci2YOc7XCNnGzCq52ovAqkz
- CxW5/t0colpU2bQPGAjSWe9qW6HDGE7IjWnLuV+X0qigbX3GcEXsbcxv0V0kMk63zF8WMaVY2Nh
- ss8FJlyZwO5ZU/eMI/C44T6tojV/JQAGlprt3f/qTw1PK0C1jo9T7k3bFx6sELUdl+mgJkB/CyG
- DCZtfGnbUWSPy2mYZLbFgJZm3xQUiiLszwOwj6Z0oblM8t5Zb+TMFYifqhXiFGl7B2fF/T1cAUP
- WjQmGNQNJZ
-X-Received: by 2002:a05:622a:343:b0:536:8e69:8fe6 with SMTP id
- d75a77b69052e-5552722f3f1mr2709781cf.14.1794248704816; 
- Mon, 09 Nov 2026 10:25:04 -0800 (PST)
-X-Received: by 2002:a05:622a:343:b0:536:8e69:8fe6 with SMTP id
- d75a77b69052e-5552722f3f1mr2709361cf.14.1794248704355; 
- Mon, 09 Nov 2026 10:25:04 -0800 (PST)
+ bh=RJsJw/yTyfg1PMZ/TQYpbU7uysIal7ki9lqSVfzy85s=;
+ b=JjnJv8yjZpEzod/OSXXZV1CYGYEywk/tQGu+Zmy7zUAR4AZO8eDFJos8Xd6rMtxQ/g
+ mPeYQ7QDcQNmTYWQWnVqlBEKumIDJ3H2KU/G2L5DuJsjHb4pja+hpKFYpdkjiEKySJWC
+ XJaGseTBV3JBCXsyk1vRA067trBBSysD98fRv0OM1BdSNW3a0Ihop2VbBK38LLVFuIkj
+ 8q8ooAeO+o2SzqZ8B0YRqBi71nLeZIB9pwyZSNr9P3eXGWPlPK9w3EEskeMg+VIK9FoP
+ rAyDSJivuqZ+1nvilaugV7tAmmd2GRLdVUI3uLpk6cxoSvZis+JhVv0Z+OPk2x6VrW0P
+ 3fdw==
+X-Gm-Message-State: APuU4Z/XA5cBA9g6kvLlRGslNaNj7yA8qPdoJtBGqiLp0JnPR0Vj8xy2
+ T1HyUso5h7LgAvszfKIEhbukKGFYOOOr2Z+/QNXwBZSFtLPOUDWnS1dkTS8UuLeS0nvzzsJNMsW
+ PnaT2P4q+YmOalDTcdLhimy/F4Gna9ywUZqf2OTiSFL8XDfZ+cP9SRqz8sQ==
+X-Gm-Gg: AYBFou09e4Uimnt1UDqaNd4i7yL9BoX8eGAj2/UEMD0qSj+0byiooI52dQuKyZbE4Kl
+ TmG/stZNL6JD9qSQw/5zZx4TflUJWbzYjKu1WKJ7T8Oml+Mba7cvH08O2+aoOYL8dOeCLMJy0Xb
+ bFiFNUNJgiUarEjw7/NL1lW5LAo1yhrjRsRKUho9fXNxC1z1w1SH9MWRIcmkphR0fJjXkSUku55
+ 2/YuqzdzGenGdAX2/5IU/k7dsDgr3Z4TBOR/1AlAizIpRb0dys9qHWxRxPsNnzA8DKbl5ILr65L
+ 5dzOvXP/u4b1/N9aoPNPEZu18Ov6Y0qDM1etvkyALTSj5PHsQlkWguoei+wKMFkfutBkfWpm19l
+ hpDh5iRTOK1shIgcekXS71vvvmjvidQLc6myJxEN6uC91ufw8HB5Kx6vsPbedoTKRgWSXK/lfrV
+ R7iq5SAz7D
+X-Received: by 2002:a05:620a:640d:b0:93e:942f:b8a5 with SMTP id
+ af79cd13be357-9479f31bdecmr58570185a.14.1794251704648; 
+ Mon, 09 Nov 2026 11:15:04 -0800 (PST)
+X-Received: by 2002:a05:620a:640d:b0:93e:942f:b8a5 with SMTP id
+ af79cd13be357-9479f31bdecmr58565685a.14.1794251704015; 
+ Mon, 09 Nov 2026 11:15:04 -0800 (PST)
 Received: from [192.168.68.100] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5550af60493sm3482831cf.4.2026.11.09.10.25.02
+ af79cd13be357-9479e770d7csm43793485a.17.2026.11.09.11.15.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Nov 2026 10:25:03 -0800 (PST)
-Message-ID: <3903b65f-229f-42c1-9236-03b4f55e7d5f@oss.qualcomm.com>
-Date: Mon, 9 Nov 2026 15:25:00 -0300
+ Mon, 09 Nov 2026 11:15:03 -0800 (PST)
+Message-ID: <bbe309da-44d5-4bbb-ac8f-be6bd87b5334@oss.qualcomm.com>
+Date: Mon, 9 Nov 2026 16:14:59 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Use gen_goto_tb() for vsetivli exits
-To: WX Chen <wxchen0913@gmail.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+Subject: Re: [PATCH v4 1/2] hw/riscv: add RPMI support for server reference
+ platform
+To: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
  <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-References: <20261104-research-vsetivli-direct-chain-20261103-v1-1-ace12cf5280a@gmail.com>
+ Chao Liu <chao.liu@processmission.com>,
+ =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>,
+ =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
+References: <20261104050650.776580-1-subrahmanya.lingappa@oss.qualcomm.com>
+ <20261104050650.776580-2-subrahmanya.lingappa@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261104-research-vsetivli-direct-chain-20261103-v1-1-ace12cf5280a@gmail.com>
+In-Reply-To: <20261104050650.776580-2-subrahmanya.lingappa@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA3MyBTYWx0ZWRfX3XoUbWeEKUcI
- z+oyzZpIVmL+HAnXMwDRJ+LyFQAurdTswJNchHC5CE7zI5p2m5FdBiLBt7GdLio012U7zt34vUA
- 3VNxXkO4f/HQYbOxA7+K+EqzmDlyPNM=
-X-Proofpoint-GUID: Oe3HY2sl85nBV7FqMiKKJvfDNIGBx1RA
-X-Proofpoint-ORIG-GUID: Oe3HY2sl85nBV7FqMiKKJvfDNIGBx1RA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA3MyBTYWx0ZWRfX8o6p8L6T+5Wf
- jPqRk5oLpe0Cf0nKHfbOW2YSCvLs82CTabxyZCUTPemcACoSB1yJkyTpo0jmxZcHX/kwnB1Ammc
- OTnQw7p+YET0Kl+Thx/hWwRdxpqgL9m6Ds55GIJWkK1dJR/TEfl/Blg0igvkhT8CmJ692G1lA53
- J0gzd1bKBYo+vOnph+Usc4tp64jmbo6Tq4odwTYA7hoqgbV3H6Rhfo6sqh1SqTm+p39hES0GeMT
- yn7rW8dW3dj+k7c5JFcoT0EHi8i9lBAUaSqURbzpmBfG+mJi5IO5R1rYsEzkx1fBTjeDwGocp0Q
- iQoV2MoYLBPfFNEnt463gPwjwEDTi/XySOxwT/V4FLInLTn5hAXaScHxLzawz2xTouzQv8Lzvqg
- TdF62iSMUwwz+aiVlHQ1Ax5DIaxxiV/0NSAQSMzY66I9pjCgc21zY8FGT2g3l21t22wGYa7kmBx
- 6ngZztVLMqMTWoklwlQ==
-X-Authority-Analysis: v=2.4 cv=XuRvqlF9 c=1 sm=1 tr=0 ts=6af21001 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTA5MDA3NiBTYWx0ZWRfX9aYnKkiDWwpq
+ rCJP1qACfeezihMD43hYkEELTz2ZSA5z6BwvBsx+nAG8X6fwUfLcQzlVJiD4C9rcboU4kMUppVb
+ 4pUdrlABrMJ4EkFTfzcdNztnIOcei+VyiDRAf74HH0Yo6ijKA4FOFcjqfW8I79DTRXuzxZbvzez
+ 0U8TVfeGVEvp8uvyNwKl8NeC/jrAzj3CyF56RidYdyKxXDcjVTdJ40wJM6zUWzy2HaFOHM3m0Uk
+ eSu/57gI1mh2gFdKlkTG+3s0Vxkx96oArp5SDT4KKMde0KXkxWNFu6VyjIG6/ZVAkgtmZoIe//u
+ 2t7oCT/IBWj4RrerDDN8incGUXXfFoLn5NtJNHAXD0Zffsj/UI/meFlTt6AmpnnAdX+Wdr8nTtE
+ ww98sq8ZS6G+PYdK5G/bYp4mTr5ym1OxkymDb6KT26oZBWmcH7pSYj1BfuBYBEltimvSeWBeu6T
+ 0qJUeOcMY4UShfqeweg==
+X-Authority-Analysis: v=2.4 cv=DZuCOftW c=1 sm=1 tr=0 ts=6af21bb9 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=mzOeKfuatP8-4bX6b9kA:9
- a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=NEAV23lmAAAA:8 a=NLiCwHATAAAA:8 a=V1jnuoLLAAAA:20 a=EUspDBNiAAAA:8
+ a=Toitx6uVrjPLbkQhwn0A:9 a=QEXdDO2ut3YA:10 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=F9tHCgz3TLBaZgltkx5D:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-GUID: FooK-rVNCm2WKeVmIGBJwTsmsB7Fy3Oc
+X-Proofpoint-ORIG-GUID: FooK-rVNCm2WKeVmIGBJwTsmsB7Fy3Oc
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTA5MDA3NiBTYWx0ZWRfX6Da+tdIN5Gce
+ u2iG+KlRXL6HFcrIp7mVOZMD1rdDptYzKxnXAsPMVbrYPz7Rsddfehl/6FKE+CwF6Gwb1+xL8ng
+ OEJmzPMgvBnlNN3JF8dzlahm6dXD+mo=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-09_06,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0 adultscore=0
- suspectscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611090073
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ priorityscore=1501 spamscore=0 phishscore=0 malwarescore=0 adultscore=0
+ impostorscore=0 bulkscore=0 clxscore=1015 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611090076
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -155,75 +160,379 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/3/2026 2:34 PM, WX Chen wrote:
-> This change adjusts the translation exit of `vsetivli`. While preserving
-> the existing helper, state update flow, and TB boundaries, it uses the
-> generic `gen_goto_tb()` path to reduce the overhead of repeated successor-TB
-> lookups.
+On 11/4/2026 2:06 AM, Subrahmanya Lingappa wrote:
+> Add opt-in RPMI platform management to the riscv-server-ref machine for
+> firmware clients that use the RPMI transport.
 > 
-> `vsetivli` is used to set the vector length and type, and both its AVL and
-> vtype encodings are provided by immediates. Given the CPU configuration and
-> the source TB execution context, after this instruction completes normally,
-> the vector state changes relevant to subsequent translation are
-> deterministic. Therefore, this exit is eligible for direct TB linking.
+> RPMI is disabled by default so the existing board remains migratable and
+> retains its legacy reset and poweroff device-tree nodes. The rpmi=on option
+> realizes the unmigratable RPMI device, advertises the Base, System Reset,
+> HSM, and System Suspend services, and omits those legacy nodes.
 > 
-> Measured on an AMD Ryzen AI 9 H 365 (x86-64) host, using qemu-riscv64
-> with -cpu rv64,v=true,vlen=128,elen=64. A RISC-V GCC 14.2.0 cc1 built for
-> rv64gcv compiles the packages with -O2 -g0 -march=rv64gcv -mabi=lp64d.
-> Only cc1 runs under emulation; make, the compiler driver, assembler and
-> linker run on the host.
+> Explicit RPMI enablement rejects KVM and builds without librpmi. Document
+> the property, migration restriction, build requirements, and both
+> device-tree layouts.
 > 
-> Each variant is warmed up once, followed by three paired clean builds in
-> AB/BA/AB order, using -j1 and fixed host CPU affinity (CPU 7). Median build
-> wall times are:
-> 
->                    Before (s)    After (s)    Wall time reduction
->    LZ4 1.10.0         125.017      123.060                  1.57%
->    zlib 1.3.1          71.062       70.310                  1.06%
-> 
-> In a separate untimed test, a loop executes two vsetivli instructions per
-> iteration for 37 iterations. Host-side GDB entry breakpoints show that
-> helper_lookup_tb_ptr() entries at the two successor PCs fall from 74 to 0.
-> The guest still executes 74 vsetivli instructions. Initial TB dispatch and
-> link establishment still occur through the normal dispatcher.
-> 
-> Signed-off-by: WX Chen <wxchen0913@gmail.com>
+> Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
 > ---
+
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
+>   docs/system/riscv/riscv-server-ref.rst |  43 +++++++
+>   hw/riscv/Kconfig                       |   1 +
+>   hw/riscv/server_platform_ref.c         | 149 ++++++++++++++++++++++++-
+>   meson.build                            |   4 +
+>   4 files changed, 195 insertions(+), 2 deletions(-)
 > 
-> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> index a22e2cae6ce8e5a055c106fb76c305c92ac53d3c..b299c82d7a29057433e280b49b5220e6ad71498f 100644
-> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> @@ -234,8 +234,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
->       gen_helper_vsetvl(dst, tcg_env, s1, s2, tcg_constant_tl(0));
->       gen_set_gpr(s, rd, dst);
->       finalize_rvv_inst(s);
-> -    gen_update_pc(s, s->cur_insn_len);
-> -    lookup_and_goto_ptr(s);
-> +    gen_goto_tb(s, 0, s->cur_insn_len);
->       s->base.is_jmp = DISAS_NORETURN;
+> diff --git a/docs/system/riscv/riscv-server-ref.rst b/docs/system/riscv/riscv-server-ref.rst
+> index da043ed096..32c3201404 100644
+> --- a/docs/system/riscv/riscv-server-ref.rst
+> +++ b/docs/system/riscv/riscv-server-ref.rst
+> @@ -28,6 +28,7 @@ The main features included in the riscv-server-ref board are:
+>   * No fw_cfg device
+>   * No ACPI table
+>   * Minimal device tree nodes
+> +* RISC-V RPMI platform management
 >   
->       return true;
-> 
-> ---
-> base-commit: d73149283205645625bfa9fe029cfb68e4c4a9ae
-> change-id: 20261104-research-vsetivli-direct-chain-20261103-69536f07be37
-> 
-> Best regards,
+>   There are multiple ways of using this reference board.  The spec compliant way
+>   is using an EDK2 image and a TPM device.  The board was tested with the TPM
+> @@ -60,6 +61,48 @@ And then start QEMU with:
+>        -netdev user,id=net0 -device e1000e,netdev=net0 \
+>        -nographic
+>   
+> +RPMI support
+> +------------
+> +
+> +The ``riscv-server-ref`` machine exposes RISC-V RPMI platform management when
+> +the ``rpmi=on`` machine option is selected and QEMU is built with librpmi
+> +support.  RPMI is disabled by default.  ``rpmi=off`` preserves the legacy
+> +device tree and keeps the board migratable.  An RPMI-enabled machine contains
+> +an unmigratable RPMI device, so live migration is unavailable while
+> +``rpmi=on`` is selected.  RPMI is unavailable with KVM and requires a build
+> +with librpmi.
+> +
+> +The initial ``riscv-server-ref`` RPMI implementation exposes Base, System
+> +Reset, HSM, and System Suspend service groups.  System Reset handles guest
+> +shutdown and cold reboot requests through RPMI.
+> +HSM uses the machine hart IDs for hart discovery, status, start, stop, and
+> +suspend commands.  System Suspend uses QEMU's suspend and wakeup path.
+> +
+> +When ``rpmi=on`` is selected, the generated device tree advertises reset,
+> +shutdown, HSM, and suspend through RPMI service nodes and omits the legacy
+> +syscon reboot and poweroff nodes.  With the default ``rpmi=off`` setting, the
+> +generated device tree retains the legacy syscon reboot and poweroff nodes.
+> +RPMI is currently described through FDT only; this machine does not emit ACPI
+> +tables for the RPMI transport or service groups.
+> +
+> +RPMI support targets the RISC-V Platform Management Interface (RPMI)
+> +Specification v1.0 Ratified (`server-ref RPMI v1.0 specification`_).  The
+> +build dependency is provided by `server-ref librpmi`_.  After installing
+> +librpmi, configure QEMU with ``--enable-librpmi`` or ``-Dlibrpmi=enabled`` to
+> +make the build fail if librpmi is unavailable.
+> +
+> +.. code-block:: bash
+> +
+> + qemu-system-riscv64 -M riscv-server-ref,rpmi=on \
+> +     -bios fw_dynamic.bin \
+> +     -kernel EDK2.fd \
+> +     -drive file=nvme_disk.ext2,format=raw,id=hd0,if=none \
+> +     -device ahci,id=ahci \
+> +     -device ide-hd,drive=hd0,bus=ahci.0 \
+> +     -nographic
+> +
+>   
+>   .. _spec: https://github.com/riscv-non-isa/riscv-server-platform
+>   .. _tpm: https://qemu-project.gitlab.io/qemu/specs/tpm.html
+> +.. _server-ref RPMI v1.0 specification: https://github.com/riscv-non-isa/riscv-rpmi/releases/download/v1.0/riscv-rpmi.pdf
+> +.. _server-ref librpmi: https://github.com/riscv-software-src/librpmi
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 28d108faf8..cae3de6993 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -86,6 +86,7 @@ config RISCV_SERVER_PLATFORM_REF
+>       select RISCV_IOMMU
+>       select RISCV_NUMA
+>       select SERIAL_MM
+> +    select RISCV_RPMI if LIBRPMI
+>   
+>   config SHAKTI_C
+>       bool
+> diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
+> index d18550b48d..ea580e475f 100644
+> --- a/hw/riscv/server_platform_ref.c
+> +++ b/hw/riscv/server_platform_ref.c
+> @@ -29,18 +29,20 @@
+>   #include "hw/riscv/device-common.h"
+>   #include "hw/riscv/fdt-common.h"
+>   #include "hw/riscv/numa.h"
+> +#include "hw/riscv/rpmi-fdt.h"
+>   #include "hw/riscv/iommu.h"
+>   #include "hw/riscv/riscv-iommu.h"
+>   #include "hw/riscv/riscv-iommu-bits.h"
+> +#include "hw/misc/riscv_rpmi.h"
+>   #include "hw/intc/riscv_aclint.h"
+>   #include "hw/intc/riscv_aplic.h"
+>   #include "hw/intc/riscv_imsic.h"
+>   #include "chardev/char.h"
+>   #include "hw/char/serial-mm.h"
+>   #include "system/device_tree.h"
+> +#include "system/kvm.h"
+>   #include "system/runstate.h"
+>   #include "system/system.h"
+> -#include "system/kvm.h"
+>   #include "system/qtest.h"
+>   #include "system/tcg.h"
+>   #include "kvm/kvm_riscv.h"
+> @@ -68,6 +70,9 @@
+>   
+>   #define RVSERVER_PLATFORM_BUS_NUM_IRQS         8
+>   
+> +#define RVSERVER_RPMI_A2P_REQ_SIZE (16 * RPMI_QUEUE_SLOT_SIZE)
+> +#define RVSERVER_RPMI_P2A_REQ_SIZE 0
+> +
+>   #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
+>   OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
+>   
+> @@ -83,6 +88,7 @@ struct RISCVServerRefMachineState {
+>   
+>       int fdt_size;
+>       int aia_guests;
+> +    bool have_rpmi;
+>       const MemMapEntry *memmap;
+>   
+>       DeviceState *platform_bus_dev;
+> @@ -93,6 +99,8 @@ enum {
+>       RVSERVER_RESET_SYSCON,
+>       RVSERVER_RTC,
+>       RVSERVER_IOMMU_SYS,
+> +    RVSERVER_RPMI_SHMEM,
+> +    RVSERVER_RPMI_DOORBELL,
+>       RVSERVER_ACLINT,
+>       RVSERVER_APLIC_M,
+>       RVSERVER_APLIC_S,
+> @@ -143,6 +151,8 @@ static const MemMapEntry rvserver_ref_memmap[] = {
+>       [RVSERVER_RESET_SYSCON] =   {   0x100000,        0x1000 },
+>       [RVSERVER_RTC] =            {   0x101000,        0x1000 },
+>       [RVSERVER_IOMMU_SYS] =      {   0x102000,        0x1000 },
+> +    [RVSERVER_RPMI_SHMEM] =     {   0x110000,       0x20000 },
+> +    [RVSERVER_RPMI_DOORBELL] =  {   0x140000,        0x1000 },
+>       [RVSERVER_ACLINT] =         {  0x2000000,       0x10000 },
+>       [RVSERVER_PCIE_PIO] =       {  0x3000000,       0x10000 },
+>       [RVSERVER_PLATFORM_BUS] =   {  0x4000000,     0x2000000 },
+> @@ -283,6 +293,81 @@ static void create_fdt_sockets(RISCVServerRefMachineState *s,
+>       riscv_socket_fdt_write_distance_matrix(ms);
+>   }
+>   
+> +#ifdef CONFIG_LIBRPMI
+> +static const RiscvRpmiServiceConfig rvserver_ref_rpmi_services[] = {
+> +    {
+> +        .node_name = "sysreset",
+> +        .compatible = "riscv,rpmi-system-reset",
+> +        .service_group = RPMI_SRVGRP_SYSTEM_RESET,
+> +    },
+> +    {
+> +        .node_name = "hsm",
+> +        .compatible = "riscv,rpmi-hsm",
+> +        .service_group = RPMI_SRVGRP_HSM,
+> +    },
+> +    {
+> +        .node_name = "suspend",
+> +        .compatible = "riscv,rpmi-system-suspend",
+> +        .service_group = RPMI_SRVGRP_SYSTEM_SUSPEND,
+> +    },
+> +};
+> +
+> +static void rvserver_ref_rpmi_system_reset(void)
+> +{
+> +    qemu_system_reset_request(SHUTDOWN_CAUSE_GUEST_RESET);
+> +}
+> +
+> +static void rvserver_ref_rpmi_system_shutdown(void)
+> +{
+> +    qemu_system_shutdown_request(SHUTDOWN_CAUSE_GUEST_SHUTDOWN);
+> +}
+> +
+> +static const RiscvRpmiMachineOps rvserver_ref_rpmi_machine_ops = {
+> +    .system_reset = rvserver_ref_rpmi_system_reset,
+> +    .system_shutdown = rvserver_ref_rpmi_system_shutdown,
+> +};
+> +
+> +static RiscvRpmiConfig rvserver_ref_rpmi_config(
+> +    RISCVServerRefMachineState *s, const uint32_t *hart_ids,
+> +    uint32_t hart_count)
+> +{
+> +    return (RiscvRpmiConfig) {
+> +        .doorbell_base = s->memmap[RVSERVER_RPMI_DOORBELL].base,
+> +        .shmem_base = s->memmap[RVSERVER_RPMI_SHMEM].base,
+> +        .shmem_size = s->memmap[RVSERVER_RPMI_SHMEM].size,
+> +        .a2p_req_size = RVSERVER_RPMI_A2P_REQ_SIZE,
+> +        .p2a_req_size = RVSERVER_RPMI_P2A_REQ_SIZE,
+> +        .platform_info = "QEMU RISC-V server-ref RPMI",
+> +        .machine_ops = &rvserver_ref_rpmi_machine_ops,
+> +        .hart_ids = hart_ids,
+> +        .hart_count = hart_count,
+> +        .services = rvserver_ref_rpmi_services,
+> +        .service_count = ARRAY_SIZE(rvserver_ref_rpmi_services),
+> +    };
+> +}
+> +
+> +static void create_fdt_rpmi(RISCVServerRefMachineState *s, uint32_t *phandle)
+> +{
+> +    uint32_t rpmi_mbox_handle;
+> +    RiscvRpmiFdtMboxConfig cfg = {
+> +        .shmem_base = s->memmap[RVSERVER_RPMI_SHMEM].base,
+> +        .doorbell_base = s->memmap[RVSERVER_RPMI_DOORBELL].base,
+> +        .a2p_req_size = RVSERVER_RPMI_A2P_REQ_SIZE,
+> +        .p2a_req_size = RVSERVER_RPMI_P2A_REQ_SIZE,
+> +        .doorbell_size = s->memmap[RVSERVER_RPMI_DOORBELL].size,
+> +    };
+> +
+> +    riscv_rpmi_fdt_add_mbox(MACHINE(s)->fdt, &cfg, phandle,
+> +                            &rpmi_mbox_handle);
+> +
+> +    for (uint32_t i = 0; i < ARRAY_SIZE(rvserver_ref_rpmi_services); i++) {
+> +        riscv_rpmi_fdt_add_service_node(MACHINE(s)->fdt,
+> +                                        &rvserver_ref_rpmi_services[i],
+> +                                        rpmi_mbox_handle);
+> +    }
+> +}
+> +#endif
+> +
+>   static void finalize_fdt(RISCVServerRefMachineState *s)
+>   {
+>       uint32_t phandle = 1, irq_mmio_phandle = 1, msi_pcie_phandle = 1;
+> @@ -307,10 +392,16 @@ static void finalize_fdt(RISCVServerRefMachineState *s)
+>                             irq_pcie_phandle, msi_pcie_phandle,
+>                             iommu_sys_phandle, RVSERVER_PCIE_IRQ);
+>   
+> +#ifdef CONFIG_LIBRPMI
+> +    if (s->have_rpmi) {
+> +        create_fdt_rpmi(s, &phandle);
+> +    }
+> +#endif
+>       riscv_create_fdt_syscon(ms->fdt, &phandle,
+>                               rvserver_ref_memmap[RVSERVER_RESET_SYSCON].base,
+>                               rvserver_ref_memmap[RVSERVER_RESET_SYSCON].size,
+> -                            SYSCON_RESET, SYSCON_POWEROFF, false, true);
+> +                            SYSCON_RESET, SYSCON_POWEROFF, false,
+> +                            !s->have_rpmi);
+>   
+>       riscv_create_fdt_uart(ms->fdt, &rvserver_ref_memmap[RVSERVER_UART0],
+>                             RVSERVER_UART0_IRQ, AIA_TYPE_APLIC_IMSIC,
+> @@ -516,6 +607,17 @@ static void rvserver_ref_machine_init(MachineState *machine)
+>       }
+>   
+>       imsic_bits = imsic_num_bits(s->aia_guests + 1);
+> +    if (s->have_rpmi) {
+> +#ifndef CONFIG_LIBRPMI
+> +        error_report("RISC-V RPMI support is not compiled in");
+> +        exit(1);
+> +#else
+> +        if (kvm_enabled()) {
+> +            error_report("RISC-V RPMI support is not available with KVM");
+> +            exit(1);
+> +        }
+> +#endif
+> +    }
+>   
+>       /* Initialize sockets */
+>       mmio_irqchip = pcie_irqchip = NULL;
+> @@ -598,6 +700,28 @@ static void rvserver_ref_machine_init(MachineState *machine)
+>                                   memmap[RVSERVER_RESET_SYSCON].base,
+>                                   reset_syscon_io);
+>   
+> +#ifdef CONFIG_LIBRPMI
+> +    if (s->have_rpmi) {
+> +        MachineClass *mc = MACHINE_GET_CLASS(machine);
+> +        const CPUArchIdList *possible_cpus = mc->possible_cpu_arch_ids(machine);
+> +        g_autofree uint32_t *rpmi_hart_ids =
+> +            g_new0(uint32_t, machine->smp.cpus);
+> +        RiscvRpmiConfig rpmi_cfg;
+> +        Error *local_err = NULL;
+> +
+> +        for (i = 0; i < machine->smp.cpus; i++) {
+> +            rpmi_hart_ids[i] = possible_cpus->cpus[i].arch_id;
+> +        }
+> +
+> +        rpmi_cfg = rvserver_ref_rpmi_config(s, rpmi_hart_ids,
+> +                                            machine->smp.cpus);
+> +        if (!riscv_rpmi_create(&rpmi_cfg, &local_err)) {
+> +            error_report_err(local_err);
+> +            exit(1);
+> +        }
+> +    }
+> +#endif
+> +
+>       riscv_gpex_pcie_init(system_memory, pcie_irqchip,
+>                            &rvserver_ref_memmap[RVSERVER_PCIE_ECAM],
+>                            &rvserver_ref_memmap[RVSERVER_PCIE_MMIO],
+> @@ -652,6 +776,7 @@ static void rvserver_ref_machine_instance_init(Object *obj)
+>                                        "pflash1", RVSERVER_FLASH_SECTOR_SIZE);
+>   
+>       s->aia_guests = RVSERVER_IRQCHIP_DEFAULT_AIA_GUESTS;
+> +    s->have_rpmi = false;
+>   }
+>   
+>   static void rvserver_ref_machine_instance_finalize(Object *obj)
+> @@ -687,6 +812,20 @@ static void rvserver_ref_set_aia_guests(Object *obj, const char *val,
+>       }
+>   }
+>   
+> +static bool rvserver_ref_get_rpmi(Object *obj, Error **errp)
+> +{
+> +    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(obj);
+> +
+> +    return s->have_rpmi;
+> +}
+> +
+> +static void rvserver_ref_set_rpmi(Object *obj, bool value, Error **errp)
+> +{
+> +    RISCVServerRefMachineState *s = RISCV_SERVER_REF_MACHINE(obj);
+> +
+> +    s->have_rpmi = value;
+> +}
+> +
+>   static const HotplugHandler *
+>   rvserver_machine_get_hotplug_handler(MachineState *ms, DeviceState *dev)
+>   {
+> @@ -747,6 +886,12 @@ static void rvserver_ref_machine_class_init(ObjectClass *oc, const void *data)
+>                    "should be between 0 and %d.", RVSERVER_IRQCHIP_MAX_GUESTS);
+>       object_class_property_set_description(oc, "aia-guests", str);
+>   
+> +    object_class_property_add_bool(oc, "rpmi", rvserver_ref_get_rpmi,
+> +                                   rvserver_ref_set_rpmi);
+> +    object_class_property_set_description(
+> +        oc, "rpmi", "Set on/off to enable/disable RISC-V RPMI devices; "
+> +        "requires librpmi and is unavailable with KVM");
+> +
+>       assert(!mc->get_hotplug_handler);
+>       mc->get_hotplug_handler = rvserver_machine_get_hotplug_handler;
+>       hc->plug = rvserver_machine_device_plug_cb;
+> diff --git a/meson.build b/meson.build
+> index 434a193efe..41f6bcb676 100644
+> --- a/meson.build
+> +++ b/meson.build
+> @@ -3444,6 +3444,10 @@ foreach target : target_dirs
+>       foreach k, v: config_devices
+>         config_devices_data.set(k, 1)
+>       endforeach
+> +    if target == 'riscv64-softmmu' and get_option('default_devices') and \
+> +       not librpmi.found()
+> +      warning('riscv-server-ref machine will be built without RPMI support; install librpmi and configure with --enable-librpmi to enable RPMI')
+> +    endif
+>       config_devices_mak_list += config_devices_mak
+>       config_devices_h += {target: configure_file(output: target + '-config-devices.h',
+>                                                   configuration: config_devices_data)}
 
 
