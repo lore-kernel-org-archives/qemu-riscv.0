@@ -1,61 +1,104 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D23F5606A31C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 12:10:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03C10606ED45
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 13:00:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=fFpIXO/T
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=mYpV2YjF
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQkfQ-0002MP-Aj; Tue, 10 Nov 2026 07:09:36 -0500
+	id 1xQlSX-0007OI-MI; Tue, 10 Nov 2026 08:00:21 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1xQkfM-0002HM-Ks; Tue, 10 Nov 2026 07:09:33 -0500
-Received: from [115.124.30.113] (helo=out30-113.freemail.mail.aliyun.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1xQkfH-0003No-R3; Tue, 10 Nov 2026 07:09:32 -0500
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1xQlSH-0007Kn-Rf
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 08:00:07 -0500
+Received: from mail-pf1-x429.google.com ([2607:f8b0:4864:20::429])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <max.chou@sifive.com>)
+ id 1xQlSF-00016s-RW
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 08:00:05 -0500
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-8a4c72951b8so1197193b3a.3
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 05:00:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1794312545; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=CBCnNNw9zHK1dhwxg4v79FZ9oh2ycj04TUBKr/PeV/M=;
- b=fFpIXO/TPyc4rNY58cVQ9xc46lHDU6ToQnT+tcFjfRQeA6mYKQ4OvYSQtbY99B73lZ1LQ13qGpiggpAjnZ64TauvL2zc0FLDmwYknxLZLF2M0YauFfmQIga7snEzqQCP9+tIZkGcaILmisaLUjQduE0wYgNIzLj2wMDPjDYLm44=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R591e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
- MF=fangyu.yu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
- TI=SMTPD_---0XEVEaw6_1794312542; 
-Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com
- fp:SMTPD_---0XEVEaw6_1794312542 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 10 Nov 2026 20:09:03 +0800
-From: fangyu.yu@linux.alibaba.com
-To: daniel.barboza@oss.qualcomm.com
-Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
- fangyu.yu@linux.alibaba.com, guoren@kernel.org, liwei1518@gmail.com,
- palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- zhiwei_liu@linux.alibaba.com
-Subject: Re: [PATCH] target/riscv: fix exception PC for WFI 
-Date: Tue, 10 Nov 2026 20:08:58 +0800
-Message-Id: <20261110120858.74302-1-fangyu.yu@linux.alibaba.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <73ad77b3-1583-4b2f-91d5-5ac756b02ce6@oss.qualcomm.com>
-References: <73ad77b3-1583-4b2f-91d5-5ac756b02ce6@oss.qualcomm.com>
+ d=sifive.com; s=google; t=1794315601; x=1794920401; darn=nongnu.org;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=ZMo+X1qc56rPSUbOWYWYhVkTSNuI8Bf5OhC55lmr9yg=;
+ b=mYpV2YjF//dR6swTHF7BUxF0WZqEk98d3QsZXTJuCvG+DJ9g8bzGqDZL5sfXFvmj1x
+ bfNu0ZLscx4UFpNeAoBiCQd3yZ5Jm9v2rSpiXUlgSRMwvzyHeCMyKXv9RMVpNGlXGKav
+ CFBGnGG3w2RC9EqnULazfeI5ezaE3ZMJ1xpro2Aj0cBhEz85HLJNeOl7wvki8onTISsq
+ iakL3fj0GsGkWaPah0e5iSqrVobfJIkTNvan5NDuvZDW03gHZBgqif8pdMgCsQqEMstW
+ V7Oz6ZTaxrS5nkFC1z8b80IHJnfZ+2MjLOyhhWjSkAUq9rH9Bim8akudO/723NsuMhM8
+ HoqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794315601; x=1794920401;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=ZMo+X1qc56rPSUbOWYWYhVkTSNuI8Bf5OhC55lmr9yg=;
+ b=bfYh/72dKfeTGXQrj37S/PxVrrKp3Zbad/dsD8fhW4o6G0W1ZcVe1z/XaO9n8YfIBH
+ 1ORy6TCz/TbH/p2WQceXJaLMQHrwQsKXPN72CJU2b1ujxnDC+YLgMM5iSE6jkPjuB6//
+ zH7vl6W98HArB4XQuW/dIo55VfTxaxLnYmWK1iHKexugqyJiKmS6i53KyyiE2QKzr2RS
+ TbTPGNPH4SIswkKZu6lHLiOsK6zayzrxKL+YHC8cdJtPA9vLlqoUpDgQZEcSNhXi3dmp
+ 6PWmTmjNHhA5+ib6TPgXFuURiIWjCuixKgt3HYIhu5BtvJXoKyuk077Agb/XUnKYh5s2
+ XGCw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErErazfm6tyEQdgAmqsb4uQssYZv4EhJHtX3vU4wWJbGGBxo3fCXqvQUpcTzeRs7iTAs34WzaNzhm2RN@nongnu.org
+X-Gm-Message-State: APuU4Z9eTuOzS6MvfZD1YhNYTHGAF4kVZ5HnmtNGHT5hC7ss4ZzosVGH
+ 8/fAr2hfwSY9WTU45onDXq4v2q5AEgSNuRaUmEirHCm9s+tHNEYuHqxsh/56hBIHA1w=
+X-Gm-Gg: AYBFou3Wztjm0eMc7Kq2ejoAodm6FVFWPoY9BXHLdUghVtmTF6798Js3cY+KwICiCZR
+ qim0zYnS15wQSsqkaUa+045zOEynvhpFVcw5V4ihTfQXEZdl1CavTfuMUCwJKLAHTjQS6cH+IBr
+ 9qbj/u418q9u92UHJuQ/vMgzUUAlIqVa9lps+Vp5dm1WTYjwFJcm+Bqn287t/39+UnAMrzd7Ygq
+ 8dkIb0s/mciFKtCn/nsljK8NuFnm0TOXchXQsLzgwggVhyau0UEbjAkPux1/++rNH5lozfAVaIz
+ 7zZZp6H+TdqwKNX6De3Z8fmkPgZXFgossNmud7DfFZgrGjXybMxIhGdMcS8pyjiDkw9E3l1/847
+ 4/4pJmxWxQjgQp3nd0Zn4fTNei/UTw/D5zkRFaIo94pvQbB15qRKRxQ6BfVeAZhiypcdsXJo1Iq
+ Kb8WPpT9/x0gsbaTngAGwKxoozSJbtnhSqDCxYgWbc4IOrMEt9UuqgUqq04iULhdyhh3kn7BxvG
+ gJfSrMILfERw82wNpMSjvHUbQofWug37JeTuroLhXYswjx8RyRsR8rgPnoMKMZZEkDQdy4WyLiQ
+ 6hdqVEcuossXRoZYfSjT9xD+Ozf5YQDoCSKJKE4LqIVUBhiTVHQKJmoS776aSjWob0y8TKZ9Jw=
+ =
+X-Received: by 2002:a05:6a20:4307:b0:3e2:3737:75fd with SMTP id
+ adf61e73a8af0-3f19018a89fmr2515218637.58.1794315601279; 
+ Tue, 10 Nov 2026 05:00:01 -0800 (PST)
+Received: from sifive.com ([167.103.28.185]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cdd8d7a5680sm731266a12.21.2026.11.10.04.59.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 10 Nov 2026 05:00:00 -0800 (PST)
+Date: Tue, 10 Nov 2026 21:59:56 +0900
+From: Max Chou <max.chou@sifive.com>
+To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, 
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <Alistair.Francis@wdc.com>, 
+ Aurelien Jarno <aurelien@aurel32.net>, Peter Maydell <peter.maydell@linaro.org>,
+ Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>
+Subject: Re: [RFC PATCH 13/38] target/riscv: rvv: Implement Zvfwdota16bf
+ instruction
+Message-ID: <avMUr0mgv2Z4I2u7@sifive.com>
+References: <20261104194155.679241-1-max.chou@sifive.com>
+ <20261104194155.679241-14-max.chou@sifive.com>
+ <ac3eb49a-72bd-47de-8386-0c6cc2aa8382@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.113 (deferred)
-Received-SPF: pass client-ip=115.124.30.113;
- envelope-from=fangyu.yu@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <ac3eb49a-72bd-47de-8386-0c6cc2aa8382@oss.qualcomm.com>
+Received-SPF: pass client-ip=2607:f8b0:4864:20::429;
+ envelope-from=max.chou@sifive.com; helo=mail-pf1-x429.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -67,107 +110,35 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
->On 11/9/2026 10:56 AM, fangyu.yu@linux.alibaba.com wrote:
->> From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
->>
->> trans_wfi() advances env->pc before calling helper_wfi(), which may
->> raise illegal or virtual-instruction exceptions through GETPC().
->> With CF_PCREL, restoring the instruction PC uses env->pc's page base.
->> If the next instruction is in a different page, the exception PC is
->> restored one page too high. This affects both a WFI ending exactly at
->> a page boundary and one crossing it.
->>
->> Keep env->pc pointing at WFI while helper_wfi() can raise an exception,
->> and pass the instruction length to the helper. Advance env->pc only on
->> the normal single-step or halt paths.
->>
->> Fixes: 356c13f94dbf ("target/riscv: Enable PC-relative translation")
->> Signed-off-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
->> ---
->>   target/riscv/helper.h                              | 2 +-
->>   target/riscv/tcg/insn_trans/trans_privileged.c.inc | 4 ++--
->>   target/riscv/tcg/op_helper.c                       | 6 +++++-
->>   3 files changed, 8 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
->> index 1cffcad580..b36e3532aa 100644
->> --- a/target/riscv/helper.h
->> +++ b/target/riscv/helper.h
->> @@ -135,7 +135,7 @@ DEF_HELPER_1(mret, tl, env)
->>   DEF_HELPER_1(dret, tl, env)
->>   DEF_HELPER_1(mnret, tl, env)
->>   DEF_HELPER_1(ctr_clear, void, env)
->> -DEF_HELPER_1(wfi, void, env)
->> +DEF_HELPER_2(wfi, void, env, i32)
->>   DEF_HELPER_1(wrs_nto, void, env)
->>   DEF_HELPER_1(tlb_flush, void, env)
->>   DEF_HELPER_1(tlb_flush_all, void, env)
->> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> index e22df6fbe7..3ca55b9842 100644
->> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
->> @@ -167,8 +167,8 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
->>   {
->>   #ifndef CONFIG_USER_ONLY
->>       decode_save_opc(ctx, 0);
->> -    gen_update_pc(ctx, ctx->cur_insn_len);
->> -    gen_helper_wfi(tcg_env);
->> +    gen_update_pc(ctx, 0);
->
->Please add a comment before this gen_update_pc() call explaining that env->pc
->is deliberately left on the WFI until the exception checks pass.  I know this is
->explained in the commit msg, but in this case it's way too easy for someone else to
->read this code. assume that this gen_update_pc() isn't intended and then try to
->advance PC back again.
->
+On 2026-11-09 17:15, Daniel Henrique Barboza wrote:
+> On 11/4/2026 4:41 PM, Max Chou wrote:
+> > ---
+> > +    bfloat16 *a_vec, *b_vec;
+> 
+> Although we don't have any existing instances of it in the code, it is perfectly
+> fine to do:
+> 
+> +    g_autofree bfloat16 *a_vec = NULL;
+> +    g_autofree bfloat16 *b_vec = NULL;
+> 
+> 
+> Sparing us from calling g_free() on both arrays later.
+> 
+> 
+> LGTM otherwise.  Thanks,
+> Daniel
+> 
 
-Good point. I will add a comment above gen_update_pc()
-explaining that env->pc is intentionally left on the WFI,
-and the helper advances it only after all exception checks
-pass.
+Hi Daniel,
 
-Thanks,
-Fangyu
+Thanks for the suggestion. Will provide v2 for this.
 
->
->LGTM otherwise.  Thanks,
->Daniel
->
->> +    gen_helper_wfi(tcg_env, tcg_constant_i32(ctx->cur_insn_len));
->>       ctx->base.is_jmp = DISAS_NORETURN;
->>       return true;
->>   #else
->> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
->> index f9c79fe6b9..3f71258858 100644
->> --- a/target/riscv/tcg/op_helper.c
->> +++ b/target/riscv/tcg/op_helper.c
->> @@ -625,7 +625,7 @@ void HELPER(ctr_clear)(CPURISCVState *env)
->>       riscv_ctr_clear(env);
->>   }
->>
->> -void HELPER(wfi)(CPURISCVState *env)
->> +void HELPER(wfi)(CPURISCVState *env, uint32_t insn_len)
->>   {
->>       CPUState *cs = env_cpu(env);
->>       bool rvs = riscv_has_ext(env, RVS);
->> @@ -639,6 +639,10 @@ void HELPER(wfi)(CPURISCVState *env)
->>                  (prv_u || (prv_s && get_field(env->hstatus, HSTATUS_VTW)))) {
->>           riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GETPC());
->>       } else {
->> +        env->pc += insn_len;
->> +        if (env->xl == MXL_RV32) {
->> +            env->pc = (int32_t)env->pc;
->> +        }
->>           if (riscv_cpu_cfg(env)->ext_sdext && !env->debug_mode &&
->>               (env->dcsr & DCSR_STEP)) {
->>               return;
->
+rnax
 
