@@ -1,137 +1,100 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B85E3606A320
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 15:17:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59AA8606A339
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 15:58:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=HATDV1HW
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=zud0Xhzc
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQnb6-0002Kj-Ac; Tue, 10 Nov 2026 10:17:22 -0500
+	id 1xQoE5-0000UZ-Rw; Tue, 10 Nov 2026 10:57:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xQnZM-0001cJ-Cb; Tue, 10 Nov 2026 10:15:37 -0500
-Received: from mail-koreacentralazlp170130006.outbound.protection.outlook.com
- ([2a01:111:f403:c40f::6] helo=SEYPR02CU001.outbound.protection.outlook.com)
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xQnZH-0001o1-VG; Tue, 10 Nov 2026 10:15:30 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j3uXjjjZS7mweSMX0R/My0ZZSE6b2qRlelwmBR7ql8aHbw4Cv+eOKSWuDKHDsgklAViQXAHD/HQuXWHtpykoIELIS24u89oIN4RbwhSV0LecRtvBnH/JdmpJeSdXVTaamlnWFaWF3jXvH1CrMChXXRuR749/wETFPoxWqjCatvoEX/U7bBma2VClHsLWYpAoARCknMwrWbKvlp2RY7z1rQA5KZ3PWEI1dRUtHzKk1+kNFrYvwx7ok+sy+aIpTGzWqvgVnd0sl5XUDoi6GwldX1rcRb1PPfjGQJPX6dFdmpg2QTkGsE1eQF5ADzP/QWfvuevffmfNum+pbZ9ZEf4T+Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LoW3UjHoV0rUoIKxQ7eNNcz4weagP1ZVmnZrgE/tJHo=;
- b=TMWVadUnjTiI0V5UR9UgFbm24RflUhyVjCM0Yr2lRNKRDQjp8sYdALJM98SWSC4mgPHsgic3cFXIwtRSsba6NsgtQfwqqv96rN3lBNiuqNKK4yQCZsVvdWdKMcnMg+vKpjahJF54P6Tp8K4XK0ZU/EX6kwHUuPiJHD/1POvE0waqSUSKksZuiWCAYOJPWHVH/h3kvgrNMLf7Cq1w03ff2hZ4Bvg7G7xQdBFRGCYOOWDNeNghgk40/JAbp2PpkfvtPNPMk9kg/RNVK6zVsci2m/aHV1+Ft7zhLSWQOGHRmgBELsgVmAso3VNC8HxO0QBUoyixcki1dBXZaKnG8roppQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=processmission.com; dmarc=pass action=none
- header.from=processmission.com; dkim=pass header.d=processmission.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LoW3UjHoV0rUoIKxQ7eNNcz4weagP1ZVmnZrgE/tJHo=;
- b=HATDV1HWN67kmnajB1ROF5sSF18IvmdfEtYhPFYWVP7dI0DavTHPQxPCuE7pOnPX8t4MXdWuSTd7BXXImOo+Utwxrc6XUl11z8scEgc1dPC1ulXUGLeoiVjrGDJmCbyDvuEaUmsnwIPGV2jv+EMh88likXGzAOyEPFxdUfwHUx3n9+5N/XMnXBRZffxqrh9gxwSK+I34amOvJ6jPaISn+Xj/64plSiQsTsWwgnfxWns+KofJvYio9v52tcLbYHF6TEYOC4TwSnwhdjzW1EdjPQ+1SyezCfAQjq3GvijHGzXRc3oJE0DZ1Wo18ThonKJpmOkKtf4W0sFaesC+t4MCXg==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=processmission.com;
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by TYSPR02MB7845.apcprd02.prod.outlook.com (2603:1096:405:61::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
- 2026 15:15:20 +0000
-Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
- ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0615.007; Tue, 10 Nov 2026
- 15:15:19 +0000
-From: Chao Liu <chao.liu@processmission.com>
-To: Max Chou <max.chou@sifive.com>
-Cc: Chao Liu <chao.liu@processmission.com>, qemu-devel@nongnu.org,
- qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <Alistair.Francis@wdc.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Peter Maydell <peter.maydell@linaro.org>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Alistair Francis <alistair.francis@wdc.com>
-Subject: Re: [RFC PATCH 09/38] target/riscv: Add Zvqwdota16i dependency imply
- rule
-Date: Tue, 10 Nov 2026 23:15:02 +0800
-Message-ID: <20261110151503.16857-1-chao.liu@processmission.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261104194155.679241-10-max.chou@sifive.com>
-References: 
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PH0P220CA0011.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:510:d3::16) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1xQoE4-0000To-8z
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 10:57:36 -0500
+Received: from mail-wm1-x329.google.com ([2a00:1450:4864:20::329])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <shentey@gmail.com>) id 1xQoE1-0008Ka-Go
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 10:57:36 -0500
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-4a20a37703bso15947575e9.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 07:57:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794326251; x=1794931051; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id
+ :references:in-reply-to:subject:cc:to:from:date:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=0fhMbGmt3RTQ78ZmraD3xoHdpK036LIpYJpNT0qF2S0=;
+ b=zud0XhzcgMNH94PVUz4hgPNyk7WoBJ9haR8ysm+pmfOrBIcFCunwtEtILoQTc89vfB
+ ZOhxHhlrg5vjk2jO8GwWzCdsRx1CG3k+TWVC3JBcSMTtAg7XTgA83EJ7lqLN4QmXAus2
+ UupmdhhOE0S6yrFYv2I7EPMh2vosGPK0zOdTmXQVb7cHXFSjvFOfles7wZRKveR8x21P
+ jddPs3S440CgJRh7KOEo+iQLhtxLH8XffEZnfJmRApRZwRf0rUKwmZLcIG/V+sarjS5G
+ RPsL194E9B5wEMN6LQ1tO4tmwCA2EHLTBn3qzLjDPVsrJzVZK2s0mHAHWZOUwrMnzEgg
+ B+GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794326251; x=1794931051;
+ h=content-transfer-encoding:content-type:mime-version:message-id
+ :references:in-reply-to:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=0fhMbGmt3RTQ78ZmraD3xoHdpK036LIpYJpNT0qF2S0=;
+ b=i9mlgecFbdMjKo6H5eyaoRKhLV6iljNsTKUJik2M/Jp3UTeg1W098v8jyBa2wQ2VwH
+ NbfMWNwYLWlsxNBSFq4mXwcyhUjCKUhUbTnLJorjQ+jpEbtHnLVibPpgRph4N7Bduswj
+ g/yxNmmRx8GhglUhbAfeFSlNhNQZ2MU9ugsxaXWZkqdilw0nu7NB8KDT+nA/25slD+TG
+ dqedfBq38UVXp579KnZF9m/2bVS8Jf43RyN8XBDRnRNdmtsyifVwXAOfb2zHy9LeMOBj
+ aD5gXyEy71rcJV6GkqMUv3Cd/bBJBT77Vp9M91ttzipNf8TXPH4Fkzf3n2rYGfJkF/lO
+ ENrg==
+X-Gm-Message-State: APuU4Z8QFmPlsnhp5j+2wSQobLl8Y67xZBHMPLa+TYLP4z+LZCaJwO+M
+ Ri8D/b44KlDBU4jbsImlQo5oTZrTLFJ+5aOJ0ajYZFaNNEo9+MH22HkA
+X-Gm-Gg: AYBFou0FBGe5VnXaFZWd39SOqUXWlkY9Mm/+21yLO2c7YLhiki4mmqHX2QddNfyX9Uj
+ kkd6oMwwQVuWbQgDIqEwjk9ZZD3F0qJA2XR9WnKgeQ/MzuySQv44/FSdUWHEM1zlXfPRHfOJaLw
+ 1+Fq4w/yu3OduVQMI/W6zdq6dv9qCVBxowqwDEEt+dfFHwCt1/49t17xqQgqxaRC7LKBRb270/U
+ CqMkAmp8hD8AH2/iXCulZJFfPRtRiTOQZQzoSDdepinyrx3mt6QkZsDgiY4MT5ZAjfpE2EPYGU0
+ /AWXVsuf5DhZBgYr3tStwBzv2rj91MMwUU/nS7Fd/qbvzRR1X/rwr5cRQj39fyNkoJdEsJnAmaj
+ x35vJm9MDhgbA4PhzNjNRgwRCy0p3Pszf58Pub5hhvKPxOdlzt2L+SEozTA12BijiEug7L21//O
+ owJPEZQRTSwkY1HFTeL5VB5FbCQTSv6QTWuQDHmHINwIKDOxl7KGWtnN738LNaGRaO9OXWQmIxw
+ wcHsQ1ayMovVVoN5CcCDdWDb/liywU4SIDGsl87+EWnJpZ+0AbnIW/4Z+3ezH75KB4G69eAzehQ
+ dy8zR+zxFPhpOrSwncDXIm6rRV0nyL5tSzHP5xZsrTCQbrIBB9B3lnjzFFPPTiqeGgUu6frY8jU
+ msAmdnk4GFYqzLFdiyZzA
+X-Received: by 2002:a05:600c:3b83:b0:4a1:88de:9e8b with SMTP id
+ 5b1f17b1804b1-4ba0233f907mr62613945e9.5.1794326250825; 
+ Tue, 10 Nov 2026 07:57:30 -0800 (PST)
+Received: from ehlo.thunderbird.net
+ (business-090-187-110-129.90.187.pools.vodafone-ip.de. [90.187.110.129])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-498369a3f4esm6214928f8f.53.2026.11.10.07.57.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Nov 2026 07:57:30 -0800 (PST)
+Date: Tue, 10 Nov 2026 11:49:33 +0000
+From: Bernhard Beschow <shentey@gmail.com>
+To: Peter Maydell <peter.maydell@linaro.org>, qemu-arm@nongnu.org,
+ qemu-devel@nongnu.org
+CC: qemu-riscv@nongnu.org, Jean-Christophe Dubois <jcd@tribudubois.net>,
+ Chao Liu <chao.liu@processmission.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Peter Xu <peterx@redhat.com>, 
+ Fabiano Rosas <farosas@suse.de>
+Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v2_for-11=2E2_2/2=5D_include/hw/core/pti?=
+ =?US-ASCII?Q?mer=2Eh=3A_Fix_=27version=27_argument_of_VMSTATE=5FPTIMER?=
+In-Reply-To: <20261106163657.3825938-3-peter.maydell@linaro.org>
+References: <20261106163657.3825938-1-peter.maydell@linaro.org>
+ <20261106163657.3825938-3-peter.maydell@linaro.org>
+Message-ID: <CDAC81E8-0731-4747-86DE-70F2368CC989@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|TYSPR02MB7845:EE_
-X-MS-Office365-Filtering-Correlation-Id: a06bc55f-e686-4bfd-be3e-08df3f3d6ed4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|23010399003|366016|261009223027099003|10067099003|261026140227099003|261026121527099003|261022105027099003|261028144727099003|261021121427099003|261102123227099003|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info: O2TYUU1kqWbozXiecFBTD8g2+W+XqX4yBCUfd7MJdNPxYkHOHnX4oDUz3hyot4jSVA++4txjvY8lWjcfFavbmRgLlnn0ayrvoZxM36OmwvzU9O3sISP3cXmZS+2M3ymKcN40knrkjX0UF7Oe4E9XrzxoG5MxQbPUM3yNmZHkD2IaMRm+lFVIJeSnmAYPowbkNYADx2giOOo9Vy+zf+x9iDA/v9+XGfozmuvSRQZ3ctLZsxnm/cPax135D6ZBW7b9Nq9jRdg1582aDckhKSjBJNSWIb3FZ+8s4SVIlJXRYKUy6USrLwVbv6m5x3fQHShG30Zq/cSSjDfAnb9AU79aXi6/TF7EPl/N7TCtzcRfWCKjCcHf/mT4a4tH+Y9vNEoGphLuLokDX0ny2vWnyvBkBsN7B3qNa04//Hl+IDd2e97+GBCCaU6Dq7bFkSGgAgVR5whhwsdSBT3355X34NdMkfc1Cn0ZZH7Ot+XXYfLjSpf+kj7UGV9qN/an8CEv2sQuGbxoL06Rc6mIwkxFCiHQsK4kC5tD841ID0j2F1G5k1CeE2pJdM02iv9dfQ14ex1xIyW5LpIfY6pfEssnjIf8nziQqW3utJTBGTbpslfQnkEzhU3K0lP4jsWggRsviWLDzlAtk6xQJKFXzEkKpETu3/Lo+vtDL78uqppz+aPICPg=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(261009223027099003)(10067099003)(261026140227099003)(261026121527099003)(261022105027099003)(261028144727099003)(261021121427099003)(261102123227099003)(56012099006)(22082099003)(18002099003);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?f2KT/8c6p7rlZdUf80GYxY+cqfQdw4kkhu58Yt57MvIQeIu0MDXII2i2uNnJ?=
- =?us-ascii?Q?3nh8sLYVMv/LIf3AJlyZvaGQ9tqOS6RZ713EuQeD/VTtJPUGb0xGLetpzNwH?=
- =?us-ascii?Q?q441LkH8bcsIOeRJiU2L9cxP0ecY5jinfRaVRzaaq5sgynvj7WFUTop31Mzh?=
- =?us-ascii?Q?fabWV72hOwgfbSw/Lqww8iKVqwjUrDWfTehYgGkIRDr4JDj2OrN72enll0J0?=
- =?us-ascii?Q?lHzzJ50nZxmZewSCBWU/k8okhaPrnQ13fcOtPeqcQ14YAtTvwo9aSuSitO9C?=
- =?us-ascii?Q?u1WHvRJjj7Wev+56PekrA5KDSWdkzwdYEWi/eu2VZoe5V9dk1cyanXFVd9Q6?=
- =?us-ascii?Q?wKDTLvWoYhRsPtZiWRI5lRbcYi2YWNnVvwE13kliug/4+w5fruX5Fkyu4Yqj?=
- =?us-ascii?Q?/+lZiiCKQM7fDMb9J9PaxWcuE8dpJEdVMOtluTIYEboI+PcsrmzvqQPBsu6W?=
- =?us-ascii?Q?AyBQTiCmSB73gYB4zI9dxmOuVdJrt38uO2T6NG4luVnrBU4llxlX6njvMdSV?=
- =?us-ascii?Q?PxEYUsRLrGhDDK/5jF8yryfcTgjPbMl3t9Wxfw5NalaDZeGzPOsTbKlVXvsV?=
- =?us-ascii?Q?VHzKQOg81quoCnnnzzcSRqSe9ClhQssD0N37Ia64c8cp4CkkM1WA6ukmBMFm?=
- =?us-ascii?Q?kVEwEddlCTrcn2ZchE+rPU7ZuV9Xwt7Q9IupO6QKy4997o0gn87RPxIJ5FCI?=
- =?us-ascii?Q?5TlrvDdml8WuNiKblVS+bG/9RPl1yfxmOxwh4mG8Eq/8HfpLBHkK2l5+5M0O?=
- =?us-ascii?Q?wF5qaJtddtDAZwmaha0x7SrcYnPZy44fKHIyMScWBLluFq9NWtK3fBbB1Sk3?=
- =?us-ascii?Q?5v5qdbg3T1cPGcgwop/W7vIKGxJ84s4fY9EWqxQ+ZtZkcrIhxCkcXejOcCsD?=
- =?us-ascii?Q?IZEvKsy0DCKNtOa20kp0kao7BZj1NRbB868TZ2H6goVbeCNmQaHw5b5gXJ8s?=
- =?us-ascii?Q?ukv4mVntFIonj8XyNo+6ifcq95Q5G0ShQ0xt7AwTWFLPwA5QMpZ9KOfC5317?=
- =?us-ascii?Q?j17YOeErzjGqw7GfzBMiZI3D17gi+wSZgry4ErZj2x/KBch4bwGtw00luVMM?=
- =?us-ascii?Q?FE/wOj69ObejHZo0rJ8Vfzh4TO765vyx1B49JOBC8bD3JFLtDT0K2yz24EDd?=
- =?us-ascii?Q?HJXk7MpAk+acCKCsONPInIvSMyHf6EgMsjfDcFO1rzKPScxFietu0nnQs8n/?=
- =?us-ascii?Q?DYsPDDTixU6QRINdlGOzgCW2dkiMNK5CLsXvn95417Z3Fq4VQFcA3u73dhlS?=
- =?us-ascii?Q?NxuEM9RQmGfekU/9izv8vHO60V8FXK0ogSl/XolLxpIvTFwmyElOy8K/pdrw?=
- =?us-ascii?Q?XJ1A6Q4exkKrKBxSqX4KHZru24NypvFb86e8W+57tEa1PaX4cL5ml+kKwyWR?=
- =?us-ascii?Q?3LBTANuxrRX4zpm0XBN+9G0iwuq5d5s0sy3j7Rg3gU9QzX+8tQc/FdvwDCQo?=
- =?us-ascii?Q?m50hn9WcGOzEKjnBHBQ4E4UC5rkNz7UyaN49TaaWRmaF0SOoMI+9q33MXpBD?=
- =?us-ascii?Q?SQ8Jm3I7LORtL9f0RuoSTo6Cm7UMZ5FNDwf34ZxVnJ2gBFbqx/hSb+BN9lrn?=
- =?us-ascii?Q?P2qisVQ2r6NCd3zgqAHbd+98F0pdnOCYIhtsd9r5Knb/ZUEOVZggZEk3Ns+E?=
- =?us-ascii?Q?VunDMD2kqQLxfZYs2/w+hyq7CEq/gGvgsc+KY+tagUdDpWL94L95GdjxghWS?=
- =?us-ascii?Q?6zY/9NZkzwTYwSrutScAj18yST3kOwKATqMqFhwXh04Be2NRHoDUMpPBVmu6?=
- =?us-ascii?Q?lWWBGJBtL4j06kuRiSmo8vuxJJazbw0=3D?=
-X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a06bc55f-e686-4bfd-be3e-08df3f3d6ed4
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 15:15:19.7019 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: PWD5MWO0RoqIVbRGKBeKd+acwSxXYCl/INTMoYy062gPumctfn1RabCcRgURmReQ34x+IGX242ntA3da6iiVIalDZO3bzYxQa1uho7zWAcQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYSPR02MB7845
-Received-SPF: pass client-ip=2a01:111:f403:c40f::6;
- envelope-from=chao.liu@processmission.com;
- helo=SEYPR02CU001.outbound.protection.outlook.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::329;
+ envelope-from=shentey@gmail.com; helo=mail-wm1-x329.google.com
+X-Spam_score_int: -4
+X-Spam_score: -0.5
+X-Spam_bar: /
+X-Spam_report: (-0.5 / 5.0 requ) BAYES_00=-1.9, DATE_IN_PAST_03_06=1.592,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_FROM=0.001, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -143,61 +106,114 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-16.2 required=3.0 tests=BAYES_00,DATE_IN_PAST_03_06,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu,  5 Nov 2026 03:41:24 +0800 Max Chou <max.chou@sifive.com> wrote:
 
-> According to the Zvbdota isa spec, Zvqwdota16i requires Zve64x.
-> 
-> Signed-off-by: Max Chou <max.chou@sifive.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
 
-Thanks,
-Chao
+Am 6=2E November 2026 16:36:57 UTC schrieb Peter Maydell <peter=2Emaydell@=
+linaro=2Eorg>:
+>The VMSTATE_PTIMER macro is defined to pass a 'version' argument of 1
+>to VMSTATE_STRUCT_POINTER_TEST_V=2E  This means that the field will
+>only be used in migration when the vmstate struct that uses
+>VMSTATE_PTIMER has a version_id of at least 1=2E  This doesn't match
+>how we define other VMSTATE_FOO which don't take an explicit
+>version_id, which is to use a version argument of 0 (e=2Eg=2E all the
+>common macros like VMSTATE_UINT32 are written to pass 0 to their
+>VMSTATE_UINT32_V counterparts, and so on)=2E It also doesn't match
+>how we define VMSTATE_PTIMER_ARRAY=2E
+>
+>The practical effect of this is that users of VMSTATE_PTIMER in
+>vmstate structs which explicitly or implicitly have a version_id of 0
+>were actually not getting their ptimers migrated=2E
+>
+>This affects:
+> vmstate_xlnx_csu_dma in wh/dma/xlnx_csu_dma=2Ec
+> vmstate_k230_wdt in hw/watchdog/k230_wdt=2Ec
+>
+>which are used in:
+> * Arm Xilinx versal and zynq machines
+> * RISC-V K230 machine
+>
+>Most ptimer users are unaffected because they took the usual approach
+>of explicitly setting their starting version_id to 1=2E
+>
+>Fix the version_id in this field=2E  This is a migration compatibility
+>break for all the above listed devices/machines=2E  Since the timers
+>involved are in devices where the timer is usually stopped (e=2Eg=2E  the
+>watchdogs only have the timer active when the watchdog is enabled and
+>counting down), the consequences of the bug are likely not visible to
+>most users=2E
+>
+>We could perhaps attempt to preserve migration compatibility here,
+>but none of the affected machine types are versioned and so we do not
+>promise cross-version compatibility, so do the simple thing=2E  Bump
+>the version_id and version_id on the two affected vmstate structs so
+>that attempted migration between old and new QEMU fails cleanly=2E
+>
+>Fixes: 852f771ec9e5c ("vmstate: port pmtimer")
+>Resolves: https://gitlab=2Ecom/qemu-project/qemu/-/work_items/4705
+>Signed-off-by: Peter Maydell <peter=2Emaydell@linaro=2Eorg>
+>---
+>Not cc: stable because it's a migration format change and we
+>don't generally backport those
+>---
+> include/hw/core/ptimer=2Eh | 2 +-
+> hw/dma/xlnx_csu_dma=2Ec    | 4 ++--
+> hw/watchdog/k230_wdt=2Ec   | 2 ++
+> 3 files changed, 5 insertions(+), 3 deletions(-)
+>
+>diff --git a/include/hw/core/ptimer=2Eh b/include/hw/core/ptimer=2Eh
+>index 4dc02b0de47=2E=2E8513f8917e3 100644
+>--- a/include/hw/core/ptimer=2Eh
+>+++ b/include/hw/core/ptimer=2Eh
+>@@ -300,7 +300,7 @@ void ptimer_stop(ptimer_state *s);
+> extern const VMStateDescription vmstate_ptimer;
+>=20
+> #define VMSTATE_PTIMER(_field, _state) \
+>-    VMSTATE_STRUCT_POINTER_V(_field, _state, 1, vmstate_ptimer, ptimer_s=
+tate)
+>+    VMSTATE_STRUCT_POINTER_V(_field, _state, 0, vmstate_ptimer, ptimer_s=
+tate)
+>=20
+> #define VMSTATE_PTIMER_ARRAY(_f, _s, _n)                                =
+\
+>     VMSTATE_ARRAY_OF_POINTER_TO_STRUCT(_f, _s, _n, 0,                   =
+\
+>diff --git a/hw/dma/xlnx_csu_dma=2Ec b/hw/dma/xlnx_csu_dma=2Ec
+>index 436f9915e02=2E=2Eea703dc00ce 100644
+>--- a/hw/dma/xlnx_csu_dma=2Ec
+>+++ b/hw/dma/xlnx_csu_dma=2Ec
+>@@ -679,8 +679,8 @@ static void xlnx_csu_dma_realize(DeviceState *dev, Er=
+ror **errp)
+>=20
+> static const VMStateDescription vmstate_xlnx_csu_dma =3D {
+>     =2Ename =3D TYPE_XLNX_CSU_DMA,
+>-    =2Eversion_id =3D 0,
+>-    =2Eminimum_version_id =3D 0,
+>+    =2Eversion_id =3D 1,
+>+    =2Eminimum_version_id =3D 1,
+>     =2Efields =3D (const VMStateField[]) {
+>         VMSTATE_PTIMER(src_timer, XlnxCSUDMA),
+>         VMSTATE_UINT16(width, XlnxCSUDMA),
+>diff --git a/hw/watchdog/k230_wdt=2Ec b/hw/watchdog/k230_wdt=2Ec
+>index 1f83b499e82=2E=2Efba2013b8f3 100644
+>--- a/hw/watchdog/k230_wdt=2Ec
+>+++ b/hw/watchdog/k230_wdt=2Ec
+>@@ -234,6 +234,8 @@ static const MemoryRegionOps k230_wdt_ops =3D {
+>=20
+> static const VMStateDescription vmstate_k230_wdt =3D {
+>     =2Ename =3D "k230=2Ewdt",
+>+    =2Eversion_id =3D 1,
+>+    =2Eminimum_version_id =3D 1,
+>     =2Efields =3D (const VMStateField[]) {
+>         VMSTATE_PTIMER(timer, K230WdtState),
+>         VMSTATE_UINT32(cr, K230WdtState),
 
-> ---
->  target/riscv/cpu.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
-> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-> index 7873e67c053..ae859128d30 100644
-> --- a/target/riscv/cpu.c
-> +++ b/target/riscv/cpu.c
-> @@ -2853,6 +2853,15 @@ static RISCVCPUImpliedExtsRule ZVFHMIN_IMPLIED = {
->      },
->  };
->  
-> +static RISCVCPUImpliedExtsRule ZVQWDOTA16I_IMPLIED = {
-> +    .ext = CPU_CFG_OFFSET(ext_zvqwdota16i),
-> +    .implied_multi_exts = {
-> +        CPU_CFG_OFFSET(ext_zve64x),
-> +
-> +        RISCV_IMPLIED_EXTS_RULE_END
-> +    },
-> +};
-> +
->  static RISCVCPUImpliedExtsRule ZVQWDOTA8I_IMPLIED = {
->      .ext = CPU_CFG_OFFSET(ext_zvqwdota8i),
->      .implied_multi_exts = {
-> @@ -3066,6 +3075,7 @@ RISCVCPUImpliedExtsRule *riscv_multi_ext_implied_rules[] = {
->      &ZVKS_IMPLIED,
->      &ZVKSC_IMPLIED,
->      &ZVKSG_IMPLIED,
-> +    &ZVQWDOTA16I_IMPLIED,
->      &ZVQWDOTA8I_IMPLIED,
->      &SHA_IMPLIED,
->      &SSCFG_IMPLIED,
-> -- 
-> 2.56.0
-> 
-> 
-> 
-
-Sent using hkml (https://github.com/sjp38/hackermail)
+Reviewed-by: Bernhard Beschow <shentey@gmail=2Ecom>
 
