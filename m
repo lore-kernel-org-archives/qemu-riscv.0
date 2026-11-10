@@ -1,53 +1,53 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B0F9606A325
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 12:01:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D23F5606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 12:10:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=YkLnIKsr
+	dkim=pass (1024-bit key, unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=fFpIXO/T
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQkXa-0006UT-Jv; Tue, 10 Nov 2026 07:01:30 -0500
+	id 1xQkfQ-0002MP-Aj; Tue, 10 Nov 2026 07:09:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1xQkXH-0006S3-OQ; Tue, 10 Nov 2026 07:01:21 -0500
-Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ id 1xQkfM-0002HM-Ks; Tue, 10 Nov 2026 07:09:33 -0500
+Received: from [115.124.30.113] (helo=out30-113.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fangyu.yu@linux.alibaba.com>)
- id 1xQkXE-0002Br-Oy; Tue, 10 Nov 2026 07:01:11 -0500
+ id 1xQkfH-0003No-R3; Tue, 10 Nov 2026 07:09:32 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1794312044; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=JRkhZy3mw2JCrpoH54e3p+UZcQkZeTUJueCC1/AxRvY=;
- b=YkLnIKsr4umBUKOfukI86iVREyIXaehDb4MZd2jrW5rulA/53YYRpjFW/yjhx16tqbdlTz+oK/bAHyRc1dBtkE8pOiNEi2aOjZyBAODH1Wq8NHHKL+n+PDSykPJh14Z9TezFyfAYIJJiKET6hlWtYcO/HR7m3E2SMo2MS3IFvVw=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
- MF=fangyu.yu@linux.alibaba.com; NM=1; PH=DS; RN=11; SR=0;
- TI=SMTPD_---0XEVLfYq_1794312042; 
+ t=1794312545; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=CBCnNNw9zHK1dhwxg4v79FZ9oh2ycj04TUBKr/PeV/M=;
+ b=fFpIXO/TPyc4rNY58cVQ9xc46lHDU6ToQnT+tcFjfRQeA6mYKQ4OvYSQtbY99B73lZ1LQ13qGpiggpAjnZ64TauvL2zc0FLDmwYknxLZLF2M0YauFfmQIga7snEzqQCP9+tIZkGcaILmisaLUjQduE0wYgNIzLj2wMDPjDYLm44=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R591e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045133197;
+ MF=fangyu.yu@linux.alibaba.com; NM=1; PH=DS; RN=10; SR=0;
+ TI=SMTPD_---0XEVEaw6_1794312542; 
 Received: from localhost.localdomain(mailfrom:fangyu.yu@linux.alibaba.com
- fp:SMTPD_---0XEVLfYq_1794312042 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 10 Nov 2026 20:00:43 +0800
+ fp:SMTPD_---0XEVEaw6_1794312542 cluster:ay36) by smtp.aliyun-inc.com;
+ Tue, 10 Nov 2026 20:09:03 +0800
 From: fangyu.yu@linux.alibaba.com
-To: philmd@oss.qualcomm.com
+To: daniel.barboza@oss.qualcomm.com
 Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
- daniel.barboza@oss.qualcomm.com, fangyu.yu@linux.alibaba.com,
- guoren@kernel.org, liwei1518@gmail.com, palmer@dabbelt.com,
- qemu-devel@nongnu.org, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
+ fangyu.yu@linux.alibaba.com, guoren@kernel.org, liwei1518@gmail.com,
+ palmer@dabbelt.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ zhiwei_liu@linux.alibaba.com
 Subject: Re: [PATCH] target/riscv: fix exception PC for WFI 
-Date: Tue, 10 Nov 2026 20:00:32 +0800
-Message-Id: <20261110120032.73013-1-fangyu.yu@linux.alibaba.com>
+Date: Tue, 10 Nov 2026 20:08:58 +0800
+Message-Id: <20261110120858.74302-1-fangyu.yu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <9a8eefaa-1916-443c-b729-ccd4ddf699c1@oss.qualcomm.com>
-References: <9a8eefaa-1916-443c-b729-ccd4ddf699c1@oss.qualcomm.com>
+In-Reply-To: <73ad77b3-1583-4b2f-91d5-5ac756b02ce6@oss.qualcomm.com>
+References: <73ad77b3-1583-4b2f-91d5-5ac756b02ce6@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
-Received-SPF: pass client-ip=115.124.30.98;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.113 (deferred)
+Received-SPF: pass client-ip=115.124.30.113;
  envelope-from=fangyu.yu@linux.alibaba.com;
- helo=out30-98.freemail.mail.aliyun.com
+ helo=out30-113.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -75,9 +75,7 @@ X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
->Hi,
->
->On 9/11/26 14:56, fangyu.yu@linux.alibaba.com wrote:
+>On 11/9/2026 10:56 AM, fangyu.yu@linux.alibaba.com wrote:
 >> From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
 >>
 >> trans_wfi() advances env->pc before calling helper_wfi(), which may
@@ -123,6 +121,26 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 >> -    gen_update_pc(ctx, ctx->cur_insn_len);
 >> -    gen_helper_wfi(tcg_env);
 >> +    gen_update_pc(ctx, 0);
+>
+>Please add a comment before this gen_update_pc() call explaining that env->pc
+>is deliberately left on the WFI until the exception checks pass.  I know this is
+>explained in the commit msg, but in this case it's way too easy for someone else to
+>read this code. assume that this gen_update_pc() isn't intended and then try to
+>advance PC back again.
+>
+
+Good point. I will add a comment above gen_update_pc()
+explaining that env->pc is intentionally left on the WFI,
+and the helper advances it only after all exception checks
+pass.
+
+Thanks,
+Fangyu
+
+>
+>LGTM otherwise.  Thanks,
+>Daniel
+>
 >> +    gen_helper_wfi(tcg_env, tcg_constant_i32(ctx->cur_insn_len));
 >>       ctx->base.is_jmp = DISAS_NORETURN;
 >>       return true;
@@ -148,41 +166,6 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 >> +        if (env->xl == MXL_RV32) {
 >> +            env->pc = (int32_t)env->pc;
 >> +        }
->
->While I'm still not convinced by the fix, 'advance_pc' might
->be clearer than 'insn_len'; also we have helper to set $PC:
->
->             riscv_cpu_set_pc(env->pc + advance_pc)
->
-
-Thanks for the review.
-
-The problem is the ordering between env->pc advancement and exception
-raising. helper_wfi() can raise both ILLEGAL_INST and
-VIRT_INSTRUCTION_FAULT via GETPC(), and the exception PC must be the
-WFI's own PC. With CF_PCREL, the translator restores the faulting PC
-from env->pc's page base plus the recorded page offset. trans_wfi()
-used to advance env->pc before the helper call, so when WFI is the
-last instruction of a page (or crosses a page boundary), the restore
-takes the next page's base and the reported sepc/tval is one page too
-high.
-
-For example, with CF_PCREL and 4 KiB pages, a 4-byte WFI at
-0xffffffff80000ffc (page offset 0xffc): trans_wfi() advances
-env->pc to 0xffffffff80001000 before the helper raises
-VIRT_INSTRUCTION_FAULT. PC restoration then computes
-(env->pc & PAGE_MASK) | 0xffc = 0xffffffff80001ffc, which is one page
-above the real WFI PC. Keeping env->pc on the WFI until after all
-exception paths makes the restoration return 0xffffffff80000ffc, the
-correct sepc.
-
-I will rename insn_len to advance_pc in the next version. As for
-riscv_cpu_set_pc(), it is a static function, maybe we should leave it
-unchanged for now.
-
-Thanks,
-Fangyu
-
 >>           if (riscv_cpu_cfg(env)->ext_sdext && !env->debug_mode &&
 >>               (env->dcsr & DCSR_STEP)) {
 >>               return;
