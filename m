@@ -1,137 +1,140 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6D20606A31C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 18:04:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48CD7606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 19:12:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eAvQ2svU;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aXSt8Jch
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=h7IAdyHB;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SpUF6O6N
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQqCM-0006LP-JS; Tue, 10 Nov 2026 13:03:58 -0500
+	id 1xQrGN-0005Xu-Ex; Tue, 10 Nov 2026 14:12:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQqCJ-0006L0-8E
- for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 13:03:55 -0500
+ id 1xQrGJ-0005W9-Re
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 14:12:07 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQqCG-00088m-N9
- for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 13:03:54 -0500
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1xQrGG-0007iH-T5
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 14:12:07 -0500
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AAH5jlv2900763
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 18:03:51 GMT
+ 6AAIp0Xw669482
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 19:12:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- bM1ddLmYyc16ICnYUtXVFs0QCJ1gfHHLdo9p9PMGz1w=; b=eAvQ2svUarz1ClFR
- lcLHW0LHybpyRt11cdJpPIiFiSVLPwQt/pOji9Av2b1d1p0nbXDBIouWgfik095C
- wyM+lPJj3eUM+lLj86UJYNlv/nx38MWsphI3KlDhkroEIj1Nf98uo05lCx1X4SBt
- +cPrV3pnTwMl7Z1hgU88FkQQyM9K/17q3C1z59E2tNPZok5dtxnxDFtvU3mjGlyE
- D2Gq/xW7nVhFdVUsEIMkcavKu72R3UHndMnKWlkbseTp01uPXkWvJH0yU0sjbq7H
- kLWrE2CyQRN77pC+Ybv5rSQ7sFr5QtO3OfYlqZyylkh+TlfQ8YRm8LKKKALINsSJ
- db0dOg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hv7c5g8kx-1
+ 266sQg9DwF6EKhuofx+571ODkyk4mp2cecLrNxfP7Us=; b=h7IAdyHBqk9ccu1x
+ gAFZPJXXtaJXSBSSonvz3JuswnoZpeIiGMHacNDEKPsUF9wxb99DPs3N0C2rFGNC
+ ebz81a9sUz/LnxqJZpZyiln1KDkmcYPKAGIopkWv0xVcdm3gT4ytet83tfxHvwBM
+ iOJYnayyy+zcjE9wQ6GUnJWLKhOwpVF0919kDrCzP2dmEBz5qbbhW3kgMBBwG9R3
+ kddb3nfD39qwW9U8UYFz6d3n85xfn3gep8nNVYHBzDPBVIL8EPuPe0BQaVjQII5B
+ k2QXSUZqSkXtSfXCgxuq0ppLz1L9xgDHFHC6zfo/GEXczu3rOZBZ3mzwMCGBnubb
+ bU+IPg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hv4pv9aya-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 18:03:51 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-91e987a4099so48316246d6.1
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 10:03:51 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 19:12:03 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-544019b1831so43438101cf.0
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 11:12:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794333830; x=1794938630; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794337922; x=1794942722; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=bM1ddLmYyc16ICnYUtXVFs0QCJ1gfHHLdo9p9PMGz1w=;
- b=aXSt8JchD+IrJ1QiLAq45qdaTnp6TQZVc9pgv27YwRDHvC4OmTJ6BZ/E2yEJgZt1jK
- rkiIc5NcRGDpq4KwSOguJfMZh4HjYYYi/6ACBCTK+lu7pKMXTOTiap5Vq6vAuc9kvZQa
- 7cPnJ79K7q6SgRaEZijPHEl3og64KIdXR6bWuQJ7ly5fuYqrtWbROs52E0bR6H/q8+LD
- oPOrf1+ZLojKN0uAaqAfM+jzV3B/00uNVMEyB10oQMz+fT177bvcUtjlx0vPXK2NGl8F
- BBjTL/leOuFNPiGGaounxrE7JDqtCNpai7UJgqrWkQPepqeZ/gsXLzprJ3bwZ6K0MYcI
- 4IDQ==
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=266sQg9DwF6EKhuofx+571ODkyk4mp2cecLrNxfP7Us=;
+ b=SpUF6O6NRugzt/MCz5UIMPe7Aac2CJuAL8wiVGmP4MMRLllaby6VddfcTvgq6N4OOR
+ Gm6jU7+N91y73Ju+NQ6/l04ZM3Rmv/mA3mIZLfJWji62H1UIjYHFj2phTgQ8MqjXAfOu
+ BWhOZSPAZKTxpcgryfLrLZ2qvCKBindgmoAjfhMYyaUoOKD+hh2S4invT5iVmJ5Nz+ET
+ kml5l36djClZNTtD42EP7l6JGzkFYTwtiGUm+dKV79QaLl3UJYcTmJ3QZb83OkCb6rJk
+ 95/EveAj+lqjO4aEOtcZmwttWG+TsIXe1jBC2mt+PMfBrNBFFLVd/9N328rGWHBC3qYn
+ evOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794333830; x=1794938630;
+ d=1e100.net; s=20260707; t=1794337922; x=1794942722;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=bM1ddLmYyc16ICnYUtXVFs0QCJ1gfHHLdo9p9PMGz1w=;
- b=OhQ9KPYxSS0/uB5zW5gVGEOAmvdkT84W1hVDY8okOL3eztOSn8HNab7/NnvQjbz+Pg
- ERWvvVw/zD1mklg4CgRKj6Bc98akEeuWZzYPcC5+OJ2Jby9PZ/rrcUNrIJT03pPJgclo
- Ijy1j1qoeWxFzYNSta+swT5lFSAR96ZHxuTR7vkUH7OqnCX00VBlc27k/ZegFGGtEujg
- yzMjgV5nd1IWE00uz+NlbDYbSNSyeNpibzTaX0DuujWmkk9Th+4+Twi62C7fW0g5s69U
- RRwHgJkCPTfuKeFFHMr9dHBTMZ6wRV60PA0g3oCne59Xy+YzXdLPPCzQEVXJq/5dfNQC
- nnyg==
-X-Gm-Message-State: APuU4Z/mSLDoccZgMffRgyBBHEMCUnh8+Jrw+x3avVS3wRnr2ebFa828
- eOuoN1y0AOoXkWpkbrctLak/bDjjGFQdfZlDQrCXJArIx8hF2HP7ORKfHldYM3bwhXMXVKaYlCw
- 6jp7eJbHGEwx7qS1Fj7ZJilpqL+Ink1YXmN5aA4FaKnL7G4nCWac3MxBnkQ==
-X-Gm-Gg: AYBFou1Mwz7X0WSLKLiRFfgztVt0Sz762soEWEu1Wbfs6LP8RARyQiU3fiKeahij3B5
- OUv985J3LsVfCqxb3da/85xxWRlwP2q/IgeHAffUTJC3Cm6UjI9DleVjV7hQ9CJfvrSjg+O1QtF
- VRvwCdZjRjT2NhRDWYVYCvfT1OEOQGJmrEw+NoTTb7arfLnP3z8vhCdD1gSJIKJQIQAvF7XIVpo
- iQeNYYz7LVt0EdngI+VVnsObyO0Ff0bY6r9meBlrSgDLbo5IBnVuEeryrVSCc7QBlzz0DiWjxsm
- cepUUDqDHSWvwYXL+rGcutXhs4300fw2OO/xgixovOggjeAqFps0bTR44yPH6rwigHNi/ZVMNjo
- khndYUYC4F1AGXS8Jj0Mwt0p/ajmwTW2liA2nIklAVg8PnSi83PvT8MCAfiZwR7rUJN8f797/iQ
- D7dMwkbKzX6A==
-X-Received: by 2002:ac8:59c8:0:b0:536:52ae:d92c with SMTP id
- d75a77b69052e-55527b1cac0mr49843851cf.35.1794333830235; 
- Tue, 10 Nov 2026 10:03:50 -0800 (PST)
-X-Received: by 2002:ac8:59c8:0:b0:536:52ae:d92c with SMTP id
- d75a77b69052e-55527b1cac0mr49843161cf.35.1794333829681; 
- Tue, 10 Nov 2026 10:03:49 -0800 (PST)
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=266sQg9DwF6EKhuofx+571ODkyk4mp2cecLrNxfP7Us=;
+ b=LynQNfLaG2oZewAU+tMsvm0QT0tKYRoKU74YtxsEoMRXFSaY3j9WRCM7OPhT8A0NKl
+ Owea5j6SGYBc49TbIyeDnfIq4A8stBwPRt/cOR+RnSnusiAtMGL2AVeJgwOkHdpgQiof
+ MF428rHROrT7GdZ5eoSJqQo2FFKSysZXl3s9GW99tLPKQf2zNZ6pP/3+8/N7A8Wd0EWc
+ TTkcqX4PsH3+peLy+JdUBpIy+TcWNgYFpN0A5p4V1MUIj5ZWpKl861Nmdt27UH64UsRz
+ SRkcOJHI4X/qbMjOm86xr3Z2Av0w8PUPrf6WlnIkgHbJAYShKSDV/j6A1pTatZXCE94s
+ E2VQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEG7RIPIo87ya7DqIQq8UvrwSb4TET+hAXYwDwGTbGYMBnppKPJGZfPfM26zzvzFV8X6UO71HJtAwY9@nongnu.org
+X-Gm-Message-State: APuU4Z8ZmTcqVxNScNDaSB7w3kb9NMHpXwLmMirI0wcSBea6mUc6m4l2
+ z+WST5lvqs1ncpG1QYbe8qSyJvrUyEkzNisCzdS/cii2eJLJFeCOlFgLcoXGofKxtyfDcCX14Ci
+ Rj266uLw7OofSFRdaV3DtTnsJQPqmWLwdJqQlYprlOrWRpquvjIiGhkyqjw==
+X-Gm-Gg: AYBFou11ohnEjNrNlRPU9F8dECW0bMk+/pplXuffYF6ZLWdwruSpy6MpPlNUqKJuIEW
+ oRqr2zfYPBgUVfkXRDU1GbN0ACdI6ybD8Vau5t4jS06EqikhLW1EJ5LXes7eJPwYzITZy8kPQsg
+ FlYBhMd14lZitXdiExkoQXjx8DenChXQKqkw4ERyZ7I63K0h1mo70BBrfCVdkHosWAcyRvPe4CL
+ Rs5VkWK1HqtCyiKdzx0no1JVoWXm9W9VDZpxKllN++F+1vHsm/Y0gLEv7YhkTvqxjSETjSJuFdq
+ Zx2OscomTnUDb89HLU2nmGEgUoWZsYbKhuhxgpalxBeQPRf0iTMMNGqqByxsN/GImf9BuS7PZ6a
+ rTOb6J2ipeVY9X6lI/elGbDYOQmGtndskZnIpVLeTvJcLPwSrQoY2gBlks2rr4f1iyltV7HyLZ0
+ 91LJ+UG/gBoA==
+X-Received: by 2002:ac8:5e06:0:b0:535:84ec:baaf with SMTP id
+ d75a77b69052e-5552a35eebamr54624911cf.43.1794337922312; 
+ Tue, 10 Nov 2026 11:12:02 -0800 (PST)
+X-Received: by 2002:ac8:5e06:0:b0:535:84ec:baaf with SMTP id
+ d75a77b69052e-5552a35eebamr54624221cf.43.1794337921485; 
+ Tue, 10 Nov 2026 11:12:01 -0800 (PST)
 Received: from [192.168.68.105] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-555093d9c3fsm29870961cf.3.2026.11.10.10.03.47
+ 6a1803df08f44-91ef04ab626sm28513346d6.15.2026.11.10.11.11.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 10:03:49 -0800 (PST)
-Message-ID: <7e7d30c4-eebe-416e-9776-eab7fb99bf80@oss.qualcomm.com>
-Date: Tue, 10 Nov 2026 15:03:46 -0300
+ Tue, 10 Nov 2026 11:12:00 -0800 (PST)
+Message-ID: <d76ec165-fb11-4e63-8e20-a8ee5062701d@oss.qualcomm.com>
+Date: Tue, 10 Nov 2026 16:11:57 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] hw/riscv: iommu: Support automatic PTE A/D updates
-To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
- chao.liu@processmission.com
-References: <20261108143934.129923-1-tanchi25@mails.ucas.ac.cn>
- <20261108143934.129923-4-tanchi25@mails.ucas.ac.cn>
+Subject: Re: [PATCH] target/riscv: Fix icount trigger exception PC
+To: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>,
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+References: <20261108110107.1752051-1-himanshu.chauhan@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261108143934.129923-4-tanchi25@mails.ucas.ac.cn>
+In-Reply-To: <20261108110107.1752051-1-himanshu.chauhan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA3MSBTYWx0ZWRfX/DBT28VVXuon
- wKuZPTRnb3kAZ/1qpqoepm4/lxzaGLs7HCs0fK0wcnbHFQWvbzGLngZ+vgC2ei193wp/vTqaVUq
- bOb5KmCppS0CFxSd67n2cg6qsvt+KQcVSKkn9qTOzvvyJIlFXGRRW4DrYZXx1fYHtUPOvKhVncP
- Xn6ouVAx5zixSiMxRMX5ZSPc6IEFnVD0ESDVaf8Ph7htWU7tWdYpEtSVkS5Ft3QQMoELGqkfg9k
- +HDLKK5gzI0Hnnr0v6FAduaFq3nQiu5vwcYUkLU5XUT3wwiCJ2F83CJmVn+SkPNDfsHrC9nX0vB
- pHL0V9AURpT11sK46qKmL3g3T3eW6B+PvHQPsCILHSil/ihVAgN6zJMpFKGxC/p7oQ0lPAfsLso
- mqB6twjmUs528ztMhMwni0WBX3g0lBKgqSX1vUPqjTuck0p9AI0Bl/+knpOI0hrI5920cx7VJYx
- I3c9WeCGHxGPKRsF3Dg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA3MSBTYWx0ZWRfX9uPEbHW+SY5h
- 7BUPtLZSabOjygfekzo7HL6ZIhjWybn/Enn3PJX4ruw2jVwM0nUkfpAUMXUdAu61Ikgm0toqTUg
- ze7qv0rcIAt/9JEpQaZYyzSVliwmZIY=
-X-Proofpoint-ORIG-GUID: W1euFdr9paoXGy47_aPGmieTXIhcMw7i
-X-Authority-Analysis: v=2.4 cv=eq9KXYpX c=1 sm=1 tr=0 ts=6af35c87 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Authority-Analysis: v=2.4 cv=XqZvqlF9 c=1 sm=1 tr=0 ts=6af36c83 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=e2OcnuQTBostoCPegigA:9 a=QEXdDO2ut3YA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-GUID: W1euFdr9paoXGy47_aPGmieTXIhcMw7i
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=8OJyc8wFlYHFoqYmSOsA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: euLQ64x6XqEK5OJrqi75DmvpL6ZjBTPM
+X-Proofpoint-GUID: euLQ64x6XqEK5OJrqi75DmvpL6ZjBTPM
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA3NiBTYWx0ZWRfX4YskL4HoKM9I
+ 23xjfiE/UdAFIQllkv5PtB99bQDerBAjguHIuUBQjMgGFGuy/mpn2gAmXhSYrpMQl25nyitnYxr
+ FlNzZwtHG1KYDb/J20f/Mzl3+YP2biE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA3NiBTYWx0ZWRfX/0LEk67buj6s
+ i7n7S1UVQ7YlZ5yyPkERJFlkFrD9c1YUpF9587I23lxQ9BfX1a+jRMFbj2QfftlQ7V7tfclrku8
+ bv0Oz1aEfiJFlTYf9/wtEgRW2/dOzA+6PLdmMj4z2TggTR9bU33MQKsBUjOykpb7mPMc0CPr4nB
+ AHdLkGsj8AVYiFBdTU/6VEMia88goY2p4NFfu2QWvYD95rUM09tadUGseEqrs7a4AZEGUfl/4B2
+ MuhD1/o7eKE2jpq90+KFkAfSEuJ1UP+8iXEdMkBNHBzk9F9HThCD7tbB+AloEV022bbhWTi8lkN
+ h/XbK/y0xCQZrDw9KiQLRbqH0k5NpFUcT+Q7JmCdA6la/o948bfZ/ZQOR7armYnlCPTWVGWLLiM
+ 9LHta7fjLtNtLfRMLc0a2ov9UE4gveX66zzpBzU1roUu5fWeGPADRA8xd4/sp+Tyy2ooFtFIBsh
+ d/XsTI+Ae+u5+uXoqOA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-10_05,2026-11-06_01,2025-10-01_01
+ definitions=2026-11-10_06,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 clxscore=1015
- malwarescore=0 spamscore=0 phishscore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100071
+ impostorscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ malwarescore=0 bulkscore=0 lowpriorityscore=0 adultscore=0 spamscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611100076
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -155,329 +158,442 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/8/2026 11:39 AM, Tan Chi wrote:
-> Add support for the AMO_HWAD capability to automatically update the
-> accessed and dirty bits of leaf PTEs when SADE or GADE is enabled.
+On 11/8/2026 8:01 AM, Himanshu Chauhan wrote:
+> Per the Sdtrig specification, on a breakpoint exception with icount, the
+> xepc must contain the virtual address of the next instruction that must
+> be executed to preserve the program flow.
 > 
-> Use atomic compare-and-exchange to update PTEs, restarting the
-> page-table walk if a concurrent modification is detected.
+> Since SBI DBTR exposes these trigger encodings to supervisor software, an
+> icount trigger used as a one-instruction step must fire only after the
+> counted instruction retires and the architectural successor PC is known,
+> which for a taken branch is the branch target, not the trigger install
+> address or fallthrough.
 > 
-> For nested translation, check G-stage write permissions before updating
-> an S-stage PTE. Restart the walk if the write translation resolves to a
-> different physical address.
+> QEMU previously disabled the translated-block trigger flag when icount was
+> enabled and relied on timer and privilege-change callbacks to update the
+> count, so the trigger could fire outside instruction retirement before the
+> guest PC advanced, causing Linux to observe the old PC and re-enter the same
+> breakpoint while single-stepping with icount.
 > 
-> Avoid caching write permission when the PTE's dirty bit is clear, so
-> subsequent writes can trigger the required update.
+> Fix this by
+>    - publishing the icount trigger flag in translated blocks even with
+>      icount enabled
+>    - making the helper decrement the trigger count after the
+>      instruction has committed its successor PC and raise the trigger
+>      action only then
+>    - privilege-change callbacks refresh cached enabled state because itriggers
+>      tied to privilege mode.
 > 
-> Expose the capability through the new "amo-hwad" device property,
-> disabled by default.
+> Also make trigger data CSR availability depend on an implemented trigger slot
+> rather than the currently selected trigger type, so software can disable a
+> trigger with type zero and still write the rest of the slot state before
+> selecting another supported type.
 > 
-> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+> itrigger timers are completely removed as they are not required now.
+> 
+> Signed-off-by: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
 > ---
 
 
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+LGTM.  I took a look at other instances of itrigger_enabled and seems like we're
+missing one instance in this patch:
 
->   hw/riscv/riscv-iommu.c | 196 ++++++++++++++++++++++++++++++++++++++++-
->   hw/riscv/riscv-iommu.h |   1 +
->   2 files changed, 193 insertions(+), 4 deletions(-)
+target/riscv/machine.c, debug_post_load():
+
+      RISCVCPU *cpu = opaque;
+      CPURISCVState *env = &cpu->env;
+
+     if (icount_enabled()) {
+         env->itrigger_enabled = riscv_itrigger_enabled(env);
+     }
+
+
+Since itrigger_enabled is no longer reliant on icount_enabled() we need to
+remove the icount_enabled() from machine.c too.
+
+
+Thanks,
+Daniel
+
+>   target/riscv/cpu.h            |   5 +-
+>   target/riscv/tcg/cpu_helper.c |  10 +-
+>   target/riscv/tcg/debug.c      | 169 ++++++++++------------------------
+>   target/riscv/tcg/tcg-cpu.c    |   7 +-
+>   4 files changed, 59 insertions(+), 132 deletions(-)
 > 
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 6760699eb8..04d50cd620 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -265,6 +265,128 @@ static hwaddr riscv_iommu_napot_page_mask(hwaddr ppn, hwaddr addr, hwaddr *out)
->       return page_mask;
+> diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
+> index 49a1186bdb..3109d71470 100644
+> --- a/target/riscv/cpu.h
+> +++ b/target/riscv/cpu.h
+> @@ -484,8 +484,7 @@ struct CPUArchState {
+>       uint8_t trigger_cur;
+>       /*
+>        * num_triggers is the length of tdata1, tdata2, tdata3,
+> -     * cpu_breakpoint, cpu_watchpoint and itrigger_timer
+> -     * arrays.
+> +     * cpu_breakpoint and cpu_watchpoint arrays.
+>        */
+>       uint32_t num_triggers;
+>       uint64_t *tdata1;
+> @@ -493,8 +492,6 @@ struct CPUArchState {
+>       uint64_t *tdata3;
+>       struct CPUBreakpoint **cpu_breakpoint;
+>       struct CPUWatchpoint **cpu_watchpoint;
+> -    QEMUTimer **itrigger_timer;
+> -    int64_t last_icount;
+>       bool itrigger_enabled;
+>   
+>       /* machine specific rdtime callback */
+> diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+> index 58e98e975c..0375b930be 100644
+> --- a/target/riscv/tcg/cpu_helper.c
+> +++ b/target/riscv/tcg/cpu_helper.c
+> @@ -940,10 +940,6 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
+>       g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
+>   
+>       if (newpriv != env->priv || env->virt_enabled != virt_en) {
+> -        if (icount_enabled()) {
+> -            riscv_itrigger_update_priv(env);
+> -        }
+> -
+>           riscv_pmu_update_fixed_ctrs(env, newpriv, virt_en);
+>       }
+>   
+> @@ -982,6 +978,12 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
+>               riscv_cpu_interrupt(env);
+>           }
+>       }
+> +
+> +    /*
+> +     * Icount triggers are scoped by U/S/M and VU/VS mode bits.  Refresh the
+> +     * cached translated-block flag after privilege or virtualization changes.
+> +     */
+> +    riscv_itrigger_update_priv(env);
 >   }
 >   
-> +typedef enum RISCVIOMMUADResult {
-> +    RISCV_IOMMU_AD_SUCCESS,
-> +    RISCV_IOMMU_AD_RETRY,
-> +    RISCV_IOMMU_AD_FAULT,
-> +} RISCVIOMMUADResult;
-> +
-> +/*
-> + * Atomically update the A/D bits of a leaf PTE.
-> + * Retry the page-table walk if the PTE has changed.
-> + */
-> +static RISCVIOMMUADResult
-> +riscv_iommu_ad_update(RISCVIOMMUState *s, hwaddr pte_addr,
-> +                      unsigned int pte_size, uint64_t pte, uint64_t updated_pte)
-> +{
-> +    MemoryRegion *mr;
-> +    hwaddr offset, len = pte_size;
-> +    uint64_t old_pte;
-> +    void *pte_ptr;
-> +
-> +    if (pte_addr & (pte_size - 1)) {
-> +        return RISCV_IOMMU_AD_FAULT;
-> +    }
-> +
-> +    RCU_READ_LOCK_GUARD();
-> +
-> +    mr = address_space_translate(s->target_as, pte_addr, &offset,
-> +                                 &len, true, MEMTXATTRS_UNSPECIFIED);
-> +
-> +    if (len < pte_size || !memory_region_is_ram(mr)) {
-> +        /*
-> +         * The entire PTE must be backed by a single RAM region
-> +         * for an atomic update.
-> +         */
-> +        return RISCV_IOMMU_AD_FAULT;
-> +    }
-> +
-> +    pte_ptr = qemu_map_ram_ptr(mr->ram_block, offset);
-> +
-> +    if (pte_size == 4) {
-> +        uint32_t expected = cpu_to_le32((uint32_t)pte);
-> +        uint32_t desired = cpu_to_le32((uint32_t)updated_pte);
-> +
-> +        old_pte = qatomic_cmpxchg((uint32_t *)pte_ptr, expected, desired);
-> +        old_pte = le32_to_cpu(old_pte);
-> +    } else {
-> +        uint64_t expected = cpu_to_le64(pte);
-> +        uint64_t desired = cpu_to_le64(updated_pte);
-> +
-> +        old_pte = qatomic_cmpxchg((uint64_t *)pte_ptr, expected, desired);
-> +        old_pte = le64_to_cpu(old_pte);
-> +    }
-> +
-> +    if (old_pte != pte) {
-> +        return RISCV_IOMMU_AD_RETRY;
-> +    }
-> +
-> +    return RISCV_IOMMU_AD_SUCCESS;
-> +}
-> +
-> +static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> +    IOMMUTLBEntry *iotlb, bool implicit_write, uint64_t *fault_iotval2);
-> +
-> +/*
-> + * Updating a first-stage leaf PTE requires an implicit write.
-> + * Translate its GPA through the G-stage, checking write permission
-> + * and updating the G-stage's A/D bits as needed.
-> + */
-> +static int riscv_iommu_check_pte_write(RISCVIOMMUState *s,
-> +                                       RISCVIOMMUContext *ctx,
-> +                                       dma_addr_t pte_gpa,
-> +                                       IOMMUAccessFlags req_perm,
-> +                                       hwaddr *pte_spa,
-> +                                       uint64_t *fault_iotval2)
-> +{
-> +    RISCVIOMMUContext gctx = *ctx;
-> +    uint64_t iotval2 = 0;
-> +    int fault;
-> +
-> +    IOMMUTLBEntry iotlb = {
-> +        .iova = pte_gpa,
-> +        .target_as = s->target_as,
-> +        .addr_mask = ~0ULL,
-> +        .perm = IOMMU_WO,
-> +    };
-> +
-> +    gctx.satp = RISCV_IOMMU_DC_FSC_MODE_BARE;
-> +
-> +    fault = riscv_iommu_spa_fetch(s, &gctx, &iotlb, true, &iotval2);
-> +
-> +    if (fault) {
-> +        *fault_iotval2 = iotval2;
-> +
-> +        if (fault == RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS ||
-> +            fault == RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS) {
-> +            /*
-> +             * Per the RISC-V IOMMU Fault/Event Queue format, iotval2[0]
-> +             * indicates an implicit first-stage access and iotval2[1]
-> +             * indicates an implicit write. Report the fault for the
-> +             * original DMA access rather than the implicit write.
-> +             */
-> +            *fault_iotval2 = (pte_gpa & ~3ULL) | 3;
-> +
-> +            fault = (req_perm & IOMMU_WO) ?
-> +                        RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
-> +                        RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS;
-> +        } else if (fault == RISCV_IOMMU_FQ_CAUSE_RD_FAULT ||
-> +                   fault == RISCV_IOMMU_FQ_CAUSE_WR_FAULT) {
-> +            /*
-> +             * A physical access fault also uses the original
-> +             * DMA access type.
-> +             */
-> +            fault = (req_perm & IOMMU_WO) ?
-> +                        RISCV_IOMMU_FQ_CAUSE_WR_FAULT :
-> +                        RISCV_IOMMU_FQ_CAUSE_RD_FAULT;
-> +        }
-> +        return fault;
-> +    }
-> +
-> +    *pte_spa = iotlb.translated_addr;
-> +    return 0;
-> +}
-> +
 >   /*
->    * RISCV IOMMU Address Translation Lookup - Page Table Walk
->    *
-> @@ -277,14 +399,15 @@ static hwaddr riscv_iommu_napot_page_mask(hwaddr ppn, hwaddr addr, hwaddr *out)
->    * @ctx             : Translation context for device id and process
->    *                    address space id.
->    * @iotlb           : translation data: physical address and access mode.
-> + * @implicit_write  : Whether this is an implicit write to a first-stage PTE.
->    * @fault_iotval2   : Fault address and implicit-access flags for iotval2.
->    * @return          : success or fault cause code.
+> diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
+> index 8b58cbd07a..2c9c251643 100644
+> --- a/target/riscv/tcg/debug.c
+> +++ b/target/riscv/tcg/debug.c
+> @@ -32,8 +32,6 @@
+>   #include "trace.h"
+>   #include "exec/helper-proto.h"
+>   #include "exec/watchpoint.h"
+> -#include "system/cpu-timers.h"
+> -#include "exec/icount.h"
+>   #include "accel/tcg/cpu-loop.h"
+>   
+>   /*
+> @@ -53,20 +51,6 @@
+>    *     1 |    2 |         tdata1, tdata2 | Address / Data Match
 >    */
->   static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> -    IOMMUTLBEntry *iotlb, uint64_t *fault_iotval2)
-> +    IOMMUTLBEntry *iotlb, bool implicit_write, uint64_t *fault_iotval2)
+>   
+> -/* tdata availability of a trigger */
+> -typedef bool tdata_avail[TDATA_NUM];
+> -
+> -static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
+> -    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
+> -    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
+> -    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
+> -    [TRIGGER_TYPE_INT] = { true, true, true },
+> -    [TRIGGER_TYPE_EXCP] = { true, true, true },
+> -    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
+> -    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
+> -    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
+> -};
+> -
+>   /* only breakpoint size 1/2/4/8 supported */
+>   static int access_size[SIZE_NUM] = {
+>       [SIZE_ANY] = 0,
+> @@ -165,13 +149,17 @@ static inline target_ulong build_tdata1(CPURISCVState *env,
+>   
+>   bool tdata_available(CPURISCVState *env, int tdata_index)
 >   {
->       IOMMUAccessFlags trans_perm = IOMMU_NONE;
-> -    dma_addr_t addr, base;
-> +    dma_addr_t addr, base, s_base_gpa = 0;
->       uint64_t satp, gatp, pte;
->       bool en_s, en_g;
->       struct {
-> @@ -308,6 +431,8 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->        * effective leaf permission for the translation cache.
->        */
->       const IOMMUAccessFlags req_perm = iotlb->perm;
-> +    const hwaddr addr_mask = iotlb->addr_mask;
-> +    const hwaddr translated_addr = iotlb->translated_addr;
->   
->       satp = get_field(ctx->satp, RISCV_IOMMU_ATP_MODE_FIELD);
->       gatp = get_field(ctx->gatp, RISCV_IOMMU_ATP_MODE_FIELD);
-> @@ -326,7 +451,7 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->        * means we can't do an early MSI check unless we have
->        * strictly !en_s.
->        */
-> -    if (!en_s && (req_perm & IOMMU_WO) &&
-> +    if (!implicit_write && !en_s && (req_perm & IOMMU_WO) &&
->           riscv_iommu_msi_check(s, ctx, iotlb->iova)) {
->           iotlb->target_as = &s->trap_as;
->           iotlb->translated_addr = iotlb->iova;
-> @@ -413,6 +538,17 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->       /* S/G stages translation tables root pointers */
->       gatp = PPN_PHYS(get_field(ctx->gatp, RISCV_IOMMU_ATP_PPN_FIELD));
->       satp = PPN_PHYS(get_field(ctx->satp, RISCV_IOMMU_ATP_PPN_FIELD));
-> +
-> +restart:
-> +    sc[S_STAGE].step = 0;
-> +    sc[G_STAGE].step = 0;
-> +    trans_perm = IOMMU_NONE;
-> +    iotlb->addr_mask = addr_mask;
-> +    iotlb->translated_addr = translated_addr;
-> +    iotlb->perm = req_perm;
-> +    s_base_gpa = 0;
-> +    *fault_iotval2 = 0;
-> +
->       addr = (en_s && en_g) ? satp : iotlb->iova;
->       base = en_g ? gatp : satp;
->       pass = en_g ? G_STAGE : S_STAGE;
-> @@ -540,8 +676,51 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->                   iotlb->addr_mask &= (1ULL << va_skip) - 1;
->               }
->   
-> +            /* Automatically update the leaf PTE's A/D bits when enabled. */
-> +            uint64_t updated_pte = pte;
-> +            if (ade) {
-> +                updated_pte |= PTE_A;
-> +
-> +                if (acc_perm & IOMMU_WO) {
-> +                    updated_pte |= PTE_D;
-> +                }
-> +            }
-> +            if (updated_pte != pte) {
-> +                if (pass == S_STAGE && en_g) {
-> +                    const dma_addr_t s_pte_gpa =
-> +                        s_base_gpa + idx * sc[pass].ptesize;
-> +                    hwaddr write_spa;
-> +
-> +                    int fault = riscv_iommu_check_pte_write(
-> +                        s, ctx, s_pte_gpa, req_perm, &write_spa,
-> +                        fault_iotval2);
-> +                    if (fault) {
-> +                        return fault;
-> +                    }
-> +
-> +                    if (write_spa != pte_addr) {
-> +                        goto restart;
-> +                    }
-> +                }
-> +
-> +                RISCVIOMMUADResult result = riscv_iommu_ad_update(
-> +                    s, pte_addr, sc[pass].ptesize, pte, updated_pte);
-> +
-> +                if (result == RISCV_IOMMU_AD_RETRY) {
-> +                    goto restart;
-> +                }
-> +                if (result == RISCV_IOMMU_AD_FAULT) {
-> +                    return (req_perm & IOMMU_WO) ?
-> +                        RISCV_IOMMU_FQ_CAUSE_WR_FAULT :
-> +                        RISCV_IOMMU_FQ_CAUSE_RD_FAULT;
-> +                }
-> +                pte = updated_pte;
-> +            }
-> +
->               /* Continue with S-Stage translation? */
->               if (pass && sc[0].step != sc[0].levels) {
-> +                /* Save the S-stage page-table GPA for A/D updates. */
-> +                s_base_gpa = addr;
->                   pass = S_STAGE;
->                   addr = iotlb->iova;
->                   continue;
-> @@ -552,6 +731,11 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->                                            ((pte & PTE_R) ? IOMMU_RW : IOMMU_WO) :
->                                            IOMMU_RO;
->   
-> +            /* Do not cache write permission until the D bit is set. */
-> +            if (!(pte & PTE_D)) {
-> +                leaf_perm &= ~IOMMU_WO;
-> +            }
-> +
->               trans_perm = trans_perm == IOMMU_NONE ?
->                            leaf_perm : trans_perm & leaf_perm;
->   
-> @@ -1794,7 +1978,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
->       riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_TLB_MISS);
->   
->       /* Translate using device directory / page table information. */
-> -    fault = riscv_iommu_spa_fetch(s, ctx, iotlb, &fault_iotval2);
-> +    fault = riscv_iommu_spa_fetch(s, ctx, iotlb, false, &fault_iotval2);
->   
->       if (!fault && iotlb->target_as == &s->trap_as) {
->           /* Do not cache trapped MSI translations */
-> @@ -2732,6 +2916,9 @@ static void riscv_iommu_realize(DeviceState *dev, Error **errp)
->       if (s->enable_ats) {
->           s->cap |= RISCV_IOMMU_CAP_ATS;
+> -    int trigger_type = get_trigger_type(env, env->trigger_cur);
+> -
+>       if (unlikely(tdata_index >= TDATA_NUM)) {
+>           return false;
 >       }
-> +    if (s->enable_amo_hwad) {
-> +        s->cap |= RISCV_IOMMU_CAP_AMO_HWAD;
-> +    }
->       if (s->enable_s_stage) {
->           s->cap |= RISCV_IOMMU_CAP_SV32 | RISCV_IOMMU_CAP_SV39 |
->                     RISCV_IOMMU_CAP_SV48 | RISCV_IOMMU_CAP_SV57;
-> @@ -2891,6 +3078,7 @@ static const Property riscv_iommu_properties[] = {
->           LIMIT_CACHE_IOT),
->       DEFINE_PROP_BOOL("intremap", RISCVIOMMUState, enable_msi, TRUE),
->       DEFINE_PROP_BOOL("ats", RISCVIOMMUState, enable_ats, TRUE),
-> +    DEFINE_PROP_BOOL("amo-hwad", RISCVIOMMUState, enable_amo_hwad, false),
->       DEFINE_PROP_BOOL("off", RISCVIOMMUState, enable_off, TRUE),
->       DEFINE_PROP_BOOL("s-stage", RISCVIOMMUState, enable_s_stage, TRUE),
->       DEFINE_PROP_BOOL("g-stage", RISCVIOMMUState, enable_g_stage, TRUE),
-> diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
-> index 403d10b321..8cf228f698 100644
-> --- a/hw/riscv/riscv-iommu.h
-> +++ b/hw/riscv/riscv-iommu.h
-> @@ -44,6 +44,7 @@ struct RISCVIOMMUState {
->       bool enable_off;      /* Enable out-of-reset OFF mode (DMA disabled) */
->       bool enable_msi;      /* Enable MSI remapping */
->       bool enable_ats;      /* Enable ATS support */
-> +    bool enable_amo_hwad; /* Enable hardware A/D updates */
->       bool enable_s_stage;  /* Enable S/VS-Stage translation */
->       bool enable_g_stage;  /* Enable G-Stage translation */
 >   
+> -    return tdata_mapping[trigger_type][tdata_index];
+> +    /*
+> +     * tdata CSRs belong to the trigger slot, not to the currently selected
+> +     * trigger type.  A type-zero trigger is disabled, but the slot still
+> +     * exists, so software must still be able to write tdata2/tdata3 before
+> +     * selecting a supported trigger type.
+> +     */
+> +    return env->trigger_cur < env->num_triggers;
+>   }
+>   
+>   target_ulong tselect_csr_read(CPURISCVState *env)
+> @@ -729,6 +717,30 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
+>       }
+>   }
+>   
+> +static void no_trigger_reg_write(CPURISCVState *env, target_ulong index,
+> +                                 int tdata_index, target_ulong val)
+> +{
+> +    /*
+> +     * OpenSBI programs DBTR slots by first writing type zero to tdata1, then
+> +     * writing tdata2/tdata3, and finally writing the desired trigger type.
+> +     */
+> +    switch (tdata_index) {
+> +    case TDATA1:
+> +        type2_breakpoint_remove(env, index);
+> +        env->tdata1[index] = 0;
+> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
+> +        break;
+> +    case TDATA2:
+> +        env->tdata2[index] = val;
+> +        break;
+> +    case TDATA3:
+> +        env->tdata3[index] = textra_validate(env, val);
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+>   /* icount trigger type */
+>   static inline int
+>   itrigger_get_count(CPURISCVState *env, int index)
+> @@ -754,21 +766,6 @@ itrigger_set_pending(CPURISCVState *env, int index, int val)
+>                                      ITRIGGER_PENDING, val);
+>   }
+>   
+> -static bool check_itrigger_priv(CPURISCVState *env, int index)
+> -{
+> -    target_ulong tdata1 = env->tdata1[index];
+> -    if (env->virt_enabled) {
+> -        /* check VU/VS bit against current privilege level */
+> -        return (get_field(tdata1, ITRIGGER_VS) == env->priv) ||
+> -               (get_field(tdata1, ITRIGGER_VU) == env->priv);
+> -    } else {
+> -        /* check U/S/M bit against current privilege level */
+> -        return (get_field(tdata1, ITRIGGER_M) == env->priv) ||
+> -               (get_field(tdata1, ITRIGGER_S) == env->priv) ||
+> -               (get_field(tdata1, ITRIGGER_U) == env->priv);
+> -    }
+> -}
+> -
+>   bool riscv_itrigger_enabled(CPURISCVState *env)
+>   {
+>       int count;
+> @@ -776,7 +773,7 @@ bool riscv_itrigger_enabled(CPURISCVState *env)
+>           if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
+>               continue;
+>           }
+> -        if (check_itrigger_priv(env, i)) {
+> +        if (!trigger_common_match(env, TRIGGER_TYPE_INST_CNT, i)) {
+>               continue;
+>           }
+>           count = itrigger_get_count(env, i);
+> @@ -803,7 +800,12 @@ void HELPER(itrigger_match)(CPURISCVState *env)
+>           if (!count) {
+>               continue;
+>           }
+> -        itrigger_set_count(env, i, count--);
+> +        /*
+> +         * This helper is emitted at TB exit after one guest instruction and
+> +         * after the translator has committed env->pc to the successor PC.
+> +         */
+> +        count--;
+> +        itrigger_set_count(env, i, count);
+>           if (!count) {
+>               /*
+>                * From the 1.0 spec: "When pending is set, the trigger
+> @@ -822,61 +824,21 @@ void HELPER(itrigger_match)(CPURISCVState *env)
+>               itrigger_set_pending(env, i, 1);
+>   
+>               env->itrigger_enabled = riscv_itrigger_enabled(env);
+> -            do_trigger_action(env, i);
+>               itrigger_set_pending(env, i, 0);
+> +            do_trigger_action(env, i);
+>           }
+>       }
+>   }
+>   
+>   static void riscv_itrigger_update_count(CPURISCVState *env)
+>   {
+> -    int count, executed;
+>       /*
+> -     * Record last icount, so that we can evaluate the executed instructions
+> -     * since last privilege mode change or timer expire.
+> +     * Icount triggers are matched from translated code after an instruction
+> +     * has committed its successor PC.  Timer and privilege-change callbacks
+> +     * therefore must not decrement count or fire the action here; they only
+> +     * refresh the cached TB flag state.
+>        */
+> -    int64_t last_icount = env->last_icount, current_icount;
+> -    current_icount = env->last_icount = icount_get_raw();
+> -
+> -    for (int i = 0; i < env->num_triggers; i++) {
+> -        if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
+> -            continue;
+> -        }
+> -        count = itrigger_get_count(env, i);
+> -        if (!count) {
+> -            continue;
+> -        }
+> -        /*
+> -         * Only when privilege is changed or itrigger timer expires,
+> -         * the count field in itrigger tdata1 register is updated.
+> -         * And the count field in itrigger only contains remaining value.
+> -         */
+> -        if (check_itrigger_priv(env, i)) {
+> -            /*
+> -             * If itrigger enabled in this privilege mode, the number of
+> -             * executed instructions since last privilege change
+> -             * should be reduced from current itrigger count.
+> -             */
+> -            executed = current_icount - last_icount;
+> -            itrigger_set_count(env, i, count - executed);
+> -            if (count == executed) {
+> -                do_trigger_action(env, i);
+> -            }
+> -        } else {
+> -            /*
+> -             * If itrigger is not enabled in this privilege mode,
+> -             * the number of executed instructions will be discard and
+> -             * the count field in itrigger will not change.
+> -             */
+> -            timer_mod(env->itrigger_timer[i],
+> -                      current_icount + count);
+> -        }
+> -    }
+> -}
+> -
+> -static void riscv_itrigger_timer_cb(void *opaque)
+> -{
+> -    riscv_itrigger_update_count((CPURISCVState *)opaque);
+> +    env->itrigger_enabled = riscv_itrigger_enabled(env);
+>   }
+>   
+>   void riscv_itrigger_update_priv(CPURISCVState *env)
+> @@ -911,18 +873,10 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
+>   
+>       switch (tdata_index) {
+>       case TDATA1:
+> -        /* set timer for icount */
+>           new_val = itrigger_validate(env, val);
+>           if (new_val != env->tdata1[index]) {
+>               env->tdata1[index] = new_val;
+> -            if (icount_enabled()) {
+> -                env->last_icount = icount_get_raw();
+> -                /* set the count to timer */
+> -                timer_mod(env->itrigger_timer[index],
+> -                          env->last_icount + itrigger_get_count(env, index));
+> -            } else {
+> -                env->itrigger_enabled = riscv_itrigger_enabled(env);
+> -            }
+> +            env->itrigger_enabled = riscv_itrigger_enabled(env);
+>           }
+>           break;
+>       case TDATA2:
+> @@ -937,27 +891,10 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
+>       }
+>   }
+>   
+> -static int itrigger_get_adjust_count(CPURISCVState *env)
+> -{
+> -    int count = itrigger_get_count(env, env->trigger_cur), executed;
+> -    if ((count != 0) && check_itrigger_priv(env, env->trigger_cur)) {
+> -        executed = icount_get_raw() - env->last_icount;
+> -        count += executed;
+> -    }
+> -    return count;
+> -}
+> -
+>   target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
+>   {
+> -    int trigger_type;
+>       switch (tdata_index) {
+>       case TDATA1:
+> -        trigger_type = extract_trigger_type(env,
+> -                                            env->tdata1[env->trigger_cur]);
+> -        if ((trigger_type == TRIGGER_TYPE_INST_CNT) && icount_enabled()) {
+> -            return deposit64(env->tdata1[env->trigger_cur], 10, 14,
+> -                             itrigger_get_adjust_count(env));
+> -        }
+>           return env->tdata1[env->trigger_cur];
+>       case TDATA2:
+>           return env->tdata2[env->trigger_cur];
+> @@ -995,6 +932,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>                         trigger_type);
+>           break;
+>       case TRIGGER_TYPE_NO_EXIST:
+> +        no_trigger_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        break;
+>       case TRIGGER_TYPE_UNAVAIL:
+>           qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
+>                         trigger_type);
+> @@ -1147,8 +1086,6 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
+>   
+>   void riscv_trigger_realize(CPURISCVState *env)
+>   {
+> -    int i;
+> -
+>       if (env->num_triggers > RV_MAX_TRIGGERS) {
+>           error_report(
+>                   "Invalid configuration: 'num-triggers' must be less than %u",
+> @@ -1161,12 +1098,6 @@ void riscv_trigger_realize(CPURISCVState *env)
+>       env->tdata3 = g_new0(uint64_t, env->num_triggers);
+>       env->cpu_breakpoint = g_new0(struct CPUBreakpoint *, env->num_triggers);
+>       env->cpu_watchpoint = g_new0(struct CPUWatchpoint *, env->num_triggers);
+> -    env->itrigger_timer = g_new0(QEMUTimer *, env->num_triggers);
+> -
+> -    for (i = 0; i < env->num_triggers; i++) {
+> -        env->itrigger_timer[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
+> -                                              riscv_itrigger_timer_cb, env);
+> -    }
+>   }
+>   
+>   void riscv_trigger_unrealize(CPURISCVState *env)
+> @@ -1177,11 +1108,6 @@ void riscv_trigger_unrealize(CPURISCVState *env)
+>   
+>       g_free(env->cpu_breakpoint);
+>       g_free(env->cpu_watchpoint);
+> -
+> -    for (int i = 0; i < env->num_triggers; i++) {
+> -        timer_free(env->itrigger_timer[i]);
+> -    }
+> -    g_free(env->itrigger_timer);
+>   }
+>   
+>   void riscv_trigger_reset_hold(CPURISCVState *env)
+> @@ -1209,7 +1135,6 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
+>           env->tdata3[i] = 0;
+>           env->cpu_breakpoint[i] = NULL;
+>           env->cpu_watchpoint[i] = NULL;
+> -        timer_del(env->itrigger_timer[i]);
+>       }
+>   
+>       env->mcontext = 0;
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 5834ec1524..027fe5b46a 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -181,8 +181,11 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
+>                ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+>       }
+>   
+> -    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
+> -        && !icount_enabled()) {
+> +    /*
+> +     * Publish itrigger state even when QEMU icount is enabled.  The helper
+> +     * runs from translated code after committing the guest successor PC.
+> +     */
+> +    if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
+>           flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
+>       }
+>   #endif
 
 
