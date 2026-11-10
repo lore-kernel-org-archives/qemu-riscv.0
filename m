@@ -1,139 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6093760A2605
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 20:46:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EE4B60A2600
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 20:46:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kuc3bKL8;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XZBFkgSQ
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nEGV9h2o;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ay/FBfsZ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQsiz-0000vB-N6; Tue, 10 Nov 2026 15:45:49 -0500
+	id 1xQsj2-0000wq-Fl; Tue, 10 Nov 2026 15:45:52 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQsit-0000te-EM
- for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 15:45:47 -0500
+ id 1xQsiz-0000vQ-Tr
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 15:45:49 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xQsin-0006Tr-IW
- for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 15:45:39 -0500
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1xQsix-0006c3-VL
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 15:45:49 -0500
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AAJC3VZ708805
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 20:45:32 GMT
+ 6AAIolVG3893719
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 20:45:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- u9NoxX5cA9OxKTldoj/u/oypO3YbKo8dwc5OByQ79BA=; b=kuc3bKL8hnvOeFEv
- 1KeDKkoqWNiwymiepG2MXe3KwkzsNT0D8UaFbWYWLxyeJeQICWhQ/zuaK98foqkt
- Ie4fMLTZfRD/d0fQYS6Ztg5HObd/tx36PidS45Y2NbO5qRXBA/FmMBGeXMjvUyps
- LnCkX0tIi+6frv9N5P/6CeuqvdpC0SpQnM9PlyXsajRPhLCbSVb725lg5z6Y4r+i
- 83irwooler7e9WdPViXqwjMP8s8Ha1gn0kDbGomxqb7heIoFVdsLM0Hj/kPjeWAe
- DfINk4oFukB6OGQmRmLaDLIp8DTWvo0rBaIJ4V6fu8aM4V9jibVFog8ocz4ttlEH
- lGHy9Q==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hv97c8c5t-1
+ +KhSgRSJ4vtC/hqJOuzHF05zcZQpUJaPggCQ7ReBLp8=; b=nEGV9h2oichc8Xop
+ yhnL4Lt6SSrVS1Zg4NLNmSWbnIKqyQOInfterS+MDKiobPSK38Z0+l56xdbTCr51
+ JcvZKTPxEC3xuX885CNTx5s2Uk7WyxesS1mp+0yZum8OLa/3phVzaxZxFTMg9Wgl
+ mGBBCAqm9b/JpY5VgD9DhZpLE9p/G0GJCrWnWkb3AdHRZSEfG8iJMlLrgeo6hiQ/
+ gUldR07IcZFdS/N2gy3U523HEs8s2Au8MVr3PEpfh2YSQNaWS6neDt7OkHKofb/n
+ PVfQXwoK3XI70udWUWXi23pY9vqMXETrNgPNT16HxuDzVrBi+hrMkxtWA+rdTA/w
+ +hhovw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hux84b8xd-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 20:45:32 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-91eb3a63064so53077066d6.0
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 12:45:32 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 20:45:45 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-5363b06bcb2so52399271cf.2
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 12:45:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794343531; x=1794948331; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794343544; x=1794948344; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=u9NoxX5cA9OxKTldoj/u/oypO3YbKo8dwc5OByQ79BA=;
- b=XZBFkgSQtLcudKYtPsX0i1XRfj9P/qNyiR9oeaxg2e7EKWb5ZS3Puu3XQ17lhkZCGq
- nGHGnfVamQtKfbzb7q+/Ra1Kzy977F/0+2L2eIw8NvInWTuJrqjNZgWZo3CqIwSZeGjF
- JB52pAj8SBlnrNdzt3vM3SXB3zZFWDjhban3owd7G+dXFP6Hdica7lPOarehf3VjLCIu
- UVeiBp4NBrgoG/gzU0d2L42Q2qJgdkYv9HWK+XAlUEMTyV4P3H/1Sa2sL/eAYA2MoQVo
- gQJlOoo+HZL6wM1PtF4V3nh+nZEK/dvxArAv1KJmAQoaXdbSEg/JOMfWQzUhUgRgSvG1
- 8Zcg==
+ bh=+KhSgRSJ4vtC/hqJOuzHF05zcZQpUJaPggCQ7ReBLp8=;
+ b=ay/FBfsZaY2bo7SE6xu1k2sk6Z16Pqqpnzim/7umEvETxqRyrqaVNNseCqXzuioyD1
+ SXAqAL9q740mSUYvF1ejQAChw/WmSg1u6UuUu4Kbg7dpEr7MLONGwu0lYnRm9C2bHety
+ 0e+Tgb7vzlSR9+iRF5mc9OSV/BqB4QTF9xUZl/FkUqkylenmOp8n+Lk2I8YKZ9BMPjWQ
+ rWfJiJhQcYUmGDrDCFIomH+0wgrFvYjEhmQ/sx10zISuIQFnHWYaJPA6T9WEKP+OAu1m
+ B/kM8Zl+5uY1rpb+hp1i9jVsUgbBDEwldXjxGyB1Nx7118kyHXSOrlZ/cqQeWb5hzqX6
+ Ja1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794343531; x=1794948331;
+ d=1e100.net; s=20260707; t=1794343544; x=1794948344;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=u9NoxX5cA9OxKTldoj/u/oypO3YbKo8dwc5OByQ79BA=;
- b=QKgTabhesVzRliwOan+Xy29RAP1SlesDItvzAiGFKjuqcdvbBCtaDG2qCQrQdW4saY
- LU9IRSTGC12bT/OqUtjOTcYN5msC+ukNFhGRVyPephrLTuYIH6DH5raCKqCiUaih3ZQZ
- ENZtiqSOTH5U0JN5X91ewRSyDOnskEmE/3NxHeOz/0BT/7Z2qnIsesGzjZ5goK9SUyh9
- 1ZxvmgsLX2HEf1lXFtsU/vQnSP3lKYaq8bfSs1HRHzXcRTTGXG9n0kIYHxHlm9afbku9
- 2jkOdBJo5X/ULspzoE0OzMIRrpJfwdoVhAAYhoZSZz+XgZnTz4zfVnA+4V9lsISJSG9U
- lX5A==
+ bh=+KhSgRSJ4vtC/hqJOuzHF05zcZQpUJaPggCQ7ReBLp8=;
+ b=huKaoug27bdeBBGp/Y9WIIwTCrBHJNtjISaiTWNvAVKmYFEwI59w8uU6GFeY+4D9u3
+ XvQ8ICzbmJxeg6RvjSH25Fe5GfF1dz87kIUYLoysTUly8IJHGiUED6UXa3JaexfqElYz
+ PEJQPweIgxMihjv5A55zC1BV/B6UrQ/ldU8E0XSzRjnGDuijVfGQ8Ag7j6SQyytE3gnH
+ ZPYfYYmi0Mr9g2UQnk+AwrjlpjrvTOni+GjeHurUw7QxxJA6RPBNaY/GTpOh8lE9IoYQ
+ dmh7iOZbfqNnpTx2MS9uTx5p+GZJ+pp8NpzwCReZnd45f40nFiTdNewaMpcyklqDqeo8
+ hcgw==
 X-Forwarded-Encrypted: i=1;
- AL+hErGu1sZsq6N8PwAQSN6+79k7GITwZB7bhX/Cud/gGPmML74tS8Ucqu8Kn7VHeHvY7bpAlHlAVja6G2ld@nongnu.org
-X-Gm-Message-State: APuU4Z8mdAXgf/B+XQXhQdgvBPWM87OduK1pIMfqBZTgEqO0ETJ5eGmO
- O2HtBO7+xn4Ea4lPDzoplw+4J4PpCRZ/V899YPKj4Gmbm23HXUCrAgONpI8wS+CkFPwKV5VWS0o
- q1DTaQieqkPqTn5aIPFay8xgmpM2Q2bII/XzSuGKftUFOnyjMbIPWGnqhYbE9JbEO/w==
-X-Gm-Gg: AYBFou2mLkPkjHlwbVg9Iepu/JZtmHZzEnmCv14TBUgNx10YI4lGQybP7xoaFDldg/C
- VDkqBPUbzQidFGhHGK+uQZ7IJW+cwCd/y3jlZ4JHPTHzwg14KmJIPF3+bsN8TtwLhc28KSXOCmh
- b1uC5PztP66onnguW4rZ2e2QPeM+XvmG5w6rUEwehzQU66ldPgbMlesui1DhbjB35tFCWHbmGt9
- wZyVd8IuGdS7aMl2rrkicX3pCUqM6qOfWJ7gl1cRB9pAWNiPvsd413UwtzYVYO67kG6+ZRPycaf
- d+8o6qUxRVabkKCVJlCkOvZeFNuE+q6n5JXUR0j61BGfywOaluWKjdNVD9mioMnRt38PfVtLWFt
- QzXQCty1yBbwr76UUOBMTsjECOgdbu9fVjtUaK2TqYB3/TlvO4AeXHEldOJ+nK7cN1kcFJxNrPu
- AyU2x5YbJ2/A==
-X-Received: by 2002:ad4:5de2:0:b0:917:b006:50c3 with SMTP id
- 6a1803df08f44-91f03fb13b9mr8408366d6.4.1794343531124; 
- Tue, 10 Nov 2026 12:45:31 -0800 (PST)
-X-Received: by 2002:ad4:5de2:0:b0:917:b006:50c3 with SMTP id
- 6a1803df08f44-91f03fb13b9mr8407766d6.4.1794343530443; 
- Tue, 10 Nov 2026 12:45:30 -0800 (PST)
+ AL+hErE33Qtg6VqjYDkfJM7nuMhyJ8Z4kq7R9Hz6/K8v3v+/75ndfat/sIccElXVePQgCjJ52Vd7QtkQLqR3@nongnu.org
+X-Gm-Message-State: APuU4Z/hUdFIZseGbF7ZcotA0B0jJ2otpspf4eJck6O80bPrNtEUs9di
+ saJeWyjEkf2ZDk3puyurt1nDBX5+imPvFklBP7WTADhxkt6J4xSnWR0Ki9sQl+7v7VuX9crsw19
+ +C/+mvcFntGoGPc20Cug3evfEqIiFc+Uax9v61rIagnQ8qd0vfLrQRhxbjQ==
+X-Gm-Gg: AYBFou0EjdJ63ok0iTDP8ppNtaY0qRjQ0UARaHAKzSa9kKzwTrgCyqJ0LapmHJDr5QU
+ mLMIp7a5dAnoucfOvHyZLndxo+oGyeI//Gzbwo5PVoljzOHY3WyeBjPWEPnp2EZ6pzgLMb924fY
+ CytfpZN4wcXa7CBiN5VGvlZVmVFZmfKZY0phmCPTn6JSuDX8NZ06m4umHj5imRchjW5tHw8sPPR
+ Kw/ERQfqvDzILmTgig5sTfvPtTM1NY2bxG8CuMIP5hJ1Q1gOayLyJoAIPNlS3+WPPNIrXi0/0Wf
+ wmFJ64LsJWiDJRou/L+91ow9JjaWfCsT3dnpCW1klaK15H/T2o2lR9syD9MxoyAW+6o/UuOkgVs
+ HYziggQDwHSv/SlTXL/PSFOQb5jfndnhRqzhQ5t8wCL7B3I4ivgFg443kDUcPTPaS4d/VOmb8qf
+ 9cSlrIeznnNg==
+X-Received: by 2002:a05:622a:5592:b0:533:3bd5:b6e0 with SMTP id
+ d75a77b69052e-556c1679e58mr157411cf.59.1794343544240; 
+ Tue, 10 Nov 2026 12:45:44 -0800 (PST)
+X-Received: by 2002:a05:622a:5592:b0:533:3bd5:b6e0 with SMTP id
+ d75a77b69052e-556c1679e58mr156841cf.59.1794343543591; 
+ Tue, 10 Nov 2026 12:45:43 -0800 (PST)
 Received: from [192.168.68.105] ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91f02df0333sm5643126d6.27.2026.11.10.12.45.28
+ d75a77b69052e-5550b93ee00sm32683691cf.16.2026.11.10.12.45.41
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Nov 2026 12:45:29 -0800 (PST)
-Message-ID: <e27cd461-8b77-435c-b70a-56ebfe0aaa98@oss.qualcomm.com>
-Date: Tue, 10 Nov 2026 17:45:27 -0300
+ Tue, 10 Nov 2026 12:45:43 -0800 (PST)
+Message-ID: <589e2dda-a1ab-44cb-8185-d3661d7c8f8d@oss.qualcomm.com>
+Date: Tue, 10 Nov 2026 17:45:40 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 22/26] docs/system/riscv: Document Icicle Kit HSS boot
+Subject: Re: [PATCH v5 23/26] docs/system/riscv: pfsoc: Document CLINT
+ topology for direct Linux boot
 To: Bin Meng <bin.meng@processmission.com>, QEMU <qemu-devel@nongnu.org>
 Cc: Conor Dooley <conor@kernel.org>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Sebastian Huber <sebastian.huber@embedded-brains.de>, qemu-riscv@nongnu.org
 References: <20261104154207.641511-1-bin.meng@processmission.com>
- <20261104154207.641511-23-bin.meng@processmission.com>
+ <20261104154207.641511-24-bin.meng@processmission.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261104154207.641511-23-bin.meng@processmission.com>
+In-Reply-To: <20261104154207.641511-24-bin.meng@processmission.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA4MiBTYWx0ZWRfXwteUJJBG2m16
- tyCzTecmunopJ6TjwBBq/2vep+qpKBhUf399lb4q3q2V70aVhQanDAjbNSvflwIKecwXMGgpXQa
- 1SqTYtzIlZaI02gFJpos4enmFaeVdhTMkrqyOvg3izcNz8kX/xn7Y1Pp+5naz75SNDwxLHWnNot
- N7O+PJ4TmLoPQCuBZxTCxzKe800Bd5jPGxqee5Nfs9P4vWJySoFja0eBbfSTr+mCUzoQr/aHipB
- P5xLNiivpMNPq4ZZs72ap+2n+n5ssNR80eOXEOSip2YOPHvO66goACHfJUTkSxoBvsre+SLyCur
- RMM2voFE0XuCfCUY9dJxaS9GF1W6sSrasRjZ4uEIqDYPug9eJKT+flXOX/Z4BH9Z/ni6hmMq19i
- BTtfU85bBVfhfp4Y1W+daWCnHbpO1lMk+aHWJ4XlWtxIsmV+nmtH5H03ISLo8qxOxj5z/hrhqms
- gP/TX5j21YHJ6SR8LLg==
-X-Authority-Analysis: v=2.4 cv=cJl1IVeN c=1 sm=1 tr=0 ts=6af3826c cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEwMDA4MiBTYWx0ZWRfXw5YXS80Vp3X1
+ phkz2tOZY6f8OFWCABk+m1hIXmgKresNqfcTjFjq5X7gSoURW6BEJE0zMv2GjmkPlxvlRFeUnB+
+ uRrjoLJN5nRnCKmpDJVuzc+Hw2TiPmJ4vnhXSCcq77QXZNGx7TgXQlIFxfd7sMbSkI5HllJzKB6
+ LvpzVy9/Xmk4W7oFMj1+txtuNRSnNzp3/kgCQmYnuVgYxq+IXRmnELFBxZSZRLYqs/eUkxB9ybW
+ ZdJkMcvbIrctwt3jE02PKOVOu8BH5bYaYy9jBaeUponacS7DE4hI2wn1rvy8+trLYa8fkFQQx+z
+ peotYEOsps1RYDV5zgYrAJZ5JUNNcwoIjcTNIqEfL2rv6faoqtl/AdYw8iK+27CfEHuXeENhX2t
+ ZZUwFFolwn3ZlHbaM+MYKvn0psY5cWQFhwcKgp4AgaLhTsxOXvlZUklTNJ+pVDpDe+glag3Tjnh
+ n+kFPdUBqZ7/ZXfHYDw==
+X-Proofpoint-GUID: J4CNszY9msgw4T651a_jY_4OylgOcwfa
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA4MiBTYWx0ZWRfX0PkSLP8O9ygn
+ vGzEAWAY5TetKtzmuRzOKGencJOrc3NgoCfgXxhnSK/u1dqMMHNvwvPYgFjDvdde2AWZDAegtr0
+ geApkskA58QOOEnrgKJ8rDTV5mvKDY0=
+X-Proofpoint-ORIG-GUID: J4CNszY9msgw4T651a_jY_4OylgOcwfa
+X-Authority-Analysis: v=2.4 cv=JNSuIMKb c=1 sm=1 tr=0 ts=6af38279 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=NEAV23lmAAAA:8 a=9cYYqTlEAAAA:20 a=p0WdMEafAAAA:8 a=YRHvXXt1AAAA:8
- a=OGPkCyniAAAA:20 a=FRSEYCzRAAAA:8 a=EUspDBNiAAAA:8 a=BIyTlFAXET60VLmNjCQA:9
- a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22 a=9bw_jnHfPby8klRCszyn:22
- a=H4N_Y-AU75W7NKDNhZlT:22 a=bA3UWDv6hWIuX7UZL3qL:22 a=sJAZaMKuHmt1Z9jkTlw8:22
-X-Proofpoint-GUID: BIu-QjaNrUyDO-6t8RuL9LprnlXZzeKu
-X-Proofpoint-ORIG-GUID: BIu-QjaNrUyDO-6t8RuL9LprnlXZzeKu
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEwMDA4MiBTYWx0ZWRfXxJiKqxzwzLgr
- bPqx8oL3hOUCsuX2OzATdSZMgGOY/2pC/fWVtXLsHmah6HyZjeuIa1Cex7Sm7Vb1QXw6YShmajR
- LhWpY6VtFJRaqqHXmsKfp1hT2cogCZg=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=FRSEYCzRAAAA:8 a=EUspDBNiAAAA:8 a=6BHc50qNE0_AG4K3w0MA:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22 a=H4N_Y-AU75W7NKDNhZlT:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-10_06,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
- priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
+ malwarescore=0 suspectscore=0 phishscore=0 clxscore=1015 adultscore=0
+ lowpriorityscore=0 impostorscore=0 bulkscore=0 spamscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611100082
 Received-SPF: pass client-ip=205.220.180.131;
@@ -156,205 +155,76 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
 On 11/4/2026 12:41 PM, Bin Meng wrote:
-> With all previous changes, the Icicle Kit model is now able to boot
-> HSS v2026.04.1 through a Buildroot 2026.05 SD image to U-Boot and Linux.
+> The generic OpenSBI platform derives the CLINT first hart and register
+> slot count from interrupts-extended.  Some S-mode-only MPFS device trees
+> mask the E51 M-mode interrupt entries with 0xffffffff, which shifts the
+> MSIP and MTIMECMP slots when the same DTB is used for direct boot.
 > 
-> Document the tested source versions and exact commands to build HSS
-> and Buildroot. Include the sparse resize and GPT relocation steps
-> needed to make the generated SD image usable by QEMU.
-> 
-> Explain the pinned firmware baseline and include the DDR pattern-test
-> patch used by the versioned test image. Document the tool check needed
-> for image-only builds and distinguish the DDR training failure from
-> the two investigated multi-hart startup races. Describe their visible
-> symptoms, affected source versions, and all three DTB supply paths.
-> 
-> Also describe the RAM and serial setup, boot stages, and remaining
-> model limitations.
+> Document the complete five-hart CLINT node. Require interrupts 3 and 7
+> for hart 0 as well as the U54 harts.
 > 
 > Signed-off-by: Bin Meng <bin.meng@processmission.com>
 > 
 > ---
+> 
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-> 
-> (no changes since v4)
-> 
-> Changes in v4:
-> - Use HSS v2026.04.1 and the v1.1.1 test-image recipe
-> - Select the SoftConsole toolchain explicitly
-> - Use the generated complete boot-mode-1 eNVM binary
+> (no changes since v3)
 > 
 > Changes in v3:
-> - Include the DDR pattern-test patch used by the functional-test image
-> - Document the image-only FPGA programming tool check
-> - Describe startup-race symptoms and link the firmware investigations
+> - Explain how reduced hart topologies change the CLINT DTB tuples
 > 
->   docs/system/riscv/microchip-icicle-kit.rst | 129 ++++++++++++++++++++-
->   1 file changed, 123 insertions(+), 6 deletions(-)
+>   docs/system/riscv/microchip-icicle-kit.rst | 26 +++++++++++++++++++++-
+>   1 file changed, 25 insertions(+), 1 deletion(-)
 > 
 > diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
-> index 138289a913..2159e8e461 100644
+> index 2159e8e461..038ea7221f 100644
 > --- a/docs/system/riscv/microchip-icicle-kit.rst
 > +++ b/docs/system/riscv/microchip-icicle-kit.rst
-> @@ -19,12 +19,14 @@ The ``microchip-icicle-kit`` machine supports the following devices:
->   * 4 U54 cores
->   * Core Level Interruptor (CLINT)
->   * Platform-Level Interrupt Controller (PLIC)
-> -* L2 Loosely Integrated Memory (L2-LIM)
-> +* L2 cache controller, including L2-LIM and L2-Zero windows
->   * DDR memory controller
-> +* System controller and system services mailbox
->   * 5 MMUARTs
->   * 1 DMA controller
->   * 2 GEM Ethernet controllers
->   * 1 SDHC storage controller
-> +* 1 Real-Time Clock
+> @@ -66,7 +66,31 @@ should meet the following requirements:
+>     option.
 >   
->   The machine has a fixed 2 GiB of RAM. Other memory sizes are rejected.
->   The machine defaults to all five harts. ``-smp`` may select two to five harts,
-> @@ -103,10 +105,125 @@ CAVEATS:
->   Running HSS
->   -----------
+>   * It should contain a node for the CLINT device with a compatible string
+> -  "riscv,clint0".
+> +  "riscv,clint0" or "sifive,clint0".  Its ``interrupts-extended`` property
+> +  must describe the M-mode software interrupt (3) and timer interrupt (7) for
+> +  every hart, including the E51 hart 0.
+> +
+> +For example, the default five-hart Icicle Kit CLINT node can be described as:
+> +
+> +.. code-block:: none
+> +
+> +    clint: clint@2000000 {
+> +        compatible = "sifive,fu540-c000-clint", "sifive,clint0";
+> +        reg = <0x0 0x2000000 0x0 0xc000>;
+> +        interrupts-extended = <&cpu0_intc 3>, <&cpu0_intc 7>,
+> +                              <&cpu1_intc 3>, <&cpu1_intc 7>,
+> +                              <&cpu2_intc 3>, <&cpu2_intc 7>,
+> +                              <&cpu3_intc 3>, <&cpu3_intc 7>,
+> +                              <&cpu4_intc 3>, <&cpu4_intc 7>;
+> +    };
+> +
+> +When selecting fewer harts with ``-smp``, remove the absent hart nodes and their
+> +CLINT interrupt tuples from the DTB while retaining the E51 hart 0 entries.
+> +
+> +Do not replace the hart 0 interrupt numbers with ``0xffffffff`` when the same
+> +DTB is used to initialize the generic OpenSBI platform.  OpenSBI derives the
+> +first hart and the number of CLINT register slots from these interrupt tuples;
+> +masking hart 0 would shift the per-hart MSIP and MTIMECMP register mappings.
 >   
-> -The machine ``microchip-icicle-kit`` used to run the Hart Software Services
-> -(HSS_), however, the HSS development progressed and the QEMU machine
-> -implementation lacks behind.  Currently, running the HSS no longer works.
-> -There is missing support in the clock and memory controller devices.  In
-> -particular, reading from the SD card does not work.
-> +The ``microchip-icicle-kit`` machine can boot the Hart Software Services
-> +(HSS_), which then loads an HSS payload containing U-Boot from an SD card.
-> +The following flow was tested with HSS v2026.04.1 and Buildroot 2026.05.
-> +These versions reproduce the firmware and SD card images used by the
-> +functional test.
-> +
-> +Configure HSS for the ``mpfs-icicle-kit-es`` board using its default
-> +configuration. QEMU provides the software-visible registers and deterministic
-> +status consumed by the HSS v2026.04.1 DDR initialization and training flow;
-> +it does not model the electrical properties of DDR training. HSS requires
-> +the RISC-V bare-metal toolchain supplied by Microchip SoftConsole to be
-> +available in ``PATH``.
-> +
-> +The versioned test image applies the `DDR pattern-test fix`_ before building
-> +HSS. Without this fix, the DDR state machine can reuse uninitialized
-> +pattern-test parameters across calls, particularly with the SoftConsole
-> +GCC 8.3.0 toolchain. Apply the same patch when reproducing the test image:
-> +
-> +.. code-block:: bash
-> +
-> +  $ git clone https://github.com/polarfire-soc/hart-software-services.git
-> +  $ cd hart-software-services
-> +  $ git checkout v2026.04.1
-> +  $ curl -L -o ddr-pattern-test.patch \
-> +      https://raw.githubusercontent.com/processmission/qemu-machine-images/v1.1.1/machine/riscv64/microchip-icicle-kit/0001-mpfs_hal-preserve-DDR-pattern-test-parameters.patch
-> +  $ git apply ddr-pattern-test.patch
-> +  $ cp boards/mpfs-icicle-kit-es/def_config .config
-> +  $ echo CONFIG_CC_USE_SOFTCONSOLE=y >> .config
-> +  $ FPGENPROG=/bin/true make -j$(nproc) BOARD=mpfs-icicle-kit-es
-> +
-> +``FPGENPROG=/bin/true`` satisfies the boot-mode programmer's FPGA programming
-> +tool check when generating an image for QEMU; no physical device is programmed.
-> +
-> +The HSS build creates the complete eNVM image, including the 256-byte
-> +boot header with the image size and per-hart reset vectors. Copy it to
-> +``build/hss.bin`` for the QEMU command below:
-> +
-> +.. code-block:: bash
-> +
-> +  $ cp build/bootmode1/hss-envm-wrapper-bm1-p0.bin build/hss.bin
-> +
-> +Do not pass ``build/hss-envm-wrapper.bin`` directly to QEMU. That file starts
-> +at eNVM offset 0x100 and does not contain the boot header with the image size
-> +and per-hart reset vectors.
-> +
-> +Build the SD card image with the tested Buildroot version:
-> +
-> +.. code-block:: bash
-> +
-> +  $ git clone https://gitlab.com/buildroot.org/buildroot.git
-> +  $ cd buildroot
-> +  $ git checkout 2026.05
-> +  $ make microchip_mpfs_icicle_defconfig
-> +  $ make
-> +
-> +This produces ``output/images/sdcard.img`` with three GPT partitions:
-> +
-> +* An HSS ``payload.bin`` containing U-Boot.
-> +* A FAT partition containing ``boot.scr`` and the kernel FIT image.
-> +* An ext4 Linux root filesystem.
-> +
-> +The QEMU SD card model requires a power-of-two image size. Make a sparse
-> +4 GiB working copy and relocate its backup GPT to the new end of the image:
-> +
-> +.. code-block:: bash
-> +
-> +  $ cp --reflink=auto output/images/sdcard.img sdcard.img
-> +  $ truncate -s 4G sdcard.img
-> +  $ sgdisk -e sdcard.img
-> +  $ sgdisk -v sdcard.img
-> +
-> +The Icicle Kit firmware device tree in the FIT image describes 2 GiB of RAM,
-> +matching the machine's fixed RAM size. The command below keeps ``-m 2G``
-> +explicit.  Attach the image as an SD card and route both board serial ports:
-> +
-> +.. code-block:: bash
-> +
-> +  $ qemu-system-riscv64 \
-> +      -M microchip-icicle-kit -smp 5 -m 2G \
-> +      -bios path/to/hss/build/hss.bin \
-> +      -drive if=sd,file=path/to/sdcard.img,format=raw \
-> +      -display none \
-> +      -serial file:hss.log \
-> +      -serial stdio \
-> +      -no-reboot
-> +
-> +HSS writes to MMUART0, which the command records in ``hss.log``. U-Boot and
-> +Linux use MMUART1, which remains connected to the terminal. A successful
-> +boot proceeds through HSS payload loading, U-Boot, the Linux kernel, and the
-> +login prompt from the root filesystem on the third partition.
-> +
-> +Known limitations
-> +-----------------
-> +
-> +* Two potential multi-hart startup races were reproduced with HSS v2024.06
-> +  under QEMU. The affected code paths are also present in the inspected
-> +  HSS v2026.04.1 sources; they have not been reproduced on physical hardware.
-> +  See `HSS startup races`_ for the investigation and affected source versions.
-> +
-> +  * In the eNVM wrapper, a late U54 can clear the decompression completion
-> +    flag after E51 has set it. A boot can stop before all harts enter HSS,
-> +    with the affected U54s waiting in ``wait_for_decompress_done``.
-> +  * After DDR training and payload loading, a U54 other than the configured
-> +    payload owner can win the OpenSBI coldboot lottery. With the minimal DTB
-> +    describing only ``cpu@1``, U-Boot on another hart can repeatedly print
-> +    ``Could not initialize timer (err -19)`` and ``resetting ...``.
-> +
-> +* Without the DDR pattern-test fix above, some GCC 8.3.0 builds remain at
-> +  60% DDR training progress while QEMU keeps running. This is a separate
-> +  firmware parameter-lifetime issue; see `DDR pattern-test issue`_.
-> +* The SD card model requires the raw image size to be a power of two. Keep
-> +  the backup GPT header at the end when resizing the image.
-> +* The machine does not generate an Icicle Kit device tree. Firmware boot can
-> +  obtain a DTB built into HSS, included in an HSS payload, or supplied by
-> +  subsequent software, such as U-Boot or a kernel FIT image. The DTB must
-> +  describe the selected hart topology and the modeled reference-design DDR
-> +  windows. Direct kernel boot must use ``-dtb`` as described above.
->   
->   .. _HSS: https://github.com/polarfire-soc/hart-software-services
-> +.. _DDR pattern-test fix: https://github.com/processmission/qemu-machine-images/blob/v1.1.1/machine/riscv64/microchip-icicle-kit/0001-mpfs_hal-preserve-DDR-pattern-test-parameters.patch
-> +.. _DDR pattern-test issue: https://github.com/polarfire-soc/platform/issues/36
-> +.. _HSS startup races: https://github.com/polarfire-soc/hart-software-services/issues/106
+>   When ``-bios`` is not specified or set to ``default``, the OpenSBI
+>   ``fw_dynamic`` BIOS image for the ``generic`` platform is used to boot an
 
 
