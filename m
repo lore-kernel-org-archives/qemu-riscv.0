@@ -1,64 +1,73 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1D2B606A321
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 02:14:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 752AF606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 02:50:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=EV6fW7Fp
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=OVCdq02P
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQbN0-0005G1-0I; Mon, 09 Nov 2026 21:13:58 -0500
+	id 1xQbwF-0006w0-HR; Mon, 09 Nov 2026 21:50:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xQbMy-0005Fm-ND; Mon, 09 Nov 2026 21:13:56 -0500
-Received: from [115.124.30.111] (helo=out30-111.freemail.mail.aliyun.com)
+ (Exim 4.90_1) (envelope-from <guoren@kernel.org>) id 1xQbw6-0006be-A5
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 21:50:14 -0500
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xQbMr-0000eU-N4; Mon, 09 Nov 2026 21:13:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1794276805; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=cq4krLDnjKOaTIwH7WVcvc1++uWNrEfCrMkgQ7Bmh2U=;
- b=EV6fW7FptkyxkayrVH5XvKaU+miJ/G+Zar8EJfG+uGOVH7m9gVIHg1gwMpE5AlJhIOp9p8WORDuvyASw1cOiqMgHR/B8SIaXYQkf5GblsZZgb5WMvzS5ZR6l0gAbSPNbhPpm2i5aQbDnpI0ZQn3rZa0ykkxXiF8VV7ORwmixEz8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R971e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
- MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0XETUN1t_1794276803; 
-Received: from 30.166.65.98(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0XETUN1t_1794276803 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 10 Nov 2026 10:13:24 +0800
-Message-ID: <cc5fdb8c-0e99-40e8-9c93-ff3a8702d4a9@linux.alibaba.com>
-Date: Tue, 10 Nov 2026 10:13:23 +0800
+ (Exim 4.90_1) (envelope-from <guoren@kernel.org>) id 1xQbw4-0004Y8-6p
+ for qemu-riscv@nongnu.org; Mon, 09 Nov 2026 21:50:13 -0500
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 3F948636A6
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 02:50:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E937D1F008BF
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 02:50:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794279008;
+ bh=3zbBDorW18pGxfA+56aRKlmSuwQe3evaU/AhhR9Vni8=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc;
+ b=OVCdq02PUnzA4ODSgn27ZgfyJLFVmQs6b8rA8/KtvgeVYy968ShOTIiWa3wjByzUR
+ Yu8HTsSt3fNwvU9pUEiGHTW2kVMRjgen3x/zBguYPrj7G0WMzFBgqFIHTZSgmREMuC
+ 3Rxz5G+x6RI1UqQuZw0bE6SIkpPG0XTg7SSXjooGfaTcHCATfm9EFUCxxzS7ph4xTK
+ 2CCUTB2Tpv8TkjGbhJhL/2MBbwMaqGjMkNCo93M9Hjxy6Zpx6hJUx3RmqL9eDrR+1t
+ X9JrHcFw+5OGoXBaNW3sCdUMdlkpOWiJZVbQFG+bn9r6ybTIOukfG17AYsHkf6fVfb
+ akzwWX0AloetA==
+Received: by mail-wr1-f50.google.com with SMTP id
+ ffacd0b85a97d-491aaed7565so930350f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 09 Nov 2026 18:50:08 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AL+hErFmGM9COcepsI6pnwX/xrlXdjWe/7eh/XUWvjLEDCtc6pA8on8FCGujZKhJ3Nr7lz0iVrBtZQpY+9pr@nongnu.org
+X-Gm-Message-State: APuU4Z80UD9PlQDmzy31DU1+No7uehCbO/fZgRrB/7yGp003C9O5BdyX
+ ppMTT1UIK1PvKc6ajUNQn4j8CFPm8ufcfozHgyi9KGuCFw4DgIFEgEx1yHJ2P/ZA0fPsDnmB40R
+ 5jsA/PhOs4NrjLWvnB0HXcpC52AVCCy8=
+X-Received: by 2002:adf:e195:0:b0:48e:75a1:1e38 with SMTP id
+ ffacd0b85a97d-49831cd14b8mr1811348f8f.56.1794279007468; Mon, 09 Nov 2026
+ 18:50:07 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Use gen_goto_tb() for vsetivli exits
-To: WX Chen <wxchen0913@gmail.com>, qemu-devel@nongnu.org
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-References: <20261104-research-vsetivli-direct-chain-20261103-v1-1-ace12cf5280a@gmail.com>
-Content-Language: en-US
-From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20261104-research-vsetivli-direct-chain-20261103-v1-1-ace12cf5280a@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.111 (deferred)
-Received-SPF: pass client-ip=115.124.30.111;
- envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
-X-Spam_score_int: -166
-X-Spam_score: -16.7
-X-Spam_bar: ----------------
-X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
- T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
- USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
+References: <20261109135633.64867-1-fangyu.yu@linux.alibaba.com>
+In-Reply-To: <20261109135633.64867-1-fangyu.yu@linux.alibaba.com>
+From: Guo Ren <guoren@kernel.org>
+Date: Tue, 10 Nov 2026 10:49:54 +0800
+X-Gmail-Original-Message-ID: <CAJF2gTS4rqVk5r-mJ49AFH5VWTh=FiB6VO3o=VkaDkyzFpCjMQ@mail.gmail.com>
+X-Gm-Features: AclHuK_uvJxmT4WkPCul46UIbZjgk1YEGhOErIogpq6gCjfBjKhXTzo0jHCXlhA
+Message-ID: <CAJF2gTS4rqVk5r-mJ49AFH5VWTh=FiB6VO3o=VkaDkyzFpCjMQ@mail.gmail.com>
+Subject: Re: [PATCH] target/riscv: fix exception PC for WFI
+To: fangyu.yu@linux.alibaba.com
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
+ daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com, 
+ chao.liu@processmission.com, qemu-devel@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=guoren@kernel.org;
+ helo=tor.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -70,73 +79,101 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-24.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1,USER_IN_DEF_DKIM_WL
-	autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On Mon, Nov 9, 2026 at 9:56=E2=80=AFPM <fangyu.yu@linux.alibaba.com> wrote:
+>
+> From: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+>
+> trans_wfi() advances env->pc before calling helper_wfi(), which may
+> raise illegal or virtual-instruction exceptions through GETPC().
+Yes, this is the problem. Good catch!
 
-On 11/4/26 1:34 AM, WX Chen wrote:
-> This change adjusts the translation exit of `vsetivli`. While preserving
-> the existing helper, state update flow, and TB boundaries, it uses the
-> generic `gen_goto_tb()` path to reduce the overhead of repeated successor-TB
-> lookups.
+> With CF_PCREL, restoring the instruction PC uses env->pc's page base.
+> If the next instruction is in a different page, the exception PC is
+> restored one page too high. This affects both a WFI ending exactly at
+> a page boundary and one crossing it.
 >
-> `vsetivli` is used to set the vector length and type, and both its AVL and
-> vtype encodings are provided by immediates. Given the CPU configuration and
-> the source TB execution context, after this instruction completes normally,
-> the vector state changes relevant to subsequent translation are
-> deterministic. Therefore, this exit is eligible for direct TB linking.
+> Keep env->pc pointing at WFI while helper_wfi() can raise an exception,
+> and pass the instruction length to the helper. Advance env->pc only on
+> the normal single-step or halt paths.
 >
-> Measured on an AMD Ryzen AI 9 H 365 (x86-64) host, using qemu-riscv64
-> with -cpu rv64,v=true,vlen=128,elen=64. A RISC-V GCC 14.2.0 cc1 built for
-> rv64gcv compiles the packages with -O2 -g0 -march=rv64gcv -mabi=lp64d.
-> Only cc1 runs under emulation; make, the compiler driver, assembler and
-> linker run on the host.
+> Fixes: 356c13f94dbf ("target/riscv: Enable PC-relative translation")
+> Signed-off-by: Fangyu Yu <fangyu.yu@linux.alibaba.com>
+> ---
+>  target/riscv/helper.h                              | 2 +-
+>  target/riscv/tcg/insn_trans/trans_privileged.c.inc | 4 ++--
+>  target/riscv/tcg/op_helper.c                       | 6 +++++-
+>  3 files changed, 8 insertions(+), 4 deletions(-)
 >
-> Each variant is warmed up once, followed by three paired clean builds in
-> AB/BA/AB order, using -j1 and fixed host CPU affinity (CPU 7). Median build
-> wall times are:
+> diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+> index 1cffcad580..b36e3532aa 100644
+> --- a/target/riscv/helper.h
+> +++ b/target/riscv/helper.h
+> @@ -135,7 +135,7 @@ DEF_HELPER_1(mret, tl, env)
+>  DEF_HELPER_1(dret, tl, env)
+>  DEF_HELPER_1(mnret, tl, env)
+>  DEF_HELPER_1(ctr_clear, void, env)
+> -DEF_HELPER_1(wfi, void, env)
+> +DEF_HELPER_2(wfi, void, env, i32)
+>  DEF_HELPER_1(wrs_nto, void, env)
+>  DEF_HELPER_1(tlb_flush, void, env)
+>  DEF_HELPER_1(tlb_flush_all, void, env)
+> diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/=
+riscv/tcg/insn_trans/trans_privileged.c.inc
+> index e22df6fbe7..3ca55b9842 100644
+> --- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> +++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
+> @@ -167,8 +167,8 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
+>  {
+>  #ifndef CONFIG_USER_ONLY
+>      decode_save_opc(ctx, 0);
+> -    gen_update_pc(ctx, ctx->cur_insn_len);
+> -    gen_helper_wfi(tcg_env);
+> +    gen_update_pc(ctx, 0);
+> +    gen_helper_wfi(tcg_env, tcg_constant_i32(ctx->cur_insn_len));
+>      ctx->base.is_jmp =3D DISAS_NORETURN;
+>      return true;
+>  #else
+> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+> index f9c79fe6b9..3f71258858 100644
+> --- a/target/riscv/tcg/op_helper.c
+> +++ b/target/riscv/tcg/op_helper.c
+> @@ -625,7 +625,7 @@ void HELPER(ctr_clear)(CPURISCVState *env)
+>      riscv_ctr_clear(env);
+>  }
 >
->                    Before (s)    After (s)    Wall time reduction
->    LZ4 1.10.0         125.017      123.060                  1.57%
->    zlib 1.3.1          71.062       70.310                  1.06%
->
-> In a separate untimed test, a loop executes two vsetivli instructions per
-> iteration for 37 iterations. Host-side GDB entry breakpoints show that
-> helper_lookup_tb_ptr() entries at the two successor PCs fall from 74 to 0.
-> The guest still executes 74 vsetivli instructions. Initial TB dispatch and
-> link establishment still occur through the normal dispatcher.
->
-> Signed-off-by: WX Chen <wxchen0913@gmail.com>
-Reviewed-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> -void HELPER(wfi)(CPURISCVState *env)
+> +void HELPER(wfi)(CPURISCVState *env, uint32_t insn_len)
+Yes, WFI can be either a 16-bit compressed instruction or a 32-bit
+instruction. The helper is runtime code and has no other way to know
+the instruction length, so it must be passed in order to correctly
+advance env->pc on the non-exception path. This approach is
+reasonable.
 
-Zhiwei
-> ---
->   target/riscv/tcg/insn_trans/trans_rvv.c.inc | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
->
-> diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> index a22e2cae6ce8e5a055c106fb76c305c92ac53d3c..b299c82d7a29057433e280b49b5220e6ad71498f 100644
-> --- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> +++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-> @@ -234,8 +234,7 @@ static bool do_vsetivli(DisasContext *s, int rd, TCGv s1, TCGv s2)
->       gen_helper_vsetvl(dst, tcg_env, s1, s2, tcg_constant_tl(0));
->       gen_set_gpr(s, rd, dst);
->       finalize_rvv_inst(s);
-> -    gen_update_pc(s, s->cur_insn_len);
-> -    lookup_and_goto_ptr(s);
-> +    gen_goto_tb(s, 0, s->cur_insn_len);
->       s->base.is_jmp = DISAS_NORETURN;
->   
->       return true;
->
-> ---
-> base-commit: d73149283205645625bfa9fe029cfb68e4c4a9ae
-> change-id: 20261104-research-vsetivli-direct-chain-20261103-69536f07be37
->
-> Best regards,
+>  {
+>      CPUState *cs =3D env_cpu(env);
+>      bool rvs =3D riscv_has_ext(env, RVS);
+> @@ -639,6 +639,10 @@ void HELPER(wfi)(CPURISCVState *env)
+>                 (prv_u || (prv_s && get_field(env->hstatus, HSTATUS_VTW))=
+)) {
+>          riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, GE=
+TPC());
+>      } else {
+> +        env->pc +=3D insn_len;
+> +        if (env->xl =3D=3D MXL_RV32) {
+> +            env->pc =3D (int32_t)env->pc;
+uint64_t pc;
+Yes, RV32's pc is sign-extended and stored in uint64_t.
+
+Reviewed-by: GUO Ren (XuanTie) <guoren@kernel.org>
+
+--=20
+Best Regards
+ Guo Ren
 
