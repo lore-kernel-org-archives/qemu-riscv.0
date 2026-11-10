@@ -1,30 +1,30 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACE46606A31C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 14:13:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E43D060A2627
+	for <qemu-riscv@archiver.kernel.org>; Tue, 10 Nov 2026 14:59:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=I28jhzQ3
+	dkim=pass (2048-bit key, unprotected) header.d=processmission.com header.i=@processmission.com header.a=rsa-sha256 header.s=selector1 header.b=cQGiQUeH
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQmb0-0005tx-UK; Tue, 10 Nov 2026 09:13:11 -0500
+	id 1xQnJ9-0001wH-EY; Tue, 10 Nov 2026 09:58:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xQmat-0005oQ-J5; Tue, 10 Nov 2026 09:13:03 -0500
-Received: from mail-japaneastazlp170130007.outbound.protection.outlook.com
- ([2a01:111:f403:c405::7] helo=TYDPR03CU002.outbound.protection.outlook.com)
+ id 1xQnJ7-0001vk-Nz; Tue, 10 Nov 2026 09:58:46 -0500
+Received: from mail-japaneastazlp170120005.outbound.protection.outlook.com
+ ([2a01:111:f403:c405::5] helo=TYPPR03CU001.outbound.protection.outlook.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <chao.liu@processmission.com>)
- id 1xQmar-0002Xv-Km; Tue, 10 Nov 2026 09:13:03 -0500
+ id 1xQnJ5-0007zw-LB; Tue, 10 Nov 2026 09:58:45 -0500
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=plOTK1AUAv+k6Xpk6cpMEgW/8b0mkp1d8X3jjGg6LsMFErbEX89kHcxhckhdFueZVe5ZrE8fbH991rTjYUAxjWQJXN/rIjHuPeAlmQ8KSS0kaDabt7Vk/VPtETBaUfwuncAbe3tmF81fvN4+z2uGvd9XlVzVQl5gVnLBfCRdpn11wLohrblhKAHp3rhfTmn++9WeV3D+UrhalAGQQe2kgGinwj38c63u23Zgk9F7US7IcRVE90QKfjygdwBHFmsmIlrR43e9fJORybXwrSYuMZH6027nRb0nURiJotnaDLDwaBIIbhQ+p8g6++2rN499ytaFXGsDqQvNuICgo6kEDQ==
+ b=Xzne5AZ9/53m3dKGuIe+0WJJF2jydXYMjVa4lnQWuCARYFzajp11+kN+A3LIKnk7BCiy3ViVMcqGFN09lOErVYZkEtRnmiSxSZYTy4zUDgINd26El0aD19tJ/WagjiUIXwimCnu7LxnzpNnAu2GQ0lKoLVml3oaFgAahf6NZSFRmjJ+syWR4wYalOMy1VQSH1896NBuPaW+8izxGQib99L6K/ybB0QcxH08sTSPhphvcXEulwmswJfIn4YVzv4WIjelJnKvv4P0+0Fw8fFgd1wwBrWPJ15YQQ6KNWzypNaZPdcrTJEP+tphs/5M+NvBUj9PoKulc6P+eSUxbI6t0fA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dQUf1FWcHoP8geyC5ZSPmi9wtU48e/PBvA2xyVKYBUs=;
- b=AUK9NAsx8pMxu7AdJ2A1elDzNEKStdTbYiT6BFGOiAGisQbktVGfOlpVPdgJqv1nnhmNu4D4bi6hsHrO3cgxj+VGgOugfzfUJH/2s+PDzVnolqsI2Q4S3fNmbYpiPAQeq8Q+JMXBU+CHxZ8Jq5ymcw7IcsLzDq5Z7kTXiAX1EoEG36IKK7ZuDaMgvU7j8fPoRZIukUB5ny5JBHPE3JqdtuJ5zDLsNYgBJA+v+tgI6RpahDEvmieaVliH4FwMQWJcDQkjAmpguaLGm9ta7BsZsem5OprdbeI2bZdyCAWN88bwxjue0ELaEeLDSWpOn7ogZF/roewJHdz2lccCO6orEg==
+ bh=HzuYe09Y0ODgswSww3AoPJInL/PbJHkNCMq2MR6msd8=;
+ b=QagnQ9WGto+xB4Cc/sm8bDHhvpMJYT5S7pZfgdBavE2vYAeM6S/FJVq84f1Vmn9Wn7sdv+MrBL1xsZCrE3bjCuw5YeKhDPUC32416QkJ90x77cAXvZ9gWRRydpT7Sn6uYlRSHRByv5tZhqqUhcXVLqvwLhPWHNrxEakJ0Cb5OaUyjHtrSaAvTeCyBlYPzGZZBOgp+M85GU+a7qbfVntzyDX/9CdKi4EDCrYXU6aQCBY5aM6nNItDI0EDsT/FORGOYN2r42pbWC8hlGaE6RA8sD75FTt7VjrduvJs2hpX1OgiuI7DkBod1pxXq9xozRlRigMq/unpkht2w9VHd6WQoQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=processmission.com; dmarc=pass action=none
  header.from=processmission.com; dkim=pass header.d=processmission.com;
@@ -32,19 +32,19 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dQUf1FWcHoP8geyC5ZSPmi9wtU48e/PBvA2xyVKYBUs=;
- b=I28jhzQ3n0kryLGzYK3NlPKCtaS01t3u+GvZlT0SYhaBvzxiPq81k30PxP1n9awNPB6yeA+UeeEKoxAunz64HzPcslJ+ImnpXxzLHssIJuqoRFlBkjjvDjIdqs3elVyv0xpCbd6A2ljRbdYNOqYGA9kC6qba8rk4noSFQZHPJCwDkftOw7Y6GVkM4KaSrOnNTwW2JDZguxY557IVlVsmeD8a2N3X0jx+q4PwYj1JvCJQxuoJQ+OEiAWkwd/TUkWdtC4OZfWF8gWWqi/AyvPRlX9W8mdMrm22+IG0rLqRxMqeSwt+MXdu28lv4immZLKSz7X2fxC2uJYhi0C92sUH5g==
+ bh=HzuYe09Y0ODgswSww3AoPJInL/PbJHkNCMq2MR6msd8=;
+ b=cQGiQUeHs4zMHcoKQgtmsW/V1eWw8NAUT5zgsIl/j+bD44NbLzCEzQThsAip1PygvMPM06AHMeEN4VA6kK8xR1ga9M+XRheahw0CQrqI6meJOsCQO8gepAm5x4R+oP6OnYHo8z4DTyquZoUHPqOd0jUGXZh9NlYsgRL688ntJMIAVxjNxEvPCxW+HtU3BPdBDHfD3BYjrnk0erNrCUU1vDWYj3z4P+l034BSDnDt6v6i0VHcV1e80WjEEo/W5907QVTtl8evISLNIgPjnAgmg/BngeVwtUbIoTVQimjQisbiy8KMKAUWwiZ0zBAcjgV6m+28qmDQHtTP+y7A9x9faA==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=processmission.com;
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com (2603:1096:405:3d0::15)
- by KUXPR02MB9477.apcprd02.prod.outlook.com (2603:1096:d10:a6::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.8; Tue, 10 Nov
- 2026 14:12:55 +0000
+ by JH0PR02MB6901.apcprd02.prod.outlook.com (2603:1096:990:53::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.13; Tue, 10 Nov
+ 2026 14:58:05 +0000
 Received: from TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934]) by TYNPR02MB9351.apcprd02.prod.outlook.com
  ([fe80::e5f3:5fb7:3d29:5934%6]) with mapi id 15.21.0615.007; Tue, 10 Nov 2026
- 14:12:55 +0000
+ 14:58:05 +0000
 From: Chao Liu <chao.liu@processmission.com>
 To: Max Chou <max.chou@sifive.com>
 Cc: Chao Liu <chao.liu@processmission.com>, qemu-devel@nongnu.org,
@@ -54,83 +54,84 @@ Cc: Chao Liu <chao.liu@processmission.com>, qemu-devel@nongnu.org,
  Aurelien Jarno <aurelien@aurel32.net>,
  Peter Maydell <peter.maydell@linaro.org>,
  =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
- Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [RFC PATCH 00/38] target/riscv: Add Zvdota/Zvbdota families of
- dot-product extensions
-Date: Tue, 10 Nov 2026 22:12:35 +0800
-Message-ID: <20261110141239.46244-1-chao.liu@processmission.com>
+ Weiwei Li <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Alistair Francis <alistair.francis@wdc.com>
+Subject: Re: [RFC PATCH 04/38] target/riscv: Add cfg property for Zvqwdota8i
+ extension
+Date: Tue, 10 Nov 2026 22:57:44 +0800
+Message-ID: <20261110145745.97732-1-chao.liu@processmission.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261104194155.679241-1-max.chou@sifive.com>
+In-Reply-To: <20261104194155.679241-5-max.chou@sifive.com>
 References: 
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0127.namprd03.prod.outlook.com
- (2603:10b6:a03:33c::12) To TYNPR02MB9351.apcprd02.prod.outlook.com
- (2603:1096:405:3d0::15)
+X-ClientProxiedBy: PH8P221CA0064.NAMP221.PROD.OUTLOOK.COM
+ (2603:10b6:510:349::16) To KUXPR02MB9336.apcprd02.prod.outlook.com
+ (2603:1096:d10:a3::10)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|KUXPR02MB9477:EE_
-X-MS-Office365-Filtering-Correlation-Id: c6758f66-cbd0-4f72-2a73-08df3f34b71d
+X-MS-TrafficTypeDiagnostic: TYNPR02MB9351:EE_|JH0PR02MB6901:EE_
+X-MS-Office365-Filtering-Correlation-Id: b03acd06-4474-4064-2180-08df3f3b0550
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|366016|1800799024|23010399003|56012099006|18002099003|22082099003|6133799003|10067099003|261009223027099003|261102124527099003|261102123227099003|261026121527099003|261026140227099003|261021123027099003|261021121427099003|261022105027099003|261022075727099003|261028144727099003|3023799007|13003099007;
-X-Microsoft-Antispam-Message-Info: bEk2iNpKUeXE3buvVs7QMIR3Pst0TdLbikKK6VjYw3nZuOwAtBeJW/eC2lH5VSrfo5OKnemkFrrAogIT8EN/JxIQ3wUce4sZmxiBPlSSVuQs3r7e7KUKpa4sxhhYCHs5u4bLU/8Jn+zd765TZ+2czpE3vx7dxnMkXb9hyEnpqJZ9VNhBOzQTxS5CQ8wDW9x6YNtITUC9zzgGp8oApJSNtU7+8G80HrxMU6JJOSVPLT7g45wIGihPGTbyQ6v8K6AWX+JdMs1ztcKxLY4McEkX+a/2R9KmCgfmu9a0cwb/XCWZGKkkLOTMsJAA47KgsD8FVQSLeiofIUzQSgfoWw4aI70ve4VZXfo44k1ZaeRVsyP76CPP5b7THXE9h6K3j4Xnc4H3oBazp96bjzoqzGpiU6xEJRHIrg2kTdX/1p5KVxmJNGSM4Mk+cxQA1EgXGeeadVGApVNVSwFk+j/16qveFCk3un0Cpb42jZZ9/Rj+3TNRc0V6EOZ7FhOvmYRnurp+TUAsZxY+d/6/IoxSEag8K/1uLlQVQZcRDM3uHJ+m5522kC1Z5ooZuOGEHLUkdgkLrummYogtsfwG6QILsPR0dLhucZSFHkxjlO6/vdZJkTLHOw2rm5howUG2QW3l8vXf
+ ARA:13230040|1800799024|366016|7416014|23010399003|376014|22082099003|18002099003|6133799003|10067099003|261009223027099003|261102123227099003|261102124527099003|261026121527099003|261028144727099003|261022105027099003|56012099006|261022075727099003|261021123027099003|261021121427099003|261026140227099003;
+X-Microsoft-Antispam-Message-Info: MbpBP4EIW6pC62/prFpOSQ6xvgr7sNDVQNOo9Ua1fK05N9DklVpHGWRNdtDw4sf9Rklnu7z2hFsaFtXt8P3V8ad9V0eREe2JDLd/u6C0jZstLtcLc4IoAZxxdVB0WdNHllKTHHMWzNt3xExoxI+In3ZkrQARVE7guJcvMJV1DeqVpLTzp/JMORTwN513HLLoSnLtsN4tXNCKDPB3wOZMS4B2pXqJLgyUobm9d7L4hZknKsOU9pa+WAmb/S9jYnsusgLSZHA1GjvOFVx+mAmMNpB5Zr23fDcr+W7+VngXegV1mZFcY/Q9s9BbHvTotVWkak8R6eakH0l9qq69M7vPv5PGCmC1S2SAxbCLHNTdC2iHWwA2xA/UZOZQSWdLqyIkRcnOELuAOOSsL3JJFZ6uXtEkgolMYSXP17SqNgLt3tJZEZmV3nZRETC3Tl7q4vBR+V0nqMZiJAu6B8SK8ElhQyZKMgU6GEBbuz9MinVE3M7q5HE+R36CjK3krpwM37MxgvHhbjRKZLQlzVsrCUpMufytn2IVWiLzQ/AoK4By1TUi0hKmY9tJsP0sMy3iJeRlou5rtY/TEFSFpvK48IXEOqZ+Wq+e4NWnAF2v+fUamyUSv/MdCGg8mWmiZ91l0u1uqWgejWJRgtF2Cz3M74StaZIK+65xr0Q9KsJFTGtyNrk=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:TYNPR02MB9351.apcprd02.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(366016)(1800799024)(23010399003)(56012099006)(18002099003)(22082099003)(6133799003)(10067099003)(261009223027099003)(261102124527099003)(261102123227099003)(261026121527099003)(261026140227099003)(261021123027099003)(261021121427099003)(261022105027099003)(261022075727099003)(261028144727099003)(3023799007)(13003099007);
+ SFS:(13230040)(1800799024)(366016)(7416014)(23010399003)(376014)(22082099003)(18002099003)(6133799003)(10067099003)(261009223027099003)(261102123227099003)(261102124527099003)(261026121527099003)(261028144727099003)(261022105027099003)(56012099006)(261022075727099003)(261021123027099003)(261021121427099003)(261026140227099003);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5ub8bDRunkekuwHkV0V2tKdjvsA2ptzzFVDtKwBXD4UE8FSgaKhyh+omtdrb?=
- =?us-ascii?Q?BPj/SyBgB4weQDQgc71Eil6X5l5N9ZNR97D52ani9ESC6AaM8rycl5dj7FSO?=
- =?us-ascii?Q?8amOGS1y9w78rTTJZaWrigqavdozb3SmaS9wSEWufRUxSdKhzYWHFgcDvQNP?=
- =?us-ascii?Q?HhHfDgpt6UGO1VG3b9x0ltjfEbKeolLFYdmNkoF5sqJTOPMc03/kx4As1tLe?=
- =?us-ascii?Q?6cACYO16AzWFx6ZHviyGOSP7P6aW9K2ERmziKlDRTRikvU5n/fxkU1NS/MKF?=
- =?us-ascii?Q?QBITpu8o55TSym/0Jc4c83xs8+jxexLvcm8BV9SJLZip7rm8QledBOvpIg54?=
- =?us-ascii?Q?wlx2DnDumx64/a5rWM4vYPSAy1Tlag0GGKGYOmzxCg2WdquY74NofiBz1nxa?=
- =?us-ascii?Q?+AYNNlkJfFWRzjiv6JAA2zwvVmrSKVyQDEOyRsWchedu4JpPZ7V3jbRQ8Vu/?=
- =?us-ascii?Q?zS2CY3zBbm2Xk18dzeArpTMLd4PPl9DcHQ6oVPPC5aRnRh8wRB/l53WMbxdB?=
- =?us-ascii?Q?QijOfSQ7sJA5hjyTITOQdO7PZ+kCA27nqX1ZrIDZEeCNb5Zr8VHvtnAJkd3D?=
- =?us-ascii?Q?knXFuzqf7JKXpUdT8XvTJIqweJ3gGTz03ilm3BlwmZEkujVzjXvi+X8KncQe?=
- =?us-ascii?Q?nPgKg2O+44Jf/1MiJjsJvhwSeSlbpTiQW/ZZ080ZadDq+mZAHus4r7YZveWZ?=
- =?us-ascii?Q?ax5xQy4YChgEL6VSXve/Y/ekas5VrBJaWNzM8CjRifhsHB8SQ9I6UAenRy/z?=
- =?us-ascii?Q?zE34kwkf3qhMrTrXG3QbHSHMSLd2I2nPD+T5ovO1DGP/qxvkVoeCgESupmhA?=
- =?us-ascii?Q?eHSUn4fLlGlybiKzLm4hxKxXILEZo7kjdnaN63FkMAyAsQKSVbe9+BJRR8OS?=
- =?us-ascii?Q?wYatWwlt+xtSjixpKm6Sr/LZhLThhG9mSsTWCo/qg/7Wssgl01M7tP0EkN5v?=
- =?us-ascii?Q?IfR9NpVDkEpui6r1xwX3FvGzFalnlb9W7JHJWaBBZf9eDDO9TZYL4T9B7mbf?=
- =?us-ascii?Q?SyfPs6BnrLigak4Y5uOQNyQi6I9cabtiJ4Z/fheYaDiXJgipod/7tuTwIww4?=
- =?us-ascii?Q?EZDgXNS+SxlQinYdCwMNsTeuNj6rEQwWaxrUjz8pQdtxUlrzlkazvisIDFsK?=
- =?us-ascii?Q?Ak4sHkAKOeGg/TNyyS3Nb9ljfdkaUVjGxkZVQiK5NdShy6PC7voNRMbC1oVP?=
- =?us-ascii?Q?u7rU6MPXRnwKyi1u5M4K2RhvWpbZTY5zIb3eFgS6zTehFTzl0XlOJmi7HujS?=
- =?us-ascii?Q?8GDaOZiOM9xYDCkCrKmqGjX4n3z2hM+kAVglYbLf7VsWbgCA/W/SIwQUi23O?=
- =?us-ascii?Q?U2gnbwvzEuwHd/gmf7ZBQTuxBdv4gL484T389A1N6XhS2iC6FbCv0+aFPgBH?=
- =?us-ascii?Q?fIZJL10KA3zsykoNI6+xzZZyWEYGZR/7kZKi3fRCnbnx8+x+q8nOFg1D8Jom?=
- =?us-ascii?Q?VQRd5LtPJ9t+A3RksTAgjgHvDh7WWIeqRD+QAnzff+JtibDbM0YmFKWEfKTk?=
- =?us-ascii?Q?NdmUO7QZlC6fD+TbIrDEtEM8g9ImlSMdY1wgd7I6ZnVBHkT+z94Z3i4/AO/C?=
- =?us-ascii?Q?0VlGHRBytr33ZOELbbD+msw3a7Q7GnP3SeGnOIfLAu8DiOKF+KkA6oVnDKNx?=
- =?us-ascii?Q?GipVBTyTrT+1e/O/knTwon2KJxl6EMNnN59rCYI8k+mE768jNsMb2skxQwfz?=
- =?us-ascii?Q?t3YCv01f2PDjtkGbtWIerh9/JeZB7WzMZXYGN1I1lN8LvDhV9u8gXJWCa5r4?=
- =?us-ascii?Q?PqjR7DTJtUSBVeUzkijzrHumCndGxsA=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?zNFc13HW7G/H2/AEpTDLfapHX6mgBux+6IwXS5lSVVkpa0oEiZNGfbBRwDAj?=
+ =?us-ascii?Q?ZqdVs0U+mQS2yoKUbF2j3L1Far0tr9L/oyxXYG7JOqBKgVgKAPZukQ/tDanb?=
+ =?us-ascii?Q?gJVdXsa75DQ7uJddwKJ0DBij3mHZ/yYoyUFsc653LAqbueQ5agZcbl99th5r?=
+ =?us-ascii?Q?ycEI7Hwi5uAKzVL785PxIj8sz/uCAHXXqk3C1y9FOtFhOvXlFzdckUeL1Xri?=
+ =?us-ascii?Q?4hbwIt6mssBm6RuPYw9pkd46zXXv24E9c5CKGim4DcvBYHk4Suza5HtDqS6o?=
+ =?us-ascii?Q?dKtM3NabXR39RQjQemNfQBeVj6ntra9Vor27ubRHdeMTBT5KPPA+3skAAHmG?=
+ =?us-ascii?Q?2D1MY6MKEZljqh+Lmk0t1yqECpKND54i4usIDH6+cgvJtB7Pvetg8gmJIODa?=
+ =?us-ascii?Q?8thoTtGRT/6njPBmLiJ7SwEcfWUKldve9nyTrNP33LDj9QtlhZN/bAt5CzfY?=
+ =?us-ascii?Q?c2iK4O5G+j6Wi4Zjy11VNVqj3x/Na2BMoKo+dCo7Zoj18ctVssNjmlYcdB0l?=
+ =?us-ascii?Q?IxDO577KYWUjJ4ehDy84/fOxBEn6RW24xWKRKyaQacE4xjtkb2FGv24skqyy?=
+ =?us-ascii?Q?fFQNfOnNnqI1uXzyFUeI4+awVY4Hpg9jWh9pC6zSgttGxBqU3cUrpI1PF5e3?=
+ =?us-ascii?Q?096oTZdVa/h4zpMHnLbDrbd0QlvWCUNqFlCMJhrQDM/wWF7GcquvLiHVgwr+?=
+ =?us-ascii?Q?Qvcu5Co77226kD67w1mmciQLMAFueISKyxmFH/TaOUekKPeEGMDaUpc2WnJ5?=
+ =?us-ascii?Q?w4MR+rnISCXHuBgjWrOJy++B5cbttFPnOEvr0NiNKWxI8KZSD/o4sAVs25+A?=
+ =?us-ascii?Q?NkyBC3BCCyrzUBaqgmYJCmSegFKzNYnbcM40bzIv1K73w89OE1OU7uGYtEpt?=
+ =?us-ascii?Q?HALHKg4nzhTh9tRqU81vBJoA5/1KjYrQy8IcgcTmCqzOfu/kLd43CvaMG9oy?=
+ =?us-ascii?Q?wF61ReYWgSK/EuAxNnAYfzO73782kps0XqW/Zw79hhXArsuPKbHRWF/3+UEL?=
+ =?us-ascii?Q?MU5tFwt8kx8L4mzN+hrC0aPbVXNylo+ICAbnxDzOT/Ub+ExJZkHCXHPnSxSq?=
+ =?us-ascii?Q?Vh8BXsuok8O6eKDQnwbt0Pxun6nbZc4GOv6NqUP7sQgAYhPdfBPgkyRP+YOS?=
+ =?us-ascii?Q?bUvInJcOWBWGYOmyWcU+cSAMb1IP0Z2eWu3kSX9Ydx93avXY21ZzHgQp7Ll6?=
+ =?us-ascii?Q?Unn88hthbG1QBBeBdvBpzU8DDW85xn+pn7F7u+Obq4rg9aJe2LmbODrb99No?=
+ =?us-ascii?Q?2cCW1PLU631JtMAF8lo8XzvsXvUVZ6QiK9C0ykBeaIY2bD6FT1cCQzvHEBVL?=
+ =?us-ascii?Q?K5biCfvNVYqtMdtQnHM7Rb3T34kI9hqd/1FFS0q5P0hDBCHd+0vBCrGH5kED?=
+ =?us-ascii?Q?Cu4ZyTLLWiFjb0I31wjSX/00XGOe5O2c1ooRGvw0mlIOhKlQjxsDkUGKNxwP?=
+ =?us-ascii?Q?mZAft0WZJmWuPS0eV/jOl7ZMaNiWgTtSeY5FHMNre5oLgUTFFcivytVyFZXB?=
+ =?us-ascii?Q?Ew5Xq6M1loXR1sanEsDK2v07U0SYShsZB68mBmk+YFR226B1t9TP7HcSv8uu?=
+ =?us-ascii?Q?9Us7U4nthb70cb7LPY99+2bZoa4RzTVlAqpO3GhwLQ1KtyN386oQttQsEFVY?=
+ =?us-ascii?Q?znaCZXba0wyoMdVlp1ti42WJ4yZQedbZCNuzKV5QCDlb+zwjB8XytoNqV9lV?=
+ =?us-ascii?Q?WddCxkmcM7MBtlOQOu4MGAJMF3DNdzn4Zddt0yqiPX507IDC3ZlFCTGWB66A?=
+ =?us-ascii?Q?ssPzw05P0x0PXCyb91UnlRZISEosBcI=3D?=
 X-OriginatorOrg: processmission.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6758f66-cbd0-4f72-2a73-08df3f34b71d
-X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b03acd06-4474-4064-2180-08df3f3b0550
+X-MS-Exchange-CrossTenant-AuthSource: KUXPR02MB9336.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:12:55.3644 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2026 14:58:05.2490 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EZr7oFe076VRKg8g4WjBNf/jl3+z4YKzqLSl0qUs0TIVJthxzp2lm7hPM0TmJwSfOV0/HGPC6frPpMCsNQihjQKwVtH/HteFOyeNGyP27d4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUXPR02MB9477
-Received-SPF: pass client-ip=2a01:111:f403:c405::7;
+X-MS-Exchange-CrossTenant-UserPrincipalName: 63oCk1tAO+x+UWahgt0o2srOh5zKFJeVkFIykaM0gxYHRiuq8LT2Q93hx3MPRvOTKqBIfdWOO1oyDJKp3YGOq4eOKUY3oUOoSU+Z3d4jPo4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR02MB6901
+Received-SPF: pass client-ip=2a01:111:f403:c405::5;
  envelope-from=chao.liu@processmission.com;
- helo=TYDPR03CU002.outbound.protection.outlook.com
+ helo=TYPPR03CU001.outbound.protection.outlook.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -151,109 +152,89 @@ X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu,  5 Nov 2026 03:41:15 +0800 Max Chou <max.chou@sifive.com> wrote:
+On Thu,  5 Nov 2026 03:41:19 +0800 Max Chou <max.chou@sifive.com> wrote:
 
-> This RFC patchset introduces the Zvdota/Zvbdota families of dot-product
-> extensions based on the ISA specification
-> (https://github.com/riscv/riscv-isa-manual/pull/2618 v1.0 commit: 570e32e)
-> - Zvdota: Zvqwdota8i/Zvqwdota16i/Zvfwdota16bf/Zvfqwdota8f
-> - Zvbdota: Zvqwbdota8i/Zvqwbdota16i/Zvfwbdota16bf/Zvfqwbdota8f/Zvfbdota32f
+> Add CPU configuration for the Zvqwdota8i extension which depends on the
+> Zve32x extension per the specification.
 > 
-> This RFC patchset assigns the Zvdota/Zvbdota cpu properties as the
-> experimental cpu isa extension properties. These experimental cpu isa
-> extension properties will be replaced after the Zvdota/Zvbdota isa
-> specification is ratified.
-> 
-> The toolchains support Zvdota/Zvbdota families extensions:
->  - LLVM (after 23.1.0)
->    - Support v0.2 Zvdota/Zvbdota extensions
->      - https://releases.llvm.org/23.1.0/docs/RISCVUsage.html
->    - llvm/llvm-project#196467, commit d25ec4b84487, merged 2026-05-27.
->      - https://github.com/llvm/llvm-project/pull/196467
->  - GCC (reviewing)
->    - Upstream patchset: <20261014093604.829234-3-jiawei@iscas.ac.cn>
-> 
-> References:
->  - riscv-isa-manual PR: https://github.com/riscv/riscv-isa-manual/pull/2618
-> 
-I've run cross-validation tests based on fp-conv tools [1], and I haven't
-found any issues so far. Looks good to me.
-
-Link:
-[1]: https://sw23.github.io/fp-conv/
-
-Tested-by: Chao Liu <chao.liu@processmission.com>
+> Signed-off-by: Max Chou <max.chou@sifive.com>
+Reviewed-by: Chao Liu <chao.liu@processmission.com>
 
 Thanks,
 Chao
 
-> rnax
+> ---
+>  target/riscv/cpu.c                | 2 ++
+>  target/riscv/cpu_cfg_fields.h.inc | 1 +
+>  target/riscv/tcg/tcg-cpu.c        | 5 +++++
+>  target/riscv/tcg/vector_helper.c  | 6 ++++--
+>  4 files changed, 12 insertions(+), 2 deletions(-)
 > 
-> Max Chou (38):
->   fpu/softfloat: Support OCP(Open Compute Project) OFP8 checking
->     functions
->   target/riscv: Introduce riscv_init_fp_status
->   target/riscv: rvv: Introduce RVBNA algorithm for Zvdota/Zvbdota
->     extensions
->   target/riscv: Add cfg property for Zvqwdota8i extension
->   target/riscv: Add implied rules for Zvqwdota8i extension
->   target/riscv: rvv: Implement Zvqwdota8i instructions
->   disas/riscv: Support Zvqwdota8i extension
->   target/riscv: Add Zvqwdota16i cpu property
->   target/riscv: Add Zvqwdota16i dependency imply rule
->   target/riscv: rvv: Implement Zvqwdota16i instructions
->   target/riscv: Add cfg property for Zvfwdota16bf extension
->   target/riscv: Add implied rules for Zvfwdota16bf extension
->   target/riscv: rvv: Implement Zvfwdota16bf instruction
->   disas/riscv: Support Zvfwdota16bf extension
->   target/riscv: Add cfg property for Zvfqwdota8f extension
->   target/riscv: Add implied rules for Zvfqwdota8f extension
->   target/riscv: rvv: Implement Zvfqwdota8f instructions
->   disas/riscv: Support Zvfqwdota8f extension
->   target/riscv: Add cfg property for Zvqwbdota8i extension
->   target/riscv: Add implied rules for Zvqwbdota8i extension
->   target/riscv: rvv: Implement Zvqwbdota8i instructions
->   disas/riscv: Support Zvqwbdota8i extension
->   target/riscv: Add cfg property for Zvqwbdota16i extension
->   target/riscv: Add implied rules for Zvqwbdota16i extension
->   target/riscv: rvv: Implement Zvqwbdota16i instructions
->   target/riscv: Add cfg property for Zvfwbdota16bf extension
->   target/riscv: Add implied rules for Zvfwbdota16bf extension
->   target/riscv: rvv: Implement Zvfwbdota16bf instruction
->   disas/riscv: Support Zvfwbdota16bf extension
->   target/riscv: Add cfg property for Zvfqwbdota8f extension
->   target/riscv: Add implied rules for Zvfqwbdota8f extension
->   target/riscv: rvv: Implement Zvfqwbdota8f instructions
->   disas/riscv: Support Zvfqwbdota8f extension
->   target/riscv: Add cfg property for Zvfbdota32f extension
->   target/riscv: Add implied rules for Zvfbdota32f extension
->   target/riscv: rvv: Implement Zvfbdota32f instructions
->   disas/riscv: Support Zvfbdota32f extension
->   tests/tcg/riscv64: Add test for Zvdota/Zvbdota extensions
-> 
->  MAINTAINERS                                 |   6 +
->  disas/riscv-op.c.inc                        |  12 +
->  disas/riscv.c                               |  26 ++
->  disas/riscv.h                               |   2 +
->  fpu/softfloat-specialize.c.inc              |  55 +++
->  include/fpu/softfloat.h                     |  70 ++++
->  target/riscv/cpu.c                          | 121 +++++-
->  target/riscv/cpu_cfg_fields.h.inc           |   9 +
->  target/riscv/helper.h                       |  28 ++
->  target/riscv/insn32.decode                  |  25 ++
->  target/riscv/tcg/insn_trans/trans_rvv.c.inc | 305 ++++++++++++++
->  target/riscv/tcg/meson.build                |   2 +-
->  target/riscv/tcg/rvbna.c                    | 185 +++++++++
->  target/riscv/tcg/rvbna.h                    |  40 ++
->  target/riscv/tcg/tcg-cpu.c                  |  45 +++
->  target/riscv/tcg/vector_helper.c            | 424 +++++++++++++++++++-
->  tests/tcg/riscv64/system/meson.build        |  12 +
->  tests/tcg/riscv64/test-zvdota.S             | 343 ++++++++++++++++
->  18 files changed, 1703 insertions(+), 7 deletions(-)
->  create mode 100644 target/riscv/tcg/rvbna.c
->  create mode 100644 target/riscv/tcg/rvbna.h
->  create mode 100644 tests/tcg/riscv64/test-zvdota.S
-> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 53ecce8c398..96a1d76c5a2 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -250,6 +250,8 @@ const RISCVIsaExtData isa_edata_arr[] = {
+>      ISA_EXT_DATA_ENTRY(zvksg, PRIV_VERSION_1_12_0, ext_zvksg),
+>      ISA_EXT_DATA_ENTRY(zvksh, PRIV_VERSION_1_12_0, ext_zvksh),
+>      ISA_EXT_DATA_ENTRY(zvkt, PRIV_VERSION_1_12_0, ext_zvkt),
+> +    ISA_EXPERIMENTAL_EXT_DATA_ENTRY(zvqwdota8i, PRIV_VERSION_1_13_0,
+> +                                    ext_zvqwdota8i),
+>      ISA_EXT_DATA_ENTRY(zhinx, PRIV_VERSION_1_12_0, ext_zhinx),
+>      ISA_EXT_DATA_ENTRY(zhinxmin, PRIV_VERSION_1_12_0, ext_zhinxmin),
+>      ISA_EXT_DATA_ENTRY(sdext, PRIV_VERSION_1_12_0, ext_sdext),
+> diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
+> index 85fc3ad8bb8..0c08d688ac1 100644
+> --- a/target/riscv/cpu_cfg_fields.h.inc
+> +++ b/target/riscv/cpu_cfg_fields.h.inc
+> @@ -106,6 +106,7 @@ BOOL_FIELD(ext_zvfbfmin)
+>  BOOL_FIELD(ext_zvfbfwma)
+>  BOOL_FIELD(ext_zvfh)
+>  BOOL_FIELD(ext_zvfhmin)
+> +BOOL_FIELD(ext_zvqwdota8i)
+>  BOOL_FIELD(ext_sdext)
+>  BOOL_FIELD(ext_sdtrig)
+>  BOOL_FIELD(ext_smaia)
+> diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
+> index 5834ec1524f..1c51ea94489 100644
+> --- a/target/riscv/tcg/tcg-cpu.c
+> +++ b/target/riscv/tcg/tcg-cpu.c
+> @@ -691,6 +691,11 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
+>          }
+>      }
+>  
+> +    if (cpu->cfg.ext_zvqwdota8i && !cpu->cfg.ext_zve32x) {
+> +        error_setg(errp, "Zvqwdota8i extension depends on Zve32x extension");
+> +        return;
+> +    }
+> +
+>      if ((cpu->cfg.ext_zdinx || cpu->cfg.ext_zhinxmin) && !cpu->cfg.ext_zfinx) {
+>          error_setg(errp, "Zdinx/Zhinx/Zhinxmin extensions require Zfinx");
+>          return;
+> diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
+> index 172ae0f11dc..4ba0a89f4b5 100644
+> --- a/target/riscv/tcg/vector_helper.c
+> +++ b/target/riscv/tcg/vector_helper.c
+> @@ -39,7 +39,8 @@ static target_ulong vtype_reserved(CPURISCVState *env, target_ulong vtype)
+>      int xlen = riscv_cpu_xlen(env);
+>      target_ulong reserved = 0;
+>  
+> -    if (riscv_cpu_cfg(env)->ext_zvfbfa) {
+> +    if (riscv_cpu_cfg(env)->ext_zvfbfa ||
+> +        riscv_cpu_cfg(env)->ext_zvqwdota8i) {
+>          reserved = vtype & MAKE_64BIT_MASK(R_VTYPE_RESERVED_SHIFT,
+>                                             xlen - 1 - R_VTYPE_RESERVED_SHIFT);
+>      } else {
+> @@ -88,7 +89,8 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
+>  
+>      switch (vsew) {
+>      case MO_8:
+> -        ill_altfmt &= !(cpu->cfg.ext_zvfbfa);
+> +        ill_altfmt &= !(cpu->cfg.ext_zvfbfa ||
+> +                        cpu->cfg.ext_zvqwdota8i);
+>          break;
+>      case MO_16:
+>          ill_altfmt &= !(cpu->cfg.ext_zvfbfa);
 > -- 
 > 2.56.0
 > 
