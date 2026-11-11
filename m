@@ -1,175 +1,64 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8DF3606A31C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 04:22:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35FAA606A324
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 04:25:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.a=rsa-sha256 header.s=dkim.wdc.com header.b=TnpxrTrD;
-	dkim=pass (1024-bit key) header.d=sharedspace.onmicrosoft.com header.i=@sharedspace.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-sharedspace-onmicrosoft-com header.b=B5jQ4Rgo
+	dkim=pass (2048-bit key, unprotected) header.d=lanxincomputing-com.20200927.dkim.feishu.cn header.i=@lanxincomputing-com.20200927.dkim.feishu.cn header.a=rsa-sha256 header.s=s1 header.b=V4kpL6Ww
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xQzqU-000335-EQ; Tue, 10 Nov 2026 23:22:02 -0500
+	id 1xQzt6-0003gM-D8; Tue, 10 Nov 2026 23:24:44 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=76810307e=Alistair.Francis@wdc.com>)
- id 1xQzqS-0002zu-Cp; Tue, 10 Nov 2026 23:22:00 -0500
-Received: from esa3.hgst.iphmx.com ([216.71.153.141])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=76810307e=Alistair.Francis@wdc.com>)
- id 1xQzqQ-0002Dn-5a; Tue, 10 Nov 2026 23:22:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1794370926; x=1825906926;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=PVZi8mrvwpNR1KUOXsXOVWTtPDb22nIs1kBUdXyXEFQ=;
- b=TnpxrTrDgTixIfyMp/T2Izcofnzo5cu0oaNX/z/GAiSUK0aJ4RCD2adU
- MIL+xOFUalH3CdxwUCKFjUwi36IPZ89+g/5mf5jQhluue/PlMgJV17F1K
- 15a2PrIq2871/Qofh5zWpS7Oa8q8yGDlW7QaXCDfuh4HdGC5LfWQABdHN
- qHaBXpxTfMzs5IgST282dbGC01qPyz2gYrb60ln4h7JPq2WrKYAvDq4Zk
- /lzX0z3qvKs/TW2vCmMU4qqbt2518IAaQ9a3AbEMSVt8H6cd8YE9t3R2L
- 1d9GGnfNpLQ0jSqlFD2GRQRhaWByJE4T+8ZJdBR7FrXsF/HSS2iHSRIiH w==;
-X-CSE-ConnectionGUID: EYzP1OnDR9S9OQ5ziaIY0A==
-X-CSE-MsgGUID: 9g+iPvFFQX6tvehn9Lgt3Q==
-X-IronPort-AV: E=Sophos;i="6.27,207,1786982400"; d="scan'208";a="160600990"
-Received: from mail-westusazon11012048.outbound.protection.outlook.com (HELO
- SJ2PR03CU001.outbound.protection.outlook.com) ([52.101.43.48])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 11 Nov 2026 12:22:03 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RPmHc1e1VuGzvJnS4XJcYOjUMwveWxkoVbN9yJkeuO/3RhmvdpmofxMDYGI6P1hh+H0eONyvXJUdbXP8teRXlVmoWoClB1XKx8Q2P3npfLiGKFZwmdL4XH7LqoO4fvr9lT1Xn0FaEbEhldgivv57YrYy6jp/aucNxlINZoWNp6SMd0t2nHP3vFKqpQERPfpXxs6UuYUPD5heu7SD6clGxseW8zuAOX8K1aL1OUek9Y5bnszUgJ16ZCuD24LPy2JpDOwYpNWbaBpWKogL5ZEnrJ+1paK1JPM2a98AEDrT145QVT0gUznqjPfsqC47mWeKufM/HynYqWctfrliiy9fqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PVZi8mrvwpNR1KUOXsXOVWTtPDb22nIs1kBUdXyXEFQ=;
- b=Cm5PcNtWRu6hUBtZvjC72uAftZpRvh1GvxBoGsplkWq0wo7GwYewOOzuApNm7Q8ngqS4TgfzjWDt0l0gkpTo72aFl3RTaUpJwIGSTM24Eag1+NQ30nQAJgUJ98d2ZOOesXRXJgPwpKfOtddLXb/qqkfQ+N6jLKs6cCHhqzWiQmJ6gAzrVwCgtencbPVZm36b8ufP8mB4BJif8GU5Kz327gidMOAN0BUlGvCwzKeX7bYh9QEZR8eqQf0zjMSClBKfT5TCZKogzEYCoQR+SP3sCpRnWyCbW20d9iIqsY8VD0v+PUR4eTIOkVWv+i0TPcxRvezrbhmpm7yIn6K3QaH0gw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PVZi8mrvwpNR1KUOXsXOVWTtPDb22nIs1kBUdXyXEFQ=;
- b=B5jQ4RgoMRkzDOtOv3EUxXlurKs4GUwBs7BYZ9tS+Df4AkA3j6FyxHEm5XjFDCr1FaZHkvnV2pFSBA5R77h81ifypb/Lk+3Vk3Isa4cesmAsR+5IHpsXGn9NeM/2Hwl4y4rDt1uHPZnW4osMhQAZXejJxuLyCUr6qqHamvRCF80=
-Received: from SA6PR04MB9375.namprd04.prod.outlook.com (2603:10b6:806:442::7)
- by LV3PR04MB9468.namprd04.prod.outlook.com (2603:10b6:408:28e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.592.12; Wed, 11 Nov
- 2026 04:21:53 +0000
-Received: from SA6PR04MB9375.namprd04.prod.outlook.com
- ([fe80::701f:f350:2a05:fd2b]) by SA6PR04MB9375.namprd04.prod.outlook.com
- ([fe80::701f:f350:2a05:fd2b%5]) with mapi id 15.21.0592.010; Wed, 11 Nov 2026
- 04:21:53 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "daniel.barboza@oss.qualcomm.com" <daniel.barboza@oss.qualcomm.com>,
- "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: "antikostya2@gmail.com" <antikostya2@gmail.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "chao.liu@processmission.com" <chao.liu@processmission.com>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>, "zhiwei_liu@linux.alibaba.com"
- <zhiwei_liu@linux.alibaba.com>
-Subject: Re: [PATCH v4 03/18] hw/riscv/trace-encoder: add trace start/stop
- logic
-Thread-Topic: [PATCH v4 03/18] hw/riscv/trace-encoder: add trace start/stop
- logic
-Thread-Index: AQHdYbHlsJlCPYemekORPPDrfLVciLcoZPWA
-Date: Wed, 11 Nov 2026 04:21:53 +0000
-Message-ID: <80d79e0b5b645b79ff4f940ea6f5c0e8779f294b.camel@wdc.com>
-References: <20261021231346.2452179-1-daniel.barboza@oss.qualcomm.com>
- <20261021231346.2452179-4-daniel.barboza@oss.qualcomm.com>
-In-Reply-To: <20261021231346.2452179-4-daniel.barboza@oss.qualcomm.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.62.1 (by Flathub.org) 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA6PR04MB9375:EE_|LV3PR04MB9468:EE_
-x-ms-office365-filtering-correlation-id: bdc82e92-708f-4c15-140a-08df3fab50c0
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|10070799003|23010399003|1800799024|376014|19092799006|22082099003|18002099003|10067099003|38070700021|261021121427099003|4143699003|11063799006|261102123227099003|261022105027099003|261022075727099003|261026140227099003|261009223027099003|56012099006|261026121527099003|261028144727099003|260925021311599003|260925022911599003|260925021911599003;
-x-microsoft-antispam-message-info: gBjEnAiJ+ZYnILa8fButKHA5AM9cC6MKPuQ6O5jLwt6Rd2D5Y74FQCyaM3P4Tjxvkc41DgWqFwhfkSW43k8GeiVbCRzy1JiqSCfNzFg8tAZinGjeimDzYs0n6Y4gQ/jkz80czBFxzXGqaBVy6Cy7o1raLe446nau0RbBKycm+QtQVBnv9H65YlKanj8xTLGchvpEoKA5JOGTV9zGsav/GJg/Cip5ZO6Sq9Gy1XGF5FKrX6P5TU3MNPA43XzMpELhsXZP5rQcefFYhZqlHUjH0i6G/LJvVrK0Sgtosr29WXJ4M6QmP5jcTVuXF+o//WPc+svNuvWRUHU5+E0mzkFxYrfcZaWRo60sTcHz0QxkYQOVFmAoMWqk8YZJJjlvtP5mQffgoEzZQppUNoLrOMuCzVVNu8PC45fAoM0jPIqs9F//loWN251bQ+HrnnQzoThYUMl9ToujGSgwtSefUMiyi9Ohzv7tjB+Zop3HWeKPzlJ/r+lO08y2w66aUpNnVJg3YwvY5FbFglKDh+a+m9w0YvrYITo0sqTWvKjDDci/D6vu77nX2g5YwFuWmCDGeY/4vdtUyLU9yNnWZ6poJQDvbGEnxan22v6ai77t/oAfrzC8vzstxlrkxV4Max6u7RlNYMrWUMSdbsKeBNcwlFl5S/RsuVjTEKS1pnbXGAQwSdrQYF6a0fDUkSwa59Ls5KoXt2JbL60NvEDXZ4eq072U6+BAvCJeg5VItuq/0YlA4f0=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA6PR04MB9375.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(23010399003)(1800799024)(376014)(19092799006)(22082099003)(18002099003)(10067099003)(38070700021)(261021121427099003)(4143699003)(11063799006)(261102123227099003)(261022105027099003)(261022075727099003)(261026140227099003)(261009223027099003)(56012099006)(261026121527099003)(261028144727099003)(260925021311599003)(260925022911599003)(260925021911599003);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?dkplQVpsRWlIU1BueHprREtJQzFvTjhISUw1YkhrY0xQNlhYc1NFWm5EUmY5?=
- =?utf-8?B?cHlvQ0lwck9xVXhVRkw3aGE2dlJZSkV1eExBVUpJbTdqU2RpelV6QVI2aVI1?=
- =?utf-8?B?YysvNThsZXVIWU9sN1NjcndxRU1ldlRKL3ArWThKV1ZlSjVBZW9lTDIxdjln?=
- =?utf-8?B?eEFOSjdVUUpKamxNTDh3LzNCdmVXS0F2dlNTSmxXd3hBS0xaY3QrQ1BtWnZU?=
- =?utf-8?B?eStITlRDd095SXJlbS95Y1RZNno5dWRkUHpFQ1JqQ05mNFZHTTJkN2dwMDJr?=
- =?utf-8?B?T1VEU3F4TDhxL2NSNFRCQWo0MzNCWUhrWEd6T3JKL1lRZDRMZFphTDNDYjlC?=
- =?utf-8?B?S0tkWFdwelp6QkZOZ29iem9ablVIZnkydTB4NW5TSUwzUENObURpRTlxLzQ0?=
- =?utf-8?B?VUxnS2UxaEpZVnYzZTBnY3YydGVDaUhFcmt2bHZHaWlJUjdRd1ZPQTh5RW5m?=
- =?utf-8?B?YjBvV0VudEE4QkdyUkVOSXdMVkg1L0J4NWwyOGhtOC9DZnBRR3Z6MUROTytB?=
- =?utf-8?B?SzZzRUhjeW5IOFZJcTIvWTdHbkc2dk1IMWxqVTBHcTZmYWJJbWVlOUdacFlx?=
- =?utf-8?B?aWxLMVJWZzFZRjZhR2Q3NFZIK08wNWlDQXlwN2w5bHZ3T2lZNWFIOVB5NWVP?=
- =?utf-8?B?SUh0Mlg5a2E5ZENEcHE0ME05NjYvdVAzMlhCWEF0Tnh2UEZpOTdrYkJndEN0?=
- =?utf-8?B?cFNHRVRLSExTRklxaFMwaERaeTNwMVJHQzRqejB1Q0R3cU1YZTUrQkZuWVJu?=
- =?utf-8?B?RTRWL2E5S0t3cy9UNXlibDhpRjY0OVZtM20vK3lGS2l5MEZPNWVrK3JrMGh0?=
- =?utf-8?B?R1JrY1ZPako3dUtaWi9uVGFUQzdIQ2g0cE9IYytBeFVkeDVWYVdKL3d2VEI2?=
- =?utf-8?B?WUNZY2kvTG1Wd3B4dEU1cWNiQ3NSTFhVRFpVeTZjZzlTUm5hOXhwMEc0ZkJC?=
- =?utf-8?B?YjRWWVdzR0R5T1RGNXZqL2RuRGVDT1NOSVJpOXQ0M0J1M09YTUY5eWtrT1pS?=
- =?utf-8?B?U0ZTMW9jQzZiRUk0ZHBoK2ZKVmZFejR3RGVuVjcxVlBOTndoWjZ0T0N3UjR0?=
- =?utf-8?B?RE9rbklOMklRWlVVeUEvRmg3ZWg2MVNnb0dOS00zczhTNHVMRW5GbFdRY3pu?=
- =?utf-8?B?aDV4Q2ZZSnoyaDlGUUVRWXM4c05ldlJrajFmbkQvWGFRTnVXWUU1UTE4b3FM?=
- =?utf-8?B?Ly9EbnM5QloycWhYNHliM3E1VEY1NjlPaUhoWmR1T1R3UDMvYnpkdCtWUnRH?=
- =?utf-8?B?QXM2QUpyOHJqcmhrK3pKSkxXQXdmSWphNk0yZGVIWkF5RWUxV25ncGtvVjk5?=
- =?utf-8?B?MG1NN1QyTU12bnRjNFZTNXorT2NGRzhMbC9uZWYyVTgwdng0S3pLMXJRNjln?=
- =?utf-8?B?ejJla0NEMDlqc2xXdktMU1FMSk1ZSmRCRExRUFJ2MXVrTC9jRjVxd2cyNlRt?=
- =?utf-8?B?SmNyUEUvSVNWQ1RCTU1QY01aV3U2dzFaOU1jZUpwbUpNM1dpTVpRNGF0WXpZ?=
- =?utf-8?B?V1ZaemxDcytZMUFVNWNJdEl3bGdyVS9zSjY5b3RyMlhIM3RTcU11NnlhOGVo?=
- =?utf-8?B?K0Rvcy9RSzZtdUMwK3V1WWxiSzA3eWRpZmJpbGlIOG5kdmh4TGZQMG4vVTFF?=
- =?utf-8?B?dXdSZGEraDdlSWdGK3BSRFB0WmcrQ21hSndBWlB1b3hUQmc3T3d0V2lsbVdp?=
- =?utf-8?B?QSt4QUxvWFgwek9Yc3Jxb1pqMFd5bTBITVlRbHQ3NG5TblRDMlN2OTdpUUhW?=
- =?utf-8?B?S1ByZFg0M0g3c3AvQXJXclZVYTk4SllYOGVnOWowbDA1cDZNSkZZSXQ3MGU5?=
- =?utf-8?B?WE1SZThPY2pzTHVEQUVQcjlvSXpxcDlJYzR2ZTluNUc5eFpXSlhNOFIwWUE1?=
- =?utf-8?B?Z0dnSVJObjJTQzdMbVFPNXk1cklEc3JucEJURXVCbERUL2NkeEtOL0F1WUlq?=
- =?utf-8?B?aG1zaGlRQjFlSHhjbUp3dVpyNVpibGp5WW9HcmpOL0VEZ3pQcUNWbkY3ZXk3?=
- =?utf-8?B?VmtJcTAvdkd0OFBxNFpMTHpFenFxelROaER6c2x4aFNFYys3amFlT3JKODJk?=
- =?utf-8?B?MEhYNVdMSzJQdkxLKzFpQ2R1dVFGMStBMEV3TWNWVnRHaXRHQTJGcEk4bGlu?=
- =?utf-8?B?UEQ0RUI2SHpLaml4WU0rVHJ5YWtQTkwyV3JJNENITnpodTJuVXJTYmxIc3RN?=
- =?utf-8?B?ZHkxcTlEdXVhOUt1Y1lBRlFUd0p0SkVJNVBqQUJPNWZrOENDSEJrU1FZaFh3?=
- =?utf-8?B?QkQrUGUxci94VWtrck85dzkrSVlscHdDdGEvS3g4Rno4Rk43dGxLMWMxNC9z?=
- =?utf-8?B?cXdxYngxdHljbzZ6WDhqWEplaWdXZk9URnYwZzhnd3hSZjZCeFdyT0tsWmJl?=
- =?utf-8?Q?TMKKYgswBq60NGJjwd21YA8oY015mVKe3f4+/h8/17X78?=
-x-ms-exchange-antispam-messagedata-1: G14lUNIhBi2Llk+ZbUcEOmCOyHlClLnqjj0=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <0EDF1ED977345F41A65493A7ABC80118@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1xQzt3-0003g2-G5
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 23:24:41 -0500
+Received: from va-2-39.ptr.blmpb.com ([209.127.231.39])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <liujingqi@lanxincomputing.com>)
+ id 1xQzsy-0003Ly-Pi
+ for qemu-riscv@nongnu.org; Tue, 10 Nov 2026 23:24:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1794371066;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=X1zuBvXZDippIDsXdin+wtDh6l4P12B52OCzhk70jyE=;
+ b=V4kpL6Ww+Q72nEWMFdOUGOw7tIABqS8xqASINw9Pu6BZ6jS6p0wEAQeh1GISnrK2Zfc5o7
+ BbWd3CBvddZpuDxHJwLuakxZ8RhY5jS5qmFpAR1CGlijSILDZ+GG367v7hGTFz6eMUlDCz
+ pfL0Bc+pPvj0o2WdNAtqEw5tmB4C5qy1fbyOez7GzOFcRUIztsfi6iE+xkifSS9vs9NQA4
+ yBfECDSqI08C71nJqNJbP0eZliNVuABLViH67Z/1pQ/qdZzmv3HO4QpNBnL1k6W7hJRvPs
+ WilHzBnyTLmZAvOI320l2MmEBdFSALJhuUB7kTlzanI6w0UkCEXSPY2aYUhZ7Q==
+From: "Nutty Liu" <liujingqi@lanxincomputing.com>
 X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: taO+CoLZg4hpuykLtRUFZ4O5r1C/V3Tc9fsXr54crpQcotDQSbotHsgdmOqF1/Iv1w/JEtZspSQS4yu/tn92sEQGMGyrbTZCoqxfwdkCD31nHbe1yWLqCO0XVayJrE9cw8V/O179NwEfIkuqkdhCLLukJcC705iAKr+PnYGjiESb1v8HoOgLNP0DiUyF55eTS7zT+zg/J2GetR7/OSWqEAmGhBCOBI40EG81AsF4SDO0yhCwLliassUaLlWbNn9sqTzTC7NmjPxjrTMOCnzZs8Uckp6fo5XxPqaYt1ay61W45iUJcayCVc6pAkK5oWdc/Hcz0MDXQOp0cTJ6fw/l1g==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: DFNnAiPLQXdA+3JWZ8GAAj2Lu437cp/0dfTOGzntYNKhS8Ea6r5jxse3bln901Ky8jsXOEhn4ykxBDzPJ+aT9/DJzUMLp1gmwTrpauwLLiZUyd4U2DZTaxB0LW/PoALBMb4yFVuQ2xDm9of9QfMY7drXiQ98EDyQ+Nn9T6XKrl7Rjcd+1YKhauPLOcr5D5inxxsuP3ZM2Mf/2dbXyTR+kLoXC3CdR46gxgoLXefOZqbIg/i6cTUcFxcnby11n3xu6kAYp7KW+WAOlSZn5VKii1OSycLsgEDCJQBAb+b5WoiPRn1wY0F1/+b14auB8DC2/VP9mu0UnvPQph8RZe3NjGAy7Qe2yDGQRFQ1/IlgBZnamitdrcEYH/Q/H+t4GVnKKXdEgQ5ANQwZQQ3kAdI4wbqQrLrKE2TsWgzJHTDZLoVAZDdldeo6hRKpfgdJjys5Jx2UMEWxK56lz9dYdcCt4Qndut856szVn79O3MGD9DYCiv2lrvcP8kVt4cc9NOKP//XgRkwDOAwJWbZXD3KxD+bAhj+ZoTSP1YsydoCaMDH0TcXwYqDcXKGYoRj68zXE+TLSqLw8eeU1eThmffl0wcCkJm1tm0yfTtBJEm+DiOA3mErZ8wh6Z3GpUFf0i6Am
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA6PR04MB9375.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bdc82e92-708f-4c15-140a-08df3fab50c0
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Nov 2026 04:21:53.6411 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: uQsrLMHxFuzBdz0kORdBMghCmLP+qYBYW3ukDLaZgaiSoTZejcakR/RCXAlr/CPTvxCOBw68sFt/tb6KWPpdnHmn73d9A540N5/wRLPzoGo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR04MB9468
-Received-SPF: pass client-ip=216.71.153.141;
- envelope-from=prvs=76810307e=Alistair.Francis@wdc.com;
- helo=esa3.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
+Mime-Version: 1.0
+References: <20261108143934.129923-1-tanchi25@mails.ucas.ac.cn>
+ <20261108143934.129923-2-tanchi25@mails.ucas.ac.cn>
+User-Agent: Mozilla Thunderbird
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 11 Nov 2026 12:24:21 +0800
+Content-Type: text/plain; charset=UTF-8
+X-Lms-Return-Path: <lba+26af3edf8+84146b+nongnu.org+liujingqi@lanxincomputing.com>
+In-Reply-To: <20261108143934.129923-2-tanchi25@mails.ucas.ac.cn>
+To: "Tan Chi" <tanchi25@mails.ucas.ac.cn>, <qemu-devel@nongnu.org>
+Cc: <qemu-riscv@nongnu.org>, <palmer@dabbelt.com>, 
+ <alistair.francis@wdc.com>, <liwei1518@gmail.com>, 
+ <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>, 
+ <chao.liu@processmission.com>
+Received: from [127.0.0.1] ([116.237.165.236]) by smtp.feishu.cn with ESMTPS;
+ Wed, 11 Nov 2026 12:24:23 +0800
+Subject: Re: [PATCH 1/3] hw/riscv: iommu: Fix implicit G-stage page-table
+ accesses
+Message-Id: <e01fa7e2-61d0-44e5-b9e9-b484ac7aa4e6@lanxincomputing.com>
+Content-Language: en-US
+X-Original-From: Nutty Liu <liujingqi@lanxincomputing.com>
+Received-SPF: pass client-ip=209.127.231.39;
+ envelope-from=liujingqi@lanxincomputing.com; helo=va-2-39.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -182,148 +71,218 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-T24gV2VkLCAyMDI2LTEwLTIxIGF0IDIwOjEzIC0wMzAwLCBEYW5pZWwgSGVucmlxdWUgQmFyYm96
-YSB3cm90ZToNCj4gU3RhcnRpbmcvc3RvcHBpbmcgYSB0cmFjZSBzZXNzaW9uIHdpbGwgcmVseSBv
-biB0d28gZmxhZ3M6DQo+IA0KPiAtIHRyYWNlX25leHRfaW5zbjogdGhpcyBmbGFnIHdpbGwgYmUg
-dXNlZCB0byBzaWduYWwgdGhlIHRyYW5zbGF0aW9uDQo+IHRoYXQNCj4gwqAgdGhlIGVuY29kZXIg
-d2FudHMgdG8ga25vdyB0aGUgUEMgb2YgdGhlIGN1cnJlbnQgaW5zbi4gVGhlDQo+IHRyYW5zbGF0
-aW9uDQo+IMKgIGhlbHBlciAodG8gYmUgYWRkZWQpIHdpbGwgY2xlYXIgdGhpcyBmbGFnIGFmdGVy
-IHNlbmRpbmcgdGhlIGN1cnJlbnQNCj4gwqAgaW5zbiB0byB0aGUgZW5jb2RlcjsNCj4gDQo+IC0g
-dHJhY2VfcnVubmluZzogc2hvd3MgdGhhdCB3ZSdyZSBydW5uaW5nIGEgdHJhY2Ugc2Vzc2lvbiBh
-bmQgY2VydGFpbg0KPiDCoCBpbnNucyBjbGFzc2VzICh0cmFwcywgY2VydGFpbiBqdW1wcyBhbmQg
-YnJhbmNoZXMpIG5lZWQgdG8gcmVwb3J0IHRvDQo+IMKgIHRoZSB0cmFjZSBlbmNvZGVyLg0KPiAN
-Cj4gVGhlc2UgZmxhZ3MgYXJlIGNvbnRyb2xsZWQgYnkgdGhlIHRyVGVJbnN0VHJhY2luZyBiaXQu
-IFRoaXMgYml0DQo+IHJlcXVpcmVzDQo+IG90aGVyIHR3byBiaXRzIHRvIGJlIHNldCBiZWZvcmVo
-YW5kIChBQ1RJVkUgYW5kIEVOQUJMRSkuIFdlJ2xsDQo+IHJldmlzaXQNCj4gdGhlc2UgYml0cyBp
-biB0aGUgZnV0dXJlIGFzIG1vcmUgZmVhdHVyZXMgYXJlIGltcGxlbWVudGVkLg0KPiANCj4gV2hp
-bGUgd2UncmUgYXQgaXQsIGFkZCBoYXJkd2lyZSBiaXRzIHRvIGluZGljYXRlIHdoaWNoIGZlYXR1
-cmVzIHdlJ3JlDQo+IChub3QpIGltcGxlbWVudGluZyBhdCB0aGlzIHRpbWUuDQo+IA0KPiBTaWdu
-ZWQtb2ZmLWJ5OiBEYW5pZWwgSGVucmlxdWUgQmFyYm96YQ0KPiA8ZGFuaWVsLmJhcmJvemFAb3Nz
-LnF1YWxjb21tLmNvbT4NCg0KUmV2aWV3ZWQtYnk6IEFsaXN0YWlyIEZyYW5jaXMgPGFsaXN0YWly
-LmZyYW5jaXNAd2RjLmNvbT4NCg0KQWxpc3RhaXINCg0KPiAtLS0NCj4gwqBody9yaXNjdi90cmFj
-ZS1lbmNvZGVyLmMgfCAxMDcNCj4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrDQo+IMKgaHcvcmlzY3YvdHJhY2UtZW5jb2Rlci5oIHzCoMKgIDQgKysNCj4gwqAyIGZpbGVz
-IGNoYW5nZWQsIDExMSBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvaHcvcmlzY3Yv
-dHJhY2UtZW5jb2Rlci5jIGIvaHcvcmlzY3YvdHJhY2UtZW5jb2Rlci5jDQo+IGluZGV4IDE5YWI3
-ODUzMzQuLjk5Mzk5YTU1ZTEgMTAwNjQ0DQo+IC0tLSBhL2h3L3Jpc2N2L3RyYWNlLWVuY29kZXIu
-Yw0KPiArKysgYi9ody9yaXNjdi90cmFjZS1lbmNvZGVyLmMNCj4gQEAgLTMwLDcgKzMwLDExIEBA
-IFJFRzMyKFRSX1RFX0NPTlRST0wsIDB4MCkNCj4gwqDCoMKgwqAgRklFTEQoVFJfVEVfQ09OVFJP
-TCwgSU5TVF9UUkFDSU5HLCAyLCAxKQ0KPiDCoMKgwqDCoCBGSUVMRChUUl9URV9DT05UUk9MLCBF
-TVBUWSwgMywgMSkNCj4gwqDCoMKgwqAgRklFTEQoVFJfVEVfQ09OVFJPTCwgSU5TVF9NT0RFLCA0
-LCAzKQ0KPiArwqDCoMKgIEZJRUxEKFRSX1RFX0NPTlRST0wsIENPTlRFWFQsIDksIDEpDQo+ICvC
-oMKgwqAgRklFTEQoVFJfVEVfQ09OVFJPTCwgSU5TVF9TVEFMTF9FTkEsIDEzLCAxKQ0KPiArwqDC
-oMKgIEZJRUxEKFRSX1RFX0NPTlRST0wsIElOSElCSVRfU1JDLCAxNSwgMSkNCj4gwqDCoMKgwqAg
-RklFTEQoVFJfVEVfQ09OVFJPTCwgSU5TVF9TWU5DX01PREUsIDE2LCAyKQ0KPiArwqDCoMKgIEZJ
-RUxEKFRSX1RFX0NPTlRST0wsIElOU1RfU1lOQ19NQVgsIDIwLCA0KQ0KPiDCoMKgwqDCoCBGSUVM
-RChUUl9URV9DT05UUk9MLCBGT1JNQVQsIDI0LCAzKQ0KPiDCoMKgwqDCoCAvKiByZXNlcnZlZCBi
-aXRzICovDQo+IMKgwqDCoMKgIEZJRUxEKFRSX1RFX0NPTlRST0wsIFJTVlAxLCA3LCAyKQ0KPiBA
-QCAtNzUsMTcgKzc5LDExNiBAQCBSRUczMihUUl9URV9JTVBMLCAweDQpDQo+IMKgDQo+IMKgI2Rl
-ZmluZSBSX1RSX1RFX0lNUExfUkVTRVQgKEJJVCgwKSB8IEJJVCg4KSkNCj4gwqANCj4gK1JFRzMy
-KFRSX1RFX0lOU1RfRkVBVFVSRVMsIDB4OCkNCj4gK8KgwqDCoCBGSUVMRChUUl9URV9JTlNUX0ZF
-QVRVUkVTLCBOT19BRERSX0RJRkYsIDAsIDEpDQo+ICsNCj4gK3N0YXRpYyB1aW50NjRfdCB0cmVu
-Y29kZXJfdGVfY3RybF9zZXRfaGFyZHdpcmVfdmFscyh1aW50NjRfdCBpbnB1dCkNCj4gK3sNCj4g
-K8KgwqDCoCBpbnB1dCA9IEZJRUxEX0RQMzIoaW5wdXQsIFRSX1RFX0NPTlRST0wsIElOU1RfTU9E
-RSwgMHg2KTsNCj4gK8KgwqDCoCBpbnB1dCA9IEZJRUxEX0RQMzIoaW5wdXQsIFRSX1RFX0NPTlRS
-T0wsIENPTlRFWFQsIDApOw0KPiArwqDCoMKgIGlucHV0ID0gRklFTERfRFAzMihpbnB1dCwgVFJf
-VEVfQ09OVFJPTCwgSU5TVF9TVEFMTF9FTkEsIDApOw0KPiArwqDCoMKgIGlucHV0ID0gRklFTERf
-RFAzMihpbnB1dCwgVFJfVEVfQ09OVFJPTCwgSU5ISUJJVF9TUkMsIDEpOw0KPiArwqDCoMKgIGlu
-cHV0ID0gRklFTERfRFAzMihpbnB1dCwgVFJfVEVfQ09OVFJPTCwgRk9STUFULCAwKTsNCj4gKw0K
-PiArwqDCoMKgIC8qIFNZTkNfTU9ERSBhbmQgU1lOQ19NQVggd2lsbCBiZSByZXZpc2l0ZWQgKi8N
-Cj4gK8KgwqDCoCBpbnB1dCA9IEZJRUxEX0RQMzIoaW5wdXQsIFRSX1RFX0NPTlRST0wsIElOU1Rf
-U1lOQ19NT0RFLCAwKTsNCj4gK8KgwqDCoCBpbnB1dCA9IEZJRUxEX0RQMzIoaW5wdXQsIFRSX1RF
-X0NPTlRST0wsIElOU1RfU1lOQ19NQVgsIDApOw0KPiArDQo+ICvCoMKgwqAgcmV0dXJuIGlucHV0
-Ow0KPiArfQ0KPiArDQo+ICtzdGF0aWMgdWludDY0X3QgdHJlbmNvZGVyX3RlX2N0cmxfcHJldyhS
-ZWdpc3RlckluZm8gKnJlZywgdWludDY0X3QNCj4gdmFsKQ0KPiArew0KPiArwqDCoMKgIFRyYWNl
-RW5jb2RlciAqdGUgPSBUUkFDRV9FTkNPREVSKHJlZy0+b3BhcXVlKTsNCj4gK8KgwqDCoCB1aW50
-MzJfdCB0clRlQWN0aXZlID0gQVJSQVlfRklFTERfRVgzMih0ZS0+cmVncywgVFJfVEVfQ09OVFJP
-TCwNCj4gQUNUSVZFKTsNCj4gK8KgwqDCoCB1aW50MzJfdCB0clRlSW5zdFRyYWNpbmcgPSBBUlJB
-WV9GSUVMRF9FWDMyKHRlLT5yZWdzLA0KPiBUUl9URV9DT05UUk9MLA0KPiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBJTlNUX1RSQUNJTkcpOw0KPiArwqDCoMKgIHVpbnQz
-Ml90IHRlbXA7DQo+ICsNCj4gK8KgwqDCoCB2YWwgPSB0cmVuY29kZXJfdGVfY3RybF9zZXRfaGFy
-ZHdpcmVfdmFscyh2YWwpOw0KPiArDQo+ICvCoMKgwqAgaWYgKCF0clRlQWN0aXZlKSB7DQo+ICvC
-oMKgwqDCoMKgwqDCoCAvKg0KPiArwqDCoMKgwqDCoMKgwqDCoCAqIDExLjIgUmVzZXQgYW5kIGRp
-c2NvdmVyeSwgdGFibGUgNTgsIHRyVGVDb250cm9sID0gMHgxDQo+ICvCoMKgwqDCoMKgwqDCoMKg
-ICogbWVhbnMgIlJlbGVhc2UgZnJvbSByZXNldCBhbmQgc2V0IGFsbCBkZWZhdWx0cy4iIERvDQo+
-ICvCoMKgwqDCoMKgwqDCoMKgICogdGhhdCBvbmx5IGlmIHRyVGVBY3RpdmUgaXMgMC4NCj4gK8Kg
-wqDCoMKgwqDCoMKgwqAgKi8NCj4gK8KgwqDCoMKgwqDCoMKgIGlmICh2YWwgPT0gMHgxKSB7DQo+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHZhbCA9IEZJRUxEX0RQMzIodmFsLCBUUl9URV9DT05U
-Uk9MLCBFTVBUWSwgMSk7DQo+ICsNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIHZh
-bDsNCj4gK8KgwqDCoMKgwqDCoMKgIH0NCj4gKw0KPiArwqDCoMKgwqDCoMKgwqAgLyoNCj4gK8Kg
-wqDCoMKgwqDCoMKgwqAgKiAxMS4zIEVuYWJsaW5nIGFuZCBEaXNhYmxpbmcgaGludHMgdGhhdCB0
-aGUgZGV2aWNlIG11c3QNCj4gK8KgwqDCoMKgwqDCoMKgwqAgKiBiZSBhY3RpdmF0ZWQgZmlyc3Qg
-KHRyVGVBY3RpdmUgPSAxKSwgdGhlbiBlbmFibGVkLg0KPiArwqDCoMKgwqDCoMKgwqDCoCAqIERv
-IG5vdCBlbmFibGUgdGhlIGRldmljZSBpZiBpdCdzIG5vdCBhY3RpdmUNCj4gK8KgwqDCoMKgwqDC
-oMKgwqAgKiBiZWZvcmVoYW5kLg0KPiArwqDCoMKgwqDCoMKgwqDCoCAqLw0KPiArwqDCoMKgwqDC
-oMKgwqAgdGVtcCA9IEZJRUxEX0VYMzIodmFsLCBUUl9URV9DT05UUk9MLCBFTkFCTEUpOw0KPiAr
-wqDCoMKgwqDCoMKgwqAgaWYgKHRlbXApIHsNCj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdmFs
-ID0gRklFTERfRFAzMih2YWwsIFRSX1RFX0NPTlRST0wsIEVOQUJMRSwgMCk7DQo+ICvCoMKgwqDC
-oMKgwqDCoCB9DQo+ICvCoMKgwqAgfQ0KPiArDQo+ICvCoMKgwqAgLyoNCj4gK8KgwqDCoMKgICog
-RG8gbm90IGFsbG93IGluc3QgdHJhY2luZyB0byBzdGFydCBpZiB0aGUgZGV2aWNlIGlzbid0DQo+
-ICvCoMKgwqDCoCAqIGFscmVhZHkgZW5hYmxlZC4gRG8gbm90IGFsbG93IGVuYWJsaW5nIHRoZSBk
-ZXZpbmNlIGFuZA0KPiArwqDCoMKgwqAgKiBhbmQgZW5hYmxlIHRyYWNpbmcgYXQgdGhlIHNhbWUg
-dGltZS4NCj4gK8KgwqDCoMKgICovDQo+ICvCoMKgwqAgaWYgKCF0ZS0+ZW5hYmxlZCAmJiB0clRl
-SW5zdFRyYWNpbmcpIHsNCj4gK8KgwqDCoMKgwqDCoMKgIHZhbCA9IEZJRUxEX0RQMzIodmFsLCBU
-Ul9URV9DT05UUk9MLCBJTlNUX1RSQUNJTkcsIDApOw0KPiArwqDCoMKgIH0NCj4gKw0KPiArwqDC
-oMKgIHJldHVybiB2YWw7DQo+ICt9DQo+ICsNCj4gK3N0YXRpYyB2b2lkIHRyZW5jb2Rlcl90ZV9j
-dHJsX3Bvc3R3KFJlZ2lzdGVySW5mbyAqcmVnLCB1aW50NjRfdCB2YWwpDQo+ICt7DQo+ICvCoMKg
-wqAgVHJhY2VFbmNvZGVyICp0ZSA9IFRSQUNFX0VOQ09ERVIocmVnLT5vcGFxdWUpOw0KPiArwqDC
-oMKgIHVpbnQzMl90IHRyVGVBY3RpdmUgPSBBUlJBWV9GSUVMRF9FWDMyKHRlLT5yZWdzLCBUUl9U
-RV9DT05UUk9MLA0KPiBBQ1RJVkUpOw0KPiArwqDCoMKgIHVpbnQzMl90IHRyVGVFbmFibGUgPSBB
-UlJBWV9GSUVMRF9FWDMyKHRlLT5yZWdzLCBUUl9URV9DT05UUk9MLA0KPiBFTkFCTEUpOw0KPiAr
-wqDCoMKgIHVpbnQzMl90IHRyVGVJbnN0VHJhY2luZyA9IEFSUkFZX0ZJRUxEX0VYMzIodGUtPnJl
-Z3MsDQo+IFRSX1RFX0NPTlRST0wsDQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgIElOU1RfVFJBQ0lORyk7DQo+ICsNCj4gK8KgwqDCoCBpZiAoIXRyVGVBY3RpdmUpIHsN
-Cj4gK8KgwqDCoMKgwqDCoMKgIHRlLT5lbmFibGVkID0gZmFsc2U7DQo+ICvCoMKgwqDCoMKgwqDC
-oCB0ZS0+dHJhY2VfcnVubmluZyA9IGZhbHNlOw0KPiArwqDCoMKgwqDCoMKgwqAgdGUtPnRyYWNl
-X25leHRfaW5zbiA9IGZhbHNlOw0KPiArwqDCoMKgwqDCoMKgwqAgcmV0dXJuOw0KPiArwqDCoMKg
-IH0NCj4gKw0KPiArwqDCoMKgIGlmICh0ZS0+ZW5hYmxlZCAmJiAhdHJUZUVuYWJsZSkgew0KPiAr
-wqDCoMKgwqDCoMKgwqAgLyogVE9ETzogdGhpcyBzaG91bGQgY2F1c2UgYSBwZW5kaW5nIHRyYWNl
-IGRhdGEgZmx1c2guICovDQo+ICvCoMKgwqAgfQ0KPiArDQo+ICvCoMKgwqAgdGUtPmVuYWJsZWQg
-PSB0clRlRW5hYmxlID8gdHJ1ZSA6IGZhbHNlOw0KPiArDQo+ICvCoMKgwqAgaWYgKCF0ZS0+dHJh
-Y2VfcnVubmluZyAmJiB0clRlSW5zdFRyYWNpbmcpIHsNCj4gK8KgwqDCoMKgwqDCoMKgIC8qIFN0
-YXJ0aW5nIHRyYWNlLiBBc2sgdGhlIENQVSBmb3IgdGhlIGZpcnN0IHRyYWNlIGluc24gKi8NCj4g
-K8KgwqDCoMKgwqDCoMKgIHRlLT50cmFjZV9uZXh0X2luc24gPSB0cnVlOw0KPiArwqDCoMKgIH0N
-Cj4gKw0KPiArwqDCoMKgIHRlLT50cmFjZV9ydW5uaW5nID0gdHJUZUluc3RUcmFjaW5nID8gdHJ1
-ZSA6IGZhbHNlOw0KPiArfQ0KPiArDQo+IMKgc3RhdGljIFJlZ2lzdGVyQWNjZXNzSW5mbyB0cmVu
-Y29kZXJfcmVnc19pbmZvW10gPSB7DQo+IMKgwqDCoMKgIHvCoMKgIC5uYW1lID0gIlRSX1RFX0NP
-TlRST0wiLCAuYWRkciA9IEFfVFJfVEVfQ09OVFJPTCwNCj4gwqDCoMKgwqDCoMKgwqDCoCAucnN2
-ZCA9IFJfVFJfVEVfQ09OVFJPTF9SU1ZQX0JJVFMsDQo+IMKgwqDCoMKgwqDCoMKgwqAgLnJlc2V0
-ID0gUl9UUl9URV9DT05UUk9MX1JFU0VULA0KPiDCoMKgwqDCoMKgwqDCoMKgIC5ybyA9IFJfVFJf
-VEVfQ09OVFJPTF9ST19CSVRTLA0KPiArwqDCoMKgwqDCoMKgwqAgLnByZV93cml0ZSA9ICZ0cmVu
-Y29kZXJfdGVfY3RybF9wcmV3LA0KPiArwqDCoMKgwqDCoMKgwqAgLnBvc3Rfd3JpdGUgPSAmdHJl
-bmNvZGVyX3RlX2N0cmxfcG9zdHcsDQo+IMKgwqDCoMKgIH0sDQo+IMKgwqDCoMKgIHvCoMKgIC5u
-YW1lID0gIlRSX1RFX0lNUEwiLCAuYWRkciA9IEFfVFJfVEVfSU1QTCwNCj4gwqDCoMKgwqDCoMKg
-wqDCoCAucnN2ZCA9IFJfVFJfVEVfSU1QTF9SU1ZQX0JJVFMsDQo+IMKgwqDCoMKgwqDCoMKgwqAg
-LnJlc2V0ID0gUl9UUl9URV9JTVBMX1JFU0VULA0KPiDCoMKgwqDCoMKgwqDCoMKgIC5ybyA9IFJf
-VFJfVEVfSU1QTF9ST19CSVRTLA0KPiDCoMKgwqDCoCB9LA0KPiArwqDCoMKgIHvCoMKgIC5uYW1l
-ID0gIlRSX1RFX0lOU1RfRkVBVFVSRVMiLCAuYWRkciA9DQo+IEFfVFJfVEVfSU5TVF9GRUFUVVJF
-UywNCj4gK8KgwqDCoMKgwqDCoMKgIC5yZXNldCA9IFJfVFJfVEVfSU5TVF9GRUFUVVJFU19OT19B
-RERSX0RJRkZfTUFTSywNCj4gK8KgwqDCoMKgwqDCoMKgIC5ybyA9IH4wLA0KPiArwqDCoMKgIH0s
-DQo+IMKgfTsNCj4gwqANCj4gwqBzdGF0aWMgdWludDY0X3QgdHJlbmNvZGVyX3JlYWQodm9pZCAq
-b3BhcXVlLCBod2FkZHIgYWRkciwgdW5zaWduZWQNCj4gc2l6ZSkNCj4gQEAgLTEzMiw2ICsyMzUs
-MTAgQEAgc3RhdGljIHZvaWQgdHJlbmNvZGVyX3Jlc2V0KERldmljZVN0YXRlICpkZXYpDQo+IMKg
-wqDCoMKgIGZvciAoaW50IGkgPSAwOyBpIDwgQVJSQVlfU0laRSh0ZS0+cmVnc19pbmZvKTsgaSsr
-KSB7DQo+IMKgwqDCoMKgwqDCoMKgwqAgcmVnaXN0ZXJfcmVzZXQoJnRlLT5yZWdzX2luZm9baV0p
-Ow0KPiDCoMKgwqDCoCB9DQo+ICsNCj4gK8KgwqDCoCB0ZS0+ZW5hYmxlZCA9IGZhbHNlOw0KPiAr
-wqDCoMKgIHRlLT50cmFjZV9ydW5uaW5nID0gZmFsc2U7DQo+ICvCoMKgwqAgdGUtPnRyYWNlX25l
-eHRfaW5zbiA9IGZhbHNlOw0KPiDCoH0NCj4gwqANCj4gwqBzdGF0aWMgdm9pZCB0cmVuY29kZXJf
-cmVhbGl6ZShEZXZpY2VTdGF0ZSAqZGV2LCBFcnJvciAqKmVycnApDQo+IGRpZmYgLS1naXQgYS9o
-dy9yaXNjdi90cmFjZS1lbmNvZGVyLmggYi9ody9yaXNjdi90cmFjZS1lbmNvZGVyLmgNCj4gaW5k
-ZXggODk3ODg2NTY2My4uMzBkMTE4YmUxZSAxMDA2NDQNCj4gLS0tIGEvaHcvcmlzY3YvdHJhY2Ut
-ZW5jb2Rlci5oDQo+ICsrKyBiL2h3L3Jpc2N2L3RyYWNlLWVuY29kZXIuaA0KPiBAQCAtMzMsNiAr
-MzMsMTAgQEAgc3RydWN0IFRyYWNlRW5jb2RlciB7DQo+IMKgwqDCoMKgIGh3YWRkciByYW1zaW5r
-X3JhbWxpbWl0Ow0KPiDCoMKgwqDCoCB1aW50MzJfdCByZWdzW1RSQUNFX1JfTUFYXTsNCj4gwqDC
-oMKgwqAgUmVnaXN0ZXJJbmZvIHJlZ3NfaW5mb1tUUkFDRV9SX01BWF07DQo+ICsNCj4gK8KgwqDC
-oCBib29sIGVuYWJsZWQ7DQo+ICvCoMKgwqAgYm9vbCB0cmFjZV9ydW5uaW5nOw0KPiArwqDCoMKg
-IGJvb2wgdHJhY2VfbmV4dF9pbnNuOw0KPiDCoH07DQo+IMKgDQo+IMKgI2RlZmluZSBUWVBFX1RS
-QUNFX0VOQ09ERVIgInRyYWNlLWVuY29kZXIiDQo=
+On 11/8/2026 10:39 PM, Tan Chi wrote:
+> When translating a DMA write, G-stage accesses to first-stage page
+> tables are implicit reads. The current implementation checks permissions
+> using the original DMA access type, which may incorrectly require write
+> permission for these reads.
+>
+> Use read permission for implicit page-table accesses while preserving
+> the original DMA access type for the final translation and fault
+> reporting.
+>
+> Also track the fault address separately from the translation result and
+> set the implicit-access flag in iotval2 for guest-page faults. Route
+> address-range failures through the common page-fault path to report the
+> correct fault address.
+>
+> Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+> ---
+>   hw/riscv/riscv-iommu.c | 60 ++++++++++++++++++++++++++----------------
+>   1 file changed, 38 insertions(+), 22 deletions(-)
+>
+> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
+> index 0e6970773a..2dcc528599 100644
+> --- a/hw/riscv/riscv-iommu.c
+> +++ b/hw/riscv/riscv-iommu.c
+> @@ -273,13 +273,15 @@ static hwaddr riscv_iommu_napot_page_mask(hwaddr pp=
+n, hwaddr addr, hwaddr *out)
+>    * Keeping them separate for now, as error reporting and flow specifics=
+ are
+>    * sufficiently different for separate implementation.
+>    *
+> - * @s        : IOMMU Device State
+> - * @ctx      : Translation context for device id and process address spa=
+ce id.
+> - * @iotlb    : translation data: physical address and access mode.
+> - * @return   : success or fault cause code.
+> + * @s               : IOMMU Device State
+> + * @ctx             : Translation context for device id and process
+> + *                    address space id.
+> + * @iotlb           : translation data: physical address and access mode=
+.
+> + * @fault_iotval2   : Fault address and implicit-access flags for iotval=
+2.
+> + * @return          : success or fault cause code.
+>    */
+>   static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext =
+*ctx,
+> -    IOMMUTLBEntry *iotlb)
+> +    IOMMUTLBEntry *iotlb, uint64_t *fault_iotval2)
+>   {
+>       IOMMUAccessFlags trans_perm =3D IOMMU_NONE;
+>       dma_addr_t addr, base;
+> @@ -299,10 +301,10 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>       MemTxResult ret;
+>       bool pv =3D !!ctx->process_id;
+>       /*
+> -     * Keep the request permission separate from iotlb->perm.  G-stage
+> +     * Keep the request permission separate from iotlb->perm. G-stage
+>        * walks translate S-stage PTE addresses before the real leaf is
+>        * reached, but permission checks and fault types must still use th=
+e
+> -     * original request.  A successful walk leaves iotlb->perm with the
+> +     * original request. A successful walk leaves iotlb->perm with the
+>        * effective leaf permission for the translation cache.
+>        */
+>       const IOMMUAccessFlags req_perm =3D iotlb->perm;
+> @@ -424,6 +426,14 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s,=
+ RISCVIOMMUContext *ctx,
+>           const dma_addr_t pte_addr =3D base + idx * sc[pass].ptesize;
+>           const bool ade =3D
+>               ctx->tc & (pass ? RISCV_IOMMU_DC_TC_GADE : RISCV_IOMMU_DC_T=
+C_SADE);
+> +        /*
+> +         * G-stage accesses to S-stage page tables are implicit reads.
+> +         * The original DMA permission is used for the final data access=
+.
+> +         */
+> +        const bool implicit_read =3D
+> +            pass =3D=3D G_STAGE && en_s && sc[S_STAGE].step !=3D sc[S_ST=
+AGE].levels;
+> +        const IOMMUAccessFlags acc_perm =3D
+> +            implicit_read ? IOMMU_RO : req_perm;
+>  =20
+>           if (ade && !(s->cap & RISCV_IOMMU_CAP_AMO_HWAD)) {
+>               /* GADE/SADE are reserved bits if AMO_HWAD is cleared.  */
+> @@ -442,15 +452,11 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>                   masked_msbs =3D (addr >> (va_len - 1)) & mask;
+>  =20
+>                   if (masked_msbs !=3D 0 && masked_msbs !=3D mask) {
+> -                    return (req_perm & IOMMU_WO) ?
+> -                                RISCV_IOMMU_FQ_CAUSE_WR_FAULT_S :
+> -                                RISCV_IOMMU_FQ_CAUSE_RD_FAULT_S;
+> +                    goto page_fault;
+>                   }
+>               } else {
+>                   if ((addr & va_mask) !=3D addr) {
+> -                    return (req_perm & IOMMU_WO) ?
+> -                                RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
+> -                                RISCV_IOMMU_FQ_CAUSE_RD_FAULT_VS;
+> +                    goto page_fault;
+>                   }
+>               }
+>           }
+> @@ -499,13 +505,13 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>                * non-user mode leaf PTE and !pv we need to fault.
+>                */
+>               break;
+> -        } else if ((req_perm & IOMMU_RO) && !(pte & PTE_R)) {
+> +        } else if ((acc_perm & IOMMU_RO) && !(pte & PTE_R)) {
+>               break;                /* Read access check failed */
+> -        } else if ((req_perm & IOMMU_WO) && !(pte & PTE_W)) {
+> +        } else if ((acc_perm & IOMMU_WO) && !(pte & PTE_W)) {
+>               break;                /* Write access check failed */
+>           } else if (!ade && !(pte & PTE_A)) {
+>               break;                /* Access bit not set */
+> -        } else if ((req_perm & IOMMU_WO) && !ade && !(pte & PTE_D)) {
+> +        } else if ((acc_perm & IOMMU_WO) && !ade && !(pte & PTE_D)) {
+>               break;                /* Dirty bit not set */
+>           } else if (pass =3D=3D G_STAGE && !(pte & PTE_U)) {
+>               /*
+> @@ -587,13 +593,22 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>           }
+>       } while (1);
+>  =20
+> +page_fault:
+>       /*
+>        * riscv_iommu_translate() will receive a fault and then call
+> -     * riscv_iommu_report_fault() using iotlb->translated_addr
+> -     * as iotval2.  Update translated_addr it with the latest
+> -     * translated addr we have.
+> +     * riscv_iommu_report_fault() using fault_iotval2 as iotval2.
+> +     * Update fault_iotval2 with the latest translated address.
+> +     * For guest-page faults, set the implicit first-stage
+> +     * page-table access flag in the low bit.
+>        */
+> -    iotlb->translated_addr =3D addr;
+> +    *fault_iotval2 =3D addr;
+> +
+> +    if (pass =3D=3D G_STAGE) {
+> +        bool implicit_read =3D
+> +            en_s && sc[S_STAGE].step !=3D sc[S_STAGE].levels;
+One nit pick:
+Duplicated `implicit_read` declaration and computation.
+
+Suggest to declare `implicit_read`=C2=A0 within function scope.
+Like:
+ =C2=A0 =C2=A0 =C2=A0const IOMMUAccessFlags req_perm =3D iotlb->perm;
++=C2=A0 =C2=A0 bool implicit_read;
+ =C2=A0 =C2=A0 =C2=A0...
+ =C2=A0 =C2=A0 =C2=A0do {
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0...
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 implicit_read =3D
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 pass =3D=3D G_STAGE && en_s &&
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 sc[S_STAGE].step !=3D sc[S_STAGE=
+].levels;
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0...
+ =C2=A0 =C2=A0 =C2=A0} while (1);
+
+ =C2=A0page_fault:
+ =C2=A0 =C2=A0 =C2=A0*fault_iotval2 =3D addr;
+ =C2=A0 =C2=A0 =C2=A0if (pass =3D=3D G_STAGE) {
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*fault_iotval2 =3D (addr & ~3ULL) | (imp=
+licit_read ? 1 : 0);
+ =C2=A0 =C2=A0 =C2=A0}
+
+Otherwise,
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
+
+Thanks,
+Nutty
+> +        *fault_iotval2 =3D (addr & ~3ULL) |
+> +                         (implicit_read ? 1 : 0);
+> +    }
+>  =20
+>       return (req_perm & IOMMU_WO) ?
+>                   (pass ? RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS :
+> @@ -1740,6 +1755,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>       bool enable_pri;
+>       hwaddr phys =3D 0;
+>       int fault;
+> +    uint64_t fault_iotval2 =3D 0;
+>  =20
+>       riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_URQ);
+>  =20
+> @@ -1776,7 +1792,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s=
+, RISCVIOMMUContext *ctx,
+>       riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_TLB_MISS);
+>  =20
+>       /* Translate using device directory / page table information. */
+> -    fault =3D riscv_iommu_spa_fetch(s, ctx, iotlb);
+> +    fault =3D riscv_iommu_spa_fetch(s, ctx, iotlb, &fault_iotval2);
+>  =20
+>       if (!fault && iotlb->target_as =3D=3D &s->trap_as) {
+>           /* Do not cache trapped MSI translations */
+> @@ -1827,7 +1843,7 @@ done:
+>           }
+>  =20
+>           riscv_iommu_report_fault(s, ctx, ttype, fault, enable_pid,
+> -                                 iotlb->iova, iotlb->translated_addr);
+> +                                 iotlb->iova, fault_iotval2);
+>           return fault;
+>       }
+>
 
