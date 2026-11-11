@@ -1,140 +1,131 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0699606A321
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 13:35:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA242606A324
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 13:39:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=debfWmoq;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hksoV/S5
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XTLrdvD7;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fqZtbDrG
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xR8TA-0007Bx-6l; Wed, 11 Nov 2026 08:34:32 -0500
+	id 1xR8XP-0002kZ-8g; Wed, 11 Nov 2026 08:38:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <himanshu.chauhan@oss.qualcomm.com>)
- id 1xR8T7-0007Be-9w
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 08:34:29 -0500
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xR8XG-0002h4-EL
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 08:38:48 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <himanshu.chauhan@oss.qualcomm.com>)
- id 1xR8T4-0003Vy-LM
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 08:34:29 -0500
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xR8XD-00040u-5s
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 08:38:45 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ABCYxI82356545
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 13:34:25 GMT
+ 6ABCZ25c3292079
+ for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 13:38:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=7d+r/tZvhHA
- MLWehqosyCq7mdTcvGc3EMzY/E+wk2qo=; b=debfWmoqhycdOokb5HkvUZBG3ZQ
- QU6LZr3hnxVJpaLlrBAlVmyeso9Piw6AcS0jrVALSE739ywliSKsOsTGLXuM2zEp
- v+9xU3GeXw9tAj3sabChZlQizDMwSH3dzUDLv/INJNWvgWKr+qgFsHlCgjMjzwuG
- q9zolmqAlaR4CTVfLr5Lt3ceqqQtbif2wOKD/aIs4FjrnKW0Y7PGYm2NWXCwtUuv
- 3F1xCRLr4QfAylsqdj6IUBrUB01tQwX3edt+9UJB8K4mpD+KClv8C4qGgYDXL5Jr
- n4N6XwxE+ZmiCsqlxi5tUugKntKXZqFfYerAlToh1c23gOWqYrqG7nDcGEg==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvgjdj10b-1
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=Z0ikpwZsKqoW2kRg0BMFc5icn+Z9FE20ZZE
+ 3z2QxyPM=; b=XTLrdvD77c118SbZuoSEIBtWQHgDvzPkLqiJseIsFdSFMx6P4Vb
+ I7pSwOwyz4sswgy3Pzc19D4bpNB7GsvxbMmA8gGPpVyEFfybZvpGw9qXviraNSC4
+ ghaOMiCM6BE84kO6TUN1HG7aNx7CoKtcFp/1M6/YCBn4Fb/615gaohYojXh0ZAUB
+ 69x6M2wgTmuehsSAhfSY8CdlVfC5OTjKsL9DZdWu5HmXgVUVvIoEV0U9k6qjqj0O
+ 8TkysAeWcCB6VLYg0CsHBWMdm6w5d1NbVrEOvbjSlKcl2bxmKim2bc4Ad6GfGZ5h
+ 2wYgulU5aIeZFamkBF9UgAj+4pBZ9l05rKg==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvdnp2ptq-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 13:34:24 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-33c35f5ca6cso6202956eec.1
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 05:34:24 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 13:38:41 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-91c046843f1so76240276d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 05:38:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794404064; x=1795008864; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=7d+r/tZvhHAMLWehqosyCq7mdTcvGc3EMzY/E+wk2qo=;
- b=hksoV/S5QV/gL7GD1g4zBO7B2QhKq+HFuRcE2dJNELLb46YB11UXQTyhB3LqMrhTMl
- t2mcLt0HUKBT9HzSjdBzeHGgiEl3vyh4iCoIG1ZFUNj1jUjO3ygamWpoTPA6nl4PANNO
- bKEDBqmVg0Qv2XycczUJLAAP//2CXdoNt5BGX4eggcMp3pnDwTsQy5tVN4BlfCteMIKP
- rwF1wpIEz+AtBxl5hnf/Mqr0JefMnI2I2YLwT0RtKYnxQWGj3on3I2+NsQ3prVs9KL1Z
- cY2YaYA2GAC8s28om3dfcP/4zEr2lJZM3CmfnRzlKFXHLd3QJ2a60YHbt2aNUi44FG7V
- EZEQ==
+ d=oss.qualcomm.com; s=google; t=1794404320; x=1795009120; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=Z0ikpwZsKqoW2kRg0BMFc5icn+Z9FE20ZZE3z2QxyPM=;
+ b=fqZtbDrG0Ga8YDZqSccj1A9wu6mtNjXRy5JQVYHPqP9PURtkuL7Ox0o7BuKeTqShRo
+ Bx1w1Hg8BiGRGwG0cyb5wT5ToVlCosZXE5hSD9o+x6npnENL5RKou6vKuH73O6BHsby5
+ c960hbikeU/YdRfLuI4PqjGD6NG7UYH9dOl1mNz5h9oFcYwdEdcBcrgO7KgoABuVeujF
+ TK6DcUoL2BJ8Lggt3D1ft3QtTD9/B9y9Tu9MZlUbF2hycX+eYNahhu69YjtSWPXMJ3ee
+ xoGaB4d2RAprsBxjS8qiOb69tW74YndHRtfr9BvC2us3s79UgsMLxfu4wie3+ZXHmeIx
+ dHKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794404064; x=1795008864;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=7d+r/tZvhHAMLWehqosyCq7mdTcvGc3EMzY/E+wk2qo=;
- b=ugPqkhWuMSzuaIlj11sKaxbCUfFcAmPa0J4PEeRqWIgOBA2gw0cci9b4frGhb6uaAJ
- NSubPkG1nrqH32F/VALH8BydlOqUOVrOmMk+VqtDU15kyaEIwUD0LW1S7SoVsSsiYYJL
- UtEzELTqOACFMSo6OwCk9Mh1xuIU3XAsQxODf4G6Bm63VbfLKuGUK/shupkzvODYY9tr
- 60GcXFP6eC9GFVhw8HNRE8kt/7H1qTI+FTsATTa5RucJf18u1B8GtIBJJcoS+CubRHfR
- XZ5PgCO5IRoLEbwRj1Y00s8Bq0gmLBdc2rFx0xGbq+5t3bqysVET+kwwuJMrrPuse/Xi
- IqRQ==
-X-Forwarded-Encrypted: i=1;
- AL+hErH5baIXc4SReVt30brJyxfDlEEBbQd5u9IFYufZyEGKZoncRq7pMvU8PWrLY2fh5+Q0f4mVEpi/IZan@nongnu.org
-X-Gm-Message-State: APuU4Z/ONS+3y+mdxbD5O0wo4WGynlxKmFRTrGEC18J3nGCLRZD7na2v
- XXzjlJV0w9pKI0GsJwJ3trC7F3TTiNpSBjVFPHVbtctOcfyTtZPmPqvuuEtQVPd8ZDLs2rstM4Q
- lpzuGj3PpHmvl5lRGMTNQVGi2JSnE1AP+dWob0pefzF8ZXp82k6LpQS8hmA==
-X-Gm-Gg: AYBFou0DMmw/JSyxTOKjgZXpPxpKz/WitlJQFAqUfAYoerOr+N+/hoFipEXqJ72e+Rg
- 64DuYRYVJZX9lTrl+ery/VoTS3glCQGmlbY+dhyoRndM7gH5kRb+In9CAAo7t4Ll/lERhjnCNtM
- 1s64bKsj1M+QsoGBiP8g3b3Fniz1gFe6l+q3NIWAtNaotl5mfeyGY8njrPxt14ArHSFZBF0rSfk
- HpKSu3mcgL7NcL7axYGv9yFeop13eOIyNknIQDPUrDGvdhkQ39ENa7kJY06EvwpgUvFC778pPJS
- cJgZWfGaifAG8130Mn6PSkJNvPXr9CNzMettx+flOLFCQ7Oy2zxkq/oNmG9zfaHT/TKcyirsMaW
- 1iWPWOnD8PjbQbR0imAgOmZV63CL94Qqv5g5jfjA41XAdLuxCs2m6Db/RchX/JPeB1i/CMOLtkv
- 7SS9cXQKTfl00oc0ZDkv7eLr36m7eAo8h3+exfS9mDuJwR8Po2pecK/kBr+GTanO2h/q/xGxKY
-X-Received: by 2002:a05:7301:619a:10b0:36e:b3e6:ebe7 with SMTP id
- 5a478bee46e88-37685d72791mr2912630eec.26.1794404063572; 
- Wed, 11 Nov 2026 05:34:23 -0800 (PST)
-X-Received: by 2002:a05:7301:619a:10b0:36e:b3e6:ebe7 with SMTP id
- 5a478bee46e88-37685d72791mr2912592eec.26.1794404062749; 
- Wed, 11 Nov 2026 05:34:22 -0800 (PST)
-Received: from hu-himchau-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-37520cfdfc6sm18350810eec.17.2026.11.11.05.34.19
+ d=1e100.net; s=20260707; t=1794404320; x=1795009120;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=Z0ikpwZsKqoW2kRg0BMFc5icn+Z9FE20ZZE3z2QxyPM=;
+ b=UTB3ZmUYSLWp9qT8epdAQDyfNB54l66MhggilyAlabrVauHkdmxwpDOPVXkHUNDkex
+ z3Du6vueduslf2iBHZQ7u4BWh65dcev2tQsmsrrfunjAWBGszUrw/voVaXI+wtcNYPs5
+ spq64nhNwjxjIC10pBK+ceSELrMwzqHpJ3FjmaB4KejjsXTy+CuBvHSDqgUPDU9ZV4zc
+ lVeuSP8x5OQzeHsHzk2Orl68pu9DjLxDvhRSDQV++5c8wr48XEspuS6mDgC22hDHrwOC
+ YuQjSKcbsST9VlgwqZmzEEnX/IEXr+cTg6pOS81BJnm3ksl+gtWXBnCHyOWw+KLRvdns
+ 97GQ==
+X-Gm-Message-State: APuU4Z/KF/KvkkMyVwmXnSrK/KWm4xA+AWbIkTYcKyKD0mEDFUReO7fJ
+ 44Zmvx0qhgX/8daxalK7jyaqgo1BpzRYz+eI3ZOmv8LZbv/JrU8UpElmvAp+B6YZk2vwnsq8OLi
+ WbHmvf0lPRkrb80GShKW8s3TvFTtPIxy+Qqlc/mkeoCAx4fNm/MSgDuHLkA==
+X-Gm-Gg: AYBFou3BpRb/G+1FsHz83gbRjX9+4WAPpCylazUFX4E73Q/wouIt/kqNRSskNnzsZHD
+ AmGUgFrK/PdaouNxBK3O7qaW0CBK5/TKIpQdHJThr6VJ4vber84Y3+n9jR2BsDKteiVqi9mC4YM
+ XAsonx/mLF4e39jMtxkLvV5+b/U+0rZ61N0EyPOael9IrhBrOyHKN2IFAeNWhRHWKi0hVqNw3FU
+ HpD4cll3uQZ3y3mvfYbFW2aw5d4cQHgcCnKF+1ZXEpW2j8Hrg7XNz7yrtf9l6OTVS5E5/el+pzS
+ r2zvbsXg5JfHEH5DbjFYUVx722IAYCqSX+N48LZ0Ipf+Bmhsv54y4yIh6QsmBi4csDsV92UPYt0
+ vukj+sUsM5gegYJS/lOZcCjK79fD5sOJodkC25S2RPbc1i5QAVg+nMWaSUkBQ6vFxuAGtD069QK
+ 6WppTTxC+NnUfAqWwjryFT/y7MANHQ+/SKOZQgoDmwcWmZ
+X-Received: by 2002:a05:6214:4a05:b0:91b:5d39:e13b with SMTP id
+ 6a1803df08f44-91f04212a11mr41658216d6.48.1794404320023; 
+ Wed, 11 Nov 2026 05:38:40 -0800 (PST)
+X-Received: by 2002:a05:6214:4a05:b0:91b:5d39:e13b with SMTP id
+ 6a1803df08f44-91f04212a11mr41657736d6.48.1794404319356; 
+ Wed, 11 Nov 2026 05:38:39 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com (189-68-253-226.dsl.telesp.net.br.
+ [189.68.253.226]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91ef04b01c8sm47374976d6.10.2026.11.11.05.38.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Nov 2026 05:34:22 -0800 (PST)
-From: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
-To: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ Wed, 11 Nov 2026 05:38:38 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-Cc: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
-Subject: [PATCH v2 1/1] target/riscv: Fix icount trigger exception PC
-Date: Wed, 11 Nov 2026 19:04:11 +0530
-Message-ID: <20261111133411.1922854-2-himanshu.chauhan@oss.qualcomm.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH] target/riscv/tcg/csr: filter bits when r/w HVIP(H)
+Date: Wed, 11 Nov 2026 10:38:33 -0300
+Message-ID: <20261111133833.258917-1-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261111133411.1922854-1-himanshu.chauhan@oss.qualcomm.com>
-References: <20261111133411.1922854-1-himanshu.chauhan@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=E7tYNqdl c=1 sm=1 tr=0 ts=6af46ee0 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA1NCBTYWx0ZWRfX6lEN1p6+SO0s
+ 7xJ8kPXUEs/wcjA5Fldhj5HBgoODcJiUev7M/lSnUgFsCKChlRp26i0l/SIiJMIZDYqclPCs05G
+ I97PONMcMUFwATuw3se12vunXlQojvuFbHKXxs+qUwFSBQCz44IOc+fPgsMmE80QKs+Jz+hxV/F
+ IKUHs5T1iAGT7frlNVkxz/wPInm+COEFe0D6P0/SZDIV3V1Qj1aTvdMBE0yVUtaiIB7veENwJQN
+ /2MJ3D1ORUktIJ1IbKpY+hAv7ZfTH9jpNohBWoKJZ13agbvQkEz32BpslHC9ASVZ+XLYsDmI7vN
+ JK0pZLQg5xORokKUiDAt39Ivh5M3vkFdwRMliDU/11bxIN9aE6ivW20Eg2jbE7OyVrW7vc/mJa7
+ FcC+IAfz5kwA4X5ilFd1PvhNHA3cw4wMEDoXPY1HMtJ60VIxeI2m9nRzFzMw/roZtlOCVvQM3YP
+ iSj9T5XfAf6r6Qz3t5g==
+X-Proofpoint-GUID: mU9aJ-cjKedeI9Is1Wl1K4bzI2XZL7Qy
+X-Proofpoint-ORIG-GUID: mU9aJ-cjKedeI9Is1Wl1K4bzI2XZL7Qy
+X-Authority-Analysis: v=2.4 cv=NK1AaE6g c=1 sm=1 tr=0 ts=6af46fe1 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=E6I8QaTN8wrSaqNYwnwA:9 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-ORIG-GUID: JJjg6a7zBnHkJuV__AtTp8y_9GS-CZlA
-X-Proofpoint-GUID: JJjg6a7zBnHkJuV__AtTp8y_9GS-CZlA
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDA1MyBTYWx0ZWRfX/8F4p0kPAn+N
- xW1Kr8KV0lzRpQ38XrQw+rhomYYu7Dv/zkVjcIe33k2rEzz8o/7b+pWP3VEeDR1M2kUKGkqykeN
- siB3ZDPlmaVrpJxf9sZV7fbD0DDnDdWmekfTkxQ7BU+gvawmWCaTQ267swsJxuqjUjCN8b5eIGZ
- B9KoS60LZ/EkQLHA/ex9PjwpAGqyd8J6SqTjS77FDWBjCjf0PD+iargKiTcix4cH6Q96S4yzvWa
- BX7mJcU2RcTCkjJYo8UQu7g/+428AQMstrC2C+dCFF+uOxDP9bUAHCqppRvHy1ciew2YrkW4kH4
- erpX5Gxq6c+ICBYIY9FXc+KIgr43FiVeYk+ll6WfNVVGYo7gTn9Ti0TQY5vHdr5xuTnp9Ps9wp9
- HcBiL7ofUkeBUYxqDC/WCV9RZj0ovCxVJtdY59yHU0ioRlGlqwW8RKf9098FNIYsg5gvZCU3ykU
- 1YOQHJ2e3aT0ruLsFJA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA1MyBTYWx0ZWRfX62ydQbB1v3bv
- AURrDANW+tya6njoA/XSuIHQm/MYmhde8W9VDqdV5uUz0FjnKQmlUO6NSW5DYF20k5xETnLxxW1
- B8GSqD/vxhxiqxd1pmT9wTxonKEyrJU=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=CAa-Uoc_l-2XtQuzupkA:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDA1NCBTYWx0ZWRfX0cgbc4ZWY58+
+ Y3Zqii4f2mUVKPuibdoONtYHyN4D+yljuoBf+DEKv+0m+i9JzvWgnkYd2y0D7hWEK0alA7D09Wc
+ UpJ34bi1mWpFer5nS+WKHyhTHroXr3k=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-11_02,2026-11-11_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0 adultscore=0
- malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ phishscore=0 spamscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
+ adultscore=0 malwarescore=0 priorityscore=1501 impostorscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110053
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110054
 Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=himanshu.chauhan@oss.qualcomm.com;
- helo=mx0a-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -153,464 +144,134 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Per the Sdtrig specification, on a breakpoint exception with icount, the
-xepc must contain the virtual address of the next instruction that must
-be executed to preserve the program flow. So for a one-instruction
-trigger must fire only after the counted instruction retires. The xepc
-must contains the architectural successor PC which for a taken branch
-should be the branch target and the fallthrough otherwise.
+rmw_hvip64() is not filtering out the bits from mip/sip, hosted in the
+'alias_mask' variable, when dealing with HVIP.  The bug is rather
+straightforward.  Given:
 
-QEMU previously disabled the translated-block trigger flag when icount was
-enabled and relied on timer and privilege-change callbacks to update the
-count, so the trigger could fire outside instruction retirement before the
-guest PC advanced, causing Linux to observe the old PC and re-enter the same
-breakpoint while single-stepping with icount.
+uint64_t alias_mask = (env->hideleg | ~env->hvien) | VS_MODE_INTERRUPTS;
 
-Fix this by
-  - publishing the icount trigger flag in translated blocks even with
-    icount enabled
-  - making the helper decrement the trigger count after the
-    instruction has committed its successor PC and raise the trigger
-    action only then
-  - privilege-change callbacks refresh cached enabled state because itriggers
-    tied to privilege mode.
+when env->hvien is 0, alias_mask will be a full 1s mask.  This mask is
+then used to retrieve the mip bits (via rmw_mip64) and then later when
+filtering ret_mip.  The end result is that HVIP ends up providing read
+access to bits it can't write.  The spec says:
 
-Also make trigger data CSR availability depend on an implemented trigger slot
-rather than the currently selected trigger type, so software can disable a
-trigger with type zero and still write the rest of the slot state before
-selecting another supported type.
+"Bits of hvip that are not writable are read-only zeros."
 
-itrigger timers are completely removed as they are not required now.
+So we're in a direct and trivial spec violation.
 
-Fixes: 5a4ae64cac49 ("target/riscv: Add itrigger support when icount is enabled")
-Signed-off-by: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
+As a side rant: I am less than pleased with how rmw_hvip64() is turning
+out.  It's doing way too much with way too many CSRs (hvip, vsip, sip
+...) and a bitmask salad to go along with it.  Every time an issue
+appears we have to patch up a specific piece of it, usually related to
+one of its CSRs, and hope we're not breaking anything else.  The
+alternative is a full refactor of all the CSRs callbacks involved to
+decouple the logic, which isn't the greatest time either. We should
+definitely avoid this kind of design in the future.
+
+Fixes: 40336d5b1d4c  ("target/riscv: Add HS-mode virtual interrupt and IRQ filtering support.")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3133
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/cpu.h            |   5 +-
- target/riscv/machine.c        |   5 +-
- target/riscv/tcg/cpu_helper.c |  10 +-
- target/riscv/tcg/csr.c        |   3 +
- target/riscv/tcg/debug.c      | 170 ++++++++++------------------------
- target/riscv/tcg/tcg-cpu.c    |   7 +-
- 6 files changed, 64 insertions(+), 136 deletions(-)
+ target/riscv/tcg/csr.c               |  8 ++++++
+ tests/tcg/riscv64/system/meson.build |  9 ++++++
+ tests/tcg/riscv64/test-hvip-read.S   | 41 ++++++++++++++++++++++++++++
+ 3 files changed, 58 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-hvip-read.S
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 49a1186bdb..3109d71470 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -484,8 +484,7 @@ struct CPUArchState {
-     uint8_t trigger_cur;
-     /*
-      * num_triggers is the length of tdata1, tdata2, tdata3,
--     * cpu_breakpoint, cpu_watchpoint and itrigger_timer
--     * arrays.
-+     * cpu_breakpoint and cpu_watchpoint arrays.
-      */
-     uint32_t num_triggers;
-     uint64_t *tdata1;
-@@ -493,8 +492,6 @@ struct CPUArchState {
-     uint64_t *tdata3;
-     struct CPUBreakpoint **cpu_breakpoint;
-     struct CPUWatchpoint **cpu_watchpoint;
--    QEMUTimer **itrigger_timer;
--    int64_t last_icount;
-     bool itrigger_enabled;
- 
-     /* machine specific rdtime callback */
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 0de06e9588..74176e7c6e 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -22,7 +22,6 @@
- #include "system/kvm.h"
- #include "system/tcg.h"
- #include "migration/cpu.h"
--#include "exec/icount.h"
- #include "target/riscv/tcg/debug.h"
- #ifdef CONFIG_KVM
- #include "kvm/kvm_riscv.h"
-@@ -339,9 +338,7 @@ static int debug_post_load(void *opaque, int version_id)
-     RISCVCPU *cpu = opaque;
-     CPURISCVState *env = &cpu->env;
- 
--    if (icount_enabled()) {
--        env->itrigger_enabled = riscv_itrigger_enabled(env);
--    }
-+    env->itrigger_enabled = riscv_itrigger_enabled(env);
- 
-     return 0;
- }
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 58e98e975c..0375b930be 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -940,10 +940,6 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
-     g_assert(newpriv <= PRV_M && newpriv != PRV_RESERVED);
- 
-     if (newpriv != env->priv || env->virt_enabled != virt_en) {
--        if (icount_enabled()) {
--            riscv_itrigger_update_priv(env);
--        }
--
-         riscv_pmu_update_fixed_ctrs(env, newpriv, virt_en);
-     }
- 
-@@ -982,6 +978,12 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
-             riscv_cpu_interrupt(env);
-         }
-     }
-+
-+    /*
-+     * Icount triggers are scoped by U/S/M and VU/VS mode bits.  Refresh the
-+     * cached translated-block flag after privilege or virtualization changes.
-+     */
-+    riscv_itrigger_update_priv(env);
- }
- 
- /*
 diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index af444e3e6f..7c05c866fd 100644
+index af444e3e6f..9b67f2d764 100644
 --- a/target/riscv/tcg/csr.c
 +++ b/target/riscv/tcg/csr.c
-@@ -5732,6 +5732,9 @@ static RISCVException write_mcontext(CPURISCVState *env, int csrno,
-     }
+@@ -5078,6 +5078,14 @@ static RISCVException rmw_hvip64(CPURISCVState *env, int csrno,
+     uint64_t wr_mask_hvip;
+     uint64_t wr_mask_mip;
  
-     env->mcontext = val & mask;
-+#if !defined(CONFIG_USER_ONLY)
-+    env->itrigger_enabled = riscv_itrigger_enabled(env);
-+#endif
-     return RISCV_EXCP_NONE;
- }
- 
-diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
-index 8b58cbd07a..53b1e41f6c 100644
---- a/target/riscv/tcg/debug.c
-+++ b/target/riscv/tcg/debug.c
-@@ -32,8 +32,6 @@
- #include "trace.h"
- #include "exec/helper-proto.h"
- #include "exec/watchpoint.h"
--#include "system/cpu-timers.h"
--#include "exec/icount.h"
- #include "accel/tcg/cpu-loop.h"
- 
- /*
-@@ -53,20 +51,6 @@
-  *     1 |    2 |         tdata1, tdata2 | Address / Data Match
-  */
- 
--/* tdata availability of a trigger */
--typedef bool tdata_avail[TDATA_NUM];
--
--static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
--    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
--    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
--    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
--    [TRIGGER_TYPE_INT] = { true, true, true },
--    [TRIGGER_TYPE_EXCP] = { true, true, true },
--    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
--    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
--    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
--};
--
- /* only breakpoint size 1/2/4/8 supported */
- static int access_size[SIZE_NUM] = {
-     [SIZE_ANY] = 0,
-@@ -165,13 +149,17 @@ static inline target_ulong build_tdata1(CPURISCVState *env,
- 
- bool tdata_available(CPURISCVState *env, int tdata_index)
- {
--    int trigger_type = get_trigger_type(env, env->trigger_cur);
--
-     if (unlikely(tdata_index >= TDATA_NUM)) {
-         return false;
-     }
- 
--    return tdata_mapping[trigger_type][tdata_index];
 +    /*
-+     * tdata CSRs belong to the trigger slot, not to the currently selected
-+     * trigger type.  A type-zero trigger is disabled, but the slot still
-+     * exists, so software must still be able to write tdata2/tdata3 before
-+     * selecting a supported trigger type.
++     * alias_mask, aka the bits that comes from sip/mip, should be capped
++     * to just VS_MODE_INTERRUPTS when reading/writing HVIP.
 +     */
-+    return env->trigger_cur < env->num_triggers;
- }
- 
- target_ulong tselect_csr_read(CPURISCVState *env)
-@@ -729,6 +717,30 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
-     }
- }
- 
-+static void no_trigger_reg_write(CPURISCVState *env, target_ulong index,
-+                                 int tdata_index, target_ulong val)
-+{
-+    /*
-+     * OpenSBI programs DBTR slots by first writing type zero to tdata1, then
-+     * writing tdata2/tdata3, and finally writing the desired trigger type.
-+     */
-+    switch (tdata_index) {
-+    case TDATA1:
-+        type2_breakpoint_remove(env, index);
-+        env->tdata1[index] = 0;
-+        env->itrigger_enabled = riscv_itrigger_enabled(env);
-+        break;
-+    case TDATA2:
-+        env->tdata2[index] = val;
-+        break;
-+    case TDATA3:
-+        env->tdata3[index] = textra_validate(env, val);
-+        break;
-+    default:
-+        g_assert_not_reached();
++    if (csrno == CSR_HVIP || csrno == CSR_HVIPH) {
++        alias_mask = VS_MODE_INTERRUPTS;
 +    }
++
+     /*
+      * Both alias and non-alias mask remain same for vsip except:
+      *  1- For VS* bits if they are zero in hideleg.
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e..db494f70c6 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -89,6 +89,15 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'test-hvip-read.S': {
++    'exe_name': 'test-hvip-read',
++    'cflags': cflags + ['-march=rv64gcv'],
++    'qemu_args': ['-cpu', 'max,smpmpmt=false,pmu-mask=0xfffffff8,smdbltrp=true,ssdbltrp=true', qemu_args],
++  }
 +}
 +
- /* icount trigger type */
- static inline int
- itrigger_get_count(CPURISCVState *env, int index)
-@@ -754,21 +766,6 @@ itrigger_set_pending(CPURISCVState *env, int index, int val)
-                                    ITRIGGER_PENDING, val);
- }
- 
--static bool check_itrigger_priv(CPURISCVState *env, int index)
--{
--    target_ulong tdata1 = env->tdata1[index];
--    if (env->virt_enabled) {
--        /* check VU/VS bit against current privilege level */
--        return (get_field(tdata1, ITRIGGER_VS) == env->priv) ||
--               (get_field(tdata1, ITRIGGER_VU) == env->priv);
--    } else {
--        /* check U/S/M bit against current privilege level */
--        return (get_field(tdata1, ITRIGGER_M) == env->priv) ||
--               (get_field(tdata1, ITRIGGER_S) == env->priv) ||
--               (get_field(tdata1, ITRIGGER_U) == env->priv);
--    }
--}
--
- bool riscv_itrigger_enabled(CPURISCVState *env)
- {
-     int count;
-@@ -776,7 +773,7 @@ bool riscv_itrigger_enabled(CPURISCVState *env)
-         if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
-             continue;
-         }
--        if (check_itrigger_priv(env, i)) {
-+        if (!trigger_common_match(env, TRIGGER_TYPE_INST_CNT, i)) {
-             continue;
-         }
-         count = itrigger_get_count(env, i);
-@@ -803,7 +800,12 @@ void HELPER(itrigger_match)(CPURISCVState *env)
-         if (!count) {
-             continue;
-         }
--        itrigger_set_count(env, i, count--);
-+        /*
-+         * This helper is emitted at TB exit after one guest instruction and
-+         * after the translator has committed env->pc to the successor PC.
-+         */
-+        count--;
-+        itrigger_set_count(env, i, count);
-         if (!count) {
-             /*
-              * From the 1.0 spec: "When pending is set, the trigger
-@@ -822,61 +824,21 @@ void HELPER(itrigger_match)(CPURISCVState *env)
-             itrigger_set_pending(env, i, 1);
- 
-             env->itrigger_enabled = riscv_itrigger_enabled(env);
--            do_trigger_action(env, i);
-             itrigger_set_pending(env, i, 0);
-+            do_trigger_action(env, i);
-         }
-     }
- }
- 
- static void riscv_itrigger_update_count(CPURISCVState *env)
- {
--    int count, executed;
-     /*
--     * Record last icount, so that we can evaluate the executed instructions
--     * since last privilege mode change or timer expire.
-+     * Icount triggers are matched from translated code after an instruction
-+     * has committed its successor PC.  Timer and privilege-change callbacks
-+     * therefore must not decrement count or fire the action here; they only
-+     * refresh the cached TB flag state.
-      */
--    int64_t last_icount = env->last_icount, current_icount;
--    current_icount = env->last_icount = icount_get_raw();
--
--    for (int i = 0; i < env->num_triggers; i++) {
--        if (get_trigger_type(env, i) != TRIGGER_TYPE_INST_CNT) {
--            continue;
--        }
--        count = itrigger_get_count(env, i);
--        if (!count) {
--            continue;
--        }
--        /*
--         * Only when privilege is changed or itrigger timer expires,
--         * the count field in itrigger tdata1 register is updated.
--         * And the count field in itrigger only contains remaining value.
--         */
--        if (check_itrigger_priv(env, i)) {
--            /*
--             * If itrigger enabled in this privilege mode, the number of
--             * executed instructions since last privilege change
--             * should be reduced from current itrigger count.
--             */
--            executed = current_icount - last_icount;
--            itrigger_set_count(env, i, count - executed);
--            if (count == executed) {
--                do_trigger_action(env, i);
--            }
--        } else {
--            /*
--             * If itrigger is not enabled in this privilege mode,
--             * the number of executed instructions will be discard and
--             * the count field in itrigger will not change.
--             */
--            timer_mod(env->itrigger_timer[i],
--                      current_icount + count);
--        }
--    }
--}
--
--static void riscv_itrigger_timer_cb(void *opaque)
--{
--    riscv_itrigger_update_count((CPURISCVState *)opaque);
-+    env->itrigger_enabled = riscv_itrigger_enabled(env);
- }
- 
- void riscv_itrigger_update_priv(CPURISCVState *env)
-@@ -911,18 +873,10 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
- 
-     switch (tdata_index) {
-     case TDATA1:
--        /* set timer for icount */
-         new_val = itrigger_validate(env, val);
-         if (new_val != env->tdata1[index]) {
-             env->tdata1[index] = new_val;
--            if (icount_enabled()) {
--                env->last_icount = icount_get_raw();
--                /* set the count to timer */
--                timer_mod(env->itrigger_timer[index],
--                          env->last_icount + itrigger_get_count(env, index));
--            } else {
--                env->itrigger_enabled = riscv_itrigger_enabled(env);
--            }
-+            env->itrigger_enabled = riscv_itrigger_enabled(env);
-         }
-         break;
-     case TDATA2:
-@@ -931,33 +885,17 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
-         break;
-     case TDATA3:
-         env->tdata3[index] = textra_validate(env, val);
-+        env->itrigger_enabled = riscv_itrigger_enabled(env);
-         break;
-     default:
-         g_assert_not_reached();
-     }
- }
- 
--static int itrigger_get_adjust_count(CPURISCVState *env)
--{
--    int count = itrigger_get_count(env, env->trigger_cur), executed;
--    if ((count != 0) && check_itrigger_priv(env, env->trigger_cur)) {
--        executed = icount_get_raw() - env->last_icount;
--        count += executed;
--    }
--    return count;
--}
--
- target_ulong tdata_csr_read(CPURISCVState *env, int tdata_index)
- {
--    int trigger_type;
-     switch (tdata_index) {
-     case TDATA1:
--        trigger_type = extract_trigger_type(env,
--                                            env->tdata1[env->trigger_cur]);
--        if ((trigger_type == TRIGGER_TYPE_INST_CNT) && icount_enabled()) {
--            return deposit64(env->tdata1[env->trigger_cur], 10, 14,
--                             itrigger_get_adjust_count(env));
--        }
-         return env->tdata1[env->trigger_cur];
-     case TDATA2:
-         return env->tdata2[env->trigger_cur];
-@@ -995,6 +933,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
-                       trigger_type);
-         break;
-     case TRIGGER_TYPE_NO_EXIST:
-+        no_trigger_reg_write(env, env->trigger_cur, tdata_index, val);
-+        break;
-     case TRIGGER_TYPE_UNAVAIL:
-         qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
-                       trigger_type);
-@@ -1147,8 +1087,6 @@ bool riscv_cpu_debug_check_watchpoint(CPUState *cs, CPUWatchpoint *wp)
- 
- void riscv_trigger_realize(CPURISCVState *env)
- {
--    int i;
--
-     if (env->num_triggers > RV_MAX_TRIGGERS) {
-         error_report(
-                 "Invalid configuration: 'num-triggers' must be less than %u",
-@@ -1161,12 +1099,6 @@ void riscv_trigger_realize(CPURISCVState *env)
-     env->tdata3 = g_new0(uint64_t, env->num_triggers);
-     env->cpu_breakpoint = g_new0(struct CPUBreakpoint *, env->num_triggers);
-     env->cpu_watchpoint = g_new0(struct CPUWatchpoint *, env->num_triggers);
--    env->itrigger_timer = g_new0(QEMUTimer *, env->num_triggers);
--
--    for (i = 0; i < env->num_triggers; i++) {
--        env->itrigger_timer[i] = timer_new_ns(QEMU_CLOCK_VIRTUAL,
--                                              riscv_itrigger_timer_cb, env);
--    }
- }
- 
- void riscv_trigger_unrealize(CPURISCVState *env)
-@@ -1177,11 +1109,6 @@ void riscv_trigger_unrealize(CPURISCVState *env)
- 
-     g_free(env->cpu_breakpoint);
-     g_free(env->cpu_watchpoint);
--
--    for (int i = 0; i < env->num_triggers; i++) {
--        timer_free(env->itrigger_timer[i]);
--    }
--    g_free(env->itrigger_timer);
- }
- 
- void riscv_trigger_reset_hold(CPURISCVState *env)
-@@ -1209,7 +1136,6 @@ void riscv_trigger_reset_hold(CPURISCVState *env)
-         env->tdata3[i] = 0;
-         env->cpu_breakpoint[i] = NULL;
-         env->cpu_watchpoint[i] = NULL;
--        timer_del(env->itrigger_timer[i]);
-     }
- 
-     env->mcontext = 0;
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 5834ec1524..027fe5b46a 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -181,8 +181,11 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-     }
- 
--    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
--        && !icount_enabled()) {
-+    /*
-+     * Publish itrigger state even when QEMU icount is enabled.  The helper
-+     * runs from translated code after committing the guest successor PC.
-+     */
-+    if (cpu->cfg.debug || cpu->cfg.ext_sdtrig) {
-         flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-     }
- #endif
++
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-hvip-read.S b/tests/tcg/riscv64/test-hvip-read.S
+new file mode 100644
+index 0000000000..e1cf6c774b
+--- /dev/null
++++ b/tests/tcg/riscv64/test-hvip-read.S
+@@ -0,0 +1,41 @@
++/*
++ * Test if a HVIP read is returning 0 for all bits it can't
++ * write.  Based on Gitlab 3313 testcase.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++	.option norvc
++	.text
++
++	.global _start
++
++_start:
++	li    t0, 2
++	csrs  mip, t0
++	csrr  t1, hvip
++	bnez  t1, _fail
++
++	li    a0, 0
++	j     _exit
++
++_fail:
++	li    a0, 1
++
++/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
++_exit:
++	la	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	8
++semiargs:
++	.space	16
 -- 
 2.43.0
 
