@@ -1,154 +1,61 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 839D8606A320
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 06:06:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 636B6606A31C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 06:29:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=B3N5UeTW;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Lchkuylk
+	dkim=pass (2048-bit key, unprotected) header.d=lanxincomputing-com.20200927.dkim.feishu.cn header.i=@lanxincomputing-com.20200927.dkim.feishu.cn header.a=rsa-sha256 header.s=s1 header.b=AKFmBdBp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xR1RZ-00081a-VY; Wed, 11 Nov 2026 01:04:25 -0500
+	id 1xR1pa-0002xW-T2; Wed, 11 Nov 2026 01:29:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1xR1RY-00080k-At
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:04:24 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <subrahmanya.lingappa@oss.qualcomm.com>)
- id 1xR1RV-0000Vz-5k
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:04:24 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AB5KxOG1052694
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:04:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +Q4wZP/ShiuYZUn1lGH7YdU9moBHfpBcSJIBbthl4oA=; b=B3N5UeTWYhMrI8i8
- w82KSVFn3O+4ciHoPn3vIzDmwOvaXMY/MpJs0dECoaXWtXxB2yq6nzo2t53PvRJX
- QAdX28hrab/zt+SO8EIACnoytJBWykBSFZJtkx0RBOJ2jUcwv7aq/LCAwlYnqEp8
- yW7Aay/jfPTiigaKslJ7iMZuaOaUt5jS415Qh6+xSe/XWUEffIQ8CCXPL1trtwTz
- Ps7Bpf/EVtBlR8guNYAuan+qybBBCoKHjzy79Y9/5BWMixZeayIVU9+jyjDhXc2y
- AcuhsEf9HQA30FDDk0vR/Ip6lA8bTa8SMhGIigTPLm02ndaQrPiKR3TrEar2rqHl
- tJAsXw==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvdrh12ur-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:04:19 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id
- a92af1059eb24-1966f1103a1so2871c88.2
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 22:04:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794377059; x=1794981859; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to:content-type;
- bh=+Q4wZP/ShiuYZUn1lGH7YdU9moBHfpBcSJIBbthl4oA=;
- b=LchkuylkMeOGos6u84n6AP3WgFNxuHNM7sdEwFVliGdga+N4jGkOec04+tBveeVb2K
- EctsPvWnPSdOrG8fhwMdgEqenba0+nwCocEAUHiIvt3GUqeVGoRYa/AUIwsBcw25D5a3
- fJyviiUZw7a3qGewFpXI+3SFAXmI8Si5uYcnU0RhP16lKkzlvI328bUu/7i5RSIYnNJ/
- VmMFfbH81Vt5srxxpo0TTKh5czV/F1Iis7EzxI+aEuacjC6Zab8KvA9oQGlZ61DN2fY5
- Ou0LA+3OojrJhvZ+ss5f9M5zgEbtmOBrOT/8q+g+qXeXVQ97feDqW7cL8r2v3F2TfaGu
- 017Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794377059; x=1794981859;
- h=content-transfer-encoding:content-type:mime-version:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
- :content-type;
- bh=+Q4wZP/ShiuYZUn1lGH7YdU9moBHfpBcSJIBbthl4oA=;
- b=DLaHiDkGMVcq4eku6iXZ8894kiio4+vXaN2L1829hcVmt5fHIB8L49FYPEgA/F/H8b
- fWkOZYbCkP/5ujWpgeyglMom3C8NZaa+M4zUiPiVgVfNB0cUJupuR7dye7RgnxaxoJP6
- XnvH8Y2D1WS2KpZLZSCaRZuiXZPX0i78bjCuD+xftP0b/goZvo9/8TQTazl17ONsrPOi
- 5dCAIUXQponEhoMBReof4EKl+k5iYL5vE/CBv1pghcx7jVAYNuZBUBMGJ196bb9sVKff
- Lzzi0Ms2bTgd7qTgPM7AjuGbi4q1oXRsztBA7dRozFH/62ikV3RvnuVGtmqxjaNbADTu
- RcCA==
-X-Gm-Message-State: APuU4Z+Nm5EBs4Szy6fIMGjmNywKg55hwjdqbtBryrtjHlrwuP3GQxIl
- 8FN8kEELInbRSP2OxXAd/aJHfSzFs2kcR5fiicMuC48WcEPFedO38fZy0gmZ8M3McJlYhGtwgFG
- GROFo1pnIHTqBvTTrF4J13MlHUFY82fugOyA78HyEXLAQD8ilZEUIKERw1Q==
-X-Gm-Gg: AYBFou3QOgTZG/8qHxGYn5XckduWg9TzbJjTYho0Wowy7U42I8x8zSMD67Me9NDMD7G
- QOTmuFmJv40jcGC+8kFsV/44UBvf9iZnRV4z6VMrtUsiGhbZQAQAuPuTq8i8IS35Um+k92GI5jq
- HstcZ0WhDisXVam0SNBvRVjPKAUvZyJssQq0dMlVmJuGTbVzxU74SfFSOrl6RPGHc+blVtcKbko
- DF7gLwY/fJhAS3hraX7uiDdj0rOxAc5Egb9MSL3Dz7HbCjbKmBKkvecDd1G/EZxqyvVYtotMenV
- F8KIFy/DyZTl8GWxPfhEdKJxj7ueW/YWEL0/+PJ72YvKir69VsfM3Ciss3QLM0dkSnXMtRsKMBk
- 1wvSw0GUK4oiybWmnkyjiMjOIF/FhDvXVBt+csv8HCtqy6vAcRCRiw+j2UI+pVAVor37ybmeGZp
- 2R/wxYRYyQaJ+MClZnD886IgcNUCfoEXCislzL0YONJI0KmlZEmahGGlcZP9EwrDvvr4SQ9mzET
- yBskm8=
-X-Received: by 2002:a05:701b:291b:b0:146:ffa9:2117 with SMTP id
- a92af1059eb24-1b3c02d01e5mr2000798c88.1.1794377058714; 
- Tue, 10 Nov 2026 22:04:18 -0800 (PST)
-X-Received: by 2002:a05:701b:291b:b0:146:ffa9:2117 with SMTP id
- a92af1059eb24-1b3c02d01e5mr2000778c88.1.1794377058111; 
- Tue, 10 Nov 2026 22:04:18 -0800 (PST)
-Received: from hu-slingapp-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1b3b5b2ff3bsm15067990c88.11.2026.11.10.22.04.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 22:04:17 -0800 (PST)
-From: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org,
- Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sunil V L <sunilvl@oss.qualcomm.com>, Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
-Subject: [PATCH v15 01/10] build: add optional librpmi dependency
-Date: Wed, 11 Nov 2026 11:33:53 +0530
-Message-ID: <20261111060403.3777501-2-subrahmanya.lingappa@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261111060403.3777501-1-subrahmanya.lingappa@oss.qualcomm.com>
-References: <20261111060403.3777501-1-subrahmanya.lingappa@oss.qualcomm.com>
-X-Archived-By: <archiver.kernel.org>
-MIME-Version: 1.0
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1xR1pa-0002wG-1G
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:29:14 -0500
+Received: from va-2-41.ptr.blmpb.com ([209.127.231.41])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <xiangwencheng@lanxincomputing.com>)
+ id 1xR1pU-00014W-4K
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:29:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ s=s1; d=lanxincomputing-com.20200927.dkim.feishu.cn; t=1794378535;
+ h=from:subject:mime-version:from:date:message-id:subject:to:cc:
+ reply-to:content-type:mime-version:in-reply-to:message-id;
+ bh=kzxh7/DC1bf4hnVVE6T+siDS+anoQANlbP58xi0M24I=;
+ b=AKFmBdBp9Rn/BVih0r599k9AQ39J0fSSFDRO8qIOex/7IeyFw79LFF8XSzLufBM2TaDyVx
+ 1HYJA+eBrPEsEHrcqoBOooyxNm2/1r/+VzQlgWJ4b2hH3HeHxEDwGPlBXO2ZAAcl8BDZph
+ BFfgDGJxfxNNe5UWAfwNnTfpkDvA8uwklrLayethufXPvohkBN1704tKA24bHmhxvb+ptr
+ m6Z/4M6KwrfV+YcCwn0CdDyCtVOw+Bh+ycMXIOI97F0w7xlbugMCVjXfUNyk1eviH9RpMN
+ +Dz78FwBAf/dbzYanqfoDAft4FUw1GN+9JoqtB9phVXJkZ9wDcDdh6zgYjqkvw==
+Cc: <alistair.francis@wdc.com>, <liwei1518@gmail.com>, 
+ <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>, 
+ <chao.liu@processmission.com>, <anup@brainfault.org>, 
+ <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>, 
+ <xiangwencheng@lanxincomputing.com>, <nutty.liu@hotmail.com>
+Subject: [PATCH v3] hw/intc/aplic: Fix msicfgaddrH in split mode
+Message-Id: <20261111062823.328813-1-xiangwencheng@lanxincomputing.com>
+X-Original-From: BillXiang <xiangwencheng@lanxincomputing.com>
+X-Mailer: git-send-email 2.53.0
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDAyMyBTYWx0ZWRfXw83qtlFKsKxi
- i16e8EeaxTH/byUhUKn/ltJfET33h8zQjnjWbP+ICaFC2KJuSt88zv12rXv/wMmE5MAIfEIJoKL
- /DBfzb4X0AEfsNRcSCU5Bj8HzJ0V1wg=
-X-Authority-Analysis: v=2.4 cv=PoQG/AM3 c=1 sm=1 tr=0 ts=6af40563 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=1s-lSuUWbzXNuijj7TYA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=vBUdepa8ALXHeOFLBtFW:22 a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-GUID: euQceHcl3ltgOushgvv_5tJz2kj-Wtnx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDAyMyBTYWx0ZWRfX7xnkYTEtoB0K
- vQxG+Tot01v1i106aFiyviLjXY0p7u/APdnadS9PvKa6MQJvgaH5X9iVtgbaxIwYcQOxYHnskgP
- LvXhrhcOcXfh5COmEDsv5vMSCP7zn/ZVTS1sFgo95HysrJjKrXEosKPfcxLOuqVPfESS3zvZzju
- CVdpbhbhu35oecz9SZy1GROh43S8PioOfqbaI2lmgcrvX80/HaZHbnlMnBySWjdjVsJNLcsG2nL
- ZYhIXPrjDH/StoJ/S5gtsy4GPrTXcJhSEp71UpZOwCGDpgChC8BqKJy9v3k4JNxa29Q054y0SI4
- SV76aQYqshx+XPklWV0uypizqJ3ZkwepUH8T8U3tuswBLyeoF3itUVF29YIKk4F6hutyg70ffKS
- rtLM3dTHPMDPkoILLCGqwHWyEYgM5KgMxgFbFc/3Ue8FCsl7eB+uWGHF7Bg2jdFPdwhH53RDlNC
- WpqBRuWmEM2dGKDgNJA==
-X-Proofpoint-ORIG-GUID: euQceHcl3ltgOushgvv_5tJz2kj-Wtnx
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-11_02,2026-11-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
- malwarescore=0 bulkscore=0 adultscore=0 impostorscore=0 spamscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611110023
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=subrahmanya.lingappa@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+To: <palmer@dabbelt.com>
+Date: Wed, 11 Nov 2026 14:28:23 +0800
+Content-Transfer-Encoding: 7bit
+From: "BillXiang" <xiangwencheng@lanxincomputing.com>
+X-Archived-By: <archiver.kernel.org>
+Mime-Version: 1.0
+Received: from lanxin-ThinkBook-16-G5-IRH.lan ([123.120.4.67]) by
+ smtp.feishu.cn with ESMTP; Wed, 11 Nov 2026 14:28:52 +0800
+X-Lms-Return-Path: <lba+26af40b25+826813+nongnu.org+xiangwencheng@lanxincomputing.com>
+Received-SPF: pass client-ip=209.127.231.41;
+ envelope-from=xiangwencheng@lanxincomputing.com; helo=va-2-41.ptr.blmpb.com
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, MSGID_FROM_MTA_HEADER=0.001, RCVD_IN_MSPIKE_H2=0.001,
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -160,122 +67,167 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a meson option and config probe for librpmi so RISC-V machines can
-opt into RPMI support when the library is available. Keep the dependency
-optional so default builds without librpmi continue to work.
+Add hart_bits and guest_bits to msicfgaddrH in KVM irqchip
+split mode.
+Also remove the redundant left shift when loading
+kvm_msicfgaddrH in riscv_aplic_msi_send().
 
-Signed-off-by: Subrahmanya Lingappa <subrahmanya.lingappa@oss.qualcomm.com>
+Rationale:
+static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
+                                  uint32_t hart_idx, uint32_t guest_idx,
+                                  uint32_t eiid)
+{
+     uint64_t addr;
+     MemTxResult result;
+     RISCVAPLICState *aplic_m;
+     uint32_t lhxs, lhxw, hhxs, hhxw, group_idx, msicfgaddr, msicfgaddrH;
+
+     ...
+
+     if (aplic->kvm_splitmode) {
+         msicfgaddr = aplic->kvm_msicfgaddr;
+1.        msicfgaddrH = ((uint64_t)aplic->kvm_msicfgaddrH << 32);
+     }
+     ...
+
+     lhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXS_SHIFT) &
+             APLIC_xMSICFGADDRH_LHXS_MASK;
+     lhxw = (msicfgaddrH >> APLIC_xMSICFGADDRH_LHXW_SHIFT) &
+             APLIC_xMSICFGADDRH_LHXW_MASK;
+     hhxs = (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXS_SHIFT) &
+             APLIC_xMSICFGADDRH_HHXS_MASK;
+     hhxw = (msicfgaddrH >> APLIC_xMSICFGADDRH_HHXW_SHIFT) &
+             APLIC_xMSICFGADDRH_HHXW_MASK;
+     ...
+
+     group_idx = hart_idx >> lhxw;
+
+     addr = msicfgaddr;
+2.    addr |= ((uint64_t)(msicfgaddrH & APLIC_xMSICFGADDRH_BAPPN_MASK))
+<< 32;
+     addr |= ((uint64_t)(group_idx &
+APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw))) <<
+              APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs);
+3.    addr |= ((uint64_t)(hart_idx &
+APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw))) <<
+              APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs);
+4.    addr |= (uint64_t)(guest_idx & APLIC_xMSICFGADDR_PPN_HART(lhxs));
+     addr <<= APLIC_xMSICFGADDR_PPN_SHIFT;
+     ...
+}
+
+Since msicfgaddrH is left-shifted at (2), the left shift at (1) is
+redundant.
+
+At (3) and (4), hart_idx and guest_idx are masked/shifted using lhxw and
+lhxs, which are extracted from the LHXW/LHXS fields of msicfgaddrH.
+However, riscv_aplic_set_kvm_msicfgaddr() did not program the LHXW/LHXS
+fields into kvm_msicfgaddrH, so lhxs/lhxw always read as zero, and the
+hart/guest idxs were never encoded into the MSI address. Fix this by
+programming hart_bits (LHXW) and guest_bits (LHXS) into kvm_msicfgaddrH
+in riscv_aplic_set_kvm_msicfgaddr().
+
+Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
-Reviewed-by: Sunil V L <sunilvl@oss.qualcomm.com>
+Signed-off-by: BillXiang <xiangwencheng@lanxincomputing.com>
 ---
- Kconfig.host                  |  3 +++
- meson.build                   | 14 ++++++++++++++
- meson_options.txt             |  2 ++
- scripts/meson-buildoptions.sh |  3 +++
- 4 files changed, 22 insertions(+)
+Changes in v3:
+- Add assertions for hart_bits and guest_bits.
+Changes in v2:
+- Add rationale.
+---
+ hw/intc/riscv_aplic.c         | 16 ++++++++++++----
+ hw/riscv/aia.c                |  6 +++++-
+ include/hw/intc/riscv_aplic.h |  3 ++-
+ 3 files changed, 19 insertions(+), 6 deletions(-)
 
-diff --git a/Kconfig.host b/Kconfig.host
-index 933425c74b..6f98dadb2e 100644
---- a/Kconfig.host
-+++ b/Kconfig.host
-@@ -8,6 +8,9 @@ config LINUX
- config LIBCBOR
-     bool
+diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
+index 03a0852b8b..c0c1da7804 100644
+--- a/hw/intc/riscv_aplic.c
++++ b/hw/intc/riscv_aplic.c
+@@ -182,8 +182,12 @@ bool riscv_use_emulated_aplic(bool msimode)
+     return kvm_kernel_irqchip_split();
+ }
  
-+config LIBRPMI
-+    bool
+-void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
++void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr,
++                                    uint32_t hart_bits, uint32_t guest_bits)
+ {
++    assert(hart_bits  <= APLIC_xMSICFGADDRH_LHXW_MASK);
++    assert(guest_bits <= APLIC_xMSICFGADDRH_LHXS_MASK);
 +
- config GNUTLS
-     bool
+     if (!kvm_enabled()) {
+         return;
+     }
+@@ -191,8 +195,12 @@ void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
+     if (riscv_use_emulated_aplic(aplic->msimode)) {
+         addr >>= APLIC_xMSICFGADDR_PPN_SHIFT;
+         aplic->kvm_msicfgaddr = extract64(addr, 0, 32);
+-        aplic->kvm_msicfgaddrH = extract64(addr, 32, 32) &
+-                                 APLIC_MMSICFGADDRH_VALID_MASK;
++        aplic->kvm_msicfgaddrH =
++            ((hart_bits & APLIC_xMSICFGADDRH_LHXW_MASK) <<
++             APLIC_xMSICFGADDRH_LHXW_SHIFT) |
++            ((guest_bits & APLIC_xMSICFGADDRH_LHXS_MASK) <<
++             APLIC_xMSICFGADDRH_LHXS_SHIFT) |
++            (extract64(addr, 32, 32) & APLIC_xMSICFGADDRH_BAPPN_MASK);
+     }
+ }
  
-diff --git a/meson.build b/meson.build
-index 71f135f053..434a193efe 100644
---- a/meson.build
-+++ b/meson.build
-@@ -2026,6 +2026,17 @@ if lzo.found() and not cc.links('''
-   endif
- endif
+@@ -404,7 +412,7 @@ static void riscv_aplic_msi_send(RISCVAPLICState *aplic,
  
-+librpmi = not_found
-+if not get_option('librpmi').auto() or have_system
-+  librpmi = dependency('librpmi', required: get_option('librpmi'),
-+                       method: 'pkg-config')
-+  if librpmi.found() and not cc.has_header_symbol('librpmi.h',
-+                                                  'rpmi_service_group_syssusp_create',
-+                                                  dependencies: librpmi)
-+    error('librpmi support requires the RPMI system suspend service group API')
-+  endif
-+endif
-+
- numa = not_found
- if not get_option('numa').auto() or have_system or have_tools
-   numa = cc.find_library('numa', has_headers: ['numa.h'],
-@@ -2449,6 +2460,7 @@ config_host_data.set('CONFIG_LINUX', host_os == 'linux')
- config_host_data.set('CONFIG_POSIX', host_os != 'windows')
- config_host_data.set('CONFIG_WIN32', host_os == 'windows')
- config_host_data.set('CONFIG_LZO', lzo.found())
-+config_host_data.set('CONFIG_LIBRPMI', librpmi.found())
- config_host_data.set('CONFIG_MPATH', mpathpersist.found())
- config_host_data.set('CONFIG_BLKIO', blkio.found())
- if blkio.found()
-@@ -3286,6 +3298,7 @@ host_kconfig = \
-   (multiprocess_allowed ? ['CONFIG_MULTIPROCESS_ALLOWED=y'] : []) + \
-   (vfio_user_server_allowed ? ['CONFIG_VFIO_USER_SERVER_ALLOWED=y'] : []) + \
-   (hv_balloon ? ['CONFIG_HV_BALLOON_POSSIBLE=y'] : []) + \
-+  (librpmi.found() ? ['CONFIG_LIBRPMI=y'] : []) + \
-   (have_rust ? ['CONFIG_HAVE_RUST=y'] : [])
+     if (aplic->kvm_splitmode) {
+         msicfgaddr = aplic->kvm_msicfgaddr;
+-        msicfgaddrH = ((uint64_t)aplic->kvm_msicfgaddrH << 32);
++        msicfgaddrH = aplic->kvm_msicfgaddrH;
+     } else {
+         msicfgaddr = aplic_m->mmsicfgaddr;
+         msicfgaddrH = aplic_m->mmsicfgaddrH;
+diff --git a/hw/riscv/aia.c b/hw/riscv/aia.c
+index 56fc064533..bd608bd7a6 100644
+--- a/hw/riscv/aia.c
++++ b/hw/riscv/aia.c
+@@ -38,6 +38,7 @@ DeviceState *riscv_create_aia(MemoryRegion *container,
+ {
+     int i;
+     hwaddr addr = 0;
++    uint32_t hart_bits, guest_bits;
+     DeviceState *aplic_s_dev = NULL;
+     DeviceState *aplic_m_dev = NULL;
  
- ignored = [ 'TARGET_XML_FILES', 'TARGET_ABI_DIR' ]
-@@ -5036,6 +5049,7 @@ summary_info += {'TPM support':       have_tpm}
- summary_info += {'IGVM support':      igvm}
- summary_info += {'libssh support':    libssh}
- summary_info += {'lzo support':       lzo}
-+summary_info += {'RPMI support':      librpmi}
- summary_info += {'snappy support':    snappy}
- summary_info += {'bzip2 support':     libbzip2}
- summary_info += {'lzfse support':     liblzfse}
-diff --git a/meson_options.txt b/meson_options.txt
-index 9ae8e44ab5..62c9eaa20b 100644
---- a/meson_options.txt
-+++ b/meson_options.txt
-@@ -208,6 +208,8 @@ option('lzfse', type : 'feature', value : 'auto',
-        description: 'lzfse support for DMG images')
- option('lzo', type : 'feature', value : 'auto',
-        description: 'lzo compression support')
-+option('librpmi', type : 'feature', value : 'auto',
-+       description: 'RPMI support')
- option('pvg', type: 'feature', value: 'auto',
-        description: 'macOS paravirtualized graphics support')
- option('rbd', type : 'feature', value : 'auto',
-diff --git a/scripts/meson-buildoptions.sh b/scripts/meson-buildoptions.sh
-index 0f8b56bd7f..1c2ad8f0f4 100644
---- a/scripts/meson-buildoptions.sh
-+++ b/scripts/meson-buildoptions.sh
-@@ -147,6 +147,7 @@ meson_options_help() {
-   printf "%s\n" '  libkeyutils     Linux keyutils support'
-   printf "%s\n" '  libnfs          libnfs block device driver'
-   printf "%s\n" '  libpmem         libpmem support'
-+  printf "%s\n" '  librpmi         RPMI support'
-   printf "%s\n" '  libssh          ssh block device support'
-   printf "%s\n" '  libudev         Use libudev to enumerate host devices'
-   printf "%s\n" '  libusb          libusb support for USB passthrough'
-@@ -390,6 +391,8 @@ _meson_option_parse() {
-     --disable-libnfs) printf "%s" -Dlibnfs=disabled ;;
-     --enable-libpmem) printf "%s" -Dlibpmem=enabled ;;
-     --disable-libpmem) printf "%s" -Dlibpmem=disabled ;;
-+    --enable-librpmi) printf "%s" -Dlibrpmi=enabled ;;
-+    --disable-librpmi) printf "%s" -Dlibrpmi=disabled ;;
-     --enable-libssh) printf "%s" -Dlibssh=enabled ;;
-     --disable-libssh) printf "%s" -Dlibssh=disabled ;;
-     --enable-libudev) printf "%s" -Dlibudev=enabled ;;
+@@ -93,7 +94,10 @@ DeviceState *riscv_create_aia(MemoryRegion *container,
+                                  msimode, false, aplic_m_dev);
+ 
+     if (kvm_enabled() && msimode) {
+-        riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s_dev), addr);
++        hart_bits = imsic_num_bits(hart_count);
++        guest_bits = imsic_num_bits(aia_guests + 1);
++        riscv_aplic_set_kvm_msicfgaddr(RISCV_APLIC(aplic_s_dev), addr,
++                                    hart_bits, guest_bits);
+     }
+ 
+     return kvm_enabled() ? aplic_s_dev : aplic_m_dev;
+diff --git a/include/hw/intc/riscv_aplic.h b/include/hw/intc/riscv_aplic.h
+index 62d2b33ade..d3ee2e537a 100644
+--- a/include/hw/intc/riscv_aplic.h
++++ b/include/hw/intc/riscv_aplic.h
+@@ -78,7 +78,8 @@ struct RISCVAPLICState {
+ void riscv_aplic_add_child(DeviceState *parent, DeviceState *child);
+ bool riscv_is_kvm_aia_aplic_imsic(bool msimode);
+ bool riscv_use_emulated_aplic(bool msimode);
+-void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr);
++void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr,
++                                    uint32_t hart_bits, uint32_t guest_bits);
+ 
+ DeviceState *riscv_aplic_create(MemoryRegion *container,
+     hwaddr addr, hwaddr size, uint32_t hartid_base, uint32_t num_harts,
+-- 
+2.53.0
 
