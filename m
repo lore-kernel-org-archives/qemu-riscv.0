@@ -1,72 +1,70 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E25D606A31C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 18:49:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD931606A31C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 20:10:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LPnI3G5X
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=mail.ru header.i=@mail.ru header.a=rsa-sha256 header.s=mail4 header.b=E8oZ0Lvl
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRDNK-0000BL-NW; Wed, 11 Nov 2026 13:48:50 -0500
+	id 1xREdp-0007cn-Uj; Wed, 11 Nov 2026 15:09:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xRDNC-0008Vj-67; Wed, 11 Nov 2026 13:48:42 -0500
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
+ (Exim 4.90_1) (envelope-from <domestos48@mail.ru>)
+ id 1xREdh-0007SZ-Hi; Wed, 11 Nov 2026 15:09:49 -0500
+Received: from send59.i.mail.ru ([89.221.237.154])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xRDN9-000686-Vk; Wed, 11 Nov 2026 13:48:41 -0500
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6300663285;
- Wed, 11 Nov 2026 18:48:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC3441F00A06;
- Wed, 11 Nov 2026 18:48:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1794422916;
- bh=sIzJZ1rz5oCWqX8e6H6QmXB0Qewr1m4B6vxthdmI3T0=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=LPnI3G5XUaHfwwxvfl0aFBoY/fwdQ5EgQRhLWGq+quSWZ0zwbYDbTZL6uNV7Fl3gU
- dKNsG81vvI5i7ksVLyMwIAuJYYn/pA0Lwnz8HqtD/stx7cCTnheQPma6Ek8ax7eWkd
- u2cF0a01rl9Sxqg/mp9YGga9o+lahlUOLsrWms53MJFbkCK2XiFryzOxKwQOb3hALU
- wHDpIdveWkW83nXnejpVUDoDWY9cJOOQHBk4KPMG9wF9GHCDX4UUKCUoHIgQ4a4xZD
- 7y1zeik6lcxrW5ABjfOsS9S45Yxie5urI+LBRBIGps2WFSEK8B3bCVqVbH2ry+r3Id
- KdzFDQSi+bEVQ==
-Date: Wed, 11 Nov 2026 10:48:34 -0800
-From: Drew Fustini <fustini@kernel.org>
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Sunil V L <sunilvl@oss.qualcomm.com>,
- Anup Patel <anup.patel@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Nicolas Pitre <npitre@baylibre.com>,
- Kornel =?utf-8?Q?Dul=C4=99ba?= <mindal@semihalf.com>,
- Atish Patra <atish.patra@linux.dev>,
- Radim =?utf-8?B?S3LEjW3DocWZ?= <radim.krcmar@oss.qualcomm.com>,
- yunhui cui <cuiyunhui@bytedance.com>,
- Chen Pei <cp0613@linux.alibaba.com>, guo.wenjia23@zte.com.cn,
- liu.qingtao2@zte.com.cn
-Subject: Re: [PATCH v7 4/6] hw/riscv: implement CBQRI bandwidth controller
-Message-ID: <avS4gmUdTuByzCnb@thelio>
-References: <20261101-riscv-ssqosid-cbqri-v7-0-92d1aae43e48@kernel.org>
- <20261101-riscv-ssqosid-cbqri-v7-4-92d1aae43e48@kernel.org>
- <c9bc3a82-61ea-491a-ab1f-0e09e6d55a54@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <domestos48@mail.ru>)
+ id 1xREde-0004BW-Pg; Wed, 11 Nov 2026 15:09:49 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+ s=mail4; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
+ To:From:From:Sender:Reply-To:To:Cc:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive:
+ X-Cloud-Ids:Disposition-Notification-To;
+ bh=bAhaok2IvcaI6qMiqPLbckA7SWnmOc5Jdp4FI9ev6Eg=; t=1794427783; x=1794517783; 
+ b=E8oZ0Lvl7CVkHPXDWxiMSeUBOumT/B3RQgxk56qqOlweO9K9hKe8kYhuIX0TJsYDU7xuLXJ6iKw
+ OBoLNCwiQcGWsMTkQF9SAVMJmPJCx3+5JInlPYqNe5L7DgTvYQpDhWYkQfC61sEjzyKrMN+rSjtM+
+ L5xE915koQFht+UK+oe4RlhrzRt81xXfkL+s6YR6giu7Ue9C+/AJC8z/At4aazpYoJxym7dS9QI7a
+ HG6m4Q9kceB4Uzr52K9G6YnMG7Ao2dKTrU9rPdaI7YK7HEuQMJxcEFTjFT3P1aOrpRlUnk4y4uohK
+ 23rBzRYC2aLJK6i4noZhfKympN6AhMi6LliA==;
+Received: by exim-smtp-bccb94844-l2l5r with esmtpa (envelope-from
+ <domestos48@mail.ru>)
+ id 1xREdY-00000000PnG-0Qgs; Wed, 11 Nov 2026 23:09:40 +0300
+To: qemu-devel@nongnu.org
+Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
+ daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com, palmer@dabbelt.com,
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ Dmitry Kokorev <domestos48@mail.ru>
+Subject: [PATCH v2] target/riscv: fix WPRI handling in mhpmevent CSRs
+Date: Wed, 11 Nov 2026 23:09:24 +0300
+Message-ID: <20261111200924.49157-1-domestos48@mail.ru>
+X-Mailer: git-send-email 2.56.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c9bc3a82-61ea-491a-ab1f-0e09e6d55a54@oss.qualcomm.com>
-Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
- envelope-from=fustini@kernel.org; helo=tor.source.kernel.org
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
+Content-Transfer-Encoding: 8bit
+Authentication-Results: exim-smtp-bccb94844-l2l5r;
+ auth=pass smtp.auth=domestos48@mail.ru
+ smtp.mailfrom=domestos48@mail.ru
+X-Mailru-Src: smtp
+X-7564579A: 646B95376F6C166E
+X-77F55803: 4F1203BC0FB41BD911FEDD3DADD298F8D9016E3DF913DB54E7039521800A2FC7182A05F5380850404C228DA9ACA6FE27DAF213F382F0D4FE3DE06ABAFEAF6705C7212CC5DEE6306786DF833C7CA5CCB6CF9BE0995F4686B4
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE70A10A23A3B64B805EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F7900637AC83A81C8FD4AD23D82A6BABE6F325AC2E85FA5F3EDFCBAA7353EFBB553375661F398E59D6539FAA69592133060DEFFB1C20630F9F825D10A871A72FA2F6FBE58EEF46B7454FC60B9742502CCDD46D0D062BEEFFB5F8EA3EF6B57BC7E64490611E7FA7ABCAF51C92176DF2183F8FC7C0ECC8AC47CD0EDEFF8941B15DA834481F9449624AB7ADAF37BA3038C0950A5D36D5E8D9A59859A8B6928DFCED7E1CF6F776E601842F6C81A1F004C906525384303E02D724532EE2C3F43C7A68FF6260569E8FC8737B5C2249EC8D19AE6D49635B68655334FD4449CB9ECD01F8117BC8BEAAAE862A0553A39223F8577A6DFFEA7CDA0371536F40842743847C11F186F3C59DAA53EE0834AAEE
+X-C1DE0DAB: 0D63561A33F958A57FA3F1CF9DDCA9F05002B1117B3ED69609E7D6ECAC89C5BAB91D2EB2DEE3878C3610D81D389A125CDE35189EBF2DEA281E618B5D5F965AFDA0C8A6D533FBB40DB2D1C9E48B6DC60AE2A7E19323554B122E763F503762DF50E7D66AA7A502BB9D4EAF44D9B582CE87C8A4C02DF684249CC203C45FEA855C8F
+X-C8649E89: 1C3962B70DF3F0AD73CAD6646DEDE191716CD42B3DD1D34C77DD89D51EBB774225B6776AC983F447FC0B9F89525902EE6F57B2FD27647F25E66C117BDB76D659955332C0FDAEC8FE75F3879A0D25AF3CD0E41112BD7D5A425F2741F103C4AB42075B499E40714703B8341EE9D5BE9A0A40094872DB924F0ED331799F98ACD31585E08CE8BF386A83546A885F7A58241B4C41F94D744909CEF1DAEBD50C2D18C54FDD1B49881939BFC3981EEBE9DB10F943082AE146A756F3
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+ObcCpyrx6l7KImUglyhkEat/+ysWwi0gdhEs0JGjl6ggRWTy1haxBpVdbIX1nthFXOcIETfglQORZ0zpDET4ZrlAo0bq3TDyw5v+G6YiroYwwGdQdJ4Nqu0=
+X-Mailru-Sender: EFA0F3A8419EF216CD76C1B74664C258659133B4062BC0723DE06ABAFEAF6705C7212CC5DEE63067DDAC019A3742A8B624B5DB0AABE7183291296853BA92DB575DE55D1386FB234BE5A15ED4F09F547D75E7F0E51054F537BA1E8BD3BAFE721543BE086337E13D9AEAB4BC95F72C04283CDA0F3B3F5B9367
+X-Mras: Ok
+Received-SPF: pass client-ip=89.221.237.154; envelope-from=domestos48@mail.ru;
+ helo=send59.i.mail.ru
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -78,198 +76,94 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Dmitry Kokorev <domestos48@mail.ru>
+From:  Dmitry Kokorev via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,SPF_PASS autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-19.8 required=3.0 tests=BAYES_00,DKIM_INVALID,
+	DKIM_SIGNED,FREEMAIL_REPLYTO_END_DIGIT,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Nov 09, 2026 at 10:09:29AM -0300, Daniel Henrique Barboza wrote:
-> On 11/1/2026 5:25 PM, Drew Fustini wrote:
-> > From: Nicolas Pitre <npitre@baylibre.com>
-> > 
-> > Implement a bandwidth controller according to the Capacity and Bandwidth
-> > QoS Register Interface (CBQRI) which supports these capabilities:
-> > 
-> >    - Number of access types: 2 (code and data)
-> >    - Usage monitoring operations: CONFIG_EVENT, READ_COUNTER
-> >    - Event IDs supported: None, Total read/write byte count, Total
-> >                           read byte count, Total write byte count
-> >    - Bandwidth allocation operations: CONFIG_LIMIT, READ_LIMIT
-> > 
-> > The controller gives the Linux resctrl support for CBQRI a device to
-> > configure and read back bandwidth limits per RCID on the virt machine.
-> > Only the register interface is modeled. The configured limits are not
-> > enforced and the monitoring counters are always marked INVALID because
-> > QEMU does not model memory bandwidth usage.
-> > 
-> > Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-> > Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-> > [fustini: add fields introduced in the ratified spec: rpfx and p]
-> > Signed-off-by: Drew Fustini <fustini@kernel.org>
-> > ---
-> 
-> LGTM overall.  A few comments:
+Writes to the mhpmevent CSRs can currently modify the
+reserved WPRI bits 57:56. Fix this by ignoring writes to
+these bits when writing to the mhpmevent CSRs through both
+direct and indirect CSR access paths.
 
-Thanks for reviewing!
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4722
+Suggested-by: Alistair Francis <alistair.francis@wdc.com>
+Signed-off-by: Dmitry Kokorev <domestos48@mail.ru>
 
-[..]
-> > +typedef struct BandwidthAllocation {
-> > +    uint32_t Rbwb:16;
-> > +    uint32_t Mweight:8;
-> > +    uint32_t sharedAT:3;
-> > +    bool useShared:1;
-> > +} BandwidthAllocation;
-[..]
-> I believe BandwidthAllocation could be renamed to RiscvCbrqiBandwidthAllocation for
-> naming consistency.
+---
+v2:
+- Drop explicit preservation of mhpmevent WPRI bits.
 
-Good idea, I'll change it.
+ target/riscv/cpu_bits.h | 2 ++
+ target/riscv/tcg/csr.c  | 9 ++++++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
-> > +#define RISCV_CBQRI_BC(obj) \
-> > +    OBJECT_CHECK(RiscvCbqriBandwidthState, (obj), TYPE_RISCV_CBQRI_BC)
-> > +
-> > +/*
-> > + * All bandwidth allocation records are contiguous to simplify
-> > + * allocation. The first one is used to hold the BC_BW_ALLOC register
-> > + * content, followed by respective records for each AT per RCID.
-> > + *
-> > + * Records are indexed by the AT encoding, so each RCID has one record
-> > + * per AT value whether or not the controller supports the code access
-> > + * type. is_valid_at() rejects an unsupported AT before a record is
-> > + * selected.
-> > + */
-> > +static unsigned int bw_alloc_index(uint32_t rcid, uint32_t at)
-> > +{
-> > +    assert(at < BC_NB_ATS);
-> 
-> Please use g_assert() instead of assert().
+diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
+index 3579789a1f..3df9ea4ec3 100644
+--- a/target/riscv/cpu_bits.h
++++ b/target/riscv/cpu_bits.h
+@@ -1161,6 +1161,8 @@ typedef enum CTRType {
+ #define MHPMEVENTH_BIT_VSINH               BIT(27)
+ #define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
+ #define MHPMEVENTH_BIT_VUINH               BIT(26)
++#define MHPMEVENT_WPRI                     (BIT_ULL(57) | BIT_ULL(56))
++#define MHPMEVENTH_WPRI                    (BIT(25) | BIT(24))
+ 
+ #define MHPMEVENT_FILTER_MASK              (MHPMEVENT_BIT_MINH  | \
+                                             MHPMEVENT_BIT_SINH  | \
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..94a57a4553 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1230,13 +1230,15 @@ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
+     if (riscv_cpu_mxl(env) == MXL_RV32) {
+         mhpmevt_val = deposit64(env->mhpmevent_val[evt_index], 0, 32, val);
+     } else {
+-        inh_avail_mask = ~MHPMEVENT_FILTER_MASK | MHPMEVENT_BIT_MINH;
++        inh_avail_mask = (~MHPMEVENT_FILTER_MASK | MHPMEVENT_BIT_MINH) &
++                         ~MHPMEVENT_WPRI;
+         inh_avail_mask |= riscv_has_ext(env, RVU) ? MHPMEVENT_BIT_UINH : 0;
+         inh_avail_mask |= riscv_has_ext(env, RVS) ? MHPMEVENT_BIT_SINH : 0;
+         inh_avail_mask |= (riscv_has_ext(env, RVH) &&
+                            riscv_has_ext(env, RVU)) ? MHPMEVENT_BIT_VUINH : 0;
+         inh_avail_mask |= (riscv_has_ext(env, RVH) &&
+                            riscv_has_ext(env, RVS)) ? MHPMEVENT_BIT_VSINH : 0;
++
+         mhpmevt_val = val & inh_avail_mask;
+     }
+ 
+@@ -1263,6 +1265,7 @@ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
+     target_ulong inh_avail_mask = (target_ulong)(~MHPMEVENTH_FILTER_MASK |
+                                                   MHPMEVENTH_BIT_MINH);
+ 
++    inh_avail_mask &= ~MHPMEVENTH_WPRI;
+     inh_avail_mask |= riscv_has_ext(env, RVU) ? MHPMEVENTH_BIT_UINH : 0;
+     inh_avail_mask |= riscv_has_ext(env, RVS) ? MHPMEVENTH_BIT_SINH : 0;
+     inh_avail_mask |= (riscv_has_ext(env, RVH) &&
+@@ -1531,7 +1534,7 @@ static int rmw_cd_mhpmevent(CPURISCVState *env, int evt_index,
+             *val &= ~MHPMEVENT_BIT_MINH;
+         }
+     } else if (wr_mask) {
+-        wr_mask &= ~MHPMEVENT_BIT_MINH;
++        wr_mask &= ~(MHPMEVENT_BIT_MINH | MHPMEVENT_WPRI);
+         /* wr_mask is 64-bit so upper 32 bits of mhpmevt_val are retained */
+         mhpmevt_val = (new_val & wr_mask) | (mhpmevt_val & ~wr_mask);
+         env->mhpmevent_val[evt_index] = mhpmevt_val;
+@@ -1560,7 +1563,7 @@ static int rmw_cd_mhpmeventh(CPURISCVState *env, int evt_index,
+             *val &= ~MHPMEVENTH_BIT_MINH;
+         }
+     } else if (wr_mask) {
+-        wr_mask &= ~MHPMEVENTH_BIT_MINH;
++        wr_mask &= ~(MHPMEVENTH_BIT_MINH | MHPMEVENTH_WPRI);
+         mhpmevth_val = (new_val & wr_mask) | (mhpmevth_val & ~wr_mask);
+         mhpmevt_val = deposit64(mhpmevt_val, 32, 32, mhpmevth_val);
+         env->mhpmevent_val[evt_index] = mhpmevt_val;
+-- 
+2.56.0
 
-Okay, I will change it.
-
-[..]
-> > +static void riscv_cbqri_bc_class_init(ObjectClass *klass, const void *data)
-> > +{
-> > +    DeviceClass *dc = DEVICE_CLASS(klass);
-> > +    dc->realize = riscv_cbqri_bc_realize;
-> > +    set_bit(DEVICE_CATEGORY_MISC, dc->categories);
-> > +    dc->desc = "RISC-V CBQRI Bandwidth Controller";
-> > +    device_class_set_props(dc, riscv_cbqri_bc_properties);
-> > +    dc->legacy_reset = riscv_cbqri_bc_reset;
-> 
-> We're moving away from legacy_reset for new devices.  We're now declaring a Resettable
-> interface and setting reset phases.
-> 
-> For this device a simple way of doing it is to slightly change th reset callback params:
-> 
-> 
-> static void riscv_cbqri_bc_reset(Object *obj, ResetType type)
-> 
-> And then during class_init:
-> 
->     ResettableClass *rc = RESETTABLE_CLASS(klass);
-> 
->     rc->phases.hold = riscv_cbqri_bc_reset;
-
-Thanks for letting me know. I will switch to the Resettable interface.
-
-[..]
-> > +DeviceState *riscv_cbqri_bc_create(hwaddr addr,
-> > +                                   const RiscvCbqriBandwidthCaps *caps)
-> > +{
-> > +    DeviceState *dev = qdev_new(TYPE_RISCV_CBQRI_BC);
-> > +
-> > +    qdev_prop_set_uint64(dev, "mmio_base", addr);
-> > +    qdev_prop_set_uint16(dev, "max_mcids", caps->nb_mcids);
-> > +    qdev_prop_set_uint16(dev, "max_rcids", caps->nb_rcids);
-> > +    qdev_prop_set_uint16(dev, "nbwblks", caps->nbwblks);
-> > +    qdev_prop_set_uint16(dev, "mrbwb", caps->mrbwb);
-> > +
-> > +    qdev_prop_set_bit(dev, "at_code",
-> > +                      caps->supports_at_code);
-> > +    qdev_prop_set_bit(dev, "alloc_op_config_limit",
-> > +                      caps->supports_alloc_op_config_limit);
-> > +    qdev_prop_set_bit(dev, "alloc_op_read_limit",
-> > +                      caps->supports_alloc_op_read_limit);
-> > +    qdev_prop_set_bit(dev, "mon_op_config_event",
-> > +                      caps->supports_mon_op_config_event);
-> > +    qdev_prop_set_bit(dev, "mon_op_read_counter",
-> > +                      caps->supports_mon_op_read_counter);
-> > +    qdev_prop_set_bit(dev, "mon_evt_id_none",
-> > +                      caps->supports_mon_evt_id_none);
-> > +    qdev_prop_set_bit(dev, "mon_evt_id_rdwr_count",
-> > +                      caps->supports_mon_evt_id_rdwr_count);
-> > +    qdev_prop_set_bit(dev, "mon_evt_id_rdonly_count",
-> > +                      caps->supports_mon_evt_id_rdonly_count);
-> > +    qdev_prop_set_bit(dev, "mon_evt_id_wronly_count",
-> > +                      caps->supports_mon_evt_id_wronly_count);
-> > +
-> > +    sysbus_realize_and_unref(SYS_BUS_DEVICE(dev), &error_fatal);
-> > +
-> > +    return dev;
-> > +}
-> 
-> We don't have any callers for riscv_cbqri_bc_create() in the series so I can't
-> see how the intended use would be.  In particular with the RiscvCbqriBandwidthCaps *caps
-> attribute.
-
-Good catch. They were for the fixed example SoC for v1 back in the 2023
-v1. v2 switched to -device and nothing has called them since.
-
-> Note that riscv_cbqri_bc_create() is blindly applying all settings from 'caps' to
-> the device.  This is fine, but note that extra care is required when retrieving 'caps'
-> w.r.t the defaults established.
-> 
-> E.g. in riscv_cbqri_bc_properties[] we have:
-> 
-> > +    DEFINE_PROP_UINT16("max_mcids", RiscvCbqriBandwidthState, nb_mcids, 256),
-> 
-> > +    DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb, 819),
-> > +
-> > +    DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
-> > +                     supports_at_code, true),
-> 
-> 
-> Now let's say that we'll add the device in the 'virt' machine, and I want to change just
-> nb_mcids to 512 and nothing else. If I do this:
-> 
-> 
-> RiscvCbqriBandwidthCaps caps = {.nb_mcids = 512};
-> 
-> (...)
-> 
-> riscv_cbqri_bc_create(addr, &caps);
-> 
-> 
-> 
-> I'll create a TYPE_RISCV_CBQRI_BC nb_mcids = 512 and everything else will be zeroed, disregarding
-> all defaults from riscv_cbqri_bc_properties[].
-> 
-> 
-> My suggestion here is to create a riscv_cbqri_bc_caps_init(RiscvCbqriBandwidthCaps *caps) helper
-> that callers can use to set the struct defaults first.  We would then do:
-> 
-> 
-> RiscvCbqriBandwidthCaps caps;
-> 
-> riscv_cbqri_bc_caps_init(caps);
-> caps.nb_mcids = 512;
-> 
-> (...)
-> 
-> riscv_cbqri_bc_create(addr, &caps);
-> 
-> 
-> We have precedent for this pattern - most RISC-V boards use riscv_boot_info_init() to init
-> a boot_info struct.
-
-Thanks for the guidance. I will add riscv_cbqri_bc_caps_init() and
-riscv_cbqri_cc_caps_init() to set the property defaults in the caps
-struct.
-
-Thanks,
-Drew
 
