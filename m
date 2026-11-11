@@ -1,135 +1,141 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB7C8606A32A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 06:58:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD526606A320
+	for <qemu-riscv@archiver.kernel.org>; Wed, 11 Nov 2026 06:58:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=T0jCkbb7;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jERPfvUp
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eIhSOu9J;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Pf04Qum4
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xR2Ht-0001vP-Pd; Wed, 11 Nov 2026 01:58:29 -0500
+	id 1xR2Hz-00023T-34; Wed, 11 Nov 2026 01:58:35 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xR2Hp-0001tc-UB
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:58:26 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xR2Hw-0001xK-IB
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:58:32 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xR2Ho-0007u3-3P
- for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:58:25 -0500
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1xR2Hu-0007un-Ng
+ for qemu-riscv@nongnu.org; Wed, 11 Nov 2026 01:58:32 -0500
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AB5LVni1345293
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:58:22 GMT
+ 6AB5KI3B1386357
+ for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:58:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=qcppdkim1; bh=PRXOSpARm0saCp+f+u9zQS
- VUjEZiT8BBK+1N7lxLNdM=; b=T0jCkbb74IvLhhb+eN2qvfHnIPVqWGkrbU45g4
- Mm7RgThEdqrJ4n0CTzEmK1l5p1vrjzbvEP3p95IG3l2J8tB/L9Ddf3dQBBMZYSoU
- EMQtG130kbGwKMMZFHQ42V94Gd0RM2cry0aPhw4BQ9zdMYkI51XLsKW4dUPg3EuO
- UDdJWUs1EtEnRg2VrGRvBMqkOwjzwzxfnPnkxvJ/h0NBKrAQtLoDb5f75foLdYdb
- xBEGjUhAYQkUhHWArACbMfzfCRRcW2vbVIKKJJfJ+wi6+IYOSqQdCWMIJYsPUDKs
- G8m9+8TEtgl+vrcNk85ZqDkdrjKAB5PIDBiMaKIIHgetOoaA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4huyufvs35-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ 0lTxAsMA3QpN+9zMtyW0vyhW8QFqCxQaW0AWlpp1bQc=; b=eIhSOu9JDhC+k81b
+ Mj0vOImDZI8greZa0huICkZ9dIDxrXSV5u8J4coQ/eFpuwSAH/Xoxmg7ikBwVlCs
+ zywUTkWfh0fNYcNh46116qIlYk+mifuRHaF7xt7pBRiYv68Ah98cGoBWaMIFb/aA
+ hBo0VWyfh/RBXl+lFeShzXYuyebNHV8NdYAcriyCAIsa+rQZJsc7CrG6L5BdsI8m
+ W4W/ZqfKgqS6r4VtUTh7mOJYdOePtI+yLQ7V3AcSMPJVCLiVB9iKfzRpnmmT11i7
+ epVmGam1jILN4s+J6A35xZMozgk05J1R0o1X69TkS0XNOoYnQyf5GZtre9nZKqKf
+ zRT3hw==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hvdnm99d8-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:58:21 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-93f62934ef6so659648785a.3
- for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 22:58:21 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 11 Nov 2026 06:58:29 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-93f5844e383so555652385a.1
+ for <qemu-riscv@nongnu.org>; Tue, 10 Nov 2026 22:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794380301; x=1794985101; darn=nongnu.org;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=PRXOSpARm0saCp+f+u9zQSVUjEZiT8BBK+1N7lxLNdM=;
- b=jERPfvUp2RCHc1odjoDp+WB4K3Vyu7QBf0kXjldwkNACCNebeDTj3S3LIOP2YGTvog
- /6Vl0vUlJ7Mytcp/oD1L2kxEvwxBChOgDMuGpTILHirOe+/N1cbPr4/1jiWjl7x3ZGy3
- B6xC6L7OqU34QuNu4XAH+aNE2g4WNcVUSHtfHMR4QnEnVEg/yCXaStyMJO5xuog7Uwr7
- 2KnL2ckfNrmJZ3YsYRE7SCnjSGr5KotCwFxdGKOvF3Y8jmq6BJun2WUvnXIdDHul3/X8
- gtyTEIl6GPJZpqAvkin1RXVzIfa588CTGwbTfJXfmAzQhsype8uoyozP80ukq2VYiI8J
- Uypw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794380301; x=1794985101;
- h=content-transfer-encoding:content-type:mime-version:message-id:date
- :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+ d=oss.qualcomm.com; s=google; t=1794380308; x=1794985108; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=PRXOSpARm0saCp+f+u9zQSVUjEZiT8BBK+1N7lxLNdM=;
- b=ZvgKimj7WuuKdg9cusmZ7U0aDMxQtMVgk0yNtExVmG4I8YNOERznTGd+S1rHfceZr/
- hCKMxigptrZKhrSzL7bM/Kc6oZFsBfjf7VMlNH4kjtduXNnD9FEk5K5Ds1ghA/8cnLO9
- ZvyImyWFo1x0MaNhpy6qbXi3rEUQiReA8kGIm4y3oIRC9cFkM/A+BKOh60tdRVqsKhnb
- Ps47+Du3EqA1/Vl1U3BcXRVsYQ3DxNB8TmcozeWBVHrbayiyMoTLN4fMyoGf6AUMkL5D
- CBFxo0falxdE82JcO8Rdld5GyiMRQluGDBBsouuMDxaOLm1KRQuYi0nV1+nxsBqoBWqM
- F71w==
-X-Gm-Message-State: APuU4Z+92U3Q/ugj7SApmDAdfRAM7zp0uC3RCAOc/Ln4C7LEzGNME0Ts
- PqyfX6blluhlE6WQAi74/i3ecE0JnLZCX6aurPXu3V85RQQPUV+uoiNyBKW/P14dJZEslSnb1jc
- lGghdNgCq7CBybu4r73RP3YayAvpgIJf3YiMz+W24YYvP7VLmPk1If8AnhQ==
-X-Gm-Gg: AYBFou2w4mGYSojlAkon0qjY3kqT7KsLFaJcy8UEqG+rDWmYT9fXrCX3z73TwJiVBpo
- OaX6jtBdM+Br9hYv82FQd+a1UpKpcT9vLGWZa2Ict9RtWQpW7IRiA+RKhMl61bcmer7zIhFNhzZ
- PXENKMxPSQ17rNY/ohbZ22aALcmqH8Ckn61A8C2SqXbKDq59IrA1dtYUVXpcA4wtJS9E8vaVWHG
- cZycM3YN3pYO/QlsV/kID7MfqZBaSp+GMHSGhcggbPVBWEhz9V+pVz1O7QmAKeX/qfxtqEdxd/6
- 3fw22H9QZFOFD1RPvGfJ8WGu1xK+w3eHX3HHHXWFFcyHyH1Q7gfwnLEYNyQEVucRiwEZHy77EnZ
- 0q7Ro1dHSrBBr7UhQPXp8EmvE9IZtPReDySnRu0dbMD6YKfbvkyZRH4ID15A5/qifYyyIWY3CCI
- um05KiCrB0IKw=
-X-Received: by 2002:a05:620a:271b:b0:947:8344:17a7 with SMTP id
- af79cd13be357-947afcd6addmr212858985a.11.1794380300829; 
- Tue, 10 Nov 2026 22:58:20 -0800 (PST)
-X-Received: by 2002:a05:620a:271b:b0:947:8344:17a7 with SMTP id
- af79cd13be357-947afcd6addmr212857085a.11.1794380300389; 
- Tue, 10 Nov 2026 22:58:20 -0800 (PST)
+ bh=0lTxAsMA3QpN+9zMtyW0vyhW8QFqCxQaW0AWlpp1bQc=;
+ b=Pf04Qum4DYgYNskyt2IuVhHt2KLRpYRIi9ZWozMWX3ForIIMbIFjBj2+Wi8XmscLjT
+ KKQhokQoj/bMcQE+ibeqXuRKfaG7avjsrQRdQ1gJqwhuGc3IlBpakKF7/aboU/8gvoi6
+ J0GdLFB9XrfDikHFqWJlhNNmMLqosxkF8oggdjY7y+gZ6kz8txob4OpqFukmNxJiEEUk
+ SE4wQ6KU5i4dqVAP7YWkCN0seidkkLq86SSpIe0RgaqGPQ3Wz44itsJL7fsqRF+f23Jm
+ lpPusCnyo3uzY97fg2xK9LQFNrxBh/8/dVZdBg4qGeRj5Fu7Iq54nMNC7Jhuizy5aPyO
+ 5+Vg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794380308; x=1794985108;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=0lTxAsMA3QpN+9zMtyW0vyhW8QFqCxQaW0AWlpp1bQc=;
+ b=yX/yVZM0BCpkzZriGVUfNrvTjbShp7O+SXDZlc7VSiLSGKfNJsBMi/NYb8k3FfhwkW
+ KWOaAc9XEv3atmdKsG9Cwu6oBbD0oo3ejjcVUfBPn3I9G70U8XJO3eDtvn/kajUnGdht
+ mEqgDkkanmztJSpL6tS7uQTldpmdcSbIG86+BUp3fVeib4D86uqriNYC4D3n4xBsjZ+T
+ NjGs8wr9ItA+UqX+5yQbhIKH5qTwthjQlwU8MgtnZa0qWDNFqo7wRIvwRUa34Byyb8Cf
+ 3DQpwryapjXHPf5+5kU7kx65LZqewTYaN6+7/pwn222ylOmH9n8Z2MEnJmCwOe8CpgT9
+ znmw==
+X-Gm-Message-State: APuU4Z9ud2Ur0VmEXRJouRPrCbohTggTr26f2rRfvnN6ho1/DXA3ZrOv
+ ff7RUUIH7jdk7WmiZ0jhtwBXF3UFCStwcyZ/ShH0kGYrnGLGj41pxRMAdq11gSs+X8gabw742p0
+ //sj7oF3g8lauCdSKMPYXvmRLimJZbl4Dxvg1Aol00y1t59rubovH/2+hvg==
+X-Gm-Gg: AYBFou171MUoKp0+eR+803/6unUB3vdzBKP2Uju/Njk3sg30ENdkHpdjbgWJBQPyzto
+ f2qVixv1+BUUna1rtvQSZQ9dEmFhJbfqKeGr8F4tqAvQ2VL/xdV3B1rEdH782HtwwUoCkf0+Bk7
+ vfBmPl93NFtOGUTFBxleO9e9fC2Qvs7TLOYBp5VuFfO6WuV5keTq/jxcK/NX1Q/ETdM7N0GxiQb
+ N9q3OMBDy9H5eYm8fksMEsQQZ3tcuLbq2xa/L8KF60526xlnvGoe4jnO8Dwf9sbNPcBP8V7DBl8
+ PCEKMkgYH2XQf3pVFRGH1dX1bEoCufNaMAWQKhH5TxpYa+4frDcIMoMR7py33djKp0vPX4FwKxo
+ FaF6WMfwYPV0sR3WSg7jWL87fC4WKld6SVVA4tTEYQ6jORvbiWHJC2JjBKsny4JYyAh7ktREWQU
+ 3Z8TR0NNRENV0=
+X-Received: by 2002:a05:620a:4629:b0:93e:acdd:acd9 with SMTP id
+ af79cd13be357-947afb8bf57mr246333285a.7.1794380308545; 
+ Tue, 10 Nov 2026 22:58:28 -0800 (PST)
+X-Received: by 2002:a05:620a:4629:b0:93e:acdd:acd9 with SMTP id
+ af79cd13be357-947afb8bf57mr246331085a.7.1794380308092; 
+ Tue, 10 Nov 2026 22:58:28 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([152.234.124.231])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9479e734698sm424919385a.13.2026.11.10.22.58.18
+ af79cd13be357-9479e734698sm424919385a.13.2026.11.10.22.58.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Nov 2026 22:58:19 -0800 (PST)
+ Tue, 10 Nov 2026 22:58:26 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- philmd@oss.qualcomm.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PATCH v5 0/2] target/riscv: raise access fault for Zicbom MMIO-like
+ philmd@oss.qualcomm.com, ZhengXiang Qin <qinzhengxiang@foxmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v5 2/2] target/riscv: raise access fault for Zicbom MMIO-like
  accesses
-Date: Wed, 11 Nov 2026 03:58:13 -0300
-Message-ID: <20261111065815.167869-1-daniel.barboza@oss.qualcomm.com>
+Date: Wed, 11 Nov 2026 03:58:15 -0300
+Message-ID: <20261111065815.167869-3-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261111065815.167869-1-daniel.barboza@oss.qualcomm.com>
+References: <20261111065815.167869-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 1WRC3dZWMFOIAHKqQID8Ta9MoKSYwwU3
-X-Authority-Analysis: v=2.4 cv=S6lMU4sP c=1 sm=1 tr=0 ts=6af4120e cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
+X-Proofpoint-ORIG-GUID: mhdbmexWaG3xR0iMXN70IdKs04Uk2UhU
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDAyNyBTYWx0ZWRfX7yy/4iZ/MfZK
+ knUsq6yYwYNc8TI8aD8MH+TfCqsAl6CavpcxnxODNE00MHx0H0iu2+N9V7jo/WhvxRl5igWfoYY
+ utotVzq9DoP5t2X6p1ucHMQpAjd9iLc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDAyNyBTYWx0ZWRfX8qBJWKzx9Zac
+ EXSEF1B0dzRTGQ7+XfZnQPSZ4/Z2VlI4bmHA5WeNA7u0uijhzVcmdFXmdbBmN2i9hKYu0Lhs1wa
+ SPd2HbgSvtm52fT0u0lmXKfHZ2QA8Dw0xfv+PehiflQXPSR4K8TFpCX1G0Wjepm4j457TFv2f1b
+ ZL5pdxdo2iOxuE5mmSQZm+L0zz8SsoLJOcEUpTMVPTywge3VG/Z8k2wEIB4DGJj5aXfOUpqo3ge
+ znhFddAqrd09WAf6rw/y7FttlNKGuJ2IpsTsYrU9jJUtlwnvwgBwz0024Lv9dBdgZlRplZS2Yeh
+ j6zkdOcShOSCK41POlaAFIwTk+HtgD1TpxXiAUc82h1FB7V82wQj9LpT/X4OslVNl2XssvH64TU
+ TMwV9hZvImXZi3WxajGUAf9fHDLz22kYqdvL81iY8NcKaic9+rko2U7QNTi4BCalkHFXnfqvuGD
+ +ujJw8LyPR8aZiqyhRw==
+X-Proofpoint-GUID: mhdbmexWaG3xR0iMXN70IdKs04Uk2UhU
+X-Authority-Analysis: v=2.4 cv=MpzHeGae c=1 sm=1 tr=0 ts=6af41215 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=8elE1k/PHQNyZ14TNTodlQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=76F0wDgyi296CdbU-VoA:9 a=QEXdDO2ut3YA:10
- a=zZCYzV9kfG8A:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: 1WRC3dZWMFOIAHKqQID8Ta9MoKSYwwU3
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTExMDAyNyBTYWx0ZWRfXx4daMB+furTB
- N3F+8zcBs1IJwkEVymxyPArJJSNonkyk+UZhMyifHD6HaO+PAC5Z8+ymlXk2Dh5nl2lRYhpxdhX
- 8hfayOjt0tlL64/4/BauoDqFe/BPKmw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTExMDAyNyBTYWx0ZWRfX/B6siTp2WIP3
- 0oEyPfsSLP/HunIhg6tzh4NvaTzqSFMvNsvNjXZg0cuUq2av4AtqsX8GFFNvLlAv7oXI/CFWAaS
- ql+xiCX8ThPQnVy7bs7CpU/y4Z1d6SV1dxfbl8ldUhyJYUA0kHBFzBjPp0eal00+7yDH82KCyYp
- fSFZpfNE2X9iJJgFDNjUpBGOTjqqkAFyddRGSObh6z9TE5mZcC9x7VKqilgTTpnIQYmYrj8ADau
- jJewWvjYHVBqljw2fxGsf93q0JzjQGBY7FT4y+4R/4J4O6KVZ8mBsntb/TJaqEcKot58q8AgoeR
- g5ah9aqTUwm9AZKu910Kyp8mic2FeSp92+0FXUwGFMNj3oQctLYjZD09xuL0dwIZ4vSNRk8ifaf
- nORUu9D1Rpq1G1zAuylskUUS6Cfg35MIvgFSkxvutmE9nYN2BekUMnd8dud53rWCnP+kJIezncl
- 24CFPTlThthPsUO+adQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=p0WdMEafAAAA:8 a=bDN84i_9AAAA:8 a=EUspDBNiAAAA:8 a=pGLkceISAAAA:8
+ a=f9I5WbiLg-2XRRu5Er0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22 a=J2PsDwZO0S0EpbpLmD-j:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-11_02,2026-11-06_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 lowpriorityscore=0 priorityscore=1501 impostorscore=0
- spamscore=0 clxscore=1015 malwarescore=0 bulkscore=0 adultscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611110027
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ bulkscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0 phishscore=0
+ suspectscore=0 spamscore=0 malwarescore=0 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611110027
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -148,35 +154,60 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+From: ZhengXiang Qin <qinzhengxiang@foxmail.com>
 
-In this v5 a 'Fixes' tag in the commit msg of patch 2 was added.  This
-was detected by Sashiko.
+check_zicbom_access() currently treats any probe_access_flags() result
+other than TLB_INVALID_MASK as a successful access. However, a result
+with TLB_MMIO means that the target is MMIO-like and should not be
+treated as a normal cache block management target.
 
-No other changes made.
+Raise a store/AMO access fault for Zicbom accesses to MMIO-like regions
+so that cbo.clean, cbo.flush and cbo.inval do not silently succeed on
+non-cacheable/MMIO-like memory.
 
-Changes in v5:
-- patch 2:
-  - added "Fixes" tag in commit msg
-- v4 link: https://lore.kernel.org/qemu-devel/20261110212312.56809-1-daniel.barboza@oss.qualcomm.com/
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/3501
+Fixes: e05da09b7cfd ("target/riscv: implement Zicbom extension")
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Chao Liu <chao.liu.zevorn@gmail.com>
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Signed-off-by: ZhengXiang Qin <qinzhengxiang@foxmail.com>
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ target/riscv/tcg/op_helper.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-Daniel Henrique Barboza (1):
-  target/riscv/tcg/op_helper: avoid env_archcpu() to access
-    cbom_blocksize
-
-ZhengXiang Qin (1):
-  target/riscv: raise access fault for Zicbom MMIO-like accesses
-
- target/riscv/tcg/op_helper.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
-
+diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+index d7af56ef61..52aa545eec 100644
+--- a/target/riscv/tcg/op_helper.c
++++ b/target/riscv/tcg/op_helper.c
+@@ -231,6 +231,7 @@ static void check_zicbom_access(CPURISCVState *env,
+ {
+     uint16_t cbomlen = riscv_cpu_cfg(env)->cbom_blocksize;
+     int mmu_idx = riscv_env_mmu_index(env, false);
++    uint64_t fault_addr = address;
+     void *phost;
+     int ret;
+ 
+@@ -251,7 +252,10 @@ static void check_zicbom_access(CPURISCVState *env,
+      */
+     ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
+                              mmu_idx, true, &phost, ra);
+-    if (ret != TLB_INVALID_MASK) {
++    if (ret & TLB_MMIO) {
++        env->badaddr = fault_addr;
++        riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
++    } else if (ret != TLB_INVALID_MASK) {
+         /* Success: readable */
+         return;
+     }
 -- 
 2.43.0
 
