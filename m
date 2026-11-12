@@ -1,131 +1,143 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9077606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 20:06:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF560606A31C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 20:28:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GVOSjR9H;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BnxpJaIN
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hgwvUjSc;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CLgLf3Ve
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRb4O-0006ov-G5; Thu, 12 Nov 2026 15:06:52 -0500
+	id 1xRbOq-0002Y0-3i; Thu, 12 Nov 2026 15:28:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRb4I-0006lZ-JD
- for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 15:06:49 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xRbOn-0002Xf-La
+ for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 15:27:58 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRb4G-0008Pc-PP
- for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 15:06:46 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xRbOk-0003wK-GI
+ for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 15:27:56 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ACJZli81840813
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 20:06:42 GMT
+ 6ACJZkMX3120889
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 20:27:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=YZ8VoNhOGEehTJ/f+HP/W0rRBliAPDLWh15
- r9nGZhEI=; b=GVOSjR9HPLF1nNbzEcBIJFIjVQ10n3q/Co8swT8/E9Zsk9q8Ye+
- WKbtGz/dyqbUwXfycLpby8S/G7Q7r5w73Y08R1Xjq8Mhq4EYvc4yWR3ZXCLRyvXa
- RQEptWOq2m35MQD2iz+2Ijr5rXtYFfi2kI/j9fSF/8ZUmZKVG8qfS22I09ncfBFX
- 8UG/lpj1HfWFrSAqpSpGH/fSH328m8MDImmL1tEaS7Sx/G9VGGsjb1rWpcfvIDCN
- jJ3zjIM71bI/Qa62PQwV6Ko169r/nWhnSIVAzRxC4E3Iz3VUILWg/iUXdpWp1V6t
- /hhot9v3Qrv9BjFfAVtg4mhk5sTzLADWIvA==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwan4tar9-1
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ RNqo+RO9Llb9xh86KMzmx9MTzCETXPCxCBOgf9XgzUE=; b=hgwvUjScCH16SMiE
+ MA2zgLQ1lqcunVWhydLd8EtPB4yAjf/uzS4UWiqaQKa4TeO0tGJvwNvuf69AWOzu
+ eZiDAaaZaWv/OnB8oxyWvCTFqGZjVZ7lyZOj3tWVnmvS4fNDCj2y7/I1aSdiMndm
+ fgq6pdz1YffmpvoD29QyVpH+yUKTWZegnQMO8RrGPppc9dmpaGNdIRtXst4XSPBC
+ hh0AE0kZCpwHLxms5vSVQ8cp0NolRqqd756sRISYmdvaFFZe4Z8JOdpLkj+xjDdD
+ 1vJkB5pBnXKFEOUUpm5I9Pm6yW/IXbh4P2x72/OGDc6q7kKcrRzf9AqH1abp2Y5L
+ izOcpw==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwbx326ue-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 20:06:42 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-91f10c68ccbso4669486d6.1
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:06:42 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 20:27:52 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-91f16230f03so3867806d6.1
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:27:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794514002; x=1795118802; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=YZ8VoNhOGEehTJ/f+HP/W0rRBliAPDLWh15r9nGZhEI=;
- b=BnxpJaINTpHJ/UsAEoR58MbRhiRme/uZYJPJseXm3lbPHIS8pXm2OcSoJyZY2k3sWH
- N0h08dbg1oqkn6qrhorAy1kJ4DH78KA4UwklPU9QXKU2hEjR1hTMTxZ6Sk4v2yE/xw4A
- pm+ir+Kefjy51jqVxoDVkVr29sknv5QNOAujK/IrJ2wJxtBY0KMRjJvF8TwSOfcgZKCC
- drpAIx1G99wGzZ/xLwwQDbFoQzDZxgtwGbSxYyqO3Mkn0OLe5tptMseAkkgn8eJrfUaO
- /bEui9RumGdFPMYz82VwdP+0kdpIsXa3FVS2o0zSRa0+Hr68cLJyvTZ+a4BzFYLBUKE1
- 33DA==
+ d=oss.qualcomm.com; s=google; t=1794515271; x=1795120071; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=RNqo+RO9Llb9xh86KMzmx9MTzCETXPCxCBOgf9XgzUE=;
+ b=CLgLf3VeyKAcLIdYuANqHqHav7OgQCAHtHSoxFronqRZbcpUFXoHDMF9O73qBG7tn6
+ /sAV0vC7PSAxinxzqmQwQv76cxKlGdB3MEyCUcF/fW+T/5qU7kQgl9l4C4S4umJFa5L9
+ o9IWaRsDVeJrWFGFWneoUWTRCXBK+0qRpsaJCIXjE0fKNvbiiFHJqIOPAeNDIofq9nX2
+ P/kQu1cZSj887XMjQ0yf8YwOTAHKRZGefRbk7BTnyECutwbQYKtEypyjB7eROFdRm2mJ
+ IdbBk4kdQYXnfI/xmeLT2nQwG0tuvHxp6URMCxdyrtQy51wnIfOp2DslTVPSu+rz5A7Q
+ 1T+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794514002; x=1795118802;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=YZ8VoNhOGEehTJ/f+HP/W0rRBliAPDLWh15r9nGZhEI=;
- b=PHR/A9ejM1SiRcA2W6poj67Ku/54nM2Ky3O8Sq/sawApae08/wNt49wIQvFoZWs8JM
- oYh1t6dDe4WfWxjWGS8BSR2cg1drmjINdo6nqRpK85LuPqNu5vVNyiTu2j8yYWItk+Ly
- V4gPn+CrmpX2DOM+VblDvghg6vgxZGdDRmgJMSBwsdiUzoNeR+NDEBlGABBFEsjnU+/U
- U1hRKKmu2MbqTZBYf11IVvAJejWZP+CvhFAScsfLxrFpFuOtjpcCvV5IGW6028xGVKU1
- eKiekol8RjLqI4Dp7ZBxfMcf2Pl3L7COMAlkQw0c8GzRPf+6WYtSZxRbYz3OP8j398K0
- 0kig==
-X-Gm-Message-State: APuU4Z+cZJpDS1hjGHbx37Gg9WRIAzml3AQRB+zrpVAoyLhW98JkKLJ5
- OBw9t8aInlsXCgQKwPJXTcH3aZYyjZG0GNtNu95YCcSQQ2mlhvM27GAeNjm3r2sQm1oLjs6Nn61
- OTjuugOXelAfIG48A0LlLJ+eooE93d3KQYRKuE19Txc/mY1zLYrj9luOoH9ysgnif/w==
-X-Gm-Gg: AYBFou3Lcemii5z+Atv5E7BoNCNqsO8Zw5WuvGF59Op6uNAU9HBg751ywA1mD0BjfXB
- 62OF1oMgbVGDO1v21pgOLl4GAJtqnHUQs69lYvd7tllo+KMAClz7Z1pKPDYhj5fea59KPUsz2d0
- jUW/P2qdRzLdLmdCJGujKO6Clgy/fcokEHwt9Md/1PaGlgOVHxwFGCL0I2d39kGqBoFSoyfhyme
- sTszOYKffmN1yNeuPJHcYXA7/zicjF7yZlIbMiJu7pgKmM/+ni1gGj6bpTeT4uMsDdwJy/f6Eeg
- USAUMiO/924A2G/EAluFFyBqFCGc25Tq257rwEDJrTD3Nx9f+srqqwSUqQi6uF5wmazYNjYXMFj
- 76LRzO1vmg0Ln7AXCvJd896wUyBP8vMik1qxVbbmrY9dmyZWZuYl1TFYTwSnOEOSpQMYkc/ibfh
- M60yYd1M6ZxBd1iJmHAmEOXlbepHHI8DTEmC9neEEOASiv
-X-Received: by 2002:a05:6214:4521:b0:917:96b8:de25 with SMTP id
- 6a1803df08f44-91f24050652mr6449536d6.1.1794514001732; 
- Thu, 12 Nov 2026 12:06:41 -0800 (PST)
-X-Received: by 2002:a05:6214:4521:b0:917:96b8:de25 with SMTP id
- 6a1803df08f44-91f24050652mr6448856d6.1.1794514001016; 
- Thu, 12 Nov 2026 12:06:41 -0800 (PST)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com (189-68-253-226.dsl.telesp.net.br.
+ d=1e100.net; s=20260707; t=1794515271; x=1795120071;
+ h=content-transfer-encoding:content-type:in-reply-to:content-language
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=RNqo+RO9Llb9xh86KMzmx9MTzCETXPCxCBOgf9XgzUE=;
+ b=GoNgh3wwkP6QzZXFJLub+EpaJG2UvHYwwgTz2xz4kCtngU1u3RUSq7Xkfo852Yzixo
+ GYwLP7dt1k19kE/D6xVhWyWfRLjcmVfuXcL4X7qcRk+hda1F+zvRLftrRZI3mF96v7He
+ WHX0hzZ7WYLJERSpKbExutigirs/Uk7JG4wEJrQPD5vJkDv9+rcWKnYCINkYz0+BJrC/
+ ZWm6ia/CFCZIp+7PLWHLdZCwMeXkOWMqd/pBtzAlAQXqibc+C1nGcgnmJF5QB41FdO9D
+ xg1oWcbGYMNwuIcH/qw2jVcYtI2WzuDS2KHyZQ0PYfpv9SWu2FqqjgOVuXzJDBzb3Ao1
+ eVRg==
+X-Forwarded-Encrypted: i=1;
+ AL+hErG2BKpWEwSTVI50jvvHMc4yOp7FKV3C7GY8TulluqBZXW9PKsS5nIgyeSMqNqSE/CUSvPHEZcN/itZB@nongnu.org
+X-Gm-Message-State: APuU4Z+RWg6KgYIlcwH4/A+webxCR33LxDNcpYZJ3Y5rR6dtUI8wbJ/x
+ 3lHtzK2Mh3H2vCBl5ChqIgdC1xRaFCJbGJITA+45HKpJRn/YMWgQvTVQ1jRrJZNivkMYb76orsQ
+ B3NvQvl508g+9RuadoCPA2Bbt/My/EIaQh2ExW2XzpjsxHMTokd4OS30KUA==
+X-Gm-Gg: AYBFou0hnr/8XLaGKFy0bB6HwdfE14elZsOwjCopuj3LuD6W0n0UvFeCVS4m9SGcNEi
+ mgyZOK6VCek//VSS1JPudSBAGGKFspaJfqod+a7S4LicZJHkhhAnHYSQL+gSWqj9mGZfPFY9bdJ
+ KqRzgu5hNvv7gIcmdf3PULVxTEYdYWJKPGwld0sjiyxpaZ632T/IbjN4tbfTuCLa3N07OIU9flV
+ MITBVpH+X9yGX88d6NXR0RzaOF5utjRkIOqX7XEzuAWTGqSfGfeaiz1EicvPVVmMMPwkGXfZ1Ci
+ zexAd00B4Fw407uoS+YiI/DRTRwulzz00X+FsRD1pqeb6TCyrS26WpSfYlbdYVDRrYP3VpZiCPO
+ WKZjqUZzTopcfOT7+6MffSMkP7IVNpRSxyTicY3MWgT3mcjwSY4B3JAaIqYlXJvL/t3B/HyDW4x
+ MQPrEd/JPrynVjpBG6XqUleCr8ZfFsBdrwoj0m8qemRmk=
+X-Received: by 2002:a05:620a:6f01:b0:947:b201:fabb with SMTP id
+ af79cd13be357-9494bc3b4b6mr86890685a.58.1794515271006; 
+ Thu, 12 Nov 2026 12:27:51 -0800 (PST)
+X-Received: by 2002:a05:620a:6f01:b0:947:b201:fabb with SMTP id
+ af79cd13be357-9494bc3b4b6mr86888085a.58.1794515270543; 
+ Thu, 12 Nov 2026 12:27:50 -0800 (PST)
+Received: from [192.168.68.105] (189-68-253-226.dsl.telesp.net.br.
  [189.68.253.226]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91f23c9b30asm3881066d6.2.2026.11.12.12.06.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2026 12:06:40 -0800 (PST)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] target/riscv: make mstatush.MPELP writable [GL4220]
-Date: Thu, 12 Nov 2026 17:06:35 -0300
-Message-ID: <20261112200635.549520-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ af79cd13be357-9494c5fd154sm22125385a.2.2026.11.12.12.27.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Nov 2026 12:27:49 -0800 (PST)
+Message-ID: <085470c7-8917-41c2-8fc9-2a6f11f1e5a0@oss.qualcomm.com>
+Date: Thu, 12 Nov 2026 17:27:46 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: uvxjeimW5m3CWFKI_9U0N5ULEZL2Pa0M
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA4MCBTYWx0ZWRfX+F7KvU4/pNqS
- ILR4QeSdyrAyrYpo/nCv4bOxD/b/3IuMDBqdIo8ZFf1t1sL6H6Fy/kz3HRa2QExQ7JUz98AQEkD
- 0Y3dS93n6Nql2jHrEITvBAwG/5Pwsg8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA4MCBTYWx0ZWRfXxgcj3nn1nPEb
- /akk+QptXP9Nnww1ReTgM/HyrQB9BTs2YR6P2UNcldMaEZqSt7WYGFkzWvBl1zFw3IurI9ulmQx
- 5UomaHKg2Dukrkkycrdoh7VbrU9iu/jC/1p9AnVELwJ5OFCz0cdhRfheSnrNFJEIKLPZ1EOGriN
- ks7cCuemRX/Nrbl32Gk4uuDXt5Gfb4/qMRz0PwArFR11kxbasEJsotMnmIq3AU+NAJz1ZWnjtk0
- EhRqAhRbDFYJmePZfUWUNcvlxDBbQEFFxq358nSFl4yFu6u2bRRjr8iv8Qyh8dlhBwd49Fa3N/1
- RmNdHbp4hbu55DpG+GNc1zDEcAk1VUt6tG9jpVrxNMggQdjgu4TxnLV2lp/cbpfuYlldiIxPJau
- 5wKiBv6IV02Sl5zr2N3BOTzNz7LWxG3M/mPICeCwRyxP7TmAVluRMvsHoaBX0eKj8ewY/mGmFep
- XmPl+CUL7Q/cieDJQuQ==
-X-Proofpoint-ORIG-GUID: uvxjeimW5m3CWFKI_9U0N5ULEZL2Pa0M
-X-Authority-Analysis: v=2.4 cv=Gd+CDgXL c=1 sm=1 tr=0 ts=6af61c52 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=H4QQ7LzBS-9MoOeKjzIA:9 a=1HOtulTD9v-eNWfpl4qZ:22
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] target/riscv: change mstatus bits for read-only if S
+ or U unsupported
+To: "Christian S. Lima" <christianslima@proton.me>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ qemu-devel@nongnu.org
+References: <20261112202356.23980-1-christianslima@proton.me>
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20261112202356.23980-1-christianslima@proton.me>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=S+5MU4sP c=1 sm=1 tr=0 ts=6af62148 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=VwQbUJbxAAAA:8 a=p0WdMEafAAAA:8 a=EUspDBNiAAAA:8 a=KPDRrMschBuxgPRWLJUA:9
+ a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA4MSBTYWx0ZWRfXy10nkmIfjQzy
+ WaRRQYfGzU+AOduvFypK6PyYFwno21um0PCEuPqS8CLnUUXz/KEoxS2Cv4pAUSZJ+g8aE3aaDiN
+ rvEqvSQtLVyfsghfp/9iMXAP1+hdm4zm5TEwn2oqxox57aGZl0N7yW6fROHMIcSwXC+yPmv8Gru
+ cc5Cv5P767Cw//Liv4FxWsHuZGVD9bi+7zHGp1BrZ8neiIIz/GwgS5vaIvymvMBN/EKxwNHYIEl
+ P89eS/3btqu+B2HTaTP/cRqemGp7T2U4Uvix2o+5N/FzskRi1vrer7HIRzu8K1DDaWlLsPYPg0S
+ wU8RII44VobidFuGJNqrHk6RgYNZ19b36qyQrWsSXLHl1dybSsUqX/xgvxkW0vyjGzz3sjR4IMV
+ snoxVV/UTDQMlFS2/rT/xDtlyKOLRTRL/7U67y52ztWe/ArxefHUyzROoNFAk1TGi5fVbu7quRt
+ /+9kvEll39eLiQWCbIw==
+X-Proofpoint-ORIG-GUID: _Bhrsi9szJLOUlvIwegk2d8SbdQEaWFW
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA4MSBTYWx0ZWRfX4bLspnl/CTwu
+ hKDZyqK1NLp5aNaG0Rbpu7cZlmrixgxAn/QQutVf51bfIqj/WzG6KQUdKuGW/geZCdKIp9cocAG
+ OvVb/lA11YPu6j9i3trguGOw9r41a18=
+X-Proofpoint-GUID: _Bhrsi9szJLOUlvIwegk2d8SbdQEaWFW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-12_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 lowpriorityscore=0 priorityscore=1501 spamscore=0 clxscore=1015
- malwarescore=0 phishscore=0 suspectscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 phishscore=0 malwarescore=0
+ adultscore=0 spamscore=0 suspectscore=0 impostorscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120080
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120081
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -144,109 +156,123 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add MSTATUS_MPELP in the write mask inside write_mstatush().
 
-Fixes: 4923f672e3d7 ("target/riscv: Introduce elp state and enabling controls for zicfilp")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4220
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- target/riscv/tcg/csr.c                  |  5 +++
- tests/tcg/riscv32/system/meson.build    |  7 +++++
- tests/tcg/riscv32/test-mstatush-mpelp.S | 42 +++++++++++++++++++++++++
- 3 files changed, 54 insertions(+)
- create mode 100644 tests/tcg/riscv32/test-mstatush-mpelp.S
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index af444e3e6f..e73455d021 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -2155,6 +2155,11 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
-     uint64_t valh = (uint64_t)val << 32;
-     uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
- 
-+    /* If cfi lp extension is available, then apply cfi lp mask */
-+    if (env_archcpu(env)->cfg.ext_zicfilp) {
-+        mask |= MSTATUS_MPELP;
-+    }
-+
-     if (riscv_cpu_cfg(env)->ext_smdbltrp) {
-         mask |= MSTATUS_MDT;
-         if ((valh & MSTATUS_MDT) != 0) {
-diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-index 117ae6fbce..415a1c212d 100644
---- a/tests/tcg/riscv32/system/meson.build
-+++ b/tests/tcg/riscv32/system/meson.build
-@@ -22,6 +22,13 @@ tests += {
-   },
- }
- 
-+tests += {
-+  'test-mstatush-mpelp.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
-+  },
-+}
-+
- if 'qemu-system-riscv32' in emulators
-   tcg_tests += {
-     'riscv32-softmmu': {
-diff --git a/tests/tcg/riscv32/test-mstatush-mpelp.S b/tests/tcg/riscv32/test-mstatush-mpelp.S
-new file mode 100644
-index 0000000000..f70b4dfc32
---- /dev/null
-+++ b/tests/tcg/riscv32/test-mstatush-mpelp.S
-@@ -0,0 +1,42 @@
-+/*
-+ * Test that mstatush.MPELP is writable (Gitlab 4220).
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#define MSTATUSH_MPELP 0x200
-+
-+.option norvc
-+	.text
-+	.global _start
-+
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	csrr	s0, mstatush
-+	li	t0, MSTATUSH_MPELP
-+	or	t1, s0, t0
-+	csrw	mstatush, t1
-+
-+	csrr	s0, mstatush
-+	and	t1, s0, t0
-+	bne	t0, t1, _fail
-+
-+	j	_pass
-+
-+trap:
-+	j	_fail
-+
-+_pass:
-+	li	t0, 0x100000
-+	li	t1, 0x5555	/* FINISHER_PASS */
-+	sw	t1, 0(t0)
-+	j	.
-+
-+_fail:
-+	li	t0, 0x100000
-+	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
-+	sw	t1, 0(t0)
-+	j	.
--- 
-2.43.0
+On 11/12/2026 5:24 PM, Christian S. Lima wrote:
+> The risc v privileged architecture says that mstatus.SXL, UXL, TSR,
+> TVM and MPRV should be read-only when S-mode or U-mode are not
+> present.
+> 
+> changes in v3:
+> - Fixed grammar mistakes and now Daniel can be credited correctly by the tooling
+
+Oh! Just now realized that the tag was wrong in v2:
+
+"Suugested-by: Daniel ..."
+
+> 
+> Link to v2: https://lore.kernel.org/qemu-riscv/20261110232614.83050-1-christianslima@proton.me/
+> 
+> changes in v2:
+> - Don't change bits in target/riscv/cpu_bits.h
+> - Add checks to S-Mode in the mstatus.SXL and U-mode mstatus.UXL in
+> the target/riscv/cpu.c file that were suggested by Daniel in the
+> review [1]
+> 
+> Link to v1: https://lore.kernel.org/qemu-riscv/20261104223049.86286-1-christianslima@proton.me/
+> 
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4456
+> 
+> [1] https://lore.kernel.org/qemu-riscv/20261104223049.86286-1-christianslima@proton.me/T/#mddbb34a3ea837e3c707131a2e354c63c989ab029
+> 
+> Signed-off-by: Christian S. Lima <christianslima@proton.me>
+> Suggested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+> ---
+
+Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+
+>   target/riscv/cpu.c     | 12 ++++++++++--
+>   target/riscv/tcg/csr.c | 17 ++++++++++++-----
+>   2 files changed, 22 insertions(+), 7 deletions(-)
+> 
+> diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+> index 15c27f4ce4..50bdfbe025 100644
+> --- a/target/riscv/cpu.c
+> +++ b/target/riscv/cpu.c
+> @@ -997,8 +997,16 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
+>            * The reset status of SXL/UXL is undefined, but mstatus is WARL
+>            * and we must ensure that the value after init is valid for read.
+>            */
+> -        env->mstatus = set_field(env->mstatus, MSTATUS64_SXL, env->misa_mxl);
+> -        env->mstatus = set_field(env->mstatus, MSTATUS64_UXL, env->misa_mxl);
+> +        if (riscv_has_ext(env, RVS)) {
+> +            env->mstatus = set_field(env->mstatus,
+> +                                     MSTATUS64_SXL, env->misa_mxl);
+> +        }
+> +
+> +        if (riscv_has_ext(env, RVU)) {
+> +            env->mstatus = set_field(env->mstatus,
+> +                                     MSTATUS64_UXL, env->misa_mxl);
+> +        }
+> +
+>           if (riscv_has_ext(env, RVH)) {
+>               env->vsstatus = set_field(env->vsstatus,
+>                                         MSTATUS64_SXL, env->misa_mxl);
+> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+> index af444e3e6f..24eda54bac 100644
+> --- a/target/riscv/tcg/csr.c
+> +++ b/target/riscv/tcg/csr.c
+> @@ -2081,18 +2081,25 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>           tlb_flush(env_cpu(env));
+>       }
+>       mask = MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+> -        MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
+> -        MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
+> -        MSTATUS_TW;
+> +        MSTATUS_SPP | MSTATUS_SUM | MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TW;
+>   
+>       if (riscv_has_ext(env, RVF)) {
+>           mask |= MSTATUS_FS;
+>       }
+>   
+> +    if (riscv_has_ext(env, RVS) || riscv_has_ext(env, RVU)) {
+> +        mask |= MSTATUS_MPRV;
+> +    }
+> +
+>       if (riscv_cpu_cfg(env)->ext_zve32x) {
+>           mask |= MSTATUS_VS;
+>       }
+>   
+> +    if (riscv_has_ext(env, RVS)) {
+> +        mask |= MSTATUS_TSR;
+> +        mask |= MSTATUS_TVM;
+> +    }
+> +
+>       if (riscv_env_smode_dbltrp_enabled(env, env->virt_enabled)) {
+>           mask |= MSTATUS_SDT;
+>           if ((val & MSTATUS_SDT) != 0) {
+> @@ -2111,12 +2118,12 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+>           if (riscv_has_ext(env, RVH)) {
+>               mask |= MSTATUS_MPV | MSTATUS_GVA;
+>           }
+> -        if ((val & MSTATUS64_SXL) != 0) {
+> +        if (riscv_has_ext(env, RVS) && (val & MSTATUS64_SXL) != 0) {
+>               mask |= MSTATUS64_SXL;
+>               val = riscv_write_uxl(env, val, MSTATUS64_SXL);
+>           }
+>   
+> -        if ((val & MSTATUS64_UXL) != 0) {
+> +        if (riscv_has_ext(env, RVU) && (val & MSTATUS64_UXL) != 0) {
+>               mask |= MSTATUS64_UXL;
+>               val = riscv_write_uxl(env, val, MSTATUS64_UXL);
+>           }
 
 
