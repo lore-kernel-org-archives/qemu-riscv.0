@@ -1,43 +1,44 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC9A9606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 09:50:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0502606A323
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 09:51:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=GpKIsXCA
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=m9sxCByS
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRRRu-0001tv-U9; Thu, 12 Nov 2026 04:50:36 -0500
+	id 1xRRSQ-0002Mr-1n; Thu, 12 Nov 2026 04:51:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xRRRW-0001ll-In; Thu, 12 Nov 2026 04:50:07 -0500
-Received: from [115.124.30.111] (helo=out30-111.freemail.mail.aliyun.com)
+ id 1xRRRU-0001lH-2d; Thu, 12 Nov 2026 04:50:05 -0500
+Received: from [115.124.30.119] (helo=out30-119.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xRRRH-0002ym-6v; Thu, 12 Nov 2026 04:50:06 -0500
+ id 1xRRRH-0002yY-6O; Thu, 12 Nov 2026 04:50:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1794476977; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=xIHdHO301eYppbs6y24j3jzFRvazfhB2MHx6VVpXNlE=;
- b=GpKIsXCAKe3+fWdJidblyouARRJuUB0Y60vfqawHQsvKh+wlROl4eLQ4O9NWU25hhyQeVAcc2oh/SWNK8+7MYWY+uqlQ3e0XX/qSDISTNfaW9KTh8ZUfe63G8E3KDY+UvYJts1zxk+KwdS8d9KerMDA4yaeH3I2ejRV7YTLgbp8=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R531e4; CH=green; DM=||false|;
+ t=1794476975; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=Xy6WDJMo6kEy2FPjE54FEb37T1x0ljd6lMeUEcJZ6Hw=;
+ b=m9sxCBySwb0TsYQFGXDOrMD9jU2q50RK+fMa75FpH1s2sUcws19QA8/jIrmUkWsoye0Jht3fT9EM6i6iqznp7BizdYJVuqn231uh/L51+VMO4ERFnIfCrAGASAtAi9kxJsbybnuMv38YUutGPu+SZ0/Mr1XxGxeePkCL0zPRJec=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R731e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XEbfdd5_1794476975; 
+ TI=SMTPD_---0XEbfdcZ_1794476974; 
 Received: from
  riscv-project-v011122129236.ea134.tbsite.net(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XEbfdd5_1794476975 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 12 Nov 2026 17:49:36 +0800
+ fp:SMTPD_---0XEbfdcZ_1794476974 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 12 Nov 2026 17:49:34 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Thu, 12 Nov 2026 17:49:18 +0800
-Subject: [PATCH v4 12/14] target/riscv: Migrate fixed PMU counter state
+Date: Thu, 12 Nov 2026 17:49:16 +0800
+Subject: [PATCH v4 10/14] target/riscv: Apply minstret exception accounting
+ to HPM counters
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261112-riscv-pmu-correctness-v4-12-e9067bdf4df5@linux.alibaba.com>
+Message-Id: <20261112-riscv-pmu-correctness-v4-10-e9067bdf4df5@linux.alibaba.com>
 References: <20261112-riscv-pmu-correctness-v4-0-e9067bdf4df5@linux.alibaba.com>
 In-Reply-To: <20261112-riscv-pmu-correctness-v4-0-e9067bdf4df5@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -53,17 +54,17 @@ Cc: Zephyr Li <fritchleybohrer@gmail.com>,
  =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794476967; l=10547;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794476967; l=6563;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=AbhZ//va7ibuucYQv3Aia7Yib2VtHkiEDATubbFEbjw=;
- b=2U8xihnOesRL5ThRWJ06zHSFfNMi2CBU6rnKhNWdvjZFBZWmoNRN5uYIMcHRX6C7jWLImR6Ah
- 9xUX+lnJMBaDTBfddcPnwYkJV2sF4/kQ/30BogyANTw0IjxY8h57JkH
+ bh=Sepbp21F7tZ+a5jB4MuifNFMj2AzagdIdKv8SLLV6Z4=;
+ b=3b6kfMmXr813ikhHUi2V8sJbmU+2LUGqpKv45Qbiujh9634ybuAvaJmBU+Sjq7RKJWi2duLid
+ 5KGGSt3p6B5DXCXMKk1fZGJKA4K7KRS7+m9h8dbRWKskNYEhRUy6oeI
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.111 (deferred)
-Received-SPF: pass client-ip=115.124.30.111;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.119 (deferred)
+Received-SPF: pass client-ip=115.124.30.119;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
+ helo=out30-119.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -83,305 +84,224 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-31.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT,USER_IN_DEF_DKIM_WL autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Migration saves fixed-source baselines but not the per-mode totals they
-refer to, nor mcyclecfg/minstretcfg. TCG can therefore subtract an
-unrelated baseline or apply the wrong privilege filter after loading.
+With icount, helper_raise_exception() excludes faulting instructions from
+minstret but not HPM counters selecting HW_INSTRUCTIONS.
 
-Before saving, add pending increments allowed by the current filters to
-each enabled fixed-source counter, including HPM cycle/instruction
-counters. The per-mode totals then need not migrate.
+Adjust the baseline of every running instruction counter that counts the
+current privilege mode. Do not read icount here: the helper can run inside
+a TB. Keep the existing timer, since excluding an instruction can only
+postpone overflow and expiry checks for an actual wrap.
 
-On load, clear those totals and establish destination-local baselines.
-Inhibited counters get a new baseline when enabled; other event counters
-get one when switched to a fixed source. This excludes migration downtime
-and avoids using the source QEMU's saved baselines.
+Extend the ECALL regression to compare both counters and add an LPAD
+fault test covering an exception inside a multi-instruction TB.
 
-Rebuild the event map and overflow timer. Recompute interrupt requests
-because pre-save can set LCOFIP after cpu_common saved CPU_INTERRUPT_HARD.
-
-Keep the existing main-section fields and add cpu/pmu-fixed to carry
-mcyclecfg/minstretcfg and identify values that include pending increments.
-All TCG CPUs send and require it because mcycle/minstret exist even
-without Zicntr, Zihpm or HPM counters. Reject older TCG streams, whose
-counter values cannot be reconstructed reliably. KVM PMU migration is
-unchanged.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4422
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4425
+Fixes: 14664483457b ("target/riscv: Add sscofpmf extension support")
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- target/riscv/cpu.h     |  1 +
- target/riscv/machine.c | 88 ++++++++++++++++++++++++++++++++++++++++++++++----
- target/riscv/tcg/pmu.c | 79 ++++++++++++++++++++++++++++++++++++++++++++
- target/riscv/tcg/pmu.h |  2 ++
- 4 files changed, 163 insertions(+), 7 deletions(-)
+ target/riscv/tcg/pmu.c                  | 35 ++++++++++++----
+ tests/tcg/riscv64/pmu-lpad.S            | 72 +++++++++++++++++++++++++++++++++
+ tests/tcg/riscv64/system/meson.build    |  7 ++++
+ tests/tcg/riscv64/test-minstret-ecall.S | 26 ++++++++++++
+ 4 files changed, 133 insertions(+), 7 deletions(-)
 
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 360d08b9d4448023ce96211b8bc9cafa77366c40..e3822a4a4dd74dbb11d2ab5692a33fe12327ab25 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -592,6 +592,7 @@ struct ArchCPU {
-     uint64_t pmu_timer_instret_snapshot;
-     bool pmu_timer_stalled;
-     bool pmu_timer_work_pending;
-+    bool pmu_fixed_subsection_present;
-     /* A bitmask of Available programmable counters */
-     uint32_t pmu_avail_ctrs;
-     /* Mapping of events to counters */
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index c7b1da9278c6993199a94ab81bb3c7d6f3e9828c..83eb66d3214acca470c55ed61e0abc3d7c95cfa6 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -323,6 +323,30 @@ static const VMStateDescription vmstate_kvm_mp_state = {
- };
- #endif
- 
-+static int riscv_cpu_pre_load(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    cpu->pmu_fixed_subsection_present = false;
-+#ifdef CONFIG_KVM
-+    return riscv_cpu_kvm_pre_load(opaque);
-+#else
-+    return 0;
-+#endif
-+}
-+
-+static int riscv_cpu_pre_save(void *opaque)
-+{
-+#ifdef CONFIG_TCG
-+    RISCVCPU *cpu = opaque;
-+
-+    if (tcg_enabled()) {
-+        riscv_pmu_prepare_save(&cpu->env);
-+    }
-+#endif
-+    return 0;
-+}
-+
- static bool debug_needed(void *opaque)
- {
-     RISCVCPU *cpu = opaque;
-@@ -385,16 +409,25 @@ static const VMStateDescription vmstate_sdext = {
-     }
- };
- 
--static int riscv_cpu_post_load(void *opaque, int version_id)
-+static bool riscv_cpu_post_load(void *opaque, int version_id, Error **errp)
- {
-     RISCVCPU *cpu = opaque;
-     CPURISCVState *env = &cpu->env;
- 
-     env->xl = cpu_recompute_xl(env);
- #ifdef CONFIG_TCG
--    riscv_pmu_rebuild_event_map(env);
-+    if (tcg_enabled()) {
-+        if (!cpu->pmu_fixed_subsection_present) {
-+            error_setg(errp,
-+                       "missing RISC-V fixed-counter PMU migration state");
-+            return false;
-+        }
-+        riscv_pmu_complete_load(env);
-+        /* PMU pre-save can raise an interrupt after cpu_common was saved. */
-+        riscv_cpu_interrupt(env);
-+    }
- #endif
--    return 0;
-+    return true;
- }
- 
- static bool smstateen_needed(void *opaque)
-@@ -481,6 +514,42 @@ static const VMStateDescription vmstate_pmu_ctr_state = {
-     }
- };
- 
-+static int pmu_fixed_post_load(void *opaque, int version_id)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    /* Let the outer post-load distinguish this format from a legacy stream. */
-+    cpu->pmu_fixed_subsection_present = true;
-+    return 0;
-+}
-+
-+static bool pmu_fixed_needed(void *opaque)
-+{
-+    /*
-+     * KVM keeps PMU state in the kernel, not in the TCG counter model.
-+     * TCG implements mcycle/minstret even without Zicntr, Zihpm or
-+     * programmable counters.
-+     */
-+    return tcg_enabled();
-+}
-+
-+/*
-+ * This subsection identifies TCG streams whose fixed-source counter values
-+ * include pending deltas. It also carries mcyclecfg and minstretcfg.
-+ */
-+static const VMStateDescription vmstate_pmu_fixed = {
-+    .name = "cpu/pmu-fixed",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = pmu_fixed_needed,
-+    .post_load = pmu_fixed_post_load,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT64(env.mcyclecfg, RISCVCPU),
-+        VMSTATE_UINT64(env.minstretcfg, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- static bool jvt_needed(void *opaque)
- {
-     RISCVCPU *cpu = opaque;
-@@ -582,10 +651,9 @@ const VMStateDescription vmstate_riscv_cpu = {
-     .name = "cpu",
-     .version_id = 12,
-     .minimum_version_id = 12,
--#ifdef CONFIG_KVM
--    .pre_load = riscv_cpu_kvm_pre_load,
--#endif
--    .post_load = riscv_cpu_post_load,
-+    .pre_load = riscv_cpu_pre_load,
-+    .pre_save = riscv_cpu_pre_save,
-+    .post_load_errp = riscv_cpu_post_load,
-     .fields = (const VMStateField[]) {
-         VMSTATE_UINT64_ARRAY(env.gpr, RISCVCPU, 32),
-         VMSTATE_UINT64_ARRAY(env.fpr, RISCVCPU, 32),
-@@ -631,6 +699,11 @@ const VMStateDescription vmstate_riscv_cpu = {
-         VMSTATE_UINT32(env.mcounteren, RISCVCPU),
-         VMSTATE_UINT32(env.scountinhibit, RISCVCPU),
-         VMSTATE_UINT32(env.mcountinhibit, RISCVCPU),
-+        /*
-+         * TCG includes pending fixed-source deltas in mhpmcounter_val
-+         * before saving. After loading, it ignores mhpmcounter_prev and
-+         * rebuilds the baseline from the destination source.
-+         */
-         VMSTATE_STRUCT_ARRAY(env.pmu_ctrs, RISCVCPU, RV_MAX_MHPMCOUNTERS, 0,
-                              vmstate_pmu_ctr_state, PMUCTRState),
-         VMSTATE_UINT64_ARRAY(env.mhpmevent_val, RISCVCPU, RV_MAX_MHPMEVENTS),
-@@ -662,6 +735,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_sstc,
-         &vmstate_mseccfg,
-         &vmstate_sdext,
-+        &vmstate_pmu_fixed,
-         NULL
-     }
- };
 diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
-index 6286552a4ebf614df0252f84ddfadbc25d8d2258..df99b572a4c16cb1ac65c2f7cde35c6f8349e681 100644
+index f88f6ae671d877ed874d22c9d4b840edb6f433a5..08298010b6d06f5792fa14ff81fe2f7a28c6476f 100644
 --- a/target/riscv/tcg/pmu.c
 +++ b/target/riscv/tcg/pmu.c
-@@ -663,6 +663,85 @@ void riscv_pmu_rebuild_timer(CPURISCVState *env)
-     riscv_pmu_rebuild_timer_internal(env, false);
+@@ -387,18 +387,39 @@ void riscv_pmu_write_inhibit(CPURISCVState *env, uint32_t value)
+ 
+ void riscv_pmu_decr_instret(CPURISCVState *env)
+ {
+-    if (!icount_enabled() ||
+-        (env->mcountinhibit & COUNTEREN_IR) ||
+-        riscv_pmu_counter_filtered(env, env->minstretcfg)) {
++    RISCVCPU *cpu = env_archcpu(env);
++    uint32_t ctr_mask;
++
++    if (!icount_enabled()) {
+         return;
+     }
+ 
+     /*
+-     * minstret is derived from icount, which includes the current
+-     * instruction.  Move the baseline forward to exclude an instruction
+-     * that raises an exception and therefore does not retire.
++     * Fixed instruction events are derived from icount, which includes the
++     * current instruction.  Move the baseline of each running
++     * instruction-source counter that counts the current privilege mode to
++     * exclude an instruction that raises an exception and does not retire.
++     *
++     * Do not read icount here: this helper can run in the middle of a TB.
++     * Excluding an instruction only postpones overflow, so keep the current
++     * timer deadline. The expiry handler checks for an actual counter wrap.
+      */
+-    env->pmu_ctrs[2].mhpmcounter_prev++;
++    ctr_mask = COUNTEREN_IR |
++               riscv_pmu_event_counter_mask(
++                   cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
++    while (ctr_mask) {
++        uint32_t ctr_idx = ctz32(ctr_mask);
++        uint64_t cfg = ctr_idx == 2 ? env->minstretcfg :
++                                      env->mhpmevent_val[ctr_idx];
++
++        ctr_mask &= ~BIT(ctr_idx);
++        if (!riscv_pmu_fixed_ctr_running(env, ctr_idx) ||
++            riscv_pmu_counter_filtered(env, cfg)) {
++            continue;
++        }
++
++        env->pmu_ctrs[ctr_idx].mhpmcounter_prev++;
++    }
  }
  
-+static uint32_t riscv_pmu_fixed_source_counter_mask(CPURISCVState *env)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+    uint32_t mask = COUNTEREN_CY | COUNTEREN_IR;
+ int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx)
+diff --git a/tests/tcg/riscv64/pmu-lpad.S b/tests/tcg/riscv64/pmu-lpad.S
+new file mode 100644
+index 0000000000000000000000000000000000000000..40a6b34b7c2b71dd42e78b6873d72df4d508289d
+--- /dev/null
++++ b/tests/tcg/riscv64/pmu-lpad.S
+@@ -0,0 +1,72 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
 +
-+    mask |= riscv_pmu_event_counter_mask(
-+        cpu, RISCV_PMU_EVENT_HW_CPU_CYCLES);
-+    mask |= riscv_pmu_event_counter_mask(
-+        cpu, RISCV_PMU_EVENT_HW_INSTRUCTIONS);
-+    return mask;
++/* CSR number for older assemblers. */
++#define CSR_MSECCFG          0x747
++
++/* An LPAD fault must be deliverable with HPM instruction counting enabled. */
++
++	.option	norvc
++	.option	norelax
++
++	.text
++	.global	_start
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++	li	t0, 2		/* HW_INSTRUCTIONS */
++	csrw	mhpmevent3, t0
++	li	t0, 1 << 10	/* mseccfg.MLPE */
++	csrs	CSR_MSECCFG, t0
++
++	/* x7[31:12] = 0 does not match the nonzero LPAD label. */
++	li	t2, 0
++	lla	a0, target
++	jalr	ra, a0, 0
++	j	fail
++
++	.balign	4
++target:
++	.word	0x00001017	/* lpad 1 */
++	/*
++	 * Keep the LPAD check inside a multi-instruction TB. Its exception
++	 * helper must not read icount before leaving generated code.
++	 */
++	.rept	16
++	nop
++	.endr
++	j	fail
++
++trap:
++	csrr	t0, mcause
++	li	t1, 18		/* Software-check exception */
++	bne	t0, t1, fail
++	csrr	t0, mtval
++	li	t1, 2		/* Landing-pad fault */
++	bne	t0, t1, fail
++	csrr	t0, mepc
++	lla	t1, target
++	bne	t0, t1, fail
++	li	a0, 0
++	j	exit
++
++fail:
++	li	a0, 1
++
++exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++
++	/* Semihosting call sequence. */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 4092bab25985400a69003ec00e973aa5011e1057..66b68509c5e1bb05d699f93e4570767da7e88b97 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -74,6 +74,13 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'pmu-lpad.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max', '-icount', 'shift=0', qemu_args],
++  },
 +}
 +
-+static void riscv_pmu_accumulate_fixed_source_counters(
-+    CPURISCVState *env, const RISCVPMUFixedSnapshot *snapshot)
-+{
-+    uint32_t mask = riscv_pmu_fixed_source_counter_mask(env);
+ # Exercise RV32 CSRs with the RV64 emulator's 64-bit target_ulong.
+ tests += {
+   '../riscv32/smcdeleg-rv32.S': {
+diff --git a/tests/tcg/riscv64/test-minstret-ecall.S b/tests/tcg/riscv64/test-minstret-ecall.S
+index ab268f7f22985820f19bde353215385608643f3a..b1857543d488df984b923ad1c135edb35cb948c7 100644
+--- a/tests/tcg/riscv64/test-minstret-ecall.S
++++ b/tests/tcg/riscv64/test-minstret-ecall.S
+@@ -18,11 +18,37 @@ _start:
+ 	li	t1, 1
+ 	bne	t0, t1, fail
+ 
++	/*
++	 * minstret and a counter selecting HW_INSTRUCTIONS must both exclude
++	 * ECALL, so they must contain the same number of retired instructions.
++	 */
++	li	t0, 12		/* mcountinhibit.IR | mcountinhibit.HPM3 */
++	csrs	mcountinhibit, t0
++	csrw	minstret, zero
++	csrw	mhpmcounter3, zero
++	li	t0, 2		/* RISCV_PMU_EVENT_HW_INSTRUCTIONS */
++	csrw	mhpmevent3, t0
++	lla	t0, trap_hpm
++	csrw	mtvec, t0
++	li	t0, 12
++	csrc	mcountinhibit, t0
++	ecall
++	bne	s3, s4, fail
 +
-+    while (mask) {
-+        uint32_t ctr_idx = ctz32(mask);
+ 	li	a0, 0
+ 	j	_exit
+ 
+ trap:
+ 	csrr	s1, minstret
++	j	trap_check
 +
-+        mask &= ~BIT(ctr_idx);
-+        if (riscv_pmu_fixed_ctr_running(env, ctr_idx)) {
-+            riscv_pmu_accumulate_fixed_delta(env, ctr_idx, snapshot);
-+        }
-+    }
-+}
++trap_hpm:
++	li	t0, 12
++	csrs	mcountinhibit, t0
++	csrr	s3, minstret
++	csrr	s4, mhpmcounter3
 +
-+void riscv_pmu_prepare_save(CPURISCVState *env)
-+{
-+    RISCVPMUFixedSnapshot snapshot;
-+
-+    riscv_pmu_take_fixed_snapshot(env, &snapshot);
-+    riscv_pmu_accumulate_fixed_source_counters(env, &snapshot);
-+}
-+
-+static void riscv_pmu_rebase_fixed_source_counters(
-+    CPURISCVState *env, const RISCVPMUFixedSnapshot *snapshot)
-+{
-+    uint32_t mask;
-+
-+    memset(env->pmu_fixed_ctrs, 0, sizeof(env->pmu_fixed_ctrs));
-+    if (env->virt_enabled) {
-+        env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_CYCLE]
-+            .counter_virt_prev[env->priv] = snapshot->cycle;
-+        env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_INSTRET]
-+            .counter_virt_prev[env->priv] = snapshot->instret;
-+    } else {
-+        env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_CYCLE]
-+            .counter_prev[env->priv] = snapshot->cycle;
-+        env->pmu_fixed_ctrs[RISCV_PMU_FIXED_DOMAIN_INSTRET]
-+            .counter_prev[env->priv] = snapshot->instret;
-+    }
-+
-+    mask = riscv_pmu_fixed_source_counter_mask(env);
-+    while (mask) {
-+        uint32_t ctr_idx = ctz32(mask);
-+
-+        mask &= ~BIT(ctr_idx);
-+        if (riscv_pmu_fixed_ctr_enabled(env, ctr_idx)) {
-+            riscv_pmu_set_fixed_baseline(env, ctr_idx, snapshot);
-+        }
-+    }
-+}
-+
-+void riscv_pmu_complete_load(CPURISCVState *env)
-+{
-+    RISCVCPU *cpu = env_archcpu(env);
-+    RISCVPMUFixedSnapshot snapshot;
-+
-+    riscv_pmu_rebuild_event_map(env);
-+    riscv_pmu_take_fixed_snapshot(env, &snapshot);
-+    riscv_pmu_rebase_fixed_source_counters(env, &snapshot);
-+
-+    qatomic_set(&cpu->pmu_timer_work_pending, false);
-+    cpu->pmu_timer_stalled = false;
-+    cpu->pmu_timer_instret_snapshot = snapshot.instret;
-+    riscv_pmu_rebuild_timer(env);
-+}
-+
- static void riscv_pmu_timer_work(CPUState *cs, run_on_cpu_data data)
- {
-     RISCVCPU *cpu = RISCV_CPU(cs);
-diff --git a/target/riscv/tcg/pmu.h b/target/riscv/tcg/pmu.h
-index d9238ae680f5e67031511db4f9afc2884212c5c2..1cfe6acf55b5468f5c00c4a136ece88981384341 100644
---- a/target/riscv/tcg/pmu.h
-+++ b/target/riscv/tcg/pmu.h
-@@ -45,6 +45,8 @@ void riscv_pmu_write_counter(CPURISCVState *env, uint32_t ctr_idx,
- void riscv_pmu_write_inhibit(CPURISCVState *env, uint32_t value);
- void riscv_pmu_timer_cb(void *priv);
- void riscv_pmu_rebuild_timer(CPURISCVState *env);
-+void riscv_pmu_prepare_save(CPURISCVState *env);
-+void riscv_pmu_complete_load(CPURISCVState *env);
- void riscv_pmu_init(RISCVCPU *cpu, Error **errp);
- void riscv_pmu_rebuild_event_map(CPURISCVState *env);
- int riscv_pmu_incr_ctr(RISCVCPU *cpu, enum riscv_pmu_event_idx event_idx);
++trap_check:
+ 	csrr	t0, mcause
+ 	li	t1, 11		/* Environment call from M-mode */
+ 	bne	t0, t1, fail
 
 -- 
 2.43.0
