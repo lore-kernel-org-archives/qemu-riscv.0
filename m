@@ -1,131 +1,132 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FAC9606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 12:16:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A3F5E606A32D
+	for <qemu-riscv@archiver.kernel.org>; Thu, 12 Nov 2026 12:16:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GZTCrA0x;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=R+OdQ+3u
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Kujsnu4Q;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=flYR1/ww
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRTjI-00009P-1P; Thu, 12 Nov 2026 07:16:37 -0500
+	id 1xRTjR-0000S9-3R; Thu, 12 Nov 2026 07:16:45 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRTiw-00081P-Ls
- for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 07:16:17 -0500
+ id 1xRTit-0007y5-Ag
+ for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 07:16:13 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRTiu-0002VE-7h
- for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 07:16:14 -0500
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+ id 1xRTip-0002U2-Os
+ for qemu-riscv@nongnu.org; Thu, 12 Nov 2026 07:16:10 -0500
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ACAmkXZ2555491
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:16:11 GMT
+ 6AC7oWrK2818507
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:16:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=NxI1+DZPSHm
- 2OBNcqU8iwN27qQ+ivTMTIzJsHGReJeI=; b=GZTCrA0xIHlGRzP2uwLxzDeHi4k
- b3lE/t470dnZgSHmChX5gT9UlH8quAOLQeZVJG43Zico+yPsDYLciXB4VRWY4sBv
- 5ir6jWvgk7Kh56+VDvyAAVOE6WNd+79UHNUyv61tsvU0eNmbe5c5IyH30rX6XJ2r
- eCuOvxWA0uUjrjRE1cnRmx7egnjdmGSPvBPMdod2taBp91JN3h5vdQRFQQxZfweV
- qLXRVvJFBnaNHlkxVtQqnvaYElPhcyLXVUt2DQDLlk0y5AsRJ5nxhXGRfoyHV6PQ
- 0PuUwc8drb0PNGE62RMb4ZYchtMKGxCtldDwn7MWqrGHgBi8st2D25YPqjw==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwc1j095b-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=nyRHXgmeRfJ
+ p7uChumkczt55UlW5hmRo4yOOlB6ipro=; b=Kujsnu4QpLKAP1VxYIkLt8Jowp0
+ d7xSd67DT5LRqGn0fLvFl5NQJ9j2DK5Aw//nWkfIabt1ofhCS7YesshZF3VXrY7X
+ 8I8Vh0gNJO8sXqwKUwNDOmIlq/mCVYV9QY3QjjI6+dW5A9F0dry8qfJWxlXFhMjZ
+ dn1jdbRxi0UoAC7rGATtJHSaW6Lt4QjySm2/UcfARjo5voZ+9x5iAQnpkctTKKgU
+ ECMHsDLOZ4zzwywjW2+Zp4pg6Fa9MY1Tc4MRx05qeEcqfu4yRKgztL/4QSqCdlN2
+ 59xRucNjMEapWlLlZAvgTbwXAZm565ZgckxEmR+A7nmI53SCOFBCLY7LqYg==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hw9e18xbq-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:16:11 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-91eacf20364so86620506d6.0
- for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 04:16:11 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 12:16:03 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-5363763b556so79834581cf.3
+ for <qemu-riscv@nongnu.org>; Thu, 12 Nov 2026 04:16:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794485770; x=1795090570; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1794485763; x=1795090563; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=NxI1+DZPSHm2OBNcqU8iwN27qQ+ivTMTIzJsHGReJeI=;
- b=R+OdQ+3uNZkJ1zznx1dFIKJ/Ut+6T4EVRBheC8AwOHOKnozjl/lO3uZQ/HtPpIUaP2
- AYqmSOmjP13D39ZxDIyWY94eWxl+Gyh10/4PksKEVHMOPZXUL5+zyuAzhVh3g9Bkou0T
- Ozsiq5NeMenZw2El9SHvYoRJXWMGi9lU3L1hc+Ws+CQO7gXpbz1LCoLzDqFnbh68DUwb
- p88HnPhJ8GuvfciTUMylR0m4jUMwRSlAyXSwfRRvbhgfa5i4rwyvwVECy046CZ/CaOps
- hvd3saKZBH1/3v4Z2SCeq/HkkQBcsazH/wb5NwNEZwrUfVDAmrYlkiBuvN9uHNelCwkp
- +6GQ==
+ bh=nyRHXgmeRfJp7uChumkczt55UlW5hmRo4yOOlB6ipro=;
+ b=flYR1/wwKkzT2bwiugNGrxwZRS7lqA2ZDhK36lUHw5Gasjyk9o1n8z8MkTBkk+fiWp
+ mPCXYACt0QF3qTa2rLTxevYulTJx2/5Z3djvGh8afzCaDfMLiAPs5Wkfacz+H/w4vUYA
+ ZvmMH9stkcb9lfM961yE1GkCKaCyCgADDde6W992CkK7vUoxL3zPNIB0VIx8L9UGRfHS
+ Uqr6jSs0pGudsutoKmJpOCjMQH6auN9lPEOBLdteyWKTJCHQS/+goVXbPXW4pXdBj2oc
+ NsZ8oxOg+/5CTJw64reHyPARN+08v7NjmF1lQBRx3IyP4cHGXlxZCKsYFdjcZSt1TiCV
+ eoYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794485771; x=1795090571;
+ d=1e100.net; s=20260707; t=1794485763; x=1795090563;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=NxI1+DZPSHm2OBNcqU8iwN27qQ+ivTMTIzJsHGReJeI=;
- b=J5AGeMlHynGbt8mAkQo6qsTtKSh74YUiSXrqggTFBqjbLGDQy/7opXdnnJZAaS8N7r
- vuPK8pAPx6XJrEeNdWrGihr91TxWb82wKbgLDx1vc4+2SAVqhb/+6Sh7wCT5OgeOTiMs
- RB5kuV01Jc3zG8KU3c3f1kPTCCk+r9IJXhU9uEUvEu38Sr9/0x1U8eSCGkhE2H9VK+CL
- o+pHYo81lp6nrNIhXfk/Brzx1SixiVdmncbDQg6UfLxeaXqJCQVwpuJ/M22AiNNFjQj8
- XiZ4pWLt78OBHyIf/CZ0UBGtR0g6pXgVBXGEpa2psX8x+qnMAXxgMOhr7S1w5d2qDsh1
- 1TtQ==
-X-Gm-Message-State: APuU4Z9DqjHviWEoX/Vu2wV0etl5jiHMjsnu6SE1e9mcGwFhE4mUXQin
- KvkLtwDaUGpsKnLLeCHJ7U6AIJ7pt6IR+28UAV0UMxiqY7UVIcxXIc4uxLjVrQka0rP7n2n6yjH
- lvZ8ppf9YreaMdIBlXinQRmCEQ10uDBDhsOdayBIrLvdWX2gVfjNtJoKFWTgogdwfzA==
-X-Gm-Gg: AYBFou1TXP7A8pZey90X/JKyI1t1hP2dP6uWd579owXCouPY3R/PgtWFDFK/d9xHBuj
- 2MmobhDXA+KV+5QQef/NV+S8WuMqpVZ7Hv77rpFhOCFU9cvDibiWpe7/AtWGAK/M7tbWt/0gEtn
- +GvkwS6cVmUZDXhPl22n0D3cFuQz98h2hoS7Kv/24vII1ZKc45AlnmK6VZKC2nANZ5QuHRs9ibB
- L148RbtjOVZGzZv+hpeUODGikwHlmtYjIJJAEKygaWFbFqLuoOdFUxm7wZRjGXgG5ouhPEvV0xI
- qATbrdWjiwslSXKDb28ZIzgOHTDHDZrcl/8tVKgSj+vBMZ1q/VS8K3wSzzxYWf/E0PpJSMgFQXN
- l13HMMoB0DfXPZNaM8vme23jLZS0hkvzxhXq0KyCE0bX3uLYDhQaYi+meHqI22FAIq2p5KfPjKn
- FCeuGOpc5RWO8NFyQlikhkHa3zug3W+nEd18QkAqY8SBr5
-X-Received: by 2002:a05:622a:1c1a:b0:536:6902:daea with SMTP id
- d75a77b69052e-556c0ea78f7mr90885361cf.23.1794485770365; 
- Thu, 12 Nov 2026 04:16:10 -0800 (PST)
-X-Received: by 2002:a05:622a:1c1a:b0:536:6902:daea with SMTP id
- d75a77b69052e-556c0ea78f7mr90884791cf.23.1794485769676; 
- Thu, 12 Nov 2026 04:16:09 -0800 (PST)
+ bh=nyRHXgmeRfJp7uChumkczt55UlW5hmRo4yOOlB6ipro=;
+ b=RdZYlxFIJ+Q3JHDBKSZ2OVWQHLueBmp1z9zs8adxCuqAqAEA2NhC2jTmgYxmRoAMqE
+ 11hnYOWLf3u78D5bzNaISHvfJoQTReCoaj/uSTNjhDTVpYagJtHW4k/YuKetOo6cPZYu
+ V7cAb0MAz2pFkd1d6uMMY9DmFa3OoKZ2fvIHHP+s2euxh+rALG0cXtYCD7yp0TDf7MTh
+ 3hp3n7D1Ml4ucn6To5AT3uxqNros0SVxvxUt0dfqcANxNnoS6D+GsKpUX2A3DbL9Ssdo
+ 05Np5u7n7UUojih8vBkwgmNzuWkG2iRvizJW/EV3bCSRNLLcuV3qC5bgzRP8vR+n30Co
+ qJfg==
+X-Gm-Message-State: APuU4Z+nnhHHsjnNebrDHreYz437BIcjbSEZ7o131wXRQ5ZbDrgBdF9r
+ HlXKVYeGWBmuQnpuNncyDyKne/tJQFKw4ie9vQAxwBRV3tay7EgC9JOcwi5ljTM5pakvGFOxRLR
+ S/LpfW6sqNswK9LltcNG6Xarfu6Vf8g/OjV5hlVDbf2yfkFcKHULTv9JChg==
+X-Gm-Gg: AYBFou0UWgqoz20OjkF5wWm2ToBxncIqzPV/ua+khJIsXC15jr0iTxG/WNBS5FoH0lr
+ o0rOkXM4qJh/1pUmuuCTPWJLDDQUVt53AEY6axKcWLd1hsUDPCb9Vxu3zK1mPO8xbI9m3U7DudE
+ qpQW2HOGaZCay7ACIUJ/0HxrDwzB7tueJoAAyALeSKAcQ8PSxmA0ZFhLdvfZvYl93dkFSjqnHfU
+ g/3rJECX8Jt7n//uO45uW2/kFP+MYWPWlnvdFWpBUq3ReMLxBC2gn+Bj5dmLbHgsmvDLnY4C2qG
+ uqBfXU+qNd4vAo+X0gBYIkaOLItG6999jE6dP/LLg60QGhAeI0hV8YMkgQTbBOVEOJMPdKiT63U
+ kSXlcI473BKMNBSGFRCO33Kfe3bkm8XHHU0Ez/qur2yMq9Jr3AuUCo89uDVVttm+U9ATcmWPw5X
+ s2dZyCqlQv8RVsYB282co0HDiABOdVAlYMgrGiFjh4Nics
+X-Received: by 2002:a05:622a:4d44:b0:530:ea8c:1b6b with SMTP id
+ d75a77b69052e-556bdbeba75mr86119661cf.3.1794485763083; 
+ Thu, 12 Nov 2026 04:16:03 -0800 (PST)
+X-Received: by 2002:a05:622a:4d44:b0:530:ea8c:1b6b with SMTP id
+ d75a77b69052e-556bdbeba75mr86119181cf.3.1794485762446; 
+ Thu, 12 Nov 2026 04:16:02 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com (189-68-253-226.dsl.telesp.net.br.
  [189.68.253.226]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5550af6096asm73538651cf.5.2026.11.12.04.16.06
+ d75a77b69052e-5550af6096asm73538651cf.5.2026.11.12.04.15.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Nov 2026 04:16:08 -0800 (PST)
+ Thu, 12 Nov 2026 04:16:00 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v2 3/5] hw/riscv/server_platform_ref: fix UART baud rate
-Date: Thu, 12 Nov 2026 09:15:51 -0300
-Message-ID: <20261112121553.485439-4-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v2 1/5] hw/riscv: allow machines to set 'hpm-counters' for
+ riscv-iommu-sys
+Date: Thu, 12 Nov 2026 09:15:49 -0300
+Message-ID: <20261112121553.485439-2-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261112121553.485439-1-daniel.barboza@oss.qualcomm.com>
 References: <20261112121553.485439-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA0OCBTYWx0ZWRfX+wLD3zFOX2Kd
- klfs5ZcSTyMOrmw5QcZ4lTFvmcs+M9bgp26L8AsxoTAbW4kqg3ay5hjafVHjsu/gWhNU71GrUUJ
- 0vhDOD6Yrbg+0b8+PFqQpWxhUH82E7Q=
-X-Proofpoint-ORIG-GUID: hVk1vECY32H_eSV8nOibAbDw32WVuZNu
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA0OCBTYWx0ZWRfX895oYynF/kLd
- 1IFlQwl7GpDtNi6rcp7EohDiwIWUHQeRPqv6toVocheIghwNEMdXydheBP5lkkGtOOhtUWwaaL/
- o8EurmzTq1+kbaRKo4JUqByt+aRKxEZBtCngWnt63ykXszdetWxZHDBcNkalbbv4mJzjRz/nL6c
- bSLwHWqIuFxaKuXMIy9C0ygxUqX8sOaZ8NBt6VhWqfXbIiEmU+Zh80fsOpJ8I602NslxjseIXy6
- KZHx5057KUPj08C2uhdSMKi3VZdNxAgmOL/3iQVeUFCvKkIFw+0KlcDn13oCf3IwtwMBaF94DoS
- vNS83v4veVEfCibPz1JDfnEIdhbZ8nKv2l+6F1RML138X8PMfBHcO7+rDDf57nKmIzCKgUHqJFg
- lKVbp1mFNFaBMpKMpbH+nWs7d08twiyc0ryC0JEIzIYhpuVUhDVDGFnukYArTNG+dtIvjCFaupU
- JO5vA62GX8Y2OfAGoEw==
-X-Proofpoint-GUID: hVk1vECY32H_eSV8nOibAbDw32WVuZNu
-X-Authority-Analysis: v=2.4 cv=Vqe2kO2n c=1 sm=1 tr=0 ts=6af5ae0b cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEyMDA0OCBTYWx0ZWRfX+NXwNMZGwDqx
+ B46FCcGSMyg2tftr8b3Dz7fqfjjzzHwJVN2yGLwGF2E9PfQa6dOUsxd3czfgnc4Nb1Id5qkRZpm
+ HYR9vwHD588B1j8ZFp59+eOcR4a3jgY3J62fwBY8P/sIAfdp73l/Hm8LAfBscRIc8Vyaxi7CeLG
+ L6kFJA4lShesUXx1fYgVvQKX/qko5Q54C1ji3HEeACfTQf0jFoDJv+DjOpgw5etYGjZ4tfPnrB+
+ fZDlbg6EhoKep4eWUV/HB/MEROtCqwxbtM5q2nRuRPYrkmxPRbVGQPwbcsxY6Po1aiGT29xGIWB
+ r7PrU6pgSzEzNkQPeIyAJvuDRbSrK1fTr/+QI59ZDjzdbuYoWwzzQqVRz+Cx/UHr7o68OMq5x/n
+ kp+sXLUjI46/JEPyr8Lf71sH7zHI9+E02/DkzMboKIqb4xX+lKC2pkpYlOWaX41tmNJ5eYQ7Owa
+ HSb5N6SGA3WjDsPn+XA==
+X-Proofpoint-GUID: HhScIdcLi8nEvARt-beFO0oOz5PaXF4h
+X-Proofpoint-ORIG-GUID: HhScIdcLi8nEvARt-beFO0oOz5PaXF4h
+X-Authority-Analysis: v=2.4 cv=F6fC5ahN c=1 sm=1 tr=0 ts=6af5ae03 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=HwFc7jivAAAA:8
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=HyuSmn1QhchWdNVMt-0A:9
- a=iYH6xdkBrDN1Jqds4HTS:22 a=kr7TZk85JJIQSqC0cl8G:22 a=xVlTc564ipvMDusKsbsT:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=HwFc7jivAAAA:8
+ a=EUspDBNiAAAA:8 a=48PXcFng3gF8bjtwisEA:9 a=kacYvNCVWA4VmyqE58fU:22
+ a=kr7TZk85JJIQSqC0cl8G:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEyMDA0OCBTYWx0ZWRfX/qMPnJNjxcNy
+ NizeuG9qfhXUVRDWbflVLpLvsnXxuP0k286UQ5V+ghWVvcFpvPm3tuwpOCp3tbIAarGfZB3seMH
+ qc3odO6n7956t2yHjqDT7bcNV/f2rTA=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-12_01,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0
- bulkscore=0 impostorscore=0 malwarescore=0 phishscore=0 suspectscore=0
+ priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0 clxscore=1015
+ bulkscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611120048
 Received-SPF: pass client-ip=205.220.180.131;
@@ -155,78 +156,98 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The riscv-server 1.0 spec requires an UART with 115200 baud, per rule
-"HPER_020" described in [1].
+The riscv server soc requirements [1] dictates in rule "IOM_200" that
+the IOMMU must have at least 4 event counters.  As it stands today we're
+creating an iommu-sys device with RISCV_IOMMU_IOCOUNT_NUM (31) counters.
 
-At this moment we're doing two things: the FDT is being created using
-the default UART base baud of 230400, and the device itself is being
-created using a baud of 399193.  This odd value was inherited from the
-RISC-V 'virt' machine when implementing the first interaction of the
-riscv-server-ref board.  Linux doesn't seem to care: dmesg reports a
-base baud of 230400, a value derived from what we're writing in the DT,
-and the serial seems to work fine.
+Following the design of setting just the minimal spec requirements, set
+hpm-counters to 4.  We're doing that by adding a new argument in
+riscv_create_iommu_sys().  In case more IOMMU parameters need to tweaked
+in the device we might consider a different approach, but for now this
+suffices.
 
-Straight everything up by setting the required base baud of 115200
-everywhere applicable.  And for good measure let's also change the boot
-test to be sure that userpace is reading the intended serial base baud.
+The hpm-counters value used in the 'virt' board is default val from
+riscv-iommu, i.e. there's no change in 'virt' board configuration with
+this patch.
 
 [1] https://docs.riscv.org/reference/server-soc/v1.0/server_soc_requirements.html
 
-Fixes: c2fa4320803b ("hw/riscv: server platform reference machine")
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- hw/riscv/server_platform_ref.c              | 8 +++++---
- tests/functional/riscv64/test_server_ref.py | 3 +++
- 2 files changed, 8 insertions(+), 3 deletions(-)
+ hw/riscv/riscv-iommu-sys.c     | 4 ++++
+ hw/riscv/riscv-iommu.h         | 1 +
+ hw/riscv/server_platform_ref.c | 2 ++
+ hw/riscv/virt.c                | 3 ++-
+ 4 files changed, 9 insertions(+), 1 deletion(-)
 
+diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+index 258c171efd..3a9e22080a 100644
+--- a/hw/riscv/riscv-iommu-sys.c
++++ b/hw/riscv/riscv-iommu-sys.c
+@@ -219,6 +219,7 @@ static void riscv_iommu_sys_init(Object *obj)
+ 
+ DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
+                                     hwaddr addr, int base_irq,
++                                    int hpm_counters,
+                                     bool is_32_bit)
+ {
+     DeviceState *iommu_sys = qdev_new(TYPE_RISCV_IOMMU_SYS);
+@@ -237,6 +238,9 @@ DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
+                              is_32_bit ? 34 : 56,
+                              &error_fatal);
+ 
++    object_property_set_int(OBJECT(iommu_sys), "hpm-counters",
++                            hpm_counters, &error_abort);
++
+     sysbus_realize_and_unref(SYS_BUS_DEVICE(iommu_sys), &error_fatal);
+ 
+     return iommu_sys;
+diff --git a/hw/riscv/riscv-iommu.h b/hw/riscv/riscv-iommu.h
+index 403d10b321..0f755b0992 100644
+--- a/hw/riscv/riscv-iommu.h
++++ b/hw/riscv/riscv-iommu.h
+@@ -107,6 +107,7 @@ void riscv_iommu_notify(RISCVIOMMUState *s, int vec_type);
+ void riscv_iommu_fault(RISCVIOMMUState *s, struct riscv_iommu_fq_record *ev);
+ DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
+                                     hwaddr addr, int base_irq,
++                                    int hpm_counters,
+                                     bool is_32_bit);
+ 
+ typedef struct RISCVIOMMUContext RISCVIOMMUContext;
 diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
-index d727ea6c41..af5114ac09 100644
+index 5f485b1c79..f8016e14b0 100644
 --- a/hw/riscv/server_platform_ref.c
 +++ b/hw/riscv/server_platform_ref.c
-@@ -68,6 +68,7 @@
+@@ -67,6 +67,7 @@
+ #define SYSCON_POWEROFF                        0x2
  
  #define RVSERVER_PLATFORM_BUS_NUM_IRQS         8
- #define RVSERVER_IOMMU_HPM_COUNTERS            4
-+#define RVSERVER_UART_BASE_BAUD                115200
++#define RVSERVER_IOMMU_HPM_COUNTERS            4
  
  #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
  OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
-@@ -315,7 +316,7 @@ static void finalize_fdt(RISCVServerRefMachineState *s)
+@@ -636,6 +637,7 @@ static void rvserver_ref_machine_init(MachineState *machine)
+     }
  
-     riscv_create_fdt_uart(ms->fdt, &rvserver_ref_memmap[RVSERVER_UART0],
-                           RVSERVER_UART0_IRQ, AIA_TYPE_APLIC_IMSIC,
--                          0,
-+                          RVSERVER_UART_BASE_BAUD,
-                           irq_mmio_phandle);
-     name = riscv_fdt_get_uart_nodename(rvserver_ref_memmap[RVSERVER_UART0].base);
-     qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
-@@ -613,8 +614,9 @@ static void rvserver_ref_machine_init(MachineState *machine)
-                                                     RVSERVER_PLATFORM_BUS_NUM_IRQS);
+     riscv_create_iommu_sys(mmio_irqchip, s->memmap[RVSERVER_IOMMU_SYS].base,
++                           RVSERVER_IOMMU_HPM_COUNTERS,
+                            IOMMU_SYS_IRQ, false);
  
-     serial_mm_init(system_memory, memmap[RVSERVER_UART0].base,
--        0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ), 399193,
--        serial_hd(0), DEVICE_LITTLE_ENDIAN);
-+                   0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ),
-+                   RVSERVER_UART_BASE_BAUD,
-+                   serial_hd(0), DEVICE_LITTLE_ENDIAN);
+     s->machine_done.notify = rvserver_ref_machine_done;
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 8bc5a7b072..88de49aa6e 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -947,7 +947,8 @@ static void virt_machine_init(MachineState *machine)
  
-     sysbus_create_simple("goldfish_rtc", memmap[RVSERVER_RTC].base,
-         qdev_get_gpio_in(mmio_irqchip, RVSERVER_RTC_IRQ));
-diff --git a/tests/functional/riscv64/test_server_ref.py b/tests/functional/riscv64/test_server_ref.py
-index ad29094dbe..fa7225ccc1 100755
---- a/tests/functional/riscv64/test_server_ref.py
-+++ b/tests/functional/riscv64/test_server_ref.py
-@@ -71,6 +71,9 @@ def do_test_boot_linux_test(self, tpmstate_dir=None):
-         wait_for_console_pattern(self, 'Linux version')
-         wait_for_console_pattern(self, 'Machine model: RISC-V Server Platform')
+     if (virt_is_iommu_sys_enabled(s)) {
+         riscv_create_iommu_sys(mmio_irqchip, s->memmap[VIRT_IOMMU_SYS].base,
+-                               IOMMU_SYS_IRQ, riscv_is_32bit(&s->soc[0]));
++                               IOMMU_SYS_IRQ, RISCV_IOMMU_IOCOUNT_NUM,
++                               riscv_is_32bit(&s->soc[0]));
+     }
  
-+        # Check that we have the intended base baud for the serial
-+        wait_for_console_pattern(self, 'base_baud = 115200')
-+
-         # Test e1000e network card functionality
-         wait_for_console_pattern(self, 'e1000e')
-         wait_for_console_pattern(self, 'Network Connection')
+     s->machine_done.notify = virt_machine_done;
 -- 
 2.43.0
 
