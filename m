@@ -1,137 +1,87 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6C2F606A333
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 21:55:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1CFC606A327
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 23:14:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=TRrithrY;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NmQpJE+a
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dWEuHaXy
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRzFQ-0003zn-Rz; Fri, 13 Nov 2026 16:55:52 -0500
+	id 1xS0T8-0000Pt-N1; Fri, 13 Nov 2026 18:14:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRzFO-0003vd-A4
- for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 16:55:50 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xS0T4-0000Lg-P2; Fri, 13 Nov 2026 18:14:02 -0500
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xRzFM-00018y-6Q
- for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 16:55:50 -0500
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ADKJxIZ1770316
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 21:55:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=PWquKx4n9N3yI25R4USSLMqtuZq0Hm/GwWI
- 5ZFcmaR4=; b=TRrithrYUaSVoWFOs8GxwZbzNhOWAZrstL4YDsatR8YS7djmLCx
- B3+JR86Oa/lG2p5ICGppSQnHivgjOgT00BwDbkr/tgvXVkMJ+SG78exGGzpdGLW+
- FkvS+vHvNBO1yhVoBQtut0cOFHbB+wqEXw37sp0RWKmucnHLTL7mj9YWzXVKZg8O
- IcOPhDKiDqSXcNB0RUuVWodQ8g2YRu+QV+V03CxY997hMuDsBb4EZ11YFaEgQ2Uc
- hZs4zWOjiM6/0t5soYB6TiLAdt0ZK293m0O7MqjBZ+mbl8HsZixoTDf+UNBz4Kd+
- XGAkf544/bzfSBlupf8tl/TONF+hDrg1eww==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
- [209.85.160.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwkfdn6y4-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 21:55:44 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id
- d75a77b69052e-532f343a55bso27234171cf.3
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 13:55:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794606944; x=1795211744; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=PWquKx4n9N3yI25R4USSLMqtuZq0Hm/GwWI5ZFcmaR4=;
- b=NmQpJE+aX8L4s3p8ytNmTyaqXkXTcufZ5/0G3esl2b/CjJhgT0BbmzrE/DF0N0VB9/
- NQs9cbAaKflTdl0DaiOR08TI7Y4ZB2epHnNlgZDYdccLcTYq+vG8ebsz/+O+UvwMbQxb
- cxtmzJt+puNrjZAqN1ZWnn8VGDZ+fIKIe+64p5F3fYtOG77FdjA14k1fjyPhtr/qzD0p
- /FIXQ128HnZH1Asu2UT7gV6qI6u3tAPwEZLgM472d7WFd9YmNsFN0lVv0dIrXriTZIPT
- sppL0jjKla6gOA/GMlBt2KrqCEIpw8CODXpAoPPsUHB/gUMDsEy8pWvHil5iegYy8TXW
- UPnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794606944; x=1795211744;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=PWquKx4n9N3yI25R4USSLMqtuZq0Hm/GwWI5ZFcmaR4=;
- b=tasDeK3K79/Z6JTqinJyVN0OkXXOVS5MwgWMv46tItTqGXIsT7GKkQV5/1Sl2XG1yT
- 5zxKZyBAZT1OHEdWYqVzCguUQDFdYCSsDklVR9N6IKhnwPBPjHE/XXS/0RqJyGCrd4HK
- lFbdtedTjRT/crrZMWTviQkenixUg1PX1fm/cD4hKpl10zEwQdbKq70yLXdzHs/9uPVt
- QoIevXQqxvxArQgMCC+IYl8i/P1d9yDSXySIUQ+YxOvt5QV000T2tNb+sPhA2RevXqfz
- Kmr5HR3HeCAAhAowz1SKVRhghtPLMQFLnP2PDeO6zoEfKzOtDanfWjPjFi5yk5mv974W
- Wdcw==
-X-Gm-Message-State: APuU4Z/iw/sflizWKf+zKBEFNhe8xlvxnIfFsDKuZvEaesan9uMsGtoF
- uWyfeTPe0ycEMuHbQkCt1/T31kFKjYu5R9RWIdGrzdKApajDY0oGnKJWwgORqQvQEkt7k43br56
- VGP7RYTJmZ7YEjr719hVr1rvKsHaSL86m/ZHAuC4BDmb1alAR6R/zqB/APw==
-X-Gm-Gg: AYBFou04iM65YJ0sRXEQgKyZ1u6Ys34TVcIuFuEi37e1DQmCFjXTy4zoKRgosy+OfuE
- P+7HaZxDPjIVy1s/Nb8Txkord691l7OgpKTgtkKFn74jc6d8h5vU24qMfcu30m7iBJuwhCmiXI7
- G0XQHgytXdYl0Ts8Belo+z5pXqMOT5SPTEgP+8wObR38bVf2HaFXdqjDm2vIL07/dej0lqlko6c
- iq3ES6GEYSyxDWYj8tleyXAnifulge2lyjTWJI0WLMmJRklvuBEWBU5e/UMFq8I+OsoRtp3EpsL
- BQCSpmP/5w+dD7/tigIuCeX6esNq5qEya3un8S7FIo0GxKTeaSLYl1gzdIquXm34g6wBoCRvCZg
- nuMsrFbnEikmAglhX3rBnneYPwy3mwCp2Ayp9NIjxRcZY0cxJsb5mMF3guwox4+oMptRWA/sODO
- khMLTAPYq0Mg==
-X-Received: by 2002:a05:622a:a945:20b0:55b:f621:e7cf with SMTP id
- d75a77b69052e-55bf63136b6mr23639011cf.18.1794606943634; 
- Fri, 13 Nov 2026 13:55:43 -0800 (PST)
-X-Received: by 2002:a05:622a:a945:20b0:55b:f621:e7cf with SMTP id
- d75a77b69052e-55bf63136b6mr23638591cf.18.1794606942982; 
- Fri, 13 Nov 2026 13:55:42 -0800 (PST)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([191.202.237.20])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-55c42b6f3desm4310011cf.27.2026.11.13.13.55.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 13:55:41 -0800 (PST)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH] target/riscv: make pmpcfg R=0|W=1 bit combo reserved [GL4820]
-Date: Fri, 13 Nov 2026 18:55:36 -0300
-Message-ID: <20261113215537.158118-1-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
+ (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
+ id 1xS0T2-00027y-NB; Fri, 13 Nov 2026 18:14:02 -0500
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9EE5061E4A;
+ Fri, 13 Nov 2026 23:13:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1223A1F000C6;
+ Fri, 13 Nov 2026 23:13:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1794611631;
+ bh=Pmlwe+s4TLQaxHmVxRYSWgoqPKtnATRrkXhZjDKxzf4=;
+ h=From:Subject:Date:To:Cc;
+ b=dWEuHaXyZnyeXIkfo3el+EA1NEbCY3ZHYhQcAuBVPEkRhk2Qdap7oOIYzBW/N3i2M
+ fDq8iJy96tH52d93hFlD70ZcXP+Rz9q7ge8X2xuNf1nnL+zyQfd0eHoJCMltOTzLMN
+ vYuRIWq348odv/ePsN2oFZeStRSUgmpV2NvWY/7PYunYfLlrpxc9MQTxkCPGRPZ5C9
+ MxgSPvtcz4vMC7Bv+z17iG7ic39VR+AxoloVTCM1qlfpHWieVANIHdGptOswBoZqo9
+ 4JBm9L0rqY1+y15FK7MPicKb50upxg+fPNIFtZi7AMH6qXS9rrWrlSf9xMWG6xankb
+ 93F1CJ6AjJAog==
+From: Drew Fustini <fustini@kernel.org>
+Subject: [PATCH v2 0/2] RISC-V: Add support for ACPI RQSC table
+Date: Fri, 13 Nov 2026 15:12:38 -0800
+Message-Id: <20261113-riscv-rqsc-v2-0-34d47fa4141e@kernel.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA4NyBTYWx0ZWRfXwmFAtgvuMXfT
- qIW/K6w7YFCe2iZD0ABjTwBq8xJeuOvJh2u0+mt2czpg9sRaVaPtBu+0NpR7gzCpxtB/s6gTvhS
- halewXrC/hexTAdE6Yoek4akdYeJSRI=
-X-Proofpoint-ORIG-GUID: WCafX1jL0dLGK6SyCII81TP-Dc4TrfEO
-X-Authority-Analysis: v=2.4 cv=DoTDa2/+ c=1 sm=1 tr=0 ts=6af78760 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=iNxvZbmf7GYCzVQazAudjg==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=y6ANz33TIkojjrIGTV4A:9 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA4NyBTYWx0ZWRfXwsI08VetDFFm
- GPJhw707Wkwu1H+W3YvRhb+Hst5DPptDDtK5IY3b6BRjZM5sR2tHYINA5Vm4J6uh8/gQqNS0OQj
- qDEMVCf7Zrko4fMDYZ3+mMN44ArnNxSR85uW6gJh5QrXrdHE1EF9XUv1lrfs8AXfhRqsBfo4xlJ
- mH5Rl8nWnkYLkdxWpcoUfeWRdV8EYS3Sh1m8g6B/m1erAWeGmZPsWD2DfMit0+nEi/q9H6yETgk
- 7rKuJxr/q0Dg1C+QHp4bd5KgD8HIc7EXx5LCIBWG2D5XzPHxGgNHuhx4CX0sYg71ZagiOjnNbAq
- 57Vqsox5jFNl7LoK+vqsAdRP50DAf+3kZCjFiHQp22Xagur5j8pGqbouR8XsspcxXZcCRPjAlsi
- jMui7MNgZy+L8BAByHK2qrBt18tMfWdKVY4VGsVv8fIghhj6ud9RP+qJs4ijOO/9lQxyeU85tmf
- geG9EQvGjujaR1FPIsQ==
-X-Proofpoint-GUID: WCafX1jL0dLGK6SyCII81TP-Dc4TrfEO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-13_06,2026-11-11_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 impostorscore=0 suspectscore=0 phishscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130087
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGaZ92oC/02Q22rDMBBEfyXouTLSWpbtUEr+o+RBl1Ui6kutd
+ UxLyL9XtlPIy8IszNmZvTPCFJHY8XBnCZdIcRyygLcDc1czXJBHnzUDAVqAkDxFcgtPEzlusBE
+ aUZjaGJYN3wlD/Nlgn+esr5HmMf1u7EWu238MvGIWyQX3LijVmBJ9XZ6+MA3YFWO6sPNjByecb
+ jncvNOZNYTcjX0f5+PBBl37SgdowLHX4LmHgEoCtM97RNNI0XNnpxRzfgSoZVVCCMelWa09Epm
+ n930NK4WshFZtVRdK1FppxSWn2xC7pTuNRMV0M90apMjjY/uCmd11P24r4YWxYJX0bVu2Qjsf8
+ sL6/MlStuA1KilzyccfcUD8p4kBAAA=
+X-Change-ID: 20260201-riscv-rqsc-ae806ee0a7aa
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Sunil V L <sunilvl@oss.qualcomm.com>, 
+ Anup Patel <anup.patel@oss.qualcomm.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Nicolas Pitre <npitre@baylibre.com>, 
+ =?utf-8?q?Kornel_Dul=C4=99ba?= <mindal@semihalf.com>, 
+ Atish Patra <atish.patra@linux.dev>, 
+ =?utf-8?q?Radim_Kr=C4=8Dm=C3=A1=C5=99?= <radim.krcmar@oss.qualcomm.com>, 
+ yunhui cui <cuiyunhui@bytedance.com>, Chen Pei <cp0613@linux.alibaba.com>, 
+ guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
+ Jinjie Ruan <ruanjinjie@huawei.com>, Jinjie Ruan <2118537295@qq.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Igor Mammedov <imammedo@redhat.com>, 
+ Ani Sinha <anisinha@redhat.com>, Vasudevan Srinivasan <vasu@rivosinc.com>, 
+ Drew Fustini <fustini@kernel.org>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4910; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=/GDedJy7SpLFH1rKirkGTQk2ReD8X6VzlgE5FVF09Lg=;
+ b=kA0DAAoW2+wsw9kosQwByyZiAGr3mZKjOlOLT1v0xen0d1/YsxkZJcRPb5OHld9O89aRzutUv
+ Yh1BAAWCgAdFiEEsvBu0KRKVfWgn+i22+wsw9kosQwFAmr3mZIACgkQ2+wsw9kosQxF5gEA3QFx
+ BMfmjf61yXFaWEpykJr9psjMcHsaMMKYGeLYZBQBANMq/fKFnFoqzG07/rGuY05chR64D0wwrcW
+ AHtOajiAC
+X-Developer-Key: i=fustini@kernel.org; a=openpgp;
+ fpr=1B6F948213EA489734F3997035D5CD577C1E6010
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
+ helo=tor.source.kernel.org
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -144,175 +94,99 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Priv spec says in the Physical Memory Protection CSRs section, w.r.t the
-PMP configuration register:
+Add support for the ACPI RISC-V Quality of Service Controllers (RQSC)
+table [1] that describes the CBQRI controllers [2] present in a system.
+A capacity controller is described by the PPTT Cache ID of the cache it
+backs. A bandwidth controller is described by the SRAT proximity domain
+of its NUMA node.
 
-"The R, W, and X fields form a collective WARL field for which the
-combinations with R=0 and W=1 are reserved."
+This series depends on:
+ - "riscv: implement Ssqosid extension and CBQRI controllers" v8 [3]
+ - "RISC-V: ACPI: Add PPTT support" v2 from Sunil [4]
+ - "hw/acpi: Build PPTT rev 3 with cache IDs for MPAM
+   cross-references" from Jinjie's MPAM series [5].
+   Note: bios-tables-test fails on the riscv64 PPTT golden file
+         as this patch does not update it.
 
-Smepmp changed the logic a bit: this bit combo is now reserved if there
-is no smepmp or if mseccfg.MML is cleared.
+Tested with the Linux series [6] at the tip of its b4/ssqosid-cbqri-rqsc
+branch [7], with this configuration:
 
-Add this check in pmp_is_invalid_smepmp_cfg().
+  Base addr  Spacing
+  0x4820000  4KB  Cluster 0 L2 cache controller
+  0x4821000  4KB  Cluster 1 L2 cache controller
+  0x4828000  4KB  Memory controller 0
+  0x482b000  4KB  Shared L3 cache controller
 
-Fixes: 19cf1a7d9e59 ("target/riscv: pmp: fix checks on writes to pmpcfg in Smepmp MML mode")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4820
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+  qemu-system-riscv64 \
+    -M virt,pflash0=pflash0,pflash1=pflash1,aia=aplic-imsic,smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1.cache=l1i,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=cluster,smp-cache.3.cache=l3,smp-cache.3.topology=socket \
+    -smp cpus=8,sockets=1,clusters=2,cores=4,threads=1 \
+    -blockdev node-name=pflash0,driver=file,read-only=on,filename=RISCV_VIRT_CODE.fd \
+    -blockdev node-name=pflash1,driver=file,filename=RISCV_VIRT_VARS.fd \
+    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04820000 \
+    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04821000 \
+    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=16,cache_level=3,mmio_base=0x0482b000 \
+    -device riscv.cbqri.bandwidth,max_mcids=256,max_rcids=64,nbwblks=1024,mrbwb=819,mmio_base=0x04828000
+
+Changes in v2:
+ - Drop the RFC prefix as RQSC v1.0 is ratified
+ - Rebase on Sunil's PPTT series and Jinjie's PPTT Cache ID patch
+ - Add cache_level and node properties to the CBQRI controllers
+ - Use the PPTT Cache ID and the SRAT proximity domain as the resource
+   IDs instead of the MMIO address
+ - Only build the table when CBQRI controllers are present
+ - Set the table revision to 1
+ - Make RCID Count and MCID Count 2 bytes each
+ - Add the Bandwidth per Block field to memory resources
+ - Make RISCV_VIRT select RISCV_CBQRI
+ - Link to v1: https://lore.kernel.org/qemu-devel/20260202-riscv-rqsc-v1-0-dcf448a3ed73@kernel.org/
+
+[1] https://github.com/riscv-non-isa/riscv-rqsc/releases/tag/v1.0.0
+[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+[3] https://lore.kernel.org/qemu-devel/20261111-riscv-ssqosid-cbqri-v8-0-121f6dcfb573@kernel.org/
+[4] https://lore.kernel.org/qemu-devel/20261015064957.4076464-1-sunilvl@oss.qualcomm.com/
+[5] https://lore.kernel.org/qemu-devel/tencent_F9C68A515AC6C40BE2C32DB314E14CCB7106@qq.com/
+[6] https://lore.kernel.org/all/20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org/
+[7] https://github.com/tt-fustini/linux/tree/b4/ssqosid-cbqri-rqsc
+
+Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- target/riscv/tcg/pmp.c                      |  8 ++
- tests/tcg/riscv64/system/meson.build        |  7 ++
- tests/tcg/riscv64/test-pmpcfg-rw-reserved.S | 96 +++++++++++++++++++++
- 3 files changed, 111 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-pmpcfg-rw-reserved.S
+Drew Fustini (2):
+      hw/riscv: add cache_level and node properties to CBQRI controllers
+      hw/riscv: add support for ACPI RQSC table
 
-diff --git a/target/riscv/tcg/pmp.c b/target/riscv/tcg/pmp.c
-index 04df53c234..021ec978b5 100644
---- a/target/riscv/tcg/pmp.c
-+++ b/target/riscv/tcg/pmp.c
-@@ -77,6 +77,14 @@ static int pmp_is_readonly(CPURISCVState *env, uint32_t pmp_index)
-  */
- static int pmp_is_invalid_smepmp_cfg(CPURISCVState *env, uint8_t val)
- {
-+    bool r_w_bits_reserved = !riscv_cpu_cfg(env)->ext_smepmp
-+                             || !MSECCFG_MML_ISSET(env);
-+
-+    if (r_w_bits_reserved
-+        && (val & (PMP_WRITE | PMP_READ)) == 0b10) {
-+        return 1;
-+    }
-+
-     /* No check if mseccfg.MML is not set or if mseccfg.RLB is set */
-     if (!MSECCFG_MML_ISSET(env) || MSECCFG_RLB_ISSET(env)) {
-         return 0;
-diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index 3c8b018d9e..4b905a0774 100644
---- a/tests/tcg/riscv64/system/meson.build
-+++ b/tests/tcg/riscv64/system/meson.build
-@@ -89,6 +89,13 @@ tests += {
-   }
- }
- 
-+tests += {
-+  'test-pmpcfg-rw-reserved.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
-+  }
-+}
-+
- if 'qemu-system-riscv64' in emulators
-   tcg_tests += {
-     'riscv64-softmmu': {
-diff --git a/tests/tcg/riscv64/test-pmpcfg-rw-reserved.S b/tests/tcg/riscv64/test-pmpcfg-rw-reserved.S
-new file mode 100644
-index 0000000000..94a0d6f02f
---- /dev/null
-+++ b/tests/tcg/riscv64/test-pmpcfg-rw-reserved.S
-@@ -0,0 +1,96 @@
-+/*
-+ * Test reserved pmpcfg bits R and W.  Code derived from
-+ * the Gitlab 4820 testcase.
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+.option norvc
-+	.text
-+	.global _start
-+
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	/*
-+	 * Write 0x2 (R=0, W=1) in pmp7cfg (last byte of pmpcfg0,
-+	 * i.e. a 56 shift).  Store the result in s0.
-+	 */
-+	li	t0, 0xff
-+	slli	t0, t0, 56
-+	csrc	pmpcfg0, t0
-+	li	t0, 0x02
-+	slli	t0, t0, 56
-+	csrs	pmpcfg0, t0	// pmp7cfg = 0x02
-+	csrr	s0, pmpcfg0
-+
-+	/*
-+	 * Likewise, now writing 0x6 (R=0, W=1, X=1) in pmp7cfg and
-+	 * storing the result in s1.
-+	 */
-+	li	t0, 0xff
-+	slli	t0, t0, 56
-+	csrc	pmpcfg0, t0
-+	li	t0, 0x06
-+	slli	t0, t0, 56
-+	csrs	pmpcfg0, t0	// pmp7cfg = 0x06
-+	csrr	s1, pmpcfg0
-+
-+	li	t0, 0xff
-+	slli	t0, t0, 56
-+	csrc	pmpcfg0, t0
-+
-+	/*
-+	 * rshift s0 to get to pmp7cfg and compare the first 2
-+	 * bits (R and W) with 0x2.  They must be clear.
-+	 */
-+	srli t1, s0, 56
-+	andi t1, t1, 3
-+	li   t2, 2
-+	beq  t1, t2, _fail
-+
-+	/* Do the same with s1 - R and W should be clear.  */
-+	srli t1, s1, 56
-+	andi t1, t1, 3
-+	beq  t1, t2, _fail
-+
-+	li	a0, 0
-+	j	_exit
-+
-+_fail:
-+	li	a0, 1
-+	j	_exit
-+
-+trap:
-+	# Any trap is a fail code 1
-+	li	a0, 1
-+
-+# Exit code in a0
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+
-+	.balign	64
-+cbo_step:
-+	.word 0
-+buffer:
-+	.fill 64, 1, 0xa5
-+
-+	.balign	16
-+semiargs:
-+	.space	16
-+
--- 
-2.43.0
+ hw/riscv/Kconfig           |   2 +-
+ hw/riscv/cbqri_bandwidth.c |  26 ++++
+ hw/riscv/cbqri_capacity.c  |  21 ++++
+ hw/riscv/virt-acpi-build.c | 298 ++++++++++++++++++++++++++++++++++++++++++++-
+ include/hw/riscv/cbqri.h   |  20 +++
+ 5 files changed, 365 insertions(+), 2 deletions(-)
+---
+base-commit: bf67d56f282c1ee25b67dfda3f8ca54d2bd4648e
+change-id: 20260201-riscv-rqsc-ae806ee0a7aa
+prerequisite-change-id: 20251229-riscv-ssqosid-cbqri-aee2271532ff:v8
+prerequisite-patch-id: 7d1487071207ac8c9750af152baec0cfa80b704f
+prerequisite-patch-id: 7d852a70275071c5b5cfce579bbb442cf5b4d456
+prerequisite-patch-id: 6361057143117707a309b225a6e0d6a708e6f5ff
+prerequisite-patch-id: b207082f77e5882c20a061cf415055b6832eef7c
+prerequisite-patch-id: 2d20f4be6cb77039cca28cb0b774524f88f964b1
+prerequisite-patch-id: f3474864af8c82a4d96ac2b99de7abb80458e366
+prerequisite-message-id: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
+prerequisite-patch-id: 2ff76b9d66b52771c4f963d891f39a6a93fbe5b4
+prerequisite-patch-id: 95682b479c131bd09f4bd68426554918e1d43075
+prerequisite-patch-id: cca54a74db19c96cb4cf048393dc278d96edd905
+prerequisite-patch-id: ee77339d6590704a4240b641ebfc2574f7f29ed5
+prerequisite-patch-id: 2b50d0ab2b41d993906cdf0abbd2013192d6e411
+
+Best regards,
+--  
+Drew Fustini <fustini@kernel.org>
 
 
