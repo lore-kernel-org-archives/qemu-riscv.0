@@ -1,148 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5408606B366
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 08:50:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CE51606A31C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 11:12:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IYzlf946;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fgPeIHsM
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=F5w0bsGS;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ZoxAmesF
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRmwr-0003ey-BR; Fri, 13 Nov 2026 03:47:53 -0500
+	id 1xRpC6-0005zO-KC; Fri, 13 Nov 2026 06:11:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <himanshu.chauhan@oss.qualcomm.com>)
- id 1xRmvh-00030E-8j
- for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 03:46:47 -0500
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xRpC4-0005ya-TB
+ for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 06:11:44 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <himanshu.chauhan@oss.qualcomm.com>)
- id 1xRmvf-0007VK-FB
- for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 03:46:41 -0500
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xRpC3-0003Oq-59
+ for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 06:11:44 -0500
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AD8VDJa4163547
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 08:46:38 GMT
+ 6AD8VSDd1527728
+ for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 11:11:41 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=oN6mXz/c7yi
- x4xzGlnsgM4bOUuCxsp4u/erF+z45B48=; b=IYzlf946wIX84WC3YFUI73FNB6f
- RN4SVqhOC5lgAQdJHN1ULUr/UrM91DQ/Ju/IXXRsJAyutySgp6x+D6cXgHCHKUfs
- 3ZEF7dquMUe10HBJEc0R/Cle0KtwgFyl2EOQcupTHrCuaJ65fdpfU4nYHAa/5lsy
- GpoI5CaSi7OFklAKdhpIIjLrVkLpV4ENAI+BujEm0LdvfozK3YfUqLcqdRIt7SKD
- otiJ6oVR0z7EgWrxQ0oz0JARtXOjCmkz7l1WOQzJVkbrgL7M08VreQxS5uzIdaRk
- rJGuvZqT+w0SNHck4kyZCbWVCOcjxV+siTM1XvNPXbEpGRPgLMQ0cyzB9/A==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com
- [74.125.82.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hwh0ajy77-1
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=CJ6IdqJTWho9f8+kcYElOy6uZtozeIBeBOC
+ x1jdA0KM=; b=F5w0bsGSkWEiR61SOc8i9rED63uYnyDhwxLUKGjRzeS9d894UEn
+ JN0AFtX9sdzbJsoT3unGyaL7aQV2gqtOH1SLeUpm+Lq1zLdwyHG/qIftI7Kv0mW5
+ g6meNar5SWiQmvDz6ChG9fIMnoSZYbfXUyOjs7dGNv4mmpVV+U3O9AjWhXRCvHXx
+ COuiewgLXQwdnR8GJtAVOLWAFoT2JToux1a+X7NUMV9yGrvm5C7cttHzkbdYxh3Y
+ FDtSpFc/o+h/pPSQflxEbpBgCantKU49XKv9ABZ4WxapjBVzkJ258COYZShcMBTT
+ PPg9ZrmIJ0v3YRZXIi728/nTL/xa1Y/Ez8A==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com
+ [209.85.160.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hww5r8xp9-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 08:46:38 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-3724667bc16so422202eec.1
- for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 00:46:38 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 11:11:40 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id
+ d75a77b69052e-535131e4c25so15783171cf.3
+ for <qemu-riscv@nongnu.org>; Fri, 13 Nov 2026 03:11:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794559597; x=1795164397; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=oN6mXz/c7yix4xzGlnsgM4bOUuCxsp4u/erF+z45B48=;
- b=fgPeIHsM1BQeEcv86sSiCp5l/8gTyzKKlLZV/oj96ws/Nec7MZD6flIDDULUwt+QqY
- Fm6EDxxiqFr4Pia/UZct0BwAktpTeXwjE23CHrRdUmuNUj3jke5u7ariv3t02Do/LtK2
- 8K7nzgMAy17dmng4FuuBn6RZhkehQxyqVB6qsMQgWRhktwle8Ly9opLxD4/2mc1PztLH
- djXhwqirUhtVAvtJf//10JaoJ/5ZoWD9AYIWhm1DeR4iJPE/x/jlUqlbsBD5Ui7Rni9i
- cIGQaQ5bxOrSxDhZkTcMzlBADsRq88jTX6g21wIEJyW3nQTrGMTAVWEoN2SpPdFQUCYq
- OZyA==
+ d=oss.qualcomm.com; s=google; t=1794568300; x=1795173100; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=CJ6IdqJTWho9f8+kcYElOy6uZtozeIBeBOCx1jdA0KM=;
+ b=ZoxAmesFLQRreQ7m6GEGksKZokLXwteJf/+lH6KHnVZQC3Lf4ViaUXUZC2Ir+Whm4j
+ LECfq6P3xUFFPZloaAZunGF8N3KIPceztTUN5WkLbTulSn3GWMpxRjDLPCwujD2TiFNv
+ XwbSQ0Ct+FEe1JOeknjFHK6wmSrfUBKr1qNX/Ve6tCFP6gnJbWN0L/qNOmfjIFzHs26m
+ bQXJxzraFetFKyok2jQ6O/4WYDszBqkvJ7/ObACEh4bny4WW07xPqV9crub9Fkxjf21t
+ 8MidMLzJNQYCbPBFjlwPtQrym9bpjM6Ijh/dCsGXN2QiaD3f74OO5A1yg15Uw7yUNJgq
+ 6aHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794559597; x=1795164397;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=oN6mXz/c7yix4xzGlnsgM4bOUuCxsp4u/erF+z45B48=;
- b=A88NGMkM02fuzUPb7/h/TSkVPuvL0W7UHo+w6stBlASSPTnsJarSdWEtW7e7wToCxh
- cnJiYtnHtfv3sqrrSQX3Nz5DSf0VZX8hH/xjBwSWNCaMuGAunZaE6BaToR59WPClztZI
- XV+dqowFpEW8WTqAbXpTJYJbdVzWGDB82VjgaqtCaZ/LwH9X2RtWCQ3WGOVFssZ1ln3l
- 1ViQDWVJbI9JLabTculnknBVEVPq+QmFI7gczP9ivHVJoRe+0s9ehwwAYIH2tAc+GeKH
- kGR9gUhagLYF9JU+1VaB5uWu+Kd43hlYAZlwE7FvGLW59hxjv60wzFxuKBn6s5uI7AQL
- ruYA==
-X-Forwarded-Encrypted: i=1;
- AL+hErHxZexQZOiG7wjkQ0q0kV9qYbr3i0JHseFgAERLRmk2FQRyBZyxcLER7qCojKwYkyqlXig7QXEQUsBU@nongnu.org
-X-Gm-Message-State: APuU4Z9h1icv2+lclGsxDuV3Jd7hn84Afl/inEAZRlTkzsB5RtAkQali
- 3EBTgU2nB5tPNxtQCAAUaHrbkWX+pN6VKy1Uccw6/QpCnQK+PGsUkkNNwlEq5tGEqJHi/obxNAV
- XoDwYzCt0T4Qqf270K3AY7g+Jed8MsSoBRqs+Z+rnDQ8Jn7sCIN1ZpbPa1XPy+jyT8Q==
-X-Gm-Gg: AYBFou2njJj95dyi64cM7Dl02YyWt1wKDtst+ajozKbH/q5QjpsYajA3oRA9/5/+Ten
- cK9AhqT7bWoQ17jKVz/qH/siOuCXCvQxu2/diWIYHiFPnZCNNhZwaKYPx15Of4+mHTOipOT3LwX
- 3aDmIsFsqnxXyguKE60/bRBp7h/dpqT/aE7+48Fl4hCYj17sbaXlE8tc8WXW0d3f7GeXD1VtHes
- uooYZyEpGzl3S76uYjItj5A2cOcShW437mzNcc7ib5g1AqZXSfqJBlQqmuQEiqEN64vlvgL2P2R
- igibQE6E5cfFugAcbZvcuYjoKmSN1Od4/jWYZjt53Hg3X/13Cd7vQo76tjIE0O0IKFbUE0MH9zG
- XBcmLsKX+x7ed4UbhkJN9C+sHotRlf2/Ej41HrF2Uw7tV6C8KdsuHbmgk4VD1wE2bqsrVj2rpeh
- 9IONE6/fN3wid2uSBNnbmjhfUACsdhW4bYLj7W7Yrgivas5+PCXag33OfR6rD9Gd3r22a5s1FQ
-X-Received: by 2002:a05:693c:41dc:20b0:36c:a1bc:6102 with SMTP id
- 5a478bee46e88-37960385e62mr1635994eec.0.1794559597214; 
- Fri, 13 Nov 2026 00:46:37 -0800 (PST)
-X-Received: by 2002:a05:693c:41dc:20b0:36c:a1bc:6102 with SMTP id
- 5a478bee46e88-37960385e62mr1635972eec.0.1794559596686; 
- Fri, 13 Nov 2026 00:46:36 -0800 (PST)
-Received: from hu-himchau-blr.qualcomm.com
- (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-379559189e8sm5689242eec.11.2026.11.13.00.46.33
+ d=1e100.net; s=20260707; t=1794568300; x=1795173100;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=CJ6IdqJTWho9f8+kcYElOy6uZtozeIBeBOCx1jdA0KM=;
+ b=sDVAOAksmLvwDfqoZ1pnseevI/ekWYmSJe6BL3Kdd5iPKyXsPv0HKxIeJFwNYZGsdg
+ Kgmi5M7fS/chscqgLF5WV+5l1fw14R6L2BA87TdpElpvlZBhvl9Aw8E23w4IWMbC1C0a
+ 3lgHABEOUdk4CBaXdEMMta/VH/1hjT5WGaeER1SRCUIs/52DE8dquVCxk+DwyTFVmpoh
+ dwLohuBTkWHPXvN0mGQ0hOFxJYdCW1kU8xSF1Ft2keWoPGfY94ixK4DrDfEjvCtDM+01
+ yGj3GIpThV8Z+Ms877nNVAgjtS2fB4ELFgkO2pYYEE8rJ2+quv4RHWsVWkuCrukSf+wT
+ ZVZw==
+X-Gm-Message-State: APuU4Z9I7Z5YWAp+MAfNbiXEiPOnIeSflxTx/bFYmDPQTz2R5wq78BWk
+ 6RoPm++uNtJSP47mH/xandFUvM5qp/qqhmSznGEmMjCiXcwfbdvJgtcl6kmYdLmCyt7bjUCDycz
+ Rf105U0G7QkMw3jvFKhV2ws+Vg+ad11CGVjHtH8jzrTmsFDl7ZcCDD8vNfw==
+X-Gm-Gg: AYBFou22opvHAwuX23jdSgoN2nTtNmeYjyPm2QlO7Lj+40crhg7Yg7Jjg/3Q9P4Lha9
+ OA2q48yJfJfv958Job38wvFtL9Js4nCkc+i5ol3M0G9SYPoSMV9ej18w0uNoxkAK5awVuXhAp/B
+ +W+q/rnynmgKHY/AKTK+MCTuDLtzebgbuh7jcMqYe5Nl2VN76K0r6V5AcTH3qdUir5LBYTSNz5v
+ w1+OWj8FjLqVP5Wuw5xSEqSdAh/G9ZpI4xH6VlxQq1L/cEOr5bNmaLxPwZbbS4RG2koPjIjPx55
+ p9t4VbZfvG7P9jHs8nYeTaIs2ovJDrpr0wnp3SSUUgc99pSEVwEkPl1YCRubA2MH8n4OBimHenH
+ auGHLWkcaYUU57MGEp9raCA5XEKuXFOQTgazEYrUQ36xqm4x9mAeGM4CGSoClKfDpS9PqAxR04k
+ lcU91B6UlcY1dqUh331lN2Lz53atAuHLEudj2kOoRQ1kWa
+X-Received: by 2002:a05:622a:2b4e:b0:535:9a06:1fc4 with SMTP id
+ d75a77b69052e-55ac7266e8emr31093501cf.18.1794568299937; 
+ Fri, 13 Nov 2026 03:11:39 -0800 (PST)
+X-Received: by 2002:a05:622a:2b4e:b0:535:9a06:1fc4 with SMTP id
+ d75a77b69052e-55ac7266e8emr31093051cf.18.1794568299434; 
+ Fri, 13 Nov 2026 03:11:39 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com (189-68-253-226.dsl.telesp.net.br.
+ [189.68.253.226]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91f23d456b2sm18065946d6.12.2026.11.13.03.11.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Nov 2026 00:46:36 -0800 (PST)
-From: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
-To: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
+ Fri, 13 Nov 2026 03:11:38 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-Cc: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
-Subject: [PATCH v3 1/2] target/riscv: Keep tdata CSRs available for disabled
- slots
-Date: Fri, 13 Nov 2026 14:16:21 +0530
-Message-ID: <20261113084622.738278-2-himanshu.chauhan@oss.qualcomm.com>
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH] target/riscv: fix hedeleg writable mask [GL4592]
+Date: Fri, 13 Nov 2026 08:11:34 -0300
+Message-ID: <20261113111135.27723-1-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261113084622.738278-1-himanshu.chauhan@oss.qualcomm.com>
-References: <20261113084622.738278-1-himanshu.chauhan@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDAzNCBTYWx0ZWRfX8q3DzOsl5yn+
- na9J46qf7hdA1Cz+T7qceC/69bkFsi7SE92COvjI6UhQk35DxHYi8K3w9GgeRaDP+PbBkAcFZ7l
- jC3RAJL34YEcRy269P8DbYDkVzFiqG4=
-X-Proofpoint-GUID: x2zr56P26cp9Vv0KwFBK1IZUGoeKao-R
-X-Authority-Analysis: v=2.4 cv=N+e8hG9B c=1 sm=1 tr=0 ts=6af6ce6e cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDA0NCBTYWx0ZWRfX63lwLitdw8V5
+ RdlX1UygvC/FGJVZrJJgjBOF43wa6ZWKQXMH8b90BwTowgRs15SrotzBRJ38BvtHtW4QfKI1Yd2
+ J5qg6iRaZd44jN7ygq8cozo6CTFo4lIDBTcpO8xYmJqLBr94tmjXWGNPL7YJtLHE8/DBsg105sP
+ 5OMkKARhB4r4JggOpcLV0tp3GOpzs9tjKGddva7+9IAxHEdQC2N5UNiuwcy3dFVGeeT6IiSnwl7
+ F5Q7yH3FvqwpGICsfpG8X84EWxIciHH5Qw4oBg9TC1mV2HVgSLHWq+FtHjJS8Y5BMGLqhRlFToO
+ kCR5wtS2Rq8yx0/KRSV3SeVAqvxfqH70LIFQBrc0MetG2IKxXKG1QrazOHkBf/XxjuNgLpz6i6y
+ TVZpbG2ja5Z06/T8gZWJYDF4sX3lRX38Hk6uPBi8v2Sqdq8T7C76zgQiSvB2C7KUTwYsNueZyyN
+ NuefG0uPA42NliTHz+g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTEzMDA0NCBTYWx0ZWRfXzy7H4h94FSbj
+ e022lqGYBSR3qc1iNiWNNCJU9cZXFOnIpoXPvbLU5LxcPGBffQ0rOROo/c2u5h51J7ALuH2keXx
+ XJrJgdnoZcwL8kyPxPbnr/JNTxmYDFE=
+X-Proofpoint-ORIG-GUID: bKjnUBfipWMLJE9QzPKWgeU1XGBpulGe
+X-Authority-Analysis: v=2.4 cv=Vqq2kO2n c=1 sm=1 tr=0 ts=6af6f06d cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xcxBfRYLw5hNHjR815/AfA==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=Dl6hwa1UTsAzBJgR6sYA:9 a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTEzMDAzNCBTYWx0ZWRfX5nMt3Uw+ReB1
- fSujabLahEe6TXPCrESpfTpMfCJfd9TSSz1ellIAGbr6veFmeCFJukmjQXk58j0bV5ZbDvkXC+l
- 1rMwfdaa+gNuF9jzILsV7xzdSZmcyFhctjCNu044nz7xyvbRduOeI3Ff08wiF0yfKz2SuxidL5t
- ZxpLiv9BnptGGx+WjzlB0eou0orl9z/PM9enVjMWrbfdD+r+HtJQXX5r5LSuSWRdP8t2Ts3x611
- dr8TPvDJvM/MNMTMrfm+1J3CnLdfmpKSKUjnzZnHve3OjV+8U0UkpCZcYtbBADmFa8XcnpSJHIR
- H41HvELq5rSKvL7eIs6ja9iKI4RtQ0rouTKVTgwXgfmWyh9+WH0NlZ78z/axl1F+2PENEHhZwF5
- 94EYt4iEwt0Qks2gRn4aj4vsnfscA3UVd4Br5RamcnZHZ/Za4XkOgPk6TY70QQytzRyRVIRnLaB
- xzS9e9Ok8cGKHlucqQg==
-X-Proofpoint-ORIG-GUID: x2zr56P26cp9Vv0KwFBK1IZUGoeKao-R
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=IH4YEds1svsedXLTdUwA:9 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-GUID: bKjnUBfipWMLJE9QzPKWgeU1XGBpulGe
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-13_03,2026-11-11_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0 priorityscore=1501
- phishscore=0 lowpriorityscore=0 impostorscore=0 adultscore=0 spamscore=0
+ bulkscore=0 adultscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 spamscore=0 impostorscore=0 phishscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130034
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611130044
 Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=himanshu.chauhan@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -154,113 +144,141 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The tdata CSRs belong to an implemented trigger slot, not only to the
-trigger type currently selected in tdata1. Writing zero to tdata1 disables
-the trigger by selecting type zero, but it does not remove the slot.
+Bit 19 (hardware error) must be writable in hedeleg, i.e. it must be
+delegable.  Add it DELEGABLE_EXCPS.
 
-Keep tdata access tied to the selected slot being present and let type-zero
-slots accept those writes while clearing any active breakpoint state.
+While we're at it, hedeleg bit 0 is only writable if IALIGN = 16, i.e.
+RVC is enabled.  Remove bit 0 from the delegation/writable mask if RVC
+is enabled.
 
-Fixes: 95799e36c15a ("target/riscv: Add initial support for the Sdtrig extension")
-Signed-off-by: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
+Fixes: bc083a51caff ("target/riscv: hardwire bits in hideleg and hedeleg")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4592
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/tcg/debug.c | 50 ++++++++++++++++++++++++++--------------
- 1 file changed, 33 insertions(+), 17 deletions(-)
+ target/riscv/tcg/csr.c                 | 11 +++++
+ tests/tcg/riscv64/system/meson.build   |  7 ++++
+ tests/tcg/riscv64/test-hedeleg-write.S | 57 ++++++++++++++++++++++++++
+ 3 files changed, 75 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-hedeleg-write.S
 
-diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
-index 8b58cbd07a..2067657c81 100644
---- a/target/riscv/tcg/debug.c
-+++ b/target/riscv/tcg/debug.c
-@@ -53,20 +53,6 @@
-  *     1 |    2 |         tdata1, tdata2 | Address / Data Match
-  */
- 
--/* tdata availability of a trigger */
--typedef bool tdata_avail[TDATA_NUM];
--
--static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
--    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
--    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
--    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
--    [TRIGGER_TYPE_INT] = { true, true, true },
--    [TRIGGER_TYPE_EXCP] = { true, true, true },
--    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
--    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
--    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
--};
--
- /* only breakpoint size 1/2/4/8 supported */
- static int access_size[SIZE_NUM] = {
-     [SIZE_ANY] = 0,
-@@ -165,13 +151,17 @@ static inline target_ulong build_tdata1(CPURISCVState *env,
- 
- bool tdata_available(CPURISCVState *env, int tdata_index)
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..9bea91113b 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -1837,6 +1837,7 @@ static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+                          (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_SW_CHECK)) | \
++                         (1ULL << (RISCV_EXCP_HW_ERR)) | \
+                          (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) | \
+@@ -4913,6 +4914,16 @@ static RISCVException write_hedeleg(CPURISCVState *env, int csrno,
+                                     target_ulong val, uintptr_t ra)
  {
--    int trigger_type = get_trigger_type(env, env->trigger_cur);
--
-     if (unlikely(tdata_index >= TDATA_NUM)) {
-         return false;
-     }
- 
--    return tdata_mapping[trigger_type][tdata_index];
+     env->hedeleg = val & vs_delegable_excps;
++
 +    /*
-+     * tdata CSRs belong to the trigger slot, not to the currently selected
-+     * trigger type.  A type-zero trigger is disabled, but the slot still
-+     * exists, so software must still be able to write tdata2/tdata3 before
-+     * selecting a supported trigger type.
++     * delegable_excps includes bit 0, which is writable only if
++     * IALIGN = 32 (no RVC present).  Ergo clear bit 0 if we have
++     * RVC.
 +     */
-+    return env->trigger_cur < env->num_triggers;
- }
- 
- target_ulong tselect_csr_read(CPURISCVState *env)
-@@ -729,6 +719,30 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
-     }
- }
- 
-+static void no_trigger_reg_write(CPURISCVState *env, target_ulong index,
-+                                 int tdata_index, target_ulong val)
-+{
-+    /*
-+     * OpenSBI programs DBTR slots by first writing type zero to tdata1, then
-+     * writing tdata2/tdata3, and finally writing the desired trigger type.
-+     */
-+    switch (tdata_index) {
-+    case TDATA1:
-+        type2_breakpoint_remove(env, index);
-+        env->tdata1[index] = 0;
-+        env->itrigger_enabled = riscv_itrigger_enabled(env);
-+        break;
-+    case TDATA2:
-+        env->tdata2[index] = val;
-+        break;
-+    case TDATA3:
-+        env->tdata3[index] = textra_validate(env, val);
-+        break;
-+    default:
-+        g_assert_not_reached();
++    if (riscv_has_ext(env, RVC)) {
++        env->hedeleg &= ~1ULL;
 +    }
++
+     return RISCV_EXCP_NONE;
+ }
+ 
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e..502d1d80bc 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -89,6 +89,13 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'test-hedeleg-write.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max', qemu_args],
++  }
 +}
 +
- /* icount trigger type */
- static inline int
- itrigger_get_count(CPURISCVState *env, int index)
-@@ -995,6 +1009,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
-                       trigger_type);
-         break;
-     case TRIGGER_TYPE_NO_EXIST:
-+        no_trigger_reg_write(env, env->trigger_cur, tdata_index, val);
-+        break;
-     case TRIGGER_TYPE_UNAVAIL:
-         qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
-                       trigger_type);
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-hedeleg-write.S b/tests/tcg/riscv64/test-hedeleg-write.S
+new file mode 100644
+index 0000000000..919de1fb3f
+--- /dev/null
++++ b/tests/tcg/riscv64/test-hedeleg-write.S
+@@ -0,0 +1,57 @@
++/*
++ * Test for writable hedeleg bits.  Based on Gitlab 4592 testcase,
++ * which is derived from riscv-arch-test.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#define HEDELEG_W_MASK 0xcb1fe
++
++.option norvc
++	.text
++	.global _start
++
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	/*
++	 * Write a full 1 mask on hedeleg, read it back, see if
++	 * all the expected bits were set.
++	 */
++	addi	t0, zero, -1
++	csrw	hedeleg, t0
++	csrr	t0, hedeleg
++	li	t1, HEDELEG_W_MASK
++	bne	t0, t1, _fail
++	li	a0, 0
++	j	_exit
++
++_fail:
++	li	a0, 1
++	j	_exit
++
++trap:
++	# Any trap is a fail code 1
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
 2.43.0
 
