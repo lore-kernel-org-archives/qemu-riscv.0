@@ -1,52 +1,48 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1CFC606A327
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 23:14:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEA5A606A339
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 23:15:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dWEuHaXy
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=YHInhJiM
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xS0T8-0000Pt-N1; Fri, 13 Nov 2026 18:14:06 -0500
+	id 1xS0TA-0000TS-BD; Fri, 13 Nov 2026 18:14:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xS0T4-0000Lg-P2; Fri, 13 Nov 2026 18:14:02 -0500
-Received: from tor.source.kernel.org ([172.105.4.254])
+ id 1xS0T6-0000P7-8w; Fri, 13 Nov 2026 18:14:04 -0500
+Received: from sea.source.kernel.org ([2600:3c0a:e001:78e:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xS0T2-00027y-NB; Fri, 13 Nov 2026 18:14:02 -0500
+ id 1xS0T2-00027x-OA; Fri, 13 Nov 2026 18:14:03 -0500
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 9EE5061E4A;
+ by sea.source.kernel.org (Postfix) with ESMTP id D137742DC8;
  Fri, 13 Nov 2026 23:13:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1223A1F000C6;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 732CF1F000C7;
  Fri, 13 Nov 2026 23:13:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
  s=k20260515; t=1794611631;
- bh=Pmlwe+s4TLQaxHmVxRYSWgoqPKtnATRrkXhZjDKxzf4=;
- h=From:Subject:Date:To:Cc;
- b=dWEuHaXyZnyeXIkfo3el+EA1NEbCY3ZHYhQcAuBVPEkRhk2Qdap7oOIYzBW/N3i2M
- fDq8iJy96tH52d93hFlD70ZcXP+Rz9q7ge8X2xuNf1nnL+zyQfd0eHoJCMltOTzLMN
- vYuRIWq348odv/ePsN2oFZeStRSUgmpV2NvWY/7PYunYfLlrpxc9MQTxkCPGRPZ5C9
- MxgSPvtcz4vMC7Bv+z17iG7ic39VR+AxoloVTCM1qlfpHWieVANIHdGptOswBoZqo9
- 4JBm9L0rqY1+y15FK7MPicKb50upxg+fPNIFtZi7AMH6qXS9rrWrlSf9xMWG6xankb
- 93F1CJ6AjJAog==
+ bh=3VJ5VKKHRksAaEHKGJL9GJuFhNx/L3ly7jYl1xcj/1M=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc;
+ b=YHInhJiM36dCD4Th9g/MJ8X35hirbqXVXKqU/WSEikePU5ombWT/jufL1FVHrOXKl
+ 4E4QraGvmBeRz7pBeogrXEUNAbKXojgETN2qO3bZxeFK0sen3cnNEKEvyWrysZHboE
+ JPVKLloW/GMu69FKNNJZlLVRf0oS3kqSTzZkUi+D1/z5uEF1IAtNPJ0JlLS2P/AMsi
+ j0h5cq386tiXVfPLEHLmXKuBMyERhFQsvBKhEnMdEEP5t1+AWNL1us8zDwn5is+q1z
+ ME8Srt5sKmrhccOnkjVKIv/yGXBS6tn+wigydkHaYp0VnGGELAzyp/njT8H2Dn/5yD
+ xZhv9uyhqmH8w==
 From: Drew Fustini <fustini@kernel.org>
-Subject: [PATCH v2 0/2] RISC-V: Add support for ACPI RQSC table
-Date: Fri, 13 Nov 2026 15:12:38 -0800
-Message-Id: <20261113-riscv-rqsc-v2-0-34d47fa4141e@kernel.org>
+Date: Fri, 13 Nov 2026 15:12:39 -0800
+Subject: [PATCH v2 1/2] hw/riscv: add cache_level and node properties to
+ CBQRI controllers
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGaZ92oC/02Q22rDMBBEfyXouTLSWpbtUEr+o+RBl1Ui6kutd
- UxLyL9XtlPIy8IszNmZvTPCFJHY8XBnCZdIcRyygLcDc1czXJBHnzUDAVqAkDxFcgtPEzlusBE
- aUZjaGJYN3wlD/Nlgn+esr5HmMf1u7EWu238MvGIWyQX3LijVmBJ9XZ6+MA3YFWO6sPNjByecb
- jncvNOZNYTcjX0f5+PBBl37SgdowLHX4LmHgEoCtM97RNNI0XNnpxRzfgSoZVVCCMelWa09Epm
- n930NK4WshFZtVRdK1FppxSWn2xC7pTuNRMV0M90apMjjY/uCmd11P24r4YWxYJX0bVu2Qjsf8
- sL6/MlStuA1KilzyccfcUD8p4kBAAA=
-X-Change-ID: 20260201-riscv-rqsc-ae806ee0a7aa
+Message-Id: <20261113-riscv-rqsc-v2-1-34d47fa4141e@kernel.org>
+References: <20261113-riscv-rqsc-v2-0-34d47fa4141e@kernel.org>
+In-Reply-To: <20261113-riscv-rqsc-v2-0-34d47fa4141e@kernel.org>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, 
@@ -66,16 +62,16 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Ani Sinha <anisinha@redhat.com>, Vasudevan Srinivasan <vasu@rivosinc.com>, 
  Drew Fustini <fustini@kernel.org>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4910; i=fustini@kernel.org;
- h=from:subject:message-id; bh=/GDedJy7SpLFH1rKirkGTQk2ReD8X6VzlgE5FVF09Lg=;
- b=kA0DAAoW2+wsw9kosQwByyZiAGr3mZKjOlOLT1v0xen0d1/YsxkZJcRPb5OHld9O89aRzutUv
- Yh1BAAWCgAdFiEEsvBu0KRKVfWgn+i22+wsw9kosQwFAmr3mZIACgkQ2+wsw9kosQxF5gEA3QFx
- BMfmjf61yXFaWEpykJr9psjMcHsaMMKYGeLYZBQBANMq/fKFnFoqzG07/rGuY05chR64D0wwrcW
- AHtOajiAC
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3686; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=C8GjMMtR0kTO2e1y7gN/VjOKEDesqqxWM7KvRC87P9Q=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWR9n7nuYfuE1DnLduZLeHk88lrnsoPpl8HE4iO6VpMiP
+ wVesQ2d0lHKwiDGxSArpsiy6UPehSVeoV8XzH+xDWYOKxPIEAYuTgGYiMhdRoaF3xh+WP6ZNae/
+ W2rzkyKp2WvZZB753LD6WnspM71cSD2d4b83C89a3g87ut8sZ91YGGcyM9nzqJhu5WTxDCnb6Bd
+ X0xgB
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
-Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
- helo=tor.source.kernel.org
+Received-SPF: pass client-ip=2600:3c0a:e001:78e:0:1991:8:25;
+ envelope-from=fustini@kernel.org; helo=sea.source.kernel.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -94,99 +90,115 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add support for the ACPI RISC-V Quality of Service Controllers (RQSC)
-table [1] that describes the CBQRI controllers [2] present in a system.
-A capacity controller is described by the PPTT Cache ID of the cache it
-backs. A bandwidth controller is described by the SRAT proximity domain
-of its NUMA node.
+The ACPI RQSC table specifies which cache a capacity controller backs
+and which proximity domain a bandwidth controller serves.
 
-This series depends on:
- - "riscv: implement Ssqosid extension and CBQRI controllers" v8 [3]
- - "RISC-V: ACPI: Add PPTT support" v2 from Sunil [4]
- - "hw/acpi: Build PPTT rev 3 with cache IDs for MPAM
-   cross-references" from Jinjie's MPAM series [5].
-   Note: bios-tables-test fails on the riscv64 PPTT golden file
-         as this patch does not update it.
-
-Tested with the Linux series [6] at the tip of its b4/ssqosid-cbqri-rqsc
-branch [7], with this configuration:
-
-  Base addr  Spacing
-  0x4820000  4KB  Cluster 0 L2 cache controller
-  0x4821000  4KB  Cluster 1 L2 cache controller
-  0x4828000  4KB  Memory controller 0
-  0x482b000  4KB  Shared L3 cache controller
-
-  qemu-system-riscv64 \
-    -M virt,pflash0=pflash0,pflash1=pflash1,aia=aplic-imsic,smp-cache.0.cache=l1d,smp-cache.0.topology=core,smp-cache.1.cache=l1i,smp-cache.1.topology=core,smp-cache.2.cache=l2,smp-cache.2.topology=cluster,smp-cache.3.cache=l3,smp-cache.3.topology=socket \
-    -smp cpus=8,sockets=1,clusters=2,cores=4,threads=1 \
-    -blockdev node-name=pflash0,driver=file,read-only=on,filename=RISCV_VIRT_CODE.fd \
-    -blockdev node-name=pflash1,driver=file,filename=RISCV_VIRT_VARS.fd \
-    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04820000 \
-    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=12,alloc_op_flush_rcid=false,mon_op_config_event=false,mon_op_read_counter=false,mon_evt_id_none=false,mon_evt_id_occupancy=false,mmio_base=0x04821000 \
-    -device riscv.cbqri.capacity,max_mcids=256,max_rcids=64,ncblks=16,cache_level=3,mmio_base=0x0482b000 \
-    -device riscv.cbqri.bandwidth,max_mcids=256,max_rcids=64,nbwblks=1024,mrbwb=819,mmio_base=0x04828000
-
-Changes in v2:
- - Drop the RFC prefix as RQSC v1.0 is ratified
- - Rebase on Sunil's PPTT series and Jinjie's PPTT Cache ID patch
- - Add cache_level and node properties to the CBQRI controllers
- - Use the PPTT Cache ID and the SRAT proximity domain as the resource
-   IDs instead of the MMIO address
- - Only build the table when CBQRI controllers are present
- - Set the table revision to 1
- - Make RCID Count and MCID Count 2 bytes each
- - Add the Bandwidth per Block field to memory resources
- - Make RISCV_VIRT select RISCV_CBQRI
- - Link to v1: https://lore.kernel.org/qemu-devel/20260202-riscv-rqsc-v1-0-dcf448a3ed73@kernel.org/
-
-[1] https://github.com/riscv-non-isa/riscv-rqsc/releases/tag/v1.0.0
-[2] https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-[3] https://lore.kernel.org/qemu-devel/20261111-riscv-ssqosid-cbqri-v8-0-121f6dcfb573@kernel.org/
-[4] https://lore.kernel.org/qemu-devel/20261015064957.4076464-1-sunilvl@oss.qualcomm.com/
-[5] https://lore.kernel.org/qemu-devel/tencent_F9C68A515AC6C40BE2C32DB314E14CCB7106@qq.com/
-[6] https://lore.kernel.org/all/20260601-ssqosid-cbqri-rqsc-v7-0-v6-0-baf00f50028a@kernel.org/
-[7] https://github.com/tt-fustini/linux/tree/b4/ssqosid-cbqri-rqsc
+Add a cache_level property to the capacity controller. It accepts 2 or
+3, the unified cache levels that the smp-cache option can place and the
+PPTT can describe, and defaults to 2. Add a node property to the
+bandwidth controller. It defaults to 0 and rejects a node the machine
+does not have.
 
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
-Drew Fustini (2):
-      hw/riscv: add cache_level and node properties to CBQRI controllers
-      hw/riscv: add support for ACPI RQSC table
+ hw/riscv/cbqri_bandwidth.c | 13 +++++++++++++
+ hw/riscv/cbqri_capacity.c  |  8 ++++++++
+ 2 files changed, 21 insertions(+)
 
- hw/riscv/Kconfig           |   2 +-
- hw/riscv/cbqri_bandwidth.c |  26 ++++
- hw/riscv/cbqri_capacity.c  |  21 ++++
- hw/riscv/virt-acpi-build.c | 298 ++++++++++++++++++++++++++++++++++++++++++++-
- include/hw/riscv/cbqri.h   |  20 +++
- 5 files changed, 365 insertions(+), 2 deletions(-)
----
-base-commit: bf67d56f282c1ee25b67dfda3f8ca54d2bd4648e
-change-id: 20260201-riscv-rqsc-ae806ee0a7aa
-prerequisite-change-id: 20251229-riscv-ssqosid-cbqri-aee2271532ff:v8
-prerequisite-patch-id: 7d1487071207ac8c9750af152baec0cfa80b704f
-prerequisite-patch-id: 7d852a70275071c5b5cfce579bbb442cf5b4d456
-prerequisite-patch-id: 6361057143117707a309b225a6e0d6a708e6f5ff
-prerequisite-patch-id: b207082f77e5882c20a061cf415055b6832eef7c
-prerequisite-patch-id: 2d20f4be6cb77039cca28cb0b774524f88f964b1
-prerequisite-patch-id: f3474864af8c82a4d96ac2b99de7abb80458e366
-prerequisite-message-id: <20261015064957.4076464-1-sunilvl@oss.qualcomm.com>
-prerequisite-patch-id: 2ff76b9d66b52771c4f963d891f39a6a93fbe5b4
-prerequisite-patch-id: 95682b479c131bd09f4bd68426554918e1d43075
-prerequisite-patch-id: cca54a74db19c96cb4cf048393dc278d96edd905
-prerequisite-patch-id: ee77339d6590704a4240b641ebfc2574f7f29ed5
-prerequisite-patch-id: 2b50d0ab2b41d993906cdf0abbd2013192d6e411
+diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
+index bd8cf2b50e4c..6c33d1738d27 100644
+--- a/hw/riscv/cbqri_bandwidth.c
++++ b/hw/riscv/cbqri_bandwidth.c
+@@ -17,7 +17,9 @@
+ #include "hw/core/sysbus.h"
+ #include "migration/vmstate.h"
+ #include "target/riscv/cpu.h"
++#include "hw/core/boards.h"
+ #include "hw/riscv/cbqri.h"
++#include "system/numa.h"
+ 
+ /* Property defaults, shared with riscv_cbqri_bc_caps_init() */
+ #define BC_DEFAULT_MAX_MCIDS    256
+@@ -139,6 +141,7 @@ typedef struct RiscvCbqriBandwidthState {
+ 
+     uint16_t nbwblks;
+     uint16_t mrbwb;
++    uint32_t node;
+ 
+     bool supports_at_code;
+ 
+@@ -542,12 +545,21 @@ static const MemoryRegionOps riscv_cbqri_bc_ops = {
+ static void riscv_cbqri_bc_realize(DeviceState *dev, Error **errp)
+ {
+     RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
++    MachineState *ms = MACHINE(qdev_get_machine());
++    unsigned int nb_nodes = ms->numa_state ? ms->numa_state->num_nodes : 0;
+ 
+     if (!bc->mmio_base) {
+         error_setg(errp, "mmio_base property not set");
+         return;
+     }
+ 
++    /* Without -numa there is a single implicit node 0. */
++    if (bc->node >= MAX(nb_nodes, 1)) {
++        error_setg(errp, "node %u out of range, %u NUMA node(s)",
++                   bc->node, MAX(nb_nodes, 1));
++        return;
++    }
++
+     if (bc->nb_rcids == 0) {
+         error_setg(errp, "max_rcids must be at least 1");
+         return;
+@@ -638,6 +650,7 @@ static const Property riscv_cbqri_bc_properties[] = {
+                        BC_DEFAULT_NBWBLKS),
+     DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb,
+                        BC_DEFAULT_MRBWB),
++    DEFINE_PROP_UINT32("node", RiscvCbqriBandwidthState, node, 0),
+ 
+     DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
+                      supports_at_code, true),
+diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
+index 0c572aa8b02f..1585cad1d073 100644
+--- a/hw/riscv/cbqri_capacity.c
++++ b/hw/riscv/cbqri_capacity.c
+@@ -127,6 +127,7 @@ typedef struct RiscvCbqriCapacityState {
+     uint16_t nb_rcids;
+ 
+     uint16_t ncblks;
++    uint8_t cache_level;
+ 
+     bool supports_at_code;
+ 
+@@ -591,6 +592,11 @@ static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
+         return;
+     }
+ 
++    if (cc->cache_level != 2 && cc->cache_level != 3) {
++        error_setg(errp, "cache_level must be 2 or 3");
++        return;
++    }
++
+     if (cc->nb_rcids == 0) {
+         error_setg(errp, "max_rcids must be at least 1");
+         return;
+@@ -666,6 +672,8 @@ static const Property riscv_cbqri_cc_properties[] = {
+                        CC_DEFAULT_MAX_RCIDS),
+     DEFINE_PROP_UINT16("ncblks", RiscvCbqriCapacityState, ncblks,
+                        CC_DEFAULT_NCBLKS),
++    DEFINE_PROP_UINT8("cache_level", RiscvCbqriCapacityState,
++                      cache_level, 2),
+ 
+     DEFINE_PROP_BOOL("at_code", RiscvCbqriCapacityState,
+                      supports_at_code, true),
 
-Best regards,
---  
-Drew Fustini <fustini@kernel.org>
+-- 
+2.43.0
 
 
