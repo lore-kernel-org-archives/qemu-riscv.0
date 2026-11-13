@@ -1,64 +1,64 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E628C606A327
-	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 19:12:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36BD0606A89F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 13 Nov 2026 21:36:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256 header.s=protonmail2 header.b=PKUnClPX
+	dkim=pass (2048-bit key, unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256 header.s=protonmail2 header.b=rC72FAqC
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xRwhc-0000BE-Uw; Fri, 13 Nov 2026 14:12:48 -0500
+	id 1xRywQ-000226-Gv; Fri, 13 Nov 2026 16:36:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christianslima@proton.me>)
- id 1xRwhb-00009U-65; Fri, 13 Nov 2026 14:12:47 -0500
-Received: from mail-4322.protonmail.ch ([185.70.43.22])
+ id 1xRywO-00021B-Sm
+ for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 16:36:12 -0500
+Received: from mail-106121.protonmail.ch ([79.135.106.121])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <christianslima@proton.me>)
- id 1xRwhX-0002qT-K8; Fri, 13 Nov 2026 14:12:46 -0500
+ id 1xRywK-0001gO-O0
+ for qemu-riscv@nongnu.org; Fri, 13 Nov 2026 16:36:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
- s=protonmail2; t=1794597160; x=1794856360;
- bh=BVQ+DK6YBIdZgslr+yl8OkWDFRD0PqgcNJ1+qaC8wMk=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ s=protonmail2; t=1794605765; x=1794864965;
+ bh=JoDV6owTbdOcyj5nODtuz9uTpe3s8dXYs39zq9JIrvo=;
+ h=Date:To:From:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=PKUnClPX2dfj1q1wVhCGuQc72NUjzh5CS/HUXUEFVdn6/zBQNiuaXNySyrRlXysXB
- xWNtphFwcX/FPKxooXW+FuJCVc7MtXB3cNp4pxBts+DHGksRnViwBK6OoZ3BhnlCor
- DMKvuQuEXJqDEEIM2BOAXSDx3cFA2V6IipiwReWpMt4dhyhGd8waMSmBqFmCglUapi
- LobntZBhfEH2DP31ItWgJNszg1qZ9cUSP9ZUq0GqJAceL0SP23XCy8VXD/CtCWcd7E
- MeZnzonEIvus+H8RvItP9AfZkIT1KNboGbWscosRpiRFnZJEp23oE/DIE+Iy74TL6L
- hZumkaKH1YWGQ==
-Date: Fri, 13 Nov 2026 19:12:34 +0000
-To: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-From: Christian <christianslima@proton.me>
-Cc: Palmer Dabbelt <palmer@dabbelt.com>,
+ b=rC72FAqC7QZMrsV07BWZqFrNkX7rhA6bzU+0jkdIdD0/D6pPEYx7sG165WygD0XKk
+ RPp4mXP1AUVqmbzlfyqGe5n2M8d1Kq6ge2uKmFYNmQL7K1mTW59iWG3VCAcHS607+O
+ xhDQS2EWA8DgfnspYadnqRCGwFpI0+OOe1LtHqk1mAiS3UyYRMzb293YUFtUm7tqcq
+ 7FVv9KWG2bMbpsNF7OphPwLJUCYaiJ1oGwwZv1bVTCKe4uspgUSNb9U5vx/t0qxWL3
+ xwyEKdNEmQQSSQISz3Wd9NSMkTda+eeHMi55gfFOg4AkXkE77SXQg4nB3UNLrmUrkH
+ dyT2sq6XLca7Q==
+Date: Fri, 13 Nov 2026 21:35:57 +0000
+To: Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
  qemu-devel@nongnu.org
-Subject: Re: [PATCH 1/1] target/riscv: make mstatus.SPELP read-only when
- S-mode is not present
-Message-ID: <CBPdDhVgE-QLG3L1IfvH9dommTgm0X4euIIaV2Pik_9DoitqWoCoJ4eQD1KSRWtxg4W2cKSqeTKoI1VO8pQQw_NIMgovyw19C44bgub1T0w=@proton.me>
-In-Reply-To: <80cdad68-96a7-45da-aef9-53357ed8210c@oss.qualcomm.com>
-References: <20261112214810.78747-1-christianslima@proton.me>
- <20261112214810.78747-2-christianslima@proton.me>
- <80cdad68-96a7-45da-aef9-53357ed8210c@oss.qualcomm.com>
+From: "Christian S. Lima" <christianslima@proton.me>
+Subject: [PATCH v4] target/riscv: change mstatus bits for read-only if S or U
+ unsupported
+Message-ID: <20261113213542.37925-2-christianslima@proton.me>
+In-Reply-To: <20261113213542.37925-1-christianslima@proton.me>
+References: <20261113213542.37925-1-christianslima@proton.me>
 Feedback-ID: 169431447:user:proton
-X-Pm-Message-ID: 9460b18f63d6d6733888c6927ac18b86a57a0267
+X-Pm-Message-ID: 7e6035b84e5edcc2c6129c0728d09d0f6eb59fee
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=185.70.43.22;
- envelope-from=christianslima@proton.me; helo=mail-4322.protonmail.ch
+Received-SPF: pass client-ip=79.135.106.121;
+ envelope-from=christianslima@proton.me; helo=mail-106121.protonmail.ch
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H4=0.001, RCVD_IN_MSPIKE_WL=0.001,
- SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H5=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -78,68 +78,125 @@ X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi, Daniel.
+The risc v privileged architecture says that mstatus.SXL, UXL, TSR,
+TVM and MPRV should be read-only when S-mode or U-mode are not
+present.
 
-> On 11/12/2026 6:48 PM, Christian S. Lima wrote:
-> > According to the Zicfilp specification the bit SPELP in the mstatus
-> > register should be 0 (read-only) when s-mode is not present.
-> >
-> > Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4456#note_4=
-181630619
->=20
-> The code LGTM but this tag doesn't do much as is.  Gitlab uses the tag to=
- automatically
-> close the issue when the patch lands upstream.  It can't do much with a c=
-omment.
->=20
-> Reading the bug I believe the reporter intention was to add this SPELP co=
-mment
-> as a follow-up of what you've done in 4456, i.e. this should be done in t=
-hat same
-> scope.  If we upstream them separately there's a risk of Gitlab closing 4=
-456 and,
-> if this patch is left behind, the reporter can notice that the bug wasn't=
- fully
-> resolved and reopen it.
->=20
-> My suggestion is to either squash this change into the 4456 patch or send=
- it together
-> as a 2 patch series.  Both are fine, as long as we upstream both changes =
-at the
-> same time.
+changes in v4:
+- Change to patch series
+- Minor code changes in target/riscv/tcg/csr.c, i.e adding new line
+between sxl and uxl and mask TSR and TVM bits together
 
-I'll resend as a patch series.
+Link to v3: https://lore.kernel.org/qemu-riscv/20261112202356.23980-1-chris=
+tianslima@proton.me/
 
-Thanks,
-Christian
+changes in v3:
+- Fixed grammar mistakes and now Daniel can be credited correctly by the to=
+oling
 
->=20
-> Thanks,
-> Daniel
->=20
-> >
-> > Signed-off-by: Christian S. Lima <christianslima@proton.me>
-> > ---
-> >   target/riscv/tcg/csr.c | 5 ++++-
-> >   1 file changed, 4 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> > index af444e3e6f..340c61a1c4 100644
-> > --- a/target/riscv/tcg/csr.c
-> > +++ b/target/riscv/tcg/csr.c
-> > @@ -2124,7 +2124,10 @@ static RISCVException write_mstatus(CPURISCVStat=
-e *env, int csrno,
-> >
-> >       /* If cfi lp extension is available, then apply cfi lp mask */
-> >       if (env_archcpu(env)->cfg.ext_zicfilp) {
-> > -        mask |=3D (MSTATUS_MPELP | MSTATUS_SPELP);
-> > +        mask |=3D MSTATUS_MPELP;
-> > +        if (riscv_has_ext(env, RVS)) {
-> > +            mask |=3D MSTATUS_SPELP;
-> > +        }
-> >       }
-> >
-> >       mstatus =3D (mstatus & ~mask) | (val & mask);
->=20
-> 
+Link to v2: https://lore.kernel.org/qemu-riscv/20261110232614.83050-1-chris=
+tianslima@proton.me/
+
+changes in v2:
+- Don't change bits in target/riscv/cpu_bits.h
+- Add checks to S-Mode in the mstatus.SXL and U-mode mstatus.UXL in
+the target/riscv/cpu.c file that were suggested by Daniel in the
+review [1]
+
+Link to v1: https://lore.kernel.org/qemu-riscv/20261104223049.86286-1-chris=
+tianslima@proton.me/
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4456
+
+[1] https://lore.kernel.org/qemu-riscv/20261104223049.86286-1-christianslim=
+a@proton.me/T/#mddbb34a3ea837e3c707131a2e354c63c989ab029
+
+Signed-off-by: Christian S. Lima <christianslima@proton.me>
+Suggested-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ target/riscv/cpu.c     | 12 ++++++++++--
+ target/riscv/tcg/csr.c | 17 ++++++++++++-----
+ 2 files changed, 22 insertions(+), 7 deletions(-)
+
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 15c27f4ce4..50bdfbe025 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -997,8 +997,16 @@ static void riscv_cpu_reset_hold(Object *obj, ResetTyp=
+e type)
+          * The reset status of SXL/UXL is undefined, but mstatus is WARL
+          * and we must ensure that the value after init is valid for read.
+          */
+-        env->mstatus =3D set_field(env->mstatus, MSTATUS64_SXL, env->misa_=
+mxl);
+-        env->mstatus =3D set_field(env->mstatus, MSTATUS64_UXL, env->misa_=
+mxl);
++        if (riscv_has_ext(env, RVS)) {
++            env->mstatus =3D set_field(env->mstatus,
++                                     MSTATUS64_SXL, env->misa_mxl);
++        }
++
++        if (riscv_has_ext(env, RVU)) {
++            env->mstatus =3D set_field(env->mstatus,
++                                     MSTATUS64_UXL, env->misa_mxl);
++        }
++
+         if (riscv_has_ext(env, RVH)) {
+             env->vsstatus =3D set_field(env->vsstatus,
+                                       MSTATUS64_SXL, env->misa_mxl);
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..398e312c9a 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -2081,18 +2081,24 @@ static RISCVException write_mstatus(CPURISCVState *=
+env, int csrno,
+         tlb_flush(env_cpu(env));
+     }
+     mask =3D MSTATUS_SIE | MSTATUS_SPIE | MSTATUS_MIE | MSTATUS_MPIE |
+-        MSTATUS_SPP | MSTATUS_MPRV | MSTATUS_SUM |
+-        MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TVM | MSTATUS_TSR |
+-        MSTATUS_TW;
++        MSTATUS_SPP | MSTATUS_SUM | MSTATUS_MPP | MSTATUS_MXR | MSTATUS_TW=
+;
+=20
+     if (riscv_has_ext(env, RVF)) {
+         mask |=3D MSTATUS_FS;
+     }
+=20
++    if (riscv_has_ext(env, RVS) || riscv_has_ext(env, RVU)) {
++        mask |=3D MSTATUS_MPRV;
++    }
++
+     if (riscv_cpu_cfg(env)->ext_zve32x) {
+         mask |=3D MSTATUS_VS;
+     }
+=20
++    if (riscv_has_ext(env, RVS)) {
++        mask |=3D MSTATUS_TSR | MSTATUS_TVM;
++    }
++
+     if (riscv_env_smode_dbltrp_enabled(env, env->virt_enabled)) {
+         mask |=3D MSTATUS_SDT;
+         if ((val & MSTATUS_SDT) !=3D 0) {
+@@ -2111,12 +2117,13 @@ static RISCVException write_mstatus(CPURISCVState *=
+env, int csrno,
+         if (riscv_has_ext(env, RVH)) {
+             mask |=3D MSTATUS_MPV | MSTATUS_GVA;
+         }
+-        if ((val & MSTATUS64_SXL) !=3D 0) {
++
++        if (riscv_has_ext(env, RVS) && (val & MSTATUS64_SXL) !=3D 0) {
+             mask |=3D MSTATUS64_SXL;
+             val =3D riscv_write_uxl(env, val, MSTATUS64_SXL);
+         }
+=20
+-        if ((val & MSTATUS64_UXL) !=3D 0) {
++        if (riscv_has_ext(env, RVU) && (val & MSTATUS64_UXL) !=3D 0) {
+             mask |=3D MSTATUS64_UXL;
+             val =3D riscv_write_uxl(env, val, MSTATUS64_UXL);
+         }
+--=20
+2.56.0
+
+
 
