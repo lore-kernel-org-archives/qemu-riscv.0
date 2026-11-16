@@ -1,110 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D896606A32F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 19:31:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04999606A322
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 20:52:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=FDuWT/Yn
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dpGb7X5z;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cgQ2gRJp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xT2QJ-00072k-2C; Mon, 16 Nov 2026 14:31:27 -0500
+	id 1xT3g3-0000sn-DW; Mon, 16 Nov 2026 15:51:47 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xT2QH-00070x-02
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 14:31:25 -0500
-Received: from mail-yx1-xb12c.google.com ([2607:f8b0:4864:20::b12c])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <peter.maydell@linaro.org>)
- id 1xT2QE-0004JP-2S
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 14:31:23 -0500
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-67db8985419so2122941d50.1
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 11:31:20 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1794857480; cv=none;
- d=google.com; s=arc-20260327;
- b=SmDwDV4ZQKj1LjLyJVhOY/a57TDHsQ7iQ0iDLvgtT7yLOdE2brBHpDQWcvFVPiP3rg
- fOjAjoBkSg+wGh4Y+fGGlYuidslNQfJvGJvHbtvGwfpx13Q2xjQmbttUSu2wPWNb6etd
- HF9brXtFS23vLWKWAI7yJYd6c2zPAvsJ9Zx+3fo9tCIitk7XhjvFPZCcu1h3/Lz1bS2a
- v6EhIz5wC8gQ0HDoeUsTG8MB1Or7ZVNIXSXGC7CK4jBG4zGGlvQFGV7HoDrQ/ukI/njq
- SVXFi7QYoEqQ6iYCj8JbcsX7/QFnjzQtxcjJ+e56TE4pTZPcBa20D86XFq/i0z9mY/4b
- LBrw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20260327; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:dkim-signature;
- bh=hvQ2sCg1HfdyVsyadHrWzZgE0Ls85Df2r0H9rHDaW50=;
- fh=ox/Rl4AYK7xCqYgoCuwnx9xgZhRxVEapLTc37/K6FK0=;
- b=b8vBnd72aHSMxO3GqQyG1vF+P9nAAHlh8Cian8ohhj2UJWII1bv/UiJpN5DCOCQoPT
- bJ1GqXOsClb3f7+nexqyCf5uR44Im1m5/Gu4UdIDksUARFMo6R+WcQsBa6F+bUJmiiZ0
- UVMoCjXyvSGyHnICUcftLAcVqjV7wKlYBkJdCWOldTQlmDuoHjlZdFVzc8Z9Rj2bPedN
- XbgUeZtHJr1ISW5BOgCUmm3CuJonPFVtAUpS7RsGcFCHVT0EwApTifCe+J1oUu2QHeNd
- 2HUJw1u3g/khTdYc4BP6T/9p1V4dHiWx8gobab2aIvtTf8AemQRgZZ8ygSqodNvytn2Z
- FfJw==; darn=nongnu.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xT3g1-0000qd-5x
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 15:51:45 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xT3fz-0000qM-7i
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 15:51:44 -0500
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AGJfGsB2247125
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 20:51:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=28damP9njOHyhmd9moP/vUa5nLMGCbbvkax
+ PHshSkCw=; b=dpGb7X5zh4MbKSg4ICC/6ZqdIOz41En1gmq/29RZhIDF6IbruL+
+ M2LRcitE7J9pR2/AQyrfAd+E5mlcq6GnR0M9yNXTkKeQRY5qzLbChaluUmBFi2fc
+ O4dLPCxnBR7tW/0hZrRO8KM2ym1WKAXN+SlfRznkuGCnbexB+dsYKqaatyyolbqZ
+ p3+reyCLMIhgxTzaZNH5OXxw7mLW4dO6MdsRoRz1aSaVH61QJV+XEHn18Gc5rcoq
+ vTGJsTMDWUS1AKkIu0H815BzekRYAsvJHe+cv5o9ZbcSPfpiLccIq8jkak/qewNU
+ EmwhvcA4hPHpv4uwPCVEtaXJ0LN+VURGDKw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyyqyahsj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 20:51:41 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-542fc61841eso74070581cf.0
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 12:51:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794857480; x=1795462280; darn=nongnu.org;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=hvQ2sCg1HfdyVsyadHrWzZgE0Ls85Df2r0H9rHDaW50=;
- b=FDuWT/Ynrr2xN7kLkwA0AK+DCixTe9kXdPidqLVnpQn5deUzZdZyqE3zJho6SSG5pL
- /iA5VYTXoMo+MyeKPygCqO4GBHTabzidAF0duzW9i7KXB/dAX5ycIZc01l2aVIgiXm4r
- VFeFSzxJTyGl4JYC56CZlU+BubkL1pecEo/V88HhGubwhxfs8SpN83W25m9nOC70ugoO
- XHctzaALxTMQvWpVMzQ5JRNRp1tPrajHLWhRzA0QRMCxgn3qBPmwym9ej3MT4vRTJO8N
- 3vHTI7uTqeSjjQaB7LNA2dDw2xc3/9NxpiBqohwcwcvCo9sqCvW6Nl8YD66JV2b/oPvV
- TkTA==
+ d=oss.qualcomm.com; s=google; t=1794862301; x=1795467101; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=28damP9njOHyhmd9moP/vUa5nLMGCbbvkaxPHshSkCw=;
+ b=cgQ2gRJp1IBZNx+58zUQywgZKZQfvmHpCpX62v/ypDRpX0YFDQ/Vck8DxlmXzt6ac+
+ CwcE0LDgTZDfz8GT2CtUvs3njfO5Q+QxoM7+REIINkShT7Rb6IVSPHSfSqhI6IY3RYqt
+ PgUjTj1QznS3HIWOIlcMR4DK0l0+cbzqBaHMFplA/rdKcavL/IFYxrPxo/fiGTb0rXVd
+ ug6qbFD3KYAW2lzBWOIfVlvkXCuuOb+IOgs2f1P+e7kJWlmM/+f7ZgH9lRLklWrrN/Et
+ Wv+pUSw8Bw+e2Sca4tBoY+tbbDGXz6UwrfKzR89oU6PBXjOMRf4eA7MDQ29fSvqHeO4j
+ IM1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794857480; x=1795462280;
- h=content-type:cc:to:subject:message-id:date:from:in-reply-to
- :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to:content-type;
- bh=hvQ2sCg1HfdyVsyadHrWzZgE0Ls85Df2r0H9rHDaW50=;
- b=ryU9F6+dYO0j2YZ0rfSky3/Wac4mbFuko742HbWex/BTcB6lz9Lrl16uDZTZrYArmQ
- vWGEUIctnLT2N2Wjzn2orXk/sis2teTBfxyNaTGosAEnTK8E59LQPZYYMV6yu3aYtbFN
- PYSNyBpSf0DaEsUS9nP4Dyv223cL47lHxpIYTZRoKq4P6bE28C4oBdgI8RsIpanrIpXL
- xZNze4arAeOEdbRFg740vEt+vMnnRlmcZjYak3wiA2a9GiddmeViSW6KlNc5ByrHzksY
- sKf9sARmOZjnSTmSijxdMKlM/hzDIoL2rfVsTvFhV4uOOhRia/BkDL8ft0lyJUfZEFxf
- Y8Kg==
-X-Forwarded-Encrypted: i=1;
- AL+hErEZKjxGcfolOc7psyjH8olNDoGTwMbsBEnXfxeeAGQB+/jJioGAQnYXfHYc0nryvGgzAKTPACr7yWa1@nongnu.org
-X-Gm-Message-State: APuU4Z/HnIRAb/y8oALIAAUC2aPLF4Rz8lFbIa8kTu2uZteNpmfHEBPq
- s06/R5ZDoGcY6zzgxgyZpfFIoIr+qhSef8gj/PxpEtgi+8K3hZ8PJzXzVVppr2CsFbi9ZvBcedw
- fZLLUeyJb/BeeLTeQulXtZJzKmnyVRiwJfm9MMD1/TQ==
-X-Gm-Gg: AZFdTZdZO5F0WEQctLWsR1FJyvsexEIqELcHcIn7IGi3qj45h4k3Yx/9EL4iS4xATrI
- FfsFXhtcIf0zftTQetYRltvwnFsETPOQ/LuXpFu+a+YDjH1bNILJcMaYPGTFLud97kMqRHeCkBa
- 8pzwwx6l8YG7xYVNruy2vwZjrvHczegYCYC8Syh29CEuAgqXlqQNAl2vi7QkUVRnPzZX8HDGo5+
- 72oCGtIlWiE0a7pgM+CVG4DaftA87uJGvtSoE5meL6pJEArBKSKrLDcE2AoL1dlt3CXgyQu/Gow
- EAVqRtXxN2wqi45DlMnGOGuOtk3E/9h9POKe9bHkvwZuMLRlvwQ3CZJQ2w0WmEJnBGCQy+sDpKx
- /PqjFin57zrY0LLk1ZgZIc5+/+tKkDfr7LzUhB5p7B0I7SOPn1iHS3FyCdtDwCIZznYQQ6dWt3l
- RCy2FwsuJhnTB/wkaQxIg5
-X-Received: by 2002:a05:690e:1688:b0:67d:babd:b80c with SMTP id
- 956f58d0204a3-67dbabdc5aamr1889966d50.67.1794857479878; Mon, 16 Nov 2026
- 11:31:19 -0800 (PST)
+ d=1e100.net; s=20260707; t=1794862301; x=1795467101;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=28damP9njOHyhmd9moP/vUa5nLMGCbbvkaxPHshSkCw=;
+ b=Zahuv7TYYkE9e46cplxjZmkeDHHosDJHcoc+0VTLtq3wD9QB8ZkSEnPbehw8p1ikak
+ 3mryJl5CUcvkZKNtDS1CdWxyN9AEtn5YYOxerFvsp+NireziL3taslOtqyMqVQ+RdH9a
+ fkOjJrefOeQX7HPN4zAmOmxg0TO4Mnaxxa5UpzL191ZlUibyXjNrZsmra1ImFM9t4Lr9
+ FBDSBfJQY0aAjuiAdCvTI/b6w6nEHn4ZEy8ojaA9DcDG1lNJyaTXZuAlsu/ssJ/W0S/3
+ mn5ajUq/bKErAAWgze6v4yShnwoF4o+zs/mlB0yKorlXgVynub9jmuRfN4+JTEDR/VM1
+ m5IQ==
+X-Gm-Message-State: APuU4Z8mtQ7QjuvdJoBmxWKjL4HGr+kF53ZDloAi1SLVUdoN1bwKwrG0
+ X77rN0jDs07CzT8D91gE5YmcEqKDxyisStCuYoyBU8DLA9E1pXSm2zYNWAO9OeOm0IGJ18PeD3t
+ YBnoSHnSHIa37K+s4s3I6z/n9LTd0/D8WWm5O22rw7fMQDOnWQEZcyVwVJA==
+X-Gm-Gg: AYBFou3Q+gBGqXpWSQPPFajqGMFJMXdLRyrd0nXjYv1p9TqtSmMiPKqgsRY8n/mxmk3
+ 4LrTDriT2p8ZBFAZm1DtjZ3yVS2Znr39fSL9VQVbeI7tp33jLXmnqSO48HOW1DSmWEjkRuhLz1P
+ rVG3PidQ0zD0C6Xwbb4lKIbL5fjqT6SlLr+9QQuXDl4I2yKq4Jb2k976KpfeojMbwgf8vydRr/Z
+ kBf3a9zMBaWd4g66p7vu43hubLxul1FRtX8zZzJCbye8dMX3u9AIH1d1YMYrHup5HbHswIDX4J3
+ dx4vQFXVOBRgKFbFu9J4zDPjcWorszMbC9cFlvHhsX8JNUdJKGgDO6vhA8EeOkVwM1DNVFDw9lx
+ 5T86Rcmin1WH8FVkDXh3FQK5F0m8JwaxtKU61twICz3Dn7fyjeWiy2QdsPmP8mcFmyPJKIqcSF7
+ fwb+MraaQD9j0=
+X-Received: by 2002:a05:622a:a38d:b0:55b:d0f1:1dd3 with SMTP id
+ d75a77b69052e-55bd0f12ac9mr130871971cf.76.1794862300813; 
+ Mon, 16 Nov 2026 12:51:40 -0800 (PST)
+X-Received: by 2002:a05:622a:a38d:b0:55b:d0f1:1dd3 with SMTP id
+ d75a77b69052e-55bd0f12ac9mr130871561cf.76.1794862300130; 
+ Mon, 16 Nov 2026 12:51:40 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.227.223])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-91f23da64c1sm93153546d6.37.2026.11.16.12.51.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 12:51:39 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH] target/riscv: fix hideleg write masks [GL4814]
+Date: Mon, 16 Nov 2026 17:51:34 -0300
+Message-ID: <20261116205134.846876-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
-In-Reply-To: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Mon, 16 Nov 2026 19:31:08 +0000
-X-Gm-Features: AclHuK86TOGoB8kRSwdXx4amVM7Dh5DygxvE65EO4LJUouj_so5MRTVNEi8304Q
-Message-ID: <CAFEAcA8Nmt_Nsvfm77en_oaE4orcQ3BdCBQWNAXmi0iqLgV7fw@mail.gmail.com>
-Subject: Re: [PATCH 0/3] Fix RCsc store->load ordering of release stores
-To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org, qemu-arm@nongnu.org, 
- palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com, 
- daniel.barboza@oss.qualcomm.com, chao.liu@processmission.com, 
- richard.henderson@linaro.org
-Content-Type: text/plain; charset="UTF-8"
-Received-SPF: pass client-ip=2607:f8b0:4864:20::b12c;
- envelope-from=peter.maydell@linaro.org; helo=mail-yx1-xb12c.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA4MiBTYWx0ZWRfXy9Ganzt6cDjH
+ XZPkXlBYAh/E0bKzQ5ZXa+PqRnuK/gyf/xoDm+QpLkXXFshf1u4CNrtx29KDO02JuC7kPGtIFjL
+ R0O7bRioBzqyNFQRP9DdYuPbdZ7ElzA=
+X-Proofpoint-GUID: vKhRcYqI9mPpNJAyiXWMLO5HpViJtn8y
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA4MiBTYWx0ZWRfX8BanYnAmaLvF
+ xHAK8hp0pQJshbsUq8LrbkW1HJoP7ajr7NhZxLCEmavcroLb7EiJ18wDANO/VrYf6z9A8iwA/3H
+ iO9aZNB96QzY4N9pfpqDUUOg9BJjrFendfbO+/riY/iFNqq5EygcPcVh0HoxGtRcRTi6/HYEh38
+ ZPagXNC5rRGBVdd3eR6vs0Vz3eqjXbjy+XQLN02agodnfqpHTxngHtsGGXCSU4SJunr1ylsDdeg
+ IZJFbcq3cR274azLa+9ypOkfu5XNrVobIAEczLmDCOpnEJEsx7RtKpGZZtYe+2qJoEfoLC0DMnx
+ ZbBPgi8ou5Wg1WWsxlOX9tq6hUrP85kYVwiGEcI73UqtslhaKDuKDFEEsNSeHed+8GaceM99Xh6
+ IB5fii1F8Y+Os6D/FxyJqBkNfP/PFsJj79fI/fSYfjLhPu/Y2mI8B72hmdtnBuOtVXQovvA/5aw
+ jsPaYj/JenmsjPUD/eQ==
+X-Proofpoint-ORIG-GUID: vKhRcYqI9mPpNJAyiXWMLO5HpViJtn8y
+X-Authority-Analysis: v=2.4 cv=ePeGH3p1 c=1 sm=1 tr=0 ts=6afb6cdd cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=WERq1Tg1Nl5IKGfG0e6imA==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=-qIh_jz3752EjCO2w1YA:9 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-16_06,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160082
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
 X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -116,57 +144,162 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Fri, 21 Aug 2026 at 07:40, LIU Zhiwei <zhiwei_liu@linux.alibaba.com> wrote:
->
-> Several guest architectures give their store-release instructions RCsc
-> semantics, which requires the store to be ordered not only after the
-> memory operations that precede it, but also before any subsequent
-> load-acquire with RCsc semantics.  The TCG translators, however, only
-> emit the leading barrier before the store, so under MTTCG nothing
-> prevents the host CPU from executing the load-acquire that follows a
-> store-release before the store has left its store buffer.  On an x86
-> host (TSO), store-load is the only reordering the hardware may
-> perform, and it is exactly the ordering that is missing, so the
-> architecturally forbidden [0,0] outcome of the Store Buffering litmus
-> test is easy to observe:
->
->     CPU 0                      CPU 1
->     store-release X = 1        store-release Y = 1
->     load-acquire  r0 = Y       load-acquire  r1 = X
->
-> The affected instructions are the RISC-V Zalasr store-release
-> instructions and the Arm STLR, STLPUR and A32/T32 STL store-release
-> instructions.  Neither architecture defines an RCpc store, so every
-> store-release is RCsc (RVWMO preserved program order Rule 7; Arm
-> Architecture Reference Manual DDI 0487, section B2.3.8 "Acquire and
-> release semantics").
->
-> Patch 1 fixes the RISC-V side and patch 2 the Arm side by emitting a
-> full barrier after the store as well.  Patch 3 fixes an inverted
-> barrier polarity found in the A32 LDA load-acquire translator while
-> auditing the load-acquire side.
+We need to check hideleg writable bits with mideleg and mvien. Priv spec
+says:
 
-> LIU Zhiwei (3):
->   target/riscv: Fix RCsc ordering of Zalasr store-release
->   target/arm: Fix RCsc ordering of store-release instructions
->   target/arm: Fix barrier polarity of A32 LDA load-acquire
+"For bits of mideleg that are zero, the corresponding bits in hideleg,
+hip, and hie are read-only zeros."
 
-This series seems to have been accidentally missed, possibly
-because it included both arm and riscv patches in the same
-patchset. RTH tells me that the Arm patches are correct, and
-Daniel has reviewed the riscv one.
+For mvien, the AIA spec says:
 
-riscv maintainers: are you OK with me queuing the whole set
-including the riscv patch in target-arm.next, or would you
-prefer to take the riscv patch yourself through your queue?
+"When the H extension is implemented, if a bit is zero in the same
+position in both mideleg and mvien, then that bit is read-only zero in
+hideleg".
 
-thanks
--- PMM
+Filter hideleg writable bits by using mideleg and, if the proper conditions
+are met, mvien.
+
+Fixes: d028ac7512f1 ("target/riscv: Implement AIA CSRs for 64 local interrupts on RV32")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4814
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ target/riscv/tcg/csr.c               | 22 ++++++++++
+ tests/tcg/riscv64/system/meson.build |  8 ++++
+ tests/tcg/riscv64/test-hideleg.S     | 64 ++++++++++++++++++++++++++++
+ 3 files changed, 94 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-hideleg.S
+
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..c130eb2c8a 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -4997,6 +4997,28 @@ static RISCVException rmw_hideleg64(CPURISCVState *env, int csrno,
+ {
+     uint64_t mask = wr_mask & vs_delegable_ints;
+ 
++    if (riscv_has_ext(env, RVH)
++        && riscv_cpu_cfg(env)->ext_smaia) {
++        /*
++         * The AIA spec states in section "Interrupt filtering and virtual
++         * interrupts for supervisor level":
++         *
++         * "When the H extension is implemented, if a bit is zero in the
++         * same position in both mideleg and mvien, then that bit is
++         * read-only zero in hideleg (...). But if a bit for one of
++         * interrupts 13-63 is a one in either mideleg or mvien, then the
++         * same bit in hideleg may be writable or may be read-only zero,
++         * depending on the implementation."
++         *
++         * We're making the simpler choice of making all bits read-only
++         * zero if the bit is zero on both mideleg and mvien, and writable
++         * otherwise.  We're not going to special case bits 63:13.
++         */
++        mask &= (env->mideleg | env->mvien);
++    } else {
++        mask &= env->mideleg;
++    }
++
+     if (ret_val) {
+         *ret_val = env->hideleg & vs_delegable_ints;
+     }
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e..6c08806cc9 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -89,6 +89,14 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'test-hideleg.S': {
++    'cflags': cflags,
++    'qemu_args': ['-machine', 'virt,aia=aplic-imsic,aia-guests=7',
++                  '-cpu', 'max', qemu_args],
++  }
++}
++
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-hideleg.S b/tests/tcg/riscv64/test-hideleg.S
+new file mode 100644
+index 0000000000..a07d48430f
+--- /dev/null
++++ b/tests/tcg/riscv64/test-hideleg.S
+@@ -0,0 +1,64 @@
++/*
++ * Test if bits 63:16 from hideleg becomes writable when
++ * they shouldn't.  Derived from Gitlab 4814.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#define CSR_MVIEN 0x308
++#define CSR_HIDELEG 0x603
++
++.option norvc
++	.text
++	.global _start
++
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	/* Mask for 63:16.  */
++	li	t0, -1
++	slli	s0, t0, 16
++
++	/* mideleg = 0, mvien = 0: hideleg bits 63:16 should be zero.  */
++	li	t0, 0
++	csrw	mideleg, t0
++	csrw	CSR_MVIEN, t0
++	li	t1, -1
++	csrw	CSR_HIDELEG, t1
++
++	csrr	t1, CSR_HIDELEG
++	and	t1, t1, s0
++	bnez	t1, _fail
++
++	li	a0, 0
++	j	_exit
++
++_fail:
++	li	a0, 1
++	j	_exit
++
++trap:
++	# Any trap is a fail code 1
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
+-- 
+2.43.0
+
 
