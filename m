@@ -1,75 +1,75 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49A1F606A322
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 18:42:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E65DA606A330
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 18:54:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=IO9uYEa4
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OUuvXSVN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xT1eL-0008VZ-6j; Mon, 16 Nov 2026 13:41:53 -0500
+	id 1xT1q9-0004Pg-PY; Mon, 16 Nov 2026 13:54:05 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xT1eJ-0008Ul-Cz
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:41:51 -0500
-Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ id 1xT1q3-0004OT-SC
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:53:59 -0500
+Received: from mail-wr1-x435.google.com ([2a00:1450:4864:20::435])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xT1eG-0007aW-Tg
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:41:51 -0500
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4bb64c99d2fso25565425e9.3
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 10:41:47 -0800 (PST)
+ id 1xT1q2-0000GA-BE
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:53:59 -0500
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-48b001cd92bso2550343f8f.2
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 10:53:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1794854507; x=1795459307; darn=nongnu.org;
+ d=linaro.org; s=google; t=1794855236; x=1795460036; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:message-id:date
  :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=g/FKLq3GFAut/12UiI3qYkPvweKpaUbZMtn7PvpbZnE=;
- b=IO9uYEa4/buofyIjzD3ZIt734jusBU04xhtMAuZ9WsqN59UDRYuvI8W4QFa6/MtPBU
- L4j1r8NN0CHieDhGNhJRlJOAkPp6FW8m0WUtwM9FN5N0DbZT+A+fbpPutSh9OSaSLpXE
- pbCO6evgVkcLw//9FsVsF7JtUd41wuRSkm2RMysTX7O9SLyoTOV//KpMX/yu2rHw8r/B
- e7QaoSq0Vup5+MCd3t7lbW8cY0IwqG9jfLu868dN195+bKRe5F+nESCDHLKf7bsrd2Hw
- hTXdqMpsKGcOefa6OkUmdR9P+GvEtEtJ55kZjy3NywCdpJ7r32NttYCjxRozvyF4dngh
- Mm0g==
+ bh=bsHRawm3s8PBxNWetjMw6HAVt2xlFOc5Sp4jfSBTOF0=;
+ b=OUuvXSVN895dxXHjkWOYkKpAKuSVAJVkftW0N0wuj7bTAAaGIJHtGfOZrRndlqbTGi
+ 0QikRC6+72Aa0kt3sg5XZu3y1NHlab/uLzzXh4rrI9cN4QKN5IFJtaxnC2rjlrs9k4Zm
+ XqDNS6Xr5f0GzkRLO/QTfNPdcslyjyKjkBGFNpP66ja4LbidmJ6C/kH9dc2hdVXXYhFd
+ ck/eJawT92nnayeVq8YEcBigyPIPkgHlI9h7+ov4psOxvbuWrbiuUOEecO0Tr0XLNg+j
+ 3DmF2f0hzjR19KkcMaNyHGUuMMf0VUNfHmA5ZbbyyqGFKndhoWxrSMhlyxbNf9uNq3AW
+ Ce6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794854507; x=1795459307;
+ d=1e100.net; s=20260707; t=1794855236; x=1795460036;
  h=content-transfer-encoding:content-type:mime-version:message-id:date
  :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=g/FKLq3GFAut/12UiI3qYkPvweKpaUbZMtn7PvpbZnE=;
- b=JVTtxOb52D4kGpxicKkS95Oe1ruBk3vbSEFVTgioLU6X6YAPe19jhkp4PbCTy87+bS
- FkflMpFzfQp7rETZENbFNKV6aouyEJRJD7Sm3J5WqolXI/y9lFCcvGnsrVMP+vrP/dUY
- TqFmFDIRF8UdjmrxNRgafPG8s1UYeVkuIJh0m4GAWAvIYk34aCIevpwzL+909sdHE3Op
- T99KyxCgMkONeUFCpLxxum7z3AzN3L9jzFFpSpiWJwOrE9x2hE42/gF0IzOsmR+hqcZ4
- wOgxQyaVojm8qmoRDnhkQIR5VGMmqxCS7FUefYWH8Z61IhBHMBD1ShXFjCCyjPgHbE1q
- 9rdw==
+ bh=bsHRawm3s8PBxNWetjMw6HAVt2xlFOc5Sp4jfSBTOF0=;
+ b=YGgGvy/cV/v0YnFl+lc4dnfx8+qVclDOPMCxuN/OxNdG9E2Gg8C1VQ3Umq3w4e89YP
+ D8NclrihxnTCBcKYrZ1+UM6+MoKqXFT0d2M6IZn2+E+lrAdWXZ2EuPL4md+BrHduM+QP
+ j+l1fdCPrK0ZherzyHpGSO1PjPBKJLFNmKmqAss7PKsSWq0pEMXK+ITVMdWb+t98O6l0
+ JeXlUVSR7TYuvajtj2sfNRpzs5piaVpzRLLiwx5MBSOieF8ayHOxZs2B8/M9piE2n0v+
+ nUlkK7pSomE7bDMBlyr9KV+zwP6X25EMfLkh+0z7vQkaRC8DJc2q+syudD9mvgQ4I4+7
+ pXUA==
 X-Forwarded-Encrypted: i=1;
- AL+hErEQfviAe/LK03rpvVKf7YkJJ89YmSGTxPLvk4UmU+nLHzjtSfywgRIe787Lz3XEKDJres8RvkXLuv8S@nongnu.org
-X-Gm-Message-State: APuU4Z82WB3/fJh0wYROoeFa4lu3Gv7WPDVE6MxqV3l9gRfmvFlnon1O
- 6QWOiT7NyafNcFBhHQH4TLY3yCxgRJaOklHMXZzKLcJE4qxrYMLZZr7GQHpiS6MROr8=
-X-Gm-Gg: AYBFou295ux5SDTRTv9uJPeOaE9Bx6EfjKwkOAkfZJeP1xwzy13Lnv/0+lzzjUzst8q
- QFbHjOTGcaqMhFzwZ38StOjEc5MW7wdnSp4gE/8l8G4PlUfCPvVH4/4A4NXluckMfFKc+yMXKM1
- +JY6GVtSkphZvpVeAehBsDvAgg+Jdja+ZM7WZS0Buh/AieD+THeNk73Z4eTIJ5m3IuSuBksw/vu
- cq4wc3OXW4h3vHl3gZEA6llQzY+w+egqJG78sltG4Kp7O07yQSXFfzdPVJpnLBs0s3OSpQfzpGB
- 0MB2WVtnmY3sva4BGLHR6+aETlrp82W7wE+Kaqh4r90592jH9r7y+Iigak1UPvha4Qz3k27VOYj
- IrKl7Clh3iShNQvjVdsvW/qmx3R9yLZ74u1YI3ORsJQCngOEUp+JEfrDZRr3G1WKeDFi2lNLDUj
- lOr2Aph2/Iz0HdybkZokwI1HDjvaL9agS07FYh6C4lLS37VZhULWt1IbBNerkLP6QVAv3QdEn1s
- QiFC5Rphf1BTBn0T+xvsJv0L2Ez5f6CKtCo3mj7+7CIAdOuwxBI9PDbNYlbh3oqQCW2KcROJm8j
- A5cqHZaSOrMD4q4iE3qc/ddFthQH
-X-Received: by 2002:a05:600c:501f:b0:4bb:76f6:d23a with SMTP id
- 5b1f17b1804b1-4bb779f5b93mr26225815e9.21.1794854506737; 
- Mon, 16 Nov 2026 10:41:46 -0800 (PST)
+ AL+hErHq6QSXPRauzuL3L3QmSP5wNEzcRVnrmsTz9ggMcv15hTpJj/voT8cfkGsnP+zyFwtg5EAUVqDLIow4@nongnu.org
+X-Gm-Message-State: APuU4Z/4In6KdySzvsMYHUcb1slk0SkO888b5MIcOmAZx1/T4+qRi67h
+ amxTZtYuLj712pJ/728kmrSG+4eQku6tvIukFM9x6+TbNq1M86ZzU++rXjoNZ/W4rvs=
+X-Gm-Gg: AZFdTZeXOR/axN4qAcAfTYE9E8r1gXm3P8/b9gVdN6N+prIA+21c4rFcp/RAufEEhYR
+ QpbQ1lqMD7XvcwF79V2+fXRMA4Bte5RoHHllMSVqsfHzdFhUAesgxLy2xENvcfoZ6rWHxUrQt6a
+ YDXYxAawNPYZULgM5aA7nZpPT7jfagLYdVonMIBeDUsddz2QtsVpbJDCsAHFcU1QIaEj44HPge6
+ a1PqYAf+F2M4i+wCmn5pefUrzbpUqnu6kQ+SHnPx1YXS0hi28lThRXJTnZBSj0IZlq+TZV2/HWg
+ 58THf585Xr/oN+OtVcQSj/hWJAxyPsOBH5cd6FazYIChvoswP4NLqeBlNcvA4MW1mauG4X9kvyD
+ 9PX8lrnARV13V6jP42X0P74F5n6a+meaXpp2LbGWyv/AeMgOKZjMUicNXGWQQpRRJou5zt3qMg0
+ hA7Xk4y+tIE2WuXF2McVD966sZvnA2Ju6yJKgyGikYioyme/wPq3pQu56EwkFW1rHggLrm4HOYl
+ DhjfnnFp4iveWyjWxXOXyKuacTJauWooi5kc50CST1CHmsehRM3i78gzEAY9C7siooKQwOCbEYk
+ RBz/ITfdXC9TX47bdqgGmLBiihrT
+X-Received: by 2002:a05:6000:4a03:b0:48e:f10:ceb8 with SMTP id
+ ffacd0b85a97d-49c6fd932fcmr23863250f8f.11.1794855236034; 
+ Mon, 16 Nov 2026 10:53:56 -0800 (PST)
 Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb56f97257sm200563315e9.4.2026.11.16.10.41.45
+ ffacd0b85a97d-49c5f1c0e31sm20598177f8f.19.2026.11.16.10.53.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 10:41:46 -0800 (PST)
+ Mon, 16 Nov 2026 10:53:55 -0800 (PST)
 Received: from draig (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id C356D5F8FE;
- Mon, 16 Nov 2026 18:41:44 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 2AC005F8FE;
+ Mon, 16 Nov 2026 18:53:53 +0000 (GMT)
 From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
@@ -83,14 +83,14 @@ In-Reply-To: <20260821064032.49556-3-zhiwei_liu@linux.alibaba.com> (LIU
 References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
  <20260821064032.49556-3-zhiwei_liu@linux.alibaba.com>
 User-Agent: mu4e 1.14.5-pre1; emacs 30.1
-Date: Mon, 16 Nov 2026 18:41:44 +0000
-Message-ID: <87bj7ok49j.fsf@draig.linaro.org>
+Date: Mon, 16 Nov 2026 18:53:53 +0000
+Message-ID: <875wxwk3pa.fsf@draig.linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-Received-SPF: pass client-ip=2a00:1450:4864:20::330;
- envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::435;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x435.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -109,11 +109,10 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -128,108 +127,9 @@ LIU Zhiwei <zhiwei_liu@linux.alibaba.com> writes:
 > domain, which is what forbids the [0,0] outcome of a Store Buffering
 > litmus test that pairs "STLR X=3D1; LDAR Y" on one PE with
 > "STLR Y=3D1; LDAR X" on another.
->
-> The translators only emit a barrier before the store, which orders the
-> memory operations preceding the store before the store itself (release
-> semantics).  Nothing prevents the store from being reordered with the
-> memory operations that follow it, so under MTTCG the host CPU may
-> execute the load-acquire that immediately follows a store-release
-> before the store has left its store buffer:
->
->   * on an x86 host (TSO), store-load is the only reordering the
->     hardware may perform, and it is exactly the ordering that is
->     missing here;
->
->   * on an aarch64 host, no dmb follows the store either.
->
-> The defect is easily observed with a bare-metal Store Buffering litmus
-> test on a 2 vCPU virt guest: "STLR X=3D1; LDAR Y" on CPU 0 and
-> "STLR Y=3D1; LDAR X" on CPU 1 produce the architecturally forbidden [0,0]
-> result in 6 to 7 out of 100000 iterations, while inserting a DMB ISH
-> between the store and the load on each CPU brings the number to 0,
-> which validates the harness.
->
-> Fix this by emitting a full barrier after the store as well, for
-> STLR/STLLR and STLPUR on the AArch64 side and STL/STLB/STLH on the
-> A32/T32 side.  The TCG_MO_ST_LD bit included in TCG_MO_ALL makes the
-> x86 backend emit a serializing lock-prefixed instruction after the
-> store, draining the store buffer before any subsequent load executes,
-> and the aarch64 backend emit dmb ish; the store therefore becomes
-> globally visible before any subsequent memory operation of the same
-> vCPU, and the RCsc store->load ordering is satisfied.  This is
-> stronger than the architecture strictly requires, since the barrier
-> also orders the store with respect to subsequent RCpc operations such
-> as LDAPR, but this matches how QEMU already implements FENCE-like
-> ordering and keeps the fix simple.  After the fix the litmus test no
-> longer produces the forbidden outcome.
->
-> The load-acquire side needs no change: the barrier emitted after an
-> RCsc LDAR already orders it with all subsequent memory operations, and
-> QEMU deliberately implements the RCpc LDAPR family as full load-acquire.
->
-> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
-> ---
->  target/arm/tcg/translate-a64.c | 13 +++++++++++++
->  target/arm/tcg/translate.c     |  6 ++++++
->  2 files changed, 19 insertions(+)
->
-> diff --git a/target/arm/tcg/translate-a64.c b/target/arm/tcg/translate-a6=
-4.c
-> index 4f9a93950b..b5bf977910 100644
-> --- a/target/arm/tcg/translate-a64.c
-> +++ b/target/arm/tcg/translate-a64.c
-> @@ -3672,6 +3672,13 @@ static bool trans_STLR(DisasContext *s, arg_stlr *=
-a)
->                                  true, a->rn !=3D 31, memop);
->      do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, memop, true, a->rt,
->                iss_sf, a->lasr);
-> +    /*
-> +     * STLR is an RCsc store-release: the Armv8 architecture orders it
-> +     * before any subsequent RCsc load-acquire, which is what forbids the
-> +     * store-buffering litmus test.  The barrier above only orders
-> +     * previous accesses before the store.
-> +     */
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
->      return true;
->  }
->=20=20
-> @@ -4415,6 +4422,12 @@ static bool trans_STLR_i(DisasContext *s, arg_ldap=
-r_stlr_i *a)
->      /* Store-Release semantics */
->      tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->      do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, mop, true, a->rt, iss_sf=
-, true);
-> +    /*
-> +     * Like STLR, STLPUR is an RCsc store-release and must be ordered
-> +     * before any subsequent RCsc load-acquire, so it needs a barrier
-> +     * after the store as well.
-> +     */
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
->      return true;
->  }
->=20=20
-> diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
-> index 1770428d3c..bddac41bf9 100644
-> --- a/target/arm/tcg/translate.c
-> +++ b/target/arm/tcg/translate.c
-> @@ -4259,6 +4259,12 @@ static bool op_stl(DisasContext *s, arg_STL *a, Me=
-mOp mop)
->      tmp =3D load_reg(s, a->rt);
->      tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
->      gen_aa32_st_i32(s, tmp, addr, get_mem_index(s), mop | MO_ALIGN);
-> +    /*
-> +     * STL has the same RCsc store-release semantics as the AArch64 STLR
-> +     * and must be ordered before a subsequent RCsc load-acquire (LDA).
-> +     * The barrier above only orders previous accesses before the store.
-> +     */
-> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
->      disas_set_da_iss(s, mop, a->rt | ISSIsAcqRel | ISSIsWrite);
->=20=20
->      return true;
+<snip>
 
-
-Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4872
+Tested-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
 
 --=20
 Alex Benn=C3=A9e
