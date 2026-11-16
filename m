@@ -1,141 +1,103 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3508606A31C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 17:32:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49A1F606A322
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 18:42:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QNKIBG+c;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YMZKWbED
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=IO9uYEa4
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xT0Xt-00011V-Om; Mon, 16 Nov 2026 12:31:09 -0500
+	id 1xT1eL-0008VZ-6j; Mon, 16 Nov 2026 13:41:53 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xT0Xq-00010U-Aj
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 12:31:06 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xT0Xn-0005eZ-88
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 12:31:06 -0500
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AGGIZbq2791035
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 17:31:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=rnDjRUpV946
- o5StxaET/HJ7SafmpRbN/19UItFmMXjY=; b=QNKIBG+c97uD5HmxmrbEhu4eyg2
- xudQV1EIDHM8ye9Z/h2VemRjv6EZI+m3RBfvDAlyXZwYDKJqtYLbRM37GZDKPrcC
- M+DSplBk93wc/XfK95lWpFY1OlR2d3pizszh+dumPwxe8WOBg4pmZNIb8/kWv2d+
- GYqcq+v5ij4jYIQQeeSrl+2RwWoVN5XSfuOqdaUyVeHWN/RJqtr5gCPGGbb+tbIF
- usGA/pNNkAnNie29WK//utZfgS9mhpT/qiHdCngTGxDgYEkiL5WOPx6/T61Ur6yB
- S1GLV6inaURTnMG9vpvsT4MnuFthBvcNoEL5bagJz36Q4xDAH/oJxQ+pCxA==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j00nfhh2j-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 17:31:01 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id
- af79cd13be357-93e92aad34aso745031485a.0
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 09:31:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xT1eJ-0008Ul-Cz
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:41:51 -0500
+Received: from mail-wm1-x330.google.com ([2a00:1450:4864:20::330])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xT1eG-0007aW-Tg
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 13:41:51 -0500
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4bb64c99d2fso25565425e9.3
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 10:41:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1794850261; x=1795455061; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=rnDjRUpV946o5StxaET/HJ7SafmpRbN/19UItFmMXjY=;
- b=YMZKWbEDLl1sDblZNg+YtmSWtwN/GnOb6yAZXm23TnwK4P4b7+ZbxVFrFiRewOYNCM
- h8/L+Cn4CiUnGPu27rwt6G+Y6MilLZz+881H4IE3eRvu6HAuX6ecQQjbYB0ooJeeF9V4
- RvZ1Gry4qTB3Sz/x0wD5bryv+RXcej4y+V2nEUpZ6Ulea1sHuy3bmzciJ8oz9CG9g33k
- AUA55HA4Z5gHmRIej9+F6gCoDwKrl0GMZStoU5e0wC6mPW3gKyvEGrPSSIwvjENYY+J/
- SntWGXYthe4bHni7VWM/mSwxyZlcYEVhnOJ0BmLoXUmSwDryd2oM8wgY2IuVdlZAjyba
- 2YbQ==
+ d=linaro.org; s=google; t=1794854507; x=1795459307; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=g/FKLq3GFAut/12UiI3qYkPvweKpaUbZMtn7PvpbZnE=;
+ b=IO9uYEa4/buofyIjzD3ZIt734jusBU04xhtMAuZ9WsqN59UDRYuvI8W4QFa6/MtPBU
+ L4j1r8NN0CHieDhGNhJRlJOAkPp6FW8m0WUtwM9FN5N0DbZT+A+fbpPutSh9OSaSLpXE
+ pbCO6evgVkcLw//9FsVsF7JtUd41wuRSkm2RMysTX7O9SLyoTOV//KpMX/yu2rHw8r/B
+ e7QaoSq0Vup5+MCd3t7lbW8cY0IwqG9jfLu868dN195+bKRe5F+nESCDHLKf7bsrd2Hw
+ hTXdqMpsKGcOefa6OkUmdR9P+GvEtEtJ55kZjy3NywCdpJ7r32NttYCjxRozvyF4dngh
+ Mm0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794850261; x=1795455061;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=rnDjRUpV946o5StxaET/HJ7SafmpRbN/19UItFmMXjY=;
- b=aEzV7nOBhh70Q32mD34EgIjQA866txaNGV9za6DPZgwVbfUifP5W4w2HiU+dT2P1Zh
- rsLYqXuGXjIYkUdwp5jOE88qZMMUDO2gQQ21vstOcehfGexLPhdhulKzHlMapP2FFrJ/
- Ooal9OanbdGQcf1KbyG82M47P7i+/Q0s5YNRrtgIIVgB47geP/1oGQXZyznX50Xuqq5j
- mUjhjysufHEJcfZw1pyeI2PwPA4sBM791eLHObpACHOXhhumaBKtMYpmjIdeRMQWY5gP
- E7+PnpCHh8NRS3yRjmVh+ZNYLMs5YpLLF2o2CWt0s1ukJ9xWJbLJ/jVNpa8/Cq24MYeQ
- Tq4A==
-X-Gm-Message-State: APuU4Z+8+9v8GcSq3vwEeYxPPJfSuH8p/GMUURNEIfe2MbnkmV8tGNe6
- rldI9TNzWcajtLczU0AZFnf1zE8SBr0CbaSdVRXI5Q+PFt0ujSPoskrmvEMe/Nq0gn8JmxNjdB9
- v3ZnzjDnzdQm9rHdX2Q0xAG9msOKvSiM4nSYRfWTDW4mZE+IBahQpz5LEfw==
-X-Gm-Gg: AYBFou0GQH2KzVwuMAGw5HfP38qltZMEQ7Byuxh0htjGmqd9z/vijeyuCRgXQKQV51h
- Q/DWZP7UzAIW7AWLlfE8YxzUmU3S561AkxIvwBvwVvjEGUVQeqDn9kgcG4drp1txP67fo1jvmIF
- PCFNM5+FeLLkSfb43okh3wKLyQDvpRsTxJS7rzh8x05iT5vbmC4LgXwSzcgafZVFbVwn/DcOTZh
- hwuUhfiMzSBTOLBdWdF01eIkaKuF2RYM84vV9oav0SDQJX9HGZuFm0HIEzkUFkMvtBLZp+VxHKX
- JPTUFy9Ll93EpW5hZNp46Ovgdjn3kmofg3uq9LgT3l1Y4h5QkU6HJtyy0S8jc4yTEEJ+OhfTn0U
- nzQpkNifmGnz2yTzFKOQPy1AudENssfgK24GDLvvHbIAPkFEWwy+INI24paauKIFOBxk+TtstxD
- LNtRUx8+5qgsY=
-X-Received: by 2002:a05:620a:31aa:b0:949:6d4d:2396 with SMTP id
- af79cd13be357-9496d4d2504mr1042147685a.27.1794850260999; 
- Mon, 16 Nov 2026 09:31:00 -0800 (PST)
-X-Received: by 2002:a05:620a:31aa:b0:949:6d4d:2396 with SMTP id
- af79cd13be357-9496d4d2504mr1042143385a.27.1794850260516; 
- Mon, 16 Nov 2026 09:31:00 -0800 (PST)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.227.223])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-9494c8b5c1dsm898530385a.33.2026.11.16.09.30.57
+ d=1e100.net; s=20260707; t=1794854507; x=1795459307;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=g/FKLq3GFAut/12UiI3qYkPvweKpaUbZMtn7PvpbZnE=;
+ b=JVTtxOb52D4kGpxicKkS95Oe1ruBk3vbSEFVTgioLU6X6YAPe19jhkp4PbCTy87+bS
+ FkflMpFzfQp7rETZENbFNKV6aouyEJRJD7Sm3J5WqolXI/y9lFCcvGnsrVMP+vrP/dUY
+ TqFmFDIRF8UdjmrxNRgafPG8s1UYeVkuIJh0m4GAWAvIYk34aCIevpwzL+909sdHE3Op
+ T99KyxCgMkONeUFCpLxxum7z3AzN3L9jzFFpSpiWJwOrE9x2hE42/gF0IzOsmR+hqcZ4
+ wOgxQyaVojm8qmoRDnhkQIR5VGMmqxCS7FUefYWH8Z61IhBHMBD1ShXFjCCyjPgHbE1q
+ 9rdw==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEQfviAe/LK03rpvVKf7YkJJ89YmSGTxPLvk4UmU+nLHzjtSfywgRIe787Lz3XEKDJres8RvkXLuv8S@nongnu.org
+X-Gm-Message-State: APuU4Z82WB3/fJh0wYROoeFa4lu3Gv7WPDVE6MxqV3l9gRfmvFlnon1O
+ 6QWOiT7NyafNcFBhHQH4TLY3yCxgRJaOklHMXZzKLcJE4qxrYMLZZr7GQHpiS6MROr8=
+X-Gm-Gg: AYBFou295ux5SDTRTv9uJPeOaE9Bx6EfjKwkOAkfZJeP1xwzy13Lnv/0+lzzjUzst8q
+ QFbHjOTGcaqMhFzwZ38StOjEc5MW7wdnSp4gE/8l8G4PlUfCPvVH4/4A4NXluckMfFKc+yMXKM1
+ +JY6GVtSkphZvpVeAehBsDvAgg+Jdja+ZM7WZS0Buh/AieD+THeNk73Z4eTIJ5m3IuSuBksw/vu
+ cq4wc3OXW4h3vHl3gZEA6llQzY+w+egqJG78sltG4Kp7O07yQSXFfzdPVJpnLBs0s3OSpQfzpGB
+ 0MB2WVtnmY3sva4BGLHR6+aETlrp82W7wE+Kaqh4r90592jH9r7y+Iigak1UPvha4Qz3k27VOYj
+ IrKl7Clh3iShNQvjVdsvW/qmx3R9yLZ74u1YI3ORsJQCngOEUp+JEfrDZRr3G1WKeDFi2lNLDUj
+ lOr2Aph2/Iz0HdybkZokwI1HDjvaL9agS07FYh6C4lLS37VZhULWt1IbBNerkLP6QVAv3QdEn1s
+ QiFC5Rphf1BTBn0T+xvsJv0L2Ez5f6CKtCo3mj7+7CIAdOuwxBI9PDbNYlbh3oqQCW2KcROJm8j
+ A5cqHZaSOrMD4q4iE3qc/ddFthQH
+X-Received: by 2002:a05:600c:501f:b0:4bb:76f6:d23a with SMTP id
+ 5b1f17b1804b1-4bb779f5b93mr26225815e9.21.1794854506737; 
+ Mon, 16 Nov 2026 10:41:46 -0800 (PST)
+Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb56f97257sm200563315e9.4.2026.11.16.10.41.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Nov 2026 09:30:59 -0800 (PST)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 3/3] target/riscv/tcg/csr.c: add mseccfgh CSR [GL4680]
-Date: Mon, 16 Nov 2026 14:30:47 -0300
-Message-ID: <20261116173047.812886-4-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261116173047.812886-1-daniel.barboza@oss.qualcomm.com>
-References: <20261116173047.812886-1-daniel.barboza@oss.qualcomm.com>
+ Mon, 16 Nov 2026 10:41:46 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id C356D5F8FE;
+ Mon, 16 Nov 2026 18:41:44 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+Cc: qemu-devel@nongnu.org,  qemu-riscv@nongnu.org,  qemu-arm@nongnu.org,
+ palmer@dabbelt.com,  alistair.francis@wdc.com,  liwei1518@gmail.com,
+ daniel.barboza@oss.qualcomm.com,  chao.liu@processmission.com,
+ peter.maydell@linaro.org,  richard.henderson@linaro.org
+Subject: Re: [PATCH 2/3] target/arm: Fix RCsc ordering of store-release
+ instructions
+In-Reply-To: <20260821064032.49556-3-zhiwei_liu@linux.alibaba.com> (LIU
+ Zhiwei's message of "Fri, 21 Aug 2026 14:40:31 +0800")
+References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
+ <20260821064032.49556-3-zhiwei_liu@linux.alibaba.com>
+User-Agent: mu4e 1.14.5-pre1; emacs 30.1
+Date: Mon, 16 Nov 2026 18:41:44 +0000
+Message-ID: <87bj7ok49j.fsf@draig.linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=BrEIUoX5 c=1 sm=1 tr=0 ts=6afb3dd5 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=WERq1Tg1Nl5IKGfG0e6imA==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=8OGCS-QHHjKBapB54hwA:9 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA2OSBTYWx0ZWRfXyte15KktSLhM
- +C/JrxvNN5eNTkYvfOBGnBhc7H6J9KnIbwn2eSDT9/o4FOGCKwcCOXJNWiea0MXxzgMSoz7kWM0
- egtGvPsWYMTpd3PH/0PesrKvgJkOMOk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA2OSBTYWx0ZWRfX376377DJYHM+
- r0AGrRiJfDlOM2IzyANdBTEPYY7jwG7qf5r5xgW8DDQAIYVoAq6HBEQzOuFZsvoG+kQ5CnWzQyd
- i+DooUI0bP18fFIHFW0uveyMotn6KWQmNynAP4CwU/kEZKBCPPiQ8jazUqBNthphQxNwYohDRc8
- XMX+ZlDs5VCXTYlhWxvCiGVmVQWT9/yrX1YXs9Gmu/p8N5n0/g1DoCvXWftEhZ0XGmTnL8oLU83
- fkWWjgWXU3eVgILXY6mLyXR3czqhY5pRx+4ZNI0n1W3ny6PAAOrpfry+Sa1V3fE1wlOTo/EI+g1
- ax3NQxWxQBLb11tnZ1D0gQOrgNDxAP0CJTq3oZ/it4FTNxLJanMvRusA2uk6bgsh9NDvCXp9wLB
- dTDp9bxvls/T0NulHQ+7D3uvCMSjmd35o7qkrwvdusLJYLso6FUGGpz0NFa7mH5JllpqpXe+5J9
- O3VGosr8JdnFKqSknxA==
-X-Proofpoint-ORIG-GUID: y00ZDi4kNDKiOOc3sT3QUf7S6A8MBpup
-X-Proofpoint-GUID: y00ZDi4kNDKiOOc3sT3QUf7S6A8MBpup
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-16_05,2026-11-16_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501
- suspectscore=0 adultscore=0 bulkscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611160069
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::330;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x330.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -147,120 +109,129 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Even though the mseccfgh CSR is a read-only zero the spec requires its
-existence for RV32.
+LIU Zhiwei <zhiwei_liu@linux.alibaba.com> writes:
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4680
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
----
- target/riscv/tcg/csr.c                  | 32 +++++++++++++++++++++++++
- tests/tcg/riscv32/test-mseccfg-bits-1.S | 15 +++++++++++-
- 2 files changed, 46 insertions(+), 1 deletion(-)
+> The Armv8 memory model has no RCpc store: every store-release in the
+> architecture, including the AArch64 STLR and STLPUR and the A32/T32
+> STL, STLB and STLH, carries RCsc semantics (Arm Architecture Reference
+> Manual, DDI 0487, section B2.3.8 "Acquire and release semantics").
+> The architecture therefore orders a Store-Release tagged RCsc before
+> any subsequent Load-Acquire tagged RCsc of the same shareability
+> domain, which is what forbids the [0,0] outcome of a Store Buffering
+> litmus test that pairs "STLR X=3D1; LDAR Y" on one PE with
+> "STLR Y=3D1; LDAR X" on another.
+>
+> The translators only emit a barrier before the store, which orders the
+> memory operations preceding the store before the store itself (release
+> semantics).  Nothing prevents the store from being reordered with the
+> memory operations that follow it, so under MTTCG the host CPU may
+> execute the load-acquire that immediately follows a store-release
+> before the store has left its store buffer:
+>
+>   * on an x86 host (TSO), store-load is the only reordering the
+>     hardware may perform, and it is exactly the ordering that is
+>     missing here;
+>
+>   * on an aarch64 host, no dmb follows the store either.
+>
+> The defect is easily observed with a bare-metal Store Buffering litmus
+> test on a 2 vCPU virt guest: "STLR X=3D1; LDAR Y" on CPU 0 and
+> "STLR Y=3D1; LDAR X" on CPU 1 produce the architecturally forbidden [0,0]
+> result in 6 to 7 out of 100000 iterations, while inserting a DMB ISH
+> between the store and the load on each CPU brings the number to 0,
+> which validates the harness.
+>
+> Fix this by emitting a full barrier after the store as well, for
+> STLR/STLLR and STLPUR on the AArch64 side and STL/STLB/STLH on the
+> A32/T32 side.  The TCG_MO_ST_LD bit included in TCG_MO_ALL makes the
+> x86 backend emit a serializing lock-prefixed instruction after the
+> store, draining the store buffer before any subsequent load executes,
+> and the aarch64 backend emit dmb ish; the store therefore becomes
+> globally visible before any subsequent memory operation of the same
+> vCPU, and the RCsc store->load ordering is satisfied.  This is
+> stronger than the architecture strictly requires, since the barrier
+> also orders the store with respect to subsequent RCpc operations such
+> as LDAPR, but this matches how QEMU already implements FENCE-like
+> ordering and keeps the fix simple.  After the fix the litmus test no
+> longer produces the forbidden outcome.
+>
+> The load-acquire side needs no change: the barrier emitted after an
+> RCsc LDAR already orders it with all subsequent memory operations, and
+> QEMU deliberately implements the RCpc LDAPR family as full load-acquire.
+>
+> Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+> ---
+>  target/arm/tcg/translate-a64.c | 13 +++++++++++++
+>  target/arm/tcg/translate.c     |  6 ++++++
+>  2 files changed, 19 insertions(+)
+>
+> diff --git a/target/arm/tcg/translate-a64.c b/target/arm/tcg/translate-a6=
+4.c
+> index 4f9a93950b..b5bf977910 100644
+> --- a/target/arm/tcg/translate-a64.c
+> +++ b/target/arm/tcg/translate-a64.c
+> @@ -3672,6 +3672,13 @@ static bool trans_STLR(DisasContext *s, arg_stlr *=
+a)
+>                                  true, a->rn !=3D 31, memop);
+>      do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, memop, true, a->rt,
+>                iss_sf, a->lasr);
+> +    /*
+> +     * STLR is an RCsc store-release: the Armv8 architecture orders it
+> +     * before any subsequent RCsc load-acquire, which is what forbids the
+> +     * store-buffering litmus test.  The barrier above only orders
+> +     * previous accesses before the store.
+> +     */
+> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+>      return true;
+>  }
+>=20=20
+> @@ -4415,6 +4422,12 @@ static bool trans_STLR_i(DisasContext *s, arg_ldap=
+r_stlr_i *a)
+>      /* Store-Release semantics */
+>      tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+>      do_gpr_st(s, cpu_reg(s, a->rt), clean_addr, mop, true, a->rt, iss_sf=
+, true);
+> +    /*
+> +     * Like STLR, STLPUR is an RCsc store-release and must be ordered
+> +     * before any subsequent RCsc load-acquire, so it needs a barrier
+> +     * after the store as well.
+> +     */
+> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+>      return true;
+>  }
+>=20=20
+> diff --git a/target/arm/tcg/translate.c b/target/arm/tcg/translate.c
+> index 1770428d3c..bddac41bf9 100644
+> --- a/target/arm/tcg/translate.c
+> +++ b/target/arm/tcg/translate.c
+> @@ -4259,6 +4259,12 @@ static bool op_stl(DisasContext *s, arg_STL *a, Me=
+mOp mop)
+>      tmp =3D load_reg(s, a->rt);
+>      tcg_gen_mb(TCG_MO_ALL | TCG_BAR_STRL);
+>      gen_aa32_st_i32(s, tmp, addr, get_mem_index(s), mop | MO_ALIGN);
+> +    /*
+> +     * STL has the same RCsc store-release semantics as the AArch64 STLR
+> +     * and must be ordered before a subsequent RCsc load-acquire (LDA).
+> +     * The barrier above only orders previous accesses before the store.
+> +     */
+> +    tcg_gen_mb(TCG_MO_ALL | TCG_BAR_SC);
+>      disas_set_da_iss(s, mop, a->rt | ISSIsAcqRel | ISSIsWrite);
+>=20=20
+>      return true;
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index af444e3e6f..f0b59f5f94 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -805,6 +805,15 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_ILLEGAL_INST;
- }
- 
-+static RISCVException have_mseccfgh(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_cpu_mxl(env) != MXL_RV32) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
-+
-+    return have_mseccfg(env, csrno);
-+}
-+
- static RISCVException debug(CPURISCVState *env, int csrno)
- {
-     if (riscv_cpu_cfg(env)->debug || riscv_cpu_cfg(env)->ext_sdtrig) {
-@@ -5612,6 +5621,26 @@ static RISCVException write_mseccfg(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException read_mseccfgh(CPURISCVState *env, int csrno,
-+                                    target_ulong *val)
-+{
-+    /*
-+     * The higher half of mseccfg has only PMM.  The spec says:
-+     *  "The PMM field is read-only zero for RV32".
-+     * Ergo mseccfgh is always 0.
-+     */
-+    *val = 0;
-+
-+    return RISCV_EXCP_NONE;
-+}
-+
-+static RISCVException write_mseccfgh(CPURISCVState *env, int csrno,
-+                                     target_ulong val, uintptr_t ra)
-+{
-+    /* See read_mseccfgh().  */
-+    return RISCV_EXCP_NONE;
-+}
-+
- static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
-                                   target_ulong *val)
- {
-@@ -6508,6 +6537,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Physical Memory Protection */
-     [CSR_MSECCFG]    = { "mseccfg",   have_mseccfg, read_mseccfg, write_mseccfg,
-                          .min_priv_ver = PRIV_VERSION_1_11_0           },
-+    [CSR_MSECCFGH]    = { "mseccfgh", have_mseccfgh,
-+                          read_mseccfgh, write_mseccfgh,
-+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
-     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
-     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
-     [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
-diff --git a/tests/tcg/riscv32/test-mseccfg-bits-1.S b/tests/tcg/riscv32/test-mseccfg-bits-1.S
-index ffa88f5f2f..01c29577e1 100644
---- a/tests/tcg/riscv32/test-mseccfg-bits-1.S
-+++ b/tests/tcg/riscv32/test-mseccfg-bits-1.S
-@@ -1,5 +1,6 @@
- /*
-- * Verify mseccfg bits USEED, SSEED, MLPE and WPRI.
-+ * Verify mseccfg bits USEED, SSEED, MLPE and WPRI.  Also verifies
-+ * if mseccfgh exists and it's read-only zero.
-  *
-  * With "rv32,u=off,h=off,s=off,zkr=on,zicfilp=off" we expect no
-  * bits being written in mseccfg.
-@@ -11,6 +12,7 @@
-  */
- 
- #define CSR_MSECCFG 0x747
-+#define CSR_MSECCFGH 0x757
- 
- .option norvc
- 	.text
-@@ -38,6 +40,17 @@ _start:
- 	andi	t3, t3, 7	// USEED, SSEED, MLPE -> bits 1, 2, 3
- 	bnez	t3, _fail
- 
-+	/*
-+	 * mseccfgh reads the higher half of mseccfg, which contains
-+	 * only mseccfg.PMM.  This bit is read-only zero in RV32,
-+	 * thus mseccfgh must be always zeroed.  Write a full 1s
-+	 * mask in it and verify.
-+	 */
-+	li	t0, -1
-+	csrw	CSR_MSECCFGH, t0
-+	csrr	t0, CSR_MSECCFGH
-+	bnez	t0, _fail
-+
- 	j	_pass
- 
- trap:
--- 
-2.43.0
 
+Reviewed-by: Alex Benn=C3=A9e <alex.bennee@linaro.org>
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4872
+
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
