@@ -1,96 +1,97 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB1AF606A32F
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 07:53:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D1C4606A31C
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 07:53:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=yZE2twhQ
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SWmApJc8
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xSrWA-0002Xg-N8; Mon, 16 Nov 2026 02:52:46 -0500
+	id 1xSrWU-0002dD-6q; Mon, 16 Nov 2026 02:53:06 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xSrW8-0002Wh-Un
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:52:45 -0500
-Received: from mail-pj2-x07.google.com ([2607:f8b0:4864:39::7])
+ id 1xSrWR-0002cI-6T
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:03 -0500
+Received: from mail-pj2-x09.google.com ([2607:f8b0:4864:39::9])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xSrW6-0006PU-DM
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:52:44 -0500
-Received: by mail-pj2-x07.google.com with SMTP id
- d9443c01a7336-2e934c6c20aso29096585ad.0
- for <qemu-riscv@nongnu.org>; Sun, 15 Nov 2026 23:52:41 -0800 (PST)
+ id 1xSrWP-0006Rf-DY
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:02 -0500
+Received: by mail-pj2-x09.google.com with SMTP id
+ 98e67ed59e1d1-3b1478f06e3so864244a91.0
+ for <qemu-riscv@nongnu.org>; Sun, 15 Nov 2026 23:53:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794815561; x=1795420361; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1794815580; x=1795420380; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4yaVM/4Ndz0g7rHFZsC1PhMy0pfcgoOnC4kFkKQPDt4=;
- b=yZE2twhQrQtKdGXZ7PqONdZwxivxy037SRBGMm0OOb/FXB8AXluoym3ywuBDUoX1JQ
- x+UFv9UuFNfEhJsO645aBEnCUQap6oWq6wsF9pq4M+sZghpLZzGD/LzbgpFKoONbOeoW
- VMc2ZsSI67myVL+ySB+Woj53CHiYOY/5M9Lgo/VZzP05syrBg9CU8H41oUUC1cOmz5F9
- feKGEO0mieehs6KLrTVHMWKOsRcCs1JMqM0Jqo/nwt3ubojeGE/R0Y473JXadT6fUqXn
- 0Q2cxZq41VCELB+/zhQR/LbOU6VaVc8DhGJ4RMTiIa4iA4lUa1CJ5+UIRXBw3vDsyUY9
- j42g==
+ bh=hIjlzjraPZGou6DwZuYcV0PsGSSXUwI1uycVRUHglCk=;
+ b=SWmApJc8Z715GGNIvuonZNt8OP1n6SnDOOIAol/xbDF95nrQAD7zNoSApYEJbBZ8x2
+ 01u+8XqNBSnnXBXndTJ+BwG10gLL61PWsxYHit5UD100VfFOKcrMBFnfF4d096lhDavz
+ gQVRrpE5TumwDMPMDkL8twhtWcDKQL9XDtDJ3Bw8uNmLg7lqJFwRkeofsWoAcJnY+Ppj
+ vpSK73Wes59q4khHzfp3294NRlyMKZECS8E7FiiH7xtWHD6Z2zS2dYPel0S+U7xvTIr9
+ oCPNCKEB6gPhFZODz+Ydcrl1b6C/l5pFX5kJ98frN1sp2Bai6cpj3xprJUvP8ujLRng6
+ yhAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794815561; x=1795420361;
+ d=1e100.net; s=20260707; t=1794815580; x=1795420380;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4yaVM/4Ndz0g7rHFZsC1PhMy0pfcgoOnC4kFkKQPDt4=;
- b=Gu4laPX8xLtS8kpil7oTBlA8czE6BKENvzvIKFa8kArz5FuirmOSC6j0QCKHgKkGKt
- wLAe8re9SIZTyKVWg5zFwgKK4l9Y/j7AxykEkOXONzOCyxcqYKkwLAPCdWYUHD8XEtiY
- g9qicnJCkS9Co3ggNO+TRP1+L/fNZ34y2c/ibxVUi5Nau9gpXg1un+GTHjk38OK5gqiv
- xpLIR3Hlon+ISN+vlTDDHJJWZAvmOB133CqLSdGT7c5PLvFTCwi2oj554IgM/1R6Pg0f
- OLvimt8wqzYrrohtWQxgZrK1oy+GY5+azk2dswmcQdsWe9voz6LtBDEu1tMPHfYMLPob
- Fz2g==
+ bh=hIjlzjraPZGou6DwZuYcV0PsGSSXUwI1uycVRUHglCk=;
+ b=jEk0ib3J7pZl2x96UFEYZTH15kkhqAFV1Juc9FLpBDJ9/7RMrdew86Yfefr4hyDY+r
+ eK1XCCnGV8Ixj/vbq2j1mw2ehSId4IUqKHvVqOXI9RGgXOxNQ6aNTNp6dvt7zj+zE34P
+ u1ttXNpAM3mksyF01pOjlVvAfWAqxzkvB300m1AYdtFY+ITjxF+LCOwhrqyDgKKRFQd/
+ tprTwX6kKxQKxNgh65tQ4s98PlcHYupU4EglkFy0F9kH1IdTcUWuCmkgxYlF1J9Gx5SY
+ UQst/hJEjbsAHmqaU24YfKrE///a0STmGcsqCJ6GqD1jpIeRMHfX/yt6bT6oJSVtpGtq
+ S9ug==
 X-Forwarded-Encrypted: i=1;
- AL+hErGJrOWqeK1SZamh00MbKtR5wO9h0mAaaObS/Kp++XuGbF+B+AepQszlZwwWFAav3WaEIuRobsVuNBsa@nongnu.org
-X-Gm-Message-State: APuU4Z9B/P84kZLEgXQ1AWzJ9k6l/wXuP68K42LFAjFWTW+5u2mhr0FE
- wHdPqgnGhnXA4NB0ruhrtrE2wZRjEVKSM3Z2En+U3k2qjIXxNoJdK/uH
-X-Gm-Gg: AZFdTZe/2oUvidGcCDp02go5R3xtAECWMY/CU5dNUU8y5M3NXsLW2NrVlDVFODogspg
- fNq0/0kmAR3V2Rh60k7M5knfnJf6qPVevMzKtbnYlSSeNlNIq7fYMmmU7OgO1VkxmdA1bMgqczz
- KFxkT1E39CNrGM3j/GDmoaP0w9Muni1CZboEL3RIb8kgz5uMwS4nASRlXGzwdAqMjPx5OByCW7B
- Fh7NLWm+h7AblrTX2yp3u72kPBGm2vJEVk/9ZBzRjIJtII9lwMZ5vOQNTIJOAsdtMBuGag/I9xG
- +qzj4bJ4SoH99hQMGZaQSqNqn08Z18L3HoTYO2oSNfkcdIkL5LvKV2iYsge6IcvtB0Un9UM3Gn0
- T/phHbIpLh8hzi17FKp8Ygo5wUQw3wGt1fkibBEBT7lBAmZAejy/jCY3l7HHzSo0jAMF/Xc1+RR
- 3XCw6SVNLljwUwgwa+FCbY+Pe2oChG0WqWAR8IL+ukitZmz0vucJ4o/XUIy20blm27MYPLV1tsS
- rqQ2nmXEMHWgYW5zXnbyKscGs0UiPh/mwNrjUV3dKdutKNl0PVjvtDPky+BUEgaiekNvg/e4BEs
- WIxFdD3nNnq3eAx2Xvr2H1C1hXPnFcUwltwxDheIaF+y+/NFaq0dGeXV
-X-Received: by 2002:a17:90b:2250:b0:3ac:7556:8ee6 with SMTP id
- 98e67ed59e1d1-3b1b0b668c7mr9870592a91.16.1794815560139; 
- Sun, 15 Nov 2026 23:52:40 -0800 (PST)
+ AL+hErESmTw3A+ZJ+fQnHjaSNsh7cWRuG6EXb6YFBIzui/X3PL2ojYS44Hp4asNpeLNBlrwpP+UpEEQ8tIBQ@nongnu.org
+X-Gm-Message-State: APuU4Z9Jd+wu2P/oT/oJrf3HfS90xEmPgea6J1rAW3BlhH4t91AdxuOK
+ Yv5Vh1Y1C1zNZ1EY6XKjqGHRyUtEsGMCFpTO9GqfDxfegelXZI3zoaqz
+X-Gm-Gg: AZFdTZcWpg2a2UaXdCWNEHiBFElmqNQKe8TmUBRvGYB5EJzTEXXhDCJGMawTueCnOho
+ GAiGiyR82ExZDjjw95Cpq/Cqp8DvZ3niWceT6gQVsePk6BdXxoYNf8jh9Y1G8m8XpEnU7/6Eu7y
+ L1el3Iwfz9WwYTut3yuLm4jsrTEyFwccNDFQMyXuvixqDotOo/gy0kEqPtudS1zBP5Mkh+cl721
+ V1ZqNcdy83wmR78ttgN0B5J2190kQS2U/usAspByu07dEPAdLm38snKOEDVSq8AUqWmNsi7UC7M
+ MuV5DFvTg6mO15Njd96bYy2iE7MJIe7XgGRAZB+9nn55RYIxR5DQQccZ3pLeqy+cSlvs2q5KotU
+ n1XESBx11ZopJ6WgJRHE8mQVePHFwUkpVbpCgQfAETDUXzNVmh8LQvyoXdcToFrOkXHJRJOFVg+
+ 9qmTYDhVcgH4xzNhGIWJXdG7UGSTddApBXXhfMaBt1FwgODEC9ck1Me+UYmKHWnpRp+Fja8RPGd
+ N7CyXDb39stYdPCeVWTTbXiAyNn/GTbIiXKLQW9mhqjPudT081+qDk69m7RoiLUa6vFZbDtTSpI
+ avA3OX6VjYNktnFtjAWXDcfibFff8551/XDakXqkLE42MX7djn1c1qMP
+X-Received: by 2002:a17:90b:54cb:b0:3b0:ce1c:e74f with SMTP id
+ 98e67ed59e1d1-3b1b0a3a251mr9045461a91.27.1794815579609; 
+ Sun, 15 Nov 2026 23:52:59 -0800 (PST)
 Received: from Dell-WorkStation.localdomain ([152.175.67.81])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b197d0f6e0sm20745622a91.9.2026.11.15.23.52.32
+ 98e67ed59e1d1-3b197d0f6e0sm20745622a91.9.2026.11.15.23.52.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 23:52:39 -0800 (PST)
+ Sun, 15 Nov 2026 23:52:59 -0800 (PST)
 From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu@processmission.com, qemu-riscv@nongnu.org, farosas@suse.de,
  lvivier@redhat.com, pbonzini@redhat.com
-Subject: [PATCH 1/3] hw/riscv/riscv-iommu: Preserve IOVA in MSI fault records
-Date: Mon, 16 Nov 2026 15:51:39 +0800
-Message-ID: <20261116075141.167317-2-fritchleybohrer@gmail.com>
+Subject: [PATCH 2/3] hw/riscv/riscv-iommu: Fix MSI fault PV reporting for
+ process ID zero
+Date: Mon, 16 Nov 2026 15:51:40 +0800
+Message-ID: <20261116075141.167317-3-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261116075141.167317-1-fritchleybohrer@gmail.com>
 References: <20261116075141.167317-1-fritchleybohrer@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::7;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x07.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::9;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x09.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001, SPF_PASS=-0.001,
- T_FILL_THIS_FORM_SHORT=0.01 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,410 +103,119 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-MSI translation errors currently report zero for both fault address
-fields. The MSI write handler receives the GPA used to select the MSI
-PTE, but an inbound transaction's iotval must identify its original
-IOVA. These addresses need not match when first-stage translation is
-enabled.
+MSI fault reporting derives PV from the numeric process ID, so process
+zero always produces PV=0. Ordinary translation faults and recovery
+faults instead use the device context's PDTV bit.
 
-Keep trapped translations in IOVA space when returning them to the
-memory subsystem. In the trap callback, walk the same device/process
-context again to recover the GPA and pass both addresses to the MSI
-write handler. This retains the per-transaction IOVA without shared
-last-address state and leaves internal translation/debug results intact.
+Use the same PDTV policy for MSI faults. Add a qtest with a real PD8
+process directory and DPE-selected default process zero, reaching an
+invalid MSI PTE after nonidentity nested translation. Check PV=1, PID=0,
+and the original IOVA. Also check PV=0 in the existing fault cases
+without PDTV.
 
-Report a rewalk fault with the original IOVA. If a changed mapping no
-longer selects MSI translation, complete the write as ordinary DMA
-instead. Preserve the request's process context and little-endian data
-in these paths. MSI fault reports continue to leave iotval2 unchanged.
-
-Exclude the internal GPA-recovery replay from the modeled S/G-stage HPM
-walk events, so this fault-reporting change preserves the existing
-counter behavior. Ordinary translation walks retain their existing
-accounting.
-
-Add firmware-independent qtests using device-generated MSIs and
-nonidentity first-stage mappings. Check fault addresses, Bare
-first-stage operation, successful MSI writes, and the modeled HPM
-counter deltas.
-
-This still adds a page-table walk to intercepted MSI writes when
-first-stage translation is enabled; the Bare first-stage path uses its
-existing early MSI check.
+This aligns QEMU's current context-based reporting policy. Preserving
+the validity of an explicitly supplied request PID separately from its
+value is outside this change.
 
 Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3562
 Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- hw/riscv/riscv-iommu.c         |  60 ++++++++++---
- tests/qtest/iommu-riscv-test.c | 153 ++++++++++++++++++++++++++++++---
- 2 files changed, 189 insertions(+), 24 deletions(-)
+ hw/riscv/riscv-iommu.c         |  2 +-
+ tests/qtest/iommu-riscv-test.c | 36 ++++++++++++++++++++++++++++++----
+ 2 files changed, 33 insertions(+), 5 deletions(-)
 
 diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 0e6970773a..016e95fce7 100644
+index 016e95fce7..5752a4776b 100644
 --- a/hw/riscv/riscv-iommu.c
 +++ b/hw/riscv/riscv-iommu.c
-@@ -276,10 +276,11 @@ static hwaddr riscv_iommu_napot_page_mask(hwaddr ppn, hwaddr addr, hwaddr *out)
-  * @s        : IOMMU Device State
-  * @ctx      : Translation context for device id and process address space id.
-  * @iotlb    : translation data: physical address and access mode.
-+ * @update_hpm : account for modeled page-table walk events.
-  * @return   : success or fault cause code.
-  */
- static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
--    IOMMUTLBEntry *iotlb)
-+    IOMMUTLBEntry *iotlb, bool update_hpm)
- {
-     IOMMUAccessFlags trans_perm = IOMMU_NONE;
-     dma_addr_t addr, base;
-@@ -456,10 +457,14 @@ static int riscv_iommu_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-         }
- 
- 
--        if (pass == S_STAGE) {
--            riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_S_VS_WALKS);
--        } else {
--            riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_G_WALKS);
-+        if (update_hpm) {
-+            if (pass == S_STAGE) {
-+                riscv_iommu_hpm_incr_ctr(s, ctx,
-+                                       RISCV_IOMMU_HPMEVENT_S_VS_WALKS);
-+            } else {
-+                riscv_iommu_hpm_incr_ctr(s, ctx,
-+                                       RISCV_IOMMU_HPMEVENT_G_WALKS);
-+            }
-         }
- 
-         /* Read page table entry */
-@@ -641,9 +646,9 @@ static void riscv_iommu_report_fault(RISCVIOMMUState *s,
-     riscv_iommu_fault(s, &ev);
- }
- 
--/* Redirect MSI write for given GPA. */
-+/* Redirect an MSI write, retaining the original IOVA for fault reporting. */
- static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
--    RISCVIOMMUContext *ctx, uint64_t gpa, uint64_t data,
-+    RISCVIOMMUContext *ctx, uint64_t iova, uint64_t gpa, uint64_t data,
-     unsigned size, MemTxAttrs attrs)
- {
-     MemTxResult res;
-@@ -826,7 +831,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
+@@ -831,7 +831,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
  
  err:
      riscv_iommu_report_fault(s, ctx, fault_type, cause,
--                             !!ctx->process_id, 0, 0);
-+                             !!ctx->process_id, iova, 0);
+-                             !!ctx->process_id, iova, 0);
++                             !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV), iova, 0);
      return res;
  }
  
-@@ -1776,7 +1781,7 @@ static int riscv_iommu_translate(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-     riscv_iommu_hpm_incr_ctr(s, ctx, RISCV_IOMMU_HPMEVENT_TLB_MISS);
- 
-     /* Translate using device directory / page table information. */
--    fault = riscv_iommu_spa_fetch(s, ctx, iotlb);
-+    fault = riscv_iommu_spa_fetch(s, ctx, iotlb, true);
- 
-     if (!fault && iotlb->target_as == &s->trap_as) {
-         /* Do not cache trapped MSI translations */
-@@ -2609,6 +2614,13 @@ static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
-     MemTxResult res;
-     void *ref;
-     uint32_t devid = attrs.requester_id;
-+    IOMMUTLBEntry iotlb = {
-+        .iova = addr,
-+        .target_as = s->target_as,
-+        .addr_mask = ~0ULL,
-+        .perm = IOMMU_WO,
-+    };
-+    int cause;
- 
-     if (attrs.unspecified) {
-         return MEMTX_ACCESS_ERROR;
-@@ -2617,11 +2629,32 @@ static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
-     /* FIXME: PCIe bus remapping for attached endpoints. */
-     devid |= s->bus << 8;
- 
--    ctx = riscv_iommu_ctx(s, devid, 0, IOMMU_RW, addr, &ref);
-+    ctx = riscv_iommu_ctx(s, devid, attrs.pid, IOMMU_WO, addr, &ref);
-     if (ctx == NULL) {
-         res = MEMTX_ACCESS_ERROR;
-     } else {
--        res = riscv_iommu_msi_write(s, ctx, addr, data, size, attrs);
-+        /*
-+         * The trap address is the original IOVA. Resolve the MSI GPA
-+         * without consulting or updating the translation cache.
-+         * Exclude this internal replay from the modeled HPM events.
-+         */
-+        cause = riscv_iommu_spa_fetch(s, ctx, &iotlb, false);
-+        if (cause) {
-+            riscv_iommu_report_fault(s, ctx,
-+                RISCV_IOMMU_FQ_TTYPE_UADDR_WR, cause,
-+                !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV),
-+                addr, iotlb.translated_addr);
-+            res = MEMTX_ACCESS_ERROR;
-+        } else if (iotlb.target_as == &s->trap_as) {
-+            res = riscv_iommu_msi_write(s, ctx, addr,
-+                                       iotlb.translated_addr, data,
-+                                       size, attrs);
-+        } else {
-+            /* The mapping may have changed since the original walk. */
-+            data = cpu_to_le64(data);
-+            res = dma_memory_write(iotlb.target_as, iotlb.translated_addr,
-+                                   &data, size, attrs);
-+        }
-     }
-     riscv_iommu_ctx_put(s, ref);
-     return res;
-@@ -2943,6 +2976,11 @@ static IOMMUTLBEntry riscv_iommu_memory_region_translate(
-                           IOMMU_FLAG_STR[flag & IOMMU_RW], iotlb.iova,
-                           iotlb.translated_addr);
- 
-+    if (iotlb.target_as == &as->iommu->trap_as) {
-+        /* Preserve the transaction IOVA through the MSI write callback. */
-+        iotlb.translated_addr = iotlb.iova;
-+    }
-+
-     riscv_iommu_ctx_put(as->iommu, ref);
- 
-     return iotlb;
 diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
-index 1cd753c4f2..3678d8a0d4 100644
+index 3678d8a0d4..28af06d770 100644
 --- a/tests/qtest/iommu-riscv-test.c
 +++ b/tests/qtest/iommu-riscv-test.c
-@@ -25,6 +25,12 @@
- #define DBG_TRANSLATED_PA       0x90000000ull
- #define DBG_NESTED_GPA          0x200000ull
+@@ -27,6 +27,7 @@
  
-+#define MSI_TABLE_PA            0x80030000ull
-+#define MSI_TARGET_PA           0x80040000ull
-+#define MSI_DATA                0x37
-+#define EDU_DEVICE_ID           0x11e8
-+#define EDU_IRQ_RAISE           0x60
-+
- /* RISC-V virt machine PCI configuration */
- #define RISCV_GPEX_PIO_BASE        0x3000000
- #define RISCV_BUS_PIO_LIMIT        0x10000
-@@ -50,6 +56,21 @@ typedef struct RiscvIommuDbgTest {
-     uint64_t expected_response;
- } RiscvIommuDbgTest;
+ #define MSI_TABLE_PA            0x80030000ull
+ #define MSI_TARGET_PA           0x80040000ull
++#define MSI_PROCESS_GPA         0x00050000ull
+ #define MSI_DATA                0x37
+ #define EDU_DEVICE_ID           0x11e8
+ #define EDU_IRQ_RAISE           0x60
+@@ -62,13 +63,15 @@ typedef struct RiscvIommuMsiTest {
+     bool valid_pte;
+     uint64_t s_walks;
+     uint64_t g_walks;
++    bool default_process;
+ } RiscvIommuMsiTest;
  
-+typedef struct RiscvIommuMsiTest {
-+    const char *name;
-+    QRIOMMUTransMode mode;
-+    bool valid_pte;
-+    uint64_t s_walks;
-+    uint64_t g_walks;
-+} RiscvIommuMsiTest;
-+
-+static const RiscvIommuMsiTest msi_tests[] = {
-+    { "first-stage-bare-fault", QRIOMMU_TM_G_STAGE_ONLY, false, 0, 0 },
-+    { "nested-fault", QRIOMMU_TM_NESTED, false, 3, 9 },
-+    { "first-stage-bare-basic", QRIOMMU_TM_G_STAGE_ONLY, true, 0, 0 },
-+    { "nested-basic", QRIOMMU_TM_NESTED, true, 3, 9 },
-+};
-+
+ static const RiscvIommuMsiTest msi_tests[] = {
+-    { "first-stage-bare-fault", QRIOMMU_TM_G_STAGE_ONLY, false, 0, 0 },
+-    { "nested-fault", QRIOMMU_TM_NESTED, false, 3, 9 },
+-    { "first-stage-bare-basic", QRIOMMU_TM_G_STAGE_ONLY, true, 0, 0 },
+-    { "nested-basic", QRIOMMU_TM_NESTED, true, 3, 9 },
++    { "first-stage-bare-fault", QRIOMMU_TM_G_STAGE_ONLY, false, 0, 0, false },
++    { "nested-fault", QRIOMMU_TM_NESTED, false, 3, 9, false },
++    { "first-stage-bare-basic", QRIOMMU_TM_G_STAGE_ONLY, true, 0, 0, false },
++    { "nested-basic", QRIOMMU_TM_NESTED, true, 3, 9, false },
++    { "nested-pdtv-pid0-fault", QRIOMMU_TM_NESTED, false, 3, 9, true },
+ };
+ 
  static const RiscvIommuDbgTest debug_tests[] = {
-     {
-         .name = "page-4k",
-@@ -157,15 +178,16 @@ static QPCIDevice *find_riscv_iommu_pci(QGenericPCIBus *gbus,
-     return iommu_dev;
- }
- 
--static QPCIDevice *find_iommu_testdev(QGenericPCIBus *gbus, QPCIBar *bar)
-+static QPCIDevice *find_testdev(QGenericPCIBus *gbus, QPCIBar *bar, bool msi)
- {
-     QPCIDevice *dev = NULL;
-+    uint16_t vendor = msi ? PCI_VENDOR_ID_QEMU : IOMMU_TESTDEV_VENDOR_ID;
-+    uint16_t device = msi ? EDU_DEVICE_ID : IOMMU_TESTDEV_DEVICE_ID;
- 
--    g_test_message("Searching for iommu-testdev (vendor=0x%04x, device=0x%04x)",
--                   IOMMU_TESTDEV_VENDOR_ID, IOMMU_TESTDEV_DEVICE_ID);
-+    g_test_message("Searching for %s (vendor=0x%04x, device=0x%04x)",
-+                   msi ? "edu" : "iommu-testdev", vendor, device);
- 
--    qpci_device_foreach(&gbus->bus, IOMMU_TESTDEV_VENDOR_ID,
--                        IOMMU_TESTDEV_DEVICE_ID, save_fn, &dev);
-+    qpci_device_foreach(&gbus->bus, vendor, device, save_fn, &dev);
-     g_assert(dev);
- 
-     qpci_device_enable(dev);
-@@ -175,17 +197,21 @@ static QPCIDevice *find_iommu_testdev(QGenericPCIBus *gbus, QPCIBar *bar)
-     return dev;
- }
- 
--static bool riscv_iommu_test_setup(RiscvIommuTestState *state)
-+static bool riscv_iommu_test_setup(RiscvIommuTestState *state, bool msi)
- {
-     if (!qtest_has_machine("virt")) {
-         g_test_skip("virt machine not available");
-         return false;
+@@ -389,6 +392,27 @@ static void test_riscv_iommu_msi(gconstpointer data)
+     /* Match one GPA page; interrupt-file number zero selects the first PTE. */
+     dc_addr = QRIOMMU_SPACE_OFFS + QRIOMMU_DC_BASE +
+               state.testdev->devfn * sizeof(struct riscv_iommu_dc);
++    if (cfg->default_process) {
++        uint64_t process_pa = QRIOMMU_SPACE_OFFS + MSI_PROCESS_GPA;
++        uint64_t g_leaf_pa = QRIOMMU_SPACE_OFFS + QRIOMMU_G_L1_PTE_VAL;
++        uint64_t fsc = qtest_readq(state.qts, dc_addr + 24);
++
++        g_assert_cmpuint(cfg->mode, ==, QRIOMMU_TM_NESTED);
++        g_assert_cmphex(cap & RISCV_IOMMU_CAP_PD8, !=, 0);
++        /* Map the PD8 table through G-stage; PID zero selects its first PC. */
++        qtest_writeq(state.qts,
++            g_leaf_pa + ((MSI_PROCESS_GPA >> 12) & 0x1ff) * sizeof(uint64_t),
++            ((process_pa >> 12) << 10) | QRIOMMU_LEAF_PTE_RW_MASK);
++        qtest_memset(state.qts, process_pa, 0, 0x1000);
++        qtest_writeq(state.qts, process_pa, RISCV_IOMMU_PC_TA_V);
++        qtest_writeq(state.qts, process_pa + 8, fsc);
++        qtest_writeq(state.qts, dc_addr,
++            RISCV_IOMMU_DC_TC_V | RISCV_IOMMU_DC_TC_PDTV |
++            RISCV_IOMMU_DC_TC_DPE);
++        qtest_writeq(state.qts, dc_addr + 24,
++            (MSI_PROCESS_GPA >> 12) |
++            ((uint64_t)RISCV_IOMMU_DC_FSC_PDTP_MODE_PD8 << 60));
++    }
+     qtest_writeq(state.qts, dc_addr + 32,
+                  (MSI_TABLE_PA >> 12) | (1ull << 60));
+     qtest_writeq(state.qts, dc_addr + 40, 0);
+@@ -437,6 +461,10 @@ static void test_riscv_iommu_msi(gconstpointer data)
+                          RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
+         g_assert_cmpuint((hdr & RISCV_IOMMU_FQ_HDR_DID) >> 40, ==,
+                          state.testdev->devfn);
++        /* Check QEMU's PDTV policy using DPE, without an EDU PASID. */
++        g_assert_cmpuint(!!(hdr & RISCV_IOMMU_FQ_HDR_PV), ==,
++                         cfg->default_process);
++        g_assert_cmphex(hdr & RISCV_IOMMU_FQ_HDR_PID, ==, 0);
+         g_assert_cmphex(qtest_readq(state.qts, fq_addr + 16), ==, iova);
+         g_assert_cmphex(qtest_readq(state.qts, fq_addr + 24), ==, 0);
      }
-+    if (msi && !qtest_has_device("edu")) {
-+        g_test_skip("edu device not available");
-+        return false;
-+    }
- 
--    state->qts = qtest_init("-machine virt,acpi=off "
--                            "-cpu max -smp 1 -m 512 -net none "
--                            "-device riscv-iommu-pci "
--                            "-device iommu-testdev");
-+    state->qts = qtest_initf("-machine virt,acpi=off "
-+                             "-cpu max -smp 1 -m 512 -bios none -net none "
-+                             "-device riscv-iommu-pci "
-+                             "-device %s", msi ? "edu" : "iommu-testdev");
- 
-     qpci_init_generic(&state->gbus, state->qts, NULL, false);
-     riscv_config_qpci_bus(&state->gbus);
-@@ -193,7 +219,7 @@ static bool riscv_iommu_test_setup(RiscvIommuTestState *state)
-     state->iommu_dev = find_riscv_iommu_pci(&state->gbus, &state->iommu_base);
-     g_assert(state->iommu_dev);
- 
--    state->testdev = find_iommu_testdev(&state->gbus, &state->testdev_bar);
-+    state->testdev = find_testdev(&state->gbus, &state->testdev_bar, msi);
-     g_assert(state->testdev);
- 
-     return true;
-@@ -267,7 +293,7 @@ static void run_riscv_iommu_translation(const QRIOMMUTestConfig *cfg)
- {
-     RiscvIommuTestState state = { 0 };
- 
--    if (!riscv_iommu_test_setup(&state)) {
-+    if (!riscv_iommu_test_setup(&state, false)) {
-         return;
-     }
- 
-@@ -328,6 +354,101 @@ static void test_riscv_iommu_nested(void)
-     run_riscv_iommu_translation(&cfg);
- }
- 
-+static void test_riscv_iommu_msi(gconstpointer data)
-+{
-+    static const unsigned events[] = {
-+        RISCV_IOMMU_HPMEVENT_URQ,
-+        RISCV_IOMMU_HPMEVENT_TLB_MISS,
-+        RISCV_IOMMU_HPMEVENT_S_VS_WALKS,
-+        RISCV_IOMMU_HPMEVENT_G_WALKS,
-+    };
-+    const RiscvIommuMsiTest *cfg = data;
-+    const uint64_t expected[] = { 1, 1, cfg->s_walks, cfg->g_walks };
-+    RiscvIommuTestState state = { 0 };
-+    uint64_t iova = (QRIOMMU_IOVA & ~0xfffull) +
-+                    (cfg->valid_pte ? 0 : 0x40);
-+    uint64_t gpa = iova;
-+    uint64_t dc_addr, pte = 0, hdr, cap;
-+    uint64_t fq_addr = QRIOMMU_SPACE_OFFS + QRIOMMU_FQ_BASE_ADDR;
-+    uint8_t msi_cap;
-+    uint16_t flags;
-+
-+    if (!riscv_iommu_test_setup(&state, true)) {
-+        return;
-+    }
-+
-+    cap = riscv_iommu_check(state.qts, state.iommu_base, cfg->mode);
-+    g_assert_cmphex(cap & RISCV_IOMMU_CAP_MSI_FLAT, !=, 0);
-+    g_assert_cmphex(cap & RISCV_IOMMU_CAP_HPM, !=, 0);
-+    qriommu_build_translation(state.qts, cfg->mode, state.testdev->devfn);
-+    if (cfg->mode == QRIOMMU_TM_NESTED) {
-+        gpa = QRIOMMU_L2_PTE_VAL + (iova & 0xfff);
-+        g_assert_cmphex(iova, !=, gpa);
-+    }
-+
-+    /* Match one GPA page; interrupt-file number zero selects the first PTE. */
-+    dc_addr = QRIOMMU_SPACE_OFFS + QRIOMMU_DC_BASE +
-+              state.testdev->devfn * sizeof(struct riscv_iommu_dc);
-+    qtest_writeq(state.qts, dc_addr + 32,
-+                 (MSI_TABLE_PA >> 12) | (1ull << 60));
-+    qtest_writeq(state.qts, dc_addr + 40, 0);
-+    qtest_writeq(state.qts, dc_addr + 48, gpa >> 12);
-+    qtest_memset(state.qts, MSI_TABLE_PA, 0, 0x1000);
-+    qtest_writel(state.qts, MSI_TARGET_PA, 0);
-+    if (cfg->valid_pte) {
-+        pte = ((MSI_TARGET_PA >> 12) << 10) |
-+              (RISCV_IOMMU_MSI_PTE_M_BASIC << 1) | RISCV_IOMMU_MSI_PTE_V;
-+    }
-+    qtest_writeq(state.qts, MSI_TABLE_PA, pte);
-+    qriommu_program_regs(state.qts, state.iommu_base);
-+
-+    for (unsigned i = 0; i < G_N_ELEMENTS(events); i++) {
-+        qtest_writeq(state.qts, state.iommu_base + RISCV_IOMMU_REG_IOHPMEVT(i),
-+                     events[i]);
-+        qtest_writeq(state.qts, state.iommu_base + RISCV_IOMMU_REG_IOHPMCTR(i),
-+                     0);
-+        g_assert_cmpuint(qtest_readq(state.qts,
-+            state.iommu_base + RISCV_IOMMU_REG_IOHPMCTR(i)), ==, 0);
-+    }
-+    qtest_writel(state.qts, state.iommu_base + RISCV_IOMMU_REG_IOCOUNTINH,
-+                 RISCV_IOMMU_IOCOUNTINH_CY);
-+
-+    /* EDU sends a real PCI MSI, including the transaction requester ID. */
-+    msi_cap = qpci_find_capability(state.testdev, PCI_CAP_ID_MSI, 0);
-+    g_assert_cmpuint(msi_cap, !=, 0);
-+    flags = qpci_config_readw(state.testdev, msi_cap + PCI_MSI_FLAGS);
-+    g_assert_cmpuint(flags & PCI_MSI_FLAGS_64BIT, !=, 0);
-+    qpci_config_writel(state.testdev, msi_cap + PCI_MSI_ADDRESS_LO, iova);
-+    qpci_config_writel(state.testdev, msi_cap + PCI_MSI_ADDRESS_HI, iova >> 32);
-+    qpci_config_writew(state.testdev, msi_cap + PCI_MSI_DATA_64, MSI_DATA);
-+    qpci_config_writew(state.testdev, msi_cap + PCI_MSI_FLAGS,
-+                       flags | PCI_MSI_FLAGS_ENABLE);
-+    qpci_io_writel(state.testdev, state.testdev_bar, EDU_IRQ_RAISE, 1);
-+
-+    g_assert_cmpuint(qtest_readl(state.qts,
-+        state.iommu_base + RISCV_IOMMU_REG_FQT), ==, !cfg->valid_pte);
-+    if (cfg->valid_pte) {
-+        g_assert_cmphex(qtest_readl(state.qts, MSI_TARGET_PA), ==, MSI_DATA);
-+    } else {
-+        hdr = qtest_readq(state.qts, fq_addr);
-+        g_assert_cmpuint(hdr & RISCV_IOMMU_FQ_HDR_CAUSE, ==,
-+                         RISCV_IOMMU_FQ_CAUSE_MSI_INVALID);
-+        g_assert_cmpuint((hdr & RISCV_IOMMU_FQ_HDR_TTYPE) >> 34, ==,
-+                         RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
-+        g_assert_cmpuint((hdr & RISCV_IOMMU_FQ_HDR_DID) >> 40, ==,
-+                         state.testdev->devfn);
-+        g_assert_cmphex(qtest_readq(state.qts, fq_addr + 16), ==, iova);
-+        g_assert_cmphex(qtest_readq(state.qts, fq_addr + 24), ==, 0);
-+    }
-+
-+    /* Count the original translation, excluding the GPA recovery walk. */
-+    for (unsigned i = 0; i < G_N_ELEMENTS(events); i++) {
-+        g_assert_cmpuint(qtest_readq(state.qts,
-+            state.iommu_base + RISCV_IOMMU_REG_IOHPMCTR(i)), ==, expected[i]);
-+    }
-+    riscv_iommu_test_teardown(&state);
-+}
-+
- static void riscv_iommu_dbg_map_leaf(QTestState *qts, uint64_t l1_pa,
-                                     uint64_t l2_pa, uint64_t va, uint64_t pa,
-                                     uint64_t page_size)
-@@ -386,7 +507,7 @@ static void test_riscv_iommu_dbg(gconstpointer data)
-                          cfg->g_page_size : cfg->s_page_size;
-     uint64_t response;
- 
--    if (!riscv_iommu_test_setup(&state)) {
-+    if (!riscv_iommu_test_setup(&state, false)) {
-         return;
-     }
- 
-@@ -462,6 +583,12 @@ int main(int argc, char **argv)
-                    test_riscv_iommu_g_stage_only);
-     qtest_add_func("/iommu-testdev/translation/ns-nested",
-                    test_riscv_iommu_nested);
-+    for (unsigned i = 0; i < G_N_ELEMENTS(msi_tests); i++) {
-+        g_autofree char *path = g_strdup_printf("/riscv-iommu/msi/%s",
-+                                               msi_tests[i].name);
-+
-+        qtest_add_data_func(path, &msi_tests[i], test_riscv_iommu_msi);
-+    }
-     for (unsigned i = 0; i < G_N_ELEMENTS(debug_tests); i++) {
-         g_autofree char *path = g_strdup_printf("/iommu-testdev/debug/%s",
-                                                debug_tests[i].name);
 -- 
 2.43.0
 
