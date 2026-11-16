@@ -1,90 +1,89 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D1C4606A31C
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 07:53:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04884606A329
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 07:53:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SWmApJc8
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=BT/YhZjp
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xSrWU-0002dD-6q; Mon, 16 Nov 2026 02:53:06 -0500
+	id 1xSrWq-00033F-Ic; Mon, 16 Nov 2026 02:53:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xSrWR-0002cI-6T
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:03 -0500
-Received: from mail-pj2-x09.google.com ([2607:f8b0:4864:39::9])
+ id 1xSrWo-0002sH-Bj
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:26 -0500
+Received: from mail-pj2-x07.google.com ([2607:f8b0:4864:39::7])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <fritchleybohrer@gmail.com>)
- id 1xSrWP-0006Rf-DY
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:02 -0500
-Received: by mail-pj2-x09.google.com with SMTP id
- 98e67ed59e1d1-3b1478f06e3so864244a91.0
- for <qemu-riscv@nongnu.org>; Sun, 15 Nov 2026 23:53:01 -0800 (PST)
+ id 1xSrWl-0006Tc-Fn
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 02:53:26 -0500
+Received: by mail-pj2-x07.google.com with SMTP id
+ d9443c01a7336-2e934c6c20aso29101015ad.0
+ for <qemu-riscv@nongnu.org>; Sun, 15 Nov 2026 23:53:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1794815580; x=1795420380; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1794815602; x=1795420402; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hIjlzjraPZGou6DwZuYcV0PsGSSXUwI1uycVRUHglCk=;
- b=SWmApJc8Z715GGNIvuonZNt8OP1n6SnDOOIAol/xbDF95nrQAD7zNoSApYEJbBZ8x2
- 01u+8XqNBSnnXBXndTJ+BwG10gLL61PWsxYHit5UD100VfFOKcrMBFnfF4d096lhDavz
- gQVRrpE5TumwDMPMDkL8twhtWcDKQL9XDtDJ3Bw8uNmLg7lqJFwRkeofsWoAcJnY+Ppj
- vpSK73Wes59q4khHzfp3294NRlyMKZECS8E7FiiH7xtWHD6Z2zS2dYPel0S+U7xvTIr9
- oCPNCKEB6gPhFZODz+Ydcrl1b6C/l5pFX5kJ98frN1sp2Bai6cpj3xprJUvP8ujLRng6
- yhAQ==
+ bh=t8MMnDqot1SowKtbk3GWRs6afUCmGfGIuFgIQIPOXCQ=;
+ b=BT/YhZjpvoKjzvAJtVIdVVhEvAJcU3Y69jYLK/s2tozgOvspB69G60dOtHIZi9H/Il
+ MQELQlFIDghNgvJLtadt+qH85LdpwvFrr0AbThWbMQDUK/UPr0yUsvBMTyitrWtOjGDd
+ 1OmoGFOGsATJkRDTLZA93xkMdZmzhcaNznS5+u6F6g4XcpIDRMHf7QzFMC5KdHWN8KSE
+ LWb4rEq+hM76+soJD2V+YGSTWfnJwIiRzGZ8ubGLbNt4Z7AfOZEL9W9PJwTv2mYvQHS8
+ rl3ATgdBtzaMqrNuLAzeaj7nmPD5XGwtTWWASsacNPVR85THjX1XXZ4K+ufHZcFg2ZY2
+ 294A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794815580; x=1795420380;
+ d=1e100.net; s=20260707; t=1794815602; x=1795420402;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=hIjlzjraPZGou6DwZuYcV0PsGSSXUwI1uycVRUHglCk=;
- b=jEk0ib3J7pZl2x96UFEYZTH15kkhqAFV1Juc9FLpBDJ9/7RMrdew86Yfefr4hyDY+r
- eK1XCCnGV8Ixj/vbq2j1mw2ehSId4IUqKHvVqOXI9RGgXOxNQ6aNTNp6dvt7zj+zE34P
- u1ttXNpAM3mksyF01pOjlVvAfWAqxzkvB300m1AYdtFY+ITjxF+LCOwhrqyDgKKRFQd/
- tprTwX6kKxQKxNgh65tQ4s98PlcHYupU4EglkFy0F9kH1IdTcUWuCmkgxYlF1J9Gx5SY
- UQst/hJEjbsAHmqaU24YfKrE///a0STmGcsqCJ6GqD1jpIeRMHfX/yt6bT6oJSVtpGtq
- S9ug==
+ bh=t8MMnDqot1SowKtbk3GWRs6afUCmGfGIuFgIQIPOXCQ=;
+ b=s8GCe4LudSvMPavzEMGmma2xLSeNpO66iCQs3ltSvDgUYy7pG3jPijUAHTDEMvGuTn
+ Gua88bjqqFBzvWrHUBeKcbzRS5IdltRsQ+/cOAI6+E9rgtxXMaDKn6tmi3LxsIIOZ3mL
+ W9Mkymo54c76lhnY57tpF/5k7IrWbY9poU1wIpDQlH/Er5S1VsGsiPf2n5x096A63UXU
+ nNiBOGuYocD38wVMRU4YRPt4HMAm8fVSTJRdeA50Dn7EH806JuxNGx58LTZe9Y3y/Gbk
+ c7Y5Fb4ROWLvvnlW8fdkuh6MKEJ4xIKAZWE2g9Bu91Kka3af4LGCJZpxV5F3PASJEM2I
+ LlVw==
 X-Forwarded-Encrypted: i=1;
- AL+hErESmTw3A+ZJ+fQnHjaSNsh7cWRuG6EXb6YFBIzui/X3PL2ojYS44Hp4asNpeLNBlrwpP+UpEEQ8tIBQ@nongnu.org
-X-Gm-Message-State: APuU4Z9Jd+wu2P/oT/oJrf3HfS90xEmPgea6J1rAW3BlhH4t91AdxuOK
- Yv5Vh1Y1C1zNZ1EY6XKjqGHRyUtEsGMCFpTO9GqfDxfegelXZI3zoaqz
-X-Gm-Gg: AZFdTZcWpg2a2UaXdCWNEHiBFElmqNQKe8TmUBRvGYB5EJzTEXXhDCJGMawTueCnOho
- GAiGiyR82ExZDjjw95Cpq/Cqp8DvZ3niWceT6gQVsePk6BdXxoYNf8jh9Y1G8m8XpEnU7/6Eu7y
- L1el3Iwfz9WwYTut3yuLm4jsrTEyFwccNDFQMyXuvixqDotOo/gy0kEqPtudS1zBP5Mkh+cl721
- V1ZqNcdy83wmR78ttgN0B5J2190kQS2U/usAspByu07dEPAdLm38snKOEDVSq8AUqWmNsi7UC7M
- MuV5DFvTg6mO15Njd96bYy2iE7MJIe7XgGRAZB+9nn55RYIxR5DQQccZ3pLeqy+cSlvs2q5KotU
- n1XESBx11ZopJ6WgJRHE8mQVePHFwUkpVbpCgQfAETDUXzNVmh8LQvyoXdcToFrOkXHJRJOFVg+
- 9qmTYDhVcgH4xzNhGIWJXdG7UGSTddApBXXhfMaBt1FwgODEC9ck1Me+UYmKHWnpRp+Fja8RPGd
- N7CyXDb39stYdPCeVWTTbXiAyNn/GTbIiXKLQW9mhqjPudT081+qDk69m7RoiLUa6vFZbDtTSpI
- avA3OX6VjYNktnFtjAWXDcfibFff8551/XDakXqkLE42MX7djn1c1qMP
-X-Received: by 2002:a17:90b:54cb:b0:3b0:ce1c:e74f with SMTP id
- 98e67ed59e1d1-3b1b0a3a251mr9045461a91.27.1794815579609; 
- Sun, 15 Nov 2026 23:52:59 -0800 (PST)
+ AL+hErFEO7jFMugJKWzlpcAlJ3cxycf+5cOvg+Crm/OYtTAg5BQzqtE2bjs4arS8BsZQsVXx8HpPqxpji36I@nongnu.org
+X-Gm-Message-State: APuU4Z8iD4vLVqhvzUcphcLGOimyTe2/vcoCjzw3StW5kE2QAaJp/Cv9
+ vlv97AhYSQoMhAsVo7WsIAmioxgzlqsdtwmMwxfeFufT4xMRwV/nttNF
+X-Gm-Gg: AZFdTZeQMwqipIUmVsQ7AGnNlgxvv6x7BsJCu7BLu6J5I567Rx+2ytjCDpXnYfGCe06
+ g2nz42dnHgpODF3DCc5pJDfcf/LcAj8Ohi7+5rhQ1Py2QTb13I/8dQIcpagv4nIa6VP/4lMPpXm
+ +kuzj2ihDULKtoEADViLVEZ+VnpxZLb5v3a8WMYx5MHjDM2xUv7GW16sMg+Hhjw5athJt3r8FpI
+ yz92xhPGp77LrdDxtWgrp7aDK5sJJj8YlpaAY8FEdNGdIw1vgSVC8CvJ3CrsGR9YKVzI/ikKqgh
+ W3Ru91ZXuCuwy/jGJyOtklGVGhqcLEM5y5ch/5hR/D3fPQf0+TgNO53bPXJrRm5pB2lGHtnLUEe
+ L+pstwpoiQCWOYxiHODGRPR0TBUeYmbnMlJIenkGzYlcgWVDthmHAf6+q24Z78Pb5gJCJImL/0Z
+ 5xWgvZgO26mmuT5onHWE2dDBtvAOr9B53aHUdCSiX1xeaKvUfKAY/oxlShfbXiw6yu5LeF0OQ3l
+ 1tAmIRcrADv072wJ8dOHCVydkev2HK5eYfplesJah4hnhXRWHy5lswflSHxZGi3e2NmsS0Nihop
+ YqwSYqXCkWZs+TXEFQYaVrDUEIYYysf7ZgDWpV+bqE+xMMQ8RNGUawEE
+X-Received: by 2002:a17:90a:da86:b0:3a4:b0f3:6597 with SMTP id
+ 98e67ed59e1d1-3b1b05b9444mr9861461a91.0.1794815601658; 
+ Sun, 15 Nov 2026 23:53:21 -0800 (PST)
 Received: from Dell-WorkStation.localdomain ([152.175.67.81])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b197d0f6e0sm20745622a91.9.2026.11.15.23.52.48
+ 98e67ed59e1d1-3b197d0f6e0sm20745622a91.9.2026.11.15.23.53.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Nov 2026 23:52:59 -0800 (PST)
+ Sun, 15 Nov 2026 23:53:21 -0800 (PST)
 From: Zephyr Li <fritchleybohrer@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu@processmission.com, qemu-riscv@nongnu.org, farosas@suse.de,
  lvivier@redhat.com, pbonzini@redhat.com
-Subject: [PATCH 2/3] hw/riscv/riscv-iommu: Fix MSI fault PV reporting for
- process ID zero
-Date: Mon, 16 Nov 2026 15:51:40 +0800
-Message-ID: <20261116075141.167317-3-fritchleybohrer@gmail.com>
+Subject: [PATCH 3/3] hw/riscv/riscv-iommu: Add unit tests for MSI trap handling
+Date: Mon, 16 Nov 2026 15:51:41 +0800
+Message-ID: <20261116075141.167317-4-fritchleybohrer@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261116075141.167317-1-fritchleybohrer@gmail.com>
 References: <20261116075141.167317-1-fritchleybohrer@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:39::9;
- envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x09.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:39::7;
+ envelope-from=fritchleybohrer@gmail.com; helo=mail-pj2-x07.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -106,116 +105,489 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-MSI fault reporting derives PV from the numeric process ID, so process
-zero always produces PV=0. Ordinary translation faults and recovery
-faults instead use the device context's PDTV bit.
+The recovery-fault and ordinary-DMA fallback paths are difficult to
+exercise deterministically with a qtest that updates page tables between
+the initial translation and the synchronous trap callback.
 
-Use the same PDTV policy for MSI faults. Add a qtest with a real PD8
-process directory and DPE-selected default process zero, reaching an
-invalid MSI PTE after nonidentity nested translation. Check PV=1, PID=0,
-and the original IOVA. Also check PV=0 in the existing fault cases
-without PDTV.
+Move the private callback into an implementation fragment shared with a
+unit test. Use real QEMU types and replace the callback dependencies
+only in the test translation unit, without exporting a new API or adding
+runtime test hooks.
 
-This aligns QEMU's current context-based reporting policy. Preserving
-the validity of an explicitly supplied request PID separately from its
-value is outside this change.
+Cover rejected attributes, missing contexts, MSI forwarding, recovery
+faults, and 4/8-byte fallback writes with success and error returns.
+Check the addresses, little-endian bytes, transaction attributes,
+context release, single-fault behavior, and disabled replay HPM
+accounting. The PV assertions describe the existing callback policy, not
+complete request-PID validity handling.
 
-Fixes: 0c54acb8243d ("hw/riscv: add RISC-V IOMMU base emulation")
+Register the test for system builds and add it to the RISC-V MAINTAINERS
+entry. Use the usual pointer declaration in the moved callback. The
+production behavior is unchanged.
+
+Use a distinct opaque reference in the context stub so the
+cleanup checks distinguish the returned context from its
+cache-lifetime reference.
+
 Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 ---
- hw/riscv/riscv-iommu.c         |  2 +-
- tests/qtest/iommu-riscv-test.c | 36 ++++++++++++++++++++++++++++++----
- 2 files changed, 33 insertions(+), 5 deletions(-)
+ MAINTAINERS                        |   1 +
+ hw/riscv/riscv-iommu-trap.c.inc    |  69 ++++++++
+ hw/riscv/riscv-iommu.c             |  61 +------
+ tests/unit/meson.build             |   1 +
+ tests/unit/test-riscv-iommu-trap.c | 266 +++++++++++++++++++++++++++++
+ 5 files changed, 338 insertions(+), 60 deletions(-)
+ create mode 100644 hw/riscv/riscv-iommu-trap.c.inc
+ create mode 100644 tests/unit/test-riscv-iommu-trap.c
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3d53e104c5..75de9034b8 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -387,6 +387,7 @@ F: tests/functional/riscv64
+ F: tests/tcg/riscv32/
+ F: tests/tcg/riscv64/
+ F: tests/qtest/iommu-riscv-test.c
++F: tests/unit/test-riscv-iommu-trap.c
+ 
+ RISC-V XThead* extensions
+ M: Christoph Muellner <christoph.muellner@vrull.eu>
+diff --git a/hw/riscv/riscv-iommu-trap.c.inc b/hw/riscv/riscv-iommu-trap.c.inc
+new file mode 100644
+index 0000000000..1e3eaee930
+--- /dev/null
++++ b/hw/riscv/riscv-iommu-trap.c.inc
+@@ -0,0 +1,69 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Private RISC-V IOMMU MSI trap callback
++ *
++ * Copyright (C) 2021-2023, Rivos Inc.
++ */
++
++/* Shared privately with the deterministic trap callback unit tests. */
++
++/*
++ * Translations matching MSI pattern check are redirected to "riscv-iommu-trap"
++ * memory region as untranslated address, for additional MSI/MRIF interception
++ * by IOMMU interrupt remapping implementation.
++ * Note: Device emulation code generating an MSI is expected to provide a valid
++ * memory transaction attributes with requested_id set.
++ */
++static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
++    uint64_t data, unsigned size, MemTxAttrs attrs)
++{
++    RISCVIOMMUState *s = opaque;
++    RISCVIOMMUContext *ctx;
++    MemTxResult res;
++    void *ref;
++    uint32_t devid = attrs.requester_id;
++    IOMMUTLBEntry iotlb = {
++        .iova = addr,
++        .target_as = s->target_as,
++        .addr_mask = ~0ULL,
++        .perm = IOMMU_WO,
++    };
++    int cause;
++
++    if (attrs.unspecified) {
++        return MEMTX_ACCESS_ERROR;
++    }
++
++    /* FIXME: PCIe bus remapping for attached endpoints. */
++    devid |= s->bus << 8;
++
++    ctx = riscv_iommu_ctx(s, devid, attrs.pid, IOMMU_WO, addr, &ref);
++    if (ctx == NULL) {
++        res = MEMTX_ACCESS_ERROR;
++    } else {
++        /*
++         * The trap address is the original IOVA. Resolve the MSI GPA
++         * without consulting or updating the translation cache.
++         * Exclude this internal replay from the modeled HPM events.
++         */
++        cause = riscv_iommu_spa_fetch(s, ctx, &iotlb, false);
++        if (cause) {
++            riscv_iommu_report_fault(s, ctx,
++                RISCV_IOMMU_FQ_TTYPE_UADDR_WR, cause,
++                !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV),
++                addr, iotlb.translated_addr);
++            res = MEMTX_ACCESS_ERROR;
++        } else if (iotlb.target_as == &s->trap_as) {
++            res = riscv_iommu_msi_write(s, ctx, addr,
++                                       iotlb.translated_addr, data,
++                                       size, attrs);
++        } else {
++            /* The mapping may have changed since the original walk. */
++            data = cpu_to_le64(data);
++            res = dma_memory_write(iotlb.target_as, iotlb.translated_addr,
++                                   &data, size, attrs);
++        }
++    }
++    riscv_iommu_ctx_put(s, ref);
++    return res;
++}
 diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 016e95fce7..5752a4776b 100644
+index 5752a4776b..cb98840121 100644
 --- a/hw/riscv/riscv-iommu.c
 +++ b/hw/riscv/riscv-iommu.c
-@@ -831,7 +831,7 @@ static MemTxResult riscv_iommu_msi_write(RISCVIOMMUState *s,
- 
- err:
-     riscv_iommu_report_fault(s, ctx, fault_type, cause,
--                             !!ctx->process_id, iova, 0);
-+                             !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV), iova, 0);
-     return res;
- }
- 
-diff --git a/tests/qtest/iommu-riscv-test.c b/tests/qtest/iommu-riscv-test.c
-index 3678d8a0d4..28af06d770 100644
---- a/tests/qtest/iommu-riscv-test.c
-+++ b/tests/qtest/iommu-riscv-test.c
-@@ -27,6 +27,7 @@
- 
- #define MSI_TABLE_PA            0x80030000ull
- #define MSI_TARGET_PA           0x80040000ull
-+#define MSI_PROCESS_GPA         0x00050000ull
- #define MSI_DATA                0x37
- #define EDU_DEVICE_ID           0x11e8
- #define EDU_IRQ_RAISE           0x60
-@@ -62,13 +63,15 @@ typedef struct RiscvIommuMsiTest {
-     bool valid_pte;
-     uint64_t s_walks;
-     uint64_t g_walks;
-+    bool default_process;
- } RiscvIommuMsiTest;
- 
- static const RiscvIommuMsiTest msi_tests[] = {
--    { "first-stage-bare-fault", QRIOMMU_TM_G_STAGE_ONLY, false, 0, 0 },
--    { "nested-fault", QRIOMMU_TM_NESTED, false, 3, 9 },
--    { "first-stage-bare-basic", QRIOMMU_TM_G_STAGE_ONLY, true, 0, 0 },
--    { "nested-basic", QRIOMMU_TM_NESTED, true, 3, 9 },
-+    { "first-stage-bare-fault", QRIOMMU_TM_G_STAGE_ONLY, false, 0, 0, false },
-+    { "nested-fault", QRIOMMU_TM_NESTED, false, 3, 9, false },
-+    { "first-stage-bare-basic", QRIOMMU_TM_G_STAGE_ONLY, true, 0, 0, false },
-+    { "nested-basic", QRIOMMU_TM_NESTED, true, 3, 9, false },
-+    { "nested-pdtv-pid0-fault", QRIOMMU_TM_NESTED, false, 3, 9, true },
+@@ -2599,66 +2599,7 @@ static const MemoryRegionOps riscv_iommu_mmio_ops = {
+     }
  };
  
- static const RiscvIommuDbgTest debug_tests[] = {
-@@ -389,6 +392,27 @@ static void test_riscv_iommu_msi(gconstpointer data)
-     /* Match one GPA page; interrupt-file number zero selects the first PTE. */
-     dc_addr = QRIOMMU_SPACE_OFFS + QRIOMMU_DC_BASE +
-               state.testdev->devfn * sizeof(struct riscv_iommu_dc);
-+    if (cfg->default_process) {
-+        uint64_t process_pa = QRIOMMU_SPACE_OFFS + MSI_PROCESS_GPA;
-+        uint64_t g_leaf_pa = QRIOMMU_SPACE_OFFS + QRIOMMU_G_L1_PTE_VAL;
-+        uint64_t fsc = qtest_readq(state.qts, dc_addr + 24);
+-/*
+- * Translations matching MSI pattern check are redirected to "riscv-iommu-trap"
+- * memory region as untranslated address, for additional MSI/MRIF interception
+- * by IOMMU interrupt remapping implementation.
+- * Note: Device emulation code generating an MSI is expected to provide a valid
+- * memory transaction attributes with requested_id set.
+- */
+-static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
+-    uint64_t data, unsigned size, MemTxAttrs attrs)
+-{
+-    RISCVIOMMUState* s = (RISCVIOMMUState *)opaque;
+-    RISCVIOMMUContext *ctx;
+-    MemTxResult res;
+-    void *ref;
+-    uint32_t devid = attrs.requester_id;
+-    IOMMUTLBEntry iotlb = {
+-        .iova = addr,
+-        .target_as = s->target_as,
+-        .addr_mask = ~0ULL,
+-        .perm = IOMMU_WO,
+-    };
+-    int cause;
+-
+-    if (attrs.unspecified) {
+-        return MEMTX_ACCESS_ERROR;
+-    }
+-
+-    /* FIXME: PCIe bus remapping for attached endpoints. */
+-    devid |= s->bus << 8;
+-
+-    ctx = riscv_iommu_ctx(s, devid, attrs.pid, IOMMU_WO, addr, &ref);
+-    if (ctx == NULL) {
+-        res = MEMTX_ACCESS_ERROR;
+-    } else {
+-        /*
+-         * The trap address is the original IOVA. Resolve the MSI GPA
+-         * without consulting or updating the translation cache.
+-         * Exclude this internal replay from the modeled HPM events.
+-         */
+-        cause = riscv_iommu_spa_fetch(s, ctx, &iotlb, false);
+-        if (cause) {
+-            riscv_iommu_report_fault(s, ctx,
+-                RISCV_IOMMU_FQ_TTYPE_UADDR_WR, cause,
+-                !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV),
+-                addr, iotlb.translated_addr);
+-            res = MEMTX_ACCESS_ERROR;
+-        } else if (iotlb.target_as == &s->trap_as) {
+-            res = riscv_iommu_msi_write(s, ctx, addr,
+-                                       iotlb.translated_addr, data,
+-                                       size, attrs);
+-        } else {
+-            /* The mapping may have changed since the original walk. */
+-            data = cpu_to_le64(data);
+-            res = dma_memory_write(iotlb.target_as, iotlb.translated_addr,
+-                                   &data, size, attrs);
+-        }
+-    }
+-    riscv_iommu_ctx_put(s, ref);
+-    return res;
+-}
++#include "riscv-iommu-trap.c.inc"
+ 
+ static MemTxResult riscv_iommu_trap_read(void *opaque, hwaddr addr,
+     uint64_t *data, unsigned size, MemTxAttrs attrs)
+diff --git a/tests/unit/meson.build b/tests/unit/meson.build
+index 37b561d4a7..e4c425fbad 100644
+--- a/tests/unit/meson.build
++++ b/tests/unit/meson.build
+@@ -132,6 +132,7 @@ if have_system
+     'test-iov': [],
+     'test-opts-visitor': [testqapi],
+     'test-xs-node': [qom],
++    'test-riscv-iommu-trap': [],
+     'test-virtio-dmabuf': [meson.project_source_root() / 'hw/display/virtio-dmabuf.c'],
+     'test-qmp-cmds': [testqapi],
+     'test-xbzrle': [migration],
+diff --git a/tests/unit/test-riscv-iommu-trap.c b/tests/unit/test-riscv-iommu-trap.c
+new file mode 100644
+index 0000000000..d4753c7f31
+--- /dev/null
++++ b/tests/unit/test-riscv-iommu-trap.c
+@@ -0,0 +1,266 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/* Deterministic tests of the private RISC-V IOMMU MSI trap callback. */
++#include "qemu/osdep.h"
++#include "qemu/bswap.h"
++#include "hw/riscv/riscv-iommu.h"
 +
-+        g_assert_cmpuint(cfg->mode, ==, QRIOMMU_TM_NESTED);
-+        g_assert_cmphex(cap & RISCV_IOMMU_CAP_PD8, !=, 0);
-+        /* Map the PD8 table through G-stage; PID zero selects its first PC. */
-+        qtest_writeq(state.qts,
-+            g_leaf_pa + ((MSI_PROCESS_GPA >> 12) & 0x1ff) * sizeof(uint64_t),
-+            ((process_pa >> 12) << 10) | QRIOMMU_LEAF_PTE_RW_MASK);
-+        qtest_memset(state.qts, process_pa, 0, 0x1000);
-+        qtest_writeq(state.qts, process_pa, RISCV_IOMMU_PC_TA_V);
-+        qtest_writeq(state.qts, process_pa + 8, fsc);
-+        qtest_writeq(state.qts, dc_addr,
-+            RISCV_IOMMU_DC_TC_V | RISCV_IOMMU_DC_TC_PDTV |
-+            RISCV_IOMMU_DC_TC_DPE);
-+        qtest_writeq(state.qts, dc_addr + 24,
-+            (MSI_PROCESS_GPA >> 12) |
-+            ((uint64_t)RISCV_IOMMU_DC_FSC_PDTP_MODE_PD8 << 60));
++#define TEST_IOVA       0x400040ull
++#define TEST_GPA        0x28000040ull
++#define TEST_DATA       0x1122334455667788ull
++
++static struct {
++    RISCVIOMMUState state;
++    RISCVIOMMUContext ctx;
++    unsigned ref_cookie;
++    AddressSpace physical_as;
++    AddressSpace changed_as;
++    MemTxAttrs attrs;
++    bool missing_ctx;
++    int walk_fault;
++    AddressSpace *walk_as;
++    hwaddr walk_addr;
++    MemTxResult msi_result;
++    MemTxResult dma_result;
++    unsigned size;
++    unsigned ctx_calls;
++    unsigned put_calls;
++    unsigned walk_calls;
++    unsigned msi_calls;
++    unsigned fault_calls;
++    unsigned dma_calls;
++} test;
++
++static void assert_attrs(MemTxAttrs attrs)
++{
++    g_assert_cmpuint(attrs.requester_id, ==, test.attrs.requester_id);
++    g_assert_cmpuint(attrs.pid, ==, test.attrs.pid);
++    g_assert_cmpuint(attrs.secure, ==, test.attrs.secure);
++    g_assert_cmpuint(attrs.space, ==, test.attrs.space);
++    g_assert_cmpuint(attrs.user, ==, test.attrs.user);
++    g_assert_cmpuint(attrs.memory, ==, test.attrs.memory);
++    g_assert_cmpuint(attrs.debug, ==, test.attrs.debug);
++    g_assert_cmpuint(attrs.address_type, ==, test.attrs.address_type);
++    g_assert_cmpuint(attrs.unspecified, ==, test.attrs.unspecified);
++}
++
++static RISCVIOMMUContext *test_ctx(RISCVIOMMUState *s, unsigned devid,
++                                 unsigned pid, IOMMUAccessFlags perm,
++                                 uint64_t iova, void **ref)
++{
++    g_assert_true(s == &test.state);
++    g_assert_cmpuint(devid, ==,
++                     test.attrs.requester_id | (test.state.bus << 8));
++    g_assert_cmpuint(pid, ==, test.attrs.pid);
++    g_assert_cmpuint(perm, ==, IOMMU_WO);
++    g_assert_cmphex(iova, ==, TEST_IOVA);
++    test.ctx_calls++;
++    /* Cached contexts return a separate reference for ctx_put(). */
++    *ref = test.missing_ctx ? NULL : &test.ref_cookie;
++    return test.missing_ctx ? NULL : &test.ctx;
++}
++
++static void test_ctx_put(RISCVIOMMUState *s, void *ref)
++{
++    g_assert_true(s == &test.state);
++    g_assert_true(ref == (test.missing_ctx ? NULL : &test.ref_cookie));
++    test.put_calls++;
++}
++
++static int test_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
++                          IOMMUTLBEntry *iotlb, bool update_hpm)
++{
++    g_assert_true(s == &test.state);
++    g_assert_true(ctx == &test.ctx);
++    g_assert_cmphex(iotlb->iova, ==, TEST_IOVA);
++    g_assert_true(iotlb->target_as == &test.physical_as);
++    g_assert_cmphex(iotlb->addr_mask, ==, UINT64_MAX);
++    g_assert_cmpuint(iotlb->perm, ==, IOMMU_WO);
++    g_assert_false(update_hpm);
++    test.walk_calls++;
++    iotlb->target_as = test.walk_as;
++    iotlb->translated_addr = test.walk_addr;
++    return test.walk_fault;
++}
++
++static MemTxResult test_msi_write(RISCVIOMMUState *s,
++                                  RISCVIOMMUContext *ctx, uint64_t iova,
++                                  uint64_t gpa, uint64_t data, unsigned size,
++                                  MemTxAttrs attrs)
++{
++    g_assert_true(s == &test.state);
++    g_assert_true(ctx == &test.ctx);
++    g_assert_cmphex(iova, ==, TEST_IOVA);
++    g_assert_cmphex(gpa, ==, test.walk_addr);
++    g_assert_cmphex(iova, !=, gpa);
++    g_assert_cmphex(data, ==, TEST_DATA);
++    g_assert_cmpuint(size, ==, test.size);
++    assert_attrs(attrs);
++    test.msi_calls++;
++    return test.msi_result;
++}
++
++static void test_report_fault(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
++                              uint32_t ttype, uint32_t cause, bool pv,
++                              uint64_t iotval, uint64_t iotval2)
++{
++    g_assert_true(s == &test.state);
++    g_assert_true(ctx == &test.ctx);
++    g_assert_cmpuint(ttype, ==, RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
++    g_assert_cmpuint(cause, ==, test.walk_fault);
++    /* Check the existing callback policy, not the complete PID/DPE model. */
++    g_assert_cmpuint(pv, ==, !!(test.ctx.tc & RISCV_IOMMU_DC_TC_PDTV));
++    g_assert_cmphex(iotval, ==, TEST_IOVA);
++    g_assert_cmphex(iotval2, ==, test.walk_addr);
++    test.fault_calls++;
++}
++
++static MemTxResult test_dma_write(AddressSpace *as, dma_addr_t addr,
++                                  const void *buf, dma_addr_t len,
++                                  MemTxAttrs attrs)
++{
++    static const uint8_t expected[] = {
++        0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11,
++    };
++
++    g_assert_true(as == &test.changed_as);
++    g_assert_cmphex(addr, ==, test.walk_addr);
++    g_assert_cmpuint(len, ==, test.size);
++    g_assert_cmpmem(buf, len, expected, len);
++    assert_attrs(attrs);
++    test.dma_calls++;
++    return test.dma_result;
++}
++
++/* Redirect dependencies only while compiling the private implementation. */
++#define riscv_iommu_ctx test_ctx
++#define riscv_iommu_ctx_put test_ctx_put
++#define riscv_iommu_spa_fetch test_spa_fetch
++#define riscv_iommu_msi_write test_msi_write
++#define riscv_iommu_report_fault test_report_fault
++#define dma_memory_write test_dma_write
++#include "hw/riscv/riscv-iommu-trap.c.inc"
++#undef riscv_iommu_ctx
++#undef riscv_iommu_ctx_put
++#undef riscv_iommu_spa_fetch
++#undef riscv_iommu_msi_write
++#undef riscv_iommu_report_fault
++#undef dma_memory_write
++
++static void reset_test(void)
++{
++    memset(&test, 0, sizeof(test));
++    test.state.target_as = &test.physical_as;
++    test.state.bus = 0x80;
++    test.attrs = (MemTxAttrs) {
++        .requester_id = 0x3456,
++        .pid = 0x5a,
++        .secure = true,
++        .space = 1,
++        .user = true,
++        .memory = true,
++        .debug = true,
++        .address_type = 1,
++    };
++    test.ctx.process_id = test.attrs.pid;
++    test.walk_as = &test.state.trap_as;
++    test.walk_addr = TEST_GPA;
++    test.size = 4;
++}
++
++static MemTxResult trap_write(void)
++{
++    return riscv_iommu_trap_write(&test.state, TEST_IOVA, TEST_DATA,
++                                  test.size, test.attrs);
++}
++
++static void assert_calls(unsigned ctx, unsigned walk, unsigned msi,
++                         unsigned fault, unsigned dma)
++{
++    g_assert_cmpuint(test.ctx_calls, ==, ctx);
++    g_assert_cmpuint(test.put_calls, ==, ctx);
++    g_assert_cmpuint(test.walk_calls, ==, walk);
++    g_assert_cmpuint(test.msi_calls, ==, msi);
++    g_assert_cmpuint(test.fault_calls, ==, fault);
++    g_assert_cmpuint(test.dma_calls, ==, dma);
++}
++
++static void test_unspecified(void)
++{
++    reset_test();
++    test.attrs.unspecified = true;
++    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
++    assert_calls(0, 0, 0, 0, 0);
++}
++
++static void test_missing_context(void)
++{
++    reset_test();
++    test.missing_ctx = true;
++    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
++    assert_calls(1, 0, 0, 0, 0);
++}
++
++static void test_msi_forward(void)
++{
++    reset_test();
++    test.size = 8;
++    test.msi_result = MEMTX_ERROR;
++    g_assert_cmpuint(trap_write(), ==, MEMTX_ERROR);
++    assert_calls(1, 1, 1, 0, 0);
++}
++
++static void test_rewalk_fault(gconstpointer data)
++{
++    reset_test();
++    test.attrs.pid = 0;
++    test.ctx.process_id = 0;
++    test.ctx.tc = data ? RISCV_IOMMU_DC_TC_PDTV : 0;
++    test.walk_fault = RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS;
++    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
++    assert_calls(1, 1, 0, 1, 0);
++}
++
++typedef struct FallbackCase {
++    const char *name;
++    unsigned size;
++    MemTxResult result;
++} FallbackCase;
++
++static void test_fallback(gconstpointer data)
++{
++    const FallbackCase *cfg = data;
++
++    reset_test();
++    test.size = cfg->size;
++    test.walk_as = &test.changed_as;
++    test.walk_addr = 0x90000040;
++    test.dma_result = cfg->result;
++    g_assert_cmpuint(trap_write(), ==, cfg->result);
++    assert_calls(1, 1, 0, 0, 1);
++}
++
++int main(int argc, char **argv)
++{
++    static const FallbackCase fallback_cases[] = {
++        { "fallback-4-success", 4, MEMTX_OK },
++        { "fallback-4-error", 4, MEMTX_ERROR },
++        { "fallback-8-success", 8, MEMTX_OK },
++        { "fallback-8-error", 8, MEMTX_ERROR },
++    };
++
++    g_test_init(&argc, &argv, NULL);
++    g_test_add_func("/riscv-iommu/trap/unspecified", test_unspecified);
++    g_test_add_func("/riscv-iommu/trap/missing-context", test_missing_context);
++    g_test_add_func("/riscv-iommu/trap/msi-forward", test_msi_forward);
++    g_test_add_data_func("/riscv-iommu/trap/rewalk-fault-pdtv-off", NULL,
++                         test_rewalk_fault);
++    g_test_add_data_func("/riscv-iommu/trap/rewalk-fault-pdtv-on",
++                         GUINT_TO_POINTER(1), test_rewalk_fault);
++    for (unsigned i = 0; i < G_N_ELEMENTS(fallback_cases); i++) {
++        g_autofree char *path = g_strdup_printf("/riscv-iommu/trap/%s",
++                                               fallback_cases[i].name);
++
++        g_test_add_data_func(path, &fallback_cases[i], test_fallback);
 +    }
-     qtest_writeq(state.qts, dc_addr + 32,
-                  (MSI_TABLE_PA >> 12) | (1ull << 60));
-     qtest_writeq(state.qts, dc_addr + 40, 0);
-@@ -437,6 +461,10 @@ static void test_riscv_iommu_msi(gconstpointer data)
-                          RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
-         g_assert_cmpuint((hdr & RISCV_IOMMU_FQ_HDR_DID) >> 40, ==,
-                          state.testdev->devfn);
-+        /* Check QEMU's PDTV policy using DPE, without an EDU PASID. */
-+        g_assert_cmpuint(!!(hdr & RISCV_IOMMU_FQ_HDR_PV), ==,
-+                         cfg->default_process);
-+        g_assert_cmphex(hdr & RISCV_IOMMU_FQ_HDR_PID, ==, 0);
-         g_assert_cmphex(qtest_readq(state.qts, fq_addr + 16), ==, iova);
-         g_assert_cmphex(qtest_readq(state.qts, fq_addr + 24), ==, 0);
-     }
++    return g_test_run();
++}
 -- 
 2.43.0
 
