@@ -1,122 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB1B1606A894
-	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 13:56:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32BDE606A322
+	for <qemu-riscv@archiver.kernel.org>; Mon, 16 Nov 2026 17:31:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=k40kQm51
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=X6bH6sKf;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MOaYhWpy
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xSxCE-0006Ve-FK; Mon, 16 Nov 2026 08:56:35 -0500
+	id 1xT0Xl-0000yg-GV; Mon, 16 Nov 2026 12:31:01 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1xSxBm-0006TZ-6z
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 08:56:07 -0500
-Received: from smtp-relay-internal-0.canonical.com ([185.125.188.122])
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xT0Xj-0000yD-Cj
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 12:30:59 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <heinrich.schuchardt@canonical.com>)
- id 1xSxBj-0006hD-PD
- for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 08:56:05 -0500
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A6ED93F442
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 13:56:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20251003; t=1794837361;
- bh=wl8kzpPBuwPFvMqs3QALXk57W+uxStjSHw8EooDLB2U=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=k40kQm51YdGyDzTBiX69yjm9bkX1uCTFxxQoJy2PgFxaB5yyzBeaVvczqnq0dE5Sl
- dEnLxHYtYZ6kNMLjCtXET5nPc6QxwfX2gJLCN+B2xfFklEdyxqoQ9IYqY/6Y/lL0j6
- MHTQMtTMf0fRBgZsMCSEKzCi7slccgZsvtv9qVqKcReB9Gc1EJSB+ESSjm1TbDcHCs
- Nk/u5YZ6kqKgsRXHTa6Dor+CjZXPQMTXrnBn4iwntWm/EVqag+Hdb+mfkeJYk95d69
- cpSk48wOs+M3UpI2452nCO63cqDXU/yIFbYQLp+tmVFTw00zbNLXNEBEn68O0Tpdpl
- XCKclDoN0FpPDX9S4Mo/QN7RSIi0XJXKgdoz4Rli8JiPgXmB8PYlzNKPzo9ZpjLM6n
- zcuaMcie16jLKAGXy42a5ckhdwxYynyRd7VDkb70bG/VeK/jgaO4m8RGTlpTXsXr0e
- 0pYAsWRI4HRNcIxA4rawBjLZmE90WKtvHGLq+kKuMidFtGlRCJQJ/BjmhKoyvSs1l0
- /wM6GX5vN4rrdcplGiKr0oWtF//3P0yX4JYUGbxOm7RS9HArHS3dtdyzXgM+cezq83
- Nm7Jat5cOc4wus1Fmc82qtYlSraRGA/x6xP9PYpFi9KL75RjxS5gHd9F9jjVEaiQMt
- 8AjaaheBYqoUMbfBSIinknZw=
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4bb68a5e792so7988125e9.0
- for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 05:56:01 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xT0Xh-000560-KD
+ for qemu-riscv@nongnu.org; Mon, 16 Nov 2026 12:30:59 -0500
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AGGIAWn2264118
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 17:30:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=CmBRC/fE7JFMfAKE7aGgk4lXeph89E/sfNS
+ gf5Z/xAI=; b=X6bH6sKfD34dPyHH1QdnX2jA+qCfp30U3rHNEn26r7kkLHH6Tps
+ SShb/oXs/L6CbOa+2VCHUy2z/Ufqo08VzX3jxhHXwMahUSosKgXMP4o2PqtKfX8Z
+ eDRyny5lk6IJnMFc2P680tjPu/5Md+iEekf2z2TtahA9/LzudC1ep8yasDRwCdhj
+ zKCraEmrzhT4T7kTys74HxzaBP2fAsZr914Q3imkm+JEbKdDyO1Me/mq4JFfx8PD
+ 8P5wHyYjB8S7CqYI1/xA+S5t1s5AzC1AeqyzUf97SaZaWhea/DvLzWVgiNK3dKK1
+ kMBh7hjiHLycMiZYC6/Uxty6jwVtEDuAdWw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
+ [209.85.160.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hyrmc3b3e-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 17:30:54 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id
+ d75a77b69052e-5364605e74bso53675771cf.3
+ for <qemu-riscv@nongnu.org>; Mon, 16 Nov 2026 09:30:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1794850253; x=1795455053; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=CmBRC/fE7JFMfAKE7aGgk4lXeph89E/sfNSgf5Z/xAI=;
+ b=MOaYhWpyegxOE0gchm5/LivvP7zmT7F2mvCFQF05KsT+ee6h/aTQfRktnmiupfCsrr
+ BFI539lsh/nZ14xzM+E5BSDe+DWVYTzv58IE4e5VTSgTeXCIrX9+isqBkHn5XmBVYBUS
+ Iqew4ERGqsi1bqqvGx0MrjubmiNm2Z31oyKfbP8L4DG/lWmejv1QZxq1wrWPUdVI8c5p
+ nlHXAynI69EYhHkP3TM90X+qc9NDZjXVmOdDceKKp4d/taucb5bXhBZJO344o/XJed0a
+ dWQ8/cMt924a178bmaZ651kk7v7jQPEqgyINKtgiPjhrWZIF6buNtM91/15CMU0Z5vgw
+ XnMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794837361; x=1795442161;
- h=content-transfer-encoding:content-type:in-reply-to:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20260707; t=1794850253; x=1795455053;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=wl8kzpPBuwPFvMqs3QALXk57W+uxStjSHw8EooDLB2U=;
- b=aUjyjZYwNXzB/Puw+LA7V01qouRQ0FpSQf6qGJeQew4d3QPOlPFfhvmuTUaTmJMQJ5
- v53+wNrqr9DL1rCB+d834cN9gYcQGUbFtYlQvchKB1eX+IONjMd1ugdZTG0BoHU/QY4f
- xGscKBPuOQz1uCK4BuQGgIFXj0NwlVMmeeWpgNCwZoRBKGTqfRcZHcmN1YT+0M25m+B9
- usSK3erTphOREOJWcSLpbSCow0oS23gCR/+gbdH0nNV7SQSMN84/GJ1fAhtJmbLNZ/pk
- 6XsFZhav2vhPd8hI6HKSLoKin6CjTBH+wsW0DR2cTwqllBLB2W6/8LIspGbPyKJv6EfY
- K4NA==
-X-Forwarded-Encrypted: i=1;
- AL+hErHBxKeST/V1Qr/Sg1Disbvcq7GSHFxCTzzneG0E9xkFjIw77Oi2TlrgIRDaM7aAcsQTEfv6bREkdbkN@nongnu.org
-X-Gm-Message-State: APuU4Z+UYEEgihxh7IPSLfZcDq8KXemsT5p1SWwiqZUypeD93QWBduO0
- lGvmYoOg0KrrPtmVGAEOBxpNAqMLQx/UkJ064sHuxbCJxPRAp/w2ZpYRHkIzSKEBsM8H3o+xiT4
- 5cTsP2aB75xImcOl2B86lyE/CuA/jWIkei4zWW46o96+yj9WkYXR5GoltQr+11to6SS0wsLLNZj
- lCj4AX
-X-Gm-Gg: AYBFou3lGvqF06TiJINTmhTeUK61mhP67j7hBYse553/S8lXJMUKp1A1TAHpBoMSdNA
- 3I3FRUxVprgOo074y8UaZWih7d25Vujh+GE23qIx0qeQUVZYXPEO966UWCOBq0hV3OQ73wymw9H
- EoVmUd4BE0QHlHNCi03YshPi49Iu40pFmg5hMqkeAkly6d7HpfvjxJ/WfhaEGpJkWBumIFBIviK
- slAW5jhXbnhk/Rtjoup3Am0oVU+Q03zxtOX2HW2gBIfMe+iz8UlsUR0uvR7klM2gs09p3qHlK88
- Idmb1n9Zd2wlEUSyJ2I92W+igZhoFgxHsG8bFeQw+jhh8v7wnpfpen37DRDlXzrspGB77IqCP/9
- eCNqwVS8x6FX84WAUj/xZNx1msnfomemlhO6GCz/zPBPQ5j8u6p0ICujLY0enxInlV73erDMhj9
- wIefLOk5SYrO0RO0k2qXFindYKaEPlDqzB+zpEvLKDXCpnZXTyYTiFdk37etk=
-X-Received: by 2002:a05:600c:8b16:b0:4bb:5d38:259f with SMTP id
- 5b1f17b1804b1-4bb5d382639mr203013905e9.12.1794837361067; 
- Mon, 16 Nov 2026 05:56:01 -0800 (PST)
-X-Received: by 2002:a05:600c:8b16:b0:4bb:5d38:259f with SMTP id
- 5b1f17b1804b1-4bb5d382639mr203013535e9.12.1794837360683; 
- Mon, 16 Nov 2026 05:56:00 -0800 (PST)
-Received: from ?IPV6:2a02:908:1242:30e0:beae:76e1:12ab:7bc6?
- ([2a02:908:1242:30e0:beae:76e1:12ab:7bc6])
+ bh=CmBRC/fE7JFMfAKE7aGgk4lXeph89E/sfNSgf5Z/xAI=;
+ b=kwLu1FmoRiKZJBM33waFDemJqgQeJoJqlUYG/Vgxf1F9yMPqMcVbYGnVQ3RW7CCTBI
+ S8BVV+PoSZ9QlgMvKtiZe7wHzfVQXHxz4vW1Mgs+KKBj4Daflz0fMCed/+tYW+gKdN32
+ 2szhdiY81sag/S9C2bth8ZANbeytKe7ldiOrjlO31rYrXMFVTIXAShl1VWj2tC7ZZcJw
+ T6j/77OMyGbkIl+anR1k9/Zy+pu7m3KkrEt8e/wQkKAn8C5iJT2byho2HIVrK8qJbOp4
+ vAHSeCcwqwpFAliCHbOJ6LFNtlYaw9TNRv9vSolvw5HuxQ8Da3dx1jQsAhyVrhBFJPhu
+ Vi6w==
+X-Gm-Message-State: APuU4Z85lqHVIsr0ZguwwsPkdLwSLjOqjWzjsUp8vpgSmKnZNPqGnikl
+ 4y/d5ifAN7WWjSD6C/XLjD0T+W4dYa4iIRrRriTKp0TL4StYctfmf2IklSTbFWMH+/NtTy1EYwy
+ eYMorpGC1iokZGZ1y/RxTFPIiNWMWDRlPnQRJESUP1jRLnrRdD7Z/wpr1CA==
+X-Gm-Gg: AYBFou30ZtzIh92976i5CILBUYRNawdIEl6BlqOkbfjMHf6FoJzQ2bg8brDGQgYesK1
+ fAqlq00Rj/S1nu86zLEzXyUu38RE+INHt2YUEcVhzQv9Zewe+p6xt5yq8G1WFjF6anXNnoiXkYP
+ G8u9hEGygp6Uby9SxqH69Q2Ixq7YeDgogj1g4/4tFB/xrGNfjxx/ln7PkLFx47gCSzXoUSDNUEj
+ q9iOsmOHXecyr0JmAz2H83lTwpqmljwtqf5CAgN3rdeS4OsaJ8nQ98nhi4rnb+M5OhpNNyqEPEa
+ t2vHXsKac5vidLECLzkiC7PPjJD5XzxAR0eGEw6sMr2qbT1FERWpEOcdkGq0aWAHZ4NGKiVoYt5
+ ABCJBrPBL/qpPoE0er/ZhgJKMSCnPS8XyV6okV8aEpW7lkFaH+Da3xr+X7IfrMXL+AaC0/Ok9pc
+ EulZr4Pvww75U=
+X-Received: by 2002:a05:622a:2585:b0:536:7220:1d37 with SMTP id
+ d75a77b69052e-55ac888aa66mr176912141cf.55.1794850253099; 
+ Mon, 16 Nov 2026 09:30:53 -0800 (PST)
+X-Received: by 2002:a05:622a:2585:b0:536:7220:1d37 with SMTP id
+ d75a77b69052e-55ac888aa66mr176911561cf.55.1794850252575; 
+ Mon, 16 Nov 2026 09:30:52 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([177.170.227.223])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb4e29daa5sm403874075e9.12.2026.11.16.05.55.59
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Nov 2026 05:56:00 -0800 (PST)
-Message-ID: <635d77af-07e0-413f-8ce6-8908ef4bbee3@canonical.com>
-Date: Mon, 16 Nov 2026 14:55:58 +0100
+ af79cd13be357-9494c8b5c1dsm898530385a.33.2026.11.16.09.30.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Nov 2026 09:30:52 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 0/3] target/riscv: mseccfg CSR fixes [GL4680,GL4818]
+Date: Mon, 16 Nov 2026 14:30:44 -0300
+Message-ID: <20261116173047.812886-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] hw/riscv/virt: Limit interrupt identities to what KVM
- AIA supports
-To: Qingwei Hu <qingwei.hu@bytedance.com>, Stefan Butz <mail@butz.st>
-Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Sunil V L <sunilvl@qti.qualcomm.com>, Sunil V L <sunilvl@oss.qualcomm.com>
-References: <20260928-spacemit-k3-v1-0-8c57d0596b87@butz.st>
- <20260928-spacemit-k3-v1-4-8c57d0596b87@butz.st>
- <AB465835-0ECC-4A80-A410-FBC0C945140F@bytedance.com>
- <50141629-8EFA-4AD1-9BB6-75EBE845649A@bytedance.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <50141629-8EFA-4AD1-9BB6-75EBE845649A@bytedance.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=185.125.188.122;
- envelope-from=heinrich.schuchardt@canonical.com;
- helo=smtp-relay-internal-0.canonical.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
- DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE2MDA2OSBTYWx0ZWRfX3U5FIDnDWEIv
+ xwSDOjmhvl1pMqieVCX7DR/nEnXm2mDp8woHhei28WXxlmFDWimHehxtW9h5sujQ/lkf1uElajV
+ OeqYcSWJJvpCw+kOkwm6K8wDv6skjXo=
+X-Authority-Analysis: v=2.4 cv=C9N8WgP+ c=1 sm=1 tr=0 ts=6afb3dce cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=WERq1Tg1Nl5IKGfG0e6imA==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=4mDEp5eNMeDgTd3wHUwA:9
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: qZK_WzQUw6sFT1Emo3s6WOv3NT4Sl6CM
+X-Proofpoint-GUID: qZK_WzQUw6sFT1Emo3s6WOv3NT4Sl6CM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE2MDA2OSBTYWx0ZWRfXzPrz07uOmGcT
+ 2CvZunmHu+fYdutEiKTzPHaWBj53NUN0y6ar+nM9EhCp+IAqiD3GOEFoR/sY6deMaRMqYn3wh8R
+ 0/AornI+3vk4xbd8IyA2bQSN4nfvgWWHko5+RlOITsDk9RjQcmmO4bH/XKyj34boQIjv1YqPETX
+ wYsanItSn/EV+PjjqdVM0iZHS0bt3KLhcR/yiLo0TLtIJd7XamsS3JuPklk6T/SRuL3IC91ece5
+ jOXr1Gyau417VQNvFj6bSCy7puQysUZ36DRVA5H6hyTtHt3hM4Dd7Yb0C0BhzuAixXwcCu0Mr7r
+ WZ6GxExRzlqiHMLg9AXSUrkcWbO1NrtHbAaVDOiuhvexebYZNPyQmGs0tMHsRDFy5b8v1uZ0yjS
+ OAeOdC2VOxzHMzP6Z01izOVq8uN37vJ26T0WCfGnDukUEGkeUolot7icPaeLcfgzTFlHBmTqOrh
+ 7ox3adoBHiUZ/U+vdsQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-16_05,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0
+ clxscore=1015 spamscore=0 adultscore=0 bulkscore=0 phishscore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611160069
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -128,178 +144,45 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/27/26 03:45, Qingwei Hu wrote:
-> 
->> On Oct 6, 2026, at 10:53, Qingwei Hu <qingwei.hu@bytedance.com> wrote:
->>
->> Hi Stefan,
->>
->>> On Sep 28, 2026, at 14:06, Stefan Butz via <qemu-riscv@nongnu.org> wrote:
->>>
->>> The number of interrupt identities supported by the host's KVM AIA
->>> is limited. On Spacemit K3 and Tenstorrent Atlantis to 63.
->>> virt machine alwayas aks for 255 identities, so it fails if on those
->>> platforms.
->>>
->>> Read and apply host limit from KVM AIA device and apply.
->>>
->>> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4599
->>>
->>> Signed-off-by: Stefan Butz <mail@butz.st>
->>> ---
->>> hw/riscv/virt.c              | 12 +++++++++++-
->>> target/riscv/kvm/kvm-cpu.c   | 16 ++++++++++++++++
->>> target/riscv/kvm/kvm-stub.c  |  5 +++++
->>> target/riscv/kvm/kvm_riscv.h |  1 +
->>> 4 files changed, 33 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
->>> index 28fa31d538..2af85ec5c3 100644
->>> --- a/hw/riscv/virt.c
->>> +++ b/hw/riscv/virt.c
->>> @@ -78,6 +78,16 @@ static bool virt_use_emulated_aplic(RISCVVirtAIAType aia_type)
->>>     return riscv_use_emulated_aplic(msimode);
->>> }
->>>
->>> +static void virt_kvm_aia_create(RISCVVirtState *s)
->>> +{
->>> +    kvm_riscv_aia_create();
->>> +
->>> +    s->num_msis = MIN(s->num_msis, kvm_riscv_aia_get_num_ids());
->>
->> The host may support more than 255 guest interrupt identities, but
->> this MIN() keeps num_msis capped at the default value of 255.
->> Is this intentional to preserve the existing default? Would it make
->> sense to allow users to configure a higher value when the host
->> supports it?
->>
->>> +    if (!virt_use_emulated_aplic(s->aia_type)) {
->>> +        s->num_sources = MIN(s->num_sources, s->num_msis);
->>
->> The value of num_sources has been modified here, while the value of
->> aplic_props.irqchip_num_sources set in create_fdt_sockets still uses
->> the default hard-coded value.
->>
->>> +    }
->>> +}
->>> +
->>> static bool virt_aclint_allowed(void)
->>> {
->>>     return tcg_enabled() || qtest_enabled();
->>> @@ -734,7 +744,7 @@ static void virt_machine_init(MachineState *machine)
->>>     }
->>>
->>>     if (kvm_enabled() && virt_use_kvm_aia_aplic_imsic(s->aia_type)) {
->>> -        kvm_riscv_aia_create();
->>> +        virt_kvm_aia_create(s);
->>>     }
->>>
->>>     /* Initialize sockets */
->>> diff --git a/target/riscv/kvm/kvm-cpu.c b/target/riscv/kvm/kvm-cpu.c
->>> index 1098581e7a..0409af3255 100644
->>> --- a/target/riscv/kvm/kvm-cpu.c
->>> +++ b/target/riscv/kvm/kvm-cpu.c
->>> @@ -1870,6 +1870,22 @@ void kvm_riscv_aia_create(void)
->>>     }
->>> }
->>>
->>> +uint64_t kvm_riscv_aia_get_num_ids(void)
->>> +{
->>> +    uint64_t num_ids;
->>> +    int ret;
->>> +
->>> +    ret = kvm_device_access(aia_fd, KVM_DEV_RISCV_AIA_GRP_CONFIG,
->>> +                            KVM_DEV_RISCV_AIA_CONFIG_IDS,
->>> +                            &num_ids, false, NULL);
->>
->> The KVM CONFIG_IDS GET attribute writes a u32, so num_ids should
->> be uint32_t. With the current uint64_t variable, the upper 32 bits
->> remain uninitialized and may affect the MIN() result.
->>
->> The return type, declaration, and non-KVM stub should also be
->> updated accordingly.
+Hi,
 
-The same issue can be found in origin/main, e.g. for
-reading KVM_DEV_RISCV_AIA_CONFIG_MODE.
+Here are fixes for two bugs in the same code region, i.e.
+mseccfg_csr_write() in pmp.c. 
 
-[PATCH 1/1] target/riscv/kvm: aia mode is an uint32_t
-https://lore.kernel.org/qemu-riscv/20261116135102.32508-1-heinrich.schuchardt@canonical.com/T/#u
+Patch 2 basically fixes both bugs.  One of them also requires the
+implementation of mseccfgH so an extra patch was needed.
 
-Considering hypothetical big-endian usage all write accesses to 
-KVM_DEV_RISCV_AIA_GRP_CONFIG should be reviewed, too.
+Daniel Henrique Barboza (3):
+  target/riscv/tcg/pmp.c: remove no-op in mseccfg_csr_write()
+  target/riscv/tcg: refactor mseccfg_csr_write() [GL4818]
+  target/riscv/tcg/csr.c: add mseccfgh CSR [GL4680]
 
-Best regards
+ target/riscv/tcg/csr.c                        | 32 +++++++++
+ target/riscv/tcg/pmp.c                        | 62 +++++++++++------
+ tests/tcg/riscv32/system/meson.build          | 19 +++++
+ tests/tcg/riscv32/test-mseccfg-bits-1.S       | 69 +++++++++++++++++++
+ tests/tcg/riscv32/test-mseccfg-bits-2.S       | 56 +++++++++++++++
+ tests/tcg/riscv32/test-mseccfg-bits-3.S       | 56 +++++++++++++++
+ tests/tcg/riscv32/test-mseccfg-bits-4.S       | 55 +++++++++++++++
+ tests/tcg/riscv64/system/meson.build          | 11 +++
+ tests/tcg/riscv64/test-mseccfg-pmm-clear.S    | 63 +++++++++++++++++
+ tests/tcg/riscv64/test-mseccfg-pmm-reserved.S | 63 +++++++++++++++++
+ 10 files changed, 464 insertions(+), 22 deletions(-)
+ create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-1.S
+ create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-2.S
+ create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-3.S
+ create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-4.S
+ create mode 100644 tests/tcg/riscv64/test-mseccfg-pmm-clear.S
+ create mode 100644 tests/tcg/riscv64/test-mseccfg-pmm-reserved.S
 
-Heinrich
-
->>
->>> +    if (ret < 0) {
->>> +        error_report("KVM AIA: failed to get number of msi");
->>> +        exit(1);
->>> +    }
->>> +
->>> +    return num_ids;
->>> +}
->>> +
->>> void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
->>>                         uint64_t aia_irq_num, uint64_t aia_msi_num,
->>>                         uint64_t aplic_base, uint64_t imsic_base,
->>> diff --git a/target/riscv/kvm/kvm-stub.c b/target/riscv/kvm/kvm-stub.c
->>> index 672f635b08..f5f5418b3c 100644
->>> --- a/target/riscv/kvm/kvm-stub.c
->>> +++ b/target/riscv/kvm/kvm-stub.c
->>> @@ -14,6 +14,11 @@ void kvm_riscv_aia_create(void)
->>>     g_assert_not_reached();
->>> }
->>>
->>> +uint64_t kvm_riscv_aia_get_num_ids(void)
->>> +{
->>> +    g_assert_not_reached();
->>> +}
->>> +
->>> void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
->>>                         uint64_t aia_irq_num, uint64_t aia_msi_num,
->>>                         uint64_t aplic_base, uint64_t imsic_base,
->>> diff --git a/target/riscv/kvm/kvm_riscv.h b/target/riscv/kvm/kvm_riscv.h
->>> index 532e42b0df..d8ae73fa1e 100644
->>> --- a/target/riscv/kvm/kvm_riscv.h
->>> +++ b/target/riscv/kvm/kvm_riscv.h
->>> @@ -24,6 +24,7 @@
->>> void kvm_riscv_reset_vcpu(RISCVCPU *cpu);
->>> void kvm_riscv_set_irq(RISCVCPU *cpu, int irq, int level);
->>> void kvm_riscv_aia_create(void);
->>> +uint64_t kvm_riscv_aia_get_num_ids(void);
->>> void kvm_riscv_aia_init(MachineState *machine, uint64_t group_shift,
->>>                         uint64_t aia_irq_num, uint64_t aia_msi_num,
->>>                         uint64_t aplic_base, uint64_t imsic_base,
->>>
->>> -- 
->>> Git-157)
->>>
->>
->> Best regards,
->> Qingwei Hu
-> 
-> Hi Stefan,
-> 
-> Are you already working on v2 of your AIA series? If it would help, I’d be
-> happy to prepare an updated version based on your patchset, addressing the
-> review comments.
-> 
-> Please let me know if you have changes in progress so we can avoid duplicating work.
-> 
-> Thanks,
-> Qingwei
-> 
-> 
-> 
+-- 
+2.43.0
 
 
