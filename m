@@ -1,62 +1,98 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1DA1606A31C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 13:28:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA572606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 14:31:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YRM1ZKnn
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTJDM-0000XF-5x; Tue, 17 Nov 2026 08:27:12 -0500
+	id 1xTKDA-0007AN-Aq; Tue, 17 Nov 2026 09:31:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1xTJDK-0000WK-4F
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 08:27:10 -0500
-Received: from atcsqr.andestech.com ([220.128.198.184])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alvinga@andestech.com>)
- id 1xTJDH-0003sJ-76
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 08:27:09 -0500
-Received: from mail.andestech.com (atcpcs55.andestech.com [10.0.1.155])
- by Atcsqr.andestech.com with ESMTPS id 6AHDQnNs073909
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Nov 2026 21:26:49 +0800 (+08)
- (envelope-from alvinga@andestech.com)
-Received: from ATCPCS34.andestech.com (10.0.1.134) by atcpcs55.andestech.com
- (10.0.1.155) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.56; Tue, 17 Nov
- 2026 21:26:49 +0800
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS34.andestech.com
- (10.0.1.134) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 17 Nov
- 2026 21:26:48 +0800
-To: <qemu-riscv@nongnu.org>, <qemu-devel@nongnu.org>
-CC: <alistair.francis@wdc.com>, <liwei1518@gmail.com>,
- <daniel.barboza@oss.qualcomm.com>, <zhiwei_liu@linux.alibaba.com>,
- <chao.liu@processmission.com>, Alvin Chang <alvinga@andestech.com>
-Subject: [PATCH v1 1/2] target/riscv: Write zero into mtinst/htinst for
- SSAMOSWAP faults
-Date: Tue, 17 Nov 2026 21:26:37 +0800
-Message-ID: <20261117132638.1452474-2-alvinga@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261117132638.1452474-1-alvinga@andestech.com>
-References: <20261117132638.1452474-1-alvinga@andestech.com>
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1xTKCT-000776-78
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 09:30:29 -0500
+Received: from mail-pj2-x06.google.com ([2607:f8b0:4864:39::6])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <gsh517025@gmail.com>)
+ id 1xTKCQ-0000fB-PW
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 09:30:20 -0500
+Received: by mail-pj2-x06.google.com with SMTP id
+ 98e67ed59e1d1-3ad211ad92bso1199972a91.1
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 06:30:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20260707; t=1794925816; x=1795530616; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=8TrxQ9y6PiuGeVg2mDLtK4G+dV0PTcHXkS/q9Wg3jcA=;
+ b=YRM1ZKnni13yTHqMGyIDytihjh8gompH5EWgNDt48SpeAgwoS4PtdoF4qGpo6udPSH
+ P7bnkjG4m45HzhUt2N7jeS8XXvHBBHjnGHTOKsJQlKfO3CYoVuO6xE9LTdukF9UeVQuk
+ +c8/TBUsfDFicbmNcrhhKx2d50/YOrfTtkQQZtsq0H2KvurjRpnUNHqmJ021FpUmkv8m
+ RDKz9tChYrleySGigP/EU3txYn4KhjZtYPOD22qoVTnqpnWZjXMS7TI7ygK0w4/1t6Tn
+ D30GSY9+XOD2a6srq2dfYdIsEXYGw2CPtc104SInMdaqlcVYPzv7Rbt7Vf5q8dss5ttl
+ dm4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794925816; x=1795530616;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=8TrxQ9y6PiuGeVg2mDLtK4G+dV0PTcHXkS/q9Wg3jcA=;
+ b=lXIj2l+TBBEQReNLERQRRxHcj5/IXgMmxHll0NavoHn1WHep0mlo0rvJCjUoX78egg
+ 65S4pgAPug7YwpSRv9+pO4MhERbJadZI2MryFO//Fbtj2EHHRfmVgMuPWfVFK8yRXW1O
+ 0VFNHAwLgwv9HdwQZ72cwCK/4JkXct1Cp4NWy8BW48WyXlwPeTnKrv5hal2dcjydjmKa
+ k5yrAgm0dolNo5xBbBMbudWnU5dbc3nNze2vps12ERUzfoWHl1wuoF7rwYkFPHUY15P2
+ MDvMv9FM5uP8Fx9BajjkAq2SF/S2FAzIISPnC0UYKypaE1zCABQytoXR8Phs20jIy6iC
+ VX0w==
+X-Forwarded-Encrypted: i=1;
+ AL+hErECrNwb9b0DU4hhF3R9ProAEERfsu2v9jP2CGMUjpclVWCPWEoCGrBJzbdJYxpHT5dOvKEKY3/MwrRg@nongnu.org
+X-Gm-Message-State: APuU4Z+fpy6qn0PILV/lVW7ZnxtXu1Ujs3RSoZGH/b57yyeWagq9kWqQ
+ fAYdzvAGH7CTu9UQA0lJ+MoQg/cN5Y3/K9R5xrTgJqs5UkD9WM5eXorh
+X-Gm-Gg: AZFdTZdoN6rNpfnuEkxLvactHL9r4z+NFmXySKgs7pPXKnbcGpDPp1/QdevSx4eQ5gA
+ 3QTrrHtj7iSkcMKAd2ms7dhIHzmYFY+hCd8/y7HDDxmuc9j+RoWxaRwyOuaOGLjE1Nk8Pc8M2FL
+ T0JP5Dh/DUtUCWng+oaQovPLmhnoXlewU55AQ3ZZaOAi3WavWvfANWeUk7aTzQ3Qp/zKL85O/Rg
+ U/FupqXIiy2xNcvOYais80TiZdOsVEDsCUwLRk5MoRNoPow8g9Wy5wT7xBnHsi1RXZViUoJ2D9a
+ D/eHZrKZss4ia/Q6USNZFSoNeaPm/dUhcsrNO6CbkzmzYvI42LjaavXzPnYzX/6Qwjn/4r7Z311
+ //v6+ir+a9VO6B7neSvylVuv5S25xp5vrWCHWGa+mkd9qBKTOjomH+4LwXnKSA0POI92CXhNTIv
+ tdEM7ivV8/7t8r9n/ogfk9AgFhOuoorY1gzjpTorWuP198HcWcm8wOegs90bGVNsi2gOt9QdJp3
+ nrw23e404Ny/Vy9ZjabeuWStiNv/e4nKRDXBswqLV9fshiY0Y0Eihve4znAxbNCvaJpiM4wLcgG
+ 8TjdN6fJVA0UhQiSn9ZjnvYCDduhaczx7EAxkJs=
+X-Received: by 2002:a17:90a:d010:b0:3ac:1c76:61c3 with SMTP id
+ 98e67ed59e1d1-3b1b0a26a0emr13233581a91.27.1794925816345; 
+ Tue, 17 Nov 2026 06:30:16 -0800 (PST)
+Received: from localhost.localdomain ([114.252.97.9])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3b3abebf1aesm4631394a91.16.2026.11.17.06.30.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Nov 2026 06:30:15 -0800 (PST)
+From: Gong Shuai <gsh517025@gmail.com>
+To: tanchi25@mails.ucas.ac.cn
+Cc: alistair.francis@wdc.com, chao.liu@processmission.com,
+ daniel.barboza@oss.qualcomm.com, liwei1518@gmail.com,
+ nutty.liu@hotmail.com, palmer@dabbelt.com,
+ pierrick.bouvier@oss.qualcomm.com, qemu-devel@nongnu.org,
+ qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com,
+ gong.shuai@sanechips.com.cn
+Subject: Re: [PATCH v2 0/3] hw/riscv: iommu: Support automatic PTE A/D updates
+Date: Tue, 17 Nov 2026 22:30:09 +0800
+Message-ID: <20261117143010.1286497-1-gsh517025@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261113151251.30618-1-tanchi25@mails.ucas.ac.cn>
+References: <20261113151251.30618-1-tanchi25@mails.ucas.ac.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs55.andestech.com; dkim=none;
-X-DNSRBL: 
-X-SPAM-SOURCE-CHECK: pass
-X-MAIL: Atcsqr.andestech.com 6AHDQnNs073909
-Received-SPF: pass client-ip=220.128.198.184;
- envelope-from=alvinga@andestech.com; helo=Atcsqr.andestech.com
-X-Spam_score_int: -18
-X-Spam_score: -1.9
+Received-SPF: pass client-ip=2607:f8b0:4864:39::6;
+ envelope-from=gsh517025@gmail.com; helo=mail-pj2-x06.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
 X-Spam_bar: -
-X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, SPF_HELO_PASS=-0.001,
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -68,68 +104,86 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
-Reply-to:  Alvin Chang <alvinga@andestech.com>
-From:  Alvin Chang via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.0 required=3.0 tests=BAYES_00,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The privileged spec defines transformed instructions for standard AMO
-instructions which do not include SSAMOSWAP. The spec also says: "If a
-synchronous trap occurs for a standard instruction for which no
-transformation has been defined, the trap instruction register shall
-be written with zero".
+> This series adds support for automatic updates of page-table accessed
+> (A) and dirty (D) bits in the RISC-V IOMMU, as specified by the RISC-V
+> IOMMU architecture. The feature is advertised through the AMO_HWAD
+> capability and controlled by the SADE and GADE bits in device contexts.
+> 
+> The first two patches fix implicit G-stage page-table access handling
+> and IOATC permission checks. The third patch implements atomic A/D bit
+> updates using CAS, with page-table walk retries on concurrent
+> modifications and G-stage permission checks for implicit writes during
+> nested translation.
+> 
+> The implementation has been validated with QTests, Linux DMA tests under
+> KVM and TCG, and concurrency tests covering CAS retries, PTE
+> modifications, and G-stage mapping changes.
+> 
+> ---
+> Changes in v2:
+> - Set iotval2 to zero for S-stage page faults, as suggested by
+>   Daniel Henrique Barboza.
+> - Avoid duplicate implicit_read calculations, as suggested by Nutty Liu.
+> - Document the new amo-hwad device property.
+> 
+> v1: https://lore.kernel.org/qemu-devel/20261108143934.129923-1-tanchi25@mails.ucas.ac.cn/
+> 
+> Tan Chi (3):
+>   hw/riscv: iommu: Fix implicit G-stage page-table accesses
+>   hw/riscv: iommu: Check permissions on IOATC hits
+>   hw/riscv: iommu: Support automatic PTE A/D updates
 
-So mtinst and htinst should be zero for SSAMOSWAP faults. The previous
-implementation only compares opcode which is not enough to distinguish
-SSAMOSWAP from standard AMO instructions. This commit further compares
-it with funct5.
+Hi Tan Chi,
 
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4721
-Fixes: f06bfe3dc38c ("target/riscv: implement zicfiss instructions")
-Signed-off-by: Alvin Chang <alvinga@andestech.com>
----
- target/riscv/instmap.h        | 2 ++
- target/riscv/tcg/cpu_helper.c | 9 ++++++---
- 2 files changed, 8 insertions(+), 3 deletions(-)
+Thanks for your work.
 
-diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
-index f877530576..bddcf313df 100644
---- a/target/riscv/instmap.h
-+++ b/target/riscv/instmap.h
-@@ -165,6 +165,8 @@ enum {
-     OPC_RISC_AMOMAX      = OPC_RISC_ATOMIC | (0x14 << 27),
-     OPC_RISC_AMOMINU     = OPC_RISC_ATOMIC | (0x18 << 27),
-     OPC_RISC_AMOMAXU     = OPC_RISC_ATOMIC | (0x1C << 27),
-+
-+    OPC_RISC_SSAMOSWAP   = OPC_RISC_ATOMIC | (0x09 << 27),
- };
- 
- #define MASK_OP_SYSTEM(op)   (MASK_OP_MAJOR(op) | (op & (0x7 << 12)))
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 58e98e975c..94e385261b 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -2078,9 +2078,12 @@ static target_ulong riscv_transformed_insn(CPURISCVState *env,
-         /* Transform 32bit (or wider) instructions */
-         switch (MASK_OP_MAJOR(insn)) {
-         case OPC_RISC_ATOMIC:
--            xinsn = insn;
--            access_rs1 = GET_RS1(insn);
--            access_size = 1 << GET_FUNCT3(insn);
-+            /* Exclude SSAMOSWAP.W and SSAMOSWAP.D */
-+            if (MASK_OP_ATOMIC_NO_AQ_RL_SZ(insn) != OPC_RISC_SSAMOSWAP) {
-+                xinsn = insn;
-+                access_rs1 = GET_RS1(insn);
-+                access_size = 1 << GET_FUNCT3(insn);
-+            }
-             break;
-         case OPC_RISC_LOAD:
-         case OPC_RISC_FP_LOAD:
--- 
-2.43.0
+I have tested this series on my nested IOMMU setup.
 
+- Outer QEMU: this series on top of master, -M virt,...,iommu-sys=on,
+              -global riscv-iommu.amo-hwad=on, emulated NVMe
+- Inner QEMU: needs accel=on support for riscv-iommu-pci, and
+              vfio-pci with iommufd
+- Outer Linux host: needs hardware dirty tracking and nested IOMMU
+              support
+
+Test flow:
+
+1. Boot host and guest, do NVMe I/O
+2. Clear host S2 D bits and trigger GVMA inval in the inner QEMU monitor,
+   use command: calc_dirty_rate -b 1
+3. Back to guest shell and do another NVMe I/O
+
+It completed without a guest hang or I/O error. With temporary local
+debug prints I could see en_s=1/en_g=1 and implicit G-stage page-table
+walks.
+
+One host-side workaround is that on the host I need
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+to avoid an hang with THP; otherwise calc_dirty_rate -b can leave the
+guest stuck.
+
+This is only a limited positive test. A Linux guest is not suitable for
+constructing negative cases so I would not claim full Tested-by coverage.
+
+Thanks,
+Shuai
+
+> 
+>  docs/specs/riscv-iommu.rst |   2 +
+>  hw/riscv/riscv-iommu.c     | 254 +++++++++++++++++++++++++++++++++----
+>  hw/riscv/riscv-iommu.h     |   1 +
+>  3 files changed, 232 insertions(+), 25 deletions(-)
+> 
+> -- 
+> 2.53.0
+> 
 
