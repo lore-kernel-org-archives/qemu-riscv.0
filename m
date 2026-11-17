@@ -1,95 +1,94 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE974606A323
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 09:45:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37076606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 09:47:12 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=cHGCBbI3
+	dkim=pass (2048-bit key) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=NS03S/gg
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTFkc-0006hy-MD; Tue, 17 Nov 2026 04:45:18 -0500
+	id 1xTFmN-00089N-P5; Tue, 17 Nov 2026 04:47:07 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTFkZ-0006Y5-E1
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:45:15 -0500
-Received: from mail-ej1-x634.google.com ([2a00:1450:4864:20::634])
+ id 1xTFmF-00087x-GQ
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:47:00 -0500
+Received: from mail-ej1-x62c.google.com ([2a00:1450:4864:20::62c])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTFkW-0007ex-B9
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:45:15 -0500
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-c40f29667e6so778916766b.0
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:45:11 -0800 (PST)
+ id 1xTFmD-0000WK-PD
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:46:59 -0500
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-c4203bbb1e9so752239966b.3
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:46:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1794908710; x=1795513510; darn=nongnu.org;
+ d=sifive.com; s=google; t=1794908816; x=1795513616; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=NEigU4jij5r91/pxWG3XKGaw/mSVdbAML+VHi2kgWDc=;
- b=cHGCBbI3nH2EMR1+vFAy6rQFLJiKqfDEfhV4MHTk2t9imUsTtxzxYlnRGFXLti100g
- pqh/9oOpBM92192bsm2CVX2wi/5HnGGtpWXghPdjXa1NjBLpgoIyM4oG2To+o8X/GqCK
- LgQM49zBNNts4Oy1mlSwMbUS82mmvdeeC8KfCnbTqDAeSz/JR0yGmj6zhOGaD/Fk3c/p
- pN6GukpSZuIWVHKog+IKAXOqObhU8BiaVBGMGo6ZzkPpYgET2g8Mzf5K/vCT2e2OkbNn
- xPY/9LRm8Nr0ibqVTRXoPcxeu3ev6J24Jp3qRPxs04qEQOG1SYF/DUxvoJ94D6a7JkTM
- 0ZSg==
+ :content-type; bh=n5XubskUMNo7AUg8d0Mo/LKqvRp5YGsYaCRYiE27W6o=;
+ b=NS03S/gg9IqZsXfo03+6FiIdc4TsNIf4sT5Jd7X2dupLrtfTr+FfxFUo2/3Jxkbtbg
+ aqx12zep+9Js6EtBCfY0BtuBcsLBwtwfCm1N+JJlOSdN18itgtIvMtfhHdyE1YSk8POb
+ bnJtS6NxniCvqw0kVGMTM9+lUiZZ07JEN4iHEyMWyLC7k145Qgt0c/F/4oR7VQrpH6MY
+ rE8Cb9ilfQgLJtS06s5O8iYjxpKLRCeDyH+x8ntCskicCG98LL4wfO66KO2fcAVXUBbw
+ xGWk1tC+Iu50zFuhUSG0e6G65T74UAnx1QlELCQDeaoQvB1BgkqaW8YQsWGtc6PLWeQ4
+ 4EEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794908710; x=1795513510;
+ d=1e100.net; s=20260707; t=1794908816; x=1795513616;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=NEigU4jij5r91/pxWG3XKGaw/mSVdbAML+VHi2kgWDc=;
- b=ICh0TjVZdxCfnAf7yKKDcNBXYnAjHbKTe6zQ5hi7Shu6qnsXYHndUOrS6zurmBxEAs
- k7f0WdEVihr6nZ8T4CPAuSx0gUddc8pzVSK2TSS3A55BgLyHcSKvHFTHb4mtW0BYzJ6C
- XwHv+a0xMKz388CXhYFmDQOP0DrgMkbZFJE9uoD0ddl7SwJWB+Gbt8E1EiSigWSM+Xni
- SlJaB5L3wCKVJN3reHTmdR+iPZR95Q4P+Dc9A5lQbl+Gyo4yAA75Hgh4MrlOmHm/TGyo
- 6xgtuKBa7BZCOz0t5jnbxYwohgezTbzVUVGEjBfHE+EtXzUe0ueoW8oRGLLXrJxe3mwM
- r9aQ==
+ bh=n5XubskUMNo7AUg8d0Mo/LKqvRp5YGsYaCRYiE27W6o=;
+ b=OYlvR758tEH1wAu595oV5KPljcHeVnjueNKlrUq9rIgvzS0YvVv6ZugomkwB6jbbWU
+ pf0VdMKMjCfT2L+0pz1y+2E1xs2SBhE+IKQ4UIDkEooSftu9PHDD5we6zAgAE/IewBR/
+ CKD0759qQrA7rV9PdleMaD1Ob/SPGy6MbjyH23R4PlhWzy62IqtiHG5OV6RdTOzSJH3H
+ 2eNpBpoBq0mia1F8yWisNIrPnFtURfbrEP7D/XzTQkQpCfh9gLW5ia//xFo+JbRYHZiU
+ Aj/dpqb9MhtPwJV5o2z3TltGecwvF6h8jjoNxh3uFQMcHVNfPdq3EXDCiPHUHtyUSMba
+ HBIw==
 X-Forwarded-Encrypted: i=1;
- AL+hErE6I8G5VI4mOeVdXu2DRTnuNvTlwVT+zJjmbSoDFyq+kSLT2FTT3fuWGiStbpQRehYL44Jx5ChTzORH@nongnu.org
-X-Gm-Message-State: APuU4Z8b8xgvTnRjJDBNJ0oNNzAssxlz9ffoCSMTfeUDiqWtW6oE1nFb
- YTayjr0elDr9nS7dWmRgzsm8WxIOp4n+Lfn/PXtWP74cFUAo+KDBAgP4EXb3XvnjW+fCVB1NrSP
- eAJEiTIK6TGHDunodQaloZJygnMaxWf21E7I0QFRoSw5WyiF+ZZ2GYeDDMKPfKkOk80AITG6a0Q
- E1wWFT1EKlOxdganvwW4iZc2P5+2rmX746j28ocmclymo=
-X-Gm-Gg: AYBFou0OOAsf4yrj9XbnyXnk1gcjsFFDWDcow+8Sgsy+fFB5F7nmQpgLRckVPvqh5ZZ
- nSDPob3NtzuFBear16c6rSGPbsu5y5o3Ue5OcyCCNa4ucYp3o1Yw2t18cGnNW6a1HBvma+ixFZt
- LB8jB/V6P8sxjCU6MAaZrJlf4tJdi0KAV8d25/jBt5pEIUUYPwMYGbquu2PU22ak4s5Gs/2Nq5R
- GSJuYCHiiJfteY4AHOXnFVOEoqSRkAKJMlg/TlnHwDwPwo+lcYRyyPsHwz0hBdnXt6TOCtYq7fI
- ckXqey7hA6djq6QR2/j6WtOcs3YTM3MX38tl6rb8YqYMWdhKDvrQ/ujJ5fOqs1h1js6LXxjJm37
- LFmK/lH5uOHFduY2cz3KZFhk+2GIFBZ3uqp9bbjwRuACoBlsx6bXLU2A8LGtZk9mVlGfeW59nnf
- VvH9kpth7Q/I1F2Sy3+BpS7Tw+vhDdP2V2qRlry4MWXjVXUryYG65/sWBROqYFU8xM4u6ZL6V8S
- c5FGhDm+dR7jeFfY0tPU0L1gcmYc0kOH41q/GyvuX3hdr/03AAFBPWfR2yJr29/0LJ1ZeR4suHY
- E2/eZa9MNnbeJiV/CsPkvAmWtJgEtKepKMUGXAoIOqlIPO8Mj914jiDQFO18pCliAD3rkCBPVB0
- 98wvtfQAk2UV/
-X-Received: by 2002:a17:907:802:b0:c4c:f85f:aa12 with SMTP id
- a640c23a62f3a-c509641566emr1106531666b.31.1794908710017; 
- Tue, 17 Nov 2026 01:45:10 -0800 (PST)
+ AL+hErH37g0jobt7NxMK+g66iEmZ8VAQ05SBmCIqXOXocok6FII25z+CNoXEyyAqCqHNysSrfDBFSEbzndNF@nongnu.org
+X-Gm-Message-State: APuU4Z8xBZpQ1ieK0D+69+ve5b2kdzTgg6h3k3D+uObWEweF9zE44tNG
+ F9mNKVDJnde0BGyzzpUBVesguPLAqwNdKXXOCZ5kKemZUCNqkkAM4Wpkp7K35x2nRmOTc8rOKy4
+ xRprK++bN5hFky7gcD8s/yvy2T4y7fR4gKVTdZSAsP2q14GWyMI+t3iaoCt7U6hrhr8D5DT0TXe
+ BVYsGOTjcHhvMbZiJNe9qUp1ozWYKTLanemTFLEKwIMSE=
+X-Gm-Gg: AYBFou3gXQ1v/V5fWqFWKEin0Ai9D7ks9+pZtU/jCJ69kJkiKqS7eivEG9kKRw/emCZ
+ d6ZryxUIacOwoC2FgoBHnryZLvgYdObpM2hmzNaTgdlWmV2gptmD1i11a5y/AEtxNB81jNTc6Ca
+ OyfBFISl2pYAr9kf0kg5G9aVfJ05yO669ButoZnKngeaGrnsR5OeY7kAmE/FM+8ejEDqogKPXqZ
+ GwToY+I7mTN2+gYIfd2Lku92rV2PmfqCrsvAVCDxDXW0awuwSxHdihnRes0HGnQEk5aVMFs8aWb
+ 9y1sjQmR7AJPowx4lcWU3/P3rgA6zveuszQylK34/FytKbxuEUeJfgaaw5k6bUIQ3GhLwzJXQTa
+ gQQpvpEGRGVgy2AJSGdywJfSOH1JigPO6V6YPBLAeuYSvsXCSim4Rbbz+txUVWQ00MzWygFqIob
+ ECZ7w9HsKrfGCdclSokTugzaEwt2LyGcDmBIa94xAi8l9Rjlk/NZxLNPjR/PH0q4R4XuOYZexEU
+ 2v6XlpwOEdIg4GT2P6g+BaLX1dYx30lkasWZj4Dyctjk7VWe/HHdF7d0lXdgXHQsjyEXm8gqTNt
+ yTCvn5sm/uGcB0xGiVWPsSxH0I37zrnlNKPEO0cKpF4eaaFuqms3ORcalCbsLBMWvyc=
+X-Received: by 2002:a17:907:3e07:b0:c4d:4d5b:849b with SMTP id
+ a640c23a62f3a-c50963408demr1181485366b.19.1794908815953; 
+ Tue, 17 Nov 2026 01:46:55 -0800 (PST)
 Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com.
  [209.85.208.53]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c5095b24608sm522314966b.30.2026.11.17.01.45.07
+ a640c23a62f3a-c5095a5c00fsm520809566b.3.2026.11.17.01.46.54
  for <qemu-riscv@nongnu.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 01:45:07 -0800 (PST)
+ Tue, 17 Nov 2026 01:46:54 -0800 (PST)
 Received: by mail-ed1-f53.google.com with SMTP id
- 4fb4d7f45d1cf-6b65d69f5c2so6175753a12.3
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:45:07 -0800 (PST)
+ 4fb4d7f45d1cf-6b547d6c07bso5902733a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:46:54 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AL+hErENSBXNbzGKt3PdKiruytvmEegHnwiH0o0A3Z+NTicaXMPrH+mBm1KqsDkOLOtCp4S3yEV/PWGbwtFS@nongnu.org
-X-Received: by 2002:a17:906:6d02:b0:c51:5f6:cf70 with SMTP id
- a640c23a62f3a-c5105f6d8d6mr19018066b.1.1794908707286; Tue, 17 Nov 2026
- 01:45:07 -0800 (PST)
+ AL+hErGbOyuZ+URn81vXOTwjogjt0CznRtJIpkNkE24NMU9X97VzO2ozVNyXY2jpTSGZ2bOrDs1Ku4UBVo9z@nongnu.org
+X-Received: by 2002:a05:6402:a513:10b0:6b7:186:e60b with SMTP id
+ 4fb4d7f45d1cf-6b7c0891425mr7829110a12.5.1794908813794; Tue, 17 Nov 2026
+ 01:46:53 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
- <20260825-upstream-ntrace_core-v1-10-f8be2f40d2fd@gmail.com>
-In-Reply-To: <20260825-upstream-ntrace_core-v1-10-f8be2f40d2fd@gmail.com>
+ <20260825-upstream-ntrace_core-v1-11-f8be2f40d2fd@gmail.com>
+In-Reply-To: <20260825-upstream-ntrace_core-v1-11-f8be2f40d2fd@gmail.com>
 From: Jay Chang <jay.chang@sifive.com>
-Date: Tue, 17 Nov 2026 17:44:54 +0800
-X-Gmail-Original-Message-ID: <CAMXXpfb=YccAe4QZFjqs_N-xLTQZam+sy+FQWq_UOVR+_Etp_A@mail.gmail.com>
-X-Gm-Features: AclHuK-8EnK5n4Y2fqFsqp-PAyKrYGp4oG-iyJCcB_p578YG7nVdR4nHKW5Fskw
-Message-ID: <CAMXXpfb=YccAe4QZFjqs_N-xLTQZam+sy+FQWq_UOVR+_Etp_A@mail.gmail.com>
-Subject: Re: [PATCH 10/13] test/qtest/riscv-trace-test: add test-ntrace-simple
- qtest
+Date: Tue, 17 Nov 2026 17:46:42 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfbkuD1f2xpqARBsMn1aozLWWzPjm0AgjGkhMDutGmrM2A@mail.gmail.com>
+X-Gm-Features: AclHuK9IwHkVr6pd3OVhjDk3qCS0MOS6uxv_zmoQerlcRW-wc-ZQLY7_2TtFA_I
+Message-ID: <CAMXXpfbkuD1f2xpqARBsMn1aozLWWzPjm0AgjGkhMDutGmrM2A@mail.gmail.com>
+Subject: Re: [PATCH 11/13] hw/riscv/trace-encoder.c: add remaining fields to
+ trace-encoder
 To: Konstantin Semichastnov <antikostya2@gmail.com>
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
@@ -98,9 +97,9 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>, 
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
  Alexei Filippov <halip0503@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000e6f3ce066075bf4d"
-Received-SPF: pass client-ip=2a00:1450:4864:20::634;
- envelope-from=jay.chang@sifive.com; helo=mail-ej1-x634.google.com
+Content-Type: multipart/alternative; boundary="000000000000402072066075c6a0"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62c;
+ envelope-from=jay.chang@sifive.com; helo=mail-ej1-x62c.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -126,7 +125,7 @@ X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---000000000000e6f3ce066075bf4d
+--000000000000402072066075c6a0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -136,100 +135,38 @@ Thanks
 On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semichastnov <
 antikostya2@gmail.com> wrote:
 
-> Add a simple smoke test for the ntrace encoder/trace ram sink integration
-> with the RISC-V 'virt' machine.
+> Add remaining unsupported register bits to trace-encoder as read-only zer=
+o
 >
 > Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
 > ---
->  tests/qtest/riscv-trace-test.c | 59
-> +++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 58 insertions(+), 1 deletion(-)
+>  hw/riscv/trace-encoder.c | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/tests/qtest/riscv-trace-test.c
-> b/tests/qtest/riscv-trace-test.c
-> index fe1cc85358..66069f7a56 100644
-> --- a/tests/qtest/riscv-trace-test.c
-> +++ b/tests/qtest/riscv-trace-test.c
-> @@ -21,6 +21,7 @@ REG32(TR_TE_CONTROL, 0x0)
->      FIELD(TR_TE_CONTROL, ACTIVE, 0, 1)
->      FIELD(TR_TE_CONTROL, ENABLE, 1, 1)
->      FIELD(TR_TE_CONTROL, INST_TRACING, 2, 1)
-> +    FIELD(TR_TE_CONTROL, FORMAT, 24, 3)
+> diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+> index c36d205f50..58ed4b2646 100644
+> --- a/hw/riscv/trace-encoder.c
+> +++ b/hw/riscv/trace-encoder.c
+> @@ -68,6 +68,8 @@ REG32(TR_TE_CONTROL, 0x0)
+>      FIELD(TR_TE_CONTROL, EMPTY, 3, 1)
+>      FIELD(TR_TE_CONTROL, INST_MODE, 4, 3)
+>      FIELD(TR_TE_CONTROL, CONTEXT, 9, 1)
+> +    FIELD(TR_TE_CONTROL, INST_TRIG_ENABLE, 11, 1)
+> +    FIELD(TR_TE_CONTROL, INST_STALL_OR_OVERFLOW, 12, 1)
+>      FIELD(TR_TE_CONTROL, INST_STALL_ENA, 13, 1)
+>      FIELD(TR_TE_CONTROL, INHIBIT_SRC, 15, 1)
+>      FIELD(TR_TE_CONTROL, INST_SYNC_MODE, 16, 2)
+> @@ -161,6 +163,8 @@ static uint64_t
+> trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
+>  {
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_MODE, 0x6);
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);
+> +    input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_TRIG_ENABLE, 0);
+> +    input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_OR_OVERFLOW, 0=
+);
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_ENA, 0);
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC, 1);
 >
->  REG32(TR_RAM_START_LOW, 0x010)
->      FIELD(TR_RAM_START_LOW, ADDR, 0, 32)
-> @@ -99,7 +100,61 @@ static void test_trace_simple(void)
->      g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, INST_TRACING));
->
->      g_test_timer_start();
-> -    for (;;) {
-> +    while (true) {
-> +        reg_tram_writep =3D test_read_tram_writep(qts);
-> +        if (reg_tram_writep > reg_tram_start) {
-> +            break;
-> +        }
-> +
-> +        g_assert(g_test_timer_elapsed() <=3D timeout_sec);
-> +    }
-> +
-> +    qtest_quit(qts);
-> +}
-> +
-> +static void test_ntrace_simple(void)
-> +{
-> +    QTestState *qts =3D qtest_init("-machine virt -accel tcg -d in_asm")=
-;
-> +    double timeout_sec =3D 0.5;
-> +    uint64_t reg_tram_start, reg_tram_writep;
-> +    uint32_t reg;
-> +
-> +    /* trTeActive :=3D 1 */
-> +    reg =3D test_read_te_control(qts);
-> +    reg =3D FIELD_DP32(reg, TR_TE_CONTROL, ACTIVE, 1);
-> +    test_write_te_control(qts, reg);
-> +    reg =3D test_read_te_control(qts);
-> +    g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, ACTIVE));
-> +
-> +    /* trTeEnable :=3D 1 */
-> +    reg =3D FIELD_DP32(reg, TR_TE_CONTROL, ENABLE, 1);
-> +    test_write_te_control(qts, reg);
-> +    reg =3D test_read_te_control(qts);
-> +    g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, ENABLE));
-> +
-> +    /* trTeFormat :=3D 1 (ntrace) */
-> +    reg =3D FIELD_DP32(reg, TR_TE_CONTROL, FORMAT, 1);
-> +    test_write_te_control(qts, reg);
-> +    reg =3D test_read_te_control(qts);
-> +    g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, FORMAT));
-> +
-> +    /*
-> +     * Verify if RAM Sink write pointer is equal to
-> +     * ramstart before start tracing.
-> +     */
-> +    reg_tram_start =3D test_read_tram_ramstart(qts);
-> +    g_assert(reg_tram_start > 0);
-> +    reg_tram_writep =3D test_read_tram_writep(qts);
-> +    g_assert(reg_tram_writep =3D=3D reg_tram_start);
-> +
-> +    /* trTeInstTracing :=3D 1 */
-> +    reg =3D FIELD_DP32(reg, TR_TE_CONTROL, INST_TRACING, 1);
-> +    test_write_te_control(qts, reg);
-> +    reg =3D test_read_te_control(qts);
-> +    g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, INST_TRACING));
-> +
-> +    g_test_timer_start();
-> +    while (true) {
->          reg_tram_writep =3D test_read_tram_writep(qts);
->          if (reg_tram_writep > reg_tram_start) {
->              break;
-> @@ -116,5 +171,7 @@ int main(int argc, char *argv[])
->      g_test_init(&argc, &argv, NULL);
->      qtest_add_func("/riscv-trace-test/test-trace-simple",
->                     test_trace_simple);
-> +    qtest_add_func("/riscv-trace-test/test-ntrace-simple",
-> +                   test_ntrace_simple);
->      return g_test_run();
->  }
 >
 > --
 > 2.43.0
@@ -237,7 +174,7 @@ antikostya2@gmail.com> wrote:
 >
 >
 
---000000000000e6f3ce066075bf4d
+--000000000000402072066075c6a0
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
@@ -248,115 +185,44 @@ ss=3D"gmail_attr">On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semic=
 hastnov &lt;<a href=3D"mailto:antikostya2@gmail.com">antikostya2@gmail.com<=
 /a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
 px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">A=
-dd a simple smoke test for the ntrace encoder/trace ram sink integration<br=
->
-with the RISC-V &#39;virt&#39; machine.<br>
+dd remaining unsupported register bits to trace-encoder as read-only zero<b=
+r>
 <br>
 Signed-off-by: Konstantin Semichastnov &lt;<a href=3D"mailto:antikostya2@gm=
 ail.com" target=3D"_blank">antikostya2@gmail.com</a>&gt;<br>
 ---<br>
-=C2=A0tests/qtest/riscv-trace-test.c | 59 +++++++++++++++++++++++++++++++++=
-++++++++-<br>
-=C2=A01 file changed, 58 insertions(+), 1 deletion(-)<br>
+=C2=A0hw/riscv/trace-encoder.c | 4 ++++<br>
+=C2=A01 file changed, 4 insertions(+)<br>
 <br>
-diff --git a/tests/qtest/riscv-trace-test.c b/tests/qtest/riscv-trace-test.=
-c<br>
-index fe1cc85358..66069f7a56 100644<br>
---- a/tests/qtest/riscv-trace-test.c<br>
-+++ b/tests/qtest/riscv-trace-test.c<br>
-@@ -21,6 +21,7 @@ REG32(TR_TE_CONTROL, 0x0)<br>
-=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, ACTIVE, 0, 1)<br>
-=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, ENABLE, 1, 1)<br>
-=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, INST_TRACING, 2, 1)<br>
-+=C2=A0 =C2=A0 FIELD(TR_TE_CONTROL, FORMAT, 24, 3)<br>
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c<br>
+index c36d205f50..58ed4b2646 100644<br>
+--- a/hw/riscv/trace-encoder.c<br>
++++ b/hw/riscv/trace-encoder.c<br>
+@@ -68,6 +68,8 @@ REG32(TR_TE_CONTROL, 0x0)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, EMPTY, 3, 1)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, INST_MODE, 4, 3)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, CONTEXT, 9, 1)<br>
++=C2=A0 =C2=A0 FIELD(TR_TE_CONTROL, INST_TRIG_ENABLE, 11, 1)<br>
++=C2=A0 =C2=A0 FIELD(TR_TE_CONTROL, INST_STALL_OR_OVERFLOW, 12, 1)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, INST_STALL_ENA, 13, 1)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, INHIBIT_SRC, 15, 1)<br>
+=C2=A0 =C2=A0 =C2=A0FIELD(TR_TE_CONTROL, INST_SYNC_MODE, 16, 2)<br>
+@@ -161,6 +163,8 @@ static uint64_t trencoder_te_ctrl_set_hardwire_vals(uin=
+t64_t input)<br>
+=C2=A0{<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_MODE, 0=
+x6);<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);=
 <br>
-=C2=A0REG32(TR_RAM_START_LOW, 0x010)<br>
-=C2=A0 =C2=A0 =C2=A0FIELD(TR_RAM_START_LOW, ADDR, 0, 32)<br>
-@@ -99,7 +100,61 @@ static void test_trace_simple(void)<br>
-=C2=A0 =C2=A0 =C2=A0g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, INST_T=
-RACING));<br>
++=C2=A0 =C2=A0 input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_TRIG_ENABLE,=
+ 0);<br>
++=C2=A0 =C2=A0 input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_OR_OVE=
+RFLOW, 0);<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_E=
+NA, 0);<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC,=
+ 1);<br>
 <br>
-=C2=A0 =C2=A0 =C2=A0g_test_timer_start();<br>
--=C2=A0 =C2=A0 for (;;) {<br>
-+=C2=A0 =C2=A0 while (true) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 reg_tram_writep =3D test_read_tram_writep(qts)=
-;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (reg_tram_writep &gt; reg_tram_start) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 break;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_assert(g_test_timer_elapsed() &lt;=3D timeou=
-t_sec);<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-+=C2=A0 =C2=A0 qtest_quit(qts);<br>
-+}<br>
-+<br>
-+static void test_ntrace_simple(void)<br>
-+{<br>
-+=C2=A0 =C2=A0 QTestState *qts =3D qtest_init(&quot;-machine virt -accel tc=
-g -d in_asm&quot;);<br>
-+=C2=A0 =C2=A0 double timeout_sec =3D 0.5;<br>
-+=C2=A0 =C2=A0 uint64_t reg_tram_start, reg_tram_writep;<br>
-+=C2=A0 =C2=A0 uint32_t reg;<br>
-+<br>
-+=C2=A0 =C2=A0 /* trTeActive :=3D 1 */<br>
-+=C2=A0 =C2=A0 reg =3D test_read_te_control(qts);<br>
-+=C2=A0 =C2=A0 reg =3D FIELD_DP32(reg, TR_TE_CONTROL, ACTIVE, 1);<br>
-+=C2=A0 =C2=A0 test_write_te_control(qts, reg);<br>
-+=C2=A0 =C2=A0 reg =3D test_read_te_control(qts);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, ACTIVE));<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 /* trTeEnable :=3D 1 */<br>
-+=C2=A0 =C2=A0 reg =3D FIELD_DP32(reg, TR_TE_CONTROL, ENABLE, 1);<br>
-+=C2=A0 =C2=A0 test_write_te_control(qts, reg);<br>
-+=C2=A0 =C2=A0 reg =3D test_read_te_control(qts);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, ENABLE));<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 /* trTeFormat :=3D 1 (ntrace) */<br>
-+=C2=A0 =C2=A0 reg =3D FIELD_DP32(reg, TR_TE_CONTROL, FORMAT, 1);<br>
-+=C2=A0 =C2=A0 test_write_te_control(qts, reg);<br>
-+=C2=A0 =C2=A0 reg =3D test_read_te_control(qts);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, FORMAT));<b=
-r>
-+<br>
-+=C2=A0 =C2=A0 /*<br>
-+=C2=A0 =C2=A0 =C2=A0* Verify if RAM Sink write pointer is equal to<br>
-+=C2=A0 =C2=A0 =C2=A0* ramstart before start tracing.<br>
-+=C2=A0 =C2=A0 =C2=A0*/<br>
-+=C2=A0 =C2=A0 reg_tram_start =3D test_read_tram_ramstart(qts);<br>
-+=C2=A0 =C2=A0 g_assert(reg_tram_start &gt; 0);<br>
-+=C2=A0 =C2=A0 reg_tram_writep =3D test_read_tram_writep(qts);<br>
-+=C2=A0 =C2=A0 g_assert(reg_tram_writep =3D=3D reg_tram_start);<br>
-+<br>
-+=C2=A0 =C2=A0 /* trTeInstTracing :=3D 1 */<br>
-+=C2=A0 =C2=A0 reg =3D FIELD_DP32(reg, TR_TE_CONTROL, INST_TRACING, 1);<br>
-+=C2=A0 =C2=A0 test_write_te_control(qts, reg);<br>
-+=C2=A0 =C2=A0 reg =3D test_read_te_control(qts);<br>
-+=C2=A0 =C2=A0 g_assert(1 =3D=3D FIELD_EX32(reg, TR_TE_CONTROL, INST_TRACIN=
-G));<br>
-+<br>
-+=C2=A0 =C2=A0 g_test_timer_start();<br>
-+=C2=A0 =C2=A0 while (true) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0reg_tram_writep =3D test_read_tram_writep=
-(qts);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (reg_tram_writep &gt; reg_tram_start) =
-{<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0break;<br>
-@@ -116,5 +171,7 @@ int main(int argc, char *argv[])<br>
-=C2=A0 =C2=A0 =C2=A0g_test_init(&amp;argc, &amp;argv, NULL);<br>
-=C2=A0 =C2=A0 =C2=A0qtest_add_func(&quot;/riscv-trace-test/test-trace-simpl=
-e&quot;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 test_=
-trace_simple);<br>
-+=C2=A0 =C2=A0 qtest_add_func(&quot;/riscv-trace-test/test-ntrace-simple&qu=
-ot;,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0test_=
-ntrace_simple);<br>
-=C2=A0 =C2=A0 =C2=A0return g_test_run();<br>
-=C2=A0}<br>
 <br>
 -- <br>
 2.43.0<br>
@@ -364,5 +230,5 @@ ntrace_simple);<br>
 <br>
 </blockquote></div>
 
---000000000000e6f3ce066075bf4d--
+--000000000000402072066075c6a0--
 
