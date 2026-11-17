@@ -1,94 +1,94 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29FA5606A88C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 08:58:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3572C606A329
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 09:10:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=kJ0S4Sxv
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=WnCeTLgc
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTF15-0004EX-Mk; Tue, 17 Nov 2026 03:58:15 -0500
+	id 1xTFCJ-0006SN-Ks; Tue, 17 Nov 2026 04:09:51 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTF12-0004Dg-Ol
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 03:58:12 -0500
-Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
+ id 1xTFCF-0006Rv-IC
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:09:48 -0500
+Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTF10-0008UV-Lk
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 03:58:12 -0500
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-c4d21051042so244193266b.0
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 00:58:10 -0800 (PST)
+ id 1xTFCD-0000oQ-Q7
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:09:47 -0500
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-6b4bd3d98bfso5990007a12.1
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:09:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1794905889; x=1795510689; darn=nongnu.org;
+ d=sifive.com; s=google; t=1794906584; x=1795511384; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=xrx2aASjqtzCZtcmbyEDZtYppb1iQk8pPRelgP4kkAI=;
- b=kJ0S4SxvpOTIV+5N8D5XCuKT4kSu2XIYVYwXRfExTZcRJaecTVoVwaHcaGTtCium+o
- xvLovT6tobc5+sS/MLYRNGBaiC30Y3/wGNvaybvdciGE+74YkX+eheQKfzkKLRIyZZhK
- 0jrrl6JT7KoqaFuzugaI1CyJpxAEBfoH60tfs4w7wWk3xa7tH5ygOXt5hUIJIA9fsea4
- rQitwwd3fG1Mfzp6vQojOx9JTChKzdl0qojSInJd/H/hzEGlCz5tGoiagirP31diCVwB
- HzKl0xgz2Wbno76pxkJivKKP9BPHBnIG+7tqHyEejMpAKWyLaEN3nOfhleWBEN68k7Jw
- aIZQ==
+ :content-type; bh=HaDc8I7Sj2QN4PF0OJdn+37ksGbDX+3NQt15e0saoKI=;
+ b=WnCeTLgcs1VWZnEDbSWaOUspmwo9VDfm4dTejO1EflZN03UJB3G0lFTLr5zA9giOsV
+ rB2DFwg00XQyPr0ykCRo1D/C4aGq3kbUvOLeC5Mt0/GN/F25e4Hn4eamBtMH7Iz1wWom
+ g2+JsR5nc2n3l0ZTuU4msZnyhh2Gu1u0FO6dew8B648qwCfO/QZ5TqN0FCPEyTkkPDYT
+ 0LhhyC54au6TsPyq6hLFAeIrDquVm2OvPPxczKXfy3vv5tKIYuvfD+a81XQTKj/4Tkjt
+ Gl7UDwTZLbE/1GXK56uIv0zMWYpNfs2Uxd9LKZmfRS+EX0w/ZZRhPlyQ9naiHJDbI0N2
+ TQQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794905889; x=1795510689;
+ d=1e100.net; s=20260707; t=1794906584; x=1795511384;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=xrx2aASjqtzCZtcmbyEDZtYppb1iQk8pPRelgP4kkAI=;
- b=zxEy+z7gRM1akraZ3G+c0V1C/GfPDUGxqxmfz8PMtUIJdiseyYv9cDYvd+FbnGwtw4
- cQAlZf9K8x8+zbKOEIaRZBwL1qQnQK3ayCdl6W+QAaBDhStLPSAh1M5FJQJPwS11XmZ6
- ai2q1B8+4cNDrk9Rowc/GzggQzAxjCXWWfz0wreixjSdhPn4+0JQ9kn60Y3HNp/xw05e
- lvOXr1B7rWKBgospz9d0X9KyHhcXsHlTVA5FBTWN8p1jzTEWZJ5izIHNPANOF+1hAImA
- APx8bDWgnLNe3V054xcpkyiHo49ZgNZl5v3UOgc2/KSTLknPmHGs/KgAJc+P+iJ5lb8u
- YxSA==
+ bh=HaDc8I7Sj2QN4PF0OJdn+37ksGbDX+3NQt15e0saoKI=;
+ b=ZDEeyHqLuszmFLZRIdTbuD3Q3PS9kdp/JvQfEmjgi+6ARMWTkch+QEhmsncS4FV+nu
+ IcyzXk2MNV5g89UTbB4zzZaMypyr/J4xOEHoAdbaiqhSBLPRYtIzbxfySHkEfryJ7awr
+ MgXnA49EDib7inH6nbdbkfnuFpZEN/wPq2zJikxJRSVe26Bk8rWAq8qhP/lHBV1rb4ex
+ TnUbIVVYg9VHgJyn6MpsRvl0naofTMX2Ai7saUVPa0hLUT5ib1AQl3pfP9eVxcm8qxQi
+ 98Bm6bdTV8lgzd3K+wog+h54bb6zjSepj2hki3GBmlSqjDXmlX+L8WPvqvgK6YLX1ehj
+ i6lg==
 X-Forwarded-Encrypted: i=1;
- AL+hErG+qOjAcUlFtw8izYlYKQMprWWVI3vuHvVoLlIsHHAY2tZyCoYcENjDddD3Zm4nH5SdF0uE2ED/QeOT@nongnu.org
-X-Gm-Message-State: APuU4Z9QlleArmoDmnKcAo5kFiD/bMEizc214v5pTWnj9oOE3SUxdO+s
- FwOgXiNxGVcTKKPdMgXxjClTpgVtDMvGjFz4URj7dQNwnjDfdnk2gAJvEKK7UdyYOWS8lP8IJke
- vp075DUUlGLhjyBKZoJoO6n0RPQpqP19WpH1y9WdAQEIxXAjNTyOZxRIfeEkZRAg4A3OsuF2N/O
- tRecdO8Kh/VB+nUA3Dfbq6VES8pld5M/GOsdJN/df5HA8=
-X-Gm-Gg: AYBFou0aHWtmGs1vqSw0aJCdBo4QhbqnbFX2WhxhQqMdjcEigyDb2CJEVylE9u9oFyI
- xBkWOjdjqXtdJT1WX1THm+eajiq/goSlU8ibsWGsQqhS/EkuyCS+pFAkoeR/GK5fYRq/01tbRPB
- Xp74IxwiXPbgSq7+K3UPfgei/ju0yDKaJec9m7evqxrlfVi6Qjck4kvyNQLs1+D8nEyO/gwKr5S
- ncHG0I55at/XTpZj0P/xzcD9mxjcT1WzIcxDEvjGmW9R47ok1g12dZGGhOLItw4kYCBn7lDiGq/
- dQRYDzMa7+B8vn3BPdT6omeqiwqQDNt1daYB2d8zHVBuqXzXL1DvLFPM2yvF2qWGD0rX33bwHfd
- VxtrbU3ma1KNoNvS/li49juo/R1vKpefRiMc/Xsh/b6CVNofwkBZAnJVdoR717tsDWb02LCC7xO
- KdIZb0d9trRowGAoKaDhRQrRfi1SoqAy6D2Wp3JVf8IOQ7f0XirNj2qlzxo1nzadGQECHI/NN45
- 3UHxevLv88eEkeE+8N21UolWcSCSHX0cgWKbmXyqQ0J6ZCs8U91BcPO+KoAeKr3iPuLaIRzwxoO
- DGk1o35SSexpA9KICDTDvx8XVbFL3SMQ+WhXG8GcJBIxtYLqMc+EUTPLVjS7N0vi2P0=
-X-Received: by 2002:a17:907:9446:b0:c3e:d0ca:d2fd with SMTP id
- a640c23a62f3a-c5096328171mr1143449266b.12.1794905889049; 
- Tue, 17 Nov 2026 00:58:09 -0800 (PST)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com.
- [209.85.218.53]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c50efe61044sm102918266b.49.2026.11.17.00.58.06
+ AL+hErEtWuUy3H7MWt/GFYd60AogW6l5HsAMrUQTvDb2mod+IFXRVqPhlG55h7/ZpV5u9aA+Vdvoh5t+d2zD@nongnu.org
+X-Gm-Message-State: APuU4Z8yHOfQ/IHdaa9YJLrKyhoUdSoUCL0NNRUo5JjJJIB8ANEL26qS
+ IWv7QACi4mOTowXPS2TKTT08O0zJ/aQ+KOQ63ZN8yBqkPq5pcFb61C826eBeLXIWLcWplISFe8n
+ whSH5TPg0z8XjX9a8NInjtn+MasazLVCBsie1JQjWMMLA5V19XF2R9X+UKeufoqdPFXB7mmWkzL
+ EQOlurQlnstrh1zfOWGd8sY6briOEbNV7CxVKqftIPqJs=
+X-Gm-Gg: AYBFou2CRe6b0J5vFuzgHMtVJ9eZtkXPBoMwqlM9Tpe9Ul2Bqokj+r1XGwNZZcFBvUU
+ eLjQe8CtMfxTfYekiJu0qtuqfmnJp5f3eNKXcKvmOX2fo2SCZMzScueX7dryXZLfz3WS8hAd66X
+ spA2rTcOrNUnVQba+v0nwOO8GkVOabyqsKBGuRMURUK7hFN60qPZZvykWmGR97vMrjFrL91fRhJ
+ /KkskHVuQ34djhHkDj5HUUEY2ZuXHXjYKXEYUW8OkVPFpGUY4/xoUg8awswq74B3BUfUZPijz1F
+ 9To3CE+1SP+zPf5+WYrlBa7mVgB1mDaSgYqXvROVDjQeVHinqqOTYl+wLkSZnTqN5iw45yjDtKT
+ aBBtfAFfy5davbjoOlSpuMdWE1qaZDo/nD/2hkIv9rcW4moYV4DQeKl8zNfwhv2cQhE8r90AHDH
+ FE2lIHi1KRU3xmL1NjWnpcZDY2ipzE28nJypf3URdgwHDmNmm5aRZLAd+c4x6GBHkJfunhW3Pxf
+ Vcd0VXNWM6lQ6vmT2bxnfSJQTo+Wwi2W9CLQap656dA3hlp2OAqR5CcBYF9mbk5gPmBsu6KbBHL
+ RMbHrYnb4Y9WLy9KJgj7pFLomws+0mi8xkcL7TNO3/Tm3Fc5xvB+xdqcggOhvLwiG/7I
+X-Received: by 2002:aa7:c0d3:0:b0:6b1:b97b:744 with SMTP id
+ 4fb4d7f45d1cf-6b7c0c46a5fmr7833928a12.32.1794906583996; 
+ Tue, 17 Nov 2026 01:09:43 -0800 (PST)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com.
+ [209.85.208.47]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6b7c6a5924bsm5347289a12.18.2026.11.17.01.09.43
  for <qemu-riscv@nongnu.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 00:58:07 -0800 (PST)
-Received: by mail-ej1-f53.google.com with SMTP id
- a640c23a62f3a-c505186727fso242916966b.3
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 00:58:06 -0800 (PST)
+ Tue, 17 Nov 2026 01:09:43 -0800 (PST)
+Received: by mail-ed1-f47.google.com with SMTP id
+ 4fb4d7f45d1cf-6b87a92c17eso139597a12.3
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:09:43 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AL+hErFnCNJ+weQt0Hvr3uVWjMTQIF1lBnrYWDyuDje4ucZV9eVBvpxftMBa0Zf7FFV6qUE/G0+Qesb2PGt9@nongnu.org
-X-Received: by 2002:a17:907:9492:b0:c2e:52d6:1fb7 with SMTP id
- a640c23a62f3a-c509636a2ffmr988069066b.22.1794905886301; Tue, 17 Nov 2026
- 00:58:06 -0800 (PST)
+ AL+hErGYI0bvCeypTNmy5UsCAlAz7llg8sb/8C5tTfWMFToIMSNUHWYTFruSIpWbq/VQFA8yzoP2TLCxJwn4@nongnu.org
+X-Received: by 2002:a05:6402:a508:10b0:6b7:a5a4:7205 with SMTP id
+ 4fb4d7f45d1cf-6b7c0953abcmr7108117a12.12.1794906582850; Tue, 17 Nov 2026
+ 01:09:42 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
- <20260825-upstream-ntrace_core-v1-2-f8be2f40d2fd@gmail.com>
-In-Reply-To: <20260825-upstream-ntrace_core-v1-2-f8be2f40d2fd@gmail.com>
+ <20260825-upstream-ntrace_core-v1-3-f8be2f40d2fd@gmail.com>
+In-Reply-To: <20260825-upstream-ntrace_core-v1-3-f8be2f40d2fd@gmail.com>
 From: Jay Chang <jay.chang@sifive.com>
-Date: Tue, 17 Nov 2026 16:57:55 +0800
-X-Gmail-Original-Message-ID: <CAMXXpfaWB7ThMhMwWGPswVhbNO8WoN9zbF5msp9k9XHj54UUQw@mail.gmail.com>
-X-Gm-Features: AclHuK-7e_E-nSEAQU92XKWBNlv37GKi9q3dN3M77frFQiApyxepb3L_cGdSbfk
-Message-ID: <CAMXXpfaWB7ThMhMwWGPswVhbNO8WoN9zbF5msp9k9XHj54UUQw@mail.gmail.com>
-Subject: Re: [PATCH 02/13] hw/riscv/trace-encoder.c: add trace ntrace/etrace
- selection logic
+Date: Tue, 17 Nov 2026 17:09:31 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfb2ivefcvD8ev-Q4Zu=UqrptCihGzmUFiptpnb4b=PnNQ@mail.gmail.com>
+X-Gm-Features: AclHuK9StGEbF6ZBjtfboL-7rJmqyD8zQI9bR-_XVm7q_LANkqNqJiPO3Vg966g
+Message-ID: <CAMXXpfb2ivefcvD8ev-Q4Zu=UqrptCihGzmUFiptpnb4b=PnNQ@mail.gmail.com>
+Subject: Re: [PATCH 03/13] hw/riscv: add n-trace encoder with ProgTraceSync
+ message
 To: Konstantin Semichastnov <antikostya2@gmail.com>
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
@@ -96,17 +96,17 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>, 
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Alexei Filippov <halip0503@gmail.com>
-Content-Type: multipart/alternative; boundary="000000000000c2275406607517ea"
-Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
- envelope-from=jay.chang@sifive.com; helo=mail-ej1-x62e.google.com
+ Alexei Filippov <halip0503@gmail.com>, frank.chang@sifive.com
+Content-Type: multipart/alternative; boundary="00000000000046a285066075413d"
+Received-SPF: pass client-ip=2a00:1450:4864:20::531;
+ envelope-from=jay.chang@sifive.com; helo=mail-ed1-x531.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
 X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -118,330 +118,48 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---000000000000c2275406607517ea
+--00000000000046a285066075413d
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Jay Chang<jay.chang@sifive.com>
+> +    if (packed_bit != 0) {
+> +        /* last chunk was not finished, so finish it now */
+> +        buf[buf_byte++] = packed_cur;
+> +    }
+>
+
+Although current payloads end with a FIELD_VAR, so this path is normally
+bypassed, a message ending with a partial fixed field would reach it.
+packed_cur must be shifted into the MDO bits before setting MSEO; otherwise
+the MSEO update overwrites its lower data bits.
+buf[buf_byte++] = packed_cur << MSEO_BITS_NUM;
+
 Thanks
+Jay Chang
 
-
-On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semichastnov <
-antikostya2@gmail.com> wrote:
-
-> Selecting trace message format rely on `TraceEncoder->ntrace` flag.
-> This flag mirrors trTeFormat bit.
->
-> For now only two values supported:
->
->  - E-Trace (trTeFormat =3D 0), trace format, described by Efficient trace
-> spec.
->
->  - N-Trace (trTeFormat =3D 1), trace format, described by Nexus trace spe=
-c.
->
-> For now we not yet implemented any N-Trace messages, so currently
-> `ntrace` field only disables E-Trace messages competely. We will reuse
-> this field in following commits, when N-Trace messages added.
->
-> Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
-> ---
->  hw/riscv/trace-encoder.c    | 29 +++++++++++++++++++++++++----
->  target/riscv/trace_helper.c |  8 ++++++--
->  2 files changed, 31 insertions(+), 6 deletions(-)
->
-> diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
-> index 53345a478c..34c8f60ce1 100644
-> --- a/hw/riscv/trace-encoder.c
-> +++ b/hw/riscv/trace-encoder.c
-> @@ -254,7 +254,11 @@ static void trencoder_te_ctrl_postw(RegisterInfo
-> *reg, uint64_t val)
->
->      if (!te->trace_running && trTeInstTracing) {
->          /* Starting trace. Ask the CPU for the first trace insn */
-> -        te->trace_next_insn =3D true;
-> +        if (te->ntrace) {
-> +            /* send ProgTraceSync message */
-> +        } else {
-> +            te->trace_next_insn =3D true;
-> +        }
->
->          te->ramsink_ramstart =3D trencoder_read_ramsink_writep(te);
->          te->ramsink_ramlimit =3D trencoder_read_ramsink_ramlimit(te);
-> @@ -442,6 +446,8 @@ static void trencoder_send_sync_msg(Object
-> *trencoder_obj, uint64_t pc)
->      uint8_t msg_size;
->      bool is_branch_taken;
->
-> +    g_assert(!trencoder->ntrace);
-> +
->      trencoder->first_pc =3D pc;
->      is_branch_taken =3D trencoder_addr_is_branch_taken(trencoder, pc);
->      msg_size =3D rv_etrace_gen_encoded_sync_msg(msg, pc, priv,
-> @@ -458,6 +464,8 @@ static void trencoder_send_updiscon(TraceEncoder
-> *trencoder, uint64_t pc)
->      bool updiscon =3D !notify;
->      uint8_t msg_size;
->
-> +    g_assert(!trencoder->ntrace);
-> +
->      if (trencoder->branches > 0) {
->          msg_size =3D rv_etrace_gen_encoded_format1(format2_msg,
->                                                   trencoder->branches,
-> @@ -485,6 +493,8 @@ void trencoder_set_first_trace_insn(Object
-> *trencoder_obj, uint64_t pc)
->      uint8_t msg_size;
->      bool is_branch_taken;
->
-> +    g_assert(!trencoder->ntrace);
-> +
->      if (trencoder->updiscon_pending) {
->          trencoder_send_updiscon(trencoder, pc);
->      }
-> @@ -508,6 +518,11 @@ void trencoder_trace_trap_insn(Object *trencoder_obj=
-,
->      g_autofree uint8_t *msg =3D g_malloc0(TRACE_MSG_MAX_SIZE);
->      uint8_t msg_size;
->
-> +    if (trencoder->ntrace) {
-> +        /* send IndirectBranchHist message */
-> +        return;
-> +    }
-> +
->      if (trencoder->updiscon_pending) {
->          trencoder_send_updiscon(trencoder, pc);
->      }
-> @@ -525,9 +540,15 @@ static void trencoder_send_branch_map(Object
-> *trencoder_obj)
->      g_autofree uint8_t *msg =3D g_malloc0(TRACE_MSG_MAX_SIZE);
->      uint8_t msg_size;
->
-> -    msg_size =3D rv_etrace_gen_encoded_format1_noaddr(msg,
-> -                                                    te->branches,
-> -                                                    te->branch_map);
-> +    if (te->ntrace) {
-> +        /* send ResourceFull message */
-> +        return;
-> +    } else {
-> +        msg_size =3D rv_etrace_gen_encoded_format1_noaddr(msg,
-> +                                                        te->branches,
-> +                                                        te->branch_map);
-> +    }
-> +
->      trencoder_send_message_smem(te, msg, msg_size);
->  }
->
-> diff --git a/target/riscv/trace_helper.c b/target/riscv/trace_helper.c
-> index cd57641d9b..9b43aeac09 100644
-> --- a/target/riscv/trace_helper.c
-> +++ b/target/riscv/trace_helper.c
-> @@ -34,8 +34,12 @@ void helper_trace_updiscon(CPURISCVState *env)
->      RISCVCPU *cpu =3D env_archcpu(env);
->      TraceEncoder *te =3D TRACE_ENCODER(cpu->trencoder);
->
-> -    te->updiscon_pending =3D true;
-> -    te->trace_next_insn =3D true;
-> +    if (te->ntrace) {
-> +        /* send IndirectBranchHist message */
-> +    } else {
-> +        te->updiscon_pending =3D true;
-> +        te->trace_next_insn =3D true;
-> +    }
->  }
->
->  void helper_trace_branch(CPURISCVState *env, target_ulong pc, int taken)
->
-> --
-> 2.43.0
->
->
->
-
---000000000000c2275406607517ea
+--00000000000046a285066075413d
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div><div class=3D"gmail-gs" style=3D"margin:0px;min-width=
-:0px;padding:0px 0px 20px;width:auto;font-family:&quot;Google Sans&quot;,Ro=
-boto,RobotoDraft,Helvetica,Arial,sans-serif;font-size:medium"><div class=3D=
-"gmail-"><div class=3D"gmail-ii gmail-gt gmail-adO" id=3D"gmail-:15l" style=
-=3D"direction:ltr;margin:8px 0px 0px;padding:0px;font-size:0.875rem;overflo=
-w-x:hidden"><div class=3D"gmail-a3s gmail-aiL" id=3D"gmail-:15k" style=3D"d=
-irection:ltr;font-style:normal;font-variant:normal;font-size-adjust:none;fo=
-nt-kerning:auto;font-feature-settings:normal;font-stretch:normal;font-size:=
-small;line-height:1.5;font-family:Arial,Helvetica,sans-serif;overflow:auto =
-hidden"><div id=3D"gmail-avWBGd-82"><div dir=3D"ltr">Reviewed-by: Jay Chang=
-&lt;<a href=3D"mailto:jay.chang@sifive.com" target=3D"_blank">jay.chang@sif=
-ive.com</a>&gt;<div>Thanks</div></div></div></div></div><div class=3D"gmail=
--WhmR8e" id=3D"gmail-avWBGd-83" style=3D"clear:both"></div></div></div><br =
-class=3D"gmail-Apple-interchange-newline"></div></div><br><div class=3D"gma=
-il_quote gmail_quote_container"><div dir=3D"ltr" class=3D"gmail_attr">On Tu=
-e, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semichastnov &lt;<a href=3D"=
-mailto:antikostya2@gmail.com">antikostya2@gmail.com</a>&gt; wrote:<br></div=
-><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border=
--left:1px solid rgb(204,204,204);padding-left:1ex">Selecting trace message =
-format rely on `TraceEncoder-&gt;ntrace` flag.<br>
-This flag mirrors trTeFormat bit.<br>
-<br>
-For now only two values supported:<br>
-<br>
-=C2=A0- E-Trace (trTeFormat =3D 0), trace format, described by Efficient tr=
-ace spec.<br>
-<br>
-=C2=A0- N-Trace (trTeFormat =3D 1), trace format, described by Nexus trace =
-spec.<br>
-<br>
-For now we not yet implemented any N-Trace messages, so currently<br>
-`ntrace` field only disables E-Trace messages competely. We will reuse<br>
-this field in following commits, when N-Trace messages added.<br>
-<br>
-Signed-off-by: Konstantin Semichastnov &lt;<a href=3D"mailto:antikostya2@gm=
-ail.com" target=3D"_blank">antikostya2@gmail.com</a>&gt;<br>
----<br>
-=C2=A0hw/riscv/trace-encoder.c=C2=A0 =C2=A0 | 29 +++++++++++++++++++++++++-=
----<br>
-=C2=A0target/riscv/trace_helper.c |=C2=A0 8 ++++++--<br>
-=C2=A02 files changed, 31 insertions(+), 6 deletions(-)<br>
-<br>
-diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c<br>
-index 53345a478c..34c8f60ce1 100644<br>
---- a/hw/riscv/trace-encoder.c<br>
-+++ b/hw/riscv/trace-encoder.c<br>
-@@ -254,7 +254,11 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg,=
- uint64_t val)<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0if (!te-&gt;trace_running &amp;&amp; trTeInstTracing) {=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Starting trace. Ask the CPU for the fi=
-rst trace insn */<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;trace_next_insn =3D true;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (te-&gt;ntrace) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* send ProgTraceSync message */=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;trace_next_insn =3D true;=
-<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0te-&gt;ramsink_ramstart =3D trencoder_rea=
-d_ramsink_writep(te);<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0te-&gt;ramsink_ramlimit =3D trencoder_rea=
-d_ramsink_ramlimit(te);<br>
-@@ -442,6 +446,8 @@ static void trencoder_send_sync_msg(Object *trencoder_o=
-bj, uint64_t pc)<br>
-=C2=A0 =C2=A0 =C2=A0uint8_t msg_size;<br>
-=C2=A0 =C2=A0 =C2=A0bool is_branch_taken;<br>
-<br>
-+=C2=A0 =C2=A0 g_assert(!trencoder-&gt;ntrace);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0trencoder-&gt;first_pc =3D pc;<br>
-=C2=A0 =C2=A0 =C2=A0is_branch_taken =3D trencoder_addr_is_branch_taken(tren=
-coder, pc);<br>
-=C2=A0 =C2=A0 =C2=A0msg_size =3D rv_etrace_gen_encoded_sync_msg(msg, pc, pr=
-iv,<br>
-@@ -458,6 +464,8 @@ static void trencoder_send_updiscon(TraceEncoder *trenc=
-oder, uint64_t pc)<br>
-=C2=A0 =C2=A0 =C2=A0bool updiscon =3D !notify;<br>
-=C2=A0 =C2=A0 =C2=A0uint8_t msg_size;<br>
-<br>
-+=C2=A0 =C2=A0 g_assert(!trencoder-&gt;ntrace);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (trencoder-&gt;branches &gt; 0) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0msg_size =3D rv_etrace_gen_encoded_format=
-1(format2_msg,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 trencoder-&gt;branches,<br>
-@@ -485,6 +493,8 @@ void trencoder_set_first_trace_insn(Object *trencoder_o=
-bj, uint64_t pc)<br>
-=C2=A0 =C2=A0 =C2=A0uint8_t msg_size;<br>
-=C2=A0 =C2=A0 =C2=A0bool is_branch_taken;<br>
-<br>
-+=C2=A0 =C2=A0 g_assert(!trencoder-&gt;ntrace);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (trencoder-&gt;updiscon_pending) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0trencoder_send_updiscon(trencoder, pc);<b=
-r>
-=C2=A0 =C2=A0 =C2=A0}<br>
-@@ -508,6 +518,11 @@ void trencoder_trace_trap_insn(Object *trencoder_obj,<=
-br>
-=C2=A0 =C2=A0 =C2=A0g_autofree uint8_t *msg =3D g_malloc0(TRACE_MSG_MAX_SIZ=
-E);<br>
-=C2=A0 =C2=A0 =C2=A0uint8_t msg_size;<br>
-<br>
-+=C2=A0 =C2=A0 if (trencoder-&gt;ntrace) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* send IndirectBranchHist message */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0if (trencoder-&gt;updiscon_pending) {<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0trencoder_send_updiscon(trencoder, pc);<b=
-r>
-=C2=A0 =C2=A0 =C2=A0}<br>
-@@ -525,9 +540,15 @@ static void trencoder_send_branch_map(Object *trencode=
-r_obj)<br>
-=C2=A0 =C2=A0 =C2=A0g_autofree uint8_t *msg =3D g_malloc0(TRACE_MSG_MAX_SIZ=
-E);<br>
-=C2=A0 =C2=A0 =C2=A0uint8_t msg_size;<br>
-<br>
--=C2=A0 =C2=A0 msg_size =3D rv_etrace_gen_encoded_format1_noaddr(msg,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branches,<br>
--=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branch_map);<br>
-+=C2=A0 =C2=A0 if (te-&gt;ntrace) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* send ResourceFull message */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 return;<br>
-+=C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 msg_size =3D rv_etrace_gen_encoded_format1_noa=
-ddr(msg,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branches,<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;branch_map);<br>
-+=C2=A0 =C2=A0 }<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0trencoder_send_message_smem(te, msg, msg_size);<br>
-=C2=A0}<br>
-<br>
-diff --git a/target/riscv/trace_helper.c b/target/riscv/trace_helper.c<br>
-index cd57641d9b..9b43aeac09 100644<br>
---- a/target/riscv/trace_helper.c<br>
-+++ b/target/riscv/trace_helper.c<br>
-@@ -34,8 +34,12 @@ void helper_trace_updiscon(CPURISCVState *env)<br>
-=C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D env_archcpu(env);<br>
-=C2=A0 =C2=A0 =C2=A0TraceEncoder *te =3D TRACE_ENCODER(cpu-&gt;trencoder);<=
-br>
-<br>
--=C2=A0 =C2=A0 te-&gt;updiscon_pending =3D true;<br>
--=C2=A0 =C2=A0 te-&gt;trace_next_insn =3D true;<br>
-+=C2=A0 =C2=A0 if (te-&gt;ntrace) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* send IndirectBranchHist message */<br>
-+=C2=A0 =C2=A0 } else {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;updiscon_pending =3D true;<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 te-&gt;trace_next_insn =3D true;<br>
-+=C2=A0 =C2=A0 }<br>
-=C2=A0}<br>
-<br>
-=C2=A0void helper_trace_branch(CPURISCVState *env, target_ulong pc, int tak=
-en)<br>
-<br>
--- <br>
-2.43.0<br>
-<br>
-<br>
-</blockquote></div>
+<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div class=3D"gmail_quote gmail=
+_quote_container"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
+ 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">+=C2=A0=
+ =C2=A0 if (packed_bit !=3D 0) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* last chunk was not finished, so finish it n=
+ow */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 buf[buf_byte++] =3D packed_cur;<br>
++=C2=A0 =C2=A0 }<br></blockquote><div><br>Although current payloads end wit=
+h a FIELD_VAR, so this path is normally bypassed, a message ending with a p=
+artial fixed field would reach it. packed_cur must be shifted into the MDO =
+bits before setting MSEO; otherwise the MSEO update overwrites its lower da=
+ta bits.<br>buf[buf_byte++] =3D packed_cur &lt;&lt; MSEO_BITS_NUM;<br><br>T=
+hanks<br>Jay Chang</div></div></div>
 
---000000000000c2275406607517ea--
+--00000000000046a285066075413d--
 
