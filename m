@@ -1,176 +1,111 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12321606A31C
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 02:32:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75031606A31C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 08:53:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.a=rsa-sha256 header.s=dkim.wdc.com header.b=aymQORdq;
-	dkim=pass (1024-bit key) header.d=sharedspace.onmicrosoft.com header.i=@sharedspace.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-sharedspace-onmicrosoft-com header.b=sGe3Hdyk
+	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=hSyLJ7ws
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xT8yz-0006NP-5D; Mon, 16 Nov 2026 21:31:41 -0500
+	id 1xTEwH-0003EQ-Is; Tue, 17 Nov 2026 03:53:17 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7740b39ba=Alistair.Francis@wdc.com>)
- id 1xT8yw-0006MU-AI; Mon, 16 Nov 2026 21:31:38 -0500
-Received: from esa5.hgst.iphmx.com ([216.71.153.144])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <prvs=7740b39ba=Alistair.Francis@wdc.com>)
- id 1xT8yt-0001GW-JF; Mon, 16 Nov 2026 21:31:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1794882695; x=1826418695;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=jJvp5GvwZXyEBny3rfw9KnhPScUnb99zzN/d8TkW8RA=;
- b=aymQORdquEuhSdg57pdiaiKivwlbnXw0YM9C8M1rU7o5rUMGhfQl0EpV
- Frqbx35Ot4SkEYLWYajBN3ZFLxpQFDycOdfy0MZ4kROobkSyNl+Aky7th
- sHC0EStDdn0eqN03CgkBetNPtrIGghDfObgzpzFnt+xShn8aWwX0JQVxq
- tO9yDjrdbB5sqNXvkD/FrmB151uEhzmdnTu3cNFdTI5g0GWylC8TwAz5+
- XHJwvLAQ76Y2AGKJSzx5xJWrVUt0+aqZOG6DB5n+suqIeklVNCE0hi99u
- GzzwzV3hb2rPzucHWJpckx1k9p+nAIhRkbU+2X6n5R7Y3ANv1ozNu/EnL g==;
-X-CSE-ConnectionGUID: ImzUUyLDSrSgleFP4kxxIA==
-X-CSE-MsgGUID: o5GiONF4QnKCjlkQfmvgTQ==
-X-IronPort-AV: E=Sophos;i="6.27,217,1786982400"; d="scan'208";a="160081949"
-Received: from mail-eastusazon11012046.outbound.protection.outlook.com (HELO
- BL0PR03CU003.outbound.protection.outlook.com) ([52.101.53.46])
- by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 17 Nov 2026 10:31:29 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ph1YK4yGBvQznYxRXHdRiByG4zsLRrY/6UKadVtNEw+fTK1g5JSz3zyWwv1lHXLgNRK+57Dz4QzWwYSrIZ8Tg+Y4bL+XnbYFaLlx0qpr9p2DMiqUQgc1qwrSPHtGZGIAQeTp4KIaokWVm5Sje+EeQswCPtTJjwDYlyVs0y+x3cV14WsKvOqSpd4Ap2Rn8DkWePD6hq4wlBZdrrvAETN6zc6sDB0jq/Dgim1eKYA1cVkU1uCrU3t4lo+xYzbRzizR/3hFtHY+W+SSl41ZYYa5PoPu9Eirdz6MrRX9wgM6m4Zxq5mXoP3g25pnhfIdeaWyujlheEk1XGum6vmvGOBV9Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jJvp5GvwZXyEBny3rfw9KnhPScUnb99zzN/d8TkW8RA=;
- b=HCRijDMBMNZeySWNvB1hv1/AhTls1frjWXZD9YquYvRUA4XLCdZJpoAg30+zSTjMUJvsLSioXVk+nKtQ8Rh/AM/A/46tSU08o7szyhEtSGzqVsJuAvZjm3Lsvh7VrAWjQm66ej44kfBVLVbs62O91oZP/NCPQ9iFJY8LsqRGtSuQ+S1PCg5LHK6cJiaXiZKOMx/1YVtFNme+FFc6XqQXbhEbEqkUemkg6d/RWRSd3xncnD338nNBuoWVHAjc622HI1vMGxr/A0Tm7RBjhAD2c7Oi8rUs77ieLKwRmvEKuCXM5m5B7QFnw1nUAVQvxw4yND9Z+SQSd4mHgLkfuhnIJg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
- header.d=wdc.com; arc=none
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xTEwF-0003DU-3z
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 03:53:15 -0500
+Received: from mail-ej1-x632.google.com ([2a00:1450:4864:20::632])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
+ id 1xTEwC-0004Q8-Pg
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 03:53:14 -0500
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-c4d581da0aaso526545666b.2
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 00:53:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jJvp5GvwZXyEBny3rfw9KnhPScUnb99zzN/d8TkW8RA=;
- b=sGe3HdykvWMR6ezlD1gTgj9jFQtOOwuj7+RGxwBUvo6SllABh3htW3zCZperoB1p4WlmPEckcjdgU6V9KeMrrb5KxBbvLttSSYmwou81y7A4tbDzk0HT7qrUQNsmINuk3nK/G/jfmNkw3Fz8HgJUASMR5fAF1DAFeDSABZ0wCwU=
-Received: from MN6PR04MB9359.namprd04.prod.outlook.com (2603:10b6:208:4f2::13)
- by BY5PR04MB6755.namprd04.prod.outlook.com (2603:10b6:a03:22d::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.615.14; Tue, 17 Nov
- 2026 02:31:26 +0000
-Received: from MN6PR04MB9359.namprd04.prod.outlook.com
- ([fe80::e729:bbef:5a37:2e77]) by MN6PR04MB9359.namprd04.prod.outlook.com
- ([fe80::e729:bbef:5a37:2e77%3]) with mapi id 15.21.0615.009; Tue, 17 Nov 2026
- 02:31:26 +0000
-From: Alistair Francis <Alistair.Francis@wdc.com>
-To: "peter.maydell@linaro.org" <peter.maydell@linaro.org>,
- "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-arm@nongnu.org"
- <qemu-arm@nongnu.org>, "daniel.barboza@oss.qualcomm.com"
- <daniel.barboza@oss.qualcomm.com>, "qemu-riscv@nongnu.org"
- <qemu-riscv@nongnu.org>, "chao.liu@processmission.com"
- <chao.liu@processmission.com>, "palmer@dabbelt.com" <palmer@dabbelt.com>,
- "richard.henderson@linaro.org" <richard.henderson@linaro.org>,
- "liwei1518@gmail.com" <liwei1518@gmail.com>
-Subject: Re: [PATCH 0/3] Fix RCsc store->load ordering of release stores
-Thread-Topic: [PATCH 0/3] Fix RCsc store->load ordering of release stores
-Thread-Index: AQHdMTgBpAryGhjvFEqYObuDmMpCFbcxn54AgAB1bAA=
-Date: Tue, 17 Nov 2026 02:31:26 +0000
-Message-ID: <c1df4a9e33b9e6a5e76cafa75a00d3c4a901fcbb.camel@wdc.com>
-References: <20260821064032.49556-1-zhiwei_liu@linux.alibaba.com>
- <CAFEAcA8Nmt_Nsvfm77en_oaE4orcQ3BdCBQWNAXmi0iqLgV7fw@mail.gmail.com>
-In-Reply-To: <CAFEAcA8Nmt_Nsvfm77en_oaE4orcQ3BdCBQWNAXmi0iqLgV7fw@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.62.1 (by Flathub.org) 
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wdc.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: MN6PR04MB9359:EE_|BY5PR04MB6755:EE_
-x-ms-office365-filtering-correlation-id: ee4cd38e-aecb-4298-972b-08df4452e127
-wdcipoutbound: EOP-TRUE
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|19092799006|10070799003|23010399003|6133799003|18002099003|22082099003|3023799007|261026140227099003|261022075727099003|261021121427099003|261021123027099003|261102123227099003|261028144727099003|261022105027099003|56012099006|4143699003|10067099003|5023799004|11063799006|38070700021;
-x-microsoft-antispam-message-info: RqVuVaE855vPnV4PG5m5+PPFZEQiUKtq44uTqqg47CYU3icGjVKsXiURo4XTDbOwShHu6r5qrwvMSw8sHbkMxP91fiJfnxf2yB7KEPYwsYadgOG8ZVcTtBQJueT6nk7UrmLVaCQFAHZ3SLqxdPwA2gJw5pYZ2FonUngYwiP/ohvh1Bjj7Is/lKkV9mCekwFXCP6j8djxTEICLuDkwi/vXmtaLyaHeAKDSpklD2p3cPcBpUUKX4I4hrZW+bS+PXsvQ3x+6tokOga1a31KWFMhjEDI9fUVVTvo4aMdOywQ6bNeFVo0HNHg+bYMQ6nXix+RMqM31r+0wn0Fd2j0zoSLV9GNzzYBIiwhsh01dybMKwWTSaWfv3jxDRTv5x9aNPxY2JiaAwdFoHkPN4zI4yDOuHlf5fyeUyMFHDzJ9OABzKwvyi5cyBq+uGDMNhz2Lhy14lAc49XAGzaw2JKEYZpAhwz1rH43WZQpeV2hQCCcaPQmHtdmki3rLP2vsKeLZi/6gNPUMmfZTMzF7Ke597Bz9E20CE0ExNP4RyPC13zQwgFfi52S8YZYJsnVkG4H0COnbNW3vhT+cZlhKK8oo29MUGSKkwAdKYz6BH/92k8aUvpD4QfUsep3HNzutDtJHSkVQnMpyL7FwuOavVRYfSt5tqzoA1oQl9zsMWR2TNTPGc2krKXYC5w7VxZa9gs9qgfslctX4VTRTL7FPPc5acZ528dq41bvZP0cmQKyQL7sprA=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN6PR04MB9359.namprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(19092799006)(10070799003)(23010399003)(6133799003)(18002099003)(22082099003)(3023799007)(261026140227099003)(261022075727099003)(261021121427099003)(261021123027099003)(261102123227099003)(261028144727099003)(261022105027099003)(56012099006)(4143699003)(10067099003)(5023799004)(11063799006)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VjJzVzdqWklUTnVLaWpnSEppZEhoQ0xRN1pqOEhXRG9HbWVhT0VnV1BCMzl4?=
- =?utf-8?B?YWJXVERNS1k2M1d4WFJBVXk1VkhWbDRkdTMyMDZWSUs0ZFhVOGxWeW1zK1ZE?=
- =?utf-8?B?cDZsdkJzZGZwbURwVXVHS2lyWDNyeXg5RVBQcTRPOU4vNGFkS1NRL2ZFdFlt?=
- =?utf-8?B?YXNlWEkrM1ZaTCtLZmNjSGMyM0pGa2QrNTVUWldTNUd3QktHcGh1R05YMTNi?=
- =?utf-8?B?dHNZVkQzbEJWdWFYbEpqUlcybC9xN3dHUURpalFjQWpxVUZZUyswLzBvL0hU?=
- =?utf-8?B?a0RmZlRqNGVFVytacG02U3BGSUFBSnBzbFozaXlEdUM1VjNmdHVsSTRQMEZu?=
- =?utf-8?B?ZjFLVlRwTlZzQW00dVlIVlM3eXhjNXM5T2dtQ1JmbkpvQ3N0RkRzUzgvbTZQ?=
- =?utf-8?B?QTIyUmo3QVd6QnJHK0JicHhrUElzaG1pcUN0V2lFTVdxQ1AyZzJYOWtjS2pn?=
- =?utf-8?B?clJINU8wTkhEVXRYV253VXZFMi8vMmxZQ2NoM2RlL1RGd2ZJLzY2VERyQjlw?=
- =?utf-8?B?bUFsRytjZXFLUVdjYXpjWFhyV1FyaC9XMWZka1JQWGhlSFhWOVd6aG5IMWxG?=
- =?utf-8?B?SkRCQzloSHR3eVVnNDl2dkFsWk1wRlpDTEhuakc5ZXFlM2RXdzVUdUV5ZmZo?=
- =?utf-8?B?bm5rQUxLMWx2R2Y4bG82OXdNOWpnVFJxVnFZaVlqNXdHZ01mUkpOcS9yNWwy?=
- =?utf-8?B?V3BUTEJjK0R1QU0wQitGUE5EaU5adjRXdTBRUWhZTEpPQ0dkb2xiMkN1K2pT?=
- =?utf-8?B?cTRuZm1VRGZUcEdQZWZjOGsyM21SRGR2QVhDUUEzK2YzS1E2bW5NdGw2eUJj?=
- =?utf-8?B?cGMwc2sydit6bHgySzJDUjRYWnhqM2VJUmhWVFAya01ERlQzSXd6alNaSndy?=
- =?utf-8?B?TkdmZ3NGanA2a1RXQ25reEtWaVhVQWtTekRWdlpVSFN0bDMwOVpvQ2hyeTRI?=
- =?utf-8?B?QmE2NVBLSGcxOC85bFhzcW9mc1ZtaXhjeTVSNUl4YWNDVU1FbFRLR0Nqazlq?=
- =?utf-8?B?QysvK3VGRURPTUhzNEU2VG5vUEJvUEtwZGlnd2NSMmx3eE1iRG5nUmI2M1pB?=
- =?utf-8?B?OTdaTDlLVTI2K0tiQmJ4eGk3K2M4Y3RoWlZCREZKRGxDOGVhcDIrTEp1S2hD?=
- =?utf-8?B?dEoyQnJZcXlxaGptd2Vlcyt5eWVoNFFSNUk2blYrcDJ6dDAva1lpZEo4a051?=
- =?utf-8?B?bFJOY1VXa2R2T2t5K3ZBQTNFRlNqMmc4dHA3TjMvTUVxRVQxRFNGZm4xWDZY?=
- =?utf-8?B?N2ZHSVI1S2tVTFl1UVNTbVplRmt2cHZzVmJoWkZwQkoyRXAvUFhlaWZMNkI4?=
- =?utf-8?B?R3FaMzgzVWorZ3dXVHYzVE42R1hweXowWGp1Qm15bmxvNTlLcXdRMnRzMnBY?=
- =?utf-8?B?emd4RWJWQmhYRzJ2V1hMMzNWU0g0dVE3YlVJMng3dUVmeElUTFpnS1hQU09W?=
- =?utf-8?B?WGhsZ0pCSFFDQjlPSVc0cXQwbWQzVEhRRFA1TVNVRGY5NW0zdndqZ0RMMU4w?=
- =?utf-8?B?bzI1Y2tsbWdLN251cThCVlFaOFNIaENxNU9FbzFqZGFnVk15RDlJbkwrUDQz?=
- =?utf-8?B?Nmg3NG4xbjFoY3hGeERyczFJWnRML056c3dTbDl4d3pqSlVoTjdBYzUwcU1v?=
- =?utf-8?B?MEt3eWRGak5zYUNYWDR3cVZ4K0RFRnVpWWswTWZnYnhHY3pWM2h5Vmx4Szhm?=
- =?utf-8?B?bkx0Q0NBam5BVDlvU3ZNYVFvTXJKOHY3Y2d0Nk83bnZOdnE3Q0ZXb2hhZUZr?=
- =?utf-8?B?Wk0venduanZyMzZmZlhraGw4Sm9GT3BpcjQvVHp0L3A2d2pLWnI5SnhqWTFj?=
- =?utf-8?B?NURQR2p3b2VIcWxzWk9VUnVyeVpabVpLLzd5aXN0Z0JFWWRDQmRyK0pKK2JD?=
- =?utf-8?B?MGpZZVh4V2UrU3MrMHcyZVJodWpEZ0NabHBzbmJOdFl5MVhaZ0tubjN1WWdE?=
- =?utf-8?B?K3FMb0l5Uk5QNC9TZFlCVVc1akdieGtjQWpRa3cyQ0NXRzgrWmtFVlpNb1Iv?=
- =?utf-8?B?Z1hqSTU2TGdLL0lJOUlwM25OWFBYaEExckwxZEhkYVMvT2pmcEZNeHY0WTZP?=
- =?utf-8?B?Z0pOMGFRbGxTU0Q4NDEvNmlEUFMxVGwrNDM3TzZSVnVCYTArK2VyblQxNTR1?=
- =?utf-8?B?NDNNUyt2UUFKTFlQc2NHTzIzS25SaUYwc0U3dUNhWE12ZWdTRWFYUFJFeUsw?=
- =?utf-8?B?TGQ3RzlPUTNDN2NNNzByeU1qZENORHFTOHZBQ1Q4M1Qxek5ZR25JL2F4bWZz?=
- =?utf-8?B?R1pvQmZlRUNnOHlxUms5Yk9JcVl2azlVWkxKbVFTbHFZRzZsNmJIUDFlcDQz?=
- =?utf-8?B?MFlQSTREU0p6TXQwK0RvRXV2ak5hU3N2dFNhV3ZDaWVNWm5CUktXVTc4S1hY?=
- =?utf-8?Q?QBZ9s7tpOgIoDnzFbXxz+ebvhAQi4HjLLKbUrQTHNW1oV?=
-x-ms-exchange-antispam-messagedata-1: Pp1dsZpTZU4n23QyaBuMSneV9sVXxDuFZ78=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <D220EE1E4303C0429D459C7B6B30E3CA@namprd04.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ d=sifive.com; s=google; t=1794905590; x=1795510390; darn=nongnu.org;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+ :content-type; bh=4+6siOWoxN5F3pSHbv5cNjyTYhALCGylXW4k7C6DU1c=;
+ b=hSyLJ7wsbl3wSDJJCQ/52WASLMN3fwMjF65/tNyaX5dJ5fI6ExEPLgU2r9N+KEZcuM
+ ScB+KS6H1u2N1yCa8RxtX5NxfDAX7QLtDd4v3SIV3zc9g4OTOOr0MeUubJsRxXVtdebD
+ aoXnE1wNcvkOSrXXXmC90J0wqoXG9miAxOhpWLIP1SdD+b40ghhzsMnKlM+oJCcr4xe4
+ UDgsUBj/qakpl4wDhsNrc1g7E+PzwjlJGKS7FhEwwKyf1pm7jgGZAtKwIG04nZv0hE9A
+ bS8dM5A3Wh4IIj+ZAUIJqO6aQHxWYVcLPCigWZa0C4wGv5DU/FzSe6AFyVkEkUVe/Z0m
+ JrOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1794905590; x=1795510390;
+ h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+ :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=4+6siOWoxN5F3pSHbv5cNjyTYhALCGylXW4k7C6DU1c=;
+ b=aKGSJVPBjr443moM6jHNpf5W34Ia8dCy8cCEdjzgB7woYXNMssdwVm1H6SIHrivt5O
+ caZ9bf6kxAzHv/jVr83p4rgX1waHBXmyn4sVgv+53S2xxPGPbcBjz4G1RHSDLr9otJIG
+ +pkSj9vMtdR+4z2EHt/9l6Dd7wp68qNaGAyYwOvQn5G1QLEbe+VMjl4CFhguE5TrSHbE
+ TQ/opTshwQSO5djKQCz5MFwiVQff/N2h7kZmY4ZM0iOw8DhJhTFJ1l1zT7snhMXl9aYO
+ MRYfiscM/RTfCqIe0BkS9TLiUOWtwRuzs/hNJ3YZL82o1qpPjsR/J01BxxQzxzTn/BQW
+ lu3g==
+X-Forwarded-Encrypted: i=1;
+ AL+hErF7Du1JcZDtPkdqTfgqJRpBuC7U73mMZJ0r5E8e869Fr9q/uixkAp0U2O94gd6DHT7qs56edM9E0Sj3@nongnu.org
+X-Gm-Message-State: APuU4Z/iMlxO19BAjR7flLTgsot3bgMiXCSM9Y8Ipmjp0wDvG/K4j94j
+ /eO1mKvUCttJ9vRgdWCTCcRtm4cYG1DT66xSomUOJdH82GesPARcDqhTYFEu0up/z6VVH97GqoN
+ h23vPdIlglmeTtvKHTO5BAcW4Fi9SClUysA6DjMm83no2Lv0q8Ot6pdFXou5yAVjvmsxUesFtew
+ NMrsHN8H9fziujA4DKJFkJaE8ZvC1zuEWFJoci/EVRPi8=
+X-Gm-Gg: AYBFou3GaQPknJuL5vH8QKkCBj5wk5q7kUHyxY/wUNxexGaPLroTdfS8zV7lxflAUkW
+ ZPYkrQCa2AGKG8wPRytphM+Hltav3gMaACJWsqV/X8CWnr44llu+Nhced+RVtOCRU6yJdsF6RqH
+ TOBfwnraXG2pNuPYLzygvB5dG7cinA1I1JbyeIYUX8P/mdP3Ug4OBMDDxjPTv59Gz0ClJauezLh
+ sKrCjUA8+g26kIgi94XW1BYkbgw5AZuhrkjJZ0hFbRnhVUUOkCD+/YL+4/xZoLN5uUAU2aio4jJ
+ /DjMdY8pCvIDREiVwuZ4lq91BZw3mthCRx62jQOgtCf0zIDr/7El4S2RzG4o9Ug4lUk6jXwmeUo
+ mcSz0mmap/IcK2/CIoxhOhBkt+IbiExCUXWx5+txluDYCa87I7ofnEoAt+KDDiaCPLz79Km1v9B
+ JIhfnExutvUIeR3jiQidC99PXofAfjESs/8JY7XCHjZlekCvF4yqZ55bS2A39c9OhiZG+gpKzpQ
+ sJcvPuv9FXCELRrSPZjhRw0egxClRoTy2I8tPy23e7cr9Pb6WQ3l5FhXAHdhByCp8oGDAPELt+l
+ 0laXk7xECixfQkQVxBP6EO9gE7QwK7UJrHOWTLJEzY8CZ7K9ExJ3Yzcs7jdGF+tK8RU=
+X-Received: by 2002:a17:907:3e9e:b0:c41:5e31:5184 with SMTP id
+ a640c23a62f3a-c5096344e23mr1083059566b.13.1794905590317; 
+ Tue, 17 Nov 2026 00:53:10 -0800 (PST)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com.
+ [209.85.208.52]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c5095b23b09sm504632066b.26.2026.11.17.00.53.08
+ for <qemu-riscv@nongnu.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Nov 2026 00:53:09 -0800 (PST)
+Received: by mail-ed1-f52.google.com with SMTP id
+ 4fb4d7f45d1cf-6b587591414so5358159a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 00:53:08 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AL+hErG7IrOuSiEzb4/o0cl7FH/3e+K1gHDRETbRA6o/XLqVMJGWEolM+4ZEUZWPKFgY5D47KyYdkUy9vgnu@nongnu.org
+X-Received: by 2002:a05:6402:44dc:b0:6b7:1c:eae0 with SMTP id
+ 4fb4d7f45d1cf-6b7c0c1ff32mr8009779a12.24.1794905588364; Tue, 17 Nov 2026
+ 00:53:08 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: CFNMsDg7t4pakG9lpO8NXE/P45MoUOZ1e9vIn7Qvs9Kpxbk/Kmcy7lbqW/XoefrL3O9nX5ehzvIjS2ljdb71sBj3B0VPm9kvfmgmWsndpta/pThZAH+1+RAUiOS+0q0Bh0NsX5OD0DCqBkXWsKD1QvI82Z6Cxy5xt++2xIE3dxueeM2HSXUS5nk7KQjmFX5W4QKiVxe98vpZFhO2iqBA9moFr2PTKaW/gccf14a8m7ifti/df+PI4IvlL/y/Q291K4df1jZdIXYbu0oUjWWFrj7vqFQ7w67BXGt9b1MjnwTUlxPGCDWWFJJ0mOXlUvmIUmjV4OWufUDbgpitSdIvWg==
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: LnLe1DZ+k3SrT5RXJ1jaxY6pZlnRpvc1fMQHmWW2yoH7PC+zXUEDtsnOpc10Tpu7sSOGW2rwDf1B2f30q3SjvHsjk5G+PlFYV24ZBD/rphU8dIoNixtcAzEbS3RdXsfupKj/woiorbIkEfjPHLOO0IRUgJg3AdE+uxibdtlI57utz5Zmlk4zgHwL2ymYYmW17zBkKmxt4ie8tNkAZuBNS4EH4QAeuEub3EPkQRfzOlVRjcAj3xl4RhalBAXLq0Ln44d7psmv/CZo5/wK3euLoNKhWilB4XmALhtSILYq9xIG7WB8sKKyJHMx6EpWVfL6w2mWvZk2jd8KL6s515wwy6EfPneRbmhUAIwSbk1R5wUKRiAsnQF7Q6mYo6d+r7b8/kN3O5HPJYvW5IZsUptu1gYnbIMoeQZj/6dS7/pdHU5LNVHOEcVMl1mhdb+aRL/HNPDvMerJ2/cHxAGSkrgpvFAG0zMweNTiK3T/7V1E6nCEH9zJk4yKwJpBdTyvBRUXLNuASu/JSFBd8ZjRYgaxrQs6BPz/jVdBaX8X42vMwWfovJHeS7WH0AvqNu6gOS4CiblAJZKQFeepI722hIb9G/ynlgGIVRdssLcyDLz1AneFLm4kXE9EcAHioUGub6sz
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: MN6PR04MB9359.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ee4cd38e-aecb-4298-972b-08df4452e127
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Nov 2026 02:31:26.4944 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: UNsyOP1gnVKyxubBZc94wrFHzZ0s2466WXjYDzRfIDZAvx/6ljq5ZUFUAf7X5MqAM8q5mpdYpjJmII0yssL1i7EOmM1GVbK9vwagUO6jrO4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR04MB6755
-Received-SPF: permerror client-ip=216.71.153.144;
- envelope-from=prvs=7740b39ba=Alistair.Francis@wdc.com;
- helo=esa5.hgst.iphmx.com
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
- T_SPF_PERMERROR=0.01 autolearn=ham autolearn_force=no
+References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
+ <20260825-upstream-ntrace_core-v1-1-f8be2f40d2fd@gmail.com>
+In-Reply-To: <20260825-upstream-ntrace_core-v1-1-f8be2f40d2fd@gmail.com>
+From: Jay Chang <jay.chang@sifive.com>
+Date: Tue, 17 Nov 2026 16:52:57 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfaYax-65nOrxMj0pEA3bgq3Ujz72iUbCZs0UhH6zSU5dw@mail.gmail.com>
+X-Gm-Features: AclHuK8MQoklHcAganw1PuQpM5tkim66BL6V-uC6bhC-WKRB_ndxl63hYNk5e6U
+Message-ID: <CAMXXpfaYax-65nOrxMj0pEA3bgq3Ujz72iUbCZs0UhH6zSU5dw@mail.gmail.com>
+Subject: Re: [PATCH 01/13] hw/riscv/trace-encoder: add ntrace enable flag
+To: Konstantin Semichastnov <antikostya2@gmail.com>
+Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>, 
+ Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Alexei Filippov <halip0503@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000fff9b806607505ef"
+Received-SPF: pass client-ip=2a00:1450:4864:20::632;
+ envelope-from=jay.chang@sifive.com; helo=mail-ej1-x632.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, HTML_MESSAGE=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -182,55 +117,310 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-3.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-T24gTW9uLCAyMDI2LTExLTE2IGF0IDE5OjMxICswMDAwLCBQZXRlciBNYXlkZWxsIHdyb3RlOg0K
-PiBPbiBGcmksIDIxIEF1ZyAyMDI2IGF0IDA3OjQwLCBMSVUgWmhpd2VpDQo+IDx6aGl3ZWlfbGl1
-QGxpbnV4LmFsaWJhYmEuY29tPiB3cm90ZToNCj4gPiANCj4gPiBTZXZlcmFsIGd1ZXN0IGFyY2hp
-dGVjdHVyZXMgZ2l2ZSB0aGVpciBzdG9yZS1yZWxlYXNlIGluc3RydWN0aW9ucw0KPiA+IFJDc2MN
-Cj4gPiBzZW1hbnRpY3MsIHdoaWNoIHJlcXVpcmVzIHRoZSBzdG9yZSB0byBiZSBvcmRlcmVkIG5v
-dCBvbmx5IGFmdGVyDQo+ID4gdGhlDQo+ID4gbWVtb3J5IG9wZXJhdGlvbnMgdGhhdCBwcmVjZWRl
-IGl0LCBidXQgYWxzbyBiZWZvcmUgYW55IHN1YnNlcXVlbnQNCj4gPiBsb2FkLWFjcXVpcmUgd2l0
-aCBSQ3NjIHNlbWFudGljcy7CoCBUaGUgVENHIHRyYW5zbGF0b3JzLCBob3dldmVyLA0KPiA+IG9u
-bHkNCj4gPiBlbWl0IHRoZSBsZWFkaW5nIGJhcnJpZXIgYmVmb3JlIHRoZSBzdG9yZSwgc28gdW5k
-ZXIgTVRUQ0cgbm90aGluZw0KPiA+IHByZXZlbnRzIHRoZSBob3N0IENQVSBmcm9tIGV4ZWN1dGlu
-ZyB0aGUgbG9hZC1hY3F1aXJlIHRoYXQgZm9sbG93cw0KPiA+IGENCj4gPiBzdG9yZS1yZWxlYXNl
-IGJlZm9yZSB0aGUgc3RvcmUgaGFzIGxlZnQgaXRzIHN0b3JlIGJ1ZmZlci7CoCBPbiBhbg0KPiA+
-IHg4Ng0KPiA+IGhvc3QgKFRTTyksIHN0b3JlLWxvYWQgaXMgdGhlIG9ubHkgcmVvcmRlcmluZyB0
-aGUgaGFyZHdhcmUgbWF5DQo+ID4gcGVyZm9ybSwgYW5kIGl0IGlzIGV4YWN0bHkgdGhlIG9yZGVy
-aW5nIHRoYXQgaXMgbWlzc2luZywgc28gdGhlDQo+ID4gYXJjaGl0ZWN0dXJhbGx5IGZvcmJpZGRl
-biBbMCwwXSBvdXRjb21lIG9mIHRoZSBTdG9yZSBCdWZmZXJpbmcNCj4gPiBsaXRtdXMNCj4gPiB0
-ZXN0IGlzIGVhc3kgdG8gb2JzZXJ2ZToNCj4gPiANCj4gPiDCoMKgwqAgQ1BVIDDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgQ1BVIDENCj4gPiDCoMKgwqAgc3RvcmUt
-cmVsZWFzZSBYID0gMcKgwqDCoMKgwqDCoMKgIHN0b3JlLXJlbGVhc2UgWSA9IDENCj4gPiDCoMKg
-wqAgbG9hZC1hY3F1aXJlwqAgcjAgPSBZwqDCoMKgwqDCoMKgIGxvYWQtYWNxdWlyZcKgIHIxID0g
-WA0KPiA+IA0KPiA+IFRoZSBhZmZlY3RlZCBpbnN0cnVjdGlvbnMgYXJlIHRoZSBSSVNDLVYgWmFs
-YXNyIHN0b3JlLXJlbGVhc2UNCj4gPiBpbnN0cnVjdGlvbnMgYW5kIHRoZSBBcm0gU1RMUiwgU1RM
-UFVSIGFuZCBBMzIvVDMyIFNUTCBzdG9yZS1yZWxlYXNlDQo+ID4gaW5zdHJ1Y3Rpb25zLsKgIE5l
-aXRoZXIgYXJjaGl0ZWN0dXJlIGRlZmluZXMgYW4gUkNwYyBzdG9yZSwgc28gZXZlcnkNCj4gPiBz
-dG9yZS1yZWxlYXNlIGlzIFJDc2MgKFJWV01PIHByZXNlcnZlZCBwcm9ncmFtIG9yZGVyIFJ1bGUg
-NzsgQXJtDQo+ID4gQXJjaGl0ZWN0dXJlIFJlZmVyZW5jZSBNYW51YWwgRERJIDA0ODcsIHNlY3Rp
-b24gQjIuMy44ICJBY3F1aXJlIGFuZA0KPiA+IHJlbGVhc2Ugc2VtYW50aWNzIikuDQo+ID4gDQo+
-ID4gUGF0Y2ggMSBmaXhlcyB0aGUgUklTQy1WIHNpZGUgYW5kIHBhdGNoIDIgdGhlIEFybSBzaWRl
-IGJ5IGVtaXR0aW5nDQo+ID4gYQ0KPiA+IGZ1bGwgYmFycmllciBhZnRlciB0aGUgc3RvcmUgYXMg
-d2VsbC7CoCBQYXRjaCAzIGZpeGVzIGFuIGludmVydGVkDQo+ID4gYmFycmllciBwb2xhcml0eSBm
-b3VuZCBpbiB0aGUgQTMyIExEQSBsb2FkLWFjcXVpcmUgdHJhbnNsYXRvciB3aGlsZQ0KPiA+IGF1
-ZGl0aW5nIHRoZSBsb2FkLWFjcXVpcmUgc2lkZS4NCj4gDQo+ID4gTElVIFpoaXdlaSAoMyk6DQo+
-ID4gwqAgdGFyZ2V0L3Jpc2N2OiBGaXggUkNzYyBvcmRlcmluZyBvZiBaYWxhc3Igc3RvcmUtcmVs
-ZWFzZQ0KPiA+IMKgIHRhcmdldC9hcm06IEZpeCBSQ3NjIG9yZGVyaW5nIG9mIHN0b3JlLXJlbGVh
-c2UgaW5zdHJ1Y3Rpb25zDQo+ID4gwqAgdGFyZ2V0L2FybTogRml4IGJhcnJpZXIgcG9sYXJpdHkg
-b2YgQTMyIExEQSBsb2FkLWFjcXVpcmUNCj4gDQo+IFRoaXMgc2VyaWVzIHNlZW1zIHRvIGhhdmUg
-YmVlbiBhY2NpZGVudGFsbHkgbWlzc2VkLCBwb3NzaWJseQ0KPiBiZWNhdXNlIGl0IGluY2x1ZGVk
-IGJvdGggYXJtIGFuZCByaXNjdiBwYXRjaGVzIGluIHRoZSBzYW1lDQo+IHBhdGNoc2V0LiBSVEgg
-dGVsbHMgbWUgdGhhdCB0aGUgQXJtIHBhdGNoZXMgYXJlIGNvcnJlY3QsIGFuZA0KPiBEYW5pZWwg
-aGFzIHJldmlld2VkIHRoZSByaXNjdiBvbmUuDQo+IA0KPiByaXNjdiBtYWludGFpbmVyczogYXJl
-IHlvdSBPSyB3aXRoIG1lIHF1ZXVpbmcgdGhlIHdob2xlIHNldA0KPiBpbmNsdWRpbmcgdGhlIHJp
-c2N2IHBhdGNoIGluIHRhcmdldC1hcm0ubmV4dCwgb3Igd291bGQgeW91DQo+IHByZWZlciB0byB0
-YWtlIHRoZSByaXNjdiBwYXRjaCB5b3Vyc2VsZiB0aHJvdWdoIHlvdXIgcXVldWU/DQoNClRoYW5r
-cyBmb3IgY2hlY2tpbmcsIHRoaXMgaXMgZmluZSB0byBnbyB2aWEgdGFyZ2V0LWFybS5uZXh0DQoN
-CkFsaXN0YWlyDQoNCj4gDQo+IHRoYW5rcw0KPiAtLSBQTU0NCg==
+--000000000000fff9b806607505ef
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Reviewed-by: Jay Chang<jay.chang@sifive.com>
+Thanks
+
+On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semichastnov <
+antikostya2@gmail.com> wrote:
+
+> Initial commit of N-Trace support patch series based on "RISC-V n-trace
+> (Nexus-based Trace) Specification" Version 1.0.
+> With Trace control devices based on "RISC-V Trace Control Interface
+> Specification" Version 1.0.
+>
+> Selecting trace message format rely on trTeFormat bit of trTeControl
+> trace encoder register.
+>
+> We will mirror trTeFormat value in trace encoder in `ntrace` field to
+> simplify checking of current format in trace encoder logic.
+>
+> This commit only mirrors register value in field, logic based on this
+> field value is added in next commit.
+>
+> Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
+> ---
+>  hw/riscv/trace-encoder.c | 22 +++++++++++++++++++++-
+>  hw/riscv/trace-encoder.h |  2 ++
+>  2 files changed, 23 insertions(+), 1 deletion(-)
+>
+> diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+> index 55acb1f2ae..53345a478c 100644
+> --- a/hw/riscv/trace-encoder.c
+> +++ b/hw/riscv/trace-encoder.c
+> @@ -84,6 +84,9 @@ REG32(TR_TE_CONTROL, 0x0)
+>  #define R_TR_TE_CONTROL_RESET R_TR_TE_CONTROL_EMPTY_MASK
+>  #define R_TR_TE_CONTROL_RO_BITS R_TR_TE_CONTROL_EMPTY_MASK
+>
+> +#define TR_TE_CONTROL_FORMAT_ETRACE 0
+> +#define TR_TE_CONTROL_FORMAT_NTRACE 1
+> +
+>  /*
+>   * trTeImpl register fields
+>   */
+> @@ -153,7 +156,6 @@ static uint64_t
+> trencoder_te_ctrl_set_hardwire_vals(uint64_t input)
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_ENA, 0);
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC, 1);
+> -    input =3D FIELD_DP32(input, TR_TE_CONTROL, FORMAT, 0);
+>
+>      /* SYNC_MODE and SYNC_MAX will be revisited */
+>      input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MODE, 0);
+> @@ -168,6 +170,7 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo
+> *reg, uint64_t val)
+>      uint32_t trTeActive =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
+> ACTIVE);
+>      uint32_t trTeInstTracing =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTRO=
+L,
+>                                                  INST_TRACING);
+> +    uint32_t trTeFormat =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
+> FORMAT);
+>      uint32_t temp;
+>
+>      val =3D trencoder_te_ctrl_set_hardwire_vals(val);
+> @@ -205,6 +208,19 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo
+> *reg, uint64_t val)
+>          val =3D FIELD_DP32(val, TR_TE_CONTROL, INST_TRACING, 0);
+>      }
+>
+> +    temp =3D FIELD_EX32(val, TR_TE_CONTROL, FORMAT);
+> +    if (te->trace_running) {
+> +        /* Do not allow to change tracing format while tracing is
+> enabled. */
+> +        val =3D FIELD_DP32(val, TR_TE_CONTROL, FORMAT, trTeFormat);
+> +    } else if (temp !=3D TR_TE_CONTROL_FORMAT_ETRACE &&
+> +               temp !=3D TR_TE_CONTROL_FORMAT_NTRACE) {
+> +        /*
+> +         * Do not change format, if requested format is not supported
+> +         * (only E-Trace and N-Trace formats are supported for now)
+> +         */
+> +        val =3D FIELD_DP32(val, TR_TE_CONTROL, FORMAT, trTeFormat);
+> +    }
+> +
+>      return val;
+>  }
+>
+> @@ -215,6 +231,7 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg=
+,
+> uint64_t val)
+>      uint32_t trTeEnable =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
+> ENABLE);
+>      uint32_t trTeInstTracing =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTRO=
+L,
+>                                                  INST_TRACING);
+> +    uint32_t trTeFormat =3D ARRAY_FIELD_EX32(te->regs, TR_TE_CONTROL,
+> FORMAT);
+>      RISCVCPU *cpu =3D te->cpu;
+>      CPURISCVState *env =3D &cpu->env;
+>
+> @@ -233,6 +250,8 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg=
+,
+> uint64_t val)
+>
+>      te->enabled =3D trTeEnable ? true : false;
+>
+> +    te->ntrace =3D (trTeFormat =3D=3D TR_TE_CONTROL_FORMAT_NTRACE);
+> +
+>      if (!te->trace_running && trTeInstTracing) {
+>          /* Starting trace. Ask the CPU for the first trace insn */
+>          te->trace_next_insn =3D true;
+> @@ -314,6 +333,7 @@ static void trencoder_reset(DeviceState *dev)
+>      te->enabled =3D false;
+>      te->trace_running =3D false;
+>      te->trace_next_insn =3D false;
+> +    te->ntrace =3D false;
+>      env->trace_running =3D false;
+>
+>      te->branch_map =3D 0;
+> diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h
+> index 48cf8366ee..fed0ef9a48 100644
+> --- a/hw/riscv/trace-encoder.h
+> +++ b/hw/riscv/trace-encoder.h
+> @@ -44,6 +44,8 @@ struct TraceEncoder {
+>      bool enabled;
+>      bool trace_running;
+>      bool trace_next_insn;
+> +
+> +    bool ntrace;
+>  };
+>
+>  #define TYPE_TRACE_ENCODER "trace-encoder"
+>
+> --
+> 2.43.0
+>
+>
+>
+
+--000000000000fff9b806607505ef
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><span class=3D"gmail-il">Reviewed</span>-by: Jay Chang&lt;=
+<a href=3D"mailto:jay.chang@sifive.com">jay.chang@sifive.com</a>&gt;<div>Th=
+anks</div></div><br><div class=3D"gmail_quote gmail_quote_container"><div d=
+ir=3D"ltr" class=3D"gmail_attr">On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Ko=
+nstantin Semichastnov &lt;<a href=3D"mailto:antikostya2@gmail.com">antikost=
+ya2@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddi=
+ng-left:1ex">Initial commit of N-Trace support patch series based on &quot;=
+RISC-V n-trace<br>
+(Nexus-based Trace) Specification&quot; Version 1.0.<br>
+With Trace control devices based on &quot;RISC-V Trace Control Interface<br=
+>
+Specification&quot; Version 1.0.<br>
+<br>
+Selecting trace message format rely on trTeFormat bit of trTeControl<br>
+trace encoder register.<br>
+<br>
+We will mirror trTeFormat value in trace encoder in `ntrace` field to<br>
+simplify checking of current format in trace encoder logic.<br>
+<br>
+This commit only mirrors register value in field, logic based on this<br>
+field value is added in next commit.<br>
+<br>
+Signed-off-by: Konstantin Semichastnov &lt;<a href=3D"mailto:antikostya2@gm=
+ail.com" target=3D"_blank">antikostya2@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0hw/riscv/trace-encoder.c | 22 +++++++++++++++++++++-<br>
+=C2=A0hw/riscv/trace-encoder.h |=C2=A0 2 ++<br>
+=C2=A02 files changed, 23 insertions(+), 1 deletion(-)<br>
+<br>
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c<br>
+index 55acb1f2ae..53345a478c 100644<br>
+--- a/hw/riscv/trace-encoder.c<br>
++++ b/hw/riscv/trace-encoder.c<br>
+@@ -84,6 +84,9 @@ REG32(TR_TE_CONTROL, 0x0)<br>
+=C2=A0#define R_TR_TE_CONTROL_RESET R_TR_TE_CONTROL_EMPTY_MASK<br>
+=C2=A0#define R_TR_TE_CONTROL_RO_BITS R_TR_TE_CONTROL_EMPTY_MASK<br>
+<br>
++#define TR_TE_CONTROL_FORMAT_ETRACE 0<br>
++#define TR_TE_CONTROL_FORMAT_NTRACE 1<br>
++<br>
+=C2=A0/*<br>
+=C2=A0 * trTeImpl register fields<br>
+=C2=A0 */<br>
+@@ -153,7 +156,6 @@ static uint64_t trencoder_te_ctrl_set_hardwire_vals(uin=
+t64_t input)<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, CONTEXT, 0);=
+<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_STALL_E=
+NA, 0);<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INHIBIT_SRC,=
+ 1);<br>
+-=C2=A0 =C2=A0 input =3D FIELD_DP32(input, TR_TE_CONTROL, FORMAT, 0);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* SYNC_MODE and SYNC_MAX will be revisited */<br>
+=C2=A0 =C2=A0 =C2=A0input =3D FIELD_DP32(input, TR_TE_CONTROL, INST_SYNC_MO=
+DE, 0);<br>
+@@ -168,6 +170,7 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo *re=
+g, uint64_t val)<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t trTeActive =3D ARRAY_FIELD_EX32(te-&gt;regs, T=
+R_TE_CONTROL, ACTIVE);<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t trTeInstTracing =3D ARRAY_FIELD_EX32(te-&gt;re=
+gs, TR_TE_CONTROL,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0INST_TRACING);<br>
++=C2=A0 =C2=A0 uint32_t trTeFormat =3D ARRAY_FIELD_EX32(te-&gt;regs, TR_TE_=
+CONTROL, FORMAT);<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t temp;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0val =3D trencoder_te_ctrl_set_hardwire_vals(val);<br>
+@@ -205,6 +208,19 @@ static uint64_t trencoder_te_ctrl_prew(RegisterInfo *r=
+eg, uint64_t val)<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0val =3D FIELD_DP32(val, TR_TE_CONTROL, IN=
+ST_TRACING, 0);<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
++=C2=A0 =C2=A0 temp =3D FIELD_EX32(val, TR_TE_CONTROL, FORMAT);<br>
++=C2=A0 =C2=A0 if (te-&gt;trace_running) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* Do not allow to change tracing format while=
+ tracing is enabled. */<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 val =3D FIELD_DP32(val, TR_TE_CONTROL, FORMAT,=
+ trTeFormat);<br>
++=C2=A0 =C2=A0 } else if (temp !=3D TR_TE_CONTROL_FORMAT_ETRACE &amp;&amp;<=
+br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0temp !=3D TR_TE_CON=
+TROL_FORMAT_NTRACE) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* Do not change format, if requested for=
+mat is not supported<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* (only E-Trace and N-Trace formats are =
+supported for now)<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 val =3D FIELD_DP32(val, TR_TE_CONTROL, FORMAT,=
+ trTeFormat);<br>
++=C2=A0 =C2=A0 }<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0return val;<br>
+=C2=A0}<br>
+<br>
+@@ -215,6 +231,7 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg, =
+uint64_t val)<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t trTeEnable =3D ARRAY_FIELD_EX32(te-&gt;regs, T=
+R_TE_CONTROL, ENABLE);<br>
+=C2=A0 =C2=A0 =C2=A0uint32_t trTeInstTracing =3D ARRAY_FIELD_EX32(te-&gt;re=
+gs, TR_TE_CONTROL,<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0INST_TRACING);<br>
++=C2=A0 =C2=A0 uint32_t trTeFormat =3D ARRAY_FIELD_EX32(te-&gt;regs, TR_TE_=
+CONTROL, FORMAT);<br>
+=C2=A0 =C2=A0 =C2=A0RISCVCPU *cpu =3D te-&gt;cpu;<br>
+=C2=A0 =C2=A0 =C2=A0CPURISCVState *env =3D &amp;cpu-&gt;env;<br>
+<br>
+@@ -233,6 +250,8 @@ static void trencoder_te_ctrl_postw(RegisterInfo *reg, =
+uint64_t val)<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0te-&gt;enabled =3D trTeEnable ? true : false;<br>
+<br>
++=C2=A0 =C2=A0 te-&gt;ntrace =3D (trTeFormat =3D=3D TR_TE_CONTROL_FORMAT_NT=
+RACE);<br>
++<br>
+=C2=A0 =C2=A0 =C2=A0if (!te-&gt;trace_running &amp;&amp; trTeInstTracing) {=
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Starting trace. Ask the CPU for the fi=
+rst trace insn */<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0te-&gt;trace_next_insn =3D true;<br>
+@@ -314,6 +333,7 @@ static void trencoder_reset(DeviceState *dev)<br>
+=C2=A0 =C2=A0 =C2=A0te-&gt;enabled =3D false;<br>
+=C2=A0 =C2=A0 =C2=A0te-&gt;trace_running =3D false;<br>
+=C2=A0 =C2=A0 =C2=A0te-&gt;trace_next_insn =3D false;<br>
++=C2=A0 =C2=A0 te-&gt;ntrace =3D false;<br>
+=C2=A0 =C2=A0 =C2=A0env-&gt;trace_running =3D false;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0te-&gt;branch_map =3D 0;<br>
+diff --git a/hw/riscv/trace-encoder.h b/hw/riscv/trace-encoder.h<br>
+index 48cf8366ee..fed0ef9a48 100644<br>
+--- a/hw/riscv/trace-encoder.h<br>
++++ b/hw/riscv/trace-encoder.h<br>
+@@ -44,6 +44,8 @@ struct TraceEncoder {<br>
+=C2=A0 =C2=A0 =C2=A0bool enabled;<br>
+=C2=A0 =C2=A0 =C2=A0bool trace_running;<br>
+=C2=A0 =C2=A0 =C2=A0bool trace_next_insn;<br>
++<br>
++=C2=A0 =C2=A0 bool ntrace;<br>
+=C2=A0};<br>
+<br>
+=C2=A0#define TYPE_TRACE_ENCODER &quot;trace-encoder&quot;<br>
+<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+</blockquote></div>
+
+--000000000000fff9b806607505ef--
 
