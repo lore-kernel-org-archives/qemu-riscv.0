@@ -1,94 +1,94 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3572C606A329
-	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 09:10:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3F91606A32C
+	for <qemu-riscv@archiver.kernel.org>; Tue, 17 Nov 2026 09:11:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=WnCeTLgc
+	dkim=pass (2048-bit key) header.d=sifive.com header.i=@sifive.com header.a=rsa-sha256 header.s=google header.b=V5sZGkg5
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTFCJ-0006SN-Ks; Tue, 17 Nov 2026 04:09:51 -0500
+	id 1xTFDN-000768-8V; Tue, 17 Nov 2026 04:10:57 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTFCF-0006Rv-IC
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:09:48 -0500
-Received: from mail-ed1-x531.google.com ([2a00:1450:4864:20::531])
+ id 1xTFDM-00075u-Jj
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:10:56 -0500
+Received: from mail-ej1-x62e.google.com ([2a00:1450:4864:20::62e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <jay.chang@sifive.com>)
- id 1xTFCD-0000oQ-Q7
- for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:09:47 -0500
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-6b4bd3d98bfso5990007a12.1
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:09:45 -0800 (PST)
+ id 1xTFDK-0001lv-NQ
+ for qemu-riscv@nongnu.org; Tue, 17 Nov 2026 04:10:56 -0500
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-c50dd1e2f11so279758266b.2
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:10:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sifive.com; s=google; t=1794906584; x=1795511384; darn=nongnu.org;
+ d=sifive.com; s=google; t=1794906653; x=1795511453; darn=nongnu.org;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:from:to:cc:subject:date:message-id:reply-to
- :content-type; bh=HaDc8I7Sj2QN4PF0OJdn+37ksGbDX+3NQt15e0saoKI=;
- b=WnCeTLgcs1VWZnEDbSWaOUspmwo9VDfm4dTejO1EflZN03UJB3G0lFTLr5zA9giOsV
- rB2DFwg00XQyPr0ykCRo1D/C4aGq3kbUvOLeC5Mt0/GN/F25e4Hn4eamBtMH7Iz1wWom
- g2+JsR5nc2n3l0ZTuU4msZnyhh2Gu1u0FO6dew8B648qwCfO/QZ5TqN0FCPEyTkkPDYT
- 0LhhyC54au6TsPyq6hLFAeIrDquVm2OvPPxczKXfy3vv5tKIYuvfD+a81XQTKj/4Tkjt
- Gl7UDwTZLbE/1GXK56uIv0zMWYpNfs2Uxd9LKZmfRS+EX0w/ZZRhPlyQ9naiHJDbI0N2
- TQQA==
+ :content-type; bh=aRfquUDAPsLpa9/2xbyG+SbrtcQRB0PT56U1jR1xO1c=;
+ b=V5sZGkg5ajDRNkmMiiANz8LFDNCI3dtaEBy6Dp4yr8TsemhREiV1XcANl/p0RHCoRU
+ KllpdOsz5eqvWle6O3Eamf0CgEuIX4hOTf2KiOvkxXXqMglsOGfvUli8CnIhsnusg4Dw
+ Cukm/DB467PyhaTb+W4vyZmqXz1mp6jN77uiL4+jrdvwOyoy6P+hJ3BDW2MbxSpO3AaC
+ 90NGCBW1CAa8MxlF6Br2JGswVj6vWrT644ydQH0379dq6RBX7VFmjHWaj/HWpYK/Uje3
+ WJLUgDI0Mz6RN4FNCDcoxV2omk3m2OiLv1drWltYKiSPrjV3iHKz+F5W6LlLQEqHBo7B
+ TYjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1794906584; x=1795511384;
+ d=1e100.net; s=20260707; t=1794906653; x=1795511453;
  h=content-type:cc:to:subject:message-id:date:from:in-reply-to
  :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to:content-type;
- bh=HaDc8I7Sj2QN4PF0OJdn+37ksGbDX+3NQt15e0saoKI=;
- b=ZDEeyHqLuszmFLZRIdTbuD3Q3PS9kdp/JvQfEmjgi+6ARMWTkch+QEhmsncS4FV+nu
- IcyzXk2MNV5g89UTbB4zzZaMypyr/J4xOEHoAdbaiqhSBLPRYtIzbxfySHkEfryJ7awr
- MgXnA49EDib7inH6nbdbkfnuFpZEN/wPq2zJikxJRSVe26Bk8rWAq8qhP/lHBV1rb4ex
- TnUbIVVYg9VHgJyn6MpsRvl0naofTMX2Ai7saUVPa0hLUT5ib1AQl3pfP9eVxcm8qxQi
- 98Bm6bdTV8lgzd3K+wog+h54bb6zjSepj2hki3GBmlSqjDXmlX+L8WPvqvgK6YLX1ehj
- i6lg==
+ bh=aRfquUDAPsLpa9/2xbyG+SbrtcQRB0PT56U1jR1xO1c=;
+ b=FAknXkeu7jVcqvpl8XQJi6rz+XCE/sq/aDmaSKahtUHqIxf3MxvRGJn6tXdt0CRrNf
+ N2dB4FSH7yHfshCjkQy3/VFc2UTUzflFgI9xhv+Kqylf8fT0VIxASvaBfjgAeHveL2sD
+ 7ZRZzpSfrCLq1s9LmHjwmG15mO/gWoXd8+Zbq+LgbYZT9s1pedc4LIIA6w8bP2xXmw4G
+ o/VOwtPLxisrGuUbx38OLv1+IQjZKzKNGqo90izyLIKkIZn3YXQy0gjt09XC1UHwTBIy
+ ima0bLiUAcAIPTjsJCR9vbRHRzRSO4KLfWuz8lWaxezVgLBqeyr5fUjGfKQIZwFwrp0z
+ L9WA==
 X-Forwarded-Encrypted: i=1;
- AL+hErEtWuUy3H7MWt/GFYd60AogW6l5HsAMrUQTvDb2mod+IFXRVqPhlG55h7/ZpV5u9aA+Vdvoh5t+d2zD@nongnu.org
-X-Gm-Message-State: APuU4Z8yHOfQ/IHdaa9YJLrKyhoUdSoUCL0NNRUo5JjJJIB8ANEL26qS
- IWv7QACi4mOTowXPS2TKTT08O0zJ/aQ+KOQ63ZN8yBqkPq5pcFb61C826eBeLXIWLcWplISFe8n
- whSH5TPg0z8XjX9a8NInjtn+MasazLVCBsie1JQjWMMLA5V19XF2R9X+UKeufoqdPFXB7mmWkzL
- EQOlurQlnstrh1zfOWGd8sY6briOEbNV7CxVKqftIPqJs=
-X-Gm-Gg: AYBFou2CRe6b0J5vFuzgHMtVJ9eZtkXPBoMwqlM9Tpe9Ul2Bqokj+r1XGwNZZcFBvUU
- eLjQe8CtMfxTfYekiJu0qtuqfmnJp5f3eNKXcKvmOX2fo2SCZMzScueX7dryXZLfz3WS8hAd66X
- spA2rTcOrNUnVQba+v0nwOO8GkVOabyqsKBGuRMURUK7hFN60qPZZvykWmGR97vMrjFrL91fRhJ
- /KkskHVuQ34djhHkDj5HUUEY2ZuXHXjYKXEYUW8OkVPFpGUY4/xoUg8awswq74B3BUfUZPijz1F
- 9To3CE+1SP+zPf5+WYrlBa7mVgB1mDaSgYqXvROVDjQeVHinqqOTYl+wLkSZnTqN5iw45yjDtKT
- aBBtfAFfy5davbjoOlSpuMdWE1qaZDo/nD/2hkIv9rcW4moYV4DQeKl8zNfwhv2cQhE8r90AHDH
- FE2lIHi1KRU3xmL1NjWnpcZDY2ipzE28nJypf3URdgwHDmNmm5aRZLAd+c4x6GBHkJfunhW3Pxf
- Vcd0VXNWM6lQ6vmT2bxnfSJQTo+Wwi2W9CLQap656dA3hlp2OAqR5CcBYF9mbk5gPmBsu6KbBHL
- RMbHrYnb4Y9WLy9KJgj7pFLomws+0mi8xkcL7TNO3/Tm3Fc5xvB+xdqcggOhvLwiG/7I
-X-Received: by 2002:aa7:c0d3:0:b0:6b1:b97b:744 with SMTP id
- 4fb4d7f45d1cf-6b7c0c46a5fmr7833928a12.32.1794906583996; 
- Tue, 17 Nov 2026 01:09:43 -0800 (PST)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com.
- [209.85.208.47]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b7c6a5924bsm5347289a12.18.2026.11.17.01.09.43
+ AL+hErE5u8oT5cHHNTonBR6V3KhW6yaOaHjyWmNKj7Qr0LlALICwIvbwdLZO85nU8dYZUNDoxbOegl7x3TIX@nongnu.org
+X-Gm-Message-State: APuU4Z9KDYqKpwj7oCKwII8nElCeoB2M8YaMevYEPiyOVa6hsGmObzel
+ 4RSSyAtdGUUGz+26TnY+Gy9eoH1glwTtOsGq/00twRiqXKnp7qzpy3gJttSIBfMiJsx2DgPtVvf
+ a1htyR7l0BRo8rOS5VSTD018kyykXnbnkw/oImQEEYz9v8xY7l+a8A+HhBSQmtRDIlDtNWGGQgp
+ jhSXjfhjHT6YTYQZ3MKiaQWLItBOYQxIvTm73ZVoeNyRc=
+X-Gm-Gg: AYBFou3KD7WwWiETxwWdtCEZ1PzYSs1qT6P0zpHZuLXhjioA2VOWokKyXsL6Bn3cXQb
+ iMhV5Oo5Lua8SZhvkQNCwYp7PUR5yoOZK89U59KLfC2tTZftqrPkEWrD/5dQBiMTt8KX6M5hiGQ
+ ZWACycQRYZtJ5eeFfYIbWtF+dpeHM3cD6uGxG8ybw/0LjfaC+iFVlo37LrO8HzlIol0e9v+gY80
+ udqfBLvn3TXCSNeib7AnsQUOpF3wgCEUbzbRLslnD8vFd+BZyWuESWpgWrNwQB6FmunJDInfARL
+ YXLeOcZds4BOjSQTjjUS2h1vZGWx+9350pJremWpUoPMIGlCWkQ8CAqxkXElbF5CnRc1Iljdbxn
+ /ePD2LoX1uo+xKiaYWjJBivVRgqTr4KNBb5NDIxIuFxbvmMkrrAXZ1jyLL3QxNKM6z/3BQXsB8B
+ HwCYdhMre+Ipj4iibk21xyauB0RjE8wmveEO8MQes4uTL5h7Y6SyzGtgWd765Nl7S3M74afLKst
+ wPTYDpxQS/aZ5HMe0RdjMmpoX2+HX+qSO5F2XOMucj4nfTIU2oL2TMM8lxTSui64HaxPjOBqRSy
+ tM64aHAKtb8aKbFvpgPVgwGJOrRIPAHXP94hwolrsj4RB/Txpx5jjK9CaSnYNchVnJs=
+X-Received: by 2002:a17:907:9686:b0:c50:8ff9:4f40 with SMTP id
+ a640c23a62f3a-c509630763amr1235870066b.11.1794906652665; 
+ Tue, 17 Nov 2026 01:10:52 -0800 (PST)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com.
+ [209.85.208.49]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c50b13a2ae7sm375046166b.62.2026.11.17.01.10.51
  for <qemu-riscv@nongnu.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 17 Nov 2026 01:09:43 -0800 (PST)
-Received: by mail-ed1-f47.google.com with SMTP id
- 4fb4d7f45d1cf-6b87a92c17eso139597a12.3
- for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:09:43 -0800 (PST)
+ Tue, 17 Nov 2026 01:10:52 -0800 (PST)
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-6b2237b596cso9824843a12.0
+ for <qemu-riscv@nongnu.org>; Tue, 17 Nov 2026 01:10:51 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AL+hErGYI0bvCeypTNmy5UsCAlAz7llg8sb/8C5tTfWMFToIMSNUHWYTFruSIpWbq/VQFA8yzoP2TLCxJwn4@nongnu.org
-X-Received: by 2002:a05:6402:a508:10b0:6b7:a5a4:7205 with SMTP id
- 4fb4d7f45d1cf-6b7c0953abcmr7108117a12.12.1794906582850; Tue, 17 Nov 2026
- 01:09:42 -0800 (PST)
+ AL+hErEx7mwxobuQOO7BV0lVRkBItXgToj6osLn4fm1G/0CTaGf2hwGsmgJUIYYW52IKNrzw1CQPniSCS7Ug@nongnu.org
+X-Received: by 2002:a05:6402:a513:10b0:6b7:186:e60b with SMTP id
+ 4fb4d7f45d1cf-6b7c0891425mr7749743a12.5.1794906651535; Tue, 17 Nov 2026
+ 01:10:51 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 References: <20260825-upstream-ntrace_core-v1-0-f8be2f40d2fd@gmail.com>
- <20260825-upstream-ntrace_core-v1-3-f8be2f40d2fd@gmail.com>
-In-Reply-To: <20260825-upstream-ntrace_core-v1-3-f8be2f40d2fd@gmail.com>
+ <20260825-upstream-ntrace_core-v1-4-f8be2f40d2fd@gmail.com>
+In-Reply-To: <20260825-upstream-ntrace_core-v1-4-f8be2f40d2fd@gmail.com>
 From: Jay Chang <jay.chang@sifive.com>
-Date: Tue, 17 Nov 2026 17:09:31 +0800
-X-Gmail-Original-Message-ID: <CAMXXpfb2ivefcvD8ev-Q4Zu=UqrptCihGzmUFiptpnb4b=PnNQ@mail.gmail.com>
-X-Gm-Features: AclHuK9StGEbF6ZBjtfboL-7rJmqyD8zQI9bR-_XVm7q_LANkqNqJiPO3Vg966g
-Message-ID: <CAMXXpfb2ivefcvD8ev-Q4Zu=UqrptCihGzmUFiptpnb4b=PnNQ@mail.gmail.com>
-Subject: Re: [PATCH 03/13] hw/riscv: add n-trace encoder with ProgTraceSync
- message
+Date: Tue, 17 Nov 2026 17:10:40 +0800
+X-Gmail-Original-Message-ID: <CAMXXpfYGwRLKurEaC3ypaWL=BdDbASZuSYxFXeFC35rKn-GVfQ@mail.gmail.com>
+X-Gm-Features: AclHuK-dqqgmNgt4vsN72xM89LbqEydezYISjPky5Sh_z0QS4_iMlNzGs9s5F0w
+Message-ID: <CAMXXpfYGwRLKurEaC3ypaWL=BdDbASZuSYxFXeFC35rKn-GVfQ@mail.gmail.com>
+Subject: Re: [PATCH 04/13] hw/riscv/trace-encoder.c: align ntrace messages
+ with ones
 To: Konstantin Semichastnov <antikostya2@gmail.com>
 Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
  Alistair Francis <alistair.francis@wdc.com>, Weiwei Li <liwei1518@gmail.com>, 
@@ -96,10 +96,10 @@ Cc: qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
  qemu-riscv@nongnu.org, Fabiano Rosas <farosas@suse.de>, 
  Laurent Vivier <lvivier@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>, 
- Alexei Filippov <halip0503@gmail.com>, frank.chang@sifive.com
-Content-Type: multipart/alternative; boundary="00000000000046a285066075413d"
-Received-SPF: pass client-ip=2a00:1450:4864:20::531;
- envelope-from=jay.chang@sifive.com; helo=mail-ed1-x531.google.com
+ Alexei Filippov <halip0503@gmail.com>
+Content-Type: multipart/alternative; boundary="0000000000005eaf97066075458f"
+Received-SPF: pass client-ip=2a00:1450:4864:20::62e;
+ envelope-from=jay.chang@sifive.com; helo=mail-ej1-x62e.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -118,48 +118,176 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-2.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=no
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---00000000000046a285066075413d
+--0000000000005eaf97066075458f
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> +    if (packed_bit != 0) {
-> +        /* last chunk was not finished, so finish it now */
-> +        buf[buf_byte++] = packed_cur;
+Reviewed-by: Jay Chang<jay.chang@sifive.com>
+Thanks
+
+On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semichastnov <
+antikostya2@gmail.com> wrote:
+
+> N-Trace format requires idle bytes to be filled with 0xff, instead of
+> zeroes, like E-Trace format
+>
+> Signed-off-by: Konstantin Semichastnov <antikostya2@gmail.com>
+> ---
+>  hw/riscv/trace-encoder.c | 24 +++++++++++++++++++-----
+>  1 file changed, 19 insertions(+), 5 deletions(-)
+>
+> diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c
+> index 10e52e207e..703454c9b7 100644
+> --- a/hw/riscv/trace-encoder.c
+> +++ b/hw/riscv/trace-encoder.c
+> @@ -398,21 +398,35 @@ static void trencoder_send_message_smem(TraceEncode=
+r
+> *trencoder,
+>      hwaddr dest =3D trencoder_read_ramsink_writep(trencoder);
+>      bool wrapped =3D false;
+>
+> +    if (trencoder->ntrace) {
+> +        /*
+> +         * RISC-V N-Trace 3.1. MSEO Sequences:
+> +         * idle bytes in N-Trace format are filled with 0xff, instead of
+> zeroes
+> +         */
+> +        memset(msg + msg_size, 0xff, 4 - msg_size % 4);
 > +    }
+>      msg_size =3D QEMU_ALIGN_UP(msg_size, 4);
+>
+>      /* clear trRamWrap before writing to SMEM */
+>      dest =3D FIELD_DP64(dest, TR_RAM_WP_LOW, WRAP, 0);
+>
+>      /*
+> -     * Fill with null bytes if we can't fit the packet in
+> +     * Fill with idle bytes if we can't fit the packet in
+>       * ramlimit, set wrap and write the packet in ramstart.
+>       */
+>      if (dest + msg_size > trencoder->ramsink_ramlimit) {
+> -        g_autofree uint8_t *null_packet =3D NULL;
+> -        uint8_t null_size =3D trencoder->ramsink_ramlimit - dest;
+> +        g_autofree uint8_t *idle_packet =3D NULL;
+> +        uint8_t idle_size =3D trencoder->ramsink_ramlimit - dest;
+>
+> -        null_packet =3D g_malloc0(null_size);
+> -        cpu_physical_memory_write(dest, null_packet, null_size);
+> +        idle_packet =3D g_malloc0(idle_size);
+> +        if (trencoder->ntrace) {
+> +            /*
+> +             * RISC-V N-Trace 3.1. MSEO Sequences:
+> +             * idle bytes in N-Trace format are filled with 0xff, instea=
+d
+> of zeroes
+> +             */
+> +            memset(idle_packet, 0xff, idle_size);
+> +        }
+> +        cpu_physical_memory_write(dest, idle_packet, idle_size);
+>
+>          dest =3D trencoder->ramsink_ramstart;
+>          wrapped =3D true;
+>
+> --
+> 2.43.0
+>
+>
 >
 
-Although current payloads end with a FIELD_VAR, so this path is normally
-bypassed, a message ending with a partial fixed field would reach it.
-packed_cur must be shifted into the MDO bits before setting MSEO; otherwise
-the MSEO update overwrites its lower data bits.
-buf[buf_byte++] = packed_cur << MSEO_BITS_NUM;
-
-Thanks
-Jay Chang
-
---00000000000046a285066075413d
+--0000000000005eaf97066075458f
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><div class=3D"gmail_quote gmail=
-_quote_container"><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px=
- 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">+=C2=A0=
- =C2=A0 if (packed_bit !=3D 0) {<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* last chunk was not finished, so finish it n=
-ow */<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0 buf[buf_byte++] =3D packed_cur;<br>
-+=C2=A0 =C2=A0 }<br></blockquote><div><br>Although current payloads end wit=
-h a FIELD_VAR, so this path is normally bypassed, a message ending with a p=
-artial fixed field would reach it. packed_cur must be shifted into the MDO =
-bits before setting MSEO; otherwise the MSEO update overwrites its lower da=
-ta bits.<br>buf[buf_byte++] =3D packed_cur &lt;&lt; MSEO_BITS_NUM;<br><br>T=
-hanks<br>Jay Chang</div></div></div>
+<div dir=3D"ltr">Reviewed-by: Jay Chang&lt;<a href=3D"mailto:jay.chang@sifi=
+ve.com" target=3D"_blank">jay.chang@sifive.com</a>&gt;<div>Thanks</div></di=
+v><br><div class=3D"gmail_quote gmail_quote_container"><div dir=3D"ltr" cla=
+ss=3D"gmail_attr">On Tue, Aug 25, 2026 at 10:49=E2=80=AFPM Konstantin Semic=
+hastnov &lt;<a href=3D"mailto:antikostya2@gmail.com">antikostya2@gmail.com<=
+/a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0=
+px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">N=
+-Trace format requires idle bytes to be filled with 0xff, instead of<br>
+zeroes, like E-Trace format<br>
+<br>
+Signed-off-by: Konstantin Semichastnov &lt;<a href=3D"mailto:antikostya2@gm=
+ail.com" target=3D"_blank">antikostya2@gmail.com</a>&gt;<br>
+---<br>
+=C2=A0hw/riscv/trace-encoder.c | 24 +++++++++++++++++++-----<br>
+=C2=A01 file changed, 19 insertions(+), 5 deletions(-)<br>
+<br>
+diff --git a/hw/riscv/trace-encoder.c b/hw/riscv/trace-encoder.c<br>
+index 10e52e207e..703454c9b7 100644<br>
+--- a/hw/riscv/trace-encoder.c<br>
++++ b/hw/riscv/trace-encoder.c<br>
+@@ -398,21 +398,35 @@ static void trencoder_send_message_smem(TraceEncoder =
+*trencoder,<br>
+=C2=A0 =C2=A0 =C2=A0hwaddr dest =3D trencoder_read_ramsink_writep(trencoder=
+);<br>
+=C2=A0 =C2=A0 =C2=A0bool wrapped =3D false;<br>
+<br>
++=C2=A0 =C2=A0 if (trencoder-&gt;ntrace) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* RISC-V N-Trace 3.1. MSEO Sequences:<br=
+>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* idle bytes in N-Trace format are fille=
+d with 0xff, instead of zeroes<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 memset(msg + msg_size, 0xff, 4 - msg_size % 4)=
+;<br>
++=C2=A0 =C2=A0 }<br>
+=C2=A0 =C2=A0 =C2=A0msg_size =3D QEMU_ALIGN_UP(msg_size, 4);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/* clear trRamWrap before writing to SMEM */<br>
+=C2=A0 =C2=A0 =C2=A0dest =3D FIELD_DP64(dest, TR_RAM_WP_LOW, WRAP, 0);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0/*<br>
+-=C2=A0 =C2=A0 =C2=A0* Fill with null bytes if we can&#39;t fit the packet =
+in<br>
++=C2=A0 =C2=A0 =C2=A0* Fill with idle bytes if we can&#39;t fit the packet =
+in<br>
+=C2=A0 =C2=A0 =C2=A0 * ramlimit, set wrap and write the packet in ramstart.=
+<br>
+=C2=A0 =C2=A0 =C2=A0 */<br>
+=C2=A0 =C2=A0 =C2=A0if (dest + msg_size &gt; trencoder-&gt;ramsink_ramlimit=
+) {<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_autofree uint8_t *null_packet =3D NULL;<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint8_t null_size =3D trencoder-&gt;ramsink_ra=
+mlimit - dest;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 g_autofree uint8_t *idle_packet =3D NULL;<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 uint8_t idle_size =3D trencoder-&gt;ramsink_ra=
+mlimit - dest;<br>
+<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 null_packet =3D g_malloc0(null_size);<br>
+-=C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_physical_memory_write(dest, null_packet, n=
+ull_size);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 idle_packet =3D g_malloc0(idle_size);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (trencoder-&gt;ntrace) {<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /*<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* RISC-V N-Trace 3.1. MSEO=
+ Sequences:<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0* idle bytes in N-Trace fo=
+rmat are filled with 0xff, instead of zeroes<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0*/<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 memset(idle_packet, 0xff, idle_s=
+ize);<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 }<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0 cpu_physical_memory_write(dest, idle_packet, i=
+dle_size);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dest =3D trencoder-&gt;ramsink_ramstart;<=
+br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0wrapped =3D true;<br>
+<br>
+-- <br>
+2.43.0<br>
+<br>
+<br>
+</blockquote></div>
 
---00000000000046a285066075413d--
+--0000000000005eaf97066075458f--
 
