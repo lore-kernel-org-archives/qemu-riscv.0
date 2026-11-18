@@ -1,43 +1,43 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25CC1606A31C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Nov 2026 09:04:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1782606A331
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Nov 2026 09:04:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=PhmkXveb
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=NyBgN58G
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTbYv-0008Mf-HQ; Wed, 18 Nov 2026 04:02:41 -0500
+	id 1xTbYt-0008K1-9N; Wed, 18 Nov 2026 04:02:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xTbYi-0008GY-LT; Wed, 18 Nov 2026 04:02:29 -0500
-Received: from [115.124.30.111] (helo=out30-111.freemail.mail.aliyun.com)
+ id 1xTbYh-0008G5-Pl; Wed, 18 Nov 2026 04:02:27 -0500
+Received: from [115.124.30.112] (helo=out30-112.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xTbYc-000428-3z; Wed, 18 Nov 2026 04:02:28 -0500
+ id 1xTbYc-00042K-42; Wed, 18 Nov 2026 04:02:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1794992517; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=XM7VH7UpAJHWcHedQn+0lNYBsTWS2/H8sd8mCGBqPrI=;
- b=PhmkXvebvIjmmptNA8+kpxAEgGOaZcJkhPL95atbwRpdWSqD8kkmoDKKsxYJssIV4fj/OLdlFzMQQPadwobudN2tPfJMXgIaEFAVTwiFgQMnW6zIM2HUeKSwIO4TE/YzIgvTrkdzcOACRP1WhsEV3mIoBXrn4p0xNWcb39nkT+4=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
+ t=1794992519; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=zwmTj/RrGDC4hJstDrXF4lWrvPbUyb5kwAi9xLRE+/o=;
+ b=NyBgN58Gl/S8EfUfKrcd7lqmbWa0n1kMWyBWOws50NGbyNfV9tOeuaBJUWIkPEK6j520QyrTz8f/eMYYSeD/cg4VZWRHBK9rPYlLO26ldg9jjcHqUqBTZZhe7l1iWJyYorTol5daxZe85ZpIhHwg/K/lP7ihY0OpU6HwyT6X4ow=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R411e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0XF0Gqhq_1794992516; 
+ TI=SMTPD_---0XF0GqiU_1794992517; 
 Received: from
  riscv-project-v011122129236.ea134.tbsite.net(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XF0Gqhq_1794992516 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 18 Nov 2026 17:01:57 +0800
+ fp:SMTPD_---0XF0GqiU_1794992517 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 18 Nov 2026 17:01:58 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Wed, 18 Nov 2026 17:01:31 +0800
-Subject: [PATCH RFC 4/8] disas/riscv: Decode Zl instruction lengths
+Date: Wed, 18 Nov 2026 17:01:33 +0800
+Subject: [PATCH RFC 6/8] target/riscv: Fetch 48-bit and 64-bit instructions
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261118-zl-master-v1-4-129f85e0f887@linux.alibaba.com>
+Message-Id: <20261118-zl-master-v1-6-129f85e0f887@linux.alibaba.com>
 References: <20261118-zl-master-v1-0-129f85e0f887@linux.alibaba.com>
 In-Reply-To: <20261118-zl-master-v1-0-129f85e0f887@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -49,17 +49,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chao Liu <chao.liu@processmission.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794992514; l=4851;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794992514; l=8064;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=ZlSrbm9uKweZufnx0DfkXjICY9/CjSCeOVXamUQOyZc=;
- b=ReAza96r9Cke9uBx6R6+1wNrUWVoziWO9Wwmxph+Mx14p4QqDaKGreAvEG1FgCns0gO+VoAmv
- ++5NfKcABjRAimMLmqR4yz/050cM6CIeIfu13+m7kWaC8qUnjiBjcv2
+ bh=dgNNi/AxEfDMDs61yp/J0K1XFRfOSGAWZ5Uhm6hTxeY=;
+ b=fDJ7vsiK8SSl0kvhLZn+X1TsAEtgiXR6Mpsb3786YfVBCAJ2a/aG3HeOP+iPRzsYk988VJ28M
+ lcVSZ2Q7XHLBevRzFn0OPeWoK4IgaxX/lVHv8p75v83aKLpXnh4rCkW
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.111 (deferred)
-Received-SPF: pass client-ip=115.124.30.111;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.112 (deferred)
+Received-SPF: pass client-ip=115.124.30.112;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-111.freemail.mail.aliyun.com
+ helo=out30-112.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -88,145 +88,218 @@ X-Spam-Status: No, score=-31.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The Zl draft identifies long instructions from parcel A and determines
-their 48/64-bit length from parcel C.
+Preserve the existing aligned word fetch and halfword fetch sequence.
+When Zl is enabled, use parcels A and C to determine the instruction
+length and fetch parcel D only for 64-bit encodings.
 
-Read complete 48-bit and 64-bit encodings and return their decoded
-lengths. The disassembler does not yet decode instruction mnemonics for
-these encodings, so print "unknown" rather than decoding part of a long
-instruction as a 16-bit or 32-bit instruction. When opcode display is
-enabled, also print the full encoding in hexadecimal.
+Keep the complete encoding in ctx->opcode so gen_exception_illegal()
+can report it through env->bins.
+
+For an undefined length, stop after parcel C and set env->bins to zero.
+This implementation reports no instruction bits rather than fetching
+additional parcels solely for trap reporting.
+
+Stop translation near page ends before a subsequent instruction could
+require another page.
 
 Link: https://github.com/riscv/riscv-long-instruction/blob/65c377a665feb29a4848384ad566a9873c5fd423/src/unpriv/zl.adoc
 
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- disas/riscv.c              | 34 ++++++++++++++++++++++++++++------
- disas/riscv.h              |  4 ++--
- target/riscv/insn_length.h | 17 +++++++++++++++++
- 3 files changed, 47 insertions(+), 8 deletions(-)
+ target/riscv/internals.h     |  7 ++++
+ target/riscv/tcg/translate.c | 97 ++++++++++++++++++++++++++++++++------------
+ 2 files changed, 79 insertions(+), 25 deletions(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index 8c9e06b46f19efd6aa9f605ccd0bf3716fa62d44..d2a2b322374643dc51b3bc51775484da9a99e039 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -3489,17 +3489,21 @@ static GString *disasm_inst(rv_isa isa, uint64_t pc, rv_inst inst,
-     return format_inst(24, &dec, op);
+diff --git a/target/riscv/internals.h b/target/riscv/internals.h
+index 4e11888b03e0dcb050426892e1758d733273bf99..ddd5ca65adc99d9538c98f4ce28c3c723a967824 100644
+--- a/target/riscv/internals.h
++++ b/target/riscv/internals.h
+@@ -185,6 +185,13 @@ static inline float16 check_nanbox_bf16(CPURISCVState *env, uint64_t f)
+     }
  }
  
--#define INST_FMT_2 "%04x              "
--#define INST_FMT_4 "%08x          "
-+#define INST_FMT_2 "%04" PRIx64 "              "
-+#define INST_FMT_4 "%08" PRIx64 "          "
-+#define INST_FMT_6 "%012" PRIx64 "      "
-+#define INST_FMT_8 "%016" PRIx64 "  "
- 
- static int
- print_insn_riscv(bfd_vma memaddr, struct disassemble_info *info, rv_isa isa)
++/* Long encodings must already include parcel C. */
++static inline bool riscv_zl_insn_has_undefined_length(uint64_t opcode)
++{
++    return riscv_insn_is_long(opcode) &&
++           riscv_zl_insn_length(opcode >> 32) == 0;
++}
++
+ static inline target_ulong get_xepc_mask(CPURISCVState *env)
  {
-+    const RISCVCPUConfig *cfg = info->target_info;
-     bfd_byte packet[2];
-     rv_inst inst = 0;
-     size_t len = 2;
-     bfd_vma n;
-     int status;
-+    bool zl = cfg && cfg->ext_zl;
+     RISCVCPU *cpu = env_archcpu(env);
+diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
+index 51024ee9a37df548ec27587c9b4bb240afd1d5a5..b301c41d3341dce777422a9c70a407818d3407bd 100644
+--- a/target/riscv/tcg/translate.c
++++ b/target/riscv/tcg/translate.c
+@@ -30,6 +30,7 @@
+ #include "semihosting/semihost.h"
  
-     /* Instructions are made of 2-byte packets in little-endian order */
-     for (n = 0; n < len; n += 2) {
-@@ -3510,7 +3514,15 @@ print_insn_riscv(bfd_vma memaddr, struct disassemble_info *info, rv_isa isa)
-         }
-         inst |= ((rv_inst) bfd_getl16(packet)) << (8 * n);
-         if (n == 0) {
--            len = insn_len(inst);
-+            /* Zl needs parcel C to determine a long instruction's length. */
-+            len = zl && riscv_insn_is_long(inst) ? 6 : insn_len(inst);
-+        } else if (zl && n == 4) {
-+            len = riscv_zl_insn_length(inst >> 32);
-+        }
-+        if (len == 0) {
-+            (*info->fprintf_func)(info->stream,
-+                                  "<unsupported instruction length>");
-+            return -1;
-         }
+ #include "internals.h"
++#include "insn_length.h"
+ 
+ #define HELPER_H "helper.h"
+ #include "exec/helper-info.c.inc"
+@@ -64,7 +65,7 @@ typedef struct DisasContext {
+     RISCVMXL xl;
+     RISCVMXL address_xl;
+     uint32_t misa_ext;
+-    uint32_t opcode;
++    uint64_t opcode;
+     RISCVExtStatus mstatus_fs;
+     RISCVExtStatus mstatus_vs;
+     uint32_t mem_idx;
+@@ -265,7 +266,11 @@ static void generate_exception(DisasContext *ctx, RISCVException excp)
+ 
+ static void gen_exception_illegal(DisasContext *ctx)
+ {
+-    tcg_gen_st_i64(tcg_constant_i64(ctx->opcode), tcg_env,
++    uint64_t bits = ctx->cfg_ptr->ext_zl &&
++        riscv_zl_insn_has_undefined_length(ctx->opcode) ? 0 : ctx->opcode;
++
++    /* Undefined lengths have no complete instruction to report. */
++    tcg_gen_st_i64(tcg_constant_i64(bits), tcg_env,
+                    offsetof(CPURISCVState, bins));
+     if (ctx->virt_inst_excp) {
+         generate_exception(ctx, RISCV_EXCP_VIRT_INSTRUCTION_FAULT);
+@@ -1240,8 +1245,7 @@ static uint32_t opcode_at(DisasContextBase *dcbase, target_ulong pc)
+ /* Include decoders for factored-out extensions */
+ #include "decode-XVentanaCondOps.c.inc"
+ 
+-/* The specification allows for longer insns, but not supported by qemu. */
+-#define MAX_INSN_LEN  4
++#define MAX_INSN_LEN  8
+ 
+ const RISCVDecoder decoder_table[] = {
+     { always_true_p, decode_insn32 },
+@@ -1254,12 +1258,11 @@ const RISCVDecoder decoder_table[] = {
+ 
+ const size_t decoder_table_size = ARRAY_SIZE(decoder_table);
+ 
+-static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++static bool fetch_insn(CPURISCVState *env, DisasContext *ctx)
+ {
+-    uint32_t opcode;
++    uint64_t opcode;
+     bool pc_is_4byte_align = ((ctx->base.pc_next % 4) == 0);
+ 
+-    ctx->virt_inst_excp = false;
+     if (pc_is_4byte_align) {
+         /*
+          * Load 4 bytes at once to make instruction fetch atomically.
+@@ -1276,42 +1279,82 @@ static void decode_opc(CPURISCVState *env, DisasContext *ctx)
+          * For unaligned pc, instruction preload may trigger additional
+          * page fault so we only load 2 bytes here.
+          */
+-        opcode = (uint32_t) translator_lduw_end(env, &ctx->base,
+-                                                ctx->base.pc_next,
+-                                                MO_LE);
++        opcode = translator_lduw_end(env, &ctx->base, ctx->base.pc_next, MO_LE);
      }
+-    ctx->ol = ctx->xl;
  
-@@ -3522,14 +3534,24 @@ print_insn_riscv(bfd_vma memaddr, struct disassemble_info *info, rv_isa isa)
-         case 4:
-             (*info->fprintf_func)(info->stream, INST_FMT_4, inst);
-             break;
-+        case 6:
-+            (*info->fprintf_func)(info->stream, INST_FMT_6, inst);
-+            break;
-+        case 8:
-+            (*info->fprintf_func)(info->stream, INST_FMT_8, inst);
-+            break;
-         default:
-             g_assert_not_reached();
-         }
-     }
- 
--    g_autoptr(GString) str =
--        disasm_inst(isa, memaddr, inst,
--                    (const RISCVCPUConfig *)info->target_info);
-+    /* Long instruction mnemonics are not decoded yet. */
-+    if (len > 4) {
-+        (*info->fprintf_func)(info->stream, "unknown");
-+        return len;
+     ctx->cur_insn_len = insn_len((uint16_t)opcode);
+     /* Check for compressed insn */
+     if (ctx->cur_insn_len == 2) {
+         ctx->opcode = (uint16_t)opcode;
++        return true;
 +    }
 +
-+    g_autoptr(GString) str = disasm_inst(isa, memaddr, inst, cfg);
-     (*info->fprintf_func)(info->stream, "%s", str->str);
++    if (!pc_is_4byte_align) {
++        /* Load last 2 bytes of instruction here */
++        opcode = deposit64(opcode, 16, 16,
++                           translator_lduw_end(env, &ctx->base,
++                                               ctx->base.pc_next + 2, MO_LE));
++    }
++    ctx->opcode = opcode;
++
++    if (ctx->cfg_ptr->ext_zl && riscv_insn_is_long(opcode)) {
++        uint16_t third_parcel =
++            translator_lduw_end(env, &ctx->base, ctx->base.pc_next + 4, MO_LE);
++        unsigned len = riscv_zl_insn_length(third_parcel);
++
++        ctx->opcode = deposit64(ctx->opcode, 32, 16, third_parcel);
++        if (len == 8) {
++            uint16_t fourth_parcel =
++                translator_lduw_end(env, &ctx->base, ctx->base.pc_next + 6,
++                                    MO_LE);
++
++            ctx->opcode = deposit64(ctx->opcode, 48, 16, fourth_parcel);
++        }
++        /* An undefined length stops fetching after three parcels. */
++        ctx->cur_insn_len = len ? len : 6;
++        return len != 0;
++    }
++    return true;
++}
++
++static void decode_opc(CPURISCVState *env, DisasContext *ctx)
++{
++    bool valid_length;
++
++    ctx->virt_inst_excp = false;
++    ctx->ol = ctx->xl;
++    valid_length = fetch_insn(env, ctx);
++    if (!valid_length) {
++        goto illegal;
++    }
++
++    switch (ctx->cur_insn_len) {
++    case 2:
+         /*
+          * The Zca extension is added as way to refer to instructions in the C
+-         * extension that do not include the floating-point loads and stores
++         * extension that do not include the floating-point loads and stores.
+          */
+         if ((has_ext(ctx, RVC) || ctx->cfg_ptr->ext_zca) &&
+-            decode_insn16(ctx, opcode)) {
++            decode_insn16(ctx, (uint16_t)ctx->opcode)) {
+             return;
+         }
+-    } else {
+-        if (!pc_is_4byte_align) {
+-            /* Load last 2 bytes of instruction here */
+-            opcode = deposit32(opcode, 16, 16,
+-                               translator_lduw_end(env, &ctx->base,
+-                                                   ctx->base.pc_next + 2,
+-                                                   MO_LE));
+-        }
+-        ctx->opcode = opcode;
+-
++        break;
++    case 4:
+         for (guint i = 0; i < ctx->decoders->len; ++i) {
+             riscv_cpu_decode_fn func = g_ptr_array_index(ctx->decoders, i);
+-            if (func(ctx, opcode)) {
++            if (func(ctx, (uint32_t)ctx->opcode)) {
+                 return;
+             }
+         }
++        break;
++    case 6:
++    case 8:
++        break;
++    default:
++        g_assert_not_reached();
+     }
  
-     return len;
-diff --git a/disas/riscv.h b/disas/riscv.h
-index 4f1ffc4ae02fb1e5940e833ef972f80e28603a19..b49bcadab8e4fa1f32f28e1d5ed9035c5b55a359 100644
---- a/disas/riscv.h
-+++ b/disas/riscv.h
-@@ -11,7 +11,7 @@
- 
- /* types */
- 
--typedef uint32_t rv_inst;
-+typedef uint64_t rv_inst;
- typedef uint16_t rv_opcode;
- 
- /* enums */
-@@ -184,7 +184,7 @@ struct rv_opcode_data {
- typedef struct {
-     const RISCVCPUConfig *cfg;
-     uint64_t  pc;
--    uint64_t  inst;
-+    rv_inst   inst;
-     int32_t   imm;
-     int32_t   imm1;
-     uint8_t   rd;
-diff --git a/target/riscv/insn_length.h b/target/riscv/insn_length.h
-index bfb3af0e6358249daf464fed670f09d7184d307b..14bf5c7fa98a388705e023ff7d0d0840d1306c63 100644
---- a/target/riscv/insn_length.h
-+++ b/target/riscv/insn_length.h
-@@ -9,4 +9,21 @@ static inline int insn_len(uint16_t first_word)
-     return (first_word & 3) == 3 ? 4 : 2;
++illegal:
+     gen_exception_illegal(ctx);
  }
  
-+static inline bool riscv_insn_is_long(uint16_t first_parcel)
-+{
-+    return (first_parcel & 0x1f) == 0x1f;
-+}
-+
-+/* Call only after fetching parcel C; zero means an undefined length. */
-+static inline unsigned riscv_zl_insn_length(uint16_t third_parcel)
-+{
-+    if ((third_parcel & 3) != 3) {
-+        return 6;
-+    }
-+    if ((third_parcel & 0x1f) != 0x1f) {
-+        return 8;
-+    }
-+    return 0;
-+}
-+
- #endif
+@@ -1419,7 +1462,11 @@ static void riscv_tr_translate_insn(DisasContextBase *dcbase, CPUState *cpu)
+         } else {
+             unsigned page_ofs = ctx->base.pc_next & ~TARGET_PAGE_MASK;
+ 
+-            if (page_ofs > TARGET_PAGE_SIZE - MAX_INSN_LEN) {
++            if (ctx->cfg_ptr->ext_zl) {
++                if (page_ofs > TARGET_PAGE_SIZE - MAX_INSN_LEN) {
++                    ctx->base.is_jmp = DISAS_TOO_MANY;
++                }
++            } else if (page_ofs > TARGET_PAGE_SIZE - 4) {
+                 uint16_t next_insn =
+                     translator_lduw_end(env, &ctx->base, ctx->base.pc_next,
+                                         MO_LE);
 
 -- 
 2.43.0
