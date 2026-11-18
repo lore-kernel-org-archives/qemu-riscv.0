@@ -1,43 +1,44 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9DAC606A31C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Nov 2026 09:04:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56238606A31C
+	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Nov 2026 09:04:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=l09gUee8
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=Ytt3H9Bm
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTbYs-0008J8-Hj; Wed, 18 Nov 2026 04:02:38 -0500
+	id 1xTbYs-0008J6-3u; Wed, 18 Nov 2026 04:02:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xTbYh-0008G3-P8; Wed, 18 Nov 2026 04:02:27 -0500
-Received: from [115.124.30.113] (helo=out30-113.freemail.mail.aliyun.com)
+ id 1xTbYg-0008Fz-9r; Wed, 18 Nov 2026 04:02:27 -0500
+Received: from [115.124.30.112] (helo=out30-112.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xTbYc-000426-Kn; Wed, 18 Nov 2026 04:02:26 -0500
+ id 1xTbYc-00042L-54; Wed, 18 Nov 2026 04:02:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1794992516; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=5L+7KYs5PRs6ZkFpBvhPkCxAHoPX7eUs+/JRgq5BAgg=;
- b=l09gUee8yaEZRkd+5aWhvTixpwGWF6I8KPfRNA4y5eGQ98u3ZoyHW/f8yZ0v0+2wjC+B1Eo2fGuCSl1DLEXxUGdd8Sdgly/XffP39LTBBF9AulRR+BvB8p1aIgdOgxQ2sEzyUVaa/oiM6vTQU8eMiBrjgSy6D2mZ937sgXmdS5A=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R311e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
+ t=1794992519; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
+ bh=TCgHYFytt97lFj80Wh+mfBZNQ2KuAfwkkRoDCBWdI14=;
+ b=Ytt3H9BmQFY/qclUOWfK13atdfnq9Ou4XgiXN8Q1sCjW+l7fdGRefTPnlMqYxZXXH1ZrTEY7Zll2AtNu1GNkkYOASiHDDItEoXiPL4I+pmUaEziHod7+inJPBaZMYx8bMlO8gQWtBNsPm86XhYNmeMpQensTpZw5/je2uskBPWs=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
  MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=9; SR=0;
- TI=SMTPD_---0XF0GqhE_1794992515; 
+ TI=SMTPD_---0XF0Gqi4_1794992517; 
 Received: from
  riscv-project-v011122129236.ea134.tbsite.net(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XF0GqhE_1794992515 cluster:ay36) by smtp.aliyun-inc.com;
- Wed, 18 Nov 2026 17:01:55 +0800
+ fp:SMTPD_---0XF0Gqi4_1794992517 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 18 Nov 2026 17:01:57 +0800
 From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Wed, 18 Nov 2026 17:01:28 +0800
-Subject: [PATCH RFC 1/8] disas/riscv: Reject incomplete instruction reads
+Date: Wed, 18 Nov 2026 17:01:32 +0800
+Subject: [PATCH RFC 5/8] target/riscv: Limit instruction bits to the trap
+ CSR width
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261118-zl-master-v1-1-129f85e0f887@linux.alibaba.com>
+Message-Id: <20261118-zl-master-v1-5-129f85e0f887@linux.alibaba.com>
 References: <20261118-zl-master-v1-0-129f85e0f887@linux.alibaba.com>
 In-Reply-To: <20261118-zl-master-v1-0-129f85e0f887@linux.alibaba.com>
 To: qemu-devel@nongnu.org
@@ -49,17 +50,17 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Chao Liu <chao.liu@processmission.com>, 
  TANG Tiancheng <lyndra@linux.alibaba.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1794992514; l=1474;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1794992514; l=1465;
  i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=8s05OktAEJZbeNItduUsHh1R/umCaTg8A4jSnWbz1iY=;
- b=fmSJozOpTdQ3ZLaZ0Dr8V88VMhqS/hakXhJYXFmeIhPamGuNX5s+JR62nTEoKXpcTANIC0UvX
- KsisNJbxXyRCdosznoxzOW7aAc9roIPW28xCxUK/PIwn+lx4mpp5BaI
+ bh=hBJOMecAa8MHoBIfvxIpSEskZAi1cdxXEFqTfqRWDgk=;
+ b=5fSfrO3ZwMaQU44G0RH0n76U9xG4u9ZtMGdzuacbkgZxetlSzVsI+5UxfGRw8u2sBPv8Xj5DW
+ PauBIsTB6n2BSJuphZVdqCPESpFpbCh5JQcqwnGLU5v0mWVX4b5RBo/
 X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
  pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.113 (deferred)
-Received-SPF: pass client-ip=115.124.30.113;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.112 (deferred)
+Received-SPF: pass client-ip=115.124.30.112;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-113.freemail.mail.aliyun.com
+ helo=out30-112.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -87,39 +88,40 @@ X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-If a later parcel read fails, print_insn_riscv() decodes the available
-bits with the missing bits left as zero. A truncated instruction can
-therefore be displayed as a complete, unrelated instruction.
-
-Report every failed required read at its actual address and return -1.
-If the first 2-byte read fails, return -1 instead of the error code from
-read_memory_func(). The disassembly loops would otherwise treat the
-positive error code as an instruction length.
+The instruction bits in env->bins can be wider than the destination trap
+CSR. Keep env->bins intact and limit the reported value to MXLEN for
+mtval or SXLEN for stval.
 
 Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
 ---
- disas/riscv.c | 8 ++------
- 1 file changed, 2 insertions(+), 6 deletions(-)
+ target/riscv/tcg/cpu_helper.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index ca0d6e90b37321e8c2b7ec07f3ae51f0797585cc..eb4851b4cd4b14a43cc6592bd5011c6df53ec219 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -3510,12 +3510,8 @@ print_insn_riscv(bfd_vma memaddr, struct disassemble_info *info, rv_isa isa)
-     for (n = 0; n < len; n += 2) {
-         status = (*info->read_memory_func)(memaddr + n, packet, 2, info);
-         if (status != 0) {
--            /* Don't fail just because we fell off the end.  */
--            if (n > 0) {
--                break;
--            }
--            (*info->memory_error_func)(status, memaddr, info);
--            return status;
-+            (*info->memory_error_func)(status, memaddr + n, info);
-+            return -1;
-         }
-         inst |= ((rv_inst) bfd_getl16(packet)) << (8 * n);
-         if (n == 0) {
+diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+index 58e98e975c29106f39074283a79038dbad255fae..568af11d24ccdfaf953a4d27d1a172847a547508 100644
+--- a/target/riscv/tcg/cpu_helper.c
++++ b/target/riscv/tcg/cpu_helper.c
+@@ -2260,7 +2260,7 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+             break;
+         case RISCV_EXCP_ILLEGAL_INST:
+         case RISCV_EXCP_VIRT_INSTRUCTION_FAULT:
+-            tval = env->bins;
++            tval = mxlen == 32 ? (uint32_t)env->bins : env->bins;
+             break;
+         case RISCV_EXCP_BREAKPOINT:
+             tval = env->badaddr;
+@@ -2377,6 +2377,11 @@ void riscv_cpu_do_interrupt(CPUState *cs)
+         sxlen = 16 << riscv_cpu_sxl(env);
+         env->scause = cause | ((target_ulong)async << (sxlen - 1));
+         env->sepc = env->pc;
++        if (!async && sxlen == 32 &&
++            (cause == RISCV_EXCP_ILLEGAL_INST ||
++             cause == RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) {
++            tval = (uint32_t)tval;
++        }
+         env->stval = tval;
+         env->htval = htval;
+         env->htinst = tinst;
 
 -- 
 2.43.0
