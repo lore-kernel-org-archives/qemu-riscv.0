@@ -1,69 +1,70 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4284260A2627
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 16:46:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95463606A324
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 16:47:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=YWpfHbnx
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UyvV4oC/
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xU5H0-0007Ap-Ib; Thu, 19 Nov 2026 11:46:10 -0500
+	id 1xU5H4-0007Cr-WE; Thu, 19 Nov 2026 11:46:15 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1xU5G9-0006vq-Uc
+ id 1xU5G7-0006vj-R3
  for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:21 -0500
-Received: from mail-pl1-x62b.google.com ([2607:f8b0:4864:20::62b])
+Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1xU5G8-00025s-6Q
- for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:17 -0500
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2efd824d492so12673725ad.1
- for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:45:15 -0800 (PST)
+ id 1xU5G5-00025M-31
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:15 -0500
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2f037bc348dso5237005ad.0
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:45:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795106714; x=1795711514; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1795106712; x=1795711512; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=jgpccN1w99HlO6vMNqB/j4EpMoZBvMpZ4Fxwcy0wrgs=;
- b=YWpfHbnxokyNsE18B+MND/MsPTmYkjLuxisZg05ueLrLv2NzePPNfgVrf3oDxQ6SBg
- Nzw7V+3i/2vi17h7bc4k2QJkWAUrDg9btq4GGYpe6mVtGYYaZm7KXBH2IkMGkPAeqfq/
- tSVlcdF1zXIdID5WAI6I6qA0vatzWgkBSDYL4bTvKUQO38OPCqrqvC9KZEuAOFCD7ccN
- LTSOTWmNJ0aLwoRD6cKIzhGBQramFolqtKjrpQEnGBCxs5fsHByMPEO1ZsZ5k+Z+aJih
- T7iDhis7p2JFqIe0G6QBoN4tR/f8tphoudOcWl/9XtmFHZ18OJXE4xOM+h7I+qDuOYzr
- 7ROA==
+ bh=3xraGdr2alF8MMz20FS//SLWAloaioYB+YrXGRPJ3wo=;
+ b=UyvV4oC/hq4zjYMwA7Ps2uaiOyqC2xQuN3iX7RTbLqUNbvd4wolWFQyRdK8mqAnLxF
+ JcQHnJVfGM/uAD0VNIPb+Y20Zy6RgjVZnjn1gZQH4x4QrvZrnPzUkSYsVc6LiOptRMIy
+ uFeEe4zDmthEI3ymS8wzwG3QrJK4Ghea8m3qbvF1p02/C7h9MXla4+TqW1Bh/DbMHCVY
+ Ws/Y2sEDAmDXxLyxBmfzWfs527x2xK4dfgBBN1ja7dozW07Kl/+iebdveBL9EvXIJSlR
+ mHsOvj9erXJj/XlQbmRMv76lZB/QuCr1fynCAfuiAxCEKBLLjE2HBBQJXKDHJPaU3+lI
+ COFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795106714; x=1795711514;
+ d=1e100.net; s=20260707; t=1795106712; x=1795711512;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=jgpccN1w99HlO6vMNqB/j4EpMoZBvMpZ4Fxwcy0wrgs=;
- b=ZUKciqPVofJ1rpc2GUh93qD5U3d68HWuuaO/yvKrYQa7Nn2et6H3yWvS0QzoErtm/K
- eu02Pvub0IO0lY0Y753uU41RK5rhyEBz5Jupsf7XMXOyNxPFPGmZ4rgxg68QT0J62MRY
- UMQa8LURlZYqP6uU+WNOYXEV8qb7k4Nhf7Qp+pcmtKNUVKH4SVFb9zlGKu64iHlzsmi9
- suuSbZ2TFJnKt7X7dm4SgnNLKX+iQnpllc10vRbYgnUbppcfNkeY9ZrVmQF2hCYHeYXD
- 5Wjl1FqWXm3p1diUT3X9g66OspfAqSmttoOqyxd7AhVAY60BU9Wsdv06oAFkQGeFjift
- PDRA==
-X-Gm-Message-State: APuU4Z+VQS4dPgWVQ1IrUR94g+fUcoBojrCrmQZI9B7m6UxnLT9mHuwl
- mV+0hdE7DCfrnobdcpnQp358D2K+5+ifImYReEv7WsZ+yefmRpd/4tw6
-X-Gm-Gg: AZFdTZfsc6VMCc8fokQKCkgdbBWxW9mIFMU1SgGZO8zfbdw9XSgFaBXnxsLxgQk20rq
- /JzVY7m0zgXPEFK7bEDRsoh6W/Ch035VbsaA1zPOXVh37AmEz1ZhMkxCykUV013i+2CK2lIlwcZ
- LvJuioHJ3LsniTXM18DcE4Pv+KkKjy+/tJ4kRwjai6Vzz0Plhfqtw1RF6HfwTpQz//XezGwYRef
- pl7fJpHNUkTxdPfA9+rGGqfBdh2yvB7oxp2gU42Z/aiulIHf35wAMruzT+pIfJm1hEeyqQotVYg
- mIPjjuc8THJTSOD1iE9OYxtx8VGatl4OxB8ZzsbJdwDZF9gLCHWJVm/gx43dHyYQipJozEn5CNC
- /4C5cGl2bwv0JSeblHwnWa/Oi6kQ+N7CG3cOoU8UYW5JtwmQgKH/0d2qQJhZKrkR0JjJ49HJwFy
- bYqghoZuqwWIjisw2RDckYJ0uZK3BFucaKWSPutQ02OzDp46Wwbw5g+RnrrdQZAMVwr5+aGcFoK
- YRHlmlNHgHUZENj7vXVbdK70AjNaU3tKQ1vOj+eei4JW6ZvM1/ZxkAX2cGhDmF6bTWpXfOD99qs
- hBr1oi4JSTIwfVLfL6n7E/3oahm/kmS5RS+n7gnF5c8U38rqHBFGsA==
-X-Received: by 2002:a17:903:4586:b0:2ef:e547:e0cd with SMTP id
- d9443c01a7336-2f03f1707d4mr4729285ad.31.1795106714293; 
- Thu, 19 Nov 2026 08:45:14 -0800 (PST)
+ bh=3xraGdr2alF8MMz20FS//SLWAloaioYB+YrXGRPJ3wo=;
+ b=XnWReVLK/B6YCyXRXNBLpWzAYpVtEpwot+SPJ3C42/R/7UhahqFMVl3KXYp/qxw0G5
+ rnjWv5mYpui9YDzwSqncmViMCFx/1TH2UxLeY8SuO3+AyGY+G/MQbqR5lGArsS4UPWRw
+ xgm1wAbnCXasR6Lpc+ZSY6Y74lcGVQDEOvAXV1Cr/9PerAME9trsUsVe6BmZZna5VyLH
+ 4snfeiLiO3mqx+o5x1wPDLaLmQaFV4UYuUE9GNeBr3IXBDIg2OWY/l0O80KsYU752IGu
+ carPNVWL34aRQb0yJTz8OlrEF7rQWE2gQW/nOk161ZoZ8giwp56mV2k+ybsy6bFy15m2
+ Yc8w==
+X-Gm-Message-State: APuU4Z/90DvWVGJZ4g+q4fUVkDj9aJxj8tBQEAcVyLqB9G8kq8BVtUTG
+ g81xt+gish8wCFI3XP+NhyKsATb/LQhpaw0QUOOCq2jJqtklR2XaZUsP57b6rg==
+X-Gm-Gg: AZFdTZefJmWh0oM0B8wY+Sod5I9o3XKirBM+H3cdHArE5lcWjTZoRVnGBpnLO2bmYIN
+ Mr5aun1pnLSDgiMqC/ZlqCxwHWRf0fy3KJmr9o1+P+PRqOWuLuuBfjn2ONphxYdka3srAGd+y+T
+ D2aYT89FbfGLQZKFguXIaJXfpdAL0Vnm3skmWhlmvtXaPWXlZABK1n1aJSd+Ea5tMz2TcTPULpS
+ pUksXylqQVdZB2gp1TGngGRERfDaXRV9tnbt+SOgTD9ZM2fJ/k6aYW1l4mQN7Uwu0u2Z6JQ37pF
+ /qTGvjFdrZdEkA0YXZKwudGPBn8GXTl8G1iJcq0IHWkxPgwltysESp1imtEkgUGqO+nHa9zHwgP
+ on7CiSNfi8ZwZujlMPl+Dp4WQ12/oICes/1zVReQEaU2dNIenLZ/Mfdl4XPm4vU7o1l3t5Y0Rqi
+ adHiDJfgw9AsirBeSIfz2zpFJahqRVAT14b5DA+l6vZzkZe5Z7EomukHM35EUrdCBIfJ3T0zSoC
+ pywA6DcIVqAR+x/6LTjo804ZjfmglUJ31IWix5ZQobM3qcABwiJdqGS3YURHaY2SM/hvkgo8Y0z
+ EoNbX1/TiVDSzQDFH5sZmwQQnZaGrZgvmX1yqzepNytVBtQBxzctPPAYbYF8wA5/R4yuQ72ysro
+ =
+X-Received: by 2002:a17:902:d50e:b0:2ef:e1a8:ef1e with SMTP id
+ d9443c01a7336-2f03efb01b8mr4820315ad.8.1795106711632; 
+ Thu, 19 Nov 2026 08:45:11 -0800 (PST)
 Received: from fedora ([61.74.238.173]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2f03f10e67csm2381365ad.53.2026.11.19.08.45.11
+ d9443c01a7336-2f03f10e67csm2381365ad.53.2026.11.19.08.45.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 08:45:13 -0800 (PST)
+ Thu, 19 Nov 2026 08:45:11 -0800 (PST)
 From: SeungJu Cheon <suunj1331@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -71,17 +72,17 @@ Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  Chao Liu <chao.liu@processmission.com>
-Subject: [PATCH 2/3] target/riscv: Rebuild cached TB flags at state changes
-Date: Fri, 20 Nov 2026 01:44:37 +0900
-Message-ID: <20261119164438.193579-3-suunj1331@gmail.com>
+Subject: [PATCH 1/3] target/riscv: Split out riscv_compute_tb_flags
+Date: Fri, 20 Nov 2026 01:44:36 +0900
+Message-ID: <20261119164438.193579-2-suunj1331@gmail.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20261119164438.193579-1-suunj1331@gmail.com>
 References: <20261119164438.193579-1-suunj1331@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62b;
- envelope-from=suunj1331@gmail.com; helo=mail-pl1-x62b.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
+ envelope-from=suunj1331@gmail.com; helo=mail-pl1-x62d.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -109,191 +110,186 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add tb_flags_cached, ext_tb_flags_cached and vlmax_cached to
-CPURISCVState and riscv_rebuild_tb_flags() to fill them. Call it
-where the inputs of riscv_compute_tb_flags() change: CSR writes,
-riscv_cpu_set_mode() (trap entry, xRET and debug mode exit), vsetvl
-and vtype invalidation, itrigger updates, reset and migration
-post-load.
+Move the computation of TB flags derived from state that changes on
+CSR writes, traps, privilege changes and vsetvl into
+riscv_compute_tb_flags(). Continue to read FS/VS, elp, vstart and vl
+in riscv_get_tb_cpu_state(), since they can change between lookups.
 
-riscv_get_tb_cpu_state() does not use the cached values yet.
+The lookup calls the new helper directly, preserving the TB flag
+values. The helper returns UINT32_MAX when maxsz is below the 8-byte
+gvec minimum, so the vl comparison leaves VL_EQ_VLMAX clear in the
+same cases as the previous maxsz >= 8 check.
 
 Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
 ---
- target/riscv/cpu.c               |  1 +
- target/riscv/cpu.h               | 19 +++++++++++++++++++
- target/riscv/machine.c           |  1 +
- target/riscv/tcg/cpu_helper.c    |  1 +
- target/riscv/tcg/csr.c           |  8 +++++++-
- target/riscv/tcg/debug.c         |  2 ++
- target/riscv/tcg/tcg-cpu.c       |  7 +++++++
- target/riscv/tcg/vector_helper.c |  2 ++
- 8 files changed, 40 insertions(+), 1 deletion(-)
+ target/riscv/tcg/tcg-cpu.c | 101 +++++++++++++++++++++++++------------
+ 1 file changed, 69 insertions(+), 32 deletions(-)
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 15c27f4ce4..aff6f373d3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -1122,6 +1122,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-         kvm_riscv_reset_vcpu(cpu);
-     }
- #endif
-+    riscv_rebuild_tb_flags(env);
- }
- 
- static void riscv_cpu_disas_set_info(const CPUState *s, disassemble_info *info)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 49a1186bdb..517f6081d8 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -262,6 +262,20 @@ struct CPUArchState {
-     uint8_t vxsat;
-     bool vill;
- 
-+    /*
-+     * TB flags that depend only on state changed by CSR writes, traps,
-+     * privilege changes and vsetvl; rebuilt by riscv_rebuild_tb_flags() at
-+     * those points.  Bits that translated code changes directly between
-+     * two lookups (FS/VS dirtying, elp, vstart, vl) are added on each
-+     * lookup.  vlmax_cached is VLMAX for the current vtype when the
-+     * VL_EQ_VLMAX fast path is allowed, else UINT32_MAX; vl is compared
-+     * against it per lookup because fault-only-first loads shrink vl
-+     * without a trap.
-+     */
-+    uint64_t ext_tb_flags_cached;
-+    uint32_t tb_flags_cached;
-+    uint32_t vlmax_cached;
-+
-     uint64_t pc;
-     uint64_t load_res;
-     uint64_t load_val;
-@@ -967,6 +981,11 @@ static inline uint32_t vext_get_vlmax(uint32_t vlenb, uint32_t vsew,
- bool riscv_cpu_is_32bit(RISCVCPU *cpu);
- 
- bool riscv_cpu_virt_mem_enabled(CPURISCVState *env, bool is_vm_ldst);
-+#ifdef CONFIG_TCG
-+void riscv_rebuild_tb_flags(CPURISCVState *env);
-+#else
-+static inline void riscv_rebuild_tb_flags(CPURISCVState *env) { }
-+#endif
- RISCVPmPmm riscv_pm_get_pmm(CPURISCVState *env);
- RISCVPmPmm riscv_pm_get_vm_ldst_pmm(CPURISCVState *env);
- uint32_t riscv_pm_get_pmlen(RISCVPmPmm pmm);
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 0de06e9588..f0aad72706 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -388,6 +388,7 @@ static int riscv_cpu_post_load(void *opaque, int version_id)
-     CPURISCVState *env = &cpu->env;
- 
-     env->xl = cpu_recompute_xl(env);
-+    riscv_rebuild_tb_flags(env);
-     return 0;
- }
- 
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 58e98e975c..70c889aaa5 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -982,6 +982,7 @@ void riscv_cpu_set_mode(CPURISCVState *env, privilege_mode_t newpriv,
-             riscv_cpu_interrupt(env);
-         }
-     }
-+    riscv_rebuild_tb_flags(env);
- }
- 
- /*
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index af444e3e6f..3dbfe2dc80 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -5909,7 +5909,11 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
- 
-     /* execute combined read/write operation if it exists */
-     if (csr_ops[csrno].op) {
--        return csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
-+        ret = csr_ops[csrno].op(env, csrno, ret_value, new_value, write_mask);
-+        if (ret == RISCV_EXCP_NONE && write_mask) {
-+            riscv_rebuild_tb_flags(env);
-+        }
-+        return ret;
-     }
- 
-     /*
-@@ -5937,6 +5941,7 @@ static RISCVException riscv_csrrw_do64(CPURISCVState *env, int csrno,
-                 return ret;
-             }
-         }
-+        riscv_rebuild_tb_flags(env);
-     }
- 
-     /* return old value */
-@@ -6015,6 +6020,7 @@ static RISCVException riscv_csrrw_do128(CPURISCVState *env, int csrno,
-                 return ret;
-             }
-         }
-+        riscv_rebuild_tb_flags(env);
-     }
- 
-     /* return old value */
-diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
-index 988bc815d7..e834f80ce2 100644
---- a/target/riscv/tcg/debug.c
-+++ b/target/riscv/tcg/debug.c
-@@ -822,6 +822,7 @@ void HELPER(itrigger_match)(CPURISCVState *env)
-             itrigger_set_pending(env, i, 1);
- 
-             env->itrigger_enabled = riscv_itrigger_enabled(env);
-+            riscv_rebuild_tb_flags(env);
-             do_trigger_action(env, i);
-             itrigger_set_pending(env, i, 0);
-         }
-@@ -922,6 +923,7 @@ static void itrigger_reg_write(CPURISCVState *env, target_ulong index,
-                           env->last_icount + itrigger_get_count(env, index));
-             } else {
-                 env->itrigger_enabled = riscv_itrigger_enabled(env);
-+                riscv_rebuild_tb_flags(env);
-             }
-         }
-         break;
 diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 5c5d8fcb94..a8e744bc26 100644
+index 5834ec1524..5c5d8fcb94 100644
 --- a/target/riscv/tcg/tcg-cpu.c
 +++ b/target/riscv/tcg/tcg-cpu.c
-@@ -183,6 +183,13 @@ static void riscv_compute_tb_flags(CPURISCVState *env, uint32_t *pflags,
-     *pvlmax = vlmax_cached;
+@@ -99,13 +99,20 @@ static int riscv_cpu_mmu_index(CPUState *cs, bool ifetch)
+     return riscv_env_mmu_index(cpu_env(cs), ifetch);
  }
  
-+void riscv_rebuild_tb_flags(CPURISCVState *env)
-+{
-+    riscv_compute_tb_flags(env, &env->tb_flags_cached,
-+                           &env->ext_tb_flags_cached,
-+                           &env->vlmax_cached);
+-static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
++/*
++ * Compute the TB flags that depend only on state changed through CSR
++ * writes, traps, privilege changes and vsetvl.  For now the result is
++ * fed straight back to riscv_get_tb_cpu_state(), which adds the bits
++ * that translated code changes between two lookups -- FS/VS dirtying,
++ * elp, vstart, and vl, which fault-only-first loads shrink.
++ */
++static void riscv_compute_tb_flags(CPURISCVState *env, uint32_t *pflags,
++                                   uint64_t *pext_flags, uint32_t *pvlmax)
+ {
+-    CPURISCVState *env = cpu_env(cs);
+     RISCVCPU *cpu = env_archcpu(env);
+-    RISCVExtStatus fs, vs;
+     uint32_t flags = 0;
+     uint64_t ext_flags = 0;
++    uint32_t vlmax_cached = UINT32_MAX;
+     bool pm_signext = riscv_cpu_virt_mem_enabled(env, false);
+ 
+     if (cpu->cfg.ext_zve32x) {
+@@ -124,49 +131,93 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
+         uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
+         uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
+         uint32_t maxsz = vlmax << vsew;
+-        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
+-                           (maxsz >= 8);
++
++        /* vl is compared per lookup: fault-only-first loads shrink it. */
++        vlmax_cached = maxsz >= 8 ? vlmax : UINT32_MAX;
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
+         flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
+         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
+                            FIELD_EX64(env->vtype, VTYPE, VLMUL));
+-        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
+         flags = FIELD_DP32(flags, TB_FLAGS, VTA,
+                            FIELD_EX64(env->vtype, VTYPE, VTA));
+         flags = FIELD_DP32(flags, TB_FLAGS, VMA,
+                            FIELD_EX64(env->vtype, VTYPE, VMA));
+-        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
+         ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, ALTFMT, altfmt);
+     } else {
+         flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
+     }
+ 
+     if (cpu_get_fcfien(env)) {
++        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
++    }
++
++    if (cpu_get_bcfien(env)) {
++        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
++    }
++
++#ifndef CONFIG_USER_ONLY
++    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
++    flags |= riscv_env_mmu_index(env, 0);
++
++    if (env->virt_enabled) {
++        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
++    }
++
++    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
++        && !icount_enabled()) {
++        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
++    }
++#endif
++
++    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
++    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
++    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
++    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
++
++    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, MISA_EXT, env->misa_ext);
++    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, BIG_ENDIAN,
++                           mo_endian_env(env) == MO_BE);
++
++    *pflags = flags;
++    *pext_flags = ext_flags;
++    *pvlmax = vlmax_cached;
 +}
 +
- static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
- {
-     CPURISCVState *env = cpu_env(cs);
-diff --git a/target/riscv/tcg/vector_helper.c b/target/riscv/tcg/vector_helper.c
-index 917a48b510..f1898c52ff 100644
---- a/target/riscv/tcg/vector_helper.c
-+++ b/target/riscv/tcg/vector_helper.c
-@@ -56,6 +56,7 @@ static inline void reset_ill_vtype(CPURISCVState *env)
-     env->vtype = 0;
-     env->vl = 0;
-     env->vstart = 0;
-+    riscv_rebuild_tb_flags(env);
- }
++static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
++{
++    CPURISCVState *env = cpu_env(cs);
++    RISCVCPU *cpu = env_archcpu(env);
++    RISCVExtStatus fs, vs;
++    uint32_t flags, vlmax;
++    uint64_t ext_flags;
++
++    riscv_compute_tb_flags(env, &flags, &ext_flags, &vlmax);
++
++    if (cpu->cfg.ext_zve32x) {
++        bool vstart_eq_zero = env->vstart == 0;
++
++        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX,
++                           vstart_eq_zero && env->vl == vlmax);
++        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, vstart_eq_zero);
++    }
++
++    if (FIELD_EX32(flags, TB_FLAGS, FCFI_ENABLED)) {
+         /*
+          * For Forward CFI, only the expectation of a lpad at
+          * the start of the block is tracked via env->elp. env->elp
+          * is turned on during jalr translation.
+          */
+         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_LP_EXPECTED, env->elp);
+-        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
+-    }
+-
+-    if (cpu_get_bcfien(env)) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
+     }
  
- target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-@@ -125,6 +126,7 @@ target_ulong HELPER(vsetvl)(CPURISCVState *env, target_ulong s1,
-     env->vtype = s2;
-     env->vstart = 0;
-     env->vill = 0;
-+    riscv_rebuild_tb_flags(env);
-     return vl;
- }
+ #ifdef CONFIG_USER_ONLY
+     fs = EXT_STATUS_DIRTY;
+     vs = EXT_STATUS_DIRTY;
+ #else
+-    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
+-
+-    flags |= riscv_env_mmu_index(env, 0);
+     fs = get_field(env->mstatus, MSTATUS_FS);
+     vs = get_field(env->mstatus, MSTATUS_VS);
  
+     if (env->virt_enabled) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
+         /*
+          * Merge DISABLED and !DIRTY states using MIN.
+          * We will set both fields when dirtying.
+@@ -181,27 +232,13 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
+              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
+     }
+ 
+-    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
+-        && !icount_enabled()) {
+-        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
++    if (cpu->cfg.ext_sdext && !env->debug_mode && (env->dcsr & DCSR_STEP)) {
++        ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, SDEXT_STEP, 1);
+     }
+ #endif
+ 
+     flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
+     flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
+-    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
+-    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
+-    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
+-    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
+-
+-    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, MISA_EXT, env->misa_ext);
+-    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, BIG_ENDIAN,
+-                           mo_endian_env(env) == MO_BE);
+-#ifndef CONFIG_USER_ONLY
+-    if (cpu->cfg.ext_sdext && !env->debug_mode && (env->dcsr & DCSR_STEP)) {
+-        ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, SDEXT_STEP, 1);
+-    }
+-#endif
+ 
+     return (TCGTBCPUState){
+         .pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc,
 -- 
 2.52.0
 
