@@ -1,103 +1,64 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72C1460A2603
-	for <qemu-riscv@archiver.kernel.org>; Wed, 18 Nov 2026 20:28:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=IXQ3qoFR
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB6E7606A320
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 02:44:00 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTmG6-0002Cz-Bs; Wed, 18 Nov 2026 15:27:59 -0500
+	id 1xTs7S-0000rY-KO; Wed, 18 Nov 2026 21:43:26 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xTmG0-0002CN-4u
- for qemu-riscv@nongnu.org; Wed, 18 Nov 2026 15:27:52 -0500
-Received: from mail-pg1-x529.google.com ([2607:f8b0:4864:20::529])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <richard.henderson@linaro.org>)
- id 1xTmFy-00054l-0u
- for qemu-riscv@nongnu.org; Wed, 18 Nov 2026 15:27:51 -0500
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-cdab9e9761cso1024762a12.2
- for <qemu-riscv@nongnu.org>; Wed, 18 Nov 2026 12:27:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795033668; x=1795638468; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=h2BvSNqkQhc6pqjJhFZlFetTwttDIB1qQuDIgEzss0I=;
- b=IXQ3qoFR/k33X/X5JoJfgPkXbZBz3u/dWSwNqhQQz9n8gmWapt+GtccNDjPE+GsRLo
- GRF2/7hTsTGuAh8hVMn8C58LNhJMDclNkngXp+p6XL26L1R2JukxKAKxbROCZrHYUMk7
- uNVTn0vhz8NxxuaPkXpkjX8fG/HDLJsly/Jf6IhTZyoibdg5obwCw/NTMgV9Xzh5+LiH
- syA9fnQvCsFPS1hq5v30WOfYGjMDykAPQ/Vr8c5d+EPKAV1SYLPxCvSEHCoDfyartGhf
- 3mdS0T+dWvuUewldbaCxbbWmvxrpaxyjtMsm51/JPPLd4DKYE+FwVHCQH5rg7yc+oGGo
- biIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795033668; x=1795638468;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=h2BvSNqkQhc6pqjJhFZlFetTwttDIB1qQuDIgEzss0I=;
- b=i/2zcDQk2Qu9khZ29dAxCvSfowkppjcpoCV091tKcXybdmFQdlLJwEvNWymQbnyXP1
- bMx0U9xDK4qdAN5I/QH2Ycnky9nW+yRSVJ1w0kQ4MglqGJOaQDBubmkR5p7DsSsn48CI
- yOfERxcJj8d3A7wG0X/7qesAZSp6MOekQQskSgYp/Kr45hAhNi35Fw79qnFNYdC5Uuif
- q2awOtj6DwTVQKqgEJSu6NZ76WjGibsQ6GEm/WsVU+l2BLEP6R+0QtxERU/HEGah2r6x
- c20B54kJCXcjFv/qjabnDoCa0z4/hKn91pi2EKZf74//fy9QxB4jgqRk9oNSZ93vXtBh
- f1iA==
-X-Forwarded-Encrypted: i=1;
- AL+hErGDshWILXkFA5zqi6/+5vRu8ytVHSVV3ecz/cr9boMpFo80VEl5OAASwAVKmqfH8yzHBt9P8WZSI5m+@nongnu.org
-X-Gm-Message-State: APuU4Z8jZ3KdKkQvTKtE1GoGtphmijI/0CwjpCUxAO8143AHpe3sdhTf
- RlXSdHMqqTfYty2APJrbDag1Td+4N5O91jJggFBGug+cHCC0qa9+Fe5FVb3ggR/2IE8=
-X-Gm-Gg: AZFdTZedUsdEdDUL/6sfru2vzmBF4TORrNMK49cUJROnG2S5xoF/4hn3pbY/G7nIvJj
- ef1pjR+2CE9sm8WSw495FyIB7Lw9imu+x8VVdD02j+aYDHZb0d8HHLtYcwbILSd+A+Zs8rQi3P2
- Gxz/8D4fVpFF0eiGeEoebC+zEOxIhFp7b7ZvcDB1HyfH54jMSv/UVuKFCAoChb02/6F/kNk5SwX
- Y85C+kO/rDDUaQI39qcrQmq6d+vyoTdOUQ6gUmJMbClEcvYMCdmw9BthC3XL5Fet4qQwd7qr43x
- W0aLhfq+AI9Ao2Z+37/I85offoZ1f2mFg5EGwZPI1LXmN2/kA3OTnShhucyUudw+o4BG65mtbD7
- 5GrOk8aMioPz5HX+RTh390DqrvNEE98ROmm01EX6tb9eBguscnpnM8eGC4oNxf1FJ+5P9tcx6a9
- zalbri+smMB6A/234gahZtrD0taCaaSixHKpPULHOj6S/LhjObS323erfqOXX/pNUszN2NYg3rb
- HHahgVoGRW0FSuKGxIPPtUWxaLk5jIu+70tBHageDF0PgpPGEMg+AEdpqNeF12MsPUaKO5x52o4
- YJ5LI5nHwgzkDTsimk+67xS/YSJkO0zPeror5t8/f2ETXw4Nw1ojgX9uM3vcKIIr3eZi721O2u2
- kcQAn83IxnKoByfi/
-X-Received: by 2002:a17:90b:240f:b0:3b3:fd13:6846 with SMTP id
- 98e67ed59e1d1-3b3fd137820mr62a91.11.1795033668258; 
- Wed, 18 Nov 2026 12:27:48 -0800 (PST)
-Received: from [192.168.0.4] (174-21-68-150.tukw.qwest.net. [174.21.68.150])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b3f708ae2csm785605a91.15.2026.11.18.12.27.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Nov 2026 12:27:47 -0800 (PST)
-Message-ID: <1224bde0-91d8-4efe-8be4-bcd83afc450e@linaro.org>
-Date: Wed, 18 Nov 2026 12:27:46 -0800
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xTs7O-0000pZ-IE; Wed, 18 Nov 2026 21:43:22 -0500
+Received: from smtp21.cstnet.cn ([159.226.251.21] helo=cstnet.cn)
+ by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.90_1) (envelope-from <tanchi25@mails.ucas.ac.cn>)
+ id 1xTs7K-0005eZ-QJ; Wed, 18 Nov 2026 21:43:22 -0500
+Received: from k3-03 (unknown [159.226.43.8])
+ by APP-01 (Coremail) with SMTP id qwCowAD3Hfg8Yv5qZFtAAQ--.232S5;
+ Thu, 19 Nov 2026 10:43:12 +0800 (CST)
+From: Tan Chi <tanchi25@mails.ucas.ac.cn>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
+ liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu.zevorn@gmail.com,
+ Tan Chi <tanchi25@mails.ucas.ac.cn>
+Subject: [PATCH 3/3] hw/riscv: iommu-sys: Add migration support
+Date: Thu, 19 Nov 2026 10:42:50 +0800
+Message-ID: <20261119024251.280765-4-tanchi25@mails.ucas.ac.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261119024251.280765-1-tanchi25@mails.ucas.ac.cn>
+References: <20261119024251.280765-1-tanchi25@mails.ucas.ac.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC] tcg: Support maxsz=4 in GVEC descriptors
-To: WX Chen <wxchen0913@gmail.com>, qemu-devel@nongnu.org
-Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
- <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
- Tao Tang <tangtao1634@phytium.com.cn>
-References: <20261118-bug-issue-rvv-vlen32-gvec-v1-1-c15cf05de6bc@gmail.com>
-From: Richard Henderson <richard.henderson@linaro.org>
-Content-Language: en-US
-In-Reply-To: <20261118-bug-issue-rvv-vlen32-gvec-v1-1-c15cf05de6bc@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::529;
- envelope-from=richard.henderson@linaro.org; helo=mail-pg1-x529.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: qwCowAD3Hfg8Yv5qZFtAAQ--.232S5
+X-Coremail-Antispam: 1UD129KBjvJXoW7WFW5Wry8Gw1fXw4fArW8JFb_yoW8tFWrpF
+ s5urWayr1DGr1xAFnIvw1UCF48J3Z7Ww15Z393ua97uF4UtrWDJFs5Kay5ArWkGFZ7Ca4r
+ Cr1rGr98Ar4Yvr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUUmG14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+ x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+ Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+ 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVWxJr0_GcWl
+ nxkEFVAIw20F6cxK64vIFxWle2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4
+ CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvj
+ eVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I
+ 1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r4UMxAIw28IcxkI7VAKI48JMxC20s02
+ 6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
+ I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
+ 6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj4
+ 0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8
+ JrUvcSsGvfC2KfnxnUUI43ZEXa7VUbkhLUUUUUU==
+X-CM-SenderInfo: pwdquxrlsvqzpdlo2hpxfd2hldfou0/
+Received-SPF: pass client-ip=159.226.251.21;
+ envelope-from=tanchi25@mails.ucas.ac.cn; helo=cstnet.cn
+X-Spam_score_int: -41
+X-Spam_score: -4.2
+X-Spam_bar: ----
+X-Spam_report: (-4.2 / 5.0 requ) BAYES_00=-1.9, RCVD_IN_DNSWL_MED=-2.3,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -109,39 +70,72 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 11/17/26 23:09, WX Chen wrote:
-> This patch adds support for oprsz = maxsz = 4 in GVEC descriptors.
-> 
-> The MAXSZ field currently encodes and decodes sizes as follows:
-> 
->      encoded_maxsz = maxsz / 8 - 1
->      maxsz = (encoded_maxsz + 1) * 8
-> 
-> Field value 2 would represent 24 bytes. However, maxsz values of
-> 16 bytes or more must be multiples of 16, so this field value is
-> unused by valid descriptors.
-> 
-> In this patch, we reuse MAXSZ field value 2 to represent 4 bytes.
-> As for oprsz, OPRSZ field value 2 already means "use MAXSZ", allowing
-> oprsz to follow maxsz without changing the OPRSZ decoding logic.
-> 
-> All existing valid descriptor encodings are preserved. The size
-> and alignment requirements for generic GVEC operation expansion
-> remain unchanged.
+Add VMState support for the system-bus RISC-V IOMMU device.
 
-The obvious follow-up question is: what are you going to do with it?
-Is this intended only for use within riscv tcg helper functions?
+Preserve the MSI-X configuration table and pending bit array,
+which are maintained in separate buffers by the system-bus
+wrapper. The common IOMMU registers and internal state are
+migrated independently by the embedded IOMMU device.
 
-At minimum you need to adjust assertions elsewhere in tcg/ which 
-currently rely on the assertions that you're removing/moving.
+Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
+---
+ hw/riscv/riscv-iommu-sys.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
+diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+index 258c171efd..6e4cea00a5 100644
+--- a/hw/riscv/riscv-iommu-sys.c
++++ b/hw/riscv/riscv-iommu-sys.c
+@@ -21,6 +21,7 @@
+ #include "hw/pci/pci_bus.h"
+ #include "hw/core/qdev-properties.h"
+ #include "hw/core/sysbus.h"
++#include "migration/vmstate.h"
+ #include "qapi/error.h"
+ #include "qemu/error-report.h"
+ #include "qemu/host-utils.h"
+@@ -242,6 +243,25 @@ DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
+     return iommu_sys;
+ }
+ 
++#define RISCV_IOMMU_SYSDEV_MSIX_TABLE_SIZE \
++    (RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_ENTRY_SIZE)
++
++#define RISCV_IOMMU_SYSDEV_MSIX_PBA_SIZE \
++    (QEMU_ALIGN_UP(RISCV_IOMMU_PCI_MSIX_VECTORS, 64) / 8)
++
++static const VMStateDescription vmstate_riscv_iommu_sys = {
++    .name = "riscv-iommu-sys",
++    .version_id = 1,
++    .minimum_version_id = 1,
++    .fields = (const VMStateField[]) {
++        VMSTATE_BUFFER_POINTER_UNSAFE(msix_table, RISCVIOMMUStateSys, 0,
++                                      RISCV_IOMMU_SYSDEV_MSIX_TABLE_SIZE),
++        VMSTATE_BUFFER_POINTER_UNSAFE(msix_pba, RISCVIOMMUStateSys, 0,
++                                      RISCV_IOMMU_SYSDEV_MSIX_PBA_SIZE),
++        VMSTATE_END_OF_LIST()
++    }
++};
++
+ static const Property riscv_iommu_sys_properties[] = {
+     DEFINE_PROP_UINT64("addr", RISCVIOMMUStateSys, addr, 0),
+     DEFINE_PROP_UINT32("base-irq", RISCVIOMMUStateSys, base_irq, 0),
+@@ -267,6 +287,7 @@ static void riscv_iommu_sys_class_init(ObjectClass *klass, const void *data)
+     rc->phases.hold = riscv_iommu_sys_reset_hold;
+ 
+     dc->realize = riscv_iommu_sys_realize;
++    dc->vmsd = &vmstate_riscv_iommu_sys;
+     set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+     device_class_set_props(dc, riscv_iommu_sys_properties);
+ }
+-- 
+2.53.0
 
-r~
 
