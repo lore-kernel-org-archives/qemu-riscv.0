@@ -1,70 +1,68 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95463606A324
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 16:47:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 112FA60A2616
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 16:47:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UyvV4oC/
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=QflmRBgA
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xU5H4-0007Cr-WE; Thu, 19 Nov 2026 11:46:15 -0500
+	id 1xU5H3-0007CN-Pu; Thu, 19 Nov 2026 11:46:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1xU5G7-0006vj-R3
+ id 1xU5G6-0006vZ-Ba
  for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:21 -0500
-Received: from mail-pl1-x62d.google.com ([2607:f8b0:4864:20::62d])
+Received: from mail-pl1-x634.google.com ([2607:f8b0:4864:20::634])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <suunj1331@gmail.com>)
- id 1xU5G5-00025M-31
- for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:15 -0500
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2f037bc348dso5237005ad.0
- for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:45:12 -0800 (PST)
+ id 1xU5G4-000255-Fr
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 11:45:14 -0500
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-2e9eb579c0eso16608935ad.3
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:45:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795106712; x=1795711512; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=3xraGdr2alF8MMz20FS//SLWAloaioYB+YrXGRPJ3wo=;
- b=UyvV4oC/hq4zjYMwA7Ps2uaiOyqC2xQuN3iX7RTbLqUNbvd4wolWFQyRdK8mqAnLxF
- JcQHnJVfGM/uAD0VNIPb+Y20Zy6RgjVZnjn1gZQH4x4QrvZrnPzUkSYsVc6LiOptRMIy
- uFeEe4zDmthEI3ymS8wzwG3QrJK4Ghea8m3qbvF1p02/C7h9MXla4+TqW1Bh/DbMHCVY
- Ws/Y2sEDAmDXxLyxBmfzWfs527x2xK4dfgBBN1ja7dozW07Kl/+iebdveBL9EvXIJSlR
- mHsOvj9erXJj/XlQbmRMv76lZB/QuCr1fynCAfuiAxCEKBLLjE2HBBQJXKDHJPaU3+lI
- COFA==
+ d=gmail.com; s=20260707; t=1795106709; x=1795711509; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=P1jQ7cVFDYQ1j0YtNdbpZRsX9aY9kIeS4pewg/qGi9A=;
+ b=QflmRBgA/1lt9vhrW5KgCH20pb4huYELVlFJoLAxGNzRM8BwzGkMddnQ69JUP94qwd
+ 2LhL9Zh+AaNXpsTgO94QGiazYLZzEcwHoSoMWEy7mPAytIDGL2RlO/yw+8QnkrYNPg3E
+ pXZPhW+r/OUnOoQIUtWD2hyRuo0y44sYrovzcwzrCj1H/w52OPsffLQisCvq3iHYis4p
+ 5mr+G07IGT2K8stM+/Gtv3T/pSvHMf0ocDxgGdSAGq37A3M5aafTpa8MEqSl76wmpaWb
+ Yfof2AOp0pd+jBDZrJAZK08xr9gth66M0LVINIxbZdTAzgR0YgTc7a6UmdWtaFkpQw3S
+ w9rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795106712; x=1795711512;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to:content-type;
- bh=3xraGdr2alF8MMz20FS//SLWAloaioYB+YrXGRPJ3wo=;
- b=XnWReVLK/B6YCyXRXNBLpWzAYpVtEpwot+SPJ3C42/R/7UhahqFMVl3KXYp/qxw0G5
- rnjWv5mYpui9YDzwSqncmViMCFx/1TH2UxLeY8SuO3+AyGY+G/MQbqR5lGArsS4UPWRw
- xgm1wAbnCXasR6Lpc+ZSY6Y74lcGVQDEOvAXV1Cr/9PerAME9trsUsVe6BmZZna5VyLH
- 4snfeiLiO3mqx+o5x1wPDLaLmQaFV4UYuUE9GNeBr3IXBDIg2OWY/l0O80KsYU752IGu
- carPNVWL34aRQb0yJTz8OlrEF7rQWE2gQW/nOk161ZoZ8giwp56mV2k+ybsy6bFy15m2
- Yc8w==
-X-Gm-Message-State: APuU4Z/90DvWVGJZ4g+q4fUVkDj9aJxj8tBQEAcVyLqB9G8kq8BVtUTG
- g81xt+gish8wCFI3XP+NhyKsATb/LQhpaw0QUOOCq2jJqtklR2XaZUsP57b6rg==
-X-Gm-Gg: AZFdTZefJmWh0oM0B8wY+Sod5I9o3XKirBM+H3cdHArE5lcWjTZoRVnGBpnLO2bmYIN
- Mr5aun1pnLSDgiMqC/ZlqCxwHWRf0fy3KJmr9o1+P+PRqOWuLuuBfjn2ONphxYdka3srAGd+y+T
- D2aYT89FbfGLQZKFguXIaJXfpdAL0Vnm3skmWhlmvtXaPWXlZABK1n1aJSd+Ea5tMz2TcTPULpS
- pUksXylqQVdZB2gp1TGngGRERfDaXRV9tnbt+SOgTD9ZM2fJ/k6aYW1l4mQN7Uwu0u2Z6JQ37pF
- /qTGvjFdrZdEkA0YXZKwudGPBn8GXTl8G1iJcq0IHWkxPgwltysESp1imtEkgUGqO+nHa9zHwgP
- on7CiSNfi8ZwZujlMPl+Dp4WQ12/oICes/1zVReQEaU2dNIenLZ/Mfdl4XPm4vU7o1l3t5Y0Rqi
- adHiDJfgw9AsirBeSIfz2zpFJahqRVAT14b5DA+l6vZzkZe5Z7EomukHM35EUrdCBIfJ3T0zSoC
- pywA6DcIVqAR+x/6LTjo804ZjfmglUJ31IWix5ZQobM3qcABwiJdqGS3YURHaY2SM/hvkgo8Y0z
- EoNbX1/TiVDSzQDFH5sZmwQQnZaGrZgvmX1yqzepNytVBtQBxzctPPAYbYF8wA5/R4yuQ72ysro
- =
-X-Received: by 2002:a17:902:d50e:b0:2ef:e1a8:ef1e with SMTP id
- d9443c01a7336-2f03efb01b8mr4820315ad.8.1795106711632; 
- Thu, 19 Nov 2026 08:45:11 -0800 (PST)
+ d=1e100.net; s=20260707; t=1795106709; x=1795711509;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=P1jQ7cVFDYQ1j0YtNdbpZRsX9aY9kIeS4pewg/qGi9A=;
+ b=EQ66sFTPt+DtWGM8i/KRNusdKV4IwZvpLjVWUGUvjanYxEQwmAHFP2k0bjIkBWIPxs
+ JeXpgtMqoZ8z8nQo5/tvi4c3+uT5aJwilXsXiRA1nujLoKTtU/epX638bfAlX6vuWuX7
+ ypAPrtOKlTf+pDaHztLfyEWo1yd12xr/RbQcQtuIqy5gHvJagm9vKKLnQUYgB+C7C34S
+ MeS1CdPfgh4RTwZGRk/TGLjnGxF8qTrcCv2oAtYdJ1IYfJ6yUAgnpPxVbKc44Vbs0c6+
+ Cw1S1iJRNniQqUkm8F/PsS+VTKNL5Twu6Gg0+xzCRDqzIThjNab/Rp2SG6bzJlrKyCiy
+ mxBQ==
+X-Gm-Message-State: APuU4Z+ddt6AuZ4lH5lrpyhtWqv717GpRZCC4ZAFLy9/og3YyhaXaqIN
+ 2Cadb4RHAk8H+ifB2XPSCEA/dAU3y3jUHbKGn8o0a7iS52NxlxFbrgud
+X-Gm-Gg: AZFdTZerA1cHJvcfcIWhrZUOH/pSHg08Cos91NuBa2o4QDEWSfG/WoP1GDZiHR4+12J
+ SwPT389D6i0mVSeZ5GpcoTHi7rwXOCSIftLIzDqc27hNH1Fmr9Rad/qD2E7DNeP6/fJdJD0SJWn
+ SQkZqLByPLlKjI+6B6kbsBMWcd9S/Wzul5DS/ITv+LtSk9pQnqiN8YN31gI0JQz2vLDN7mfgNid
+ vj8WAqKhhVe3GM44avxcPbd+fks1JbIygCebaGPH+IJ+yn7A+xMrajI7/tnQH+6lLwHPmtN3lkJ
+ p9w0rSCXhMJc7GT2rHycAQ7bbWfaXO1rwTlufQvRFxXWodh7XidJqA+knf2dvXqkR6OjW93XLLs
+ TklBXdAKK4A0B99eHLDwzLHWp4MC3HkyZ2MpXpH3PCnlbWlpDicVT0FuNxAqIQPCWX7vMGnKFTu
+ FlsR3H/ttSRZcPzAF3pEy6XB3K0HmZgUcOXUHYaadZT2DpLWziK4EHiAzxoT7hGBjdA9gxNqcNj
+ 7dJiImEfxJkIGyACACM8EMloaqjyvbc+hd7qOlTBgdjZuyoIdSAVZOG2ImFPZWkGB93ZkDWoNlQ
+ rVgg6mAaC8hXyvcU7v1/ndNI2pcCQXz5oAVh+rz8UnPvFRDfyqzP
+X-Received: by 2002:a17:903:b4f:b0:2ed:4b23:c417 with SMTP id
+ d9443c01a7336-2f03f1d85a3mr3862595ad.11.1795106708578; 
+ Thu, 19 Nov 2026 08:45:08 -0800 (PST)
 Received: from fedora ([61.74.238.173]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2f03f10e67csm2381365ad.53.2026.11.19.08.45.08
+ d9443c01a7336-2f03f10e67csm2381365ad.53.2026.11.19.08.45.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 08:45:11 -0800 (PST)
+ Thu, 19 Nov 2026 08:45:08 -0800 (PST)
 From: SeungJu Cheon <suunj1331@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
@@ -72,17 +70,15 @@ Cc: qemu-riscv@nongnu.org, Alistair Francis <alistair.francis@wdc.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Weiwei Li <liwei1518@gmail.com>,
  Chao Liu <chao.liu@processmission.com>
-Subject: [PATCH 1/3] target/riscv: Split out riscv_compute_tb_flags
-Date: Fri, 20 Nov 2026 01:44:36 +0900
-Message-ID: <20261119164438.193579-2-suunj1331@gmail.com>
+Subject: [PATCH 0/3] target/riscv: Cache TB flags in CPURISCVState
+Date: Fri, 20 Nov 2026 01:44:35 +0900
+Message-ID: <20261119164438.193579-1-suunj1331@gmail.com>
 X-Mailer: git-send-email 2.52.0
-In-Reply-To: <20261119164438.193579-1-suunj1331@gmail.com>
-References: <20261119164438.193579-1-suunj1331@gmail.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::62d;
- envelope-from=suunj1331@gmail.com; helo=mail-pl1-x62d.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::634;
+ envelope-from=suunj1331@gmail.com; helo=mail-pl1-x634.google.com
 X-Spam_score_int: -17
 X-Spam_score: -1.8
 X-Spam_bar: -
@@ -90,7 +86,7 @@ X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -102,194 +98,69 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move the computation of TB flags derived from state that changes on
-CSR writes, traps, privilege changes and vsetvl into
-riscv_compute_tb_flags(). Continue to read FS/VS, elp, vstart and vl
-in riscv_get_tb_cpu_state(), since they can change between lookups.
+riscv_get_tb_cpu_state() recomputes TB flags on every lookup. Most of
+the inputs change infrequently, at CSR writes, traps, privilege
+changes or vsetvl. Cache the derived TB flags in CPURISCVState and
+rebuild them when their inputs may change.  The design follows the
+Arm hflags cache, commit e979972a6a ("target/arm: Rely on hflags
+correct in cpu_get_tb_cpu_state") and its series [1].
 
-The lookup calls the new helper directly, preserving the TB flag
-values. The helper returns UINT32_MAX when maxsz is below the 8-byte
-gvec minimum, so the vl comparison leaves VL_EQ_VLMAX clear in the
-same cases as the previous maxsz >= 8 check.
+Patch 1 extracts the flag computation. Patch 2 adds the cache and
+its rebuild points. Patch 3 switches TB lookup to the cache and adds
+a CONFIG_DEBUG_TCG check that reports the cached and recomputed
+values and aborts on a mismatch.
 
-Signed-off-by: SeungJu Cheon <suunj1331@gmail.com>
----
- target/riscv/tcg/tcg-cpu.c | 101 +++++++++++++++++++++++++------------
- 1 file changed, 69 insertions(+), 32 deletions(-)
+In an RV64 virt Linux boot and power-off profile, the self overhead of
+riscv_get_tb_cpu_state() in the vCPU thread dropped from 16.54% to
+6.78%. Median boot time dropped from 5.69 s to 4.81 s (-15.5%)
+compared with the base revision. See patch 3 for measurement details.
 
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 5834ec1524..5c5d8fcb94 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -99,13 +99,20 @@ static int riscv_cpu_mmu_index(CPUState *cs, bool ifetch)
-     return riscv_env_mmu_index(cpu_env(cs), ifetch);
- }
- 
--static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-+/*
-+ * Compute the TB flags that depend only on state changed through CSR
-+ * writes, traps, privilege changes and vsetvl.  For now the result is
-+ * fed straight back to riscv_get_tb_cpu_state(), which adds the bits
-+ * that translated code changes between two lookups -- FS/VS dirtying,
-+ * elp, vstart, and vl, which fault-only-first loads shrink.
-+ */
-+static void riscv_compute_tb_flags(CPURISCVState *env, uint32_t *pflags,
-+                                   uint64_t *pext_flags, uint32_t *pvlmax)
- {
--    CPURISCVState *env = cpu_env(cs);
-     RISCVCPU *cpu = env_archcpu(env);
--    RISCVExtStatus fs, vs;
-     uint32_t flags = 0;
-     uint64_t ext_flags = 0;
-+    uint32_t vlmax_cached = UINT32_MAX;
-     bool pm_signext = riscv_cpu_virt_mem_enabled(env, false);
- 
-     if (cpu->cfg.ext_zve32x) {
-@@ -124,49 +131,93 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-         uint32_t vsew = FIELD_EX64(env->vtype, VTYPE, VSEW);
-         uint32_t vlmax = vext_get_vlmax(cpu->cfg.vlenb, vsew, lmul);
-         uint32_t maxsz = vlmax << vsew;
--        bool vl_eq_vlmax = (env->vstart == 0) && (vlmax == env->vl) &&
--                           (maxsz >= 8);
-+
-+        /* vl is compared per lookup: fault-only-first loads shrink it. */
-+        vlmax_cached = maxsz >= 8 ? vlmax : UINT32_MAX;
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL, env->vill);
-         flags = FIELD_DP32(flags, TB_FLAGS, SEW, vsew);
-         flags = FIELD_DP32(flags, TB_FLAGS, LMUL,
-                            FIELD_EX64(env->vtype, VTYPE, VLMUL));
--        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX, vl_eq_vlmax);
-         flags = FIELD_DP32(flags, TB_FLAGS, VTA,
-                            FIELD_EX64(env->vtype, VTYPE, VTA));
-         flags = FIELD_DP32(flags, TB_FLAGS, VMA,
-                            FIELD_EX64(env->vtype, VTYPE, VMA));
--        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, env->vstart == 0);
-         ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, ALTFMT, altfmt);
-     } else {
-         flags = FIELD_DP32(flags, TB_FLAGS, VILL, 1);
-     }
- 
-     if (cpu_get_fcfien(env)) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
-+    }
-+
-+    if (cpu_get_bcfien(env)) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
-+    }
-+
-+#ifndef CONFIG_USER_ONLY
-+    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
-+    flags |= riscv_env_mmu_index(env, 0);
-+
-+    if (env->virt_enabled) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-+    }
-+
-+    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
-+        && !icount_enabled()) {
-+        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-+    }
-+#endif
-+
-+    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
-+    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
-+    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
-+    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
-+
-+    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, MISA_EXT, env->misa_ext);
-+    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, BIG_ENDIAN,
-+                           mo_endian_env(env) == MO_BE);
-+
-+    *pflags = flags;
-+    *pext_flags = ext_flags;
-+    *pvlmax = vlmax_cached;
-+}
-+
-+static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-+{
-+    CPURISCVState *env = cpu_env(cs);
-+    RISCVCPU *cpu = env_archcpu(env);
-+    RISCVExtStatus fs, vs;
-+    uint32_t flags, vlmax;
-+    uint64_t ext_flags;
-+
-+    riscv_compute_tb_flags(env, &flags, &ext_flags, &vlmax);
-+
-+    if (cpu->cfg.ext_zve32x) {
-+        bool vstart_eq_zero = env->vstart == 0;
-+
-+        flags = FIELD_DP32(flags, TB_FLAGS, VL_EQ_VLMAX,
-+                           vstart_eq_zero && env->vl == vlmax);
-+        flags = FIELD_DP32(flags, TB_FLAGS, VSTART_EQ_ZERO, vstart_eq_zero);
-+    }
-+
-+    if (FIELD_EX32(flags, TB_FLAGS, FCFI_ENABLED)) {
-         /*
-          * For Forward CFI, only the expectation of a lpad at
-          * the start of the block is tracked via env->elp. env->elp
-          * is turned on during jalr translation.
-          */
-         flags = FIELD_DP32(flags, TB_FLAGS, FCFI_LP_EXPECTED, env->elp);
--        flags = FIELD_DP32(flags, TB_FLAGS, FCFI_ENABLED, 1);
--    }
--
--    if (cpu_get_bcfien(env)) {
--        flags = FIELD_DP32(flags, TB_FLAGS, BCFI_ENABLED, 1);
-     }
- 
- #ifdef CONFIG_USER_ONLY
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
- #else
--    flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
--
--    flags |= riscv_env_mmu_index(env, 0);
-     fs = get_field(env->mstatus, MSTATUS_FS);
-     vs = get_field(env->mstatus, MSTATUS_VS);
- 
-     if (env->virt_enabled) {
--        flags = FIELD_DP32(flags, TB_FLAGS, VIRT_ENABLED, 1);
-         /*
-          * Merge DISABLED and !DIRTY states using MIN.
-          * We will set both fields when dirtying.
-@@ -181,27 +232,13 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-     }
- 
--    if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
--        && !icount_enabled()) {
--        flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-+    if (cpu->cfg.ext_sdext && !env->debug_mode && (env->dcsr & DCSR_STEP)) {
-+        ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, SDEXT_STEP, 1);
-     }
- #endif
- 
-     flags = FIELD_DP32(flags, TB_FLAGS, FS, fs);
-     flags = FIELD_DP32(flags, TB_FLAGS, VS, vs);
--    flags = FIELD_DP32(flags, TB_FLAGS, XL, env->xl);
--    flags = FIELD_DP32(flags, TB_FLAGS, AXL, cpu_address_xl(env));
--    flags = FIELD_DP32(flags, TB_FLAGS, PM_PMM, riscv_pm_get_pmm(env));
--    flags = FIELD_DP32(flags, TB_FLAGS, PM_SIGNEXTEND, pm_signext);
--
--    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, MISA_EXT, env->misa_ext);
--    ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, BIG_ENDIAN,
--                           mo_endian_env(env) == MO_BE);
--#ifndef CONFIG_USER_ONLY
--    if (cpu->cfg.ext_sdext && !env->debug_mode && (env->dcsr & DCSR_STEP)) {
--        ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, SDEXT_STEP, 1);
--    }
--#endif
- 
-     return (TCGTBCPUState){
-         .pc = env->xl == MXL_RV32 ? env->pc & UINT32_MAX : env->pc,
+Runtime tests with --enable-debug-tcg
+
+- RV64 virt Linux boot and power-off, covering M/S/U modes.
+- KVM selftests inside the RV64 virt guest (ebreak_test and
+  kvm_page_table_test with Sv39, Sv48 and Sv57 guests). These exercise
+  HS/VS transitions, two-stage translation and writes to hstatus,
+  vsstatus and hgatp.
+- A vle8ff.v regression test that checks tail elements after a
+  fault-only-first load reduces vl below VLMAX without a trap.
+- Guest reboot and migration save/restore, exercising the reset and
+  post-load hooks.
+- The vle8ff.v test under riscv64-linux-user.
+
+Build-tested riscv32-softmmu. Boot timings were measured with release
+builds.
+
+VU mode, M-mode accesses with MPRV+MPV, pointer masking and CFI were
+reviewed but not exercised.
+
+[1] https://lore.kernel.org/qemu-devel/20191023150057.25731-1-richard.henderson@linaro.org/
+
+SeungJu Cheon (3):
+  target/riscv: Split out riscv_compute_tb_flags
+  target/riscv: Rebuild cached TB flags at state changes
+  target/riscv: Rely on cached TB flags in riscv_get_tb_cpu_state
+
+ target/riscv/cpu.c               |   1 +
+ target/riscv/cpu.h               |  19 +++++
+ target/riscv/machine.c           |   1 +
+ target/riscv/tcg/cpu_helper.c    |   1 +
+ target/riscv/tcg/csr.c           |   8 +-
+ target/riscv/tcg/debug.c         |   2 +
+ target/riscv/tcg/tcg-cpu.c       | 123 +++++++++++++++++++++++--------
+ target/riscv/tcg/vector_helper.c |   2 +
+ 8 files changed, 124 insertions(+), 33 deletions(-)
+
+
+base-commit: 08c9bbb825148dec9669f5184ecf18823bb6d631
 -- 
 2.52.0
 
