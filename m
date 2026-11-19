@@ -1,66 +1,142 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DF34606A320
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:51:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F2D1606A33E
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 08:24:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=STGhrcY8;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QLta5/M5
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTwun-0005zD-7U; Thu, 19 Nov 2026 02:50:41 -0500
+	id 1xTxRG-0004B5-G2; Thu, 19 Nov 2026 03:24:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwuF-0005m7-0m; Thu, 19 Nov 2026 02:50:08 -0500
-Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
- by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
- (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwu9-0007Eu-TY; Thu, 19 Nov 2026 02:50:05 -0500
-Received: from xiaoou-ubuntu-01 (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S18;
- Thu, 19 Nov 2026 15:44:06 +0800 (CST)
-From: Molly Chen <xiaoou@iscas.ac.cn>
-To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
-Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
- qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v4 16/20] target/riscv: Add packed SIMD load-replicate
- instructions
-Date: Thu, 19 Nov 2026 07:43:36 +0000
-Message-ID: <20261119074345.866125-17-xiaoou@iscas.ac.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
-References: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xTxRF-0004AJ-62
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:13 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xTxRD-0001Zt-5x
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:12 -0500
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AJ6wJfv1007305
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=SL7ot0XagmX
+ +jlLEB+IH78jWmo3C6r0IDP96I4NE9k0=; b=STGhrcY85N26h7HAmEcmzIO7oLE
+ rGoE9Vtm7j1f9/RF4/hTUQComg5NS3dAFj7mcNOMTsDOHNt239twQbroV5V+U1xN
+ RAAecKdd/ZaziUUS9S2LS882cx4JoulxegTVT3DKBALXyNngE0khXkwmU19+mQxC
+ QvCMhmp+mnzgez4OgrFzrSG1xLYD4C9koRmB2czUk/0TxbNpflvpi0vRL4fcWlu8
+ ZMHpT+TS2dQ7XKgLC8eoMI2YLqzzxcaXIeSSVA/VJWqEjxt61ckL0ti3Vq5j8yte
+ Fld/LQ7rviry37+PG6DYdbBwkD+fQwOo+xCnB8lM/8gLZSB0Fq4aNBUvWBw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com
+ [209.85.160.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1etnus3a-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:09 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id
+ d75a77b69052e-5383c05fb2fso50099361cf.1
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 00:24:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oss.qualcomm.com; s=google; t=1795076649; x=1795681449; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=SL7ot0XagmX+jlLEB+IH78jWmo3C6r0IDP96I4NE9k0=;
+ b=QLta5/M5smizbvicmegc4nWzBPMeePuQnYnqxu2nWH5fRr0hoTzmifcmaGiJaveSE9
+ fALA7bMfcSPf3le0nMbpFLCzFf9W4N9XNqwkZL2gaPBHVIX182W44Mfm0BbGj6w3vl12
+ E/Ys5yV1OLPC9eCXVBjw0l1SmryQa/8c/0XGKUSXHW+HkYlw3VMaGLDmI3Tp1e/j/afk
+ dpYssAUQaxjdV14jlWRv9sp6AUmkutmqX/kr/JQtXVmc0kH60/UkH8Lr/9/ht2g7kVML
+ PpAey9P5hG9Hvd2SB/ewBbPfzhm7msXQRV1lZl8++cLVWZpp3ZFg9m8lljhAm+9uRi7o
+ yYDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795076649; x=1795681449;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=SL7ot0XagmX+jlLEB+IH78jWmo3C6r0IDP96I4NE9k0=;
+ b=pY0cyhtgHi7C6qLr1HX7DXN7gZG0ZgtRc0go75bZeCeYPQbxBbDo0/1iJro7/P/cye
+ ZSbeRRayjVy+DsR7KJ9L/NxRzpRbDG7DJlQ3+d/dCh1i65rNUflybxs5uyXd5gy2uNud
+ C/JJoDTtzfdD1nZPbB/0m+wSw9EbbhqRRF+P71yQpR8F2c1wIL/3SzmH4NhZST+PBHsi
+ l5/o5+84gnczVsLKCOHihvWoZx9rADY5BT46NgYB5TRkDIi9RNYg3Ia2cr/JYFEOBabD
+ LW5nrTx5iEMGfEYf03voQBIBG0F4JGJM/kykuV2a7BnOGZ0qiwI3BkQVxDABJIaqYcqp
+ Yu9w==
+X-Gm-Message-State: APuU4Z9zE+I2hRPi72O4wL00/QOdaL0r+H4MV9NitfF9hK0HZhE8s7Kl
+ lq0SHuJjgWujw8nUDoWaDs0cR+2g7c2WinnPa/P1HpBOK4hDcCwe0luVW81U1roA5aEYFnuptbR
+ be0NjoQxHlcFUwO9WxxqfF9hC1sPP6gk5Nl2WSBgy5ti7aTKSaht7F0YqMw==
+X-Gm-Gg: AYBFou2zX1NshUzOXKpE+Z5dD04cDLw9kxxIeElHilKklLihGM1DmeLNd1PEZ2zrcei
+ upGO/zB49CLH5DM6XNZ1PKM/w1B0c/Ex2xZYKIQtvQP2R9Riog3bu+hzoHC27YmMeMGvRr7n2y1
+ 2xgk8XV5UAUKD/O4ajlrWIUEulqvJb6iZspKyu0O4WgaW7zRrQF9JD0aE4IKY6V1YE1/nkP19VF
+ +NGqdd4sfUcSUpXcMdkhgknu32FvEobGg/2LpEqtT8kqVZT0VYw7B3JIi2u/5zomsZnYfnUajpT
+ qTR+nONY1QeZJzHzVBzYyavpoV/ifb0Bb9iBU9xho5OWE80CSbEO0+78f2RPiXNn0iKOl10HWYI
+ jnjT32lbsSkWAqZWl8DLAS4equILVOJkCuxvp1O/zvD1M+ExytZcnwSk4m9pUXRZkZkCA94xEoC
+ Ah6Y9x6Y0k
+X-Received: by 2002:ac8:5f8c:0:b0:533:983b:e53f with SMTP id
+ d75a77b69052e-55d5a66d699mr81222911cf.59.1795076648621; 
+ Thu, 19 Nov 2026 00:24:08 -0800 (PST)
+X-Received: by 2002:ac8:5f8c:0:b0:533:983b:e53f with SMTP id
+ d75a77b69052e-55d5a66d699mr81222671cf.59.1795076648039; 
+ Thu, 19 Nov 2026 00:24:08 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([179.193.8.137])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-9211a6318aesm34524136d6.39.2026.11.19.00.24.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 19 Nov 2026 00:24:07 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v3 3/5] hw/riscv/server_platform_ref: fix UART baud rate
+Date: Thu, 19 Nov 2026 05:23:53 -0300
+Message-ID: <20261119082356.1264726-4-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261119082356.1264726-1-daniel.barboza@oss.qualcomm.com>
+References: <20261119082356.1264726-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S18
-X-Coremail-Antispam: 1UD129KBjvJXoWxXw4rtFyfWFWDJw1DKFW5trb_yoWrWw1DpF
- 48Kr17KrW8Jry3AF93Kr45Jr13XrsxG3yUJwnxXw15Za15JFyrA34jk3yUKrW5XFyDWFyU
- W3WqyryDuaykJwUanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmm14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
- kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
- z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
- 4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE
- 3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2I
- x0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j
- 6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
- 8vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE
- 7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI
- 8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW5JVW7
- JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr
- 0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1U
- YxBIdaVFxhVjvjDU0xZFpf9x0JUHE__UUUUU=
-X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
-Received-SPF: pass client-ip=159.226.251.25; envelope-from=xiaoou@iscas.ac.cn;
- helo=cstnet.cn
-X-Spam_score_int: 1
-X-Spam_score: 0.1
-X-Spam_bar: /
-X-Spam_report: (0.1 / 5.0 requ) BAYES_00=-1.9, HK_RANDOM_ENVFROM=0.993,
- HK_RANDOM_FROM=1, RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
- SPF_PASS=-0.001 autolearn=no autolearn_force=no
+X-Authority-Analysis: v=2.4 cv=b8UncdGx c=1 sm=1 tr=0 ts=6afeb229 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=a6tGUzlCxnQfwxx7nGpYxQ==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=HwFc7jivAAAA:8
+ a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=HyuSmn1QhchWdNVMt-0A:9
+ a=uxP6HrT_eTzRwkO_Te1X:22 a=kr7TZk85JJIQSqC0cl8G:22 a=xVlTc564ipvMDusKsbsT:22
+X-Proofpoint-GUID: VxqbEFxH8libYSl4qBSB_PixTLylDu1a
+X-Proofpoint-ORIG-GUID: VxqbEFxH8libYSl4qBSB_PixTLylDu1a
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfXxluAQ1A/fob1
+ fEHnyMTuy99X5jkiaeirSFSfBkWClbFHnd2dOF3/aP+h3BAZKlkHia/qYWdlCj+Phq9DS5E8J6g
+ v/a2qJGj1SN2NC4E2q7gsNrgU5Kp5mE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX9mNQSVACsjwe
+ WIZ5AFkeXKtpx/ssrxEC9OxhNVDkP2mcTUMuGyAtRCjYqglc/QPWMJuzxw2BNyoVYum78FOmgV3
+ JCsRzzxLw4kyeh17/pyCDwTQ6Pe7M4Ha90aJ9oIgjmUMAnP+f/DCGnDVMDriSpGsFXOvWDfwp7I
+ s1zs2wnbf3Ikcj+7h6IyIKCLipHhuwL7Jfv3wS1Uuq1cUgh/fPAJ/xid788YS6qjxZQIpERc1bM
+ xv2Sc7ZObShQA0tLHLFzD5N44MHGuRsBVD5iFtOBW8VTXCITU+QZ3McA4dWyGSL8NSX6P+IrUGi
+ 80ODrm/gfLZq5i1O5jX4AfvrNrTbVZE4QGbJXs24OiYIFXozDCtnONoXTbawMvZOqIceuYes7o2
+ ypXWMLhKc9CIKNSbpJi8vZPHbBu2SzEs/62PnZ/4uGbouj7euA+qLchLOxHfi3MX+kCYpuZJqE+
+ OeXqEPL49B80Y9FtIwA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 malwarescore=0 adultscore=0 spamscore=0
+ clxscore=1015 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611190033
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -72,123 +148,86 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Implement packed load-immediate and load-upper-immediate operations.
-Cover byte, halfword, and word elements across the supported register
-widths. Add the associated decode entries, translators.
+The riscv-server 1.0 spec requires an UART with 115200 baud, per rule
+"HPER_020" described in [1].
 
-These instructions construct an element-sized value from the encoded
-immediate and replicate it into every packed destination element.
-PLI.H and PLI.W sign-extend their 10-bit immediates, while PLUI.H and
-PLUI.W place their immediates in the upper bits of each element and
-clear the lower bits.  These operations do not affect vxsat.
+At this moment we're doing two things: the FDT is being created using
+the default UART base baud of 230400, and the device itself is being
+created using a baud of 399193.  This odd value was inherited from the
+RISC-V 'virt' machine when implementing the first interaction of the
+riscv-server-ref board.  Linux doesn't seem to care: dmesg reports a
+base baud of 230400, a value derived from what we're writing in the DT,
+and the serial seems to work fine.
 
-Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
+Straight everything up by setting the required base baud of 115200
+everywhere applicable.  And for good measure let's also change the boot
+test to be sure that userpace is reading the intended serial base baud.
+
+[1] https://docs.riscv.org/reference/server-soc/v1.0/server_soc_requirements.html
+
+Fixes: c2fa4320803b ("hw/riscv: server platform reference machine")
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- target/riscv/insn32.decode                  | 16 +++++++++++++
- target/riscv/tcg/insn_trans/trans_rvp.c.inc | 25 +++++++++++++++++++++
- target/riscv/tcg/translate.c                |  2 ++
- 3 files changed, 43 insertions(+)
+ hw/riscv/server_platform_ref.c              | 8 +++++---
+ tests/functional/riscv64/test_server_ref.py | 3 +++
+ 2 files changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index 4d77bb9c35..e1019eca62 100644
---- a/target/riscv/insn32.decode
-+++ b/target/riscv/insn32.decode
-@@ -44,6 +44,10 @@
- %imm_p_ui16 20:4
- %imm_p_ui32 20:5
- %imm_p_ui64 20:6
-+%imm_p_l1  16:8
-+%imm_p_l2  15:s1 16:9
-+%imm_p_l3  15:s9 24:1              !function=ex_shift_6
-+%imm_p_l4  15:s9 24:1              !function=ex_shift_22
+diff --git a/hw/riscv/server_platform_ref.c b/hw/riscv/server_platform_ref.c
+index 5cb55a43a8..5fa3130a25 100644
+--- a/hw/riscv/server_platform_ref.c
++++ b/hw/riscv/server_platform_ref.c
+@@ -68,6 +68,7 @@
  
- # Argument sets:
- &empty
-@@ -53,6 +57,7 @@
- &r    rd rs1 rs2
- &r2   rd rs1
- &r2_s rs1 rs2
-+&p_l  imm rd
- &s    imm rs1 rs2
- &u    imm rd
- &shift     shamt rs1 rd
-@@ -114,6 +119,10 @@
- @p_ui16 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui16 %rs1 %rd
- @p_ui32 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui32 %rs1 %rd
- @p_ui64 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui64 %rs1 %rd
-+@p_l1  ........ ........ .... ..... ....... &p_l      imm=%imm_p_l1         %rd
-+@p_l2  ....... .......... ... ..... ....... &p_l      imm=%imm_p_l2         %rd
-+@p_l3  ....... .......... ... ..... ....... &p_l      imm=%imm_p_l3         %rd
-+@p_l4  ....... .......... ... ..... ....... &p_l      imm=%imm_p_l4         %rd
+ #define RVSERVER_PLATFORM_BUS_NUM_IRQS         8
+ #define RVSERVER_IOMMU_HPM_COUNTERS            4
++#define RVSERVER_UART_BASE_BAUD                115200
  
- # Formats 64:
- @sh5     .......  ..... .....  ... ..... ....... &shift  shamt=%sh5      %rs1 %rd
-@@ -1628,3 +1637,10 @@ pm4addu_h       10100 11 ..... ..... 101 ..... 0111011 @r
- pm4adda_h       10001 11 ..... ..... 101 ..... 0111011 @r
- pm4addasu_h     11101 11 ..... ..... 101 ..... 0111011 @r
- pm4addau_h      10101 11 ..... ..... 101 ..... 0111011 @r
-+
-+# Packed SIMD - Load and Replicate instructions
-+pli_b    10110100 ........ 0010 ..... 0011011 @p_l1
-+pli_h    1011000 .......... 010 ..... 0011011 @p_l2
-+plui_h   1111000 .......... 010 ..... 0011011 @p_l3
-+pli_w    1011001 ..... ..... 010 ..... 0011011 @p_l2
-+plui_w   1111001 ..... ..... 010 ..... 0011011 @p_l4
-diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-index eba377fac6..ccb02b78af 100644
---- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-@@ -924,3 +924,28 @@ GEN_SIMD_TRANS_64(pm4addu_h)
- GEN_SIMD_TRANS_ACC_64(pm4adda_h)
- GEN_SIMD_TRANS_ACC_64(pm4addasu_h)
- GEN_SIMD_TRANS_ACC_64(pm4addau_h)
-+
-+#define GEN_PLI(NAME, PRE_REQ, IMM_TYPE, LIMIT, SHIFT, ADDEND) \
-+static bool trans_##NAME(DisasContext *ctx, arg_##NAME * a)    \
-+{                                                              \
-+    PRE_REQ                                                    \
-+    REQUIRE_RVP(ctx);                                          \
-+    int i = 1;                                                 \
-+    IMM_TYPE imm = a->imm;                                     \
-+    while (i < (LIMIT)) {                                      \
-+        imm = (imm << (SHIFT)) + (ADDEND);                     \
-+        i++;                                                   \
-+    }                                                          \
-+    gen_set_gpri(ctx, a->rd, imm);                             \
-+    return true;                                               \
-+}
-+
-+GEN_PLI(pli_b, , target_long, TARGET_LONG_BITS / 8, 8, a->imm)
-+GEN_PLI(pli_h, , target_long, TARGET_LONG_BITS / 16, 16,
-+        a->imm & 0xFFFF)
-+GEN_PLI(plui_h, , target_long, TARGET_LONG_BITS / 16, 16,
-+        a->imm & 0xFFFF)
-+GEN_PLI(pli_w, REQUIRE_64BIT(ctx); , int64_t, TARGET_LONG_BITS / 32, 32,
-+        a->imm & 0xFFFFFFFF)
-+GEN_PLI(plui_w, REQUIRE_64BIT(ctx); , int64_t, TARGET_LONG_BITS / 32, 32,
-+        a->imm & 0xFFFFFFFF)
-diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
-index 6db8004aff..d415d57171 100644
---- a/target/riscv/tcg/translate.c
-+++ b/target/riscv/tcg/translate.c
-@@ -799,7 +799,9 @@ EX_SH(1)
- EX_SH(2)
- EX_SH(3)
- EX_SH(4)
-+EX_SH(6)
- EX_SH(12)
-+EX_SH(22)
+ #define TYPE_RISCV_SERVER_REF_MACHINE MACHINE_TYPE_NAME("riscv-server-ref")
+ OBJECT_DECLARE_SIMPLE_TYPE(RISCVServerRefMachineState, RISCV_SERVER_REF_MACHINE)
+@@ -320,7 +321,7 @@ static void finalize_fdt(RISCVServerRefMachineState *s)
  
- #define REQUIRE_EXT(ctx, ext) do { \
-     if (!has_ext(ctx, ext)) {      \
+     riscv_create_fdt_uart(ms->fdt, &rvserver_ref_memmap[RVSERVER_UART0],
+                           RVSERVER_UART0_IRQ, AIA_TYPE_APLIC_IMSIC,
+-                          0,
++                          RVSERVER_UART_BASE_BAUD,
+                           irq_mmio_phandle);
+     name = riscv_fdt_get_uart_nodename(rvserver_ref_memmap[RVSERVER_UART0].base);
+     qemu_fdt_setprop_string(ms->fdt, "/chosen", "stdout-path", name);
+@@ -618,8 +619,9 @@ static void rvserver_ref_machine_init(MachineState *machine)
+                                                     RVSERVER_PLATFORM_BUS_NUM_IRQS);
+ 
+     serial_mm_init(system_memory, memmap[RVSERVER_UART0].base,
+-        0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ), 399193,
+-        serial_hd(0), DEVICE_LITTLE_ENDIAN);
++                   0, qdev_get_gpio_in(mmio_irqchip, RVSERVER_UART0_IRQ),
++                   RVSERVER_UART_BASE_BAUD,
++                   serial_hd(0), DEVICE_LITTLE_ENDIAN);
+ 
+     sysbus_create_simple("goldfish_rtc", memmap[RVSERVER_RTC].base,
+         qdev_get_gpio_in(mmio_irqchip, RVSERVER_RTC_IRQ));
+diff --git a/tests/functional/riscv64/test_server_ref.py b/tests/functional/riscv64/test_server_ref.py
+index ad29094dbe..fa7225ccc1 100755
+--- a/tests/functional/riscv64/test_server_ref.py
++++ b/tests/functional/riscv64/test_server_ref.py
+@@ -71,6 +71,9 @@ def do_test_boot_linux_test(self, tpmstate_dir=None):
+         wait_for_console_pattern(self, 'Linux version')
+         wait_for_console_pattern(self, 'Machine model: RISC-V Server Platform')
+ 
++        # Check that we have the intended base baud for the serial
++        wait_for_console_pattern(self, 'base_baud = 115200')
++
+         # Test e1000e network card functionality
+         wait_for_console_pattern(self, 'e1000e')
+         wait_for_console_pattern(self, 'Network Connection')
 -- 
-2.53.0
+2.43.0
 
 
