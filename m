@@ -1,134 +1,134 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B8AC60A2607
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 08:26:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C0E3606A32F
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 08:26:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nlq1FFQz;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Tlah6DjO
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YAE9Zo6W;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TCdQDcFP
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTxRO-0004Dw-0c; Thu, 19 Nov 2026 03:24:22 -0500
+	id 1xTxRK-0004Cb-83; Thu, 19 Nov 2026 03:24:18 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xTxRJ-0004CR-DL
- for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:17 -0500
+ id 1xTxRH-0004Bx-Ve
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:16 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xTxRH-0001u3-KW
- for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:16 -0500
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ id 1xTxRF-0001lK-OA
+ for qemu-riscv@nongnu.org; Thu, 19 Nov 2026 03:24:15 -0500
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AJ6vEGt2935539
- for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:14 GMT
+ 6AJ6vWjV330681
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=hv0gCW5owmh
- PA76Wzy1UA8RIz97Ep0lDMq0mGjAflXA=; b=nlq1FFQzTLlT4uXPrSdLPD2H8Xx
- /HLNBtFmKZiMuY6+ve4/D71R4UNUe+MGjGNFX2iIMkelysqdO6ZNletgapMTAADf
- YlBvJp+g0yH0HYt2r5BwFD4ru5I4X2bP5sJuPdj8yIQhYcGXDXdtTbRUORxw+fNP
- fQCsG8z+3YIK37PsIJqiMUQb34YMtpNWFtDzJHZVwqkepywZs6QnLiBUmUcYmF9P
- wkJful7YpD9P6heqr1JJv+jkpScXi3nvYETVaUSgX0pJICv68mWOLdxDGAMhnB1H
- +ZJXQFbLvkm5yxqUd9JoS8oJSLUqS4Wobtfs2DZ8jEQ33mPGO8SNx2k1QrQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1g9ekc85-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=tGilkePA/I6
+ Z7w81HYXyow4LaQeCJgl//68K2X2Vikw=; b=YAE9Zo6WmPhAWf4FgkrpcEq7Q4t
+ ga1e5kIOeXe6pzL0rllBrIIYocryxoMlcfcqYNIiT2CoBPPwwtRK1N7Q1ImbV80k
+ dtJ/oY8D1qqvXPKcLjQv0rbGMzLr9nbFrmQ9/Q478I9m8z/vE51lnX9ieytQk976
+ rxPBoKgktPCKKFumw90Iq0Zn1Arq8dN8Ss110ySStnxYl/HrOF8hxqXvid8EzX11
+ aYiJKaDkPHnqi5ncaGC543T0BKiNNBgeTMhkz3smq5sAQcKnH2yVlo24gvZH5Ro7
+ 9K1U2QMkMwoSUrhJ2UdGSAhuRF/bt+XytTPfgCl8YJLRDKNPeI95D9FHZew==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j1fpnkg4e-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:14 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-92111028a03so36918016d6.0
- for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 00:24:14 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 08:24:12 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93e92aad34aso381261085a.0
+ for <qemu-riscv@nongnu.org>; Thu, 19 Nov 2026 00:24:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795076653; x=1795681453; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795076651; x=1795681451; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=hv0gCW5owmhPA76Wzy1UA8RIz97Ep0lDMq0mGjAflXA=;
- b=Tlah6DjOyGYffLw8TRW2zRm1pDzUs1C/9WNCY6ExpCalHF7ZvJ+jZQO2qexDjnqEp+
- q3+mG4J/XCsvFZGmeKfigyLdNDBoLO/g8znF9HXF9mKwne395siQN2GceuSmDoDFngk5
- 9jmFQ2er4HfuuU0tZ4RjXnxYVyNt/LmtL+vPJvPMdmpeWFYEJf5GmdnwZqtSzY1qkWqZ
- +vlfcRPnk/amc7WD4pvynk0oGYsn20/gy9bIGaq3EM4gbP5CluCNvtNbK296ZxIgxAS1
- nX8ldQeUVZP1w9hUmsmXfo4/DO77ic0Qjia/fHoH65boIvMyxooaaxj1/h8F+gOnLAid
- 3WZw==
+ bh=tGilkePA/I6Z7w81HYXyow4LaQeCJgl//68K2X2Vikw=;
+ b=TCdQDcFPzo5VHVcKv0y8p0PnLujLyGClU7x/E17/+PUsHQPBn2HIvvCDdDi49iRuGT
+ qhgOg7Ltok/LabnWLt3RbNWwVcrztyl+Y4nb4JWZAeDMGddYKSqFle9GVj8Gc8kA8PDp
+ JZ5XFehwZcX+4DH/3pWGYAh6ribYFvGsdgOgPgiDgW4leLwDPVmJ7ZKzJDhszrasofLi
+ Va6J7fWX5CPNA/mXCosMDltjCdaemdp9Eeb97j3tfv2rFQAge9WaGImdS5VLUKCGvZLC
+ yNyebhp29YDfX0K/+xsVuBMsYyOfmbEpktU8Vb+C6eb6+f8gH2ywuX5wWYu+4JnVLg3e
+ flVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795076653; x=1795681453;
+ d=1e100.net; s=20260707; t=1795076651; x=1795681451;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=hv0gCW5owmhPA76Wzy1UA8RIz97Ep0lDMq0mGjAflXA=;
- b=vZ0FlGyo6IXwypexGYHDHj9zqLqnuKbn4W9pVS7GBlUPPS/R/r5Q/kwGDZgBRsc46n
- eB76730KCbIAXLMpZ9FkE5vZEjiFvXO2pmN8+J8voSiOh50FKsbW4ciyxLAtVZoyfXNw
- 3aTlQgaq75yEJ9yKCtNjEfF9Rfx25COdBYJto4yTd36W0fAcKompDHdBdNPrh1X+ChdA
- zQdJX3/b/wiXa9JHK1pad3KeVERlJr9bEXNVap2+zY+Dkwxon3qQirSkL1qJDx2mpeQ5
- RsB2f0lsTFMCUJq7MXcCCGwqrWh9DCaUr9xtF45m3LlAQp01sHpVQjzbf4HsJ+iUmNqS
- AbTA==
-X-Gm-Message-State: APuU4Z/U1f/6nykjDbfT7CjbQfcA//JToaCduD5cJozUBbfA0FdSN7y3
- PbCbliB8erVN07L6OSogshfl/dUjqqhX/yqRPSTC2u2eP+pfAn2QAjlwKN/K5fMO6IQmUbvxpVP
- 8n/kGQJl+/75GS9OYEUTRGps4FTDD5nEbKemLrCP0pNdVVXi7MWLnCIq11A==
-X-Gm-Gg: AZFdTZdxZTbfhiO22JNL+F43gWn3XgqN7DS7iCTUK/v4JdEFqWx75C+8a32AyoM8M28
- dNNM0NiMI5T+oXzAIQrJHCJlJUclEPfgIfDTv8fsJXdr+a8pgQdO1NM90J1cFMA/Qo/adJK9VXh
- 5/1hLbG+BmFwOZ6Kl1ktO2zavnDEC5Rs6WNySYrHkZm6s1qhPWkNWNcT4A5dH3uN616212NvY8X
- 9YVNFI8eHTwPrMargQAjuUkQ1lHGhOUeZODKkK3rf+z1Nl29lziJtT8dvEPgtYc9fw+jmK7NxoZ
- AauW9UJiXxMTqMXuJFl6hypNfefVNANbNKqG782QmPzAw6Pahj/esKLEdpiCYKzV7yEsMP37r0X
- IYGC52ZdKXVGwKrtF0Om4+OJYKmRLa5JzqTNocG4YVrmmoh4kwgattOdIXC6+C5NA+mRco/cCts
- 8exD2kJX1V
-X-Received: by 2002:a05:6214:4016:b0:91e:ef31:77c3 with SMTP id
- 6a1803df08f44-92114f18bf8mr79922226d6.31.1795076652949; 
- Thu, 19 Nov 2026 00:24:12 -0800 (PST)
-X-Received: by 2002:a05:6214:4016:b0:91e:ef31:77c3 with SMTP id
- 6a1803df08f44-92114f18bf8mr79921936d6.31.1795076652442; 
- Thu, 19 Nov 2026 00:24:12 -0800 (PST)
+ bh=tGilkePA/I6Z7w81HYXyow4LaQeCJgl//68K2X2Vikw=;
+ b=zGJHujNHJVuI8bR0Xio5Ma6qD1YBdaO9bYr8FnF8d3QXdd4k/0GuI7WHOFfkLvvp/K
+ icojuiUTzhu29QZVVFBM8/gNTTdTjQXBa9r22cLAUZ2Eue2+pwxFKFq8kP4WSV/FJhfu
+ W8XjOetf7c+iGo+L8OG02PCb+K3ZnsyvE6G1zgjozN2rwqa5sMpia0AAwVy7p9J1NhVL
+ W7LEd7iiBbg9pzC7TaOjBXIVLWueoGI4Z11+jKp/BuyarDp77t882f/bMiFEsMLGKmtT
+ TiEUBsGmD8HanEHz8+hwuTP28FXwr+aU24PqhQPw2txLTCizWEGhdkO/lKQ0SOxsSRXs
+ gXGg==
+X-Gm-Message-State: APuU4Z+lrFSgPOzsZUm+gCz3ctSQe1hapPY+hfR81zD4Z+rgUFjGjywU
+ YmO2EJl4p2gki2Y1bjTEy4s2jqVxW0yP8RlYz3CHzOED7dp9KiUnhEptfj6uhfmk8FEwlX0uc68
+ wmyw3NLfhPQcdrs13fWtFhfJga4o33qEg62ccUWYDO2xDmKlhfdXYnSW+cw==
+X-Gm-Gg: AYBFou3wjbmgHl/5KFZ1C3AUcWdw5sZHxPJDtVyGE10jSDxvybR+ST3hkseeoRrQtJb
+ aTtCLSLXFFdRBGNiHun7KXePacyv8XC7JlUP7opYdRMQKD37C4NQC+7cDuoeSXd94crS43RvPUl
+ rJiJVc7IfcfQ8zkYXaY660W64j+oHwQ1OIB/wb6/asi/wpYF10j7esLLwqXSXmmRUL1gMuyHusT
+ +KcLRZ3FyphAT1bEhfChv5BRZmlMmYX2P6y7WT/nuDtF04CbN8m2wLH7np+UBzXRZuvYbg0Ml4n
+ R5RuAHBHW4+L4oKb/hB/H614RaB14YMyAo6gGkO/CzZwc8BvptEASIyo27wA8p1TUCMGuXlTlvV
+ xZ1PArWUx3tcL2SZG06XpZ0wstRfs+mrqXMDcnPZlzAfhBErCgOE/Rh62lcWhdPyNdSMScdceSI
+ sn6ynoXzG2
+X-Received: by 2002:a05:620a:8801:b0:949:3644:edc0 with SMTP id
+ af79cd13be357-94999574d97mr903379185a.17.1795076650903; 
+ Thu, 19 Nov 2026 00:24:10 -0800 (PST)
+X-Received: by 2002:a05:620a:8801:b0:949:3644:edc0 with SMTP id
+ af79cd13be357-94999574d97mr903375985a.17.1795076650273; 
+ Thu, 19 Nov 2026 00:24:10 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([179.193.8.137])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9211a6318aesm34524136d6.39.2026.11.19.00.24.10
+ 6a1803df08f44-9211a6318aesm34524136d6.39.2026.11.19.00.24.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 19 Nov 2026 00:24:11 -0800 (PST)
+ Thu, 19 Nov 2026 00:24:09 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PATCH v3 5/5] MAINTAINERS: add contact for the RISC-V server-ref
- machine
-Date: Thu, 19 Nov 2026 05:23:55 -0300
-Message-ID: <20261119082356.1264726-6-daniel.barboza@oss.qualcomm.com>
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v3 4/5] hw/riscv/virt.c: fix base baud in serial_mm_init()
+Date: Thu, 19 Nov 2026 05:23:54 -0300
+Message-ID: <20261119082356.1264726-5-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261119082356.1264726-1-daniel.barboza@oss.qualcomm.com>
 References: <20261119082356.1264726-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX+6hKwQDvuXRL
- WPSpFfHwIRiut0RQwr7i6x/WYB4ma3j/ny2bDp2EfaoSYYkyfGMuxl/zlmvcGA8pngowioYMBxj
- xzKMQqxbWz8gfcuehX5D/5eJFEGQpDLpkAaYGvjCPiT8OfEaDtOCX+iMdsG3yJ1F//H7C/aarCW
- V3XAOSkzOje1wE9xecmGSLHqmfOYkjw5sPjWqzOH+Rwljwz8rfio3DBYz8cF6yizgT+JQoNFR69
- IvqhZr619fm/UXC+M4yis59859gZPIHUaorwWpsIxziM7/RM6CcUsjr0vM+SbmFy/887adhdZq8
- GkhI6KWtnQpppCbk4bezU9nxi9BbvOoznEP3DTaIOsNwF10FPPca73g1miNbHFs33ZkQQ6kQbJP
- 4NXbGrE4bpgtx87d66sM4YM0TLepPCuIF+l4TPEnFEB7DOw3DX/Qe5FMCUoLj2JzrazQo442Y/O
- wpHYV8+lqK8QVEebD7g==
-X-Authority-Analysis: v=2.4 cv=QO391QLL c=1 sm=1 tr=0 ts=6afeb22e cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=a6tGUzlCxnQfwxx7nGpYxQ==:17
+X-Proofpoint-GUID: _7W7QoaH_psg0Pb_mS0JSB1AvEVn2_KZ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX2hw0P6tjkshP
+ fEiXaRsqAjucgasnjg6zmLlmDl+sDFluBmeVZYkFauH3pKmxNxMll0nMnWXFNHasiO1spvTfNB1
+ UFOGbu1xaoFcthav/aB62GDt8cwKcq7Q4bltoB5nK98BLIPhxm0K0JN1mKa8SoQwdYwC/k0wMIn
+ KlVWPw9UemUrEfuDIw1o6MWyodpVr6KQONBZdkR4B5VqOQ5mF9pi/nIQY4JGr5E8e/8XPqr2/2e
+ UmGn7fsXionVhHaL2oULS4Nl9871Nq5nIchNntVZ4IQNXOGTcmDDaNfUJNTjA5xJH7DsKvXC/0z
+ 0Ydz8Q0HoOw4TLzV1lyjyyDVpSgrGP6KWovvsqTHMpvxgsDOiCj73O7tQ+k2im/YFwjlh5+qeSr
+ bz7mTHtvXZc8mx/ei5J4ssX04xzpyJuMuiFe43pAiLm+ccosNwD3XwATwUDSvC7SgMVYHmDTvkP
+ nf/QB9vG8JZoh4p81oQ==
+X-Proofpoint-ORIG-GUID: _7W7QoaH_psg0Pb_mS0JSB1AvEVn2_KZ
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX+HAk8fYg7xzu
+ i15qkLQuAX88+oRjx60FTqQkRieeKJrVw39goqLN4AFcYTmbfXaCTWwDtzZwSzkTgKIM0GjZno0
+ Do8751J7kk2MRKmJtzm5g1pqxmrKYmM=
+X-Authority-Analysis: v=2.4 cv=PJ6aavqC c=1 sm=1 tr=0 ts=6afeb22c cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=a6tGUzlCxnQfwxx7nGpYxQ==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=FRSEYCzRAAAA:8 a=JF9118EUAAAA:8 a=69wJf7TsAAAA:8 a=MOatoMk4zhW8oBTF--8A:9
- a=pJ04lnu7RYOZP9TFuWaZ:22 a=H4N_Y-AU75W7NKDNhZlT:22 a=xVlTc564ipvMDusKsbsT:22
- a=Fg1AiH1G6rFz08G2ETeA:22
-X-Proofpoint-ORIG-GUID: 6SZQkDhvR4xIyb7RjfEjudcBDdYgKpN2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTE5MDAzMyBTYWx0ZWRfX3Y2KxXNiU/Sa
- CNGk7Ikrc4dE67pI98RbgwW93acaCLAgXDAst9syMcxkEatADGSgHfmYPTsZHDcHQUr69jAa8CX
- odm3g5KfaN9ADUAuPUzZaWui7zxR5U0=
-X-Proofpoint-GUID: 6SZQkDhvR4xIyb7RjfEjudcBDdYgKpN2
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=JF9118EUAAAA:8 a=YBD5noFLO0MiZe3rPCsA:9 a=bTQJ7kPSJx9SKPbeHEYW:22
+ a=xVlTc564ipvMDusKsbsT:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-19_02,2026-11-16_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 spamscore=0 bulkscore=0 clxscore=1015
- adultscore=0 lowpriorityscore=0 phishscore=0 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611190033
+ bulkscore=0 lowpriorityscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 phishscore=0 spamscore=0 adultscore=0 impostorscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611190033
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -157,34 +157,63 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Make it clearer that this is a board that is actively maintained.
+We've been using a base baud of 399193 to create the UART devices
+while, at the same time, reporting a clock frequency that represents
+a 230400 baud rate.
 
+This pattern dates back to the initial RISC-V port and so far seems to
+be doing okay.  Linux thinks that we have a 230400 baud serials and
+nothing seems of.  Or better yet: no one has complained about a
+potential bug in the UART devices since 2018.
+
+All this said, set the UARTs baud rate in serial_mm_init() to match
+what Linux has been seeing all this time.
+
+Fixes: 04331d0b56a0 ("RISC-V VirtIO Machine")
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
 Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ hw/riscv/virt.c         | 10 ++++++----
+ include/hw/riscv/virt.h |  2 ++
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 15942aaba3..ba026ded6e 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1914,6 +1914,14 @@ F: include/hw/riscv/cv1800b.h
- F: tests/functional/riscv64/test_milkv_duo.py
- F: tests/qtest/milkv-duo-test.c
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 9eccf62d4f..9c621b5939 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -929,13 +929,15 @@ static void virt_machine_init(MachineState *machine)
+         VIRT_PLATFORM_BUS_NUM_IRQS);
  
-+RISC-V Server Reference Platform (riscv-server-ref) machines
-+M: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-+L: qemu-riscv@nongnu.org
-+S: Maintained
-+F: docs/system/riscv/riscv-server-ref.rst
-+F: hw/riscv/server_platform_ref.c
-+F: tests/functional/riscv64/test_server_ref.py
+     serial_mm_init(system_memory, s->memmap[VIRT_UART0].base,
+-        0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ), 399193,
+-        serial_hd(0), DEVICE_LITTLE_ENDIAN);
++                   0, qdev_get_gpio_in(mmio_irqchip, UART0_IRQ),
++                   RISCV_VIRT_UART_BASE_BAUD,
++                   serial_hd(0), DEVICE_LITTLE_ENDIAN);
+ 
+     if (serial_hd(1)) {
+         serial_mm_init(system_memory, s->memmap[VIRT_UART1].base,
+-            0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ), 399193,
+-            serial_hd(1), DEVICE_LITTLE_ENDIAN);
++                       0, qdev_get_gpio_in(mmio_irqchip, UART1_IRQ),
++                       RISCV_VIRT_UART_BASE_BAUD,
++                       serial_hd(1), DEVICE_LITTLE_ENDIAN);
+         s->uart1_present = true;
+     }
+ 
+diff --git a/include/hw/riscv/virt.h b/include/hw/riscv/virt.h
+index 6e4fbf4b64..63907d7362 100644
+--- a/include/hw/riscv/virt.h
++++ b/include/hw/riscv/virt.h
+@@ -121,6 +121,8 @@ enum {
+ #define VIRT_PLIC_SIZE(__num_context) \
+     (VIRT_PLIC_CONTEXT_BASE + (__num_context) * VIRT_PLIC_CONTEXT_STRIDE)
+ 
++#define RISCV_VIRT_UART_BASE_BAUD  230400
 +
- RX Machines
- -----------
- rx-gdbsim
+ bool virt_is_iommu_sys_enabled(RISCVVirtState *s);
+ void riscv_virt_acpi_setup(RISCVVirtState *vms);
+ 
 -- 
 2.43.0
 
