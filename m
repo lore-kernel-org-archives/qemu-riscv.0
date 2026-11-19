@@ -1,33 +1,33 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2805606A325
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 13:17:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DCF1606A32A
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 13:18:08 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xU1zh-0006ei-Ab; Thu, 19 Nov 2026 08:16:06 -0500
+	id 1xU1zc-0006dz-Ix; Thu, 19 Nov 2026 08:16:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xU1za-0006cj-Cw; Thu, 19 Nov 2026 08:15:58 -0500
-Received: from mxhk.zte.com.cn ([160.30.148.35])
+ id 1xU1zW-0006ZP-Ot; Thu, 19 Nov 2026 08:15:54 -0500
+Received: from mxhk.zte.com.cn ([160.30.148.34])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <gong.shuai@sanechips.com.cn>)
- id 1xU1zW-0005qA-BW; Thu, 19 Nov 2026 08:15:57 -0500
+ id 1xU1zT-0005nJ-Sm; Thu, 19 Nov 2026 08:15:54 -0500
 Received: from mse-fl2.zte.com.cn (unknown [10.5.228.133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jVf9H5gbYz8Xrrm;
+ by mxhk.zte.com.cn (FangMail) with ESMTPS id 4jVf9H1xhcz4yjjG;
  Thu, 19 Nov 2026 21:15:47 +0800 (CST)
-Received: from szxlzmapp03.zte.com.cn ([10.5.231.207])
- by mse-fl2.zte.com.cn with SMTP id 6AJDFe01060370;
- Thu, 19 Nov 2026 21:15:40 +0800 (+08)
+Received: from szxl2zmapp07.zte.com.cn ([10.1.32.52])
+ by mse-fl2.zte.com.cn with SMTP id 6AJDFdEf060324;
+ Thu, 19 Nov 2026 21:15:39 +0800 (+08)
  (envelope-from gong.shuai@sanechips.com.cn)
 Received: from ubuntu-35-gs (unknown [10.230.214.35])
  by smtp (Zmail) with SMTP; Thu, 19 Nov 2026 21:15:43 +0800
-X-Zmail-TransId: 3e816afef67f02f-55750
+X-Zmail-TransId: 3e816afef67e02f-55743
 X-Zmail-LocalSMTP: 1
 X-Zmail-RealSender: gong.shuai@sanechips.com.cn
 From: Gong Shuai <gong.shuai@sanechips.com.cn>
@@ -43,10 +43,10 @@ Cc: Paolo Bonzini <pbonzini@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>,
  Wu Fei <wu.fei9@sanechips.com.cn>,
  Qingye Zhao <zhao.qingye@sanechips.com.cn>,
  Gong Shuai <gong.shuai@sanechips.com.cn>
-Subject: [RFC PATCH v3 13/15] hw/riscv/riscv-iommu-accel: Add support to issue
- invalidation cmd to host
-Date: Thu, 19 Nov 2026 21:15:22 +0800
-Message-ID: <20261119131524.395861-14-gong.shuai@sanechips.com.cn>
+Subject: [RFC PATCH v3 12/15] hw/riscv/riscv-iommu-accel: Apply the DDTP mode
+ to every device
+Date: Thu, 19 Nov 2026 21:15:21 +0800
+Message-ID: <20261119131524.395861-13-gong.shuai@sanechips.com.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261119131524.395861-1-gong.shuai@sanechips.com.cn>
 References: <20261119131524.395861-1-gong.shuai@sanechips.com.cn>
@@ -54,14 +54,14 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-ZMAIL-USEORIGINALEMLTOOUTBOUND: 1
 Content-Transfer-Encoding: 8bit
-X-MAIL: mse-fl2.zte.com.cn 6AJDFe01060370
+X-MAIL: mse-fl2.zte.com.cn 6AJDFdEf060324
 X-TLS: YES
 X-ENVELOPE-SENDER: gong.shuai@sanechips.com.cn
 X-SOURCE-IP: 10.5.228.133 unknown Thu, 19 Nov 2026 21:15:47 +0800
 X-CLEAN: YES
 X-Fangmail-Anti-Spam-Filtered: true
-X-Fangmail-MID-QID: 6AFEF683.001/4jVf9H5gbYz8Xrrm
-Received-SPF: pass client-ip=160.30.148.35;
+X-Fangmail-MID-QID: 6AFEF683.000/4jVf9H1xhcz4yjjG
+Received-SPF: pass client-ip=160.30.148.34;
  envelope-from=gong.shuai@sanechips.com.cn; helo=mxhk.zte.com.cn
 X-Spam_score_int: -18
 X-Spam_score: -1.9
@@ -82,108 +82,90 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Wu Fei <wu.fei9@sanechips.com.cn>
+The DDTP mode decides how the IOMMU translates accesses from the
+devices behind it. On reset, attach every device to the pre-allocated
+abort or bypass HWPT selected by DDTP mode and re-apply the mode on
+every accepted DDTP change.
 
-Provide a helper to forward guest IOTLB invalidations to the host
-RISC-V IOMMU, and use it in the IOTINVAL command path so the
-accelerated translation caches stay in sync with the guest. Only
-one command is issued at a time for now.
-
-Signed-off-by: Wu Fei <wu.fei9@sanechips.com.cn>
 Signed-off-by: Gong Shuai <gong.shuai@sanechips.com.cn>
 ---
- hw/riscv/riscv-iommu-accel.c | 44 ++++++++++++++++++++++++++++++++++++
- hw/riscv/riscv-iommu-accel.h |  8 +++++++
- hw/riscv/riscv-iommu.c       |  3 +++
- 3 files changed, 55 insertions(+)
+ hw/riscv/riscv-iommu-accel.c | 38 ++++++++++++++++++++++++++++++++++++
+ hw/riscv/riscv-iommu-accel.h |  6 ++++++
+ hw/riscv/riscv-iommu.c       | 15 ++++++++++++++
+ 3 files changed, 59 insertions(+)
 
 diff --git a/hw/riscv/riscv-iommu-accel.c b/hw/riscv/riscv-iommu-accel.c
-index 47303323c7..4cd3fae8e4 100644
+index e203c384a6..47303323c7 100644
 --- a/hw/riscv/riscv-iommu-accel.c
 +++ b/hw/riscv/riscv-iommu-accel.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include "qemu/osdep.h"
-+#include "qemu/bswap.h"
- #include "qemu/error-report.h"
- #include "trace.h"
- 
-@@ -161,6 +162,49 @@ static uint32_t riscv_iommu_accel_ddtp_hwpt(RISCVIOMMUState *s,
-                accel->abort_hwpt_id : accel->bypass_hwpt_id;
+@@ -496,6 +496,44 @@ bool riscv_iommu_accel_install_dc_all(RISCVIOMMUState *s)
+     return all_ok;
  }
  
 +/*
-+ * Issue the invalidation command to the host RISC-V IOMMU.
-+ *
-+ * The RISC-V IOTINVAL command carries no device (like ARM's SID)
-+ * information, only (addr, gscid, pscid), so no per-device filtering
-+ * is needed here.
++ * Attach every accelerated device to the pre-allocated abort/bypass proxy
++ * HWPT selected by the current DDTP mode. All the devices must be re-attached
++ * whenever the DDTP mode is (re)applied.
 + */
-+bool riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
-+                                     const struct riscv_iommu_command *cmd)
++bool riscv_iommu_accel_attach_ddtp_hwpt(RISCVIOMMUState *s, Error **errp)
 +{
 +    RISCVIOMMUAccelState *accel = s->accel_state;
-+    struct iommu_viommu_riscv_invalidate inv = {
-+        .cmd = { cpu_to_le64(cmd->dword0), cpu_to_le64(cmd->dword1) },
-+    };
-+    uint32_t entry_num = 1;
-+    bool ret;
++    RISCVIOMMUAccelDevice *accel_dev;
 +    Error *local_err = NULL;
++    bool all_ok = true;
++    uint32_t hwpt_id;
 +
-+    /* The uAPI entry must stay exactly one hardware command word */
-+    QEMU_BUILD_BUG_ON(sizeof(inv) != sizeof(*cmd));
-+
-+    /*
-+     * No accel or viommu means no VFIO/IOMMUFD devices, nothing to
-+     * invalidate.
-+     */
 +    if (!accel || !accel->viommu) {
 +        return true;
 +    }
 +
-+    /* Single command (entry_num = 1); no need to check returned entry_num */
-+    ret = iommufd_backend_invalidate_cache(accel->viommu->iommufd,
-+                                           accel->viommu->viommu_id,
-+                                           IOMMU_VIOMMU_INVALIDATE_DATA_RISCV,
-+                                           sizeof(inv), &entry_num, &inv,
-+                                           &local_err);
-+
-+    if (local_err) {
-+        error_report_err(local_err);
++    hwpt_id = riscv_iommu_accel_ddtp_hwpt(s, accel);
++    QLIST_FOREACH(accel_dev, &accel->device_list, next) {
++        if (!host_iommu_device_iommufd_attach_hwpt(accel_dev->idev,
++                                                   IOMMU_NO_PASID, hwpt_id,
++                                                   &local_err)) {
++            error_append_hint(&local_err, "Failed to attach DDTP hwpt %u for "
++                              "idev devid 0x%x", hwpt_id,
++                              accel_dev->idev->devid);
++            error_report_err(local_err);
++            local_err = NULL;
++            all_ok = false;
++        }
 +    }
 +
-+    return ret;
++    if (!all_ok) {
++        error_setg(errp, "Failed to attach all DDTP based HWPTs properly");
++    }
++
++    return all_ok;
 +}
 +
- static bool riscv_iommu_accel_alloc_viommu(RISCVIOMMUState *s,
-                                            HostIOMMUDeviceIOMMUFD *idev,
-                                            Error **errp)
+ static const PCIIOMMUOps riscv_iommu_accel_ops = {
+     .supports_address_space = riscv_iommu_accel_supports_as,
+     .get_address_space = riscv_iommu_accel_find_as,
 diff --git a/hw/riscv/riscv-iommu-accel.h b/hw/riscv/riscv-iommu-accel.h
-index bf614017e2..73529e9fac 100644
+index 85a1ab6d42..bf614017e2 100644
 --- a/hw/riscv/riscv-iommu-accel.h
 +++ b/hw/riscv/riscv-iommu-accel.h
-@@ -43,6 +43,8 @@ void riscv_iommu_accel_init(RISCVIOMMUState *s);
+@@ -42,6 +42,7 @@ typedef struct RISCVIOMMUAccelDevice {
+ void riscv_iommu_accel_init(RISCVIOMMUState *s);
  bool riscv_iommu_accel_install_dc(RISCVIOMMUState *s, int devid);
  bool riscv_iommu_accel_install_dc_all(RISCVIOMMUState *s);
- bool riscv_iommu_accel_attach_ddtp_hwpt(RISCVIOMMUState *s, Error **errp);
-+bool riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
-+                                     const struct riscv_iommu_command *cmd);
++bool riscv_iommu_accel_attach_ddtp_hwpt(RISCVIOMMUState *s, Error **errp);
  #else
  static inline void riscv_iommu_accel_init(RISCVIOMMUState *s)
  {
-@@ -62,6 +64,12 @@ riscv_iommu_accel_attach_ddtp_hwpt(RISCVIOMMUState *s, Error **errp)
+@@ -56,6 +57,11 @@ riscv_iommu_accel_install_dc_all(RISCVIOMMUState *s)
  {
      return true;
  }
 +static inline bool
-+riscv_iommu_accel_issue_inv_cmd(RISCVIOMMUState *s,
-+                                const struct riscv_iommu_command *cmd)
++riscv_iommu_accel_attach_ddtp_hwpt(RISCVIOMMUState *s, Error **errp)
 +{
 +    return true;
 +}
@@ -191,19 +173,38 @@ index bf614017e2..73529e9fac 100644
  
  #endif /* HW_RISCV_RISCV_IOMMU_ACCEL_H */
 diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-index 7a55b7514b..72fea5f8be 100644
+index fa751d566f..7a55b7514b 100644
 --- a/hw/riscv/riscv-iommu.c
 +++ b/hw/riscv/riscv-iommu.c
-@@ -2101,6 +2101,9 @@ static void riscv_iommu_process_cq_tail(RISCVIOMMUState *s)
-             }
+@@ -1966,6 +1966,16 @@ static void riscv_iommu_process_ddtp(RISCVIOMMUState *s)
+     s->ddtp = new_ddtp;
  
-             riscv_iommu_iot_inval(s, iot_func, gscid, pscid, iova, transtag);
-+            if (!riscv_iommu_accel_issue_inv_cmd(s, &cmd)) {
-+                goto cmd_ill;
-+            }
-             break;
-         }
+     riscv_iommu_reg_set64(s, RISCV_IOMMU_REG_DDTP, new_ddtp);
++
++    /* Apply the new DDTP mode to the accelerated devices */
++    if (s->accel && new_ddtp != old_ddtp) {
++        if (new_mode == RISCV_IOMMU_DDTP_MODE_OFF ||
++            new_mode == RISCV_IOMMU_DDTP_MODE_BARE) {
++            riscv_iommu_accel_attach_ddtp_hwpt(s, NULL);
++        } else {
++            riscv_iommu_accel_install_dc_all(s);
++        }
++    }
+ }
  
+ /* Command function and opcode field. */
+@@ -2894,6 +2904,11 @@ void riscv_iommu_reset(RISCVIOMMUState *s)
+     qemu_mutex_lock(&s->iot_lock);
+     g_hash_table_remove_all(s->iot_cache);
+     qemu_mutex_unlock(&s->iot_lock);
++
++    /* Re-attach every accelerated device based on the reset DDTP mode */
++    if (s->accel) {
++        riscv_iommu_accel_attach_ddtp_hwpt(s, NULL);
++    }
+ }
+ 
+ static const Property riscv_iommu_properties[] = {
 -- 
 2.53.0
 
