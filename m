@@ -1,43 +1,43 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EC43606A320
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:45:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A483A606A320
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:45:59 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTwpF-00073P-Ax; Thu, 19 Nov 2026 02:44:57 -0500
+	id 1xTwom-0006x9-Fh; Thu, 19 Nov 2026 02:44:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwou-0006yR-Rj; Thu, 19 Nov 2026 02:44:42 -0500
+ id 1xTwoX-0006v3-EB; Thu, 19 Nov 2026 02:44:15 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwor-0001kY-Ov; Thu, 19 Nov 2026 02:44:35 -0500
+ id 1xTwoS-0001j8-N6; Thu, 19 Nov 2026 02:44:12 -0500
 Received: from xiaoou-ubuntu-01 (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S20;
- Thu, 19 Nov 2026 15:44:08 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S10;
+ Thu, 19 Nov 2026 15:44:04 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
 Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v4 18/20] target/riscv: Remove Zbkb dependency from P
- extension to align with the spec
-Date: Thu, 19 Nov 2026 07:43:38 +0000
-Message-ID: <20261119074345.866125-19-xiaoou@iscas.ac.cn>
+Subject: [PATCH v4 08/20] target/riscv: Add packed SIMD horizontal reduction
+ instructions
+Date: Thu, 19 Nov 2026 07:43:28 +0000
+Message-ID: <20261119074345.866125-9-xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 References: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S20
-X-Coremail-Antispam: 1UD129KBjvJXoW7tw48Wr4xCryDXrykKw1ftFb_yoW8uw4kpr
- 48C3yYkrWqqryrA3yftF4UAF1UGr4S9a1Iga1vqwn5ua15ArW3Xw4qkw4agF1UJF1kWw42
- 9Fn2ywn8ZFW8Xa7anT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S10
+X-Coremail-Antispam: 1UD129KBjvJXoWxZr4UZrW7KF1fuFWDGr17Wrg_yoWrXrW7pF
+ s7GrW3JrWUXFyaqas3tr4Yk3W3WwsYgan8CwsaqFnYvay5JFW8u34DKr12kF4UXF9rur15
+ Wa10yrZxAFWrX3JanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
  9KBjDU0xBIdaVrnRJUUUmm14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
  rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
  kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
@@ -75,60 +75,94 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
----
- target/riscv/tcg/insn_trans/trans_rvb.c.inc | 4 +++-
- target/riscv/tcg/insn_trans/trans_rvp.c.inc | 2 +-
- target/riscv/tcg/tcg-cpu.c                  | 6 ++----
- 3 files changed, 6 insertions(+), 6 deletions(-)
+Implement packed horizontal reduction-sum operations.  Cover signed and
+unsigned variants for byte, halfword, and word elements. These instructions
+sum all packed elements in rs1 and add the result to rs2.
+Add the associated decode entries, translators and helpers.
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvb.c.inc b/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-index 82e715c7b7..c30ce61b97 100644
---- a/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvb.c.inc
-@@ -524,7 +524,9 @@ static bool trans_brev8(DisasContext *ctx, arg_brev8 *a)
- 
- static bool trans_pack(DisasContext *ctx, arg_pack *a)
- {
--    REQUIRE_ZBKB(ctx);
-+    if (!has_ext(ctx, RVP) && !ctx->cfg_ptr->ext_zbkb) {
-+        return false;
-+    }
-     return gen_arith(ctx, a, EXT_NONE, gen_pack, NULL);
- }
- 
+Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
+---
+ target/riscv/helper.h                       |  8 ++++++++
+ target/riscv/insn32.decode                  |  8 ++++++++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc |  8 ++++++++
+ target/riscv/tcg/psimd_helper.c             | 15 +++++++++++++++
+ 4 files changed, 39 insertions(+)
+
+diff --git a/target/riscv/helper.h b/target/riscv/helper.h
+index eded651d2b..bd1a03257a 100644
+--- a/target/riscv/helper.h
++++ b/target/riscv/helper.h
+@@ -1550,3 +1550,11 @@ DEF_HELPER_3(psas_wx, i64, env, i64, i64)
+ DEF_HELPER_3(pssa_wx, i64, env, i64, i64)
+ DEF_HELPER_3(paas_wx, i64, env, i64, i64)
+ DEF_HELPER_3(pasa_wx, i64, env, i64, i64)
++
++/* Packed SIMD - Horizontal Reduction Operations */
++DEF_HELPER_3(predsum_bs, tl, env, tl, tl)
++DEF_HELPER_3(predsumu_bs, tl, env, tl, tl)
++DEF_HELPER_3(predsum_hs, tl, env, tl, tl)
++DEF_HELPER_3(predsumu_hs, tl, env, tl, tl)
++DEF_HELPER_3(predsum_ws, i64, env, i64, i64)
++DEF_HELPER_3(predsumu_ws, i64, env, i64, i64)
+diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
+index 5c3b6195b9..edb8f03658 100644
+--- a/target/riscv/insn32.decode
++++ b/target/riscv/insn32.decode
+@@ -1301,3 +1301,11 @@ psas_wx    1001001 ..... ..... 110 ..... 0111011 @r
+ pssa_wx    1001011 ..... ..... 110 ..... 0111011 @r
+ paas_wx    1001101 ..... ..... 110 ..... 0111011 @r
+ pasa_wx    1001111 ..... ..... 110 ..... 0111011 @r
++
++# Packed SIMD - Horizontal Reduction Operations
++predsum_bs   1001110 ..... ..... 100 ..... 0011011 @r
++predsumu_bs  1011110 ..... ..... 100 ..... 0011011 @r
++predsum_hs   1001100 ..... ..... 100 ..... 0011011 @r
++predsumu_hs  1011100 ..... ..... 100 ..... 0011011 @r
++predsum_ws   1001101 ..... ..... 100 ..... 0011011 @r
++predsumu_ws  1011101 ..... ..... 100 ..... 0011011 @r
 diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-index 3cc630f182..99bab3c1b8 100644
+index c991ac37e3..726707b295 100644
 --- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-@@ -1436,4 +1436,4 @@ GEN_DWS_REG_OP(psll_dws, EXT_NONE, true, tcg_gen_shl_tl)
- GEN_DWS_REG_OP(psrl_dws, EXT_ZERO, true, tcg_gen_shr_tl)
- GEN_DWS_REG_OP(psra_dws, EXT_SIGN, true, tcg_gen_sar_tl)
- 
--GEN_DW_PAIR_ARITH(ppaire_dh, REQUIRE_ZBKB(ctx); , EXT_NONE, gen_pack)
-+GEN_DW_PAIR_ARITH(ppaire_dh, , EXT_NONE, gen_pack)
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 3b3cb52c84..0621bcc785 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -592,10 +592,8 @@ static void riscv_cpu_validate_p(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
--    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb &&
--          cpu->cfg.ext_zbkb)) {
--        error_setg(errp, "P extension requires zmmul, zba, zbb and zbkb "
--                         "extensions");
-+    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb)) {
-+        error_setg(errp, "P extension requires zmmul, zba and zbb extensions");
-         return;
-     }
- }
+@@ -664,3 +664,11 @@ GEN_SIMD_TRANS_64_VXSAT(psas_wx)
+ GEN_SIMD_TRANS_64_VXSAT(pssa_wx)
+ GEN_SIMD_TRANS_64(paas_wx)
+ GEN_SIMD_TRANS_64(pasa_wx)
++
++/* Packed SIMD - Horizontal Reduction Operations */
++GEN_SIMD_TRANS(predsum_bs)
++GEN_SIMD_TRANS(predsumu_bs)
++GEN_SIMD_TRANS(predsum_hs)
++GEN_SIMD_TRANS(predsumu_hs)
++GEN_SIMD_TRANS_64(predsum_ws)
++GEN_SIMD_TRANS_64(predsumu_ws)
+diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
+index 5537a44dff..a1e4fb64ef 100644
+--- a/target/riscv/tcg/psimd_helper.c
++++ b/target/riscv/tcg/psimd_helper.c
+@@ -2457,3 +2457,18 @@ GEN_PSIMD_XPAIR_AVG_BINOP(paas_wx, uint64_t, int32_t, int64_t,
+ GEN_PSIMD_XPAIR_AVG_BINOP(pasa_wx, uint64_t, int32_t, int64_t,
+                           EXTRACT32, INSERT32, ELEMS_W,
+                           PSIMD_DO_ADD, PSIMD_DO_SUB)
++
++/* Horizontal sum operations */
++
++GEN_PSIMD_REDSUM(predsum_bs, target_ulong, int64_t, int8_t,
++                 EXTRACT8, ELEMS_B, (int64_t)(int32_t)rs2)
++GEN_PSIMD_REDSUM(predsumu_bs, target_ulong, uint64_t, uint8_t,
++                 EXTRACT8, ELEMS_B, rs2)
++GEN_PSIMD_REDSUM(predsum_hs, target_ulong, int64_t, int16_t,
++                 EXTRACT16, ELEMS_H, (int64_t)(int32_t)rs2)
++GEN_PSIMD_REDSUM(predsumu_hs, target_ulong, uint64_t, uint16_t,
++                 EXTRACT16, ELEMS_H, rs2)
++GEN_PSIMD_REDSUM(predsum_ws, uint64_t, int64_t, int32_t,
++                 EXTRACT32, ELEMS_W, (int64_t)rs2)
++GEN_PSIMD_REDSUM(predsumu_ws, uint64_t, uint64_t, uint32_t,
++                 EXTRACT32, ELEMS_W, rs2)
 -- 
 2.53.0
 
