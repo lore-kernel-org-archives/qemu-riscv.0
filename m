@@ -1,76 +1,67 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07362606A320
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 14:56:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 773D6606A320
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 14:57:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=PfrZQffv
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=Y3zFIkou
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xU3Y8-0001TF-SY; Thu, 19 Nov 2026 09:55:45 -0500
+	id 1xU3Yp-0001zH-9f; Thu, 19 Nov 2026 09:56:39 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xU3Un-0007RX-82; Thu, 19 Nov 2026 09:52:19 -0500
-Received: from [115.124.30.132] (helo=out30-132.freemail.mail.aliyun.com)
+ id 1xU3W7-0007zR-Cf; Thu, 19 Nov 2026 09:53:50 -0500
+Received: from [115.124.30.110] (helo=out30-110.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <lyndra@linux.alibaba.com>)
- id 1xU3Ug-0007U0-1U; Thu, 19 Nov 2026 09:52:16 -0500
+ id 1xU3Vr-0001I2-UG; Thu, 19 Nov 2026 09:53:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1795099907; h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To;
- bh=Uut4UxOu9wAD4Dix55OzV26d1ntTROJKNLev3nj8YQg=;
- b=PfrZQffvrrCaG4/0N+RP1K/q4xJdTR4GFcQ5OuvHIcgv/YvxeP7eJmUp8MuXGt3Nb38Veky5DXATaBv+IadLCfut/pi0LabC3KXr3D+ZLfxukLai3+yvQQLYqYtJz+dPueaPyktjOwUv+Or6jz++tfe8NEoCoQ1REa1n2I5zvxQ=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R831e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033045098064;
- MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0XF3s1a4_1795099906; 
-Received: from ea134-sw06.eng.xrvm.cn(mailfrom:lyndra@linux.alibaba.com
- fp:SMTPD_---0XF3s1a4_1795099906 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 19 Nov 2026 22:51:46 +0800
-From: TANG Tiancheng <lyndra@linux.alibaba.com>
-Date: Thu, 19 Nov 2026 22:50:38 +0800
-Subject: [PATCH v5 05/14] target/riscv: Preserve minstretcfgh on RV32
- minstretcfg writes
+ t=1795099983; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
+ bh=Bb+IN3QAeXPKu/t5xgVp6Pjp1hZmDcn80zkwE2ZIs38=;
+ b=Y3zFIkougBzN3x/6D4YHjlMTEp6pzAbCHq/KkYoBH4PO5Bq5nJpbkleUQpzMUD3tdQQRGFnyFqnZVgHb/+ufDIoCq179yN6cEZiAesRC30T/CqLebyhQGOxD0ntaMMIVwRal6s8seJ2DFm1O/MNvbyUJVJuWEHtTFEE0Ptl62DY=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037026112;
+ MF=lyndra@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
+ TI=SMTPD_---0XF3nDqQ_1795099982; 
+Received: from 30.180.144.153(mailfrom:lyndra@linux.alibaba.com
+ fp:SMTPD_---0XF3nDqQ_1795099982 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 19 Nov 2026 22:53:02 +0800
+Message-ID: <d9a849a7-5b3a-45da-8d59-17afc721d1f8@linux.alibaba.com>
+Date: Thu, 19 Nov 2026 22:53:02 +0800
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261119-riscv-pmu-correctness-v5-5-ae9bdc2d2f86@linux.alibaba.com>
-References: <20261119-riscv-pmu-correctness-v5-0-ae9bdc2d2f86@linux.alibaba.com>
-In-Reply-To: <20261119-riscv-pmu-correctness-v5-0-ae9bdc2d2f86@linux.alibaba.com>
-To: qemu-devel@nongnu.org
-Cc: Zephyr Li <fritchleybohrer@gmail.com>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- Richard Henderson <richard.henderson@linaro.org>, 
- Paolo Bonzini <pbonzini@redhat.com>, 
- =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
- TANG Tiancheng <lyndra@linux.alibaba.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795099903; l=3448;
- i=lyndra@linux.alibaba.com; s=20250909; h=from:subject:message-id;
- bh=3Q7mBTvKDM44jyGpEkFpVgGu9pU8S2QoPRlU3fcVHG4=;
- b=PdMc22aAtG47Bp9zBs60Ce5br/9NRTF0HarA/kHGXxOlttHQ4rhfPi+pCDbG1C/UkcFbJB84N
- kiLDT3DeVpoBYwdd3+dlN6TbobyB6n7OGKmYHwk8HJlLNELGKshsWQI
-X-Developer-Key: i=lyndra@linux.alibaba.com; a=ed25519;
- pk=GQh4uOSLVucXGkaZfEuQ956CrYS14cn1TA3N8AiIjBw=
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.132 (deferred)
-Received-SPF: pass client-ip=115.124.30.132;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 00/14] RISC-V TCG PMU correctness fixes
+To: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+ qemu-devel@nongnu.org
+Cc: Zephyr Li <fritchleybohrer@gmail.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Paolo Bonzini <pbonzini@redhat.com>
+References: <20261112-riscv-pmu-correctness-v4-0-e9067bdf4df5@linux.alibaba.com>
+ <c95dace6-1c4f-409c-8878-d4c68ec16d62@oss.qualcomm.com>
+From: TianCheng TANG <lyndra@linux.alibaba.com>
+In-Reply-To: <c95dace6-1c4f-409c-8878-d4c68ec16d62@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.110 (deferred)
+Received-SPF: pass client-ip=115.124.30.110;
  envelope-from=lyndra@linux.alibaba.com;
- helo=out30-132.freemail.mail.aliyun.com
+ helo=out30-110.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
 X-Spam_report: (-16.7 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, ENV_AND_HDR_SPF_MATCH=-0.5,
- RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
+ RCVD_IN_DNSWL_NONE=-0.0001, RDNS_NONE=0.793, SPF_PASS=-0.001,
+ T_SPF_HELO_TEMPERROR=0.01, UNPARSEABLE_RELAY=0.001, USER_IN_DEF_DKIM_WL=-7.5,
  USER_IN_DEF_SPF_WL=-7.5 autolearn=no autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -83,121 +74,70 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-19.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1,USER_IN_DEF_DKIM_WL autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-RV32 write_minstretcfg() replaces the full 64-bit register, clearing
-minstretcfgh and its privilege-inhibit bits.
+在 2026/11/19 20:31, Philippe Mathieu-Daudé 写道:
+> Hi,
+>
+> On 2026-11-12 10:49, TANG Tiancheng wrote:
+>
+>> TCG tests cover RV32/RV64 counter accesses, delegated registers, 
+>> selector
+>> and filter changes, multiple counters per event, overflow notification
+>> with and without Sscofpmf, instruction exceptions, and reset. The RV32
+>> HPM tests also cover full-width accesses through the shared counter 
+>> path.
+>
+>
+>> ---
+>> TANG Tiancheng (14):
+>>        target/riscv: Preserve PMU state across event selector writes
+>>        target/riscv: Support multiple counters per PMU event
+>>        target/riscv: Use VM-elapsed sources for fixed PMU events
+>>        target/riscv: Preserve MINH on delegated config reads
+>>        target/riscv: Preserve minstretcfgh on RV32 minstretcfg writes
+>>        target/riscv: Fix RV32 accesses to delegated PMU registers
+>>        target/riscv: Preserve fixed counters across PMU state changes
+>>        target/riscv: Require Sscofpmf for non-fixed event overflow
+>>        target/riscv: Rebuild fixed-event PMU overflow deadlines
+>>        target/riscv: Apply minstret exception accounting to HPM counters
+>>        target/riscv: Process PMU timer expiry on the owner vCPU
+>>        target/riscv: Migrate fixed PMU counter state
+>>        target/riscv: Clear virtualization mode on reset
+>>        target/riscv: Preserve fixed PMU state across reset
+>>   tests/tcg/riscv32/pmu-fixed-rv32.S          |  90 ++++
+>>   tests/tcg/riscv32/pmu-minstretcfg-rv32.S    |  52 ++
+>>   tests/tcg/riscv32/smcdeleg-minh-rv32.S      |  78 +++
+>>   tests/tcg/riscv32/smcdeleg-rv32.S           | 115 ++++
+>>   tests/tcg/riscv32/sscofpmf-event-rv32.S     |  99 ++++
+>>   tests/tcg/riscv32/system/meson.build        |  35 ++
+>>   tests/tcg/riscv64/pmu-cycle-controls.S      | 107 ++++
+>>   tests/tcg/riscv64/pmu-lpad.S                |  72 +++
+>>   tests/tcg/riscv64/pmu-reset-vs.S            | 105 ++++
+>>   tests/tcg/riscv64/smcdeleg-minh.S           |  78 +++
+>>   tests/tcg/riscv64/smcdeleg-sxl32.S          | 233 ++++++++
+>>   tests/tcg/riscv64/sscofpmf-cycle-overflow.S |  58 ++
+>>   tests/tcg/riscv64/sscofpmf-event-overflow.S | 103 ++++
+>>   tests/tcg/riscv64/sscofpmf-overflow.S       | 134 +++++
+>>   tests/tcg/riscv64/system/meson.build        |  88 +++
+>>   tests/tcg/riscv64/test-minstret-ecall.S     |  26 +
+> Do the tests need the 'AI-used-for: Regression tests' mention?
 
-Replace only bits 31:0, as write_mcyclecfg() does. Test that a low-half
-write preserves both set and clear xINH bits in minstretcfgh.
+Hi Philippe,
 
-Fixes: b54a84c15e38 ("target/riscv: Add cycle & instret privilege mode filtering support")
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
-AI-used-for: Regression tests
-Signed-off-by: TANG Tiancheng <lyndra@linux.alibaba.com>
----
- target/riscv/tcg/csr.c                   |  2 +-
- tests/tcg/riscv32/pmu-minstretcfg-rv32.S | 52 ++++++++++++++++++++++++++++++++
- tests/tcg/riscv32/system/meson.build     |  7 +++++
- 3 files changed, 60 insertions(+), 1 deletion(-)
+Yes, AI helped write and refine the regression tests. I've added
 
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index f11b912d38df9c9588827878b3601f672fc8f65e..93f49fdab80677ab13c924ea6c969b689ccbe502 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -1170,7 +1170,7 @@ static RISCVException write_minstretcfg(CPURISCVState *env, int csrno,
-     uint64_t inh_avail_mask;
- 
-     if (riscv_cpu_mxl(env) == MXL_RV32) {
--        env->minstretcfg = val;
-+        env->minstretcfg = deposit64(env->minstretcfg, 0, 32, val);
-     } else {
-         inh_avail_mask = ~MHPMEVENT_FILTER_MASK | MINSTRETCFG_BIT_MINH;
-         inh_avail_mask |= riscv_has_ext(env, RVU) ? MINSTRETCFG_BIT_UINH : 0;
-diff --git a/tests/tcg/riscv32/pmu-minstretcfg-rv32.S b/tests/tcg/riscv32/pmu-minstretcfg-rv32.S
-new file mode 100644
-index 0000000000000000000000000000000000000000..59ee516cea9d09d0945033a77e788e4387cd684f
---- /dev/null
-+++ b/tests/tcg/riscv32/pmu-minstretcfg-rv32.S
-@@ -0,0 +1,52 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
-+
-+/* CSR numbers for older assemblers. */
-+#define CSR_MINSTRETCFG      0x322
-+#define CSR_MINSTRETCFGH     0x722
-+
-+/* RV32 writes to minstretcfg must preserve minstretcfgh. */
-+
-+	.option	norvc
-+	.option	norelax
-+
-+	.text
-+	.global _start
-+_start:
-+	/*
-+	 * Use complementary patterns to check both set and clear xINH bits.
-+	 * All fields in the low half are WPRI, so write zero there.
-+	 * Exit status 1 or 2 identifies the pattern that was not preserved.
-+	 */
-+	li	t4, 1
-+	li	t0, 0x54000000		/* MINH, UINH, VUINH */
-+	csrw	CSR_MINSTRETCFGH, t0
-+	csrw	CSR_MINSTRETCFG, zero
-+	csrr	t1, CSR_MINSTRETCFGH
-+	bne	t0, t1, exit
-+
-+	li	t4, 2
-+	li	t0, 0x28000000		/* SINH, VSINH */
-+	csrw	CSR_MINSTRETCFGH, t0
-+	csrw	CSR_MINSTRETCFG, zero
-+	csrr	t1, CSR_MINSTRETCFGH
-+	bne	t0, t1, exit
-+	li	t4, 0
-+
-+exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026		/* ADP_Stopped_ApplicationExit */
-+	sw	t0, 0(a1)
-+	sw	t4, 4(a1)
-+	li	a0, 0x20		/* TARGET_SYS_EXIT_EXTENDED */
-+
-+	/* Semihosting call sequence. */
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	8
-diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-index 7364b625c02b05987af848c7f3bfcc91192e5129..6a24561607dabd261246e905583b7c8a9022cd37 100644
---- a/tests/tcg/riscv32/system/meson.build
-+++ b/tests/tcg/riscv32/system/meson.build
-@@ -29,6 +29,13 @@ tests += {
-   },
- }
- 
-+tests += {
-+  'pmu-minstretcfg-rv32.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
-+  },
-+}
-+
- if 'qemu-system-riscv32' in emulators
-   tcg_tests += {
-     'riscv32-softmmu': {
+     AI-used-for: Regression tests
 
--- 
-2.43.0
+to the commits that add or extend them for v5.
+
+Thanks,
+Tiancheng
 
 
