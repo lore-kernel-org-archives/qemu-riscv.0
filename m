@@ -1,42 +1,43 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76302606A325
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:48:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E97EF606A320
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:49:17 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTwpE-00072U-E5; Thu, 19 Nov 2026 02:44:56 -0500
+	id 1xTwpK-000762-Sw; Thu, 19 Nov 2026 02:45:02 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwoV-0006uw-K2; Thu, 19 Nov 2026 02:44:14 -0500
+ id 1xTwos-0006y5-ON; Thu, 19 Nov 2026 02:44:42 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwoR-0001ix-Ub; Thu, 19 Nov 2026 02:44:11 -0500
+ id 1xTwoo-0001jo-Ay; Thu, 19 Nov 2026 02:44:34 -0500
 Received: from xiaoou-ubuntu-01 (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S8;
- Thu, 19 Nov 2026 15:44:03 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S16;
+ Thu, 19 Nov 2026 15:44:06 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
 Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org
-Subject: [PATCH v4 06/20] target/riscv: Add packed SIMD shift instructions
-Date: Thu, 19 Nov 2026 07:43:26 +0000
-Message-ID: <20261119074345.866125-7-xiaoou@iscas.ac.cn>
+Subject: [PATCH v4 14/20] target/riscv: Add packed SIMD two-way
+ multiply-add/subtract instructions
+Date: Thu, 19 Nov 2026 07:43:34 +0000
+Message-ID: <20261119074345.866125-15-xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 References: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S8
-X-Coremail-Antispam: 1UD129KBjvAXoW3tF47GryDWry8ZFyxKF1xZrb_yoW8GFykGo
- Z3Gw45Zr1rGr45Z345Cw48XwnFvr92vw4ktrWrZw1UWa92vryagrn8J348Z3WxAr1Yyry7
- JrZ3Gw15t3Z3W34Dn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
+X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S16
+X-Coremail-Antispam: 1UD129KBjvAXoW3CrWDuFyrWryrKr1kXF1xAFb_yoW8GF15Xo
+ Z29r15ZrZ3Gw1Uuryakw18XFn7XrykX3yDGrWUZr43WFWfXr1agr4UJ34UZ3WIyrWayFW7
+ XrZakw15tF9a934Dn29KB7ZKAUJUUUU5529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
  AaLaJ3UjIYCTnIWjp_UUUO-7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
  j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r126s0DM28Irc
  Ia0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l
@@ -71,346 +72,296 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,
+X-Spam-Status: No, score=-11.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_CR_TRAILER,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Implement packed logical left and right shifts, arithmetic right
-shifts, saturating left shifts, rounding right shifts, and
-bidirectional shift operations.  Cover immediate and
-register-controlled variants across the supported element widths.
-Add the associated decode entries, translators and helpers.
+Implement Q-format horizontal multiply-add and PM2 horizontal
+multiply-add/subtract operations.  Cover signed, unsigned, mixed-sign,
+corresponding and crossed element pairing, accumulating and
+non-accumulating, and rounded and non-rounded variants. Add
+the associated decode entries, translators and helpers.
 
-Note that saturating left-shift operations clamp results that cannot be
-represented in the signed element domain to the corresponding minimum
-or maximum signed value and set vxsat. Rounding right-shift operations
-add the required rounding value before shifting and do not affect vxsat.
-The helper implementation is equivalent to the operation defined in the
-specification.
+These instructions combine two products from each packed element group
+using addition or subtraction.  Q-format variants discard the low
+fractional bits of each product, while rounded variants add the required
+rounding value before extraction.  Accumulating variants add the
+combined result to the corresponding element of rd.  Note that
+PM2SADD.H and PM2SADD.HX clamp out-of-range sums to the signed
+destination range and set vxsat; the other operations wrap to the
+destination width and do not affect vxsat.
 
 Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
 ---
- target/riscv/helper.h                       |  43 +++++++
- target/riscv/insn32.decode                  |  57 +++++++++
- target/riscv/tcg/insn_trans/trans_rvp.c.inc |  43 +++++++
- target/riscv/tcg/psimd_helper.c             | 123 ++++++++++++++++++++
- 4 files changed, 266 insertions(+)
+ target/riscv/helper.h                       |  36 ++++++
+ target/riscv/insn32.decode                  |  36 ++++++
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc |  36 ++++++
+ target/riscv/tcg/psimd_helper.c             | 119 ++++++++++++++++++++
+ 4 files changed, 227 insertions(+)
 
 diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 37312855d5..198e2792c0 100644
+index 6a41d0a9bf..4a38b1a9c0 100644
 --- a/target/riscv/helper.h
 +++ b/target/riscv/helper.h
-@@ -1493,3 +1493,46 @@ DEF_HELPER_3(pmaxu_w, i64, env, i64, i64)
- DEF_HELPER_3(mseq, i32, env, i32, i32)
- DEF_HELPER_3(mslt, i32, env, i32, i32)
- DEF_HELPER_3(msltu, i32, env, i32, i32)
+@@ -1744,3 +1744,39 @@ DEF_HELPER_4(pmqacc_w_h11, i64, env, i64, i64, i64)
+ DEF_HELPER_4(pmqracc_w_h00, i64, env, i64, i64, i64)
+ DEF_HELPER_4(pmqracc_w_h01, i64, env, i64, i64, i64)
+ DEF_HELPER_4(pmqracc_w_h11, i64, env, i64, i64, i64)
 +
-+/* Packed SIMD - Shift Operations */
-+DEF_HELPER_3(pslli_b, tl, env, tl, tl)
-+DEF_HELPER_3(psll_bs, tl, env, tl, tl)
-+DEF_HELPER_3(pslli_h, tl, env, tl, tl)
-+DEF_HELPER_3(psll_hs, tl, env, tl, tl)
-+DEF_HELPER_3(pslli_w, i64, env, i64, i64)
-+DEF_HELPER_3(psll_ws, i64, env, i64, i64)
-+DEF_HELPER_3(psrli_b, tl, env, tl, tl)
-+DEF_HELPER_3(psrl_bs, tl, env, tl, tl)
-+DEF_HELPER_3(psrli_h, tl, env, tl, tl)
-+DEF_HELPER_3(psrl_hs, tl, env, tl, tl)
-+DEF_HELPER_3(psrli_w, i64, env, i64, i64)
-+DEF_HELPER_3(psrl_ws, i64, env, i64, i64)
-+DEF_HELPER_3(psrai_b, tl, env, tl, tl)
-+DEF_HELPER_3(psra_bs, tl, env, tl, tl)
-+DEF_HELPER_3(psrai_h, tl, env, tl, tl)
-+DEF_HELPER_3(psra_hs, tl, env, tl, tl)
-+DEF_HELPER_3(psrai_w, i64, env, i64, i64)
-+DEF_HELPER_3(psra_ws, i64, env, i64, i64)
-+DEF_HELPER_3(psslai_h, tl, env, tl, tl)
-+DEF_HELPER_3(psslai_w, i64, env, i64, i64)
-+DEF_HELPER_3(sslai, i32, env, i32, i32)
-+DEF_HELPER_3(psrari_h, tl, env, tl, tl)
-+DEF_HELPER_3(psrari_w, i64, env, i64, i64)
-+DEF_HELPER_3(srari_32, i32, env, i32, i32)
-+DEF_HELPER_3(srari_64, i64, env, i64, i64)
-+DEF_HELPER_3(pssha_hs, tl, env, tl, tl)
-+DEF_HELPER_3(pssha_ws, i64, env, i64, i64)
-+DEF_HELPER_3(psshar_hs, tl, env, tl, tl)
-+DEF_HELPER_3(psshar_ws, i64, env, i64, i64)
-+DEF_HELPER_3(ssha, i32, env, i32, i32)
-+DEF_HELPER_3(sshar, i32, env, i32, i32)
-+DEF_HELPER_3(sha, i64, env, i64, i64)
-+DEF_HELPER_3(shar, i64, env, i64, i64)
-+DEF_HELPER_3(psshl_hs, tl, env, tl, tl)
-+DEF_HELPER_3(psshlr_hs, tl, env, tl, tl)
-+DEF_HELPER_3(psshl_ws, i64, env, i64, i64)
-+DEF_HELPER_3(psshlr_ws, i64, env, i64, i64)
-+DEF_HELPER_3(sshl, i32, env, i32, i32)
-+DEF_HELPER_3(sshlr, i32, env, i32, i32)
-+DEF_HELPER_3(shl, i64, env, i64, i64)
-+DEF_HELPER_3(shlr, i64, env, i64, i64)
++/* Packed SIMD - Two-Way Multiply and Accumulate Operations */
++DEF_HELPER_3(pmq2add_h, tl, env, tl, tl)
++DEF_HELPER_3(pmqr2add_h, tl, env, tl, tl)
++DEF_HELPER_4(pmq2adda_h, tl, env, tl, tl, tl)
++DEF_HELPER_4(pmqr2adda_h, tl, env, tl, tl, tl)
++DEF_HELPER_3(pmq2add_w, i64, env, i64, i64)
++DEF_HELPER_3(pmqr2add_w, i64, env, i64, i64)
++DEF_HELPER_4(pmq2adda_w, i64, env, i64, i64, i64)
++DEF_HELPER_4(pmqr2adda_w, i64, env, i64, i64, i64)
++DEF_HELPER_3(pm2add_h, tl, env, tl, tl)
++DEF_HELPER_3(pm2addsu_h, tl, env, tl, tl)
++DEF_HELPER_3(pm2addu_h, tl, env, tl, tl)
++DEF_HELPER_3(pm2add_hx, tl, env, tl, tl)
++DEF_HELPER_3(pm2sub_h, tl, env, tl, tl)
++DEF_HELPER_3(pm2sub_hx, tl, env, tl, tl)
++DEF_HELPER_3(pm2sadd_h, tl, env, tl, tl)
++DEF_HELPER_3(pm2sadd_hx, tl, env, tl, tl)
++DEF_HELPER_4(pm2adda_h, tl, env, tl, tl, tl)
++DEF_HELPER_4(pm2addasu_h, tl, env, tl, tl, tl)
++DEF_HELPER_4(pm2addau_h, tl, env, tl, tl, tl)
++DEF_HELPER_4(pm2adda_hx, tl, env, tl, tl, tl)
++DEF_HELPER_4(pm2suba_h, tl, env, tl, tl, tl)
++DEF_HELPER_4(pm2suba_hx, tl, env, tl, tl, tl)
++DEF_HELPER_3(pm2add_w, i64, env, i64, i64)
++DEF_HELPER_3(pm2addsu_w, i64, env, i64, i64)
++DEF_HELPER_3(pm2addu_w, i64, env, i64, i64)
++DEF_HELPER_3(pm2add_wx, i64, env, i64, i64)
++DEF_HELPER_3(pm2sub_w, i64, env, i64, i64)
++DEF_HELPER_3(pm2sub_wx, i64, env, i64, i64)
++DEF_HELPER_4(pm2adda_w, i64, env, i64, i64, i64)
++DEF_HELPER_4(pm2addasu_w, i64, env, i64, i64, i64)
++DEF_HELPER_4(pm2addau_w, i64, env, i64, i64, i64)
++DEF_HELPER_4(pm2adda_wx, i64, env, i64, i64, i64)
++DEF_HELPER_4(pm2suba_w, i64, env, i64, i64, i64)
++DEF_HELPER_4(pm2suba_wx, i64, env, i64, i64, i64)
 diff --git a/target/riscv/insn32.decode b/target/riscv/insn32.decode
-index f1e2a170c1..30ee8319ea 100644
+index 62a1b7b21b..42750bde00 100644
 --- a/target/riscv/insn32.decode
 +++ b/target/riscv/insn32.decode
-@@ -40,6 +40,7 @@
- %imm_z6   26:1 15:5
- %imm_mop5 30:1 26:2 20:2
- %imm_mop3 30:1 26:2
-+%imm_p_ui8 20:3
- %imm_p_ui16 20:4
- %imm_p_ui32 20:5
- %imm_p_ui64 20:6
-@@ -109,6 +110,7 @@
- @mop5 . . .. .. .... .. ..... ... ..... ....... &mop5 imm=%imm_mop5 %rd %rs1
- @mop3 . . .. .. . ..... ..... ... ..... ....... &mop3 imm=%imm_mop3 %rd %rs1 %rs2
- 
-+@p_ui8  ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui8  %rs1 %rd
- @p_ui16 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui16 %rs1 %rd
- @p_ui32 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui32 %rs1 %rd
- @p_ui64 ..... .... ... ..... ... ..... ....... &i imm=%imm_p_ui64 %rs1 %rd
-@@ -1230,3 +1232,58 @@ pmin_w     1110001 ..... ..... 110 ..... 0111011 @r
- pminu_w    1110101 ..... ..... 110 ..... 0111011 @r
- pmax_w     1111001 ..... ..... 110 ..... 0111011 @r
- pmaxu_w    1111101 ..... ..... 110 ..... 0111011 @r
+@@ -1578,3 +1578,39 @@ mqacc_w11       11111 01 ..... ..... 111 ..... 0111011 @r
+ mqracc_w00      11101 11 ..... ..... 111 ..... 0111011 @r
+ mqracc_w01      11111 11 ..... ..... 101 ..... 0111011 @r
+ mqracc_w11      11111 11 ..... ..... 111 ..... 0111011 @r
 +
-+# Packed SIMD - Shift Operations
-+pslli_b    10000 0001... ..... 010 ..... 0011011 @p_ui8
-+psll_bs    1000110 ..... ..... 010 ..... 0011011 @r
-+pslli_h    10000 001.... ..... 010 ..... 0011011 @p_ui16
-+psll_hs    1000100 ..... ..... 010 ..... 0011011 @r
-+pslli_w    10000 01..... ..... 010 ..... 0011011 @p_ui32
-+psll_ws    1000101 ..... ..... 010 ..... 0011011 @r
-+psrli_b    10000 0001... ..... 100 ..... 0011011 @p_ui8
-+psrl_bs    1000110 ..... ..... 100 ..... 0011011 @r
-+psrli_h    10000 001.... ..... 100 ..... 0011011 @p_ui16
-+psrl_hs    1000100 ..... ..... 100 ..... 0011011 @r
-+psrli_w    10000 01..... ..... 100 ..... 0011011 @p_ui32
-+psrl_ws    1000101 ..... ..... 100 ..... 0011011 @r
-+psrai_b    11000 0001... ..... 100 ..... 0011011 @p_ui8
-+psra_bs    1100110 ..... ..... 100 ..... 0011011 @r
-+psrai_h    11000 001.... ..... 100 ..... 0011011 @p_ui16
-+psra_hs    1100100 ..... ..... 100 ..... 0011011 @r
-+psrai_w    11000 01..... ..... 100 ..... 0011011 @p_ui32
-+psra_ws    1100101 ..... ..... 100 ..... 0011011 @r
-+psslai_h   11010 001.... ..... 010 ..... 0011011 @p_ui16
-+{
-+  sslai    11010 01..... ..... 010 ..... 0011011 @p_ui32
-+  psslai_w 11010 01..... ..... 010 ..... 0011011 @p_ui32
-+}
-+psrari_h   11010 001.... ..... 100 ..... 0011011 @p_ui16
-+{
-+  srari_32 11010 01..... ..... 100 ..... 0011011 @p_ui32
-+  psrari_w 11010 01..... ..... 100 ..... 0011011 @p_ui32
-+}
-+srari_64   110101 ...... ..... 100 ..... 0011011 @p_ui64
-+pssha_hs   1110100 ..... ..... 010 ..... 0011011 @r
-+{
-+  ssha     1110101 ..... ..... 010 ..... 0011011 @r
-+  pssha_ws 1110101 ..... ..... 010 ..... 0011011 @r
-+}
-+psshar_hs  1111100 ..... ..... 010 ..... 0011011 @r
-+{
-+  sshar    1111101 ..... ..... 010 ..... 0011011 @r
-+  psshar_ws 1111101 ..... ..... 010 ..... 0011011 @r
-+}
-+sha        1110111 ..... ..... 010 ..... 0011011 @r
-+shar       1111111 ..... ..... 010 ..... 0011011 @r
-+psshl_hs   1010100 ..... ..... 010 ..... 0011011 @r
-+psshlr_hs  1011100 ..... ..... 010 ..... 0011011 @r
-+{
-+  psshl_ws 1010101 ..... ..... 010 ..... 0011011 @r
-+  sshl     1010101 ..... ..... 010 ..... 0011011 @r
-+}
-+{
-+  psshlr_ws 1011101 ..... ..... 010 ..... 0011011 @r
-+  sshlr     1011101 ..... ..... 010 ..... 0011011 @r
-+}
-+shl        1010111 ..... ..... 010 ..... 0011011 @r
-+shlr       1011111 ..... ..... 010 ..... 0011011 @r
++# Packed SIMD - Two-Way Multiply and Accumulate Operations
++pmq2add_h       10110 00 ..... ..... 101 ..... 0111011 @r
++pmqr2add_h      10110 10 ..... ..... 101 ..... 0111011 @r
++pmq2adda_h      10111 00 ..... ..... 101 ..... 0111011 @r
++pmqr2adda_h     10111 10 ..... ..... 101 ..... 0111011 @r
++pmq2add_w       10110 01 ..... ..... 101 ..... 0111011 @r
++pmqr2add_w      10110 11 ..... ..... 101 ..... 0111011 @r
++pmq2adda_w      10111 01 ..... ..... 101 ..... 0111011 @r
++pmqr2adda_w     10111 11 ..... ..... 101 ..... 0111011 @r
++pm2add_h        10000 00 ..... ..... 101 ..... 0111011 @r
++pm2addsu_h      11100 00 ..... ..... 101 ..... 0111011 @r
++pm2addu_h       10100 00 ..... ..... 101 ..... 0111011 @r
++pm2add_hx       10010 00 ..... ..... 101 ..... 0111011 @r
++pm2sub_h        11000 00 ..... ..... 101 ..... 0111011 @r
++pm2sub_hx       11010 00 ..... ..... 101 ..... 0111011 @r
++pm2sadd_h       11000 10 ..... ..... 101 ..... 0111011 @r
++pm2sadd_hx      11010 10 ..... ..... 101 ..... 0111011 @r
++pm2adda_h       10001 00 ..... ..... 101 ..... 0111011 @r
++pm2addasu_h     11101 00 ..... ..... 101 ..... 0111011 @r
++pm2addau_h      10101 00 ..... ..... 101 ..... 0111011 @r
++pm2adda_hx      10011 00 ..... ..... 101 ..... 0111011 @r
++pm2suba_h       11001 00 ..... ..... 101 ..... 0111011 @r
++pm2suba_hx      11011 00 ..... ..... 101 ..... 0111011 @r
++pm2add_w        10000 01 ..... ..... 101 ..... 0111011 @r
++pm2addsu_w      11100 01 ..... ..... 101 ..... 0111011 @r
++pm2addu_w       10100 01 ..... ..... 101 ..... 0111011 @r
++pm2add_wx       10010 01 ..... ..... 101 ..... 0111011 @r
++pm2sub_w        11000 01 ..... ..... 101 ..... 0111011 @r
++pm2sub_wx       11010 01 ..... ..... 101 ..... 0111011 @r
++pm2adda_w       10001 01 ..... ..... 101 ..... 0111011 @r
++pm2addasu_w     11101 01 ..... ..... 101 ..... 0111011 @r
++pm2addau_w      10101 01 ..... ..... 101 ..... 0111011 @r
++pm2adda_wx      10011 01 ..... ..... 101 ..... 0111011 @r
++pm2suba_w       11001 01 ..... ..... 101 ..... 0111011 @r
++pm2suba_wx      11011 01 ..... ..... 101 ..... 0111011 @r
 diff --git a/target/riscv/tcg/insn_trans/trans_rvp.c.inc b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-index 81d3f90eb0..32b5de9f1b 100644
+index ef3c5b00a3..65647fd61e 100644
 --- a/target/riscv/tcg/insn_trans/trans_rvp.c.inc
 +++ b/target/riscv/tcg/insn_trans/trans_rvp.c.inc
-@@ -607,3 +607,46 @@ GEN_SIMD_TRANS_64(pmaxu_w)
- GEN_SIMD_TRANS_32(mseq)
- GEN_SIMD_TRANS_32(mslt)
- GEN_SIMD_TRANS_32(msltu)
+@@ -874,3 +874,39 @@ GEN_SIMD_TRANS_ACC_64(pmqacc_w_h11)
+ GEN_SIMD_TRANS_ACC_64(pmqracc_w_h00)
+ GEN_SIMD_TRANS_ACC_64(pmqracc_w_h01)
+ GEN_SIMD_TRANS_ACC_64(pmqracc_w_h11)
 +
-+/* Packed SIMD - Shift Operations */
-+GEN_SIMD_TRANS_IMM(pslli_b)
-+GEN_SIMD_TRANS(psll_bs)
-+GEN_SIMD_TRANS_IMM(pslli_h)
-+GEN_SIMD_TRANS(psll_hs)
-+GEN_SIMD_TRANS_IMM_64(pslli_w)
-+GEN_SIMD_TRANS_64(psll_ws)
-+GEN_SIMD_TRANS_IMM(psrli_b)
-+GEN_SIMD_TRANS(psrl_bs)
-+GEN_SIMD_TRANS_IMM(psrli_h)
-+GEN_SIMD_TRANS(psrl_hs)
-+GEN_SIMD_TRANS_IMM_64(psrli_w)
-+GEN_SIMD_TRANS_64(psrl_ws)
-+GEN_SIMD_TRANS_IMM(psrai_b)
-+GEN_SIMD_TRANS(psra_bs)
-+GEN_SIMD_TRANS_IMM(psrai_h)
-+GEN_SIMD_TRANS(psra_hs)
-+GEN_SIMD_TRANS_IMM_64(psrai_w)
-+GEN_SIMD_TRANS_64(psra_ws)
-+GEN_SIMD_TRANS_IMM_VXSAT(psslai_h)
-+GEN_SIMD_TRANS_IMM_64_VXSAT(psslai_w)
-+GEN_SIMD_TRANS_IMM_32_VXSAT(sslai)
-+GEN_SIMD_TRANS_IMM(psrari_h)
-+GEN_SIMD_TRANS_IMM_64(psrari_w)
-+GEN_SIMD_TRANS_IMM_32(srari_32)
-+GEN_SIMD_TRANS_IMM_64(srari_64)
-+GEN_SIMD_TRANS_VXSAT(pssha_hs)
-+GEN_SIMD_TRANS_64_VXSAT(pssha_ws)
-+GEN_SIMD_TRANS_VXSAT(psshar_hs)
-+GEN_SIMD_TRANS_64_VXSAT(psshar_ws)
-+GEN_SIMD_TRANS_32_VXSAT(ssha)
-+GEN_SIMD_TRANS_32_VXSAT(sshar)
-+GEN_SIMD_TRANS_64(sha)
-+GEN_SIMD_TRANS_64(shar)
-+GEN_SIMD_TRANS_VXSAT(psshl_hs)
-+GEN_SIMD_TRANS_VXSAT(psshlr_hs)
-+GEN_SIMD_TRANS_64_VXSAT(psshl_ws)
-+GEN_SIMD_TRANS_64_VXSAT(psshlr_ws)
-+GEN_SIMD_TRANS_32_VXSAT(sshl)
-+GEN_SIMD_TRANS_32_VXSAT(sshlr)
-+GEN_SIMD_TRANS_64(shl)
-+GEN_SIMD_TRANS_64(shlr)
++/* Packed SIMD - Two-Way Multiply and Accumulate Operations */
++GEN_SIMD_TRANS(pmq2add_h)
++GEN_SIMD_TRANS(pmqr2add_h)
++GEN_SIMD_TRANS_ACC(pmq2adda_h)
++GEN_SIMD_TRANS_ACC(pmqr2adda_h)
++GEN_SIMD_TRANS_64(pmq2add_w)
++GEN_SIMD_TRANS_64(pmqr2add_w)
++GEN_SIMD_TRANS_ACC_64(pmq2adda_w)
++GEN_SIMD_TRANS_ACC_64(pmqr2adda_w)
++GEN_SIMD_TRANS(pm2add_h)
++GEN_SIMD_TRANS(pm2addsu_h)
++GEN_SIMD_TRANS(pm2addu_h)
++GEN_SIMD_TRANS(pm2add_hx)
++GEN_SIMD_TRANS(pm2sub_h)
++GEN_SIMD_TRANS(pm2sub_hx)
++GEN_SIMD_TRANS_VXSAT(pm2sadd_h)
++GEN_SIMD_TRANS_VXSAT(pm2sadd_hx)
++GEN_SIMD_TRANS_ACC(pm2adda_h)
++GEN_SIMD_TRANS_ACC(pm2addasu_h)
++GEN_SIMD_TRANS_ACC(pm2addau_h)
++GEN_SIMD_TRANS_ACC(pm2adda_hx)
++GEN_SIMD_TRANS_ACC(pm2suba_h)
++GEN_SIMD_TRANS_ACC(pm2suba_hx)
++GEN_SIMD_TRANS_64(pm2add_w)
++GEN_SIMD_TRANS_64(pm2addsu_w)
++GEN_SIMD_TRANS_64(pm2addu_w)
++GEN_SIMD_TRANS_64(pm2add_wx)
++GEN_SIMD_TRANS_64(pm2sub_w)
++GEN_SIMD_TRANS_64(pm2sub_wx)
++GEN_SIMD_TRANS_ACC_64(pm2adda_w)
++GEN_SIMD_TRANS_ACC_64(pm2addasu_w)
++GEN_SIMD_TRANS_ACC_64(pm2addau_w)
++GEN_SIMD_TRANS_ACC_64(pm2adda_wx)
++GEN_SIMD_TRANS_ACC_64(pm2suba_w)
++GEN_SIMD_TRANS_ACC_64(pm2suba_wx)
 diff --git a/target/riscv/tcg/psimd_helper.c b/target/riscv/tcg/psimd_helper.c
-index 0e9f959bbb..87359db208 100644
+index 6df8b65ca5..61ba98e723 100644
 --- a/target/riscv/tcg/psimd_helper.c
 +++ b/target/riscv/tcg/psimd_helper.c
-@@ -2290,3 +2290,126 @@ GEN_PSIMD_BINOP(mslt, uint32_t, int32_t, uint32_t,
-                 EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_LT_MASK)
- GEN_PSIMD_BINOP(msltu, uint32_t, uint32_t, uint32_t,
-                 EXTRACT32, INSERT32, ELEMS_W, PSIMD_DO_LT_MASK)
+@@ -3096,3 +3096,122 @@ GEN_PSIMD_QMUL_ACC_INDEXED(pmqracc_w_h11, uint64_t, int16_t, int16_t,
+                            int32_t, int64_t, int32_t, uint32_t, EXTRACT16,
+                            EXTRACT32, INSERT32, ELEMS_W, 2, 1, 1, 15,
+                            1LL << 14, PSIMD_MUL_S64)
 +
-+/* Shift operations (immediate and register) */
++/* Two-Way Multiply and Accumulate Operations */
 +
-+GEN_PSIMD_SHIFTOP(pslli_b, target_ulong, uint8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SLL)
-+GEN_PSIMD_SHIFTOP(psll_bs, target_ulong, uint8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x1f, PSIMD_DO_SLL)
-+GEN_PSIMD_SHIFTOP(pslli_h, target_ulong, uint16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x0f, PSIMD_DO_SLL)
-+GEN_PSIMD_SHIFTOP(psll_hs, target_ulong, uint16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x1f, PSIMD_DO_SLL)
-+GEN_PSIMD_SHIFTOP(pslli_w, uint64_t, uint32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SLL)
-+GEN_PSIMD_SHIFTOP(psll_ws, uint64_t, uint32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SLL)
++GEN_PSIMD_Q2ADD(pmq2add_h, target_ulong, int16_t, int32_t, int64_t,
++                uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2, 15, 0,
++                PSIMD_MUL_S32)
++GEN_PSIMD_Q2ADD(pmqr2add_h, target_ulong, int16_t, int32_t, int64_t,
++                uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2, 15, 1LL << 14,
++                PSIMD_MUL_S32)
++GEN_PSIMD_Q2ADDA(pmq2adda_h, target_ulong, int16_t, int32_t, int32_t,
++                 int64_t, uint32_t, EXTRACT16, EXTRACT32, INSERT32,
++                 ELEMS_W, 2, 15, 0, PSIMD_MUL_S32)
++GEN_PSIMD_Q2ADDA(pmqr2adda_h, target_ulong, int16_t, int32_t, int32_t,
++                 int64_t, uint32_t, EXTRACT16, EXTRACT32, INSERT32,
++                 ELEMS_W, 2, 15, 1LL << 14, PSIMD_MUL_S32)
 +
-+GEN_PSIMD_SHIFTOP(psrli_b, target_ulong, uint8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SRL)
-+GEN_PSIMD_SHIFTOP(psrl_bs, target_ulong, uint8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x1f, PSIMD_DO_SRL)
-+GEN_PSIMD_SHIFTOP(psrli_h, target_ulong, uint16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x0f, PSIMD_DO_SRL)
-+GEN_PSIMD_SHIFTOP(psrl_hs, target_ulong, uint16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x1f, PSIMD_DO_SRL)
-+GEN_PSIMD_SHIFTOP(psrli_w, uint64_t, uint32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SRL)
-+GEN_PSIMD_SHIFTOP(psrl_ws, uint64_t, uint32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SRL)
++GEN_PSIMD_Q2ADD(pmq2add_w, uint64_t, int32_t, int64_t, int64_t,
++                uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0, 31, 0,
++                PSIMD_MUL_S64)
++GEN_PSIMD_Q2ADD(pmqr2add_w, uint64_t, int32_t, int64_t, int64_t,
++                uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0, 31, 1LL << 30,
++                PSIMD_MUL_S64)
++GEN_PSIMD_Q2ADDA(pmq2adda_w, uint64_t, int32_t, int64_t, int64_t,
++                 int64_t, uint64_t, EXTRACT32, EXTRACT64, INSERT64,
++                 ELEMS_D, 0, 31, 0, PSIMD_MUL_S64)
++GEN_PSIMD_Q2ADDA(pmqr2adda_w, uint64_t, int32_t, int64_t, int64_t,
++                 int64_t, uint64_t, EXTRACT32, EXTRACT64, INSERT64,
++                 ELEMS_D, 0, 31, 1LL << 30, PSIMD_MUL_S64)
 +
-+GEN_PSIMD_SHIFTOP(psrai_b, target_ulong, int8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x07, PSIMD_DO_SRA)
-+GEN_PSIMD_SHIFTOP(psra_bs, target_ulong, int8_t, uint8_t,
-+                  EXTRACT8, INSERT8, ELEMS_B, 0x1f, PSIMD_DO_SRA)
-+GEN_PSIMD_SHIFTOP(psrai_h, target_ulong, int16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x0f, PSIMD_DO_SRA)
-+GEN_PSIMD_SHIFTOP(psra_hs, target_ulong, int16_t, uint16_t,
-+                  EXTRACT16, INSERT16, ELEMS_H, 0x1f, PSIMD_DO_SRA)
-+GEN_PSIMD_SHIFTOP(psrai_w, uint64_t, int32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SRA)
-+GEN_PSIMD_SHIFTOP(psra_ws, uint64_t, int32_t, uint32_t,
-+                  EXTRACT32, INSERT32, ELEMS_W, 0x1f, PSIMD_DO_SRA)
++GEN_PSIMD_2WAY_MUL(pm2add_h, target_ulong, int16_t, int16_t,
++                   int32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 0, 1, PSIMD_MUL_S32, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2addsu_h, target_ulong, int16_t, uint16_t,
++                   int32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 0, 1, PSIMD_MUL_SU32, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2addu_h, target_ulong, uint16_t, uint16_t,
++                   uint32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 0, 1, PSIMD_MUL_U32, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2add_hx, target_ulong, int16_t, int16_t,
++                   int32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 1, 0, PSIMD_MUL_S32, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2sub_h, target_ulong, int16_t, int16_t,
++                   int32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 0, 1, PSIMD_MUL_S32, PSIMD_COMB_SUB)
++GEN_PSIMD_2WAY_MUL(pm2sub_hx, target_ulong, int16_t, int16_t,
++                   int32_t, uint32_t, EXTRACT16, INSERT32, ELEMS_W, 2,
++                   0, 1, 1, 0, PSIMD_MUL_S32, PSIMD_COMB_SUB)
 +
-+/* Saturating shift operations */
++GEN_PSIMD_2WAY_SAT_MUL(pm2sadd_h, 0, 1, 0, 1)
++GEN_PSIMD_2WAY_SAT_MUL(pm2sadd_hx, 0, 1, 1, 0)
 +
-+GEN_PSIMD_SAT_SHIFTOP(psslai_h, target_ulong, int16_t, int32_t,
-+                      EXTRACT16, INSERT16, ELEMS_H, 0x0f,
-+                      signed_saturate_h)
-+GEN_PSIMD_SAT_SHIFTOP(psslai_w, uint64_t, int32_t, int64_t,
-+                      EXTRACT32, INSERT32, ELEMS_W, 0x1f,
-+                      signed_saturate_w)
++GEN_PSIMD_2WAY_MUL_ACC(pm2adda_h, target_ulong, int16_t, int16_t,
++                       int32_t, int32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 0, 1, PSIMD_MUL_S32,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2addasu_h, target_ulong, int16_t, uint16_t,
++                       int32_t, int32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 0, 1, PSIMD_MUL_SU32,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2addau_h, target_ulong, uint16_t, uint16_t,
++                       uint32_t, uint32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 0, 1, PSIMD_MUL_U32,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2adda_hx, target_ulong, int16_t, int16_t,
++                       int32_t, int32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 1, 0, PSIMD_MUL_S32,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2suba_h, target_ulong, int16_t, int16_t,
++                       int32_t, int32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 0, 1, PSIMD_MUL_S32,
++                       PSIMD_COMB_SUB)
++GEN_PSIMD_2WAY_MUL_ACC(pm2suba_hx, target_ulong, int16_t, int16_t,
++                       int32_t, int32_t, uint32_t, EXTRACT16, EXTRACT32,
++                       INSERT32, ELEMS_W, 2, 0, 1, 1, 0, PSIMD_MUL_S32,
++                       PSIMD_COMB_SUB)
 +
-+GEN_PSIMD_SAT_SHIFTOP(sslai, uint32_t, int32_t, int64_t,
-+                      EXTRACT32, INSERT32, ELEMS_W, 0x1f,
-+                      signed_saturate_w)
++GEN_PSIMD_2WAY_MUL(pm2add_w, uint64_t, int32_t, int32_t,
++                   int64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 0, 1, PSIMD_MUL_S64, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2addsu_w, uint64_t, int32_t, uint32_t,
++                   int64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 0, 1, PSIMD_MUL_SU64, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2addu_w, uint64_t, uint32_t, uint32_t,
++                   uint64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 0, 1, PSIMD_MUL_U64, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2add_wx, uint64_t, int32_t, int32_t,
++                   int64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 1, 0, PSIMD_MUL_S64, PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL(pm2sub_w, uint64_t, int32_t, int32_t,
++                   int64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 0, 1, PSIMD_MUL_S64, PSIMD_COMB_SUB)
++GEN_PSIMD_2WAY_MUL(pm2sub_wx, uint64_t, int32_t, int32_t,
++                   int64_t, uint64_t, EXTRACT32, INSERT64, ELEMS_D, 0,
++                   0, 1, 1, 0, PSIMD_MUL_S64, PSIMD_COMB_SUB)
 +
-+/* Rounding shift operations */
-+
-+GEN_PSIMD_ROUND_SRAI(psrari_h, target_ulong, int16_t, int32_t,
-+                     EXTRACT16, INSERT16, ELEMS_H, 0x0f)
-+GEN_PSIMD_ROUND_SRAI(psrari_w, uint64_t, int32_t, int64_t,
-+                     EXTRACT32, INSERT32, ELEMS_W, 0x1f)
-+
-+GEN_PSIMD_ROUND_SRAI(srari_32, uint32_t, int32_t, int64_t,
-+                     EXTRACT32, INSERT32, ELEMS_W, 0x1f)
-+
-+/**
-+ * SRARI (RV64) - Scalar arithmetic shift right with rounding
-+ */
-+uint64_t HELPER(srari_64)(CPURISCVState *env, uint64_t rs1, uint64_t imm)
-+{
-+    int64_t a = (int64_t)rs1;
-+    uint8_t shamt = imm & 0x3F;
-+
-+    if (shamt == 0) {
-+        return rs1;
-+    }
-+
-+    return (uint64_t)((((__int128_t)a >> (shamt - 1)) + 1) >> 1);
-+}
-+
-+/* Variable shift operations (with saturation and rounding) */
-+
-+GEN_PSIMD_VAR_SSHA(pssha_hs, target_ulong, int16_t, int32_t,
-+                   EXTRACT16, INSERT16, ELEMS_H, 16, signed_saturate_h)
-+GEN_PSIMD_VAR_SSHA(pssha_ws, uint64_t, int32_t, int64_t,
-+                   EXTRACT32, INSERT32, ELEMS_W, 32, signed_saturate_w)
-+
-+GEN_PSIMD_VAR_SSHAR(psshar_hs, target_ulong, int16_t, int32_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 16, SAT_MIN_H, SAT_MAX_H,
-+                    signed_saturate_h)
-+GEN_PSIMD_VAR_SSHAR(psshar_ws, uint64_t, int32_t, int64_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 32, SAT_MIN_W, SAT_MAX_W,
-+                    signed_saturate_w)
-+
-+GEN_PSIMD_VAR_SSHA(ssha, uint32_t, int32_t, int64_t,
-+                   EXTRACT32, INSERT32, ELEMS_W, 32, signed_saturate_w)
-+GEN_PSIMD_VAR_SSHAR(sshar, uint32_t, int32_t, int64_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 32, SAT_MIN_W, SAT_MAX_W,
-+                    signed_saturate_w)
-+
-+GEN_PSIMD_VAR_SRA64(sha, PSIMD_DO_SRA64)
-+GEN_PSIMD_VAR_SRA64(shar, PSIMD_DO_RNDSRA64)
-+
-+GEN_PSIMD_VAR_USHL(psshl_hs, target_ulong, uint16_t, uint32_t,
-+                   EXTRACT16, INSERT16, ELEMS_H, 16, unsigned_saturate_h)
-+
-+GEN_PSIMD_VAR_USHLR(psshlr_hs, target_ulong, uint16_t, uint32_t,
-+                    EXTRACT16, INSERT16, ELEMS_H, 16, unsigned_saturate_h)
-+
-+GEN_PSIMD_VAR_USHL(psshl_ws, uint64_t, uint32_t, uint64_t,
-+                   EXTRACT32, INSERT32, ELEMS_W, 32, unsigned_saturate_w)
-+
-+GEN_PSIMD_VAR_USHLR(psshlr_ws, uint64_t, uint32_t, uint64_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 32, unsigned_saturate_w)
-+
-+GEN_PSIMD_VAR_USHL(sshl, uint32_t, uint32_t, uint64_t,
-+                   EXTRACT32, INSERT32, ELEMS_W, 32, unsigned_saturate_w)
-+
-+GEN_PSIMD_VAR_USHLR(sshlr, uint32_t, uint32_t, uint64_t,
-+                    EXTRACT32, INSERT32, ELEMS_W, 32, unsigned_saturate_w)
-+
-+GEN_PSIMD_VAR_SRL64(shl, PSIMD_DO_SRL64)
-+GEN_PSIMD_VAR_SRL64(shlr, PSIMD_DO_RNDSRL64)
++GEN_PSIMD_2WAY_MUL_ACC(pm2adda_w, uint64_t, int32_t, int32_t,
++                       int64_t, int64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 0, 1, PSIMD_MUL_S64,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2addasu_w, uint64_t, int32_t, uint32_t,
++                       int64_t, int64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 0, 1, PSIMD_MUL_SU64,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2addau_w, uint64_t, uint32_t, uint32_t,
++                       uint64_t, uint64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 0, 1, PSIMD_MUL_U64,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2adda_wx, uint64_t, int32_t, int32_t,
++                       int64_t, int64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 1, 0, PSIMD_MUL_S64,
++                       PSIMD_COMB_ADD)
++GEN_PSIMD_2WAY_MUL_ACC(pm2suba_w, uint64_t, int32_t, int32_t,
++                       int64_t, int64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 0, 1, PSIMD_MUL_S64,
++                       PSIMD_COMB_SUB)
++GEN_PSIMD_2WAY_MUL_ACC(pm2suba_wx, uint64_t, int32_t, int32_t,
++                       int64_t, int64_t, uint64_t, EXTRACT32, EXTRACT64,
++                       INSERT64, ELEMS_D, 0, 0, 1, 1, 0, PSIMD_MUL_S64,
++                       PSIMD_COMB_SUB)
 -- 
 2.53.0
 
