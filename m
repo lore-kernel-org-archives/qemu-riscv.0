@@ -1,59 +1,56 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61D29606A320
-	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:44:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CF72606A324
+	for <qemu-riscv@archiver.kernel.org>; Thu, 19 Nov 2026 07:44:36 +0000 (UTC)
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xTwog-0006wK-Ki; Thu, 19 Nov 2026 02:44:24 -0500
+	id 1xTwof-0006ve-1m; Thu, 19 Nov 2026 02:44:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwoT-0006ub-Hn; Thu, 19 Nov 2026 02:44:11 -0500
+ id 1xTwoT-0006ua-H5; Thu, 19 Nov 2026 02:44:11 -0500
 Received: from smtp25.cstnet.cn ([159.226.251.25] helo=cstnet.cn)
  by eggs.gnu.org with esmtps (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
  (Exim 4.90_1) (envelope-from <xiaoou@iscas.ac.cn>)
- id 1xTwoP-0001ip-C4; Thu, 19 Nov 2026 02:44:09 -0500
+ id 1xTwoO-0001iS-7f; Thu, 19 Nov 2026 02:44:08 -0500
 Received: from xiaoou-ubuntu-01 (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S3;
- Thu, 19 Nov 2026 15:44:00 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowABX8LW1qP5qLIlyAQ--.23889S2;
+ Thu, 19 Nov 2026 15:43:49 +0800 (CST)
 From: Molly Chen <xiaoou@iscas.ac.cn>
 To: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
  daniel.barboza@oss.qualcomm.com, zhiwei_liu@linux.alibaba.com,
- chao.liu.zevorn@gmail.com, Chao Liu <chao.liu@processmission.com>
+ chao.liu.zevorn@gmail.com
 Cc: nutty.liu@hotmail.com, max.chou@sifive.com, xiaoou@iscas.ac.cn,
  qemu-riscv@nongnu.org, qemu-devel@nongnu.org,
  Yin Zhang <zhangyin2018@iscas.ac.cn>,
  Dajun Huang <djhuang_1@std.uestc.edu.cn>,
  Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
-Subject: [PATCH v4 01/20] target/riscv: Add packed SIMD extension state
-Date: Thu, 19 Nov 2026 07:43:21 +0000
-Message-ID: <20261119074345.866125-2-xiaoou@iscas.ac.cn>
+Subject: [PATCH v4 00/20] target/riscv: Add support for RISC-V P extension V0.6
+Date: Thu, 19 Nov 2026 07:43:20 +0000
+Message-ID: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
-References: <20261119074345.866125-1-xiaoou@iscas.ac.cn>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S3
-X-Coremail-Antispam: 1UD129KBjvJXoW3Ar4xtryfWry8Jw1DAFW3GFg_yoWDGF15pr
- 4DG39xGry8Jas7Zws3tF15WF15Ww1kG3ySkws7Ww4IqFW5JrW5GFn7t347ZFn8GFZ5Zr43
- uF48CryDZr4UAFDanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
- 9KBjDU0xBIdaVrnRJUUUmF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
- rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
- x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
- Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
- 8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
- 0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
- IY67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
- F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
- IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
- 6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17
- CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26ryj6F1UMIIF
- 0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIx
- AIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2
- KfnxnUUI43ZEXa7VUj4lkDUUUUU==
+X-CM-TRANSID: zQCowABX8LW1qP5qLIlyAQ--.23889S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxuFWxXryDWFyftF1fJFWrXwb_yoW3GF48pF
+ s5G3yYyayktFWIqw1ftw48Cr15WF4rGa15C3WxX340vw43tF93tFnFkw4YkFn8JF1kWw1j
+ 9FnFkr15uF4UAFJanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+ 9KBjDU0xBIdaVrnRJUUU9214x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+ rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+ 1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+ 6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+ CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+ 2Ix0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r
+ 1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02
+ 628vn2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4
+ IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1r
+ MI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW5JV
+ W7JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j
+ 6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYx
+ BIdaVFxhVjvjDU0xZFpf9x0JULo7NUUUUU=
 X-CM-SenderInfo: 50ld003x6l2u1dvotugofq/
 Received-SPF: pass client-ip=159.226.251.25; envelope-from=xiaoou@iscas.ac.cn;
  helo=cstnet.cn
@@ -75,308 +72,177 @@ List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	HEADER_FROM_DIFFERENT_DOMAINS,HK_RANDOM_FROM,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Model vxsat with separate Vector/Zve and P-only control paths.  When
-Zve* is present, vxsat follows mstatus.VS/vsstatus.VS; when P is
-implemented without Zve*, stateen0.VXSAT controls access instead.
+This series adds support for the RISC-V Packed SIMD (P) extension for
+RV32 and RV64.
 
-Record the P-only stateen result in TB flags so cached translations
-preserve both instruction legality and the illegal-vs-virtual exception
-class.
+The P extension defines packed-SIMD fixed-point operations intended for
+DSP workloads such as multimedia and signal processing. These
+instructions operate on packed subword elements in general-purpose
+registers, with register-pair forms for wider operands on RV32.
+
+The implementation targets the V0.6 development draft of the RISC-V P
+extension specification:
+
+  https://github.com/riscv/riscv-p-spec
+
+The local riscv-p-spec reference checkout is at commit 85857f3(tag: v0.6).
+
+P support is enabled with the experimental x-p CPU property. The series
+includes instruction decoding and translation, helpers, extension-state
+handling, and the specification-defined control of vxsat. The focus
+remains functional correctness and instruction coverage; performance
+optimization is left for future work.
+
+Thanks to Daniel Henrique Barboza, Nutty Liu, Chao Liu, and Max Chou for
+their reviews and suggestions.
+
+Changes in v4:
+
+  - P extension TCG test: migrate from Makefile to the Meson framework.
+
+  - Align rounded logical right shifts with P extension v0.6.
+
+  - Replace TARGET_LONG_SIZE with TARGET_LONG_BITS in GEN_PLI*.
+
+Testing:
+
+  The P extension TCG tests were built with LLVM/Clang 24.0.0git,
+  llvm-project commit:
+
+    96295a1412f9afbee9d4a3c2701e83f5a529a9cc
+
+  P extension TCG tests pass for both RV32 and RV64. The test targets 
+  enable x-p, zmmul, zba, and zbb on the corresponding rv32 or rv64 CPU. 
+  The P-aware compiler path is configurable through PSIMD_CC. The build 
+  and test commands are as follows:
+
+  $ export PSIMD_CC=/path/to/clang
+  $ ./configure --target-list=riscv32-linux-user,riscv64-linux-user \
+    --enable-tcg --enable-tests
+  $ cd build && ninja
+  $ ./run meson test \
+    riscv32-linux-user-psimd-rv32 \
+    riscv64-linux-user-psimd-rv64
+
+Changes in v3:
+
+  - Add descriptive commit messages explaining the purpose and behavior
+    of the patches, and document helper macro definitions, including
+    their interfaces and arithmetic semantics.
+
+  - Add RV32 and RV64 assembly tests under tests/tcg/riscv, with shared
+    test macros and integration into the TCG test Makefiles. Cover
+    arithmetic, shifts, multiplication, narrowing, saturation, register
+    overlap, and zero register-pair operands. The tests are freestanding
+    Linux-user programs and do not require a target libc. Set PSIMD_CC
+    to a P-capable Clang to build them; the assembler options use
+    rv32gp0p21 and rv64gp0p21. Enable previously disabled tests using the
+    P v0.21 mnemonics and update signed saturation immediate operands.
+
+  - Correct register-controlled packed byte and halfword shifts to use
+    the low five bits of rs2. Share the signed saturating/rounding shift
+    implementation between scalar and packed forms: psshar_hs,
+    psshar_ws, and sshar are all generated by GEN_PSIMD_VAR_SSHAR.
+    Return zero for oversized SSHAR/SHAR right shifts, and widen
+    rounding arithmetic before adding the rounding bit.
+
+  - Clamp unsigned rounding right shifts to the element width so that
+    the source MSB still participates in rounding for oversized shifts.
+    Apply this to PSSHLR/SSHLR and RV64 SHLR. Use a wider intermediate
+    for SHLR to preserve the carry when rounding UINT64_MAX right by
+    one bit, and add regression tests for these cases.
+
+  - Fix RV32 register-pair operations when the destination overlaps
+    the scalar source by completing both results before writeback.
+    Treat a zero register-pair selector as {x0, x0}, suppress both
+    destination writes for a zero pair, and preserve vxsat side effects.
+    Use tcg_gen_movi_i64() to initialize a zero source in narrowing
+    translations, with a dedicated regression test.
+
+  - Avoid undefined behavior in helper arithmetic by using unsigned
+    operations where wraparound is intended and wider intermediates
+    where needed. Handle oversized left shifts explicitly and handle
+    zero shifts in SLX/SRX without shifting by the operand width.
+
+  - Correct the RV32 REV encoding, reject unavailable translations
+    instead of accepting them without an operation, and fix lane
+    selection in PMQWACC.H and PMQRWACC.H.
+
+  - Reuse qemu/bitops.h extract64() for lane extraction, correct
+    misleading helper comments, and align macro continuation characters.
+
+Previous versions:
+
+  v3: https://lists.nongnu.org/archive/html/qemu-riscv/2026-09/msg00523.html
+  v2: https://lists.nongnu.org/archive/html/qemu-riscv/2026-07/msg00697.html
+  v1: https://lists.nongnu.org/archive/html/qemu-riscv/2026-04/msg00301.html
+
+Feedback on the implementation and tests would be appreciated.
 
 Co-authored-by: Yin Zhang <zhangyin2018@iscas.ac.cn>
 Co-authored-by: Dajun Huang <djhuang_1@std.uestc.edu.cn>
 Co-authored-by: Zhiyuan Yang <zhiyuan.plct@isrc.iscas.ac.cn>
 
-Signed-off-by: Molly Chen <xiaoou@iscas.ac.cn>
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Nutty Liu <nutty.liu@hotmail.com>
-Reviewed-by: Chao Liu <chao.liu@processmission.com>
----
- target/riscv/cpu.c         |  5 ++--
- target/riscv/cpu.h         |  8 +++++++
- target/riscv/cpu_bits.h    |  2 ++
- target/riscv/machine.c     | 19 +++++++++++++++
- target/riscv/tcg/csr.c     | 39 +++++++++++++++++++++++++++++--
- target/riscv/tcg/tcg-cpu.c | 48 ++++++++++++++++++++++++++++++++++++++
- 6 files changed, 117 insertions(+), 4 deletions(-)
+Molly Chen (20):
+  target/riscv: Add packed SIMD extension state
+  target/riscv: Add packed SIMD helper framework
+  target/riscv: Add packed SIMD arithmetic instructions
+  target/riscv: Add packed SIMD averaging and rounding instructions
+  target/riscv: Add packed SIMD absolute, difference, compare and mask
+    instructions
+  target/riscv: Add packed SIMD shift instructions
+  target/riscv: Add packed SIMD exchange instructions
+  target/riscv: Add packed SIMD horizontal reduction instructions
+  target/riscv: Add packed SIMD pack, merge and count-leading
+    instructions
+  target/riscv: Add packed SIMD pure multiplication instructions
+  target/riscv: Add packed SIMD multiply-accumulate instructions
+  target/riscv: Add packed SIMD Q-format multiplication instructions
+  target/riscv: Add packed SIMD Q-format MAC instructions
+  target/riscv: Add packed SIMD two-way multiply-add/subtract
+    instructions
+  target/riscv: Add packed SIMD four-way multiply-add instructions
+  target/riscv: Add packed SIMD load-replicate instructions
+  target/riscv: Add packed SIMD RV32 only instructions
+  target/riscv: Remove Zbkb dependency from P extension to align with
+    the spec
+  tests/tcg/riscv: Add tests for the P extension
+  target/riscv: align rounded logical right shifts with P extension v0.6
 
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 15c27f4ce4..755e1dd19b 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -50,7 +50,7 @@
- /* RISC-V CPU definitions */
- static const char riscv_single_letter_exts[] = "IEMAFDQCBPVH";
- const uint32_t misa_bits[] = {RVI, RVE, RVM, RVA, RVF, RVD, RVV,
--                              RVC, RVS, RVU, RVH, RVG, RVB, 0};
-+                              RVC, RVS, RVU, RVH, RVG, RVB, RVP, 0};
- #define RISCV_CPU_MVENDORID 0
- #define RISCV_CPU_MIMPID 0
- /*
-@@ -1621,7 +1621,8 @@ static const MISAExtInfo misa_ext_info_arr[] = {
-     MISA_EXT_INFO(RVH, "h", "Hypervisor"),
-     MISA_EXT_INFO(RVV, "v", "Vector operations"),
-     MISA_EXT_INFO(RVG, "g", "General purpose (IMAFD_Zicsr_Zifencei)"),
--    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)")
-+    MISA_EXT_INFO(RVB, "b", "Bit manipulation (Zba_Zbb_Zbs)"),
-+    MISA_EXT_INFO(RVP, "x-p", "Packed-SIMD instructions")
- };
- 
- static void riscv_cpu_validate_misa_mxl(RISCVCPUClass *mcc)
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 49a1186bdb..a5f42d2066 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -70,6 +70,7 @@ typedef struct CPUArchState CPURISCVState;
- #define RVG RV('G')
- #define RVB RV('B')
- #define RVX RV('X')
-+#define RVP RV('P')
- 
- extern const uint32_t misa_bits[];
- const char *riscv_get_misa_ext_name(uint32_t bit);
-@@ -783,6 +784,13 @@ FIELD(EXT_TB_FLAGS, ALTFMT, 32, 1)
- FIELD(EXT_TB_FLAGS, BIG_ENDIAN, 33, 1)
- /* sdext single-step needs a TB flag to build 1-insn TBs */
- FIELD(EXT_TB_FLAGS, SDEXT_STEP, 34, 1)
-+FIELD(EXT_TB_FLAGS, P_VXSAT_EXCP, 35, 2)
-+
-+enum {
-+    P_VXSAT_EXCP_NONE,
-+    P_VXSAT_EXCP_ILLEGAL,
-+    P_VXSAT_EXCP_VIRTUAL,
-+};
- 
- #ifdef TARGET_RISCV32
- #define riscv_cpu_mxl(env)  ((void)(env), MXL_RV32)
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 3579789a1f..79b9a08f7a 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -355,6 +355,8 @@
- #define SMSTATEEN0_CS       (1ULL << 0)
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
-+/* Packed-SIMD draft: enable access to vxsat when misa.V = 0. */
-+#define SMSTATEEN0_VXSAT    (1ULL << 3)
- #define SMSTATEEN0_CTR      (1ULL << 54)
- #define SMSTATEEN0_P1P13    (1ULL << 56)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 0de06e9588..020df9b8b1 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -160,6 +160,24 @@ static const VMStateDescription vmstate_vector = {
-     }
- };
- 
-+static bool p_vxsat_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
-+
-+    return riscv_has_ext(&cpu->env, RVP) && !cpu->cfg.ext_zve32x;
-+}
-+
-+static const VMStateDescription vmstate_p_vxsat = {
-+    .name = "cpu/p-vxsat",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = p_vxsat_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINT8(env.vxsat, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
-+
- static bool pointermasking_needed(void *opaque)
- {
-     return false;
-@@ -638,6 +656,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_pmp,
-         &vmstate_hyper,
-         &vmstate_vector,
-+        &vmstate_p_vxsat,
-         &vmstate_pointermasking,
-         &vmstate_rv128,
- #ifdef CONFIG_KVM
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index af444e3e6f..68c0b6112e 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -109,6 +109,24 @@ static RISCVException vs(CPURISCVState *env, int csrno)
-     return RISCV_EXCP_ILLEGAL_INST;
- }
- 
-+/* vxsat is also architectural state when P is implemented without Zve*. */
-+static RISCVException vxsat(CPURISCVState *env, int csrno)
-+{
-+    if (riscv_cpu_cfg(env)->ext_zve32x) {
-+        return vs(env, csrno);
-+    }
-+
-+    if (riscv_has_ext(env, RVP)) {
-+#if !defined(CONFIG_USER_ONLY)
-+        return smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
-+#else
-+        return RISCV_EXCP_NONE;
-+#endif
-+    }
-+
-+    return RISCV_EXCP_ILLEGAL_INST;
-+}
-+
- static RISCVException ctr(CPURISCVState *env, int csrno)
- {
-     if ((csrno >= CSR_CYCLE && csrno <= CSR_INSTRET) ||
-@@ -1016,7 +1034,12 @@ static RISCVException write_vxsat(CPURISCVState *env, int csrno,
-                                   target_ulong val, uintptr_t ra)
- {
- #if !defined(CONFIG_USER_ONLY)
--    env->mstatus |= MSTATUS_VS;
-+    if (riscv_cpu_cfg(env)->ext_zve32x) {
-+        env->mstatus |= MSTATUS_VS;
-+        if (env->virt_enabled) {
-+            env->mstatus_hs |= MSTATUS_VS;
-+        }
-+    }
- #endif
-     env->vxsat = val & BIT(0);
-     return RISCV_EXCP_NONE;
-@@ -3711,6 +3734,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
-                                       target_ulong new_val, uintptr_t ra)
- {
-     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
-+
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -3834,6 +3861,10 @@ static RISCVException write_hstateen0(CPURISCVState *env, int csrno,
- {
-     uint64_t wr_mask = SMSTATEEN_STATEEN | SMSTATEEN0_HSENVCFG;
- 
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-+
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -3963,6 +3994,10 @@ static RISCVException write_sstateen0(CPURISCVState *env, int csrno,
- {
-     uint64_t wr_mask = 0;
- 
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        wr_mask |= SMSTATEEN0_VXSAT;
-+    }
-+
-     if (!riscv_has_ext(env, RVF)) {
-         wr_mask |= SMSTATEEN0_FCSR;
-     }
-@@ -6155,7 +6190,7 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     [CSR_FCSR]     = { "fcsr",     fs,     read_fcsr,    write_fcsr   },
-     /* Vector CSRs */
-     [CSR_VSTART]   = { "vstart",   vs,     read_vstart,  write_vstart },
--    [CSR_VXSAT]    = { "vxsat",    vs,     read_vxsat,   write_vxsat  },
-+    [CSR_VXSAT]    = { "vxsat",    vxsat,  read_vxsat,   write_vxsat  },
-     [CSR_VXRM]     = { "vxrm",     vs,     read_vxrm,    write_vxrm   },
-     [CSR_VCSR]     = { "vcsr",     vs,     read_vcsr,    write_vcsr   },
-     [CSR_VL]       = { "vl",       vs,     read_vl                    },
-diff --git a/target/riscv/tcg/tcg-cpu.c b/target/riscv/tcg/tcg-cpu.c
-index 5834ec1524..3b3cb52c84 100644
---- a/target/riscv/tcg/tcg-cpu.c
-+++ b/target/riscv/tcg/tcg-cpu.c
-@@ -159,6 +159,8 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-     fs = EXT_STATUS_DIRTY;
-     vs = EXT_STATUS_DIRTY;
- #else
-+    RISCVException p_vxsat_excp;
-+
-     flags = FIELD_DP32(flags, TB_FLAGS, PRIV, env->priv);
- 
-     flags |= riscv_env_mmu_index(env, 0);
-@@ -181,6 +183,23 @@ static TCGTBCPUState riscv_get_tb_cpu_state(CPUState *cs)
-              ? EXT_STATUS_DIRTY : EXT_STATUS_DISABLED;
-     }
- 
-+    /*
-+     * Without Zve*, all P instructions in the OP-32 and OP-IMM-32
-+     * spaces are controlled by stateen0.VXSAT.  Preserve the exception
-+     * class in the TB flags so translated code can distinguish an illegal
-+     * instruction from a virtual-instruction exception.
-+     */
-+    p_vxsat_excp = smstateen_acc_ok(env, 0, SMSTATEEN0_VXSAT);
-+    if (riscv_has_ext(env, RVP) && !riscv_cpu_cfg(env)->ext_zve32x) {
-+        if (p_vxsat_excp == RISCV_EXCP_VIRT_INSTRUCTION_FAULT) {
-+            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-+                                   P_VXSAT_EXCP_VIRTUAL);
-+        } else if (p_vxsat_excp != RISCV_EXCP_NONE) {
-+            ext_flags = FIELD_DP64(ext_flags, EXT_TB_FLAGS, P_VXSAT_EXCP,
-+                                   P_VXSAT_EXCP_ILLEGAL);
-+        }
-+    }
-+
-     if ((cpu->cfg.debug || cpu->cfg.ext_sdtrig)
-         && !icount_enabled()) {
-         flags = FIELD_DP32(flags, TB_FLAGS, ITRIGGER, env->itrigger_enabled);
-@@ -559,6 +578,28 @@ static void riscv_cpu_validate_b(RISCVCPU *cpu)
-     }
- }
- 
-+static void riscv_cpu_validate_p(RISCVCPU *cpu, Error **errp)
-+{
-+    CPURISCVState *env = &cpu->env;
-+
-+    if (!riscv_has_ext(env, RVP)) {
-+        return;
-+    }
-+
-+    if (riscv_cpu_mxl(env) != MXL_RV32 &&
-+        riscv_cpu_mxl(env) != MXL_RV64) {
-+        error_setg(errp, "P extension requires RV32 or RV64");
-+        return;
-+    }
-+
-+    if (!(cpu->cfg.ext_zmmul && cpu->cfg.ext_zba && cpu->cfg.ext_zbb &&
-+          cpu->cfg.ext_zbkb)) {
-+        error_setg(errp, "P extension requires zmmul, zba, zbb and zbkb "
-+                         "extensions");
-+        return;
-+    }
-+}
-+
- /*
-  * Check consistency between chosen extensions while setting
-  * cpu->cfg accordingly.
-@@ -641,6 +682,12 @@ void riscv_cpu_validate_set_extensions(RISCVCPU *cpu, Error **errp)
-         return;
-     }
- 
-+    riscv_cpu_validate_p(cpu, &local_err);
-+    if (local_err != NULL) {
-+        error_propagate(errp, local_err);
-+        return;
-+    }
-+
-     riscv_cpu_validate_v(env, &cpu->cfg, &local_err);
-     if (local_err != NULL) {
-         error_propagate(errp, local_err);
-@@ -1455,6 +1502,7 @@ static const RISCVCPUMisaExtConfig misa_ext_cfgs[] = {
-     MISA_CFG(RVV, false),
-     MISA_CFG(RVG, false),
-     MISA_CFG(RVB, false),
-+    MISA_CFG(RVP, false),
- };
- 
- /*
+ target/riscv/cpu.c                          |    5 +-
+ target/riscv/cpu.h                          |    8 +
+ target/riscv/cpu_bits.h                     |    2 +
+ target/riscv/helper.h                       |  529 +++
+ target/riscv/insn32.decode                  |  830 +++++
+ target/riscv/machine.c                      |   19 +
+ target/riscv/tcg/csr.c                      |   39 +-
+ target/riscv/tcg/insn_trans/trans_rvb.c.inc |    4 +-
+ target/riscv/tcg/insn_trans/trans_rvp.c.inc | 1439 ++++++++
+ target/riscv/tcg/meson.build                |    3 +-
+ target/riscv/tcg/psimd_helper.c             | 3535 +++++++++++++++++++
+ target/riscv/tcg/tcg-cpu.c                  |   46 +
+ target/riscv/tcg/translate.c                |    6 +
+ tests/tcg/meson.build                       |    1 +
+ tests/tcg/riscv/meson.build                 |   49 +
+ tests/tcg/riscv/psimd-common.S              | 1115 ++++++
+ tests/tcg/riscv/psimd-rv32.S                | 1275 +++++++
+ tests/tcg/riscv/psimd-rv64.S                |  587 +++
+ tests/tcg/riscv/psimd-test-macros.inc       |  952 +++++
+ 19 files changed, 10438 insertions(+), 6 deletions(-)
+ create mode 100644 target/riscv/tcg/insn_trans/trans_rvp.c.inc
+ create mode 100644 target/riscv/tcg/psimd_helper.c
+ create mode 100644 tests/tcg/riscv/meson.build
+ create mode 100644 tests/tcg/riscv/psimd-common.S
+ create mode 100644 tests/tcg/riscv/psimd-rv32.S
+ create mode 100644 tests/tcg/riscv/psimd-rv64.S
+ create mode 100644 tests/tcg/riscv/psimd-test-macros.inc
+
 -- 
 2.53.0
 
