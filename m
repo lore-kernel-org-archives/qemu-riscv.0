@@ -1,74 +1,97 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 924D5606A320
-	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Nov 2026 12:29:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEFD5606A333
+	for <qemu-riscv@archiver.kernel.org>; Fri, 20 Nov 2026 12:51:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=univ-grenoble-alpes.fr header.i=@univ-grenoble-alpes.fr header.a=rsa-sha256 header.s=2020 header.b=Nmww1KmF
+	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=W8S/wqEO
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xUNiZ-0007Qe-9b; Fri, 20 Nov 2026 07:27:51 -0500
+	id 1xUO48-00013l-I7; Fri, 20 Nov 2026 07:50:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1xUNiX-0007Pu-H2; Fri, 20 Nov 2026 07:27:49 -0500
-Received: from zm-mta-out-3.u-ga.fr ([152.77.200.56])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xUO41-00010Q-Qd
+ for qemu-riscv@nongnu.org; Fri, 20 Nov 2026 07:50:02 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1)
- (envelope-from <frederic.petrot@univ-grenoble-alpes.fr>)
- id 1xUNiT-0001rC-Of; Fri, 20 Nov 2026 07:27:49 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=univ-grenoble-alpes.fr; s=2020; t=1795177663;
- bh=ybSyrnvn3+y8MaWdEcLUri4GqKjR2qVAYWDhQwkpNmk=;
- h=From:To:Cc:Subject:Date:From;
- b=Nmww1KmFwR+ORKwZjvv2XeXGqSWpSkUU6zooll+QeBO4tHph3aMv8ch5hRznnLpBi
- Adc60/iW0BWhnhGb85R3PtOMU6qxP8UBQ1jH+POddZknGnmypcSIw5RHpx8DdgRfcV
- rrLAyiKr6FPeYELj/SudW0BntJmNJRbqydg/+et/dy39DM9YO9YAWo2FnqFg6lIY8l
- 0WhwfEZmmNQbMWelAYjKuJ7iy6pNhq8Q0kc5PK3pz31QXN0LBoOPoV5NuDmRA/VQtd
- aTiB//FjBEx9hvKOKjb18loAYOm7jmAjB94S5ayppkrfgl+owe6RwhU8XwY5CCt+77
- gfZMCwugRvi3A==
-Received: from mailhub-2.u-ga.fr (mailhub-2.u-ga.fr [129.88.178.102])
- by zm-mta-out-3.u-ga.fr (Postfix) with ESMTP id 2436A402AB;
- Fri, 20 Nov 2026 13:27:43 +0100 (CET)
-Received: from smtps.univ-grenoble-alpes.fr (smtps2.u-ga.fr [152.77.18.2])
- by mailhub-2.u-ga.fr (Postfix) with ESMTP id 1F05CFF856;
- Fri, 20 Nov 2026 13:27:43 +0100 (CET)
-Received: from naga.tima.u-ga.fr (naga.tima.u-ga.fr [147.171.132.150])
+ (Exim 4.90_1) (envelope-from <berrange@redhat.com>)
+ id 1xUO3z-0004nY-K5
+ for qemu-riscv@nongnu.org; Fri, 20 Nov 2026 07:50:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1795178998;
+ h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=mCfGxPXNZfWhfyT0a8G9/tq9CFSzbLrFepa2fZjPDhg=;
+ b=W8S/wqEOVLcBZLRxH10Hbc+BP7Rh5V80iEUYaISNTUu99GIcgz7tKp2RepA+V0levPUq8c
+ IV6zBiBRw3lNuv2WtCO+yqD9GlByrAenZGWjyBUJsibBIwbCtfAGdmPcOuFeQi8Fer8NlN
+ zyKpfrOnxACyiCdWxevtj9dqAz1AIPA=
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-564-HWlhJuSbNnafuoCiWH2KwA-1; Fri,
+ 20 Nov 2026 12:49:54 +0000
+X-MC-Unique: HWlhJuSbNnafuoCiWH2KwA-1
+X-Mimecast-MFC-AGG-ID: HWlhJuSbNnafuoCiWH2KwA_1795178991
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- (Authenticated sender: petrotf@univ-grenoble-alpes.fr)
- by smtps.univ-grenoble-alpes.fr (Postfix) with ESMTPSA id B703514009A;
- Fri, 20 Nov 2026 13:27:42 +0100 (CET)
-From: frederic.petrot@univ-grenoble-alpes.fr
-To: qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, peter.maydell@linaro.org,
- daniel.barboza@oss.qualcomm.com, palmer@dabbelt.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org, =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20P=C3=A9trot?=
- <frederic.petrot@univ-grenoble-alpes.fr>
-Subject: [PATCH v5 0/4]  target/riscv: Correct undefined behaviors in x-rv128
-Date: Fri, 20 Nov 2026 13:27:37 +0100
-Message-ID: <20261120122741.33727-1-frederic.petrot@univ-grenoble-alpes.fr>
-X-Mailer: git-send-email 2.43.0
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B354818004FD; Fri, 20 Nov 2026 12:49:49 +0000 (UTC)
+Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9B69E180197B; Fri, 20 Nov 2026 12:49:38 +0000 (UTC)
+Date: Fri, 20 Nov 2026 12:49:36 +0000
+From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+To: marcandre.lureau@redhat.com
+Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, peter.maydell@linaro.org,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Kuan-Wei Chiu <visitorckw@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Michael Ellerman <mpe@kernel.org>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ Halil Pasic <pasic@linux.ibm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Eric Farman <farman@linux.ibm.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
+ qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
+Subject: Re: [PATCH v2] tests/functional: use immutable tuxboot kernel URLs
+Message-ID: <awBB4I184ACobtOP@redhat.com>
+References: <20261112133320.418012-2-marcandre.lureau@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20261112133320.418012-2-marcandre.lureau@redhat.com>
+User-Agent: Mutt/2.4.3 (2026-10-09)
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: fMU3Jt5yQU5zaJpM8JHOHL9r74XU1B0sn-p82JDuR-Y_1795178991
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Greylist: Whitelist-UGA SMTP Authentifie (petrotf@univ-grenoble-alpes.fr)
- via submission-587 ACL (41)
-Received-SPF: pass client-ip=152.77.200.56;
- envelope-from=frederic.petrot@univ-grenoble-alpes.fr;
- helo=zm-mta-out-3.u-ga.fr
-X-Spam_score_int: -43
-X-Spam_score: -4.4
-X-Spam_bar: ----
-X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+Received-SPF: pass client-ip=170.10.133.124; envelope-from=berrange@redhat.com;
+ helo=us-smtp-delivery-124.mimecast.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIMWL_WL_HIGH=-0.001,
+ DKIM_SIGNED=0.1, DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ RCVD_IN_DNSWL_LOW=-0.7, RCVD_IN_MSPIKE_H3=0.001, RCVD_IN_MSPIKE_WL=0.001,
+ SPF_HELO_PASS=-0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -79,69 +102,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Frédéric Pétrot <frederic.petrot@univ-grenoble-alpes.fr>
+On Thu, Nov 12, 2026 at 05:33:20PM +0400, marcandre.lureau@redhat.com wrote:
+> From: Marc-André Lureau <marcandre.lureau@redhat.com>
+> 
+> tuxboot rebuilds the 6.18.54 kernel images in place, so the URLs
+> without a datestamp now serve content that does not match the recorded
+> hashes and the tuxrun tests fail to fetch their assets. Point the
+> x86_64, arm64 and s390 tests at the immutable 20260930 snapshots and
+> keep the hashes that were recorded against them, instead of implicitly
+> switching to the rebuilt images.
+> 
+> Do the same for the riscv64 6.11.9 kernel assets, which still used
+> non-datestamped URLs; their recorded hashes already match the 20241122
+> snapshot.
+> 
+> Fixes: 8ac1aab21fca ("tests/functional: update arm64 tuxrun images")
+> Fixes: 09961fafc5a0 ("tests/functional: update s390x tuxrun images")
+> Fixes: 467c9eb7dd31 ("tests/functional: update x86_64 tuxrun images")
+> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> ---
+>  tests/functional/aarch64/test_tuxrun.py      | 4 ++--
+>  tests/functional/riscv64/test_milkv_duo.py   | 4 ++--
+>  tests/functional/riscv64/test_tt_atlantis.py | 2 +-
+>  tests/functional/riscv64/test_tuxrun.py      | 2 +-
+>  tests/functional/s390x/test_tuxrun.py        | 4 ++--
+>  tests/functional/x86_64/test_tuxrun.py       | 4 ++--
+>  6 files changed, 10 insertions(+), 10 deletions(-)
 
-Peter reported undefined behaviors in x-rv128 pmp configuration
-registers accesses detected by the clang sanitizer.
-This series introduces a 128-bit version of these accesses, and
-corrects other out-of-bound shifts within the handling of interrupts
-that were triggered afterwards.
-
-Changes in v5:
-- Fixe the 'Fixes:' trailer lines
-Note that patch 3 has a Medium issue reported by Sashiko AI
-regarding the state update in riscv_cpu_post_load.
-Since the correct "cause" values are computed on demand, such
-state update is not necessary.
-
-Changes in v4:
-- Change version_id in machine states as we are adding new fields,
-- Add Fixes: trailers in commits
-Note that Sashiko AI reports a misuse of riscv_cpu_sxl in patch 2, 
-while all calls are related to the use of scause (or vscause). 
-
-Changes in v3:
-- Extract the "interrupt" bitfield in the different versions of the
-  cause register in a separate field of cpu.h and build the cause
-  registers value on demand,
-- Add these new fields into the machine migration state,
-- Check that the pmp registers used in rv128 are only those allowed,
-- Add tcg tests for mcause and scause accesses.
-
-Changes in v2:
-- I messed up and directly assigned a 0 to an Int128, so v2 corrects
-  that.
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
 
 
-Frédéric Pétrot (4):
-  target/riscv: fix pmp sanitize error for x-rv128
-  target/riscv: fix riscv_cpu_do_interrupt sanitize error for x-rv128
-  target/riscv: Update machine state
-  target/riscv: [ms]cause tcg tests for x-rv128
-
- target/riscv/cpu.c                    |   1 +
- target/riscv/cpu.h                    |   4 +
- target/riscv/machine.c                |  12 ++-
- target/riscv/tcg/cpu_helper.c         |  20 ++++-
- target/riscv/tcg/csr.c                |  95 ++++++++++++++++++++----
- target/riscv/tcg/csr.h                |   3 +
- target/riscv/tcg/pmp.c                |  38 ++++++++++
- tests/tcg/riscv64/system/meson.build  |  14 ++++
- tests/tcg/riscv64/test-rv128-mcause.S | 101 ++++++++++++++++++++++++++
- tests/tcg/riscv64/test-rv128-scause.S |  94 ++++++++++++++++++++++++
- 10 files changed, 362 insertions(+), 20 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-rv128-mcause.S
- create mode 100644 tests/tcg/riscv64/test-rv128-scause.S
-
+With regards,
+Daniel
 -- 
-2.43.0
+|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
+|: https://libvirt.org          ~~          https://entangle-photo.org :|
+|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
 
 
