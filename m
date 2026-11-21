@@ -1,145 +1,123 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D2E1606A33B
-	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 12:44:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10902606A320
+	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 15:31:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gYRWenxQ;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=j4+lCjyk
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=O9N1plTl
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xUkSJ-0001xL-Tr; Sat, 21 Nov 2026 07:44:35 -0500
+	id 1xUn3l-00006J-2M; Sat, 21 Nov 2026 10:31:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xUkSH-0001ws-7L
- for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 07:44:33 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xUkSF-0002ZI-8g
- for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 07:44:32 -0500
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ALCGuvO731968
- for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 12:44:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Da6xAt7hKA/OTIGh2+Uf8diabrWMSKHHVafFvlU5+54=; b=gYRWenxQmJMNdY4t
- 4Shf7jQCebofJTYukrEgGfOz9x62CAl+V4iyJnHpuvlsib7LG6DZp9bSSPa1GBzl
- ZTw95XRNoLjLfyE3/sjcnRm3KhoC+1ETIPL5GPTeQYPiGGK4YMCQaauNtxzBL654
- 3+EH34o89tVB6bKXY3zODlXWogMGPYG9CD570Rv32b63loMIuei5iGqEKQQQNTOO
- nbnqCtljHafjeOWDz216aNRtjLEOSx6sL+8q6hndLKF1anY/XhQvqsAfVD94vZ5x
- k1fWKd1GsOTTfdwfiKLUjNiwrFttgbg799TSQidLAggeSN2R3YqtTlR7Hp/7Wz31
- +EoQIQ==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j328rs999-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 12:44:29 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-91c6c1e082bso52068466d6.0
- for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 04:44:29 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xUn3X-0008TR-UA
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 10:31:13 -0500
+Received: from mail-yx1-xb131.google.com ([2607:f8b0:4864:20::b131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <bmeng.cn@gmail.com>)
+ id 1xUn3W-0001jy-4Y
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 10:31:11 -0500
+Received: by mail-yx1-xb131.google.com with SMTP id
+ 956f58d0204a3-675617e81f9so2154985d50.3
+ for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 07:31:09 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795275068; cv=none;
+ d=google.com; s=arc-20260327;
+ b=A875wMfCnWn3/Vn9Kfu0rOQKmBLt2fgzEF+HOCfelzu4BTiITvpxitLFVOThM7Fg1H
+ aeqbAZm8WLflQUI+LgJBdfim55CBCBrmOtLEkx0D8WQe4kRwG7bUl59i7PVkQghrE8R3
+ 50gfndO9M1PByT3BAELUQAxBhW8ga53P4MMR/t5KgbKCydHrpRvb98+PK2CNnHFQjeM7
+ ON0IkIGDdC/qxLe4F555LukacQc0MnTHftGmkGCht4lZvUV+4JK6aEwQRIcA/aDNyB5+
+ XdujZc1P/G37GuDIYv3pkUOeAM+uQ0M0upDFl7WSADQvuABoVaWThniGCBWCsle+gsn5
+ +6xA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=Ymh1U0QIx+ok+DwbBTAoaXzSeH80ixPkSzLNsRW/NP4=;
+ fh=mD0DBJfnJrqNJrwE1rZZYwPpAlh4p7S2foyOL0T4juY=;
+ b=qOZ5YpgFzHMzQp8VUhRLKC5cIy/9bGxsKeWHzflF/fovKTNjnVbdq55HvJAel6xnOB
+ N/FiBBgv9lZ/TnnF7+aM/whoyb/x+qcP3LHnMYZD/CDfjD1Xb2Uqz+fAi4UN0ZIBSNhv
+ EGFWcxXeac334MQa2Ej5rcSQ6F2TtR3s+9IscmRczwG9YwuilPgr4BvYz3enoKKdonMa
+ B0HBFBjjetktoc73zpM6LKSPVfkaiQ5nVV4bSs+cBrkEDShhsjGlUryEPBiz58eaMCcW
+ zfYhveXGV4QO8Gu/pODACnILQxhc73qI2XOgw4oFAjIKaKv4rGYbtk259stqaHqWd+9V
+ /ztQ==; darn=nongnu.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795265067; x=1795869867; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Da6xAt7hKA/OTIGh2+Uf8diabrWMSKHHVafFvlU5+54=;
- b=j4+lCjykCmj5WcAxtJIkI8BNIsRbSzstoPgeaxZFgcbrRPYhVCmgcyziALdIoTTRHQ
- UsLJ3FS9oEATfcpQbG9umvG5QMI9YfmxVUMQ3C+p7tEvhgARxFw/QzzxCO2KLYgpoXVj
- Qw1wmWPHLJABdCCqf4CmeVteB9sm69JemFzvB3KL2KNsaMjOobFhc2XRz3nEUtOi592p
- 75HWig3AcyI5ZK53rkK3wn3YyveohHgGcnZj+W8Rl4nABgKEkHwwjxgwwxnv0QqADYoM
- Akief1M+qDzgNDeKansT+nAk6hxOKzAhMwF4nqOn0tLsopMa8jwjJ1IaYT4IWsk2Bh8c
- voaA==
+ d=gmail.com; s=20260707; t=1795275068; x=1795879868; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Ymh1U0QIx+ok+DwbBTAoaXzSeH80ixPkSzLNsRW/NP4=;
+ b=O9N1plTlIQQoIsptnQFYO/fGawCghmVC100umxbPOrFI2jBZYWH0p/rzJ+TpkktYw0
+ 5UCR5cFfmNFuiC52BsAklD5A8ZBkW1GUXN/i8TPxO9QVJVy40IOl9uKc0JcQMOo9pXs2
+ ZqC/SSsmiU2jpu5PJMMrC74C4u6ImAvUAsGOSVOii0SSC4fB8MaJxkvzn6fop4PhzAUV
+ uu7W8o4w//pQU+p4k6x4RuJyUo0Le5hFAL0l+5w9gKgVnKqB130k+fntoBKv7VqdDioo
+ Be9AUZDSPQNwDc8Jj+V28c4Z1BXXYEzG1JNK5RlFVpDJFuNPAxod//YrtF0Ntd70fwh+
+ wf1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795265067; x=1795869867;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Da6xAt7hKA/OTIGh2+Uf8diabrWMSKHHVafFvlU5+54=;
- b=oWNGCbvKSWqOzlMntkyzGrJl4VGI9IFDhmTOfiHj7luzfoJmBU6AeSuwHQBBRoeSNs
- mEjfFlvKbdu53FQMVbjtUV+geAl6HsIDpoRbS/CocBx76dZECh4b3cEcvWgUiNwWCVxB
- hcYU19Hnk9wtJNvBjEVfD/6izvnyPAgZiXCO56BQaiUXT3aCviOB3HTTgFDWaGSnQ9Qz
- hJ1ZidujRPns+moQnK6vgS0oUkivwzRsbsdNybIzdLi//wjAJ+jznp8hOvfX7mVrR24I
- cEcBwGVw8Z+ZkxkuqYUvnA7Wk/EoR9naUpvN2kUroIbt85IC0QmcK+alCplUkhEwFNoM
- HxIQ==
-X-Gm-Message-State: APuU4Z92nk5se18Ye2N/YVbtC7jFfoKcqwG4oxeiCC7wxv/+sXfVe5KY
- 8KKzZ5L3SVLWbcZ9SU9x6Ecs7arL4VZM6YOmQgW/FWhsnVDR0JwPFvXJtnlIeGV5ucV6QIe4Ml0
- SJ0i57AdlfThO+QVcaMtHge32JsV2fh9LcyNUsxdeSQ3SZQXOixq2qBRdWw==
-X-Gm-Gg: AZFdTZegZ5ptOmHvpcaL4twukD7GQk0H4TumlLpxFaYbWEZJxtyXo51pxqTeCzN50fG
- EPa6SlSgrUUcfcGzyZmTSOSjmINHTzgHpExNenjR+RIZJ7ggk+rfkvBwKkybw5liPLzFja3Fk2a
- PcurP63gClxdaUD53vtS5TS/Jgarcg72jAsKBK356FqWSh0mw2P3Hzr01XOe3P1NGDpoTZPIkgR
- c/DNDtnOq5Av4TGmoSs/JhmAwHJWwqVypuGpX41sqY2Hzo/rP7p0LbZFeJxTONcGJ/fz6/bAmu6
- 3quga68jbuZh55bI540HSiXbcFKcBnOy+lB5H1WGF8QIo99ZKajuV9qFCHFWwfbH47ku83Vv8CJ
- YIUP8Wvx7nTQdo8c8rG3o2x76yVWL/3N9/yuGsIqsRsGaDbNFkYoJY4KGA9wEvsfgCO+mBsggnT
- bjaQ5X0Uij
-X-Received: by 2002:a05:6214:2dc4:b0:921:3475:4bf2 with SMTP id
- 6a1803df08f44-92134b9d275mr92478936d6.25.1795265067299; 
- Sat, 21 Nov 2026 04:44:27 -0800 (PST)
-X-Received: by 2002:a05:6214:2dc4:b0:921:3475:4bf2 with SMTP id
- 6a1803df08f44-92134b9d275mr92478556d6.25.1795265066697; 
- Sat, 21 Nov 2026 04:44:26 -0800 (PST)
-Received: from [192.168.68.105] ([189.110.107.17])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-92134a2806dsm51653596d6.45.2026.11.21.04.44.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 21 Nov 2026 04:44:26 -0800 (PST)
-Message-ID: <e61303cd-34b0-4f3a-92f2-cab9834b24bb@oss.qualcomm.com>
-Date: Sat, 21 Nov 2026 09:44:23 -0300
+ d=1e100.net; s=20260707; t=1795275068; x=1795879868;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Ymh1U0QIx+ok+DwbBTAoaXzSeH80ixPkSzLNsRW/NP4=;
+ b=L6WraqDq9LQXzWqvpVhKgpCJwdhAQq+vl+gnjPpFSZxPXm2LPBaJvP4KPjWKXm0WIQ
+ P4wFA4xqgyrtDulChVrqJtl2Wy1zjRD7yh99qHGFA2KdBGq0uf/0GPjEfyFJJKYZ9717
+ sF/RBEk9Io4qQvWKcIcJ8eEqBfH4KqMnSD0pEjfZFeyrh+6LoB3pNdYTovdCeFkVay5+
+ UwzeVD1Xr73ioN0AaCCWGJy8yGoFrLLr8vd+Sh0hcEVYgIecHrqjXXV/SwLs3kTGohFb
+ kwRfqkHtpFcjxYzmsP6SK1PKsv8rgBND3eyHgaLiXGnBgm4lah9RkKhXd2D2p/ZhX1o6
+ hRlQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErEVpQZQfkZ2kZ+zQq2kK3Iyk2sHu0hxMXRXRli1u9fyel0tVeSOlIhbY75ZRYyDiBRDPvBskk0kPkRh@nongnu.org
+X-Gm-Message-State: APuU4Z8TX2T9OKy2IAtfJqdehx+hdL7wQcK7JRaoXyh1G8Pg3eUOyzZP
+ GIaff+HZgE+KSzjBEsaBw+w2bGsfhbEDQ35VIGNrk+ESoeTXJMVEkGgBnkDJToZ23S6Vg22gd/M
+ LRvJstHpGq9CrMmbwfhPLgKJe4g5s8+I=
+X-Gm-Gg: AZFdTZejMoO+J5S+kROI9yFZLhHM79q3L9MmiVL/fV478IcCddZUxlEOFRBTslviYJ+
+ jmvoCjRsUC1BUB8cckSNkkr9GOu4Sf7370llRsFT9Ark6PUVYL6Maj/16l1zU+G21o20gQEBEdp
+ I5xWdUX83xSRadN13DyF20jQG+XEqqJRnaK+M21pDg5ftUjFvnLHlYgRQ3ImKbVE99jd8LEoLCW
+ jLs1nYIved4UP6wNWLKyQXaZHxdgLcthICOEzhe/OSjntax0YAnBL5THl6fGLLX4c0mn0RZursq
+ H0jkYMaGYBbcA2DKqCRJynVia/AXrDImqP5z/RZ5f6sXDUnGY69lUP4nuRMyhJlKecB47mkEfvy
+ rz+k9/hHIQKuJghVW1H0hB3Y07dshh7D4cLYY7zFM3bjqdly7RjIbxoOTEawWDrNtNqqWrR8=
+X-Received: by 2002:a05:690e:12c5:b0:67c:1dca:808 with SMTP id
+ 956f58d0204a3-67df43f6506mr3192394d50.40.1795275068633; Sat, 21 Nov 2026
+ 07:31:08 -0800 (PST)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: make mstatush.MPELP writable [GL4220]
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Palmer Dabbelt <palmer@dabbelt.com>
-References: <20261112200635.549520-1-daniel.barboza@oss.qualcomm.com>
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20261112200635.549520-1-daniel.barboza@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIxMDA1MCBTYWx0ZWRfX+5EC//LRJkiZ
- Tp7bHklBvl3xIlY/ZG2Sru+RKr41hTfvB+GmH50oqPvQ3Qh6Wg/khfRL5vYmvM1HbdTVKNeAN4b
- 2RhxrZOc+rH74kmPb8q8DxuIdMoFIB4=
-X-Proofpoint-GUID: UCXfIoK8xWHKjBJ1flgZfgmsqwl9Y5k3
-X-Proofpoint-ORIG-GUID: UCXfIoK8xWHKjBJ1flgZfgmsqwl9Y5k3
-X-Authority-Analysis: v=2.4 cv=c9w+0h9l c=1 sm=1 tr=0 ts=6b01922d cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=p0WdMEafAAAA:8 a=EUspDBNiAAAA:8 a=cg53bU8Wj0-TdxcqrnAA:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIxMDA1MCBTYWx0ZWRfX1Lw4EcCmBw7D
- /SGzUrMyWBb9LZXbVZo2ZPIX4pDCGtFtWBc2eilYqC/QZav0MRa2Gd7RuEEfpIEeY6+yfCJeIlr
- 9BSzs9+4KtN8uHhQL0wTg5OVpGBWNhrsRyuB4FQUVHUqvdDNE/my+doH8B+HoCqrtXlm6+lCCd4
- vvIeslUdlz/BjKO0PwWYBkk0q82UKE8dok+CGLIC23y/P7hYUgPvNTnvJCEe1P5O5mVPqWIqMD7
- rZgDBWfwiQ9bfy/745+v5DNay9mpRG1Hfm8CRT42LzTdO7elCpE0LhLxbHPCofuUPMEZICW0RE9
- MaArJwFWP/q7bJzh/r9hxXn21WTDFnkheatBjSrfSF2weJOd2XJy9P3BfFNVMV9nujCKv5s+VLU
- mOVg8L7TIikfst4V55gL5mIInNkaa2+lSDMnk1B5LlT9j7XxI/HOwuN79mYnX3selbKy/Zge4vj
- ltCEb/xgAYetpaZgang==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-21_03,2026-11-19_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 adultscore=0 bulkscore=0 clxscore=1015
- suspectscore=0 malwarescore=0 impostorscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611210050
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+References: <20261104154207.641511-1-bin.meng@processmission.com>
+ <CAEUhbmW4u6sjkOtY_+Rm5SVz7Uxxx69=Q-5kSOWsSC=PfFLYfg@mail.gmail.com>
+In-Reply-To: <CAEUhbmW4u6sjkOtY_+Rm5SVz7Uxxx69=Q-5kSOWsSC=PfFLYfg@mail.gmail.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 21 Nov 2026 23:30:57 +0800
+X-Gm-Features: Aa3M54q5dQ7qxUjEgRs_XFF_wf_wOAr933o_dCzX0PcLbwkHPto4xrMLFmfvWgU
+Message-ID: <CAEUhbmVS6kEBHG29j4w+ftcjcKEoVMPbeKo+88oBZpUJ1W0E1g@mail.gmail.com>
+Subject: Re: [PATCH v5 00/26] hw/riscv: Restore Microchip PolarFire SoC Icicle
+ Kit firmware boot
+To: Bin Meng <bin.meng@processmission.com>
+Cc: QEMU <qemu-devel@nongnu.org>, Alistair Francis <Alistair.Francis@wdc.com>, 
+ Alistair Francis <alistair@alistair23.me>,
+ Chao Liu <chao.liu@processmission.com>, Conor Dooley <conor@kernel.org>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Fabiano Rosas <farosas@suse.de>,
+ Laurent Vivier <lvivier@redhat.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Markus Armbruster <armbru@redhat.com>, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, 
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>,
+ Weiwei Li <liwei1518@gmail.com>, 
+ qemu-arm@nongnu.org, qemu-block@nongnu.org, qemu-riscv@nongnu.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2607:f8b0:4864:20::b131;
+ envelope-from=bmeng.cn@gmail.com; helo=mail-yx1-xb131.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -151,116 +129,92 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-7.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_PASS,SPF_PASS autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Ping review/Sashiko
+On Mon, Nov 9, 2026 at 9:43=E2=80=AFAM Bin Meng <bmeng.cn@gmail.com> wrote:
+>
+> On Wed, Nov 4, 2026 at 11:42=E2=80=AFPM Bin Meng <bin.meng@processmission=
+.com> wrote:
+> >
+> > The microchip-icicle-kit machine was originally validated with an older
+> > Hart Software Services (HSS) firmware stack. HSS v2026.04.1 cannot boot
+> > through U-Boot to Linux because several firmware-visible parts of the
+> > PolarFire SoC are missing or incomplete.
+> >
+> > The first failure occurs before the UART is initialized because the L2
+> > zero window is not mapped. HSS then needs additional L2 cache controlle=
+r
+> > and DDR training behavior. Later boot stages exercise system services,
+> > the RTC, SDHC version 4 DMA, and high-capacity SD card block sizing,
+> > along with the complete DDR aliases. The existing models ither reject
+> > these accesses or expose behavior that does not match the hardware
+> > specifications.
+> >
+> > This series restores the complete firmware boot flow. With these
+> > changes, QEMU boots the HSS v2026.04.1 eNVM image, loads its U-Boot
+> > payload from an SD card, and reaches the Buildroot 2026.05 Linux
+> > login prompt.
+> >
+> > The changes are organized around the firmware boot sequence:
+> >
+> > * Correct the L2-LIM size, map the L2 zero window, and provide the DMC
+> >   status transitions required by HSS DDR initialization.
+> > * Model the documented L2CC Config, WayEnable, and WayMask registers,
+> >   and resize L2-LIM as cache ways are enabled.
+> > * Complete SDHCI version 4 support used by the Cadence controller,
+> >   including Host Control 2, SDMA system addressing, 64-bit ADMA2
+> >   descriptors, and SDMA boundary continuation.
+> > * Run ADMA from a bounded timer-driven engine instead of performing wor=
+k
+> >   from command or unrelated MMIO accesses.  This keeps DMA progress
+> >   independent of guest register traffic and avoids consuming a polling
+> >   deadline inside the command write.
+> > * Advertise the Cadence controller's 64-bit system bus support.
+> > * Add the PolarFire SoC serial-number system service and RTC, and honor
+> >   the system-service notification control bit.
+> > * Correct the DDR aliases and fix the board topology at its physical
+> >   configuration of 2 GiB of RAM and five harts.
+> > * Document direct and HSS boot, add focused qtests and a full firmware
+> >   functional test, and restore the machine's Supported maintainer
+> >   status.
+> >
+> > Testing performed:
+> >
+> > * Built qemu-system-riscv64 and the documentation.
+> > * Passed various newly added qtests.
+> > * Booted HSS v2026.04.1, U-Boot, and Buildroot 2026.05 Linux to
+> >   the login prompt using the functional-test image.
+> >
+> > The functional test uses the processmission/qemu-machine-images release
+> > v1.1.1 tarball:
+> >
+> > https://github.com/processmission/qemu-machine-images/releases/download=
+/
+> > v1.1.1/riscv64-microchip-icicle-kit-v1.1.1.tar.zst
+> >
+> > When restoring the HSS boot support, 3 potential bugs were identified i=
+n
+> > the upstream HSS source codes that either blocks the DDR training from
+> > succeed or traps in a multi-core race at the very beginning or after
+> > a succesfully DDR training but stuck at OpenSBI/U-Boot hand-off. There
+> > are already bug reports filed aginst various upstream projects.
+> >
+> > Changes in v5:
+> > - Select REGISTER to fix riscv32-softmmu link failures
+> > - Rebase onto origin/master
+> > - Drop the high-capacity SD block-size fix already merged upstream
+> >
+>
+> Patch 8/11/15/22/23 still doesn't have any RB/TB tags. Ping for review?
+>
 
-Let's not miss the great "Gitlab fixes" train coming up in the next PR :)
+Only #10 needs a review or testing tag. Ping?
 
-
-Thanks,
-Daniel
-
-On 11/12/2026 5:06 PM, Daniel Henrique Barboza wrote:
-> Add MSTATUS_MPELP in the write mask inside write_mstatush().
-> 
-> Fixes: 4923f672e3d7 ("target/riscv: Introduce elp state and enabling controls for zicfilp")
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4220
-> Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-> ---
->   target/riscv/tcg/csr.c                  |  5 +++
->   tests/tcg/riscv32/system/meson.build    |  7 +++++
->   tests/tcg/riscv32/test-mstatush-mpelp.S | 42 +++++++++++++++++++++++++
->   3 files changed, 54 insertions(+)
->   create mode 100644 tests/tcg/riscv32/test-mstatush-mpelp.S
-> 
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index af444e3e6f..e73455d021 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -2155,6 +2155,11 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
->       uint64_t valh = (uint64_t)val << 32;
->       uint64_t mask = riscv_has_ext(env, RVH) ? MSTATUS_MPV | MSTATUS_GVA : 0;
->   
-> +    /* If cfi lp extension is available, then apply cfi lp mask */
-> +    if (env_archcpu(env)->cfg.ext_zicfilp) {
-> +        mask |= MSTATUS_MPELP;
-> +    }
-> +
->       if (riscv_cpu_cfg(env)->ext_smdbltrp) {
->           mask |= MSTATUS_MDT;
->           if ((valh & MSTATUS_MDT) != 0) {
-> diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-> index 117ae6fbce..415a1c212d 100644
-> --- a/tests/tcg/riscv32/system/meson.build
-> +++ b/tests/tcg/riscv32/system/meson.build
-> @@ -22,6 +22,13 @@ tests += {
->     },
->   }
->   
-> +tests += {
-> +  'test-mstatush-mpelp.S': {
-> +    'cflags': cflags,
-> +    'qemu_args': ['-cpu', 'max', qemu_args],
-> +  },
-> +}
-> +
->   if 'qemu-system-riscv32' in emulators
->     tcg_tests += {
->       'riscv32-softmmu': {
-> diff --git a/tests/tcg/riscv32/test-mstatush-mpelp.S b/tests/tcg/riscv32/test-mstatush-mpelp.S
-> new file mode 100644
-> index 0000000000..f70b4dfc32
-> --- /dev/null
-> +++ b/tests/tcg/riscv32/test-mstatush-mpelp.S
-> @@ -0,0 +1,42 @@
-> +/*
-> + * Test that mstatush.MPELP is writable (Gitlab 4220).
-> + *
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + * SPDX-License-Identifier: GPL-2.0-or-later
-> + */
-> +
-> +#define MSTATUSH_MPELP 0x200
-> +
-> +.option norvc
-> +	.text
-> +	.global _start
-> +
-> +_start:
-> +	lla	t0, trap
-> +	csrw	mtvec, t0
-> +
-> +	csrr	s0, mstatush
-> +	li	t0, MSTATUSH_MPELP
-> +	or	t1, s0, t0
-> +	csrw	mstatush, t1
-> +
-> +	csrr	s0, mstatush
-> +	and	t1, s0, t0
-> +	bne	t0, t1, _fail
-> +
-> +	j	_pass
-> +
-> +trap:
-> +	j	_fail
-> +
-> +_pass:
-> +	li	t0, 0x100000
-> +	li	t1, 0x5555	/* FINISHER_PASS */
-> +	sw	t1, 0(t0)
-> +	j	.
-> +
-> +_fail:
-> +	li	t0, 0x100000
-> +	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
-> +	sw	t1, 0(t0)
-> +	j	.
-
+Regards,
+Bin
 
