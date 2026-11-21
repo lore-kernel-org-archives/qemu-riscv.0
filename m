@@ -1,114 +1,115 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC3D606A338
-	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 03:53:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9119606A320
+	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 09:01:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hGCBuVrU
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Yrx5fcAM
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xUc9g-0000mS-2M; Fri, 20 Nov 2026 22:52:48 -0500
+	id 1xUgy6-0006rF-5H; Sat, 21 Nov 2026 04:01:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1xUc9d-0000la-It
- for qemu-riscv@nongnu.org; Fri, 20 Nov 2026 22:52:45 -0500
-Received: from mail-pj1-x102a.google.com ([2607:f8b0:4864:20::102a])
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xUgy1-0006qp-Fr
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 04:01:05 -0500
+Received: from mail-dy1-x132e.google.com ([2607:f8b0:4864:20::132e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <visitorckw@gmail.com>)
- id 1xUc9a-0004dP-3w
- for qemu-riscv@nongnu.org; Fri, 20 Nov 2026 22:52:45 -0500
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-3b43d30822fso521192a91.3
- for <qemu-riscv@nongnu.org>; Fri, 20 Nov 2026 19:52:41 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
+ id 1xUgxz-0004DS-9B
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 04:01:04 -0500
+Received: by mail-dy1-x132e.google.com with SMTP id
+ 5a478bee46e88-380c28f9e35so2621229eec.1
+ for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 01:01:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795233160; x=1795837960; darn=nongnu.org;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=gPMPz95XHRn193S3M8qU2GOltb60Cn4ZvH5ddS5NAHU=;
- b=hGCBuVrUTJnffAjfCgNrIjeqODZzzHmGDwWwZdQ/DVnBNN216hplETRrdUSExEfH/9
- 2V2Ps5s3ogank0O0VsyXc3lT9aIDa1mbiva6suEEUOy0FwaRE4TuUePaBJh53HDuweau
- 6DefME5IjoWxhwBYexjpbS6iOmV/+PUpfkpWKV7nrovJDKJtWw9oDuWiP90LURDqdm05
- RuD3aNtU7TQyhjWEaZjKsEhfEE6xyvCOS2YR9ScDVO8L4kZGVQ5/nZe4jjDCLve456Yg
- 7a+8y305eleHVKloOHfcjoWQfWV+HCuNwCi68+o5FJHaQqw55hc+6d19/owrblxq3Hrq
- ICaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795233160; x=1795837960;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :content-type:mime-version:references:message-id:subject:cc:to:from
- :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=gmail.com; s=20260707; t=1795251661; x=1795856461; darn=nongnu.org;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
  :reply-to:content-type;
- bh=gPMPz95XHRn193S3M8qU2GOltb60Cn4ZvH5ddS5NAHU=;
- b=ko+o/p/9U9Xr0ilqav7whM6ciTcW7doOrKbGhJiZ+I7UJJirU3ddUX6a0EzGMiHWya
- 1s9utbylJ/4ca0hB5unWbbqB6bonIJbIS1NP6+Ysqzf4sqQWYV7yvTS+vBKmjt66045e
- 6Pkuu7tgyo3MiSDN9lDVjYc8ckJY8Q/gnM9sOBaiPJ/drdEPmentuiiDLUn3RzWcZviF
- R4/9rjVOY7ppl/RA7CE/JvKk0R+WuCHegNV9Tos7KtJ9d0GkH3TEgDD3hCIM5XVVDkY0
- OFi2tczLZSNPqAUciLxsOerGT/Tr/9EE5eAxBP0bvvgQFUz+xv+HMH/ohuOgEnIBsdny
- E0Tg==
+ bh=rG6UIpHbkL//NmJGfcJECAPN+i2Amqje9llivMmzrpg=;
+ b=Yrx5fcAMqn+f3xiNEPzg0qgHAClKe/XLjxahDd8ZFTw2iYgECZntIMbck86Jd4YPzp
+ HuyIibVdMQA9qXiEi68jZ9ZMWbV9DC8iLUH+4w4P2xiHAOPuMJWtUmqnrMkwv+6lQFrJ
+ nafi5IwcD5mhajZqcMGtH8Dr/XhkpAgMZklwHwZ0LpzWaByWpE84dcPBrwllcKt/Rj2o
+ CWtcMG8A5TtyFD/strk6ktDKG4PPqzGFqWzHAa8Mp/BUazBFKNpN8R6Pj35T6OkRP+uF
+ jPZTH5MjZe4j4xGKYKDwL8X3mG6ZFmcS1UauoLUqLwHasy0NozOm380uQ8iLMb7L3x8S
+ KIFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795251662; x=1795856462;
+ h=cc:to:message-id:content-transfer-encoding:content-type
+ :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to:content-type;
+ bh=rG6UIpHbkL//NmJGfcJECAPN+i2Amqje9llivMmzrpg=;
+ b=kNby235HZ5XfdefRLjm1junDzkBMIhOA6Sj43fPTjQFv5vaq0hQ3jc5iBzkcRtJfyK
+ k8pA0HhiIFEqmx6ffzoKcFsx28I4xmWBJixHFNAXLbrUHUW14IwMrHuLxeWlP1ArGXNo
+ WlVyifnR4KxbQYKp4/8wSZ85ODNynhmVZXQZEM3pgwHtIYrlnisjHU8xgBFHMwYPGw2O
+ s43Ulk8JRmbadTx8stgH9qku6ut+FH3uD7JUKE3k/E5ARIjy35iYNoZnX+7sIKXgRnY6
+ YlcuS3ujWWi27l867OoWHTU1OSeleeTDx7iwavOk7daAwP0te1otRX+jILpqi8PCPYLD
+ AbUg==
 X-Forwarded-Encrypted: i=1;
- AL+hErGIBW0N4ejz5E9T7yOa1PPj8A7gyaCPQ3W5h8K2xbFwAdqkPxN3vd1Mbs48o2YtD9JZ0AhX27euaEfs@nongnu.org
-X-Gm-Message-State: APuU4Z+AtmdNemN8OsvZR5MKCsZgAom9aacB7B5S6evwqS+o5ApRPhj7
- 7te9rITnGwLmrSbkeDEeWDyvJEg4RKI7sSvMF33lA2hjecJ4dd9iYz4v
-X-Gm-Gg: AZFdTZcz+G4vNTc3a0/Ep4eccVpbuO2nYnCM3WaPnqXFgoSlBFMl1Gq3Qhb+tcegUS8
- 3XNOD41xpcwA0RwZU9JywQ9gvVm9Z3BBiv1ssS2vn1EYWvlmu08IDsZBkYGqCEkC9H2ph7+7BEw
- JKwZ+oPdXcxjgQsGaQVw8Uv+wVRI4dsyJArgo+7y/Qtr2L05JFk6mDZVzlG0QZAlP+vcJ3P/5cP
- o2mVds5KCXNZeHv3Y3Ci255Ixbx3DlXpaJGeEXFRIy0/kxMIpCw/vO/WPXxiPV03nskjhGzDsZq
- h6xr3JFA9dSadmFpDaLlmrXQ1kSK6owIoWfHGGZfskzP4MVcEKUigVUbUKKcT+yVdocDDy42vbf
- VnoUs6H1xv7MMG8gMFSmA9racRkIiqzHmoJ4ANz9QMCI0x7KUsXKPUYJPbcpuarOPbMFVzNIwCS
- q8CNqTTfSv6kDftHNbfs4q9EPCoE3eMqA1CYn5/ShfKk47WAcT9iVTmmonTOBUZw4VEHfgngAba
- P4FXmimDb7iAkPjIcARyLdphmFM4y5QDVJ4yi/ReJ5EuS2JZwdPglnrqLwmoPl05msNAY4UGrb9
- 7Ij9DnBvlAP20B8453W6/6bOsou6cO9ZHwDbQzHG/62Sdu6ucSWpkjY+4lPeqZBrZ2qIudXSJmA
- wypu3w/lEUA==
-X-Received: by 2002:a17:90b:390c:b0:3a7:9e3d:b3 with SMTP id
- 98e67ed59e1d1-3b41c9beafamr4541420a91.66.1795233160138; 
- Fri, 20 Nov 2026 19:52:40 -0800 (PST)
-Received: from google.com (61-230-61-116.dynamic-ip.hinet.net. [61.230.61.116])
+ AL+hErFXTlOIPEl9gWoSha6JUei5/FNJ4o6KKrrzMEeLcq+3BN3oZeMxM1ZQpRKMWRM/YUKhn4vFZViUqhsL@nongnu.org
+X-Gm-Message-State: APuU4Z8G22tvG5PBYQzrKiPgsCB59v/1M8Ux8RUnoqdh7W6C9RhKVxaN
+ SPkeI2C2znCADpPch9waTyEsIYG7ezpHdLmF3rRDIVaZeYnY89wKuJIT
+X-Gm-Gg: AZFdTZfDCP326D6BeP4ioxEUeHuhMM25ZbPzpA/7KNMXrelnTqFIUT9a7Nhd/nSZYJo
+ wmDlivGbW5xtAnG6HrWbASfz8EI7HKtekgk6+4m0t5FOuwtt24wl19UDVaOwhCoc5PbmvAT0e47
+ szG28DlLKjC3xlhfe4LVRmB3PLct+2eZ1ZerXMTpvufxW1fzG/kaVYb4nejQnNn5n6AaI9vxU+D
+ 3b2UP+WnS5w153h7npSCE35sCIe78tSmMXbGiNUNv16J9F58f4E3WTtR1k5xWc+k9KN6Cy+8JrB
+ AdQEippzOrhc/Ld3LdUO7rP6mYP6/JRYo2DzHfmKzErcXPIBheKz0FM9afPRSQsG6Rn4Zu0ts5E
+ mlYJ1VSBBzPqTj7WPhdTKglIR6jZQBFMyGatIq+QBdUb1NAvwf7LCAVZZlavVMp9STOq6H9j4YH
+ j5m105yMwtVA4IKintizpMEsMJrGwWIfsgCR/Fx3igkDL2YlVeq3gQpJuNOeXB/baAE/Hm/gb07
+ iCidRKka9QYp/ls7RjpA3SP3ucLyM0wHjxjPDSa/1OzX3MU/clIt3YHaxyrBSoESi/6bwRez1kx
+ O+b9RL0KasnbtvttuhKwc9j+IpUsAD3Lg9g6nEEoB9SC+Dqp//6ihw2WqpfrmglCsNuKm6WdYpG
+ Jdi5dW3Skucg=
+X-Received: by 2002:a05:701b:2603:b0:1b2:5ecf:9bd1 with SMTP id
+ a92af1059eb24-1b55249484cmr6566615c88.7.1795251661299; 
+ Sat, 21 Nov 2026 01:01:01 -0800 (PST)
+Received: from [127.0.1.1]
+ (ec2-18-140-66-51.ap-southeast-1.compute.amazonaws.com. [18.140.66.51])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b405d97356sm9568281a91.13.2026.11.20.19.52.33
+ a92af1059eb24-1b562a82b3fsm7397514c88.5.2026.11.21.01.00.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 20 Nov 2026 19:52:39 -0800 (PST)
-Date: Sat, 21 Nov 2026 11:52:30 +0800
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: marcandre.lureau@redhat.com
-Cc: qemu-devel@nongnu.org, alex.bennee@linaro.org, peter.maydell@linaro.org,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Alistair Francis <alistair.francis@wdc.com>,
- Weiwei Li <liwei1518@gmail.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Joel Stanley <joel@jms.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
- Michael Ellerman <mpe@kernel.org>,
- Portia Stephens <portias@oss.tenstorrent.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- Eric Farman <farman@linux.ibm.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Zhao Liu <zhao1.liu@intel.com>,
- qemu-arm@nongnu.org, qemu-riscv@nongnu.org, qemu-s390x@nongnu.org
-Subject: Re: [PATCH v2] tests/functional: use immutable tuxboot kernel URLs
-Message-ID: <awEVfpG0U9p02nxm@google.com>
-References: <20261112133320.418012-2-marcandre.lureau@redhat.com>
+ Sat, 21 Nov 2026 01:01:00 -0800 (PST)
+From: WX Chen <wxchen0913@gmail.com>
+Date: Sat, 21 Nov 2026 17:00:48 +0800
+Subject: [PATCH] target/riscv: add memory ordering required by RVTSO in
+ ldst_stride_trans
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261112133320.418012-2-marcandre.lureau@redhat.com>
-Received-SPF: pass client-ip=2607:f8b0:4864:20::102a;
- envelope-from=visitorckw@gmail.com; helo=mail-pj1-x102a.google.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
- DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, FREEMAIL_FROM=0.001,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261121-fix-rvtso-vector-stride-v1-1-1c451042b0b5@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAL9dAWsC/x3MywrDIBCF4VcJs+6Ao/WSvkrowujYuEnKGEIh5
+ N1ru/zgnP+ExlK5wWM4QfiorW5rB90GSEtcX4w1d4NW2hFpwlI/KMfeNjw47Ztg26VmRjOW7Io
+ ytpCH/n4L9+m/PD2759gYZ4lrWn49FTiPPhmTTKDAxVL0KVht7j7qwGNxLig/W7iuL4iX51WkA
+ AAA
+X-Change-ID: 20261121-fix-rvtso-vector-stride-39fd6f035f17
+To: qemu-devel@nongnu.org
+Cc: Tao Tang <tangtao1634@phytium.com.cn>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ WX Chen <wxchen0913@gmail.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795251652; l=2866;
+ i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
+ bh=s6qZvzhx6DyW00xi8ctwLQr3Vh7dJFsEyTG7tU2lmTQ=;
+ b=4a65fKidnQ9PeZVDl5TF4Y06zVKhMOWQIj2B4iGc1okKqNZYo/h0dwxEVtjtXNxT2wR2o/OQv
+ svmZfbxfi+2Avh6rszuw2VfUMXFW2ItkI34OM3VOICkAWr5SIWXV74V
+X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
+ pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
+Received-SPF: pass client-ip=2607:f8b0:4864:20::132e;
+ envelope-from=wxchen0913@gmail.com; helo=mail-dy1-x132e.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+ DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -120,140 +121,85 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Thu, Nov 12, 2026 at 05:33:20PM +0400, marcandre.lureau@redhat.com wrote:
-> From: Marc-André Lureau <marcandre.lureau@redhat.com>
-> 
-> tuxboot rebuilds the 6.18.54 kernel images in place, so the URLs
-> without a datestamp now serve content that does not match the recorded
-> hashes and the tuxrun tests fail to fetch their assets. Point the
-> x86_64, arm64 and s390 tests at the immutable 20260930 snapshots and
-> keep the hashes that were recorded against them, instead of implicitly
-> switching to the rebuilt images.
-> 
-> Do the same for the riscv64 6.11.9 kernel assets, which still used
-> non-datestamped URLs; their recorded hashes already match the 20241122
-> snapshot.
-> 
-> Fixes: 8ac1aab21fca ("tests/functional: update arm64 tuxrun images")
-> Fixes: 09961fafc5a0 ("tests/functional: update s390x tuxrun images")
-> Fixes: 467c9eb7dd31 ("tests/functional: update x86_64 tuxrun images")
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+RISCV ztso extension provide default memory ordering of:
+    R -> R,  R -> W,  W -> W,  without W -> R,
+but the current ldst_stride_trans hasn't any ordering listed above. This may
+not satisfy the guest requirement on some weak memory ordering hosts.
+This patch add the above ordering in ldst_stride_trans, who is in charge of
+the following instructions:
+vlse8.v, vlse16.v, vlse32.v, vlse64.v
+vsse8.v, vsse16.v, vsse32.v, vsse64.v
 
-Reviewed-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+Signed-off-by: WX Chen <wxchen0913@gmail.com>
+---
+ target/riscv/tcg/insn_trans/trans_rvv.c.inc | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
-> ---
->  tests/functional/aarch64/test_tuxrun.py      | 4 ++--
->  tests/functional/riscv64/test_milkv_duo.py   | 4 ++--
->  tests/functional/riscv64/test_tt_atlantis.py | 2 +-
->  tests/functional/riscv64/test_tuxrun.py      | 2 +-
->  tests/functional/s390x/test_tuxrun.py        | 4 ++--
->  tests/functional/x86_64/test_tuxrun.py       | 4 ++--
->  6 files changed, 10 insertions(+), 10 deletions(-)
-> 
-> diff --git a/tests/functional/aarch64/test_tuxrun.py b/tests/functional/aarch64/test_tuxrun.py
-> index 2ff321582d38..035984d8e3e5 100755
-> --- a/tests/functional/aarch64/test_tuxrun.py
-> +++ b/tests/functional/aarch64/test_tuxrun.py
-> @@ -17,10 +17,10 @@
->  class TuxRunAarch64Test(TuxRunBaselineTest):
->  
->      ASSET_ARM64_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/arm64/Image.gz',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/arm64/Image.gz',
->          '39f4633bbcb444267d4d829bd28d8868a287c4c160cda64b0fd23fb090571c4e')
->      ASSET_ARM64_VMLINUX = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/arm64/vmlinux.xz',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/arm64/vmlinux.xz',
->          '6487eb113ef6e841aedab6cb6fa704006377d68f64dd544570aa42f462a52b85')
->      ASSET_ARM64_ROOTFS = Asset(
->          'https://storage.tuxboot.com/buildroot/20260924/arm64/rootfs.ext4.zst',
-> diff --git a/tests/functional/riscv64/test_milkv_duo.py b/tests/functional/riscv64/test_milkv_duo.py
-> index 6a7e2a5d1967..fdc83d7c8284 100755
-> --- a/tests/functional/riscv64/test_milkv_duo.py
-> +++ b/tests/functional/riscv64/test_milkv_duo.py
-> @@ -14,11 +14,11 @@ class MilkvDuoMachine(LinuxKernelTest):
->      timeout = 120
->  
->      ASSET_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-> +        'https://storage.tuxboot.com/kernels/20241122/6.11.9/riscv64/Image',
->          '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0'
->      )
->      ASSET_DTBS = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/dtbs.tar.xz',
-> +        'https://storage.tuxboot.com/kernels/20241122/6.11.9/riscv64/dtbs.tar.xz',
->          '97e5e65a7e6c68303e53486af120c0846ee8df572e9c15f0c4dccb831d0cef4b'
->      )
->      ASSET_ROOTFS = Asset(
-> diff --git a/tests/functional/riscv64/test_tt_atlantis.py b/tests/functional/riscv64/test_tt_atlantis.py
-> index 48abd5cd27c2..7cd5234432d9 100755
-> --- a/tests/functional/riscv64/test_tt_atlantis.py
-> +++ b/tests/functional/riscv64/test_tt_atlantis.py
-> @@ -14,7 +14,7 @@
->  class TTAtlantis(LinuxKernelTest):
->  
->      ASSET_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-> +        'https://storage.tuxboot.com/kernels/20241122/6.11.9/riscv64/Image',
->          '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0')
->      ASSET_ROOTFS = Asset(
->          ('https://github.com/groeck/linux-build-test/raw/'
-> diff --git a/tests/functional/riscv64/test_tuxrun.py b/tests/functional/riscv64/test_tuxrun.py
-> index 6203a45060ce..b470c05300a7 100755
-> --- a/tests/functional/riscv64/test_tuxrun.py
-> +++ b/tests/functional/riscv64/test_tuxrun.py
-> @@ -17,7 +17,7 @@
->  class TuxRunRiscV64Test(TuxRunBaselineTest):
->  
->      ASSET_RISCV64_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.11.9/riscv64/Image',
-> +        'https://storage.tuxboot.com/kernels/20241122/6.11.9/riscv64/Image',
->          '174f8bb87f08961e54fa3fcd954a8e31f4645f6d6af4dd43983d5e9841490fb0')
->      ASSET_RISCV64_ROOTFS = Asset(
->          'https://storage.tuxboot.com/buildroot/20241119/riscv64/rootfs.ext4.zst',
-> diff --git a/tests/functional/s390x/test_tuxrun.py b/tests/functional/s390x/test_tuxrun.py
-> index 1dd662aaaf05..420e7146bb10 100755
-> --- a/tests/functional/s390x/test_tuxrun.py
-> +++ b/tests/functional/s390x/test_tuxrun.py
-> @@ -17,10 +17,10 @@
->  class TuxRunS390xTest(TuxRunBaselineTest):
->  
->      ASSET_S390X_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/s390/bzImage',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/s390/bzImage',
->          '5efeb31754b211440e1595ab11355bb006fe78a2c0604ed0a8c55c4598b71aec')
->      ASSET_S390X_VMLINUX = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/s390/vmlinux.xz',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/s390/vmlinux.xz',
->          '5bbd4d34e0950f88053a9bfd16078896df4b1ee1696fc2ad62488e681a6bdd8e')
->      ASSET_S390X_ROOTFS = Asset(
->          'https://storage.tuxboot.com/buildroot/20260924/s390/rootfs.ext4.zst',
-> diff --git a/tests/functional/x86_64/test_tuxrun.py b/tests/functional/x86_64/test_tuxrun.py
-> index 1a1138d16aea..d2e6008ae708 100755
-> --- a/tests/functional/x86_64/test_tuxrun.py
-> +++ b/tests/functional/x86_64/test_tuxrun.py
-> @@ -17,10 +17,10 @@
->  class TuxRunX86Test(TuxRunBaselineTest):
->  
->      ASSET_X86_64_KERNEL = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/x86_64/bzImage',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/x86_64/bzImage',
->          '24a3ade610c2cc426ff821050de8a35930b0371357d94cc2c334abac6658552b')
->      ASSET_X86_64_VMLINUX = Asset(
-> -        'https://storage.tuxboot.com/kernels/6.18.54/x86_64/vmlinux.xz',
-> +        'https://storage.tuxboot.com/kernels/20260930/6.18.54/x86_64/vmlinux.xz',
->          '77bf44cca48c9c1b9c142e16a2311d58b8ae3462b61bce44bcaf9243b5f26628')
->      ASSET_X86_64_ROOTFS = Asset(
->          'https://storage.tuxboot.com/buildroot/20260924/x86_64/rootfs.ext4.zst',
-> -- 
-> 2.56.0.116.g6de20f6092dc
-> 
+diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..de6c8ba2a397b12cf0fecbe88936a4798a49bff4 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
+@@ -880,7 +880,7 @@ typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
+ 
+ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+                               uint32_t data, gen_helper_ldst_stride *fn,
+-                              DisasContext *s)
++                              DisasContext *s, bool is_store)
+ {
+     TCGv_ptr dest, mask;
+     TCGv base, stride;
+@@ -896,10 +896,18 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
+     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
+     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+ 
++    if (is_store && s->ztso) {
++        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
++    }
++
+     mark_vs_dirty(s);
+ 
+     fn(dest, mask, base, stride, tcg_env, desc);
+ 
++    if (!is_store && s->ztso) {
++        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
++    }
++
+     finalize_rvv_inst(s);
+     return true;
+ }
+@@ -924,7 +932,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+     data = FIELD_DP32(data, VDATA, NF, a->nf);
+     data = FIELD_DP32(data, VDATA, VTA, s->vta);
+     data = FIELD_DP32(data, VDATA, VMA, s->vma);
+-    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
++    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
+ }
+ 
+ static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+@@ -958,7 +966,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
+         return false;
+     }
+ 
+-    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
++    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+ }
+ 
+ static bool st_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
+
+---
+base-commit: 08ed97c33c3818ef51a7c852347a28e9f66807b5
+change-id: 20261121-fix-rvtso-vector-stride-39fd6f035f17
+
+Best regards,
+-- 
+WX Chen <wxchen0913@gmail.com>
+
 
