@@ -1,115 +1,140 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9119606A320
-	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 09:01:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C13D606A32C
+	for <qemu-riscv@archiver.kernel.org>; Sat, 21 Nov 2026 12:42:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Yrx5fcAM
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IYpiu+0U;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UHwQsPCO
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xUgy6-0006rF-5H; Sat, 21 Nov 2026 04:01:12 -0500
+	id 1xUkQF-0001GU-UC; Sat, 21 Nov 2026 07:42:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xUgy1-0006qp-Fr
- for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 04:01:05 -0500
-Received: from mail-dy1-x132e.google.com ([2607:f8b0:4864:20::132e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xUgxz-0004DS-9B
- for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 04:01:04 -0500
-Received: by mail-dy1-x132e.google.com with SMTP id
- 5a478bee46e88-380c28f9e35so2621229eec.1
- for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 01:01:02 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xUkQE-0001GB-Lg
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 07:42:26 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xUkQC-0001JZ-8G
+ for qemu-riscv@nongnu.org; Sat, 21 Nov 2026 07:42:26 -0500
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6ALCHFOr208570
+ for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 12:42:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=3BOBJs/frEGXWVsUhbzSLt1pfLPbuoCUT3s
+ BRrGSMec=; b=IYpiu+0U/nvdaKWOvNWsD74v1s2n5GDwjxUUANBU5OWG4nemDnt
+ SiGPxL4WzDSfLg/caB9ADOiNwGlGM0hx9MqkRJYVKR21TF2u4L0idmT/rrCSeR+8
+ xODni0Mh7Z8fjVvcUbjJpOo1+WbEAfsfZXWurT7FVDeUx3cNNsIzC/fira5gb068
+ zwpwcdeqSVAz9SmPLCgBQxM2lZL1f6BC0jvDGuNvyf0wi64CYff1WLLvvPpiSyKf
+ AvCqNIo/K0lokEeNpVEYQShPrxX4v6cAfmN5wQip4ce+gEsjY/92aB3xkRX8cLZD
+ vbzEBkSUrTtiMtzlXVpQ+07EBx/h+A0p62A==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
+ [209.85.160.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j32mg96xj-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 12:42:21 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id
+ d75a77b69052e-55bc8181defso35635601cf.0
+ for <qemu-riscv@nongnu.org>; Sat, 21 Nov 2026 04:42:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795251661; x=1795856461; darn=nongnu.org;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=rG6UIpHbkL//NmJGfcJECAPN+i2Amqje9llivMmzrpg=;
- b=Yrx5fcAMqn+f3xiNEPzg0qgHAClKe/XLjxahDd8ZFTw2iYgECZntIMbck86Jd4YPzp
- HuyIibVdMQA9qXiEi68jZ9ZMWbV9DC8iLUH+4w4P2xiHAOPuMJWtUmqnrMkwv+6lQFrJ
- nafi5IwcD5mhajZqcMGtH8Dr/XhkpAgMZklwHwZ0LpzWaByWpE84dcPBrwllcKt/Rj2o
- CWtcMG8A5TtyFD/strk6ktDKG4PPqzGFqWzHAa8Mp/BUazBFKNpN8R6Pj35T6OkRP+uF
- jPZTH5MjZe4j4xGKYKDwL8X3mG6ZFmcS1UauoLUqLwHasy0NozOm380uQ8iLMb7L3x8S
- KIFg==
+ d=oss.qualcomm.com; s=google; t=1795264941; x=1795869741; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=3BOBJs/frEGXWVsUhbzSLt1pfLPbuoCUT3sBRrGSMec=;
+ b=UHwQsPCOErInik3ucabRYOTRGLAnJZenzG6yMheJLrmICWy9uJoOtj4r7SJko5WjZx
+ aoSgqQxZ4khDj66KUS2PoMQ5+h/IM6zF023dqXvQ8wjFVfiw54Ou5qSXI041t7IV1Q74
+ URp3LcLXa8d3FQVnEpikYviqrEvraEsyY9+vqBbD20sTMvETLgh1RUAn6iYWicYvD/B8
+ Kdb4hZceCfoTwraZPyfo9h6JCmGrJUYujB4FD426xYCYZxODLyWBFHXiyC1cJl/J6oJe
+ lmB6AZzgttcvPsVTVEeTr1GmcG6WivNGalHKAuBZ7nUBSNw/+bX8yCewmoG/OkDCJAh2
+ 5b7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795251662; x=1795856462;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=rG6UIpHbkL//NmJGfcJECAPN+i2Amqje9llivMmzrpg=;
- b=kNby235HZ5XfdefRLjm1junDzkBMIhOA6Sj43fPTjQFv5vaq0hQ3jc5iBzkcRtJfyK
- k8pA0HhiIFEqmx6ffzoKcFsx28I4xmWBJixHFNAXLbrUHUW14IwMrHuLxeWlP1ArGXNo
- WlVyifnR4KxbQYKp4/8wSZ85ODNynhmVZXQZEM3pgwHtIYrlnisjHU8xgBFHMwYPGw2O
- s43Ulk8JRmbadTx8stgH9qku6ut+FH3uD7JUKE3k/E5ARIjy35iYNoZnX+7sIKXgRnY6
- YlcuS3ujWWi27l867OoWHTU1OSeleeTDx7iwavOk7daAwP0te1otRX+jILpqi8PCPYLD
- AbUg==
-X-Forwarded-Encrypted: i=1;
- AL+hErFXTlOIPEl9gWoSha6JUei5/FNJ4o6KKrrzMEeLcq+3BN3oZeMxM1ZQpRKMWRM/YUKhn4vFZViUqhsL@nongnu.org
-X-Gm-Message-State: APuU4Z8G22tvG5PBYQzrKiPgsCB59v/1M8Ux8RUnoqdh7W6C9RhKVxaN
- SPkeI2C2znCADpPch9waTyEsIYG7ezpHdLmF3rRDIVaZeYnY89wKuJIT
-X-Gm-Gg: AZFdTZfDCP326D6BeP4ioxEUeHuhMM25ZbPzpA/7KNMXrelnTqFIUT9a7Nhd/nSZYJo
- wmDlivGbW5xtAnG6HrWbASfz8EI7HKtekgk6+4m0t5FOuwtt24wl19UDVaOwhCoc5PbmvAT0e47
- szG28DlLKjC3xlhfe4LVRmB3PLct+2eZ1ZerXMTpvufxW1fzG/kaVYb4nejQnNn5n6AaI9vxU+D
- 3b2UP+WnS5w153h7npSCE35sCIe78tSmMXbGiNUNv16J9F58f4E3WTtR1k5xWc+k9KN6Cy+8JrB
- AdQEippzOrhc/Ld3LdUO7rP6mYP6/JRYo2DzHfmKzErcXPIBheKz0FM9afPRSQsG6Rn4Zu0ts5E
- mlYJ1VSBBzPqTj7WPhdTKglIR6jZQBFMyGatIq+QBdUb1NAvwf7LCAVZZlavVMp9STOq6H9j4YH
- j5m105yMwtVA4IKintizpMEsMJrGwWIfsgCR/Fx3igkDL2YlVeq3gQpJuNOeXB/baAE/Hm/gb07
- iCidRKka9QYp/ls7RjpA3SP3ucLyM0wHjxjPDSa/1OzX3MU/clIt3YHaxyrBSoESi/6bwRez1kx
- O+b9RL0KasnbtvttuhKwc9j+IpUsAD3Lg9g6nEEoB9SC+Dqp//6ihw2WqpfrmglCsNuKm6WdYpG
- Jdi5dW3Skucg=
-X-Received: by 2002:a05:701b:2603:b0:1b2:5ecf:9bd1 with SMTP id
- a92af1059eb24-1b55249484cmr6566615c88.7.1795251661299; 
- Sat, 21 Nov 2026 01:01:01 -0800 (PST)
-Received: from [127.0.1.1]
- (ec2-18-140-66-51.ap-southeast-1.compute.amazonaws.com. [18.140.66.51])
+ d=1e100.net; s=20260707; t=1795264941; x=1795869741;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=3BOBJs/frEGXWVsUhbzSLt1pfLPbuoCUT3sBRrGSMec=;
+ b=AX/NF0lOq/8HPLKK/3xpxJy/Z5b/UPRPuirRHi6btde+wkKRFN0B7LKnR80ErxafWl
+ WSlSz+HmcqP33e+H9A23cNjKbg4grZ50+PC4GlU+oz48jj9tfUkfeST45XGURlP4vAkz
+ FCeP9/EeIq40kcrc3cIEsEV7dXwkAciTjD69ooNT9wPdEtNshrFPJaTWJ8Xsua/yYFYj
+ rMoYoYgMTn5ck/AB6Id2woBnxQXfQ+V9NliAUu29gxB9B+b9I6aZ2bk8mpm+XcPlgYhV
+ GaBzJXSzeUGX98x+W/XC459sRfY6jlZ/sTolh7rAMq5mK9zDbUWd2eLKMaoptj7/sczS
+ QwrA==
+X-Gm-Message-State: APuU4Z/2tweZ9Fm9mdXwwWw67dw8l0oU94MdlL2OCbwo01jJGcSHuA0F
+ iRPWfAaGB8SEBLDDgqyjG/FiX4n9fZuJnIQZKgC5hQb+CZPU0pQdAPCQNxCIxAZEmsFZoaxRY7w
+ lsdGZx4ovPcWO7Hc46T3WvLe/Qs0IbI9CcOWfXqkHK1+5XcbOGBs/FgDLtQ==
+X-Gm-Gg: AZFdTZeeBeAC2j7ttFEgdlj/NFNv/KNxAXzZeTAX4e+TmLKnqCXKOir09NHbp6KG0FD
+ LamL03a3HtoBEs2HfgWVzdADcFUfMLYtddR/wlKcujRgLGJSV/Lnp8TOKC86SgxQkiA7zrO6T7R
+ NN1ljj1ZvPNtYaXc4IJjnMnMRRwmZpQIMXfbtNiMK6qyesT662rePpItt1ytlu49Dr4LlUSADMA
+ EoL2kHlGcuzvW6daflsXnfVDV4zeB2SSXF5P8tFkUd9d6KXCRop2qHTrd6ZM19Pa84gKq9QmnMj
+ 6LfqGr0JeHM+l6TbSk7cKgPXCRtmoIh2OHWHlQS+zU3cegRvc5URDADMSm3T36sAMXiHyPnTmso
+ jJPvJbGk67jj6EB9i/qbCjAYUskje41aU0e59wiYbpWsOyxFs5eKot1v8MGrx4vR6h3wYaCBJL8
+ 7tR/lFmo7w2Q==
+X-Received: by 2002:ac8:5d09:0:b0:55d:3682:d234 with SMTP id
+ d75a77b69052e-55d76a81033mr92806671cf.47.1795264940765; 
+ Sat, 21 Nov 2026 04:42:20 -0800 (PST)
+X-Received: by 2002:ac8:5d09:0:b0:55d:3682:d234 with SMTP id
+ d75a77b69052e-55d76a81033mr92806431cf.47.1795264940284; 
+ Sat, 21 Nov 2026 04:42:20 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- a92af1059eb24-1b562a82b3fsm7397514c88.5.2026.11.21.01.00.52
+ 6a1803df08f44-92134bf848dsm52499216d6.44.2026.11.21.04.42.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 21 Nov 2026 01:01:00 -0800 (PST)
-From: WX Chen <wxchen0913@gmail.com>
-Date: Sat, 21 Nov 2026 17:00:48 +0800
-Subject: [PATCH] target/riscv: add memory ordering required by RVTSO in
- ldst_stride_trans
+ Sat, 21 Nov 2026 04:42:19 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v2] target/riscv: fix hideleg write masks [GL4814]
+Date: Sat, 21 Nov 2026 09:42:15 -0300
+Message-ID: <20261121124215.1294032-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261121-fix-rvtso-vector-stride-v1-1-1c451042b0b5@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAL9dAWsC/x3MywrDIBCF4VcJs+6Ao/WSvkrowujYuEnKGEIh5
- N1ru/zgnP+ExlK5wWM4QfiorW5rB90GSEtcX4w1d4NW2hFpwlI/KMfeNjw47Ztg26VmRjOW7Io
- ytpCH/n4L9+m/PD2759gYZ4lrWn49FTiPPhmTTKDAxVL0KVht7j7qwGNxLig/W7iuL4iX51WkA
- AAA
-X-Change-ID: 20261121-fix-rvtso-vector-stride-39fd6f035f17
-To: qemu-devel@nongnu.org
-Cc: Tao Tang <tangtao1634@phytium.com.cn>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- WX Chen <wxchen0913@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795251652; l=2866;
- i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
- bh=s6qZvzhx6DyW00xi8ctwLQr3Vh7dJFsEyTG7tU2lmTQ=;
- b=4a65fKidnQ9PeZVDl5TF4Y06zVKhMOWQIj2B4iGc1okKqNZYo/h0dwxEVtjtXNxT2wR2o/OQv
- svmZfbxfi+2Avh6rszuw2VfUMXFW2ItkI34OM3VOICkAWr5SIWXV74V
-X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
- pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::132e;
- envelope-from=wxchen0913@gmail.com; helo=mail-dy1-x132e.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIxMDA1MCBTYWx0ZWRfX7tUaoRRVzv1L
+ 8g+2f30dzbETYx7sRRJu+iVbZ/VXuYhijIzITagAebyyPaA54LYCBCY3wTcAEyE5GiflSH7BiP3
+ ry+DUodIM4ivKmSCwzCLjlY7vDINUzH/r1KLib3ZhYq9yGML4ud7XNZ3esz7bDfRNX0EkpGBXdc
+ 8MH6Hn6vaqAINEAgpQphlDk3kpCGp7RwFnL+I7k18EyFMoKKPOcipA4ssoP6vkCmFrwvpY3LehX
+ YRLV68kLJdLYCpcfMg23yT3BqxbBp3jVgBSSosgChE9DdEQRYV7Y1PjSzZ5SmIF1pOlLexkjgHf
+ qIO7LrwMOB2V0oWtkAX5SxVZhGXPFjf8XVHaLzHBPQTxH1QdSNz4s6Ed2Xj41FgsdHmPuN4qG/p
+ ESUtswMqn3n/JjXuegtYV7W5FVWv+SEZeH5K29MJlZWrKwto0SAjnPNyAmKfa9RKjfxFMXwpOYM
+ OpsWSBZPK4enJ/P8g0A==
+X-Authority-Analysis: v=2.4 cv=OM+yTiaB c=1 sm=1 tr=0 ts=6b0191ad cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=-qIh_jz3752EjCO2w1YA:9
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIxMDA1MCBTYWx0ZWRfX5T8K8RxXR7S/
+ 2HfiA+7d0P5vikyYp4W1oCyki0N/FPRVSVApu+4+w7IvF4nTD8G7JEFQAv8bzNOtRfy+9rhHN8H
+ WgZavf5PThaDJBo88KuaBlk6dxzH2cw=
+X-Proofpoint-GUID: -slgUfrq5FWX3Mh3QOaNKQla72dmLl7_
+X-Proofpoint-ORIG-GUID: -slgUfrq5FWX3Mh3QOaNKQla72dmLl7_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-21_03,2026-11-19_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 phishscore=0 adultscore=0 impostorscore=0 bulkscore=0
+ priorityscore=1501 spamscore=0 lowpriorityscore=0 malwarescore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611210050
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -121,85 +146,174 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-RISCV ztso extension provide default memory ordering of:
-    R -> R,  R -> W,  W -> W,  without W -> R,
-but the current ldst_stride_trans hasn't any ordering listed above. This may
-not satisfy the guest requirement on some weak memory ordering hosts.
-This patch add the above ordering in ldst_stride_trans, who is in charge of
-the following instructions:
-vlse8.v, vlse16.v, vlse32.v, vlse64.v
-vsse8.v, vsse16.v, vsse32.v, vsse64.v
+We need to check hideleg writable bits with mideleg and mvien. Priv spec
+says:
 
-Signed-off-by: WX Chen <wxchen0913@gmail.com>
+"For bits of mideleg that are zero, the corresponding bits in hideleg,
+hip, and hie are read-only zeros."
+
+For mvien, the AIA spec says:
+
+"When the H extension is implemented, if a bit is zero in the same
+position in both mideleg and mvien, then that bit is read-only zero in
+hideleg".
+
+Filter hideleg writable bits by using mideleg and, if the proper conditions
+are met, mvien.
+
+Fixes: d028ac7512f1 ("target/riscv: Implement AIA CSRs for 64 local interrupts on RV32")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4814
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..de6c8ba2a397b12cf0fecbe88936a4798a49bff4 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -880,7 +880,7 @@ typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
- 
- static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-                               uint32_t data, gen_helper_ldst_stride *fn,
--                              DisasContext *s)
-+                              DisasContext *s, bool is_store)
+Changes in v2:
+- add a comment explaining why we're checking ext_smaia check along with
+  RVH (Sashiko).
+- v1 link: https://lore.kernel.org/qemu-devel/20261116205134.846876-1-daniel.barboza@oss.qualcomm.com/
+
+
+ target/riscv/tcg/csr.c               | 27 ++++++++++++
+ tests/tcg/riscv64/system/meson.build |  8 ++++
+ tests/tcg/riscv64/test-hideleg.S     | 64 ++++++++++++++++++++++++++++
+ 3 files changed, 99 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-hideleg.S
+
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..5d3363cf4a 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -4997,6 +4997,33 @@ static RISCVException rmw_hideleg64(CPURISCVState *env, int csrno,
  {
-     TCGv_ptr dest, mask;
-     TCGv base, stride;
-@@ -896,10 +896,18 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
+     uint64_t mask = wr_mask & vs_delegable_ints;
  
-+    if (is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
++    /*
++     * The spec mentions only "when H is implemented", but since we're
++     * reading a CSR that exists only with ext_smaia is enabled (mvien),
++     * we're also checking for smaia.
++     */
++    if (riscv_has_ext(env, RVH)
++        && riscv_cpu_cfg(env)->ext_smaia) {
++        /*
++         * The AIA spec states in section "Interrupt filtering and virtual
++         * interrupts for supervisor level":
++         *
++         * "When the H extension is implemented, if a bit is zero in the
++         * same position in both mideleg and mvien, then that bit is
++         * read-only zero in hideleg (...). But if a bit for one of
++         * interrupts 13-63 is a one in either mideleg or mvien, then the
++         * same bit in hideleg may be writable or may be read-only zero,
++         * depending on the implementation."
++         *
++         * We're making the simpler choice of making all bits read-only
++         * zero if the bit is zero on both mideleg and mvien, and writable
++         * otherwise.  We're not going to special case bits 63:13.
++         */
++        mask &= (env->mideleg | env->mvien);
++    } else {
++        mask &= env->mideleg;
 +    }
 +
-     mark_vs_dirty(s);
- 
-     fn(dest, mask, base, stride, tcg_env, desc);
- 
-+    if (!is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
-+    }
-+
-     finalize_rvv_inst(s);
-     return true;
- }
-@@ -924,7 +932,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     data = FIELD_DP32(data, VDATA, VTA, s->vta);
-     data = FIELD_DP32(data, VDATA, VMA, s->vma);
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
- 
- static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -958,7 +966,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-         return false;
+     if (ret_val) {
+         *ret_val = env->hideleg & vs_delegable_ints;
      }
- 
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index 3c8b018d9e..6c08806cc9 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -89,6 +89,14 @@ tests += {
+   }
  }
  
- static bool st_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-
----
-base-commit: 08ed97c33c3818ef51a7c852347a28e9f66807b5
-change-id: 20261121-fix-rvtso-vector-stride-39fd6f035f17
-
-Best regards,
++tests += {
++  'test-hideleg.S': {
++    'cflags': cflags,
++    'qemu_args': ['-machine', 'virt,aia=aplic-imsic,aia-guests=7',
++                  '-cpu', 'max', qemu_args],
++  }
++}
++
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-hideleg.S b/tests/tcg/riscv64/test-hideleg.S
+new file mode 100644
+index 0000000000..a07d48430f
+--- /dev/null
++++ b/tests/tcg/riscv64/test-hideleg.S
+@@ -0,0 +1,64 @@
++/*
++ * Test if bits 63:16 from hideleg becomes writable when
++ * they shouldn't.  Derived from Gitlab 4814.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++#define CSR_MVIEN 0x308
++#define CSR_HIDELEG 0x603
++
++.option norvc
++	.text
++	.global _start
++
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	/* Mask for 63:16.  */
++	li	t0, -1
++	slli	s0, t0, 16
++
++	/* mideleg = 0, mvien = 0: hideleg bits 63:16 should be zero.  */
++	li	t0, 0
++	csrw	mideleg, t0
++	csrw	CSR_MVIEN, t0
++	li	t1, -1
++	csrw	CSR_HIDELEG, t1
++
++	csrr	t1, CSR_HIDELEG
++	and	t1, t1, s0
++	bnez	t1, _fail
++
++	li	a0, 0
++	j	_exit
++
++_fail:
++	li	a0, 1
++	j	_exit
++
++trap:
++	# Any trap is a fail code 1
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
-WX Chen <wxchen0913@gmail.com>
+2.43.0
 
 
