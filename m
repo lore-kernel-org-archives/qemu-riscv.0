@@ -1,140 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2ABE606A31A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 17:03:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E10A606A32D
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 17:18:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Rm/xBZSM;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Mj0qbtid
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=b4d/Qkxn;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FgzkOyeR
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVXQ1-00052A-Km; Mon, 23 Nov 2026 12:01:29 -0500
+	id 1xVXgj-0005Ca-Sk; Mon, 23 Nov 2026 12:18:46 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVXPu-0004ok-Ov
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 12:01:27 -0500
+ id 1xVXgd-0005Bq-Ny
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 12:18:40 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVXPs-0007Yh-Ag
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 12:01:22 -0500
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ id 1xVXgZ-0007QF-38
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 12:18:36 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ANGGujQ2340279
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 17:01:15 GMT
+ 6ANGGxVP3730309
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 17:18:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- StUgBFixpSxgq3zfud5N7ALSDdBCkiEZM2RFZZXiTs0=; b=Rm/xBZSMerAqh3FD
- bD3Je+T8mwsAwM42e83Cjh+4IgwlDGhbYIV2degW3+x6FqUPSD6xFkku+PUhdD9O
- EhJC4IEkuNpkAhyMyoqJkGRJIyrF6c5nTWq0kXsJrXr7usYiis8x3ZZKgzz1hQT1
- yelkJ+pqYX57An91sLFEgPbV4EW56F7QwJReIsap3xAWFM2F1knN/m+ldD4v4eFF
- 7NvGiJOIHSydYvXKd6CqEp8Wa49Hi0rtDNepF0xSYaXiOQPWw7tAk8nAb5ItWhpL
- vIPEDAErEB2exB2VQDIRzmTQc/hahenzXGl1ZyAx3eI5GCqaWgKwMAF0QZ7ika/4
- kNZK9Q==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
- [209.85.219.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4exx2pen-1
+ GU+Fy+aJxNVn6hRJlG//T+aV+gPJBsD2yjDuzqEXxaQ=; b=b4d/Qkxn5Rqn6REZ
+ APrUiPiVVJ6CwIpt2jK9d9FVX7E7leEJwRtUHq74hUGwWIBtGanBhqzwyYxm5htz
+ ZIMJ9mgHx9KhoIUFbfPYFVN6TbCo7ZyA7boT1bvy4Qid+Gv2Y6RYTtNnK92J7f2v
+ sMwmYWQ+a+2nrMXRz2bdOcIQB1y3ZLPnCR+jh5hqQ2shZ1la64yPgjOkX+Qc8CQ1
+ YgTaMnKkhsbcZomPVA1yD9zEZifsO2unOatBPIq7A3ThD36H5OW96OoZ50ryQ1no
+ 50DUSeQ+bQyogg3AQgGaul3KVOrENbU7386ePkfNxhLKeRrBG69L2YHkah8vj8x6
+ tnHaCA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
+ [209.85.222.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fyd2khp-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 17:01:15 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id
- 6a1803df08f44-92125ff2d08so5598066d6.2
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 09:01:15 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 17:18:31 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id
+ af79cd13be357-93f5844e383so578917085a.1
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 09:18:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795453274; x=1796058074; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795454310; x=1796059110; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=StUgBFixpSxgq3zfud5N7ALSDdBCkiEZM2RFZZXiTs0=;
- b=Mj0qbtid0gPKVt8pxvdVP8cpseBwGGLFU+NTRhrXe2O1H25iWYeJfpa/+FcCkb7JC3
- ASSkvUiU95661pJY21vdwgYKvURz5G5nMQj7heiihsJJHkASGiqzuOdtgIprDMdWDtaY
- 77X9/gLYV+SI0XtTajjy+8+TCo97YSHPcjxvf9rBohn3cE4HcT0zv244woxppd2AnbPW
- fXODw1/b94CS0YrR50FM2Y7fjk37jwFsvZ/6O3n6v7nDNyzizLtUPccizcD2kKtJblTU
- o0jLpROWodMuaC38xSxxPqTRUW0aF5ZgvddW9tgwyvj6Wy4tE/q7I0FkYQMYlRU2LnvN
- EjYg==
+ bh=GU+Fy+aJxNVn6hRJlG//T+aV+gPJBsD2yjDuzqEXxaQ=;
+ b=FgzkOyeRoiqSMQJrf4CqB0E51D/eDbKPf71Qu+8MQnZ77GM3jfy80dv18ED2y0079G
+ ZhxGwOzo/maIZHtGYsjVtNfZO7yw94ubosJ1wXtRdXdUOnkT0mxKsTVWpCOUjFstuMvl
+ pxgI+gJH+GXRjUDXSfzo50N1Y82XqS8NhA4rBrG49n3QoCsChCD2y7AqznpDkIjWwZ3B
+ gYGuIDH69eHw+pETIGvD4U4D24FlwphYys7HxmtDinf277GBn1I6mZ4j+n5DhyQqsS8r
+ +5bAC5CC8dRFm6MZ9eRWcjc6Z8OLERq1It2B/2vY9no/btpLk/BhH124HLMGVrcx1rs3
+ dq3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795453274; x=1796058074;
+ d=1e100.net; s=20260707; t=1795454310; x=1796059110;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=StUgBFixpSxgq3zfud5N7ALSDdBCkiEZM2RFZZXiTs0=;
- b=tZIinAfK+NWZ5eeoNwsAAJbqFJH/64AEe+U6VeIu3uxj1VLHQs51p05o9iUiD4f1jJ
- jq4ld/Lpq+lj1pFEogVKBAAxL285fO7Cg1+d8Z1eL6tQQqqSgmPXxgPBYQDlldwz3Kml
- au0PJSqhUj146cronpitm+Hut46Fu5R2oWC1zV2b/rpcgeKFDRLxgTHZP6vW3IoxZR7j
- mtJtB665WLhlOdJACYkQYnp77Q6Y4tazHfzb5DZG9aFU7cI4mrVHWt4PaAui0IDkAk0K
- N+eD3wxBAHN4NSA4yY3KuIA12tSmz8Oe1FwuU5MIommNjRuipAmbsrVfbqWY1XIflcqa
- 4miA==
+ bh=GU+Fy+aJxNVn6hRJlG//T+aV+gPJBsD2yjDuzqEXxaQ=;
+ b=lqwMMpc84wwc9nkLktXoOtajBZkn77WfniZjRnOweVmYlQhOHmoJOPNm6aZ985EHq3
+ I1qNGcJJ4XRF0LNpxvZ7fuSp5f0d51PMaF7MAK+3GCBNAOh7mHb+ibWoCzmpyxnxLCKv
+ z3547TewAki5u95Ppfe8EtCI3ifbdgReu73yjemLm10ddcuCRWCdrCWMEd4hHY/c1JUH
+ 1d7FWlOIfdAKjdzYUCtAQkzse2hwHlDipUncA1k47CWQESBACZel+xswKKifmNOL3VLu
+ 2zBjLMIGxNaeMhrTe9EstOJTuy0KKPb0qJIxruvhA9W5KQNnEVFZ1MFfeKqVpMH43gAL
+ gy/w==
 X-Forwarded-Encrypted: i=1;
- AL+hErGqHkdyMfZLETVCGN+b2BXcnrs2oj00U8B9Qzf3S4zFQuaZkIsjpPTvv66+x7+qmO/ZdBz5YGjBFd3r@nongnu.org
-X-Gm-Message-State: APuU4Z+HwbY+u9p89xv0ASTatndiDUy0KfWzzUfGFKA2m5hjM8pUae9Z
- 9EJIS7Ctp6REslkFBNZHSmEaabyD6rZsTSdd2P0TagS7lXGYX6RtJeuPD0Spy4mMZL4rwUHHrqI
- Bb49zjPgLsTeKdg5ldiHGM08lG2RYOrw4jm9zx5X51buwOIepMSPt1YqGuQ==
-X-Gm-Gg: AZFdTZezKOXIVvwC3b6qy9p50mitCX+CvuFTx6iCv2o4bld3JM9yeWRSG/N3vl2L7F6
- MnLGF4MBmbI5VVjN8dFFFhM1NLSzUW2g7dTd8UiDrAJT/eynW2GxRxYnuALsNbS3yITj2hMbnxu
- AR7xMX/lL/4fV/DyHptwjwqxhH5r6jiABwBK6Jmyv75njE7xvZAGM3NPFQ18lkNxkQOkFKeUkF0
- +5zEDpS/0KXd1DSb7yRyL23F6ciehev6qWBoLqPH8pGjownUQXJr7sYC4Nmz6oGVV5+fOqxZOso
- BaC9xU5FLI7fWx4G6eeyHn1XjDUHt5oQaMnetNGo6TPEHh3XspKPrLzZkM1XUKVDm7uOvs/GIM3
- OI3P/3XW4EilF4j47QB6bqUsOyN6wRVM++2PS3rPcFl17TSqkK39iFAOU/zCXkebK40R0JNJpq4
- 9/+N25PM3p
-X-Received: by 2002:a05:620a:1305:b0:937:6de8:b40 with SMTP id
- af79cd13be357-949ba9b3a2cmr1964637385a.15.1795453274287; 
- Mon, 23 Nov 2026 09:01:14 -0800 (PST)
-X-Received: by 2002:a05:620a:1305:b0:937:6de8:b40 with SMTP id
- af79cd13be357-949ba9b3a2cmr1964627185a.15.1795453273577; 
- Mon, 23 Nov 2026 09:01:13 -0800 (PST)
+ AL+hErF8JtvlefM5gwxN7UfAoqcQXATFpoK3kGk9JB8+IDKJN7qSyis1hGHeI0F54XJBhzcjESkiWq42YsFX@nongnu.org
+X-Gm-Message-State: APuU4Z+pEfR2bNh5LMmq5QT5WhU/X/wbPxHtTdBReqzsyxY4+j65Zo/Z
+ MGTdktCLaoghK5hsA7HQZSOHQAWnuYCkIJRb0dp2FGddtgLVoZoD2NvfCLTeBqCJnly53kVV6zJ
+ wE5NIfWPlaFtXTr1Fbyr5GyScu5bmkQ08WQmQ9KDWKrgrL4Gd8Lsf96EGWg==
+X-Gm-Gg: AZFdTZeAH6JWH4JBiA1uMKRlXUu8kaSnCf4OSXjcUAr+M+50kP2Bps7Xy0eXTAqj4ot
+ DPghKQPbLCvMiKvKnCnTT0ALWHuYxS4rEn5FO3wXgmx6cm5mVTGnmI02IueOioWH6XNa5da66o4
+ H+CtmfjvnRfaDOKDvs9s50Tqbh66Lozf0Xbfonm8MK6v2Oto3PtKulX5U60BBPRg3TyN/aRyNg6
+ 3r1o4ZQO8xmdt6hH6UVKk1d6C9d+GwTXgdga1dAVALBYA1zrf/4StUWLHGvUM4KhSWSM9VJ7doU
+ SwNXno/aSOHMpoi16BjwvIs947okDYrv5Lx9Dl0RRY4cbHEoB37p7dDDSBYMVZS/GbHdbpJx/3x
+ 2S0hIVkesrxp+ZL0l6I4lTgtJUE80NTc1A99oHsi3eEc+bJZxzwHWJJSkGpWMVuEvl+TTSSa6Gb
+ KrVlMPMOKl
+X-Received: by 2002:a05:620a:f04:b0:939:6de6:9518 with SMTP id
+ af79cd13be357-949ba9dcc43mr2131388285a.47.1795454310207; 
+ Mon, 23 Nov 2026 09:18:30 -0800 (PST)
+X-Received: by 2002:a05:620a:f04:b0:939:6de6:9518 with SMTP id
+ af79cd13be357-949ba9dcc43mr2131380385a.47.1795454309669; 
+ Mon, 23 Nov 2026 09:18:29 -0800 (PST)
 Received: from [192.168.68.101] ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949bb40efc4sm838933385a.36.2026.11.23.09.01.11
+ af79cd13be357-949bb0315f4sm842513785a.3.2026.11.23.09.18.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2026 09:01:12 -0800 (PST)
-Message-ID: <177600b6-c65b-4dba-ae3b-44e7e32cea96@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 14:01:10 -0300
+ Mon, 23 Nov 2026 09:18:29 -0800 (PST)
+Message-ID: <1c13e1bc-a970-456f-a9e4-9a04afc06c82@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 14:18:26 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] target/riscv: Write zero into mtinst/htinst for
- SSAMOSWAP faults
-To: Alvin Chang <alvinga@andestech.com>, qemu-riscv@nongnu.org,
- qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com
-References: <20261117132638.1452474-1-alvinga@andestech.com>
- <20261117132638.1452474-2-alvinga@andestech.com>
+Subject: Re: [PATCH] target/riscv: Reject shadow-stack accesses in Bare mode
+To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
+Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ qemu-riscv@nongnu.org
+References: <20261118063027.33313-1-fritchleybohrer@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261117132638.1452474-2-alvinga@andestech.com>
+In-Reply-To: <20261118063027.33313-1-fritchleybohrer@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=FKKOVOos c=1 sm=1 tr=0 ts=6b04715b cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-ORIG-GUID: _9y-ASthBog90nZ8SLjDwD7dJSTWFpGy
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA2OCBTYWx0ZWRfXxj/NHq0hA+Vk
+ 8oQZRyhMpEZDUwJYeDGimH3R59T5VsZjQJva8wrv0gv69op2kmfqZapHbeKCAi7ENYmATdSeqWl
+ hVrjONej9Aw2mWnnRzVRM8mUZowL7VPDqh4yxRpvhYK2LJsKUgYWzvHbYV605cSumM9mCRPTFHm
+ 9x2KIXHdLtuGIfkDX8/PuvR/fHl797oMjeB5RF7DfYByeMbSFZTnU1T+xQwtjFMUTebErXDO7Dw
+ +B1yHL6B3OysDAqF50ePEp/el7IkxyjZgpaIukSV/oc0N252ZM5wvJUVNaLfwu8mjx6OHJPsFBZ
+ 66PO1lvKdSMZ7PfKWMbyw0iQFkN0f0GGU9r6s1oc4wtrLAuqMptEQAVTcM0uqABoUaMpTzVjRgZ
+ gb/aap5W6EK4fXLO+fTNR3JyDUoq3P29WYcIkg2Fkhx2y6nZRqA9DszSR5dCbtCF+ajkz1EO4fl
+ tUCZT1K2ks9guzuI3kQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA2OCBTYWx0ZWRfX5thjsdYdzzS/
+ +k06Hde3yEp1cnBGm07U24NureOcHLeHVZf0o4zt41138vggEdtxu266w6NgXEvFXEE7vBOZXB2
+ zEoUNiyNQOldOX2JPbBGPNgQF9XDP50=
+X-Proofpoint-GUID: _9y-ASthBog90nZ8SLjDwD7dJSTWFpGy
+X-Authority-Analysis: v=2.4 cv=Aol7T+9P c=1 sm=1 tr=0 ts=6b047567 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=p0WdMEafAAAA:8 a=ZT-azI6cAAAA:8 a=EUspDBNiAAAA:8 a=1-oS70kicTKPYVcAC6AA:9
- a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22 a=MMnepr4wVL9Sz6vaZzge:22
-X-Proofpoint-ORIG-GUID: Qd0tPnPYvpRAqC3wFzwc1WSgOJcepay5
-X-Proofpoint-GUID: Qd0tPnPYvpRAqC3wFzwc1WSgOJcepay5
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA2NyBTYWx0ZWRfX/Iwk84bE6/v3
- 9iz8IPmwF+guJ+48F2271ux0xSHZqCyPTPCinpLIhoamfSxyq5OIKLSTOBPUsUyVyXaEzv+FQCP
- FTVBH/TZqPNJHw6dUX6uOwG9pDm7HM4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA2NyBTYWx0ZWRfX5k+4Of3tpTsM
- WGBNHFUErc/Ug07SLKOgAfruEx66xi5Z/f5iCakfZdrA6Owws6vWLpWK/BccG5eyu6rBVcBrWl3
- q4CLF+KtC2KuK+I+Jd5rbJxfyELtSoPBsHR8/wD2vxpFvEvESdlNf4foNeCU1lY6NmOajXXeknj
- BlBJq+MiVrMTUjdVKnpXdULIlMevFtyuAdV9LqtIMbK0ozd1B8Vm2GnrlJGk3aG23nH0Fh/BmgA
- lw8QTYuaG+qYZ6wB6t0mID6GQ5oTwLo1BCXCY4988IcVjd74REAZKc6lwoNnjLplrLz4qTQSJeP
- ppn/MmWL7TGWIJ8hxN88XmTSTl9sdn/VbEYjtDQMbLhml7l8oZbqxV6geNTAIfaeQmk9IjS49CL
- wGTOnWKuGNAV807VS2hUaEd0JraETYMceE2P0KJI0uKMIqadeFAU/yl8J0WiH0TmONkNEZ9Sdei
- 2yz/Ceodfex/r+o9J2w==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=p0WdMEafAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=SJ8tTX9GuA0rmjIxmVoA:9
+ a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-23_04,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 bulkscore=0 priorityscore=1501 malwarescore=0
- lowpriorityscore=0 impostorscore=0 phishscore=0 suspectscore=0 adultscore=0
+ clxscore=1015 suspectscore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230067
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230068
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -165,62 +163,61 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 
-On 11/17/2026 10:26 AM, Alvin Chang wrote:
-> The privileged spec defines transformed instructions for standard AMO
-> instructions which do not include SSAMOSWAP. The spec also says: "If a
-> synchronous trap occurs for a standard instruction for which no
-> transformation has been defined, the trap instruction register shall
-> be written with zero".
+On 11/18/2026 3:30 AM, Zephyr Li wrote:
+> Zicfiss requires shadow-stack memory accesses to raise a store/AMO
+> access fault when the effective privilege is below M and satp.MODE
+> (or vsatp.MODE when virtualized) is Bare.
 > 
-> So mtinst and htinst should be zero for SSAMOSWAP faults. The previous
-> implementation only compares opcode which is not enough to distinguish
-> SSAMOSWAP from standard AMO instructions. This commit further compares
-> it with funct5.
+> get_physical_address() currently returns an identity mapping with full
+> permissions for Bare before applying any shadow-stack checks. A
+> shadow-stack instruction can therefore access ordinary memory instead
+> of taking the required exception.
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4721
-> Fixes: f06bfe3dc38c ("target/riscv: implement zicfiss instructions")
-> Signed-off-by: Alvin Chang <alvinga@andestech.com>
+> Reject shadow-stack accesses in the first-stage Bare path using
+> TRANSLATE_PMP_FAIL, so the existing exception handling reports an
+> access fault. SSPOPCHK's existing unwind metadata promotes its load
+> fault to the required store/AMO fault.
+> 
+> Apply the same restriction to the MMU-disabled identity-mapping path,
+> while preserving the M-mode fast path.
+> 
+> Restrict the check to the first stage so a valid VS-stage shadow-stack
+> mapping can still be used with G-stage Bare, subject to the usual
+> PMP/PMA checks.
+> 
+> Fixes: 669b4867495c ("target/riscv: mmu changes for zicfiss shadow stack protection")
+> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4432
+> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
 > ---
-
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   target/riscv/instmap.h        | 2 ++
->   target/riscv/tcg/cpu_helper.c | 9 ++++++---
->   2 files changed, 8 insertions(+), 3 deletions(-)
+>   target/riscv/tcg/cpu_helper.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> diff --git a/target/riscv/instmap.h b/target/riscv/instmap.h
-> index f877530576..bddcf313df 100644
-> --- a/target/riscv/instmap.h
-> +++ b/target/riscv/instmap.h
-> @@ -165,6 +165,8 @@ enum {
->       OPC_RISC_AMOMAX      = OPC_RISC_ATOMIC | (0x14 << 27),
->       OPC_RISC_AMOMINU     = OPC_RISC_ATOMIC | (0x18 << 27),
->       OPC_RISC_AMOMAXU     = OPC_RISC_ATOMIC | (0x1C << 27),
-> +
-> +    OPC_RISC_SSAMOSWAP   = OPC_RISC_ATOMIC | (0x09 << 27),
->   };
->   
->   #define MASK_OP_SYSTEM(op)   (MASK_OP_MAJOR(op) | (op & (0x7 << 12)))
 > diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-> index 58e98e975c..94e385261b 100644
+> index 58e98e975c..8f6f980ecf 100644
 > --- a/target/riscv/tcg/cpu_helper.c
 > +++ b/target/riscv/tcg/cpu_helper.c
-> @@ -2078,9 +2078,12 @@ static target_ulong riscv_transformed_insn(CPURISCVState *env,
->           /* Transform 32bit (or wider) instructions */
->           switch (MASK_OP_MAJOR(insn)) {
->           case OPC_RISC_ATOMIC:
-> -            xinsn = insn;
-> -            access_rs1 = GET_RS1(insn);
-> -            access_size = 1 << GET_FUNCT3(insn);
-> +            /* Exclude SSAMOSWAP.W and SSAMOSWAP.D */
-> +            if (MASK_OP_ATOMIC_NO_AQ_RL_SZ(insn) != OPC_RISC_SSAMOSWAP) {
-> +                xinsn = insn;
-> +                access_rs1 = GET_RS1(insn);
-> +                access_size = 1 << GET_FUNCT3(insn);
-> +            }
->               break;
->           case OPC_RISC_LOAD:
->           case OPC_RISC_FP_LOAD:
+> @@ -1131,6 +1131,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>       }
+>   
+>       if (mode == PRV_M || !riscv_cpu_cfg(env)->mmu) {
+> +        if (mode != PRV_M && first_stage && is_sstack_idx) {
+> +            return TRANSLATE_PMP_FAIL;
+> +        }
+>           *physical = addr;
+>           *ret_prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+>           return TRANSLATE_SUCCESS;
+> @@ -1181,6 +1184,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>       case VM_1_10_SV57:
+>         levels = 5; ptidxbits = 9; ptesize = 8; break;
+>       case VM_1_10_MBARE:
+> +        if (first_stage && is_sstack_idx) {
+> +            return TRANSLATE_PMP_FAIL;
+> +        }
+>           *physical = addr;
+>           *ret_prot = PAGE_READ | PAGE_WRITE | PAGE_EXEC;
+>           return TRANSLATE_SUCCESS;
 
 
