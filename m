@@ -1,100 +1,99 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 804F3606A327
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 14:05:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC78F606A327
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 14:16:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=JfqKFCtr;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Ct15865b
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=irE/OR+V;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=YQv/pv0Y
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVUeK-0002Rc-Ed; Mon, 23 Nov 2026 09:04:04 -0500
+	id 1xVUps-0005my-94; Mon, 23 Nov 2026 09:16:00 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVUdk-0002Jc-M0
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 09:03:32 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xVUpj-0005mD-Ba
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 09:15:52 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVUdh-0001qN-FQ
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 09:03:27 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xVUpf-0001Mh-Rt
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 09:15:51 -0500
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ANDL1EW2086051
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 14:03:23 GMT
+ 6ANDKwgK3329322
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 14:15:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- AQiHntMmnvlqkvMV/Ha1Ck0HXP3c1l/WJPdOqiMIX38=; b=JfqKFCtrEmFvHqC5
- 1W3XAtTuINNgxu9e9Mkv4UhcqhkTSlskGevyf1tbPvNUYtDmrWp3TZR85eS3ZKt8
- 9AmYRPjX8gV1pUMi8F8y6YV2dWwCIX7Oi2lrcQ01PxDPA4bwTaR11Fc9WcCbcEld
- dS8+lrxg+CQxcohKpftv27o82aOkCl/hSPTTZJNbriZZhIr+U68cbFtBaBeZtDw+
- Y1U3Wbn1HlkNx29v04mU7nnY2C458GMKskAU96tiRNP3oMZ/71Tpz9Wq2YbRWbFv
- 1jv1z2LNNrCPAvCcOsMa6PeJUIAwRDCwkd0bEboiglkxi4lgFL7w9X3GTP+J532b
- 6F9fVg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com
- [209.85.160.197])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fy01pkq-1
+ olLCY1fAu8QDNEh0nxpYLJ/Qqo5dq251K0dK64U7NdQ=; b=irE/OR+VolqVa3A7
+ E7JV4oc552jLYYBDyXCauezNxPW/4dphxRlaF7fWtki1iS1W4TVHmQNg0wSUItG2
+ v1oPiMlNP4SG6YBmUW94mzMms1do3zhU7a9T7/JcWig6yKJQ/wctFjyUr3BokbsD
+ Lgmlg5VFz8TvjagPD0GlFH82pydbeyBe+f1qsJ91rnZ2nmjryt/A8DPY3xpCXXeq
+ ymzRPDBnG58KgQDscmNCwqkaTYu5Ir4tec7vpsVKpzQO7PdRkVLQdNcivv3voi5x
+ yDRahHLecWYqev+eu7GYXgAG5O3iz4uMR8sG6JgB7vPF27rqO9S8UY3xudyXkxlq
+ sgFRvQ==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fyd1rw4-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 14:03:23 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id
- d75a77b69052e-5363fa3d3e4so60213591cf.0
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 06:03:23 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 14:15:45 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id
+ 6a1803df08f44-9212335e257so70272686d6.3
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 06:15:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795442603; x=1796047403; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795443345; x=1796048145; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=AQiHntMmnvlqkvMV/Ha1Ck0HXP3c1l/WJPdOqiMIX38=;
- b=Ct15865byHHvQkbA+V6+eMmp+MMohNOLo486uYvTae3dHhatEYTeVcubUcAKWzQkqf
- LVeO5s+IYlwSX3b1L2YE3FhfrJ0AzIROtv3JRa+wJec50FHvSDr1NurRHN6Jd8QOBXtY
- q5FOtqs0zwGoliO3KcShSJqRHa2CzMKOFdj7fL6hbysUUe4Y/iDpVz3mpSMSEZ6i3wV6
- pNDqJ4SZNyFoLMToqLu/olB1rwBVABZv+8HevNBPJ+rSlHbhLO9O1FF218yyGuZR80Os
- zupO1WFjBSQB1ueHsHsGrlmkP+zJhLkEtXxU1G5VmIuWCpKu31iFIMPZ3bnzB7X4KZo3
- K3Pg==
+ bh=olLCY1fAu8QDNEh0nxpYLJ/Qqo5dq251K0dK64U7NdQ=;
+ b=YQv/pv0YlB5tU6PosWL60xRK1G6u9mafysTweRwcNJ4KDXYzSd+VA6q8UgFphEIwWR
+ BaSx8UrEMd+uWkehw3x0YlKLPl6rfETYolusPWaUbtsvC8lHq4XsTcue4qKNJXrfoqzl
+ FiA59gy0poihYCaqcvCdfbN5NV1XtIZ99iEmv9Jjc6j0T9I+FZ9WvWHZo4CHfWh24GwA
+ onU2ulWp9MIUw1LrA5C4Uq3DJedyLjixw5pJLz53V0yLV5J22SqJ8kqt+O41MYIrQdYc
+ MB7unpGVRIi9rq+uygZ/iDZqGeSod4Rh3R1Ia2Jyjr2tvboxxgYh/MQVhWAuomPXDAEl
+ 4qyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795442603; x=1796047403;
+ d=1e100.net; s=20260707; t=1795443345; x=1796048145;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=AQiHntMmnvlqkvMV/Ha1Ck0HXP3c1l/WJPdOqiMIX38=;
- b=YK7LrGvANvBGldyP+CStb8w529WJQh/60b7ZmgtpqwaZ7XoRpKSx+FBYabWtAx4+/w
- oyDihC4r+6LMgQMiUo5uAMWdrsTZqEsGhF5wOwsE74P6PN51NxxyXYPrbVZWfGswcS/z
- siVeRQ+WZghl0FNnbg8Ttk9Fv/EsyIYS3y+T9/yrZErsrIti0dJW47Npzha4rjqi/ZCn
- YJpWk78+aeq8CtmoyCZk6JjY3t1uIkS1ISs9sZVkzXEsjhQD8GIE5SdzIUyNkC2RXe2j
- +VJJ2UfaBPwhO9AbFxQfEupy28Hranahe+II3ao9Zfc2Y/xlhOWwPmGTAnvbvmadiWj4
- I8MQ==
-X-Gm-Message-State: APuU4Z9AYSFrqwy8R60eSotAko9uZ5Klu+1vwQnQOjvI75Vptd+bTWDG
- +QZpUjwO/yOYEpukmg2tLocDKirZMQ2fpDH8YoVINPvhzHIxzlh56ES81RvKI9IKsjgcN9upKEn
- Z+beEma0LMaf/bXcBCaQpb+e5NN5+POFdrV/vHNNzSZ5rIOKJyiTLL5VkJw==
-X-Gm-Gg: AZFdTZd7K1kzftegr6d8/YmhOmwLjl5CwhktvxrwWmepq8Yv79CF5zM9VVBrXyHV6p5
- dm4dgzLKn1SGXVb4oNe314Xczs9xyajiCCOKKxzyGb15a6bgIOOqJEssXtu6O57YneriLQ5S07C
- f9QA8lLZwjfEicM8SgqBS5qIQPsc6jGrhxmuN4/o4IjNybo3jmnuCUEm9vyXu/W6A4izVDZame7
- masOWWpEwZ77rsayeM/nI/U8Bvr0Ffj+cT2k+soWe9W44Q5D3jfQAzvrZKz7+38q6gcUoiRI8da
- vEyihUkJmSXIWsnDM/jV2j8HjP4ayaogs0FXGufu2n18iqF/lD7AZzFBQSAUm2aS9oIP+BlBw64
- wJGAar6RA1M75YWV/EXm3Mdc2Jq9J0ooJCjnpl6Av1mHp8+rCOr0uQkVMd4IiUYZATPoXUZwLfp
- iAOGrUf33/
-X-Received: by 2002:a05:622a:1b23:b0:55c:840:1308 with SMTP id
- d75a77b69052e-55d76ac843dmr206798421cf.60.1795442602649; 
- Mon, 23 Nov 2026 06:03:22 -0800 (PST)
-X-Received: by 2002:a05:622a:1b23:b0:55c:840:1308 with SMTP id
- d75a77b69052e-55d76ac843dmr206797511cf.60.1795442601947; 
- Mon, 23 Nov 2026 06:03:21 -0800 (PST)
+ bh=olLCY1fAu8QDNEh0nxpYLJ/Qqo5dq251K0dK64U7NdQ=;
+ b=pVcsFSG7F1sT5TC2LhtDkcc8suwI2srmFzJZ6mXiVsdmcBCMZZx1YeOaW9veDR4dSB
+ t5feRMhUZefS0TA6G1FuNr71NuMfAoguHcTSvrgOt7gA9ILr1QleCTQoQ9KbYncRcLti
+ Dhg9f8cZmmtQxP79MtLZ08NoXZxTJJ7d7cZOlnjgyJlNi18pOou2lT7/2WGjfqHRHTpt
+ 7HEGaj10O+n8yDs80GU93ttIH1vZDlYvNv63oP3xbQJJsAhMsYuRxb3BSKcaGjLR+e/B
+ SK7itM6++7SDZa371whYdnM89qG5m6DCCVa7J1edfGU++64PKtYwmvrtewfqH80LobtF
+ ryPQ==
+X-Gm-Message-State: APuU4Z87BruHNQQ2ChqweFoBfM5jwlBzTEvBCnqe/pUouOdU+7rzH/aA
+ ogwsEwSNfz2R15GOK+P3Zk33TD4s+/wU3cpuQ6bejs/pRzGo42PcLgFJFmWWfXF3mjtG18S3Tx9
+ M1MKH12vvPspySzrO3iPg5KNwbtRHmjNaDNTm9GDMLoPmDiROrZ/sZxaHAg==
+X-Gm-Gg: AZFdTZfdZicEYL5hQsp4NCYx+uo+Lw6KQ9J0J72l3VRMl++3/fetAgrTftIJFRwveB4
+ oz5+uLKtLl6yzz0LyuBsPeMGPhPY2bPlGU0Rs6ZcEqfStVJFwwY0kTUKIcaZolkZPRH3ONCVwQP
+ qHUYUu99BoDx/qlOXkwrFuo8QWzLCHQ83W+h64l0Mm2sHP6q6c57TrKiUGS9dHoBHLyjDRxsdsI
+ jb2fBhNz1Glf421gYTqxFAYvBLd96bOMps9IDgEaY1qI/s6hMm45LTye2jPU289e8O6j4g0Tl4V
+ zGjJobzHpKxFRHQ6Ec01291ReIEXVXX+uGchfIUVbHN1ktOFiX8KLDJCNo42Hqn5yX4ZUgpU+F6
+ CAvEG5U00SjgljbUbMiM7id1ECt5V8uvkvetdoSpBe2Ampw92ceXDoErAKUnANKp7PYpoH3owN2
+ pVWzVEnXcO
+X-Received: by 2002:a05:620a:f0f:b0:949:57b4:388b with SMTP id
+ af79cd13be357-949bab0eb6cmr2115113985a.41.1795443344420; 
+ Mon, 23 Nov 2026 06:15:44 -0800 (PST)
+X-Received: by 2002:a05:620a:f0f:b0:949:57b4:388b with SMTP id
+ af79cd13be357-949bab0eb6cmr2115105085a.41.1795443343870; 
+ Mon, 23 Nov 2026 06:15:43 -0800 (PST)
 Received: from [192.168.68.101] ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-55d788548a2sm98983591cf.19.2026.11.23.06.03.17
+ af79cd13be357-949bb031617sm812694485a.1.2026.11.23.06.15.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2026 06:03:21 -0800 (PST)
-Message-ID: <51e50192-328b-4780-aea1-06dbd89be222@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 11:03:15 -0300
+ Mon, 23 Nov 2026 06:15:43 -0800 (PST)
+Message-ID: <bd116e02-a7b2-4b90-bbee-b855111d2411@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 11:15:38 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] hw/riscv: add cache_level and node properties to
- CBQRI controllers
+Subject: Re: [PATCH v2 2/2] hw/riscv: add support for ACPI RQSC table
 To: Drew Fustini <fustini@kernel.org>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
@@ -113,41 +112,42 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Igor Mammedov <imammedo@redhat.com>, Ani Sinha <anisinha@redhat.com>,
  Vasudevan Srinivasan <vasu@rivosinc.com>
 References: <20261113-riscv-rqsc-v2-0-34d47fa4141e@kernel.org>
- <20261113-riscv-rqsc-v2-1-34d47fa4141e@kernel.org>
+ <20261113-riscv-rqsc-v2-2-34d47fa4141e@kernel.org>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261113-riscv-rqsc-v2-1-34d47fa4141e@kernel.org>
+In-Reply-To: <20261113-riscv-rqsc-v2-2-34d47fa4141e@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1NSBTYWx0ZWRfX0cUyBJ4mdIrV
- 9Jqk81exho90hDVq3G9mxwOCTbs+tB6OfLOBSJ/aVxPBazu54QHa6FzuTfA33YOLoy85KRl/e9p
- hKrI7FdfXmOLxsNudP6e9UMcXOkq486bWaSrSy0AluuzKzNYb9/BJ74pYUDthYliE+li5vDBIuB
- QtgggAP/qRkjaHTaWF9CYyDSfUZaeklGIbly2vwZnZnf3mSThzHF36Ijid/CC/2dCZmEGGIliIR
- 7IMRCqlHVli7MCFmYolVCQNA119aCOcOf7W1c2CB2n34Y88KqDNDG5regvt7C3OModMdc1fS0gm
- /9G6WDV1NDNS1cT0SX98FAzgNRGomv4sANHz+t2s4E3p3vXkbTO4CySdxCtapMMdwB7e/b+i18X
- bGgtQONpJIL5IySrI5cOtC6DsQQUZlQ3HalsH+xEYrKMxCnUN7ZMI5j3R5ab1qOIG/jxdwj4RWb
- 9xloN7p12dhL848hvRQ==
-X-Proofpoint-ORIG-GUID: RUl1Q6afiA1r5EpjuTxDurDD0D9pU5mP
-X-Authority-Analysis: v=2.4 cv=QrXLTlyd c=1 sm=1 tr=0 ts=6b0447ab cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-ORIG-GUID: yohr_EY699KkQsKQkjdmg3yXDLlT7YMR
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1NiBTYWx0ZWRfXycjF6KdzC0n+
+ ImxNmxbDYOK8ROtl1x1HwXWsp8b4KD5YOzGfBtpOt3xPcqn19EZorO8fw8//vb+ptPki13MRnXm
+ 1r4QfKZ7NSlAdF2Rmb4T9/Ps4F/l74kw/ZUEJD2HGX9eDy19iIEeqjkXpCNBFQ/fhehLih05iE0
+ ttWH2zQE7jhXDljdmE7Ul0l065JQz3nCslhbhSCMx4Dpdd+sDB9q7s9HMAbVYbH1x7QIx/DxCLY
+ i3MXRWPced8F72a6i0lCQNmP2vNH/qC5Y9U1GcpVL1b/rZK6aunrPYU7k3jenmSc6JL/6gadjLq
+ v1KzwkAZo09eTuQbrmwmBtrkrvfFtKZ9bNRL+4ofSWiM0iWevWIFS6qXFo1BWi3j5vvGOBNrZ7P
+ l9Ooxx5DFY4M7PcGbrm7ZPMDD+jlQRAH/OLKodS8K71a4oPui4JWu/INX91/Q2vsHuNMon2ZtMH
+ VhQdQqCKqZKJYjIzjKQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1NiBTYWx0ZWRfX+ZdfBJDhU8DG
+ FfJb4tKN7p+TNDUo4kyL7dNqBu8OchmSaucvzUSze2aQoR6/lv49+hlvhoe45eZDCbuBa5yCwVS
+ jpio7N/Q2CQ5tu8ACNzcbyMy7zxWics=
+X-Proofpoint-GUID: yohr_EY699KkQsKQkjdmg3yXDLlT7YMR
+X-Authority-Analysis: v=2.4 cv=Aol7T+9P c=1 sm=1 tr=0 ts=6b044a91 cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=s8214ipjFJNddzb_8BYA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: RUl1Q6afiA1r5EpjuTxDurDD0D9pU5mP
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1NSBTYWx0ZWRfXxB25SR9+Fbhp
- o0AjHTjOUhh2ws+0oUh6radHiFEsYzdqpb6IrrA4Smgzdd5/AsbTbwOOjsZOG7DEoxd2eHww2Tk
- +dCFl3CnzIWCifyoAYm20xkLVXte2F0=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=V1jnuoLLAAAA:20 a=h0uksLzaAAAA:8 a=VwQbUJbxAAAA:8 a=vJmiy4lZmNxXquneKHYA:9
+ a=QEXdDO2ut3YA:10 a=OIgjcC2v60KrkQgK7BGD:22 a=MSi_79tMYmZZG2gvAgS0:22
+ a=bA3UWDv6hWIuX7UZL3qL:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-23_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 suspectscore=0 phishscore=0 spamscore=0
- lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ clxscore=1015 suspectscore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230055
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230056
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -166,168 +166,480 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
 On 11/13/2026 8:12 PM, Drew Fustini wrote:
-> The ACPI RQSC table specifies which cache a capacity controller backs
-> and which proximity domain a bandwidth controller serves.
+> Build the ACPI RISC-V Quality of Service Controllers (RQSC) table for
+> the virt machine when CBQRI controllers are present. A capacity
+> controller is described by the PPTT Cache ID of the cache it backs and
+> a bandwidth controller by the SRAT proximity domain of its NUMA node.
 > 
-> Add a cache_level property to the capacity controller. It accepts 2 or
-> 3, the unified cache levels that the smp-cache option can place and the
-> PPTT can describe, and defaults to 2. Add a node property to the
-> bandwidth controller. It defaults to 0 and rejects a node the machine
-> does not have.
+> Make RISCV_VIRT select RISCV_CBQRI as the table code calls into the
+> CBQRI devices.
 > 
+> Link: https://github.com/riscv-non-isa/riscv-rqsc/releases/tag/v1.0.0
+> Co-developed-by: Vasudevan Srinivasan <vasu@rivosinc.com>
+> Signed-off-by: Vasudevan Srinivasan <vasu@rivosinc.com>
 > Signed-off-by: Drew Fustini <fustini@kernel.org>
 > ---
->   hw/riscv/cbqri_bandwidth.c | 13 +++++++++++++
->   hw/riscv/cbqri_capacity.c  |  8 ++++++++
->   2 files changed, 21 insertions(+)
+>   hw/riscv/Kconfig           |   2 +-
+>   hw/riscv/cbqri_bandwidth.c |  13 ++
+>   hw/riscv/cbqri_capacity.c  |  13 ++
+>   hw/riscv/virt-acpi-build.c | 298 ++++++++++++++++++++++++++++++++++++++++++++-
+>   include/hw/riscv/cbqri.h   |  20 +++
+>   5 files changed, 344 insertions(+), 2 deletions(-)
 > 
+> diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
+> index 98bdebb4b814..47dda3e52d20 100644
+> --- a/hw/riscv/Kconfig
+> +++ b/hw/riscv/Kconfig
+> @@ -71,7 +71,7 @@ config RISCV_VIRT
+>       select PLATFORM_BUS
+>       select ACPI
+>       select ACPI_PCI
+> -    imply RISCV_CBQRI
+> +    select RISCV_CBQRI
+>   
+>   config RISCV_SERVER_PLATFORM_REF
+>       bool
 > diff --git a/hw/riscv/cbqri_bandwidth.c b/hw/riscv/cbqri_bandwidth.c
-> index bd8cf2b50e4c..6c33d1738d27 100644
+> index 6c33d1738d27..c55709d662f2 100644
 > --- a/hw/riscv/cbqri_bandwidth.c
 > +++ b/hw/riscv/cbqri_bandwidth.c
-> @@ -17,7 +17,9 @@
->   #include "hw/core/sysbus.h"
->   #include "migration/vmstate.h"
->   #include "target/riscv/cpu.h"
-> +#include "hw/core/boards.h"
->   #include "hw/riscv/cbqri.h"
-> +#include "system/numa.h"
+> @@ -760,4 +760,17 @@ DeviceState *riscv_cbqri_bc_create(hwaddr addr,
+>       return dev;
+>   }
 >   
->   /* Property defaults, shared with riscv_cbqri_bc_caps_init() */
->   #define BC_DEFAULT_MAX_MCIDS    256
-> @@ -139,6 +141,7 @@ typedef struct RiscvCbqriBandwidthState {
->   
->       uint16_t nbwblks;
->       uint16_t mrbwb;
-> +    uint32_t node;
->   
->       bool supports_at_code;
->   
-> @@ -542,12 +545,21 @@ static const MemoryRegionOps riscv_cbqri_bc_ops = {
->   static void riscv_cbqri_bc_realize(DeviceState *dev, Error **errp)
->   {
->       RiscvCbqriBandwidthState *bc = RISCV_CBQRI_BC(dev);
-> +    MachineState *ms = MACHINE(qdev_get_machine());
-> +    unsigned int nb_nodes = ms->numa_state ? ms->numa_state->num_nodes : 0;
->   
->       if (!bc->mmio_base) {
->           error_setg(errp, "mmio_base property not set");
->           return;
->       }
->   
-> +    /* Without -numa there is a single implicit node 0. */
-> +    if (bc->node >= MAX(nb_nodes, 1)) {
-> +        error_setg(errp, "node %u out of range, %u NUMA node(s)",
-> +                   bc->node, MAX(nb_nodes, 1));
-> +        return;
-> +    }
-> +
->       if (bc->nb_rcids == 0) {
->           error_setg(errp, "max_rcids must be at least 1");
->           return;
-> @@ -638,6 +650,7 @@ static const Property riscv_cbqri_bc_properties[] = {
->                          BC_DEFAULT_NBWBLKS),
->       DEFINE_PROP_UINT16("mrbwb", RiscvCbqriBandwidthState, mrbwb,
->                          BC_DEFAULT_MRBWB),
-> +    DEFINE_PROP_UINT32("node", RiscvCbqriBandwidthState, node, 0),
->   
->       DEFINE_PROP_BOOL("at_code", RiscvCbqriBandwidthState,
->                        supports_at_code, true),
-> diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
-> index 0c572aa8b02f..1585cad1d073 100644
-> --- a/hw/riscv/cbqri_capacity.c
-> +++ b/hw/riscv/cbqri_capacity.c
-> @@ -127,6 +127,7 @@ typedef struct RiscvCbqriCapacityState {
->       uint16_t nb_rcids;
->   
->       uint16_t ncblks;
-> +    uint8_t cache_level;
->   
->       bool supports_at_code;
->   
-> @@ -591,6 +592,11 @@ static void riscv_cbqri_cc_realize(DeviceState *dev, Error **errp)
->           return;
->       }
->   
-> +    if (cc->cache_level != 2 && cc->cache_level != 3) {
-> +        error_setg(errp, "cache_level must be 2 or 3");
-> +        return;
-> +    }
-> +
+> +void riscv_cbqri_bc_get_details(DeviceState *ds, const char *type,
+> +                                RqscController *rqsc)
+> +{
+> +    if (strcmp(type, TYPE_RISCV_CBQRI_BC) == 0) {
 
-For this kind of property that has a very specific and restrictive value range (i.e.
-we'll abort if we don't get what we want), I suggest not using DEFINE_PROP_UINT8()
-to declare the prop in the array.
-
-What we do in target/riscv/cpu.c in for 'num-pmp-regions':
+The only existing caller for riscv_cbqri_bc_get_details() is already doing this
+check:
 
 
-static void prop_num_pmp_regions_set(Object *obj, Visitor *v, const char *name,
-                                      void *opaque, Error **errp)
-{
-     RISCVCPU *cpu = RISCV_CPU(obj);
-     uint8_t value;
+ > +        bool is_bc = !strcmp(type, TYPE_RISCV_CBQRI_BC);
 
-     visit_type_uint8(v, name, &value, errp);
+(...)
 
-     (... a bunch of checks ....)
-}
-
-static void prop_num_pmp_regions_get(Object *obj, Visitor *v, const char *name,
-                                      void *opaque, Error **errp)
-{
-     uint8_t value = RISCV_CPU(obj)->cfg.pmp_regions;
-
-     visit_type_uint8(v, name, &value, errp);
-}
-
-static const PropertyInfo prop_num_pmp_regions = {
-     .type = "uint8",
-     .qapi_type = &uint8_type_info,
-     .description = "num-pmp-regions",
-     .get = prop_num_pmp_regions_get,
-     .set = prop_num_pmp_regions_set,
-};
+ > +        if (is_bc) {
+ > +            riscv_cbqri_bc_get_details(kid->child, type, &rqsc[count]);
+ > +        }
 
 
-And this is added in a property array like this:
+Unless there are plans to add new callers that will unsafely call the function
+without guaranteeing that the device type is correct, I suggest removing the
+redundant strcmp().
 
-{.name = "num-pmp-regions", .info = &prop_num_pmp_regions},
+Same thing with riscv_cbqri_cc_get_details() below.
 
-
-This is more verbose but it will make realize() easier since the property
-is guaranteed to be valid. 'cache_level' seems like a good candidate for
-this kind of pattern.
-
-
-Thanks,
+Otherwise LGTM.  Thanks,
 Daniel
 
 
-
->       if (cc->nb_rcids == 0) {
->           error_setg(errp, "max_rcids must be at least 1");
->           return;
-> @@ -666,6 +672,8 @@ static const Property riscv_cbqri_cc_properties[] = {
->                          CC_DEFAULT_MAX_RCIDS),
->       DEFINE_PROP_UINT16("ncblks", RiscvCbqriCapacityState, ncblks,
->                          CC_DEFAULT_NCBLKS),
-> +    DEFINE_PROP_UINT8("cache_level", RiscvCbqriCapacityState,
-> +                      cache_level, 2),
+> +        RiscvCbqriBandwidthState *bcs = RISCV_CBQRI_BC(ds);
+> +        rqsc->type = RQSC_CONTROLLER_TYPE_BANDWIDTH;
+> +        rqsc->mmio_base = bcs->mmio_base;
+> +        rqsc->rcid_count = bcs->nb_rcids;
+> +        rqsc->mcid_count = bcs->nb_mcids;
+> +        rqsc->node = bcs->node;
+> +    }
+> +}
+> +
+>   type_init(riscv_cbqri_bc_register_types)
+> diff --git a/hw/riscv/cbqri_capacity.c b/hw/riscv/cbqri_capacity.c
+> index 1585cad1d073..3ebc8a1cc26d 100644
+> --- a/hw/riscv/cbqri_capacity.c
+> +++ b/hw/riscv/cbqri_capacity.c
+> @@ -776,4 +776,17 @@ DeviceState *riscv_cbqri_cc_create(hwaddr addr,
+>       return dev;
+>   }
 >   
->       DEFINE_PROP_BOOL("at_code", RiscvCbqriCapacityState,
->                        supports_at_code, true),
+> +void riscv_cbqri_cc_get_details(DeviceState *ds, const char *type,
+> +                                RqscController *rqsc)
+> +{
+> +    if (strcmp(type, TYPE_RISCV_CBQRI_CC) == 0) {
+> +        RiscvCbqriCapacityState *ccs = RISCV_CBQRI_CC(ds);
+> +        rqsc->type = RQSC_CONTROLLER_TYPE_CAPACITY;
+> +        rqsc->mmio_base = ccs->mmio_base;
+> +        rqsc->rcid_count = ccs->nb_rcids;
+> +        rqsc->mcid_count = ccs->nb_mcids;
+> +        rqsc->cache_level = ccs->cache_level;
+> +    }
+> +}
+> +
+>   type_init(riscv_cbqri_cc_register_types)
+> diff --git a/hw/riscv/virt-acpi-build.c b/hw/riscv/virt-acpi-build.c
+> index 8254f1294a72..c8a720eb568c 100644
+> --- a/hw/riscv/virt-acpi-build.c
+> +++ b/hw/riscv/virt-acpi-build.c
+> @@ -34,6 +34,7 @@
+>   #include "hw/pci-host/gpex.h"
+>   #include "hw/riscv/virt.h"
+>   #include "hw/riscv/numa.h"
+> +#include "hw/riscv/cbqri.h"
+>   #include "hw/virtio/virtio-acpi.h"
+>   #include "kvm/kvm_riscv.h"
+>   #include "migration/vmstate.h"
+> @@ -279,6 +280,295 @@ spcr_setup(GArray *table_data, BIOSLinker *linker, RISCVVirtState *s)
+>   /* RHCT Node[N] starts at offset 56 */
+>   #define RHCT_NODE_ARRAY_OFFSET 56
+>   
+> +/*
+> + * RISC-V Quality of Service Controllers (RQSC) table, v1.0
+> + * https://github.com/riscv-non-isa/riscv-rqsc/releases/tag/v1.0.0
+> + */
+> +
+> +/* RQSC Resource Type and Resource ID Type */
+> +#define RQSC_RESOURCE_TYPE_CACHE                0
+> +#define RQSC_RESOURCE_TYPE_MEMORY               1
+> +#define RQSC_RESOURCE_ID_TYPE_PROCESSOR_CACHE   0
+> +#define RQSC_RESOURCE_ID_TYPE_MEMORY_RANGE      1
+> +
+> +#define RQSC_MAX_CONTROLLERS                    10
+> +
+> +/* PPTT nodes start after the 36-byte table header */
+> +#define PPTT_NODE_ARRAY_OFFSET                  36
+> +/* PPTT revision 3 Cache Type Structure */
+> +#define PPTT_NODE_TYPE_CACHE                    1
+> +#define PPTT_CACHE_NODE_LEN                     28
+> +#define PPTT_CACHE_ID_OFFSET                    24
+> +
+> +static bool virt_has_cbqri(RISCVVirtState *vs)
+> +{
+> +    BusChild *kid;
+> +
+> +    if (!vs->platform_bus_dev) {
+> +        return false;
+> +    }
+> +
+> +    QTAILQ_FOREACH(kid, &vs->platform_bus_dev->parent_bus->children, sibling) {
+> +        const char *type = object_get_typename(OBJECT(kid->child));
+> +
+> +        if (!strcmp(type, TYPE_RISCV_CBQRI_BC) ||
+> +            !strcmp(type, TYPE_RISCV_CBQRI_CC)) {
+> +            return true;
+> +        }
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +static int rqsc_cmp_mmio_base(const void *a, const void *b)
+> +{
+> +    const RqscController *x = a, *y = b;
+> +
+> +    return x->mmio_base < y->mmio_base ? -1 : x->mmio_base > y->mmio_base;
+> +}
+> +
+> +static unsigned int gather_cbqri_details(RISCVVirtState *vs,
+> +                                         RqscController rqsc[])
+> +{
+> +    BusChild *kid;
+> +    unsigned int count = 0;
+> +
+> +    if (!vs->platform_bus_dev) {
+> +        return 0;
+> +    }
+> +
+> +    QTAILQ_FOREACH(kid, &vs->platform_bus_dev->parent_bus->children, sibling) {
+> +        const char *type = object_get_typename(OBJECT(kid->child));
+> +        bool is_bc = !strcmp(type, TYPE_RISCV_CBQRI_BC);
+> +        bool is_cc = !strcmp(type, TYPE_RISCV_CBQRI_CC);
+> +
+> +        if (!is_bc && !is_cc) {
+> +            continue;
+> +        }
+> +
+> +        if (count == RQSC_MAX_CONTROLLERS) {
+> +            error_setg(&error_fatal, "RQSC: more than %d CBQRI controllers",
+> +                       RQSC_MAX_CONTROLLERS);
+> +        }
+> +
+> +        if (is_bc) {
+> +            riscv_cbqri_bc_get_details(kid->child, type, &rqsc[count]);
+> +        } else {
+> +            riscv_cbqri_cc_get_details(kid->child, type, &rqsc[count]);
+> +        }
+> +        count++;
+> +    }
+> +
+> +    /*
+> +     * The bus lists its children newest first. Order the controllers by
+> +     * address so that the n-th capacity controller of a cache level is
+> +     * the one backing the n-th cache of that level.
+> +     */
+> +    qsort(rqsc, count, sizeof(*rqsc), rqsc_cmp_mmio_base);
+> +
+> +    return count;
+> +}
+> +
+> +/*
+> + * Return the PPTT Cache ID of one unified cache of the given level. The
+> + * topology containers that hold a cache of that level are counted from 0
+> + * in possible_cpus order, and idx selects the container. build_pptt()
+> + * derives the ID with PPTT_CACHE_ID() from the cache type and level plus
+> + * the first CPU of the container, so walk possible_cpus the way it does.
+> + * Return -1 when there is no such cache and store in num_caches how many
+> + * caches of that level the topology has, 0 when no smp-cache option places
+> + * that level.
+> + */
+> +static int64_t rqsc_pptt_cache_id(MachineState *ms, unsigned int level,
+> +                                  unsigned int idx, unsigned int *num_caches)
+> +{
+> +    const CPUArchIdList *cpus = ms->possible_cpus;
+> +    int64_t socket_id = -1, cluster_id = -1, core_id = -1;
+> +    unsigned int n, found = 0;
+> +    CpuTopologyLevel topo;
+> +
+> +    *num_caches = 0;
+> +
+> +    switch (level) {
+> +    case 2:
+> +        topo = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L2);
+> +        break;
+> +    case 3:
+> +        topo = machine_get_cache_topo_level(ms, CACHE_LEVEL_AND_TYPE_L3);
+> +        break;
+> +    default:
+> +        return -1;
+> +    }
+> +
+> +    for (n = 0; n < cpus->len; n++) {
+> +        const CpuInstanceProperties *p = &cpus->cpus[n].props;
+> +        bool first;
+> +
+> +        switch (topo) {
+> +        case CPU_TOPOLOGY_LEVEL_SOCKET:
+> +            first = p->socket_id != socket_id;
+> +            break;
+> +        case CPU_TOPOLOGY_LEVEL_CLUSTER:
+> +            first = p->socket_id != socket_id || p->cluster_id != cluster_id;
+> +            break;
+> +        case CPU_TOPOLOGY_LEVEL_CORE:
+> +            first = p->socket_id != socket_id ||
+> +                    p->cluster_id != cluster_id || p->core_id != core_id;
+> +            break;
+> +        default:
+> +            return -1;
+> +        }
+> +
+> +        if (!first) {
+> +            continue;
+> +        }
+> +
+> +        socket_id = p->socket_id;
+> +        cluster_id = p->cluster_id;
+> +        core_id = p->core_id;
+> +
+> +        if (found++ == idx) {
+> +            return PPTT_CACHE_ID(UNIFIED_CACHE, level, n);
+> +        }
+> +    }
+> +
+> +    *num_caches = found;
+> +    return -1;
+> +}
+> +
+> +/*
+> + * Whether the PPTT at pptt_start holds a Cache Type Structure with the
+> + * given Cache ID. build_pptt() does not emit every cache level for every
+> + * smp-cache layout, for example an L3 cache placed at core level.
+> + */
+> +static bool rqsc_pptt_has_cache_id(GArray *table_data, unsigned int pptt_start,
+> +                                   uint32_t id)
+> +{
+> +    const uint8_t *pptt = (const uint8_t *)table_data->data + pptt_start;
+> +    uint32_t len = ldl_le_p(pptt + 4);
+> +    uint32_t off = PPTT_NODE_ARRAY_OFFSET;
+> +
+> +    while (off + PPTT_CACHE_NODE_LEN <= len) {
+> +        uint8_t node_len = pptt[off + 1];
+> +
+> +        if (pptt[off] == PPTT_NODE_TYPE_CACHE &&
+> +            node_len >= PPTT_CACHE_NODE_LEN &&
+> +            ldl_le_p(pptt + off + PPTT_CACHE_ID_OFFSET) == id) {
+> +            return true;
+> +        }
+> +        if (!node_len) {
+> +            break;
+> +        }
+> +        off += node_len;
+> +    }
+> +
+> +    return false;
+> +}
+> +
+> +static void build_rqsc(GArray *table_data, BIOSLinker *linker,
+> +                       RISCVVirtState *s, unsigned int pptt_start)
+> +{
+> +    MachineState *ms = MACHINE(s);
+> +    RqscController rqsc[RQSC_MAX_CONTROLLERS];
+> +    unsigned int num, i, nr_cc[4] = {};
+> +    AcpiTable table = { .sig = "RQSC", .rev = 1, .oem_id = s->oem_id,
+> +                        .oem_table_id = s->oem_table_id };
+> +
+> +    acpi_table_begin(&table, table_data);
+> +
+> +    num = gather_cbqri_details(s, rqsc);
+> +
+> +    /* Number of QoS Controllers */
+> +    build_append_int_noprefix(table_data, num, 4);
+> +
+> +    for (i = 0; i < num; i++) {
+> +        bool is_cc = rqsc[i].type == RQSC_CONTROLLER_TYPE_CAPACITY;
+> +        /* A Memory resource carries 8 bytes of Bandwidth per Block */
+> +        unsigned int res_len = is_cc ? 20 : 28;
+> +        uint8_t res_type, id_type;
+> +        int64_t id;
+> +
+> +        if (is_cc) {
+> +            unsigned int level = rqsc[i].cache_level;
+> +            unsigned int num_caches;
+> +
+> +            res_type = RQSC_RESOURCE_TYPE_CACHE;
+> +            id_type = RQSC_RESOURCE_ID_TYPE_PROCESSOR_CACHE;
+> +            id = rqsc_pptt_cache_id(ms, level, nr_cc[level]++, &num_caches);
+> +            if (id < 0 && !num_caches) {
+> +                error_setg(&error_fatal,
+> +                           "CBQRI capacity controller at 0x%" PRIx64
+> +                           " backs an L%u cache, but no smp-cache option"
+> +                           " places the L%u cache",
+> +                           rqsc[i].mmio_base, level, level);
+> +            } else if (id < 0) {
+> +                error_setg(&error_fatal,
+> +                           "CBQRI capacity controller at 0x%" PRIx64
+> +                           " is L%u controller %u, but the smp-cache"
+> +                           " topology has only %u L%u cache%s",
+> +                           rqsc[i].mmio_base, level, nr_cc[level] - 1,
+> +                           num_caches, level, num_caches == 1 ? "" : "s");
+> +            } else if (!rqsc_pptt_has_cache_id(table_data, pptt_start, id)) {
+> +                error_setg(&error_fatal,
+> +                           "CBQRI capacity controller at 0x%" PRIx64
+> +                           " backs an L%u cache, but the PPTT has no L%u"
+> +                           " cache with ID 0x%" PRIx64,
+> +                           rqsc[i].mmio_base, level, level, (uint64_t)id);
+> +            }
+> +        } else {
+> +            res_type = RQSC_RESOURCE_TYPE_MEMORY;
+> +            id_type = RQSC_RESOURCE_ID_TYPE_MEMORY_RANGE;
+> +            id = rqsc[i].node;
+> +        }
+> +
+> +        /* Controller Type */
+> +        build_append_int_noprefix(table_data, rqsc[i].type, 1);
+> +        /* Reserved */
+> +        build_append_int_noprefix(table_data, 0, 1);
+> +        /* Length */
+> +        build_append_int_noprefix(table_data, 24 + res_len, 2);
+> +        /* Register Interface Address */
+> +        build_append_gas(table_data,
+> +                AML_AS_SYSTEM_MEMORY,
+> +                0,
+> +                0,
+> +                4,
+> +                rqsc[i].mmio_base);
+> +        /* RCID Count */
+> +        build_append_int_noprefix(table_data, rqsc[i].rcid_count, 2);
+> +        /* MCID Count */
+> +        build_append_int_noprefix(table_data, rqsc[i].mcid_count, 2);
+> +        /* Controller Flags */
+> +        build_append_int_noprefix(table_data, 0, 2);
+> +        /* Number of Resources, one per controller */
+> +        build_append_int_noprefix(table_data, 1, 2);
+> +
+> +        /* Resource Structure */
+> +        /* Resource Type */
+> +        build_append_int_noprefix(table_data, res_type, 1);
+> +        /* Reserved */
+> +        build_append_int_noprefix(table_data, 0, 1);
+> +        /* Length of Resource Structure */
+> +        build_append_int_noprefix(table_data, res_len, 2);
+> +        /* Resource Flags */
+> +        build_append_int_noprefix(table_data, 0, 2);
+> +        /* Reserved */
+> +        build_append_int_noprefix(table_data, 0, 1);
+> +        /* Resource ID Type */
+> +        build_append_int_noprefix(table_data, id_type, 1);
+> +        /* Resource ID 1: PPTT Cache ID or SRAT Proximity Domain */
+> +        build_append_int_noprefix(table_data, id, 8);
+> +        /* Resource ID 2 */
+> +        build_append_int_noprefix(table_data, 0, 4);
+> +        if (!is_cc) {
+> +            /* Bandwidth per Block, 0 means not provided */
+> +            build_append_int_noprefix(table_data, 0, 8);
+> +        }
+> +    }
+> +
+> +    acpi_table_end(linker, &table);
+> +}
+> +
+>   /*
+>    * ACPI spec, Revision 6.6
+>    * 5.2.37 RISC-V Hart Capabilities Table (RHCT)
+> @@ -879,7 +1169,7 @@ build_srat(GArray *table_data, BIOSLinker *linker, RISCVVirtState *vms)
+>   static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>   {
+>       GArray *table_offsets;
+> -    unsigned dsdt, xsdt;
+> +    unsigned dsdt, xsdt, pptt_start;
+>       GArray *tables_blob = tables->table_data;
+>       MachineState *ms = MACHINE(s);
+>       CPUCoreCaches caches[CPU_MAX_CACHES];
+> @@ -913,9 +1203,15 @@ static void virt_acpi_build(RISCVVirtState *s, AcpiBuildTables *tables)
+>       }
+>   
+>       acpi_add_table(table_offsets, tables_blob);
+> +    pptt_start = tables_blob->len;
+>       build_pptt(tables_blob, tables->linker, ms, s->oem_id,
+>                  s->oem_table_id, num_caches, caches);
+>   
+> +    if (virt_has_cbqri(s)) {
+> +        acpi_add_table(table_offsets, tables_blob);
+> +        build_rqsc(tables_blob, tables->linker, s, pptt_start);
+> +    }
+> +
+>       acpi_add_table(table_offsets, tables_blob);
+>   
+>       if (ms->acpi_spcr_enabled) {
+> diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
+> index 10b64613599f..bb0b961b3a43 100644
+> --- a/include/hw/riscv/cbqri.h
+> +++ b/include/hw/riscv/cbqri.h
+> @@ -78,4 +78,24 @@ DeviceState *riscv_cbqri_cc_create(hwaddr addr,
+>                                      const RiscvCbqriCapacityCaps *caps);
+>   DeviceState *riscv_cbqri_bc_create(hwaddr addr,
+>                                      const RiscvCbqriBandwidthCaps *caps);
+> +
+> +/* RQSC QoS Controller Type */
+> +#define RQSC_CONTROLLER_TYPE_CAPACITY   0
+> +#define RQSC_CONTROLLER_TYPE_BANDWIDTH  1
+> +
+> +/* What the ACPI RQSC table reports about one CBQRI controller */
+> +typedef struct RqscController {
+> +    uint8_t type;           /* RQSC_CONTROLLER_TYPE_* */
+> +    uint64_t mmio_base;
+> +    uint16_t rcid_count;
+> +    uint16_t mcid_count;
+> +    uint8_t cache_level;    /* capacity controllers */
+> +    uint32_t node;          /* bandwidth controllers */
+> +} RqscController;
+> +
+> +void riscv_cbqri_bc_get_details(DeviceState *ds, const char *type,
+> +                                RqscController *rqsc);
+> +void riscv_cbqri_cc_get_details(DeviceState *ds, const char *type,
+> +                                RqscController *rqsc);
+> +
+>   #endif
 > 
 
 
