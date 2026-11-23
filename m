@@ -1,139 +1,138 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE08D606A31E
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 20:06:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5EBC8606A31E
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 20:06:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fyFh8Ky3;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EE1dedoa
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=B80DTjO/;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=VzZsN0Yw
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVaHv-00063U-I5; Mon, 23 Nov 2026 15:05:19 -0500
+	id 1xVaII-0006Js-Aq; Mon, 23 Nov 2026 15:05:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVaHs-00062z-KA
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 15:05:16 -0500
+ id 1xVaIG-0006Hv-2O
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 15:05:40 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVaHp-0002Cc-6f
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 15:05:16 -0500
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ id 1xVaIE-0003A3-9h
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 15:05:39 -0500
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ANJuQH73255326
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 20:05:11 GMT
+ 6ANJuNVh2349969
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 20:05:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- jctTf7MlA/OhyTxx8VxIJDBlWtWuAXaZzvVIWxJ7eAI=; b=fyFh8Ky3grvgGf4W
- b164bB8vpAVIfd9+dP4UC4oQXvWF1HKrg8+XVc7TR2lWygMiLmQdm1WcZXLqCG+B
- C4FgpR6P0hEOkCglnXiAmcr8KzKwSlDfI8VX6+QONwz/H0t1dXlB8hmHWptB8UE/
- M9iKCBUdgp76CLs0+SkMZPhqTJ59ft5Qm5bydPlumLwgSgDxs4ppHoh3ZVQ6znPA
- 41V9G1NCEWKJFNST5hr3T2gcNxIy2J+/jlKiwg9qPalYFGhmKXncyUUZJf3SsOch
- eh/Eg+AT7wTfrjg2oH6EBnPEmUBEPQCfG6AM7qsfnMn1PsObH75EGmySYRnOGIdb
- o7i+Uw==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4g1pb70d-1
+ WWLb8+fh6oO3ZnzEEKtRhiJ803Mtq9Gx0HjgM7/TCnM=; b=B80DTjO/shIT/blh
+ q+h+7FJJFahuPXXJi30WjGIryphv86T3jCKpYbnPcvdOtIQk39PSTSD703J3Ertq
+ 3IOhIYaSOJjHbqps5pDio8/6quiWQWDg94ZFeQ+gaQTZeHNl/U3g1P17gTbSRXo3
+ P7TjyrTROpQuAk1JjBGhnZKgv/B/olMPKkbRdLYCPSk7T+km9nkCCeZvGhw2Qrc+
+ rSjgv7n274Odt09Eu7NBGU9Wln6Rtlg2ilZzEYPlrrfqOkb8NaWMqVsDl5mWXq/4
+ Kqk+IKww0rg9c788YnV3POLuWC/VvKzvA7SycSP6qv8mSFTW/XICrCT4Bk4/mSMe
+ GQEESw==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4g9a372t-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 20:05:11 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-948d83322f6so77678585a.1
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 12:05:10 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 20:05:36 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-9308eafb465so778173985a.2
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 12:05:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795464310; x=1796069110; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795464336; x=1796069136; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=jctTf7MlA/OhyTxx8VxIJDBlWtWuAXaZzvVIWxJ7eAI=;
- b=EE1dedoa6Gkw9hBh6H5J8b403otzQPaC5aLCpzF1B2yee9+eUzcM7a5Kj68EokTYMZ
- uldGhRqWCZQdYE72CdVUOFsx9G5CcqDMNym4RhTjuLZCuZI8ntvrxNtrdWnl+YWY8PxY
- ZKXYVGtUIPMZdVXiocSe/4STzJN8JNmi9rYYFyebcPZTvAfP2sXjfsdyxtdV7njl3Eaq
- zyTyi5MTy09te0DglfYFSbV2QvHpWiSScM7OF5ug9rz+lKEm0X6jaEaeTfL06++x8bif
- 4uDZPBazyDzDKmP+95EAmAJgwnsuHQKp8DpN8Os+tdqidnNLT/dwvBLMouZtw9FmUg41
- aCdw==
+ bh=WWLb8+fh6oO3ZnzEEKtRhiJ803Mtq9Gx0HjgM7/TCnM=;
+ b=VzZsN0YwNgzFx2D1eftRTolUAm/if2+ZU1zeLPI9QxAqOZjN5sdFX34EjNbOsFh9rr
+ dFzr+dwZCeEDHrWyyfhBUzpgpex9OpBPk7D9umODzCE+ciNOGDfuFu6sbNd4Icy8JPQG
+ MnAMLf8qh8r+NIr+882EN76M/TUERAEFj77pfnjD8DPeISfOeQkn82nCUkrfLJpg2+ev
+ WfNVF8MdvRLcx+wikcgVIJ/kDuiZWxxNBK+jSm8Hnkmw9niUhrOJjdkg7B5DWkIO2r6/
+ pwDOAKnNF9KnAoWDwwtgdx07Y7q42vsNYVEFupaEcAXeM4X8mOjW9xG4xA13t75Qae0v
+ aZeQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795464310; x=1796069110;
+ d=1e100.net; s=20260707; t=1795464336; x=1796069136;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=jctTf7MlA/OhyTxx8VxIJDBlWtWuAXaZzvVIWxJ7eAI=;
- b=igfatX64ko2Y15MC024dbyOeC+7NZnypEHq5LWDrIyklCy1l+ArkksVaaRszH41Y7S
- 44FKOu0rpxHw7/dvfrAiAtUsniaWks22/Iir4SWsT4iSLHw/tv/vhxPMHj0dq/4dumBB
- ZN4plHRH/V2Z37MHcQFGXOIP+yxuo1mVLZ8cRUjbfigD17+g6jTAunCMEU1shpDDlsak
- VQ+w4dk1pMc5vQFsh0eCUrJUBGOkEcZTBh2dozZwf91PkBXw2Qmq2gEakkMuOehRpF6g
- PY+Uh5mlRj9dMmAEvV5vIqsh3SAgAvMiS24NXft9bYKqPF+OQ3++AhjLXVrE/OejWE4M
- Ccew==
-X-Gm-Message-State: APuU4Z9074a7Cs0n59p0ZxKVB5urdkcht+5FnQUKXUVRmWX2ujWHNfbm
- WWEs87hxMeUSpb9CvpxN5HJX4Zr1ZfXoaW5uRXZGQCOTbxg31nG6XXMvjhWMn+dQT3SX8Lnji8n
- lx3P0kDnTVjr1VY6qqi30SLr8u5TMR+ayadKPD0jtIj7+cxbL74FIAQL2Zw==
-X-Gm-Gg: AZFdTZdsXpclXJpplULpcwZD+DI46hWNE2ThUsnwylTmA7Xqoa2qxiJfz25f9VynoE1
- /GkkE3j+VlqDJOsrd0C3+TOskBYgLj/QxdhYmzJNCPYj8HY+7TbG6MMePx5rni3HWuZRS2jbe9W
- YYZu3ZiVE/gzWjOF5h+2ag1AycsEIpDROterOx3tIWt7hmTv9uEfxrvRfFgSc8fSFNtJIliaDD4
- thy3Tm8/GDoW8j9s7Fj8btlsqFSu5/mz7zSV7lPlnqxozmhDhDA9Z0R8jdEOzkPSFmaTiSpaJ4c
- 1VYFS8M5BRbpqXXyD1TJa0Y0aalVvhCE9OF2QliRXMkiWxWErMNk2PB2AM8zR3QZgUwaAL8Xvim
- +P20RILCdWihHWBYkWQ17gpLJELMVvIL1hmNd1dWs6AKaigUMOpOMX7U/vnlC0RPFHY+lAHQp6D
- 9IMbwL05tu
-X-Received: by 2002:a05:620a:2995:b0:93f:43a4:a48c with SMTP id
- af79cd13be357-949baa0640dmr2226388085a.45.1795464309786; 
- Mon, 23 Nov 2026 12:05:09 -0800 (PST)
-X-Received: by 2002:a05:620a:2995:b0:93f:43a4:a48c with SMTP id
- af79cd13be357-949baa0640dmr2226379585a.45.1795464309153; 
- Mon, 23 Nov 2026 12:05:09 -0800 (PST)
+ bh=WWLb8+fh6oO3ZnzEEKtRhiJ803Mtq9Gx0HjgM7/TCnM=;
+ b=TkDKk7lhRxa0rKIi3Aj4/nOMdHePoB8bZbKYKRd1xU2ZeEnEclWlyGoZxyCGBGV00L
+ DLHF9h/zyOZ7kVHiUK72w41+08sPUqLA15AaEeVhmMKeL3G/QKNN+Pv7JrjnQyQFRPNq
+ 61VhKq5/iumjhVlqqvuhFkEHKA/bzBC/x9whtqOH6lodmPuzo9Bn4QZtkS1p7rK/qZRz
+ IEsWykEwwbTTY1cQ1VFiYXWugvj2G2kQ/mFeHvDKfObDazwexae9+a4V/z6/Lgu5NefD
+ T6Jiy4xA/OOwlfmE7Rd0cMkS/R3aVg5pxY+Nr0xz/YnVAJikz6twrQvR5+3HQZ7rPqDG
+ Fk/w==
+X-Gm-Message-State: APuU4Z+4dmtjaywEqgEnD40oMJGm3Z98h+tYBKO0HydD7XpvDbk0L1GK
+ TfssaPAMBSYAmYJPWGJ2nB2a/h5apfqB3QT1/aw4E20yJa1L2M8XouVX5NS8lMXzErbNL6QmZrE
+ saoHxdozI9x5p15RGY8T1VaiE7Y3qPPRBVDjtO6MOBGPVBoInIS+wEkxsXTZ7qYptBw==
+X-Gm-Gg: AZFdTZdiGM3TsNSXXWni1Ntt7lXVtbGKbkP1LFIdZnbbNmBdcBg79fyR8hXpU9T3mN6
+ lSuwhhP1VUWEjHItwQZB9dUV3KbX+VNvuzYciGPuoKBFX7ZAk4ai2UD5V9JaFX29ww1qAGTU2V+
+ 8cfAY65B7qhq7INL3DBfNI/Mbd6bbY3S23zZP0NpK2q8jlijxqqfstMZLGrJSz8LTbE0AaJVSel
+ Ma2PItJZIQCA1hVPkvuyncYZfydbNtyTzYsZu4XHwyRtz6mFGmKrlbgLF7EWdmtu+/m6DSm9xzv
+ QdOjE04Jvan0HxEU5JX8ECIQGU3qccYlJsaLydYtyzLY0irPq1ITsItZE38Mi7WGFmyhQvqsp4D
+ km0/ixJ40XOroMgHODT9Wv/NMeram0Jyna8TqJIBwJL1RQAyDCmcjJhvqFPTZR7cQQsU1dnKgf4
+ WkB//YtAMw
+X-Received: by 2002:a05:620a:4384:b0:949:733e:dde5 with SMTP id
+ af79cd13be357-949bab32aadmr2124872585a.66.1795464335905; 
+ Mon, 23 Nov 2026 12:05:35 -0800 (PST)
+X-Received: by 2002:a05:620a:4384:b0:949:733e:dde5 with SMTP id
+ af79cd13be357-949bab32aadmr2124866085a.66.1795464335146; 
+ Mon, 23 Nov 2026 12:05:35 -0800 (PST)
 Received: from [192.168.68.101] ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949bb34ae74sm876952585a.8.2026.11.23.12.05.07
+ af79cd13be357-949bb35005dsm880498985a.11.2026.11.23.12.05.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2026 12:05:08 -0800 (PST)
-Message-ID: <4fe0858f-aa32-4f1a-bb92-767c2e51c8a4@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 17:05:05 -0300
+ Mon, 23 Nov 2026 12:05:34 -0800 (PST)
+Message-ID: <aa883642-c38a-48e4-b883-c3206d1b8426@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 17:05:32 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] hw/riscv: iommu: Add migration support for common
- state
+Subject: Re: [PATCH 3/3] hw/riscv: iommu-sys: Add migration support
 To: Tan Chi <tanchi25@mails.ucas.ac.cn>, qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
  liwei1518@gmail.com, zhiwei_liu@linux.alibaba.com,
  chao.liu.zevorn@gmail.com
 References: <20261119024251.280765-1-tanchi25@mails.ucas.ac.cn>
- <20261119024251.280765-2-tanchi25@mails.ucas.ac.cn>
+ <20261119024251.280765-4-tanchi25@mails.ucas.ac.cn>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261119024251.280765-2-tanchi25@mails.ucas.ac.cn>
+In-Reply-To: <20261119024251.280765-4-tanchi25@mails.ucas.ac.cn>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA3OSBTYWx0ZWRfX2U3sScsH7+25
- tAWNfgHC0bvJD+s6CZpLSh73blOP3hkVHduYoO0vpConnQYH2ruwfYJnHkM0my6AoSW3JDnqkcJ
- DDDHWAZEApX59EO+NwN0/NQMkMjJovyD2/UOxAUXG1o0imeod9T5Y3+z0OvhRdB+7gFri8lsyuD
- fwn0IRc3r/7+ZBtdCplo/hhvyhu3XN+n/X7rJ5LEoOfjJu+/h9e5d9CIAc90HxrujNGvbfUZLsu
- Q482nILdUMXOZMkW/CjSZ2rYiLMwb+9KJWujo5scBXmMgylMvwuyeeGXUL9GGHmUo5AkLJJqZyj
- mGMopRh+jqZO8a9cUq4JkmvQ9UB4EadDIvFlw6EQmw47TyOsXp1TVWlkPuXS5+9spcbOUBaKL+q
- 6dWLB5Z7NjkYOerknr1FwCTvOH9ckmlVgKiBzAjdQQpRLR7PqWbcLZ0vjaXeEvGr6o7gnyw448/
- gtxsQQn3KeQWjU6eWTg==
-X-Authority-Analysis: v=2.4 cv=AeIkjHXG c=1 sm=1 tr=0 ts=6b049c77 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA4MCBTYWx0ZWRfX5UcAnuMBnDMz
+ jzi6H5KmdZ5RZwdfl+UjPzHkdHaoMfrpk4co3e7hDT/TtjfSwQgnbEXkIXgP8jzXuFid9FUGlzz
+ Pnc6iulujRvzWAvwmDn421gEE3dh5sk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA4MCBTYWx0ZWRfXytB9MBfcLa+/
+ S/NiyJ2M9rAEpkAT2Koi5tp6WXKQ01EYtIhD5B33ucyGtp9N9doxzuXQTHTLyLaQwVb/kYPqzje
+ Odc0eyQjR+7ozSwz24xsFYPQv80d5lRr7xidqeYu1hzw7GeHdG7O4ssjRqPwHwW1UH7sPxpJbfw
+ 2BGOKKEQBkeysmQV7cB2SWy2X1QkThzH0coikDusM3o0KoXtWHbn6WJTu4xZbyD9HkRmLqTewgW
+ 672vhWfFJvJsbcEW6hMLCVHv1gm1DLkRki06XDqa5ss0vXd4McbD0wy/rqWDJe0xwwbzJpcwEfC
+ MfSnwziFYGXtM+P+dleP2+KfZJN0WLK5gmxaLHsTwgKvG0AUPXwTQQeehQG+B0eGgLIJrmKl2FO
+ 8gL//acMlbajy4Y/HmHPAhGJanzrKoLHm7szfavL+P2USUK2selSIUbpz6uJImjdGOVzNFbPj/T
+ vBVr0ZUJIfciAjQAvrA==
+X-Proofpoint-ORIG-GUID: SivIMvfriOm-F8Fc4shwLeaCY9RjuOsA
+X-Authority-Analysis: v=2.4 cv=cYJHPXDM c=1 sm=1 tr=0 ts=6b049c90 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=jNSlP54px0yOmMIMDkQA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: F988XQLp8LaCDUiWjPEXdJhL3HD5SBjb
-X-Proofpoint-ORIG-GUID: F988XQLp8LaCDUiWjPEXdJhL3HD5SBjb
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA3OSBTYWx0ZWRfXyg8hxLsM70DY
- SjUy6pFW1zBFz7R79brYevvjzTGZ5elFSa8fxsCXhehxBzhJDt8B/jlIrfjcU6tqfdTP9QxhVYM
- AuINZTOc5d90WzdTUkQl+XTzMGaWTtE=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=fGMt68kduvb59XZs-sMA:9 a=QEXdDO2ut3YA:10
+ a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-GUID: SivIMvfriOm-F8Fc4shwLeaCY9RjuOsA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-23_05,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 clxscore=1015
- suspectscore=0 phishscore=0 impostorscore=0 malwarescore=0 bulkscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611230079
+ phishscore=0 clxscore=1015 malwarescore=0 spamscore=0 bulkscore=0
+ priorityscore=1501 adultscore=0 suspectscore=0 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611230080
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -142,7 +141,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -165,142 +164,66 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 
 On 11/18/2026 11:42 PM, Tan Chi wrote:
-> Add VMState support for the common RISC-V IOMMU device to preserve
-> its register state, device directory configuration, and command,
-> fault, and page-request queue state across migration.
+> Add VMState support for the system-bus RISC-V IOMMU device.
 > 
-> Save the HPM cycle counter state and overflow timer in a separate
-> subsection when HPM is enabled. Rebuild the HPM event-to-counter
-> mapping from the restored event selector registers on the
-> destination.
+> Preserve the MSI-X configuration table and pending bit array,
+> which are maintained in separate buffers by the system-bus
+> wrapper. The common IOMMU registers and internal state are
+> migrated independently by the embedded IOMMU device.
 > 
 > Signed-off-by: Tan Chi <tanchi25@mails.ucas.ac.cn>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
->   hw/riscv/riscv-iommu-hpm.c | 27 +++++++++++++++++++
->   hw/riscv/riscv-iommu-hpm.h |  2 ++
->   hw/riscv/riscv-iommu.c     | 54 ++++++++++++++++++++++++++++++++++++++
->   3 files changed, 83 insertions(+)
+>   hw/riscv/riscv-iommu-sys.c | 21 +++++++++++++++++++++
+>   1 file changed, 21 insertions(+)
 > 
-> diff --git a/hw/riscv/riscv-iommu-hpm.c b/hw/riscv/riscv-iommu-hpm.c
-> index 9bfef6db45..9656fdc839 100644
-> --- a/hw/riscv/riscv-iommu-hpm.c
-> +++ b/hw/riscv/riscv-iommu-hpm.c
-> @@ -381,3 +381,30 @@ void riscv_iommu_process_hpmevt_write(RISCVIOMMUState *s, uint32_t evt_reg)
->   
->       update_event_map(s, val, ctr_idx);
->   }
-> +
-> +int riscv_iommu_hpm_post_load(void *opaque, int version_id)
-> +{
-> +    RISCVIOMMUState *s = opaque;
-> +    uint64_t evt_val;
-> +    unsigned int i;
-> +
-> +    if (!(s->cap & RISCV_IOMMU_CAP_HPM)) {
-> +        return 0;
-> +    }
-> +
-> +    g_hash_table_remove_all(s->hpm_event_ctr_map);
-> +
-> +    for (i = 0; i < s->hpm_cntrs; i++) {
-> +        evt_val = riscv_iommu_reg_get64(
-> +                    s, RISCV_IOMMU_REG_IOHPMEVT_BASE + (i << 3));
-> +
-> +        if (!check_valid_event_id(
-> +                get_field(evt_val, RISCV_IOMMU_IOHPMEVT_EVENT_ID))) {
-> +            continue;
-> +        }
-> +
-> +        update_event_map(s, evt_val, i);
-> +    }
-> +
-> +    return 0;
-> +}
-> diff --git a/hw/riscv/riscv-iommu-hpm.h b/hw/riscv/riscv-iommu-hpm.h
-> index 5fc4ef2e8b..516974ec87 100644
-> --- a/hw/riscv/riscv-iommu-hpm.h
-> +++ b/hw/riscv/riscv-iommu-hpm.h
-> @@ -30,4 +30,6 @@ void riscv_iommu_process_iocntinh_cy(RISCVIOMMUState *s, bool prev_cy_inh);
->   void riscv_iommu_process_hpmcycle_write(RISCVIOMMUState *s);
->   void riscv_iommu_process_hpmevt_write(RISCVIOMMUState *s, uint32_t evt_reg);
->   
-> +int riscv_iommu_hpm_post_load(void *opaque, int version_id);
-> +
->   #endif
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 5b1a388364..7c23e32693 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -3067,6 +3067,59 @@ void riscv_iommu_reset(RISCVIOMMUState *s)
->       qemu_mutex_unlock(&s->iot_lock);
+> diff --git a/hw/riscv/riscv-iommu-sys.c b/hw/riscv/riscv-iommu-sys.c
+> index 258c171efd..6e4cea00a5 100644
+> --- a/hw/riscv/riscv-iommu-sys.c
+> +++ b/hw/riscv/riscv-iommu-sys.c
+> @@ -21,6 +21,7 @@
+>   #include "hw/pci/pci_bus.h"
+>   #include "hw/core/qdev-properties.h"
+>   #include "hw/core/sysbus.h"
+> +#include "migration/vmstate.h"
+>   #include "qapi/error.h"
+>   #include "qemu/error-report.h"
+>   #include "qemu/host-utils.h"
+> @@ -242,6 +243,25 @@ DeviceState *riscv_create_iommu_sys(DeviceState *mmio_irqchip,
+>       return iommu_sys;
 >   }
 >   
-> +static bool riscv_iommu_hpm_state_needed(void *opaque)
-> +{
-> +    RISCVIOMMUState *s = opaque;
+> +#define RISCV_IOMMU_SYSDEV_MSIX_TABLE_SIZE \
+> +    (RISCV_IOMMU_PCI_MSIX_VECTORS * PCI_MSIX_ENTRY_SIZE)
 > +
-> +    return !!(s->cap & RISCV_IOMMU_CAP_HPM);
-> +}
+> +#define RISCV_IOMMU_SYSDEV_MSIX_PBA_SIZE \
+> +    (QEMU_ALIGN_UP(RISCV_IOMMU_PCI_MSIX_VECTORS, 64) / 8)
 > +
-> +static const VMStateDescription vmstate_riscv_iommu_hpm = {
-> +    .name = "riscv-iommu/hpm",
+> +static const VMStateDescription vmstate_riscv_iommu_sys = {
+> +    .name = "riscv-iommu-sys",
 > +    .version_id = 1,
 > +    .minimum_version_id = 1,
-> +    .needed = riscv_iommu_hpm_state_needed,
-> +    .post_load = riscv_iommu_hpm_post_load,
 > +    .fields = (const VMStateField[]) {
-> +        VMSTATE_UINT64(hpmcycle_val, RISCVIOMMUState),
-> +        VMSTATE_UINT64(hpmcycle_prev, RISCVIOMMUState),
-> +        VMSTATE_UINT64(irq_overflow_left, RISCVIOMMUState),
-> +        VMSTATE_TIMER_PTR(hpm_timer, RISCVIOMMUState),
+> +        VMSTATE_BUFFER_POINTER_UNSAFE(msix_table, RISCVIOMMUStateSys, 0,
+> +                                      RISCV_IOMMU_SYSDEV_MSIX_TABLE_SIZE),
+> +        VMSTATE_BUFFER_POINTER_UNSAFE(msix_pba, RISCVIOMMUStateSys, 0,
+> +                                      RISCV_IOMMU_SYSDEV_MSIX_PBA_SIZE),
 > +        VMSTATE_END_OF_LIST()
 > +    }
 > +};
 > +
-> +static const VMStateDescription vmstate_riscv_iommu = {
-> +    .name = "riscv-iommu",
-> +    .version_id = 1,
-> +    .minimum_version_id = 1,
-> +    .priority = MIG_PRI_IOMMU,
-> +    .fields = (const VMStateField[]) {
-> +        VMSTATE_BUFFER_POINTER_UNSAFE(regs, RISCVIOMMUState,
-> +            0, RISCV_IOMMU_REG_MSI_CONFIG),
-> +
-> +        VMSTATE_UINT64(ddtp, RISCVIOMMUState),
-> +        VMSTATE_UINT64(fctl, RISCVIOMMUState),
-> +
-> +        VMSTATE_UINT64(cq_addr, RISCVIOMMUState),
-> +        VMSTATE_UINT64(fq_addr, RISCVIOMMUState),
-> +        VMSTATE_UINT64(pq_addr, RISCVIOMMUState),
-> +
-> +        VMSTATE_UINT32(cq_mask, RISCVIOMMUState),
-> +        VMSTATE_UINT32(fq_mask, RISCVIOMMUState),
-> +        VMSTATE_UINT32(pq_mask, RISCVIOMMUState),
-> +
-> +        VMSTATE_BUFFER_POINTER_UNSAFE(regs_ro, RISCVIOMMUState,
-> +            0, RISCV_IOMMU_REG_MSI_CONFIG),
-> +
-> +        VMSTATE_END_OF_LIST(),
-> +    },
-> +    .subsections = (const VMStateDescription * const []) {
-> +        &vmstate_riscv_iommu_hpm,
-> +        NULL
-> +    }
-> +};
-> +
->   static const Property riscv_iommu_properties[] = {
->       DEFINE_PROP_UINT32("version", RISCVIOMMUState, version,
->           RISCV_IOMMU_SPEC_DOT_VER),
-> @@ -3094,6 +3147,7 @@ static void riscv_iommu_class_init(ObjectClass *klass, const void *data)
->       dc->user_creatable = false;
->       dc->realize = riscv_iommu_realize;
->       dc->unrealize = riscv_iommu_unrealize;
-> +    dc->vmsd = &vmstate_riscv_iommu;
->       device_class_set_props(dc, riscv_iommu_properties);
->   }
+>   static const Property riscv_iommu_sys_properties[] = {
+>       DEFINE_PROP_UINT64("addr", RISCVIOMMUStateSys, addr, 0),
+>       DEFINE_PROP_UINT32("base-irq", RISCVIOMMUStateSys, base_irq, 0),
+> @@ -267,6 +287,7 @@ static void riscv_iommu_sys_class_init(ObjectClass *klass, const void *data)
+>       rc->phases.hold = riscv_iommu_sys_reset_hold;
 >   
+>       dc->realize = riscv_iommu_sys_realize;
+> +    dc->vmsd = &vmstate_riscv_iommu_sys;
+>       set_bit(DEVICE_CATEGORY_MISC, dc->categories);
+>       device_class_set_props(dc, riscv_iommu_sys_properties);
+>   }
 
 
