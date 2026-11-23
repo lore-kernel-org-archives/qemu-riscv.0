@@ -1,150 +1,111 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F99B606A31A
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 07:51:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76067606A31A
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 09:14:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QoU9x9Mk;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Eggmcf39
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=PbRPBH7n
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVOpV-0003Ao-EK; Mon, 23 Nov 2026 02:51:13 -0500
+	id 1xVQ7W-0000sQ-65; Mon, 23 Nov 2026 04:13:54 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xVOpT-0003AH-Pw
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 02:51:11 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xVOpR-0005GB-Km
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 02:51:11 -0500
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AN51K5Y2924184
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 07:51:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- q/0zW6xxrtosJNHDIkpc0kRXyO4jXKZkWfFTspcd46w=; b=QoU9x9Mkuk9Hnksf
- CTSAa9F1zbVKHgOsFdMMQPvtGsOOHappbuwW9lSBbSewhKu78PFcMfNMNxCkvA6n
- I+JXESGITcUBJR+fuhmmpqEZnEp6xzFYb/WLE6w4vhdPzgVrgUl/fxxdZQE5chAp
- mDEAcEkCBKiuyZ5cM8piAFEcqidQ4NkKvxpZGE3yUzRdTftF30itK+374K/lstqq
- WkIk7e0CenRfm4a2KSe271zKIuZzHTDzCJTD5D3SYEUolJe5k1h5I33Oej0S5v/t
- +8mveNJvMHtsyw1cYDhcnDmujwl/0KLW1L0xhqwiebGdfgGIo9L8A4qV51YW294q
- 39CTiQ==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4evsghym-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 07:51:07 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id
- d75a77b69052e-55d994579f9so14208751cf.0
- for <qemu-riscv@nongnu.org>; Sun, 22 Nov 2026 23:51:07 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xVQ7R-0000rl-OY
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 04:13:50 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xVQ7O-0003C7-TJ
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 04:13:49 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4b467581b98so27665805e9.0
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 01:13:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795420267; x=1796025067; darn=nongnu.org;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=q/0zW6xxrtosJNHDIkpc0kRXyO4jXKZkWfFTspcd46w=;
- b=Eggmcf39G+dsl9DOP88wyQq2WL++fe7MwFn5t6WUG2HsW3C0x10dcHmOizZY8MZwfc
- Ed1Uj7Wet3KDjTJXIlCXk925B+H1jFMjH3jRzPe+zYYy9TMxCaKRxbP54ds0J2s+jnZv
- yzkknginWIfC3vKStZghsvuBM1+7Mnfx/QHoHBfQPWEp9wAnM4/mU2bJN9abva1CsAwl
- YVddCWwaXGoAc7GjDep8oJxY35egqSq2WQjUQIIoR/Z1S8XeCE2HZk0AQ6gacJhlAY6q
- HYIcFJHBzBsQ8JOBtljtLYxRtnrcqx3+dG8M9pva+76v1iF3kxxlrIgPh7A6WtflhyNh
- YKwA==
+ d=linaro.org; s=google; t=1795425225; x=1796030025; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:from:to:cc
+ :subject:date:message-id:reply-to:content-type;
+ bh=uTTE+l6YI9JuWAqmG1kclELSlKlQuPwIA0YAkWZ+Izs=;
+ b=PbRPBH7nLYyocAAuOZ6jKPLuCqYB+1DFfGf1E1yaOhh2JNr456uYcYYGm5RDhzod6F
+ WvvTRNNZ6xO6ClVA8r4YQ75zMAIQdVLFz7PWrsOkt6TntT4t+wsWDz9+BcEj8OfR4iGj
+ 1xeBBD8gZDrOMZ0wtK8UztVWt1sdgp5E6vTeCTqTINo7J8noRg38y/qJaSn9l4AK3NwL
+ SITtCUH81ODJStZTLmp3V7bG/MkqUpmr8RDV2Lipw7kvTQ37JKUnN7i/g+bCGYGUooIn
+ LVjA3MibaroZhcj5/2o8ULNKF2zHiwxgNxMG2OPjMwOxqRBfLPghfEU4/wJs9NsyaJRT
+ 0fXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795420267; x=1796025067;
- h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=q/0zW6xxrtosJNHDIkpc0kRXyO4jXKZkWfFTspcd46w=;
- b=CafR5/GzGzd846BFm/wD7cszLWB3C71jBWAsQR7+1ggndjxbAGnIRvB0O+YnacpTsP
- L4Tktb37rPq1Qjplfr+bsZc9Vh7Kc0/FZ1yHUS7RmA0d0YizfDdzlq3WD9GBDmGwh01I
- J+K9WCb7RIxwBBTOaA5kbBeuf4Ix9sMIinkvIzugEnLxlvuOe44njab3y5y+AkVGF8tI
- WNTy6V1ERGNY8mk5D9MpgwVc4e0Zb6m+rYhYv28zfW5TDkSj80Hm+UUG47MG5ZyPYjIt
- IyfdOaVIaf5aVzNcVEbdOx0/ps4G/LKUl/Q6jweyCx2wknLla+D4qc3AknVMwtMokcfG
- t+NA==
-X-Gm-Message-State: APuU4Z/W3HL1+hYRq7dsxH8bxxvnWDiVfhQR2vAFbAGZnFK9CJvHGCtF
- B8mjJTAiOMEyRmD6CIxXB8VazkQTcfb7DgSzZJyFeGDEifnOI0rdopbKUtkyynRTnb5JeGm1Fv6
- k7GBv0XC0SvDL3DIWjaNR6Im1JwiCVt1iCnR6KkvJUxCusJRiKhQ9OQQD2A==
-X-Gm-Gg: AZFdTZfrLzfu0lg/GVUErV1a3PocdKbMqy0xcNbqiC/IkstliC6w0v2Hkpdtb4j0Lx0
- 44XDsx5yBvDbUKIK0pu5Na2G4/KVP02Tsxw/b54GMaP0Js3H4HpVBaJ2dnjiDQ+mfnsLXfGJJND
- cql9h6Ublqk/uMAf8ntIoARwz04u4S0e3HzZIoAfZALJMmANSX1d8kBghSU07obwHfLr/0ocva0
- J5Fv/gZtkME7HV19+M6z2awhBrsrZL098rD0ZS9+lM1hojbKSJfkW583xwT8DwH3ViOT3NQwbG+
- zfpV5osaiYvsaXyGzsqA1HnXKhfLo/+77sau4Co/7o13qsmEj9nRb/tnfDdmd/RcD6GVeUyLCeh
- DB4AcNnUSWw/oMLcmitadl2g4xdaUhVjta+rWCRr2ZJpmPcU3rBbFhdKTLgBni8aUawlqg2s3lB
- s8t58zeek=
-X-Received: by 2002:a05:622a:1a89:b0:536:8bb3:ee45 with SMTP id
- d75a77b69052e-55d76a38dadmr189863071cf.30.1795420267094; 
- Sun, 22 Nov 2026 23:51:07 -0800 (PST)
-X-Received: by 2002:a05:622a:1a89:b0:536:8bb3:ee45 with SMTP id
- d75a77b69052e-55d76a38dadmr189862801cf.30.1795420266542; 
- Sun, 22 Nov 2026 23:51:06 -0800 (PST)
-Received: from [192.168.69.234] (pmd666.hd.free.fr. [82.67.153.177])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ad6403fdbbsm14182147f8f.15.2026.11.22.23.51.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 22 Nov 2026 23:51:05 -0800 (PST)
-Message-ID: <1b05e1f3-b739-44e4-9a56-217455b16dd5@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 08:51:04 +0100
+ d=1e100.net; s=20260707; t=1795425225; x=1796030025;
+ h=content-transfer-encoding:content-type:mime-version:message-id:date
+ :user-agent:references:in-reply-to:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=uTTE+l6YI9JuWAqmG1kclELSlKlQuPwIA0YAkWZ+Izs=;
+ b=eh5FX47WyIeyKeROEVcMZmmevPMeEeOtzZOEXFlhA13sbbBbvqi/ZncoxTtWnHDuM4
+ p/6YvyiABlxmvsiTl0Y8WN4Q3Xy8KZkkJ16K2auL7iWdK73ppE3H94aZO9KIYwRraoRg
+ R8gpRqkWLlPjr6CbR/xYyTnjsYEhfrxlteuT07UKpDoiO5Dop2R6XKhIY5Tw1No7BJQF
+ XaUo64ywVXTdNMAsOL/Vjt74Fh7Z0Uqdb35ye0Mpxvs6qkLcc4+CuqAismdDZOUiLeG+
+ HLji1iXBwzRboZ+sIw2ZV9uM2s7OTQqd6np0iH/8v+TtHWxQUe2Hrdd6MRpe4AYLB5Aa
+ sMIQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErHOgxu33dfS1N4QIGqVHzAGbxYTee11jF6Fn/38znRa1M8E4Rv0/9l+Jk56525F0856b3Ond+S4ndEC@nongnu.org
+X-Gm-Message-State: APuU4Z90ojXbRnC6qYZWueMvdpOrz08OR3wQRT7rbEMxzXcyzhUuHYPK
+ S7bZcXTG0jxePDJ53MCiM0g6aP3bOUWrve+e9jcAzaCpgOWEKPAILoQ7d6UO/GiFXkg=
+X-Gm-Gg: AZFdTZdxcmYv7JgKCbSdDAsoDuvR3gFnfC/WwjuhQ4sqID8S23aEDHphEqm2s9rFku0
+ 0M5fVAwTeaJykC1CMyMDHS+R5JHZtMH1YGvGlJXhmtx1epqbYUU8UQobSsxGdlXJusVBhe4C64B
+ 7EpJG7gRkVQ0diaIRnGLqKDoSjykHMcQABGxieGclML6hTX+fAvKS31S80Ac0NYTuYuQee8SN/V
+ FvQFPP4mFlbBqUiwr9lQOzKnq+ZQ+TIr8sUWbQ2J0HiUuFwRWVP+xQOprG9onoWs1s3NxJgTexP
+ QP77RJk/LQlLzO2GtDdT8bfU7AFNIQlRS+xObXXBwdsTXmumYxJtOTITNnJGAN3T5Sr7aldxzO2
+ 0gHVQN8l63LhafhloIJyiuxWF3/Aa0vr3JcmwB6yIJ7qrlUo7eI1zA1+QX1MOBBQlB0bHdqSeDv
+ UdzmlSMmr1Hq4py+htLi6eeP5P8sVVeKBIcsJvXuMY5J23uDdLdtuBVLT0ZnWMvid5B1Y0rc8zE
+ fRXoetcZDRkWwzkNbY8eUbKk7myRgEnMmHqhEHE9tfCiwFPiflquEsHRRDtioXSARdj+ZVqaBR7
+ UrN8hScAUwjkZsc0aYtcL4cNi/5+
+X-Received: by 2002:a05:600c:5249:b0:4bb:665c:a078 with SMTP id
+ 5b1f17b1804b1-4bb8893a89bmr218098255e9.28.1795425224856; 
+ Mon, 23 Nov 2026 01:13:44 -0800 (PST)
+Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb884ab091sm480682815e9.11.2026.11.23.01.13.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 23 Nov 2026 01:13:44 -0800 (PST)
+Received: from draig (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id 171975F914;
+ Mon, 23 Nov 2026 09:13:43 +0000 (GMT)
+From: =?utf-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>
+To: marcandre.lureau@redhat.com
+Cc: qemu-devel@nongnu.org,  peter.maydell@linaro.org,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Kuan-Wei Chiu
+ <visitorckw@gmail.com>,  Palmer Dabbelt <palmer@dabbelt.com>,  Alistair
+ Francis <alistair.francis@wdc.com>,  Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+ Joel Stanley <joel@jms.id.au>,  Nicholas Piggin <npiggin@gmail.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,  Michael Ellerman
+ <mpe@kernel.org>,  Portia Stephens <portias@oss.tenstorrent.com>,  Halil
+ Pasic <pasic@linux.ibm.com>,  Christian Borntraeger
+ <borntraeger@linux.ibm.com>,  Eric Farman <farman@linux.ibm.com>,  Matthew
+ Rosato <mjrosato@linux.ibm.com>,  "Michael S. Tsirkin" <mst@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,  Zhao Liu <zhao1.liu@intel.com>,
+ qemu-arm@nongnu.org,  qemu-riscv@nongnu.org,  qemu-s390x@nongnu.org
+Subject: Re: [PATCH v2] tests/functional: use immutable tuxboot kernel URLs
+In-Reply-To: <20261112133320.418012-2-marcandre.lureau@redhat.com> (marcandre
+ lureau's message of "Thu, 12 Nov 2026 17:33:20 +0400")
+References: <20261112133320.418012-2-marcandre.lureau@redhat.com>
+User-Agent: mu4e 1.14.5-pre2; emacs 30.1
+Date: Mon, 23 Nov 2026 09:13:43 +0000
+Message-ID: <87fqwrx648.fsf@draig.linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] target/riscv: Keep cycle overflow deadlines in virtual
- nanoseconds
-To: TianCheng TANG <lyndra@linux.alibaba.com>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Weiwei Li <liwei1518@gmail.com>,
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
- Chao Liu <chao.liu@processmission.com>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Alistair Francis <alistair.francis@wdc.com>
-References: <20261119222036.71913-1-philmd@oss.qualcomm.com>
- <13a574ec-484d-47e3-8937-2327d296cec8@linux.alibaba.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <13a574ec-484d-47e3-8937-2327d296cec8@linux.alibaba.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=AL9GXjHq c=1 sm=1 tr=0 ts=6b03f06b cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=SRrdq9N9AAAA:8 a=EUspDBNiAAAA:8 a=xxBewgCzm8hXLYR9PUMA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: 6HkECCOrutYtcFUZ_jSudZ2EqsAaeUne
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDAzMSBTYWx0ZWRfX2/szbG3v0MKY
- C1yjTnbCWu9iAsSxokGq9bQiJJLyTC+7mhAYC34As75TFhHZW0HkWV4rneFgzWQJ6ZTbOcMgOaS
- +Oig1kCBYuU9v9JcKO7zOORLRusB9/nuZw5jmorbjyjeN48enPPGf1Fh7hGSaXyG1y2vvRVlDmJ
- t4ZexMVm6kpY9SER5gZt/JU32PeJ5zEOebKO+70Y9I2M6sguISUUlMeVWhiWP0FGCcD8/eBbNqI
- SvyLEAr1IsHJ3EMoLgAQZqSly8P0NtTDYROAU1CPyuvSRT9Lvif0DEUDbz/DmXKoptAlmcGQ/Ya
- /962/1s+egK+iWXZdlkcd/Qc0Px0ZwRcx8+fKoemPuyef6gpZ3WI0M2N0mwZdmo0bARyysH58BO
- ay9uwypof1sZaIV8Es2nlUP1JYTx2+o3EQfMyTrVyjYhS3grL8Ws5UTLYijQ1R6QbqQjtxSC5OC
- +76tsX1fukiaVADws0w==
-X-Proofpoint-GUID: 6HkECCOrutYtcFUZ_jSudZ2EqsAaeUne
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDAzMSBTYWx0ZWRfX5aa9p+rZ3XSz
- /daQ4gOgYEkP+h8ftNz+Py2ylf9SgDiUQ1Kl4nKaX6OvLI0SjVe0Hch1hUFAmpr/+budY4do28N
- /Zu6G/1bFH3KYkssOkXY3brMhcFh9iY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-23_01,2026-11-22_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 bulkscore=0 phishscore=0 priorityscore=1501 adultscore=0
- malwarescore=0 lowpriorityscore=0 impostorscore=0 spamscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230031
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
 X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,103 +117,36 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Tiancheng,
+marcandre.lureau@redhat.com writes:
 
-On 20/11/26 04:01, TianCheng TANG wrote:
-> 
-> 在 2026/11/20 06:20, Philippe Mathieu-Daudé 写道:
->> The cycle counter uses icount_get(), which already returns virtual
->> time in nanoseconds. The PMU overflow helper applies icount_to_ns()
->> to both cycle and instruction counters, so cycle overflow timers
->> are delayed by the icount shift.
->>
->> Pass the counter context to the helper and scale only instruction
->> counts.
-> Hi Philippe,
-> 
-> Patch 3 of my PMU series [1] includes this fix.
+> From: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
+>
+> tuxboot rebuilds the 6.18.54 kernel images in place, so the URLs
+> without a datestamp now serve content that does not match the recorded
+> hashes and the tuxrun tests fail to fetch their assets. Point the
+> x86_64, arm64 and s390 tests at the immutable 20260930 snapshots and
+> keep the hashes that were recorded against them, instead of implicitly
+> switching to the rebuilt images.
+>
+> Do the same for the riscv64 6.11.9 kernel assets, which still used
+> non-datestamped URLs; their recorded hashes already match the 20241122
+> snapshot.
+>
+> Fixes: 8ac1aab21fca ("tests/functional: update arm64 tuxrun images")
+> Fixes: 09961fafc5a0 ("tests/functional: update s390x tuxrun images")
+> Fixes: 467c9eb7dd31 ("tests/functional: update x86_64 tuxrun images")
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
-Yes, I noticed your work while preparing mine for submission. I have
-the impression your series is too big to get merged as a fix for 11.2
-so I sent mine hoping at least this part'd get fixed, it isn't
-invasive; still your series would need adapting rebase then.
+Queued to testing/next, thanks.
 
-> Its aim is to keep
-> counter accounting and overflow scheduling consistent for each fixed
-> event.
-> 
-> It introduces riscv_pmu_read_fixed_source() so counter reads and
-> privilege accounting use the same source. In non-icount mode, this
-> switches both paths to VM-elapsed ticks, excluding time spent while
-> the VM is stopped.
-> 
-> Overflow scheduling must respect that source's units. Under icount,
-> cycles are already virtual nanoseconds, while instructions remain
-> raw counts. In pmu_ticks_to_ns(), icount_to_ns() therefore converts
-> only the number of instructions remaining before overflow to virtual
-> nanoseconds. The cycle value needs no further conversion.
-> 
-> This covers the issue addressed by your patch. Patch 3 also includes
-> a cycle-overflow regression test with icount shift=3.
-> 
-> Thanks,
-> Tiancheng
-> 
-> [1] https://lore.kernel.org/qemu-devel/20261119-riscv-pmu-correctness- 
-> v5-3-ae9bdc2d2f86@linux.alibaba.com/
-> 
->> Fixes: b2d7a7c7e4e30 ("target/riscv: Implement privilege mode 
->> filtering for cycle/instret")
->> Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
->> ---
->>   target/riscv/tcg/pmu.c | 12 ++++++++----
->>   1 file changed, 8 insertions(+), 4 deletions(-)
->>
->> diff --git a/target/riscv/tcg/pmu.c b/target/riscv/tcg/pmu.c
->> index 0165faf06b86..cd4de9cde0ab 100644
->> --- a/target/riscv/tcg/pmu.c
->> +++ b/target/riscv/tcg/pmu.c
->> @@ -281,12 +281,15 @@ static gboolean pmu_remove_event_map(gpointer 
->> key, gpointer value,
->>       return (GPOINTER_TO_UINT(value) == GPOINTER_TO_UINT(udata)) ? 
->> true : false;
->>   }
->> -static int64_t pmu_icount_ticks_to_ns(int64_t value)
->> +static int64_t pmu_icount_ticks_to_ns(CPURISCVState *env, uint32_t 
->> ctr_idx,
->> +                                      int64_t value)
->>   {
->>       int64_t ret = 0;
->>       if (icount_enabled()) {
->> -        ret = icount_to_ns(value);
->> +        /* The cycle counter counts ns of virtual time, see 
->> icount_get() */
->> +        ret = riscv_pmu_ctr_monitor_instructions(env, ctr_idx) ?
->> +              icount_to_ns(value) : value;
->>       } else {
->>           ret = (NANOSECONDS_PER_SECOND / RISCV_TIMEBASE_FREQ) * value;
->>       }
->> @@ -456,8 +459,9 @@ int riscv_pmu_setup_timer(CPURISCVState *env, 
->> uint64_t value, uint32_t ctr_idx)
->>       if (riscv_pmu_ctr_monitor_cycles(env, ctr_idx) ||
->>           riscv_pmu_ctr_monitor_instructions(env, ctr_idx)) {
->> -        overflow_ns = pmu_icount_ticks_to_ns((int64_t)overflow_delta);
->> -        overflow_left = pmu_icount_ticks_to_ns(overflow_left) ;
->> +        overflow_ns = pmu_icount_ticks_to_ns(env, ctr_idx,
->> +                                             (int64_t)overflow_delta);
->> +        overflow_left = pmu_icount_ticks_to_ns(env, ctr_idx, 
->> overflow_left);
->>       } else {
->>           return -1;
->>       }
-> 
-
+--=20
+Alex Benn=C3=A9e
+Virtualisation Tech Lead @ Linaro
 
