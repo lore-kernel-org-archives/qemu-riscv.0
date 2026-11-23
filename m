@@ -1,141 +1,144 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7496606A687
-	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 13:37:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF523606A31F
+	for <qemu-riscv@archiver.kernel.org>; Mon, 23 Nov 2026 13:40:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=UN5o7e2C;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=j0CeBxAR
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lCBeAue9;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WETywPmx
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVUEJ-0001nV-Cd; Mon, 23 Nov 2026 08:37:11 -0500
+	id 1xVUHZ-0003gn-RG; Mon, 23 Nov 2026 08:40:37 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVUED-0001kb-Hs
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 08:37:06 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xVUHQ-0003fQ-I9
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 08:40:24 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVUEB-0001KZ-M8
- for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 08:37:05 -0500
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ id 1xVUHO-0003C5-3W
+ for qemu-riscv@nongnu.org; Mon, 23 Nov 2026 08:40:24 -0500
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ANDL1rP3072383
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 13:37:02 GMT
+ 6ANDKskg2621998
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 13:40:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- 6AoQpW+ymI45nH3l0UGKC6lF6pJ+YGQ/TXcjiLHKz3Y=; b=UN5o7e2CdfObcLaX
- JHqyhDorXY9TR69JGvgfIM1y2r9DMfR4cEbhu5GSXVS8t7VdVXVtX4FPCCdBkTlA
- bWFUf4Sfye6m3bBy3Zgx4s96o/a12cFmWPN70YhOoAPtgOG+Wi2vDGJjguL7l8Uy
- u51eAQGgdfthv1idnRWi3RKzCF0fOMAhN3KSFN5/BxF9ouFOZjTqOgS0IC0HMG5U
- Qk3U/OMa9tUjO4w/HMVdfG/HUVImt6hc6q1pP0Cf2FDq8HtI9c1JD6a/rHv3XP+f
- Bffya2ghN6iC3BkvfRWWfUOQOkc1yqKt6F+332N2SJS4dShyKAFQT4z05f9We/I0
- wje+Ag==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4hn7s78f-1
+ SinndvNwezGQAzNIgYWl11ssfbpESHAdAhjKdgnj19I=; b=lCBeAue91EHuUN/d
+ kpTUtXlgW7cWdbLMzsizQppyFHWazP43a18hxtrwzg/PHKVVcOs9m/4ngLH7MWsa
+ DulLYPcf5Nb7lcWvZ06rJNWNNR2SaccHDpW7L/e0y6qLJpwSoHiDx17c0JJfNs3Q
+ PFZeVF3U2TgdVFI1YYGRsWzUPdrQeveIKT6txgFEFQmVMngxjkYf3jtNjQDnCvQ7
+ qlf/XjoPk9yPwNn3P909pt0s2zrVV3HpQdQQc5sm1OSQe+xYhB4mlAD09hisV0+/
+ gVzo+05T5lQOMSdxJ5bevM4YPENraw2NMwI2YR/BSzBbeoNqiG8f8SYwwoULa/MJ
+ t4jbRA==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4g1p9kqm-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 13:37:02 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-93f2373e9b4so357169485a.1
- for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 05:37:02 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 13:40:19 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-93f2005ce21so542379985a.3
+ for <qemu-riscv@nongnu.org>; Mon, 23 Nov 2026 05:40:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795441022; x=1796045822; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795441218; x=1796046018; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=6AoQpW+ymI45nH3l0UGKC6lF6pJ+YGQ/TXcjiLHKz3Y=;
- b=j0CeBxARFJk/SrvybH8NeQ2rOVJ7F9lAXK+I4wxTg01jZ+LvAjblKormux78F2Od+N
- UVYDz8qhbrQgnlYLZandIAGWYtCtuM2uDDthoHfD6tzqcObR/rVLNluIUHTGse/Tn0N3
- hsF/ks+koTHY7IRPj5oHSoTvaoUll1WPkJD2SCrUpPT8v+0f6H4OHxCIJxOQCT0hbrTY
- dxp2TKay5RFH8dG7BEmJr1c5KqXfVQEHj4r6AdpkyYJ3qrFIvbvYqOsC08lSEvQmzvYn
- 0kUBdF27uDwGZRsvNkI76g9jDDhOE948YUsg9++A+QEESBYWz12Z3kUK6tu8BEzIzGQO
- BsEA==
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=SinndvNwezGQAzNIgYWl11ssfbpESHAdAhjKdgnj19I=;
+ b=WETywPmx0QdcvCZ1w6oppS9aYQK+S/K27it4eKNdTZwXdcy0zB5qY/ij1zWcJ8OzGN
+ yH4s404mpS8jCRMo6qCY8LBCxxGILHWScyyOPZZt6/yMTBSFwL/rpTGtpZIl5Aul9LPH
+ dSISrqTrX7LZRxsdAxIhMbVV61Tb1KEtWE+AdZttPt1EMSd9fAeUcPgUR464H3pasbFR
+ lLA8tf6BvVo4LuC6S2logQjlwJxAWl6iQCYnxmX3wiVg9UAITFsNi6lBwJhzz5RAevYl
+ dhEwp1Ihdy8YEceKQBymlgC4WQRm/NnxOg5oOltHRJn+qLkPoYisB9fwkd6wNF/sWrKc
+ qiKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795441022; x=1796045822;
+ d=1e100.net; s=20260707; t=1795441218; x=1796046018;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
- :from:references:cc:to:subject:user-agent:mime-version:date
- :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=6AoQpW+ymI45nH3l0UGKC6lF6pJ+YGQ/TXcjiLHKz3Y=;
- b=r2uvKCiBxi8Zi6XM5JsB+KHA47JnPO9t5nN/hbrd1GJpD2Q58+X+SLL+yxZtbDqp0u
- bSThrfQ4IZ8LQ1oEyGyvKlVhfqH6Bg0EvBuECwAefccuSoBjNPoVlFNkJ+kCaX6GU+m9
- L0TS8e5i0b+pmtAY3xDKfifog3pH7KPj0TM0QDCkxYvM1mAECxsyJUvCMrMXAsgL7Qhy
- WdbpDw3BlWsRX5ele5PBo6Kk3gbO16mSFHu6UTMOlPh0DznORI9FAKWDs0oYKTjPNxJ2
- 4v3CkxNeEa1kaD6dXs4bUuWSp2+suEK2c/KqJ67Hzh0XBVrEXvpQOmib5828XEff2yHm
- 67Iw==
+ :from:references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to:content-type;
+ bh=SinndvNwezGQAzNIgYWl11ssfbpESHAdAhjKdgnj19I=;
+ b=KJWf4McO3oFiN+CwOozl7hw0+JvMoJVKcMEjuRSkNoIxmuJqTxDGLeusxqDl21uwmX
+ aNO71A4vNPwLXMrZBPDKN21I9tCrZFIVaxo51zQMaHjcXKKBhVoZ56QYDN63V2p4lqNz
+ 4DbUWntUdU/SinX633x9xZiv0NbBrvUcul2XHcrRG9A2kF/LcP0u4tF+sFkeJaAl/VKg
+ QkD9TeyR30BdAXZzRIODnAtBad1i5/kI1bz1dB90hFmq+AXu+RpWcAXZxqsCoe2W1kok
+ EVjy1vbN9J311OnB++lsQJaqgWR65rurM4+Z0clGMeTC275B2Q26fn6KnIOf0aPFRn/m
+ 3ddQ==
 X-Forwarded-Encrypted: i=1;
- AL+hErFSJCYmfjNldOP5U72vkxodqrfBq66/MLUWAunN/TEC5msZ7pvJ6Odxb8ENxW7s41iVFYVthZZp7Kam@nongnu.org
-X-Gm-Message-State: APuU4Z9no0Cij8bt6vNCBdLRjTVYMeWkwPsxyh5NRvNluThBEfKOWxeG
- Dqz4+a1usoHIC4OhLTYHoJTdW36SSlPpcvsoUuCC4taDezqF66aMmJxLrjUgJ10N3JajlpZcFq5
- ks3M+VIiXSNorD3W4ZzUChBLRdkfCNdsF/J/ca5Z9W2pXR/qIyAMf+OLPZQ==
-X-Gm-Gg: AZFdTZchqs+KW40GnqiaL6Z9174kGVVso/GKTNlV3+dgNjUddu1ALuLJ7xeMuXjU2C2
- QRzIhrmS3ocfGehqEWM5nuemHhqawWkf5rIS8eH3T/YIzDuS6DuwuHUUdEoIK3N4uv9luT0zJQS
- iS8lv/LFNT1M5YuHubkOCywNSkPQpvFFpOi/Vm051CVxvwlplUtSqKtf5RZuAaW2FHkPj9352TN
- p6JJf2/PBciloJN4xt7+B/GGV42/jJHKIRKiSfQDK6l/Ib7JpUGbXtt/FdJX2neLRUzGpYbdRA2
- H1MsXyskUfmp6sxkZkzk9DKLJmkMniEIhwyuViqp4V5yejKpmPsdfKEgwdYY1tSIUmZLyvJtywR
- p2YkaVOphFVY47fz82KVO8zCPtyKA7hG7othVFea+W3hUWn21bomwI3eapFqT+ztvSa4IsG7G19
- 6wcFFd6kGZ
-X-Received: by 2002:a05:620a:2610:b0:947:920d:3408 with SMTP id
- af79cd13be357-949bab188famr2031573785a.46.1795441021592; 
- Mon, 23 Nov 2026 05:37:01 -0800 (PST)
-X-Received: by 2002:a05:620a:2610:b0:947:920d:3408 with SMTP id
- af79cd13be357-949bab188famr2031566385a.46.1795441020994; 
- Mon, 23 Nov 2026 05:37:00 -0800 (PST)
+ AL+hErGFlxAIQpIyVILg72pBS/YAdel8850/ioNQKDUYRlmSjLywsAN7PzW0vtMsV03tb+Upphbx6pL5t4GY@nongnu.org
+X-Gm-Message-State: APuU4Z+fnRW6O6FFxe4e1tUzETFqxL0d0Gri4K47+eHM9jhXCIX5yBOo
+ HWftcipm0qIqI6IMxAFmEXivD3aKhuUk0KcRuGmXAXKI9fSA5u7O8bn8XbIFgi7xqAqjg24WCYO
+ HSBpOjB0zkK1jyQ4Ff+ipTF1zJBIh7G6bjueis3WbCwIFs8OhPMaWKuX1Kw==
+X-Gm-Gg: AZFdTZchN5Nm+R/MktnFAJlS6qKFKmIXRSyl5LHvm0RQkc4AMNUKvVcq9HWE5/yA/Oz
+ J7Ic+bvwKC7lKBFtsMoNdg0BFBpjJsFFpsLLPTb9kr561+3cOzymdKJD6zde4D/Bw8GAE8a5xTt
+ 3sdd5Ri9QlCoHB+TW5Ym85N1AjzYzwDrubAeWFBuGxOZIpjizNqzlf5r2bbMnO4sJfw4VF7HDtf
+ d+2ENCi2jiEofWemh0HESNLLeQLOSHV004h/m6jyRJWX4QLuQtZWYHmm8sb3/0EMQqIA6038+fC
+ J2n9iALzMmjX/J4t1EKkqqaNTUYXjYjO+wHQySi5KWPYgPpj0T7xeECZAiiErazkWaScYETdeGX
+ 6xla5726ReIDiNgWAuJkHIxOO0gHZdt9jip0NOsbTEpOlVq2HwYlAMsYpza9pZ3dCXwiEFAC+V4
+ tgg7f5rx1k
+X-Received: by 2002:a05:620a:4608:b0:949:710e:2cdb with SMTP id
+ af79cd13be357-949bab27025mr2004415785a.69.1795441217596; 
+ Mon, 23 Nov 2026 05:40:17 -0800 (PST)
+X-Received: by 2002:a05:620a:4608:b0:949:710e:2cdb with SMTP id
+ af79cd13be357-949bab27025mr2004407785a.69.1795441216865; 
+ Mon, 23 Nov 2026 05:40:16 -0800 (PST)
 Received: from [192.168.68.101] ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949ca846322sm615464785a.34.2026.11.23.05.36.58
+ af79cd13be357-949bb34ac11sm809421385a.14.2026.11.23.05.40.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 23 Nov 2026 05:37:00 -0800 (PST)
-Message-ID: <f2ff2235-807e-4292-a559-1f892c810805@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 10:36:57 -0300
+ Mon, 23 Nov 2026 05:40:16 -0800 (PST)
+Message-ID: <fb83b108-b9ee-463a-af25-931a2d8014fd@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 10:40:13 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] target/riscv: fix WPRI handling in mhpmevent CSRs
-To: Dmitry Kokorev <domestos48@mail.ru>, qemu-devel@nongnu.org
-Cc: alistair.francis@wdc.com, chao.liu@processmission.com, liwei1518@gmail.com,
- palmer@dabbelt.com, qemu-riscv@nongnu.org, zhiwei_liu@linux.alibaba.com
-References: <20261111200924.49157-1-domestos48@mail.ru>
+Subject: Re: [PATCH v3 1/2] target/riscv: Keep tdata CSRs available for
+ disabled slots
+To: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>,
+ qemu-devel@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
+References: <20261113084622.738278-1-himanshu.chauhan@oss.qualcomm.com>
+ <20261113084622.738278-2-himanshu.chauhan@oss.qualcomm.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261111200924.49157-1-domestos48@mail.ru>
+In-Reply-To: <20261113084622.738278-2-himanshu.chauhan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Ls0HWXdc c=1 sm=1 tr=0 ts=6b04417e cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-GUID: FhBstY5hvHksKJY592PC0BFb82yaN2By
+X-Authority-Analysis: v=2.4 cv=K+O3jCWI c=1 sm=1 tr=0 ts=6b044243 cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=p0WdMEafAAAA:8 a=JF9118EUAAAA:8 a=RgBw9RmQAAAA:8 a=EUspDBNiAAAA:8
- a=LDk848BDNixZ8QLvqFcA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
- a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1NCBTYWx0ZWRfXwBhq2Dk7Venq
- debsqljhCTpAZO4iekuD4k72VHP13FfzHM4TKL+wi79J5dj4YwNnikWcy58xkCF+tRKWgmos3Lk
- c0obAKdWqe6hNnr4frhn116KfX9TYIcVFGzQAIpeVxEvWSfrZsHsbHSqwY4GFjNUqDzN/BJTBxK
- gdHzlMxyhdgkiW0wAdj/xWuc4zW6Cw6Ox+MK3uADA8NaCc71I79xhJDHbBqkpY5q9G7wl72D2ka
- QogW234/3bIv2L8FtNuOScH26Smw0tzqSOJV/AzGZbYk6WOMfPyB0Eo4z0hge4jUBNIaCcUF5qh
- dlSlBJLJiE7Fyq2fEAv1k2q0qbnpkHKzLGgowBkNlSMfoFBZTyxcGLnRVwmllcZOn9uQXPVuJze
- HTzxAt/Hd/XJuVE6pF2fPwFqfWtNVhQak9PHXzWAZeA185hiJzSaqdmTtjzE5Z7sqXbHzpD7REn
- JC7utLCkOKNPNZklLlw==
-X-Proofpoint-GUID: _3BI90sHichlndWUPr00BBJQ_qaDGZAo
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1NCBTYWx0ZWRfX/Ign4bacEBuN
- KGq2r+mqpfQi7q4vuowv09jPjpjRavvHulcTvJSOZFeYBf/nMHjQaB171YaPSBMn0ZvSIH2pwOb
- zi4L0VKrOVcV3o0DbGAZI4B/nl2YZDI=
-X-Proofpoint-ORIG-GUID: _3BI90sHichlndWUPr00BBJQ_qaDGZAo
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=Pk_qp4Yd0QN3FsfdVUAA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1NCBTYWx0ZWRfX2h9UdLiS4LJs
+ 14tQ8osZqLw/G6XSh4trYdN8eHeTk72xMYtMSltLq6+TRvdfAGVV/T7ZTfi9gdymjGjz/WQGOCC
+ aAjMzYTR/ta4nWo0J143O6JEKxc/CvI=
+X-Proofpoint-ORIG-GUID: FhBstY5hvHksKJY592PC0BFb82yaN2By
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1NCBTYWx0ZWRfX00g0dlfd5ybK
+ m3NBb2FG3nCzjgDmZ8BO7byEFnghJYy1A50s4Y+3+FE7ZOBeAUww4MbE9RHPKrNvh30Rqlh8xK9
+ De1eboSMzGaPMAa/48pvMYadksAJ6oK1vdQ1PqChWr3Ex6Q6/gCmFPeDvKX3PZ7fW4cgDKtJB34
+ 2faBgUzAUyU3QzCFLnEBCFDTMU8BRyYYzEdruaQ3cgpG6WJZaZdSIYBZspX+/4F5AgOihq5g3Jk
+ n167BuTRPptFbH9hEmIQzPuAgiUbHlYhNibThRX3NeGcebGJWHcTS3uTXVeXqSZaLQXRstD5ZAl
+ 4Ut/3a5zA891FJdfLYUYQ+RE2vjc7728Jvv6QbAnQCqwsmZOMlRljhe9e0SLCgqkl1S4RoGHo3a
+ vlih5IY8g4F+nytjFWhrHsUKr/hV21BwtpU/KyMkQdnYRJlk3Uf/XWI6V/rufL1aZryLFc+vFei
+ onWAOWMcD5tmAfeuMaw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-23_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ phishscore=0 malwarescore=0 spamscore=0 adultscore=0 clxscore=1015
+ lowpriorityscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
  definitions=main-2611230054
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -154,96 +157,118 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 
 
-On 11/11/2026 5:09 PM, Dmitry Kokorev wrote:
-> Writes to the mhpmevent CSRs can currently modify the
-> reserved WPRI bits 57:56. Fix this by ignoring writes to
-> these bits when writing to the mhpmevent CSRs through both
-> direct and indirect CSR access paths.
+On 11/13/2026 5:46 AM, Himanshu Chauhan wrote:
+> The tdata CSRs belong to an implemented trigger slot, not only to the
+> trigger type currently selected in tdata1. Writing zero to tdata1 disables
+> the trigger by selecting type zero, but it does not remove the slot.
 > 
-> Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4722
-> Suggested-by: Alistair Francis <alistair.francis@wdc.com>
-> Signed-off-by: Dmitry Kokorev <domestos48@mail.ru>
+> Keep tdata access tied to the selected slot being present and let type-zero
+> slots accept those writes while clearing any active breakpoint state.
 > 
+> Fixes: 95799e36c15a ("target/riscv: Add initial support for the Sdtrig extension")
+> Signed-off-by: Himanshu Chauhan <himanshu.chauhan@oss.qualcomm.com>
 > ---
 
 Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 
-> v2:
-> - Drop explicit preservation of mhpmevent WPRI bits.
+>   target/riscv/tcg/debug.c | 50 ++++++++++++++++++++++++++--------------
+>   1 file changed, 33 insertions(+), 17 deletions(-)
 > 
->   target/riscv/cpu_bits.h | 2 ++
->   target/riscv/tcg/csr.c  | 9 ++++++---
->   2 files changed, 8 insertions(+), 3 deletions(-)
-> 
-> diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-> index 3579789a1f..3df9ea4ec3 100644
-> --- a/target/riscv/cpu_bits.h
-> +++ b/target/riscv/cpu_bits.h
-> @@ -1161,6 +1161,8 @@ typedef enum CTRType {
->   #define MHPMEVENTH_BIT_VSINH               BIT(27)
->   #define MHPMEVENT_BIT_VUINH                BIT_ULL(58)
->   #define MHPMEVENTH_BIT_VUINH               BIT(26)
-> +#define MHPMEVENT_WPRI                     (BIT_ULL(57) | BIT_ULL(56))
-> +#define MHPMEVENTH_WPRI                    (BIT(25) | BIT(24))
+> diff --git a/target/riscv/tcg/debug.c b/target/riscv/tcg/debug.c
+> index 8b58cbd07a..2067657c81 100644
+> --- a/target/riscv/tcg/debug.c
+> +++ b/target/riscv/tcg/debug.c
+> @@ -53,20 +53,6 @@
+>    *     1 |    2 |         tdata1, tdata2 | Address / Data Match
+>    */
 >   
->   #define MHPMEVENT_FILTER_MASK              (MHPMEVENT_BIT_MINH  | \
->                                               MHPMEVENT_BIT_SINH  | \
-> diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-> index af444e3e6f..94a57a4553 100644
-> --- a/target/riscv/tcg/csr.c
-> +++ b/target/riscv/tcg/csr.c
-> @@ -1230,13 +1230,15 @@ static RISCVException write_mhpmevent(CPURISCVState *env, int csrno,
->       if (riscv_cpu_mxl(env) == MXL_RV32) {
->           mhpmevt_val = deposit64(env->mhpmevent_val[evt_index], 0, 32, val);
->       } else {
-> -        inh_avail_mask = ~MHPMEVENT_FILTER_MASK | MHPMEVENT_BIT_MINH;
-> +        inh_avail_mask = (~MHPMEVENT_FILTER_MASK | MHPMEVENT_BIT_MINH) &
-> +                         ~MHPMEVENT_WPRI;
->           inh_avail_mask |= riscv_has_ext(env, RVU) ? MHPMEVENT_BIT_UINH : 0;
->           inh_avail_mask |= riscv_has_ext(env, RVS) ? MHPMEVENT_BIT_SINH : 0;
->           inh_avail_mask |= (riscv_has_ext(env, RVH) &&
->                              riscv_has_ext(env, RVU)) ? MHPMEVENT_BIT_VUINH : 0;
->           inh_avail_mask |= (riscv_has_ext(env, RVH) &&
->                              riscv_has_ext(env, RVS)) ? MHPMEVENT_BIT_VSINH : 0;
-> +
->           mhpmevt_val = val & inh_avail_mask;
+> -/* tdata availability of a trigger */
+> -typedef bool tdata_avail[TDATA_NUM];
+> -
+> -static tdata_avail tdata_mapping[TRIGGER_TYPE_NUM] = {
+> -    [TRIGGER_TYPE_NO_EXIST] = { false, false, false },
+> -    [TRIGGER_TYPE_AD_MATCH] = { true, true, true },
+> -    [TRIGGER_TYPE_INST_CNT] = { true, false, true },
+> -    [TRIGGER_TYPE_INT] = { true, true, true },
+> -    [TRIGGER_TYPE_EXCP] = { true, true, true },
+> -    [TRIGGER_TYPE_AD_MATCH6] = { true, true, true },
+> -    [TRIGGER_TYPE_EXT_SRC] = { true, false, false },
+> -    [TRIGGER_TYPE_UNAVAIL] = { true, true, true }
+> -};
+> -
+>   /* only breakpoint size 1/2/4/8 supported */
+>   static int access_size[SIZE_NUM] = {
+>       [SIZE_ANY] = 0,
+> @@ -165,13 +151,17 @@ static inline target_ulong build_tdata1(CPURISCVState *env,
+>   
+>   bool tdata_available(CPURISCVState *env, int tdata_index)
+>   {
+> -    int trigger_type = get_trigger_type(env, env->trigger_cur);
+> -
+>       if (unlikely(tdata_index >= TDATA_NUM)) {
+>           return false;
 >       }
 >   
-> @@ -1263,6 +1265,7 @@ static RISCVException write_mhpmeventh(CPURISCVState *env, int csrno,
->       target_ulong inh_avail_mask = (target_ulong)(~MHPMEVENTH_FILTER_MASK |
->                                                     MHPMEVENTH_BIT_MINH);
+> -    return tdata_mapping[trigger_type][tdata_index];
+> +    /*
+> +     * tdata CSRs belong to the trigger slot, not to the currently selected
+> +     * trigger type.  A type-zero trigger is disabled, but the slot still
+> +     * exists, so software must still be able to write tdata2/tdata3 before
+> +     * selecting a supported trigger type.
+> +     */
+> +    return env->trigger_cur < env->num_triggers;
+>   }
 >   
-> +    inh_avail_mask &= ~MHPMEVENTH_WPRI;
->       inh_avail_mask |= riscv_has_ext(env, RVU) ? MHPMEVENTH_BIT_UINH : 0;
->       inh_avail_mask |= riscv_has_ext(env, RVS) ? MHPMEVENTH_BIT_SINH : 0;
->       inh_avail_mask |= (riscv_has_ext(env, RVH) &&
-> @@ -1531,7 +1534,7 @@ static int rmw_cd_mhpmevent(CPURISCVState *env, int evt_index,
->               *val &= ~MHPMEVENT_BIT_MINH;
->           }
->       } else if (wr_mask) {
-> -        wr_mask &= ~MHPMEVENT_BIT_MINH;
-> +        wr_mask &= ~(MHPMEVENT_BIT_MINH | MHPMEVENT_WPRI);
->           /* wr_mask is 64-bit so upper 32 bits of mhpmevt_val are retained */
->           mhpmevt_val = (new_val & wr_mask) | (mhpmevt_val & ~wr_mask);
->           env->mhpmevent_val[evt_index] = mhpmevt_val;
-> @@ -1560,7 +1563,7 @@ static int rmw_cd_mhpmeventh(CPURISCVState *env, int evt_index,
->               *val &= ~MHPMEVENTH_BIT_MINH;
->           }
->       } else if (wr_mask) {
-> -        wr_mask &= ~MHPMEVENTH_BIT_MINH;
-> +        wr_mask &= ~(MHPMEVENTH_BIT_MINH | MHPMEVENTH_WPRI);
->           mhpmevth_val = (new_val & wr_mask) | (mhpmevth_val & ~wr_mask);
->           mhpmevt_val = deposit64(mhpmevt_val, 32, 32, mhpmevth_val);
->           env->mhpmevent_val[evt_index] = mhpmevt_val;
+>   target_ulong tselect_csr_read(CPURISCVState *env)
+> @@ -729,6 +719,30 @@ static void type6_reg_write(CPURISCVState *env, target_ulong index,
+>       }
+>   }
+>   
+> +static void no_trigger_reg_write(CPURISCVState *env, target_ulong index,
+> +                                 int tdata_index, target_ulong val)
+> +{
+> +    /*
+> +     * OpenSBI programs DBTR slots by first writing type zero to tdata1, then
+> +     * writing tdata2/tdata3, and finally writing the desired trigger type.
+> +     */
+> +    switch (tdata_index) {
+> +    case TDATA1:
+> +        type2_breakpoint_remove(env, index);
+> +        env->tdata1[index] = 0;
+> +        env->itrigger_enabled = riscv_itrigger_enabled(env);
+> +        break;
+> +    case TDATA2:
+> +        env->tdata2[index] = val;
+> +        break;
+> +    case TDATA3:
+> +        env->tdata3[index] = textra_validate(env, val);
+> +        break;
+> +    default:
+> +        g_assert_not_reached();
+> +    }
+> +}
+> +
+>   /* icount trigger type */
+>   static inline int
+>   itrigger_get_count(CPURISCVState *env, int index)
+> @@ -995,6 +1009,8 @@ void tdata_csr_write(CPURISCVState *env, int tdata_index, target_ulong val)
+>                         trigger_type);
+>           break;
+>       case TRIGGER_TYPE_NO_EXIST:
+> +        no_trigger_reg_write(env, env->trigger_cur, tdata_index, val);
+> +        break;
+>       case TRIGGER_TYPE_UNAVAIL:
+>           qemu_log_mask(LOG_GUEST_ERROR, "trigger type: %d does not exit\n",
+>                         trigger_type);
 
 
