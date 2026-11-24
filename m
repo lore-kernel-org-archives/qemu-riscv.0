@@ -1,45 +1,45 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7EC7606A321
-	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 19:48:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99415606A32A
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 19:49:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HxvZrjtz
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EWvstHuD
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVwUz-00028U-Mm; Tue, 24 Nov 2026 14:48:17 -0500
+	id 1xVwVA-0002Cj-Qr; Tue, 24 Nov 2026 14:48:28 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xVwUm-00025q-WB; Tue, 24 Nov 2026 14:48:05 -0500
-Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
+ id 1xVwUq-00026L-SG; Tue, 24 Nov 2026 14:48:11 -0500
+Received: from tor.source.kernel.org ([172.105.4.254])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xVwUj-0006Br-IM; Tue, 24 Nov 2026 14:48:04 -0500
+ id 1xVwUm-0006Ce-2C; Tue, 24 Nov 2026 14:48:07 -0500
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6CD1B620C3;
- Tue, 24 Nov 2026 19:47:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E46931F000CF;
- Tue, 24 Nov 2026 19:47:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id DF7D6623D4;
+ Tue, 24 Nov 2026 19:48:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E19471F000CF;
+ Tue, 24 Nov 2026 19:48:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795549679;
- bh=h/HYrxuCSKjUlx6UaRDCumwdZDh4sMToNe3c3pgQvts=;
+ s=k20260515; t=1795549681;
+ bh=bvwjiVvoXmgVl0yCFTcNyjRLt/db5nhKIczcD8DW9o0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=HxvZrjtzQeguu1euklmSq85dilquM0OkssFPB5fjyf9dlzej+TX4gDfBMgKNpbhki
- h4fCSdCkDnjsyW4aw8mBKY60JxOvV+SAEqL62lGCRaSzXoWXGRqBDVGHaEnnAjzYfd
- SgL/TjpnOWV50phTSh8r3uw6Kzbnoz+x5dypzNKIj0DLIgXDgq+RD5ZAe1gOdbVSld
- PDLcFV3M9GC//ZClmYUHgj6LR2Db9Hy4FSO0dtUk8IDMN9gDUlPWaNqrXgFUAX1kCu
- Xk2ISpAekvEMeDKzmWJ2tS1K5x3/sxWe7nq9HRxYT7kWQwU1c4zciJ4X/LsAnBBSAS
- 1xyioqNqcBw2A==
+ b=EWvstHuDZIg4ep7b3XwVm5R0gexwGOHIPcJVx6STe0YKeuLObIC/weLv+l12hDdkF
+ 6S6KFsKT3tC0gGTmbyhYEahPYemOEMU7djmS6dwxk+39YISOHaA3YtvkNVEAcN9fon
+ 0KwBf7OTx+20XX6X3pIKv6DfOMjCrZ/kCToVHre8NWyKM/ubanc2810Ufi1Dgg8pD4
+ 6qX/VYPkHqBgv8At4NOygxs3OSDe8DF/ow3rbAWtoUaAvNm6oEYziiHlqdGRFeNy3y
+ deukxPSxSoYcRR1a2eLjFLHsbt1ZRnNV5lU2iMwbLOtt5EhV/O2kaIKv0P+zeAKNGi
+ rEyeHAD/avS3A==
 From: Drew Fustini <fustini@kernel.org>
-Date: Tue, 24 Nov 2026 11:47:51 -0800
-Subject: [PATCH v9 3/7] hw/riscv: define capabilities of CBQRI controllers
+Date: Tue, 24 Nov 2026 11:47:55 -0800
+Subject: [PATCH v9 7/7] hw/riscv: add CBQRI controllers to virt machine
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261124-riscv-ssqosid-cbqri-v9-3-73b961a3f1d9@kernel.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261124-riscv-ssqosid-cbqri-v9-7-73b961a3f1d9@kernel.org>
 References: <20261124-riscv-ssqosid-cbqri-v9-0-73b961a3f1d9@kernel.org>
 In-Reply-To: <20261124-riscv-ssqosid-cbqri-v9-0-73b961a3f1d9@kernel.org>
 To: qemu-devel@nongnu.org
@@ -59,16 +59,16 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  Drew Fustini <fustini@kernel.org>, 
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3710; i=fustini@kernel.org;
- h=from:subject:message-id; bh=ZZZGHu09BjE+PGMOQWdwhNg1P47qjihq9puSdv7vySE=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSzvnwdy9U480nXhpYICZ0sjV/r/kZ9Nbvise9jwJ0ln
- G+b96xR7yhlYRDjYpAVU2TZ9CHvwhKv0K8L5r/YBjOHlQlkCAMXpwBMRCuFkWG69w7Lt5wXHidO
- YLX8vFPu5ge7gmU53zdd4Gx/FB7741oDw//41z/mr55+UbArWtL3fNHX6yI1+yJf8nbOUQxU/3q
- o34YHAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4130; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=qMqmefxsaS+NM+D3D809WfuStDYYs2u/OoCuoyx9x28=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSzvnwjOH2v5TXH1oXWG112Mdl7dF95EMw9J66f9UrQR
+ ZGUi7n1HaUsDGJcDLJiiiybPuRdWOIV+nXB/BfbYOawMoEMYeDiFICJHH3P8L9Mx7t505mi3Rfa
+ 11i4XHE80nGb3b3Ip0HlVIYN26ve1zcZ/nCcUcv7u7hHUGNawfvCI3r7l10qmMok0PyYcT5vjvu
+ 7CC4A
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
-Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
- envelope-from=fustini@kernel.org; helo=tor.source.kernel.org
+Received-SPF: pass client-ip=172.105.4.254; envelope-from=fustini@kernel.org;
+ helo=tor.source.kernel.org
 X-Spam_score_int: -43
 X-Spam_score: -4.4
 X-Spam_bar: ----
@@ -87,128 +87,116 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 From: Nicolas Pitre <npitre@baylibre.com>
 
-Define structs to represent the hardware capabilities of capacity and
-bandwidth controllers according to the RISC-V Capacity and Bandwidth QoS
-Register Interface (CBQRI).
+Add CBQRI controllers to the RISC-V virt machine. The device properties
+can be fully configured from the command line:
 
-Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
+  $ qemu-system-riscv64 -M virt ... \
+      -device riscv.cbqri.capacity,mmio_base=0x04820000[,...] \
+      -device riscv.cbqri.bandwidth,mmio_base=0x04829000[,...]
+
+The mmio_base option is mandatory. The others are optional.
+
+As many -device arguments as wanted can be provided as long as their
+mmio regions don't conflict.
+
+To see all possible options:
+
+  $ qemu-system-riscv64 -device riscv.cbqri.capacity,help
+  riscv.cbqri.capacity options:
+    alloc_op_config_limit=<bool> - on/off (default: on)
+    alloc_op_flush_rcid=<bool> - on/off (default: on)
+    alloc_op_read_limit=<bool> - on/off (default: on)
+    at_code=<bool>         - on/off (default: on)
+    max_mcids=<uint16>     -  (default: 256)
+    max_rcids=<uint16>     -  (default: 64)
+    mmio_base=<uint64>     -  (default: 0)
+    mon_evt_id_none=<bool> - on/off (default: on)
+    mon_evt_id_occupancy=<bool> - on/off (default: on)
+    mon_op_config_event=<bool> - on/off (default: on)
+    mon_op_read_counter=<bool> - on/off (default: on)
+    ncblks=<uint16>        -  (default: 16)
+
+  $ qemu-system-riscv64 -device riscv.cbqri.bandwidth,help
+  riscv.cbqri.bandwidth options:
+    alloc_op_config_limit=<bool> - on/off (default: on)
+    alloc_op_read_limit=<bool> - on/off (default: on)
+    at_code=<bool>         - on/off (default: on)
+    max_mcids=<uint16>     -  (default: 256)
+    max_rcids=<uint16>     -  (default: 64)
+    mmio_base=<uint64>     -  (default: 0)
+    mon_evt_id_none=<bool> - on/off (default: on)
+    mon_evt_id_rdonly_count=<bool> - on/off (default: on)
+    mon_evt_id_rdwr_count=<bool> - on/off (default: on)
+    mon_evt_id_wronly_count=<bool> - on/off (default: on)
+    mon_op_config_event=<bool> - on/off (default: on)
+    mon_op_read_counter=<bool> - on/off (default: on)
+    mrbwb=<uint16>         -  (default: 819)
+    nbwblks=<uint16>       -  (default: 1024)
+
+Boolean options correspond to hardware capabilities that can be
+disabled.
+
 Reviewed-by: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
 Signed-off-by: Nicolas Pitre <npitre@baylibre.com>
-[fustini: rebase, update to the ratified spec, add caps_init()]
+[fustini: rebase on riscv-to-apply.next]
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- MAINTAINERS              |  7 +++++
- include/hw/riscv/cbqri.h | 73 ++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 80 insertions(+)
+ hw/core/sysbus-fdt.c | 4 ++++
+ hw/riscv/virt.c      | 3 +++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 47eefdf2c399..3d36a784a3ec 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -406,6 +406,13 @@ F: target/riscv/XVentanaCondOps.decode
- F: target/riscv/insn_trans/trans_xventanacondops.c.inc
- F: disas/riscv-xventana*
+diff --git a/hw/core/sysbus-fdt.c b/hw/core/sysbus-fdt.c
+index 12238570b5e1..265917ef573e 100644
+--- a/hw/core/sysbus-fdt.c
++++ b/hw/core/sysbus-fdt.c
+@@ -35,6 +35,7 @@
+ #include "hw/core/platform-bus.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/uefi/var-service-api.h"
++#include "hw/riscv/cbqri.h"
+ #include "hw/arm/fdt.h"
+ #include "hw/watchdog/sbsa_gwdt.h"
  
-+RISC-V QoS (Ssqosid ext and CBQRI spec)
-+M: Nicolas Pitre <npitre@baylibre.com>
-+M: Drew Fustini <fustini@kernel.org>
-+L: qemu-riscv@nongnu.org
-+S: Supported
-+F: include/hw/riscv/cbqri.h
-+
- RISC-V SiFive (Xsf*) extensions
- M: Max Chou <max.chou@sifive.com>
- L: qemu-riscv@nongnu.org
-diff --git a/include/hw/riscv/cbqri.h b/include/hw/riscv/cbqri.h
-new file mode 100644
-index 000000000000..7132e6474fb9
---- /dev/null
-+++ b/include/hw/riscv/cbqri.h
-@@ -0,0 +1,73 @@
-+/*
-+ * RISC-V Capacity and Bandwidth QoS Register Interface
-+ * URL: https://github.com/riscv-non-isa/riscv-cbqri/releases/tag/v1.0
-+ *
-+ * Copyright (c) 2023 BayLibre SAS
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef HW_RISCV_CBQRI_H
-+#define HW_RISCV_CBQRI_H
-+
-+#include "qemu/typedefs.h"
-+
-+#define RISCV_CBQRI_VERSION_MAJOR   1
-+#define RISCV_CBQRI_VERSION_MINOR   0
-+
-+#define TYPE_RISCV_CBQRI_CC         "riscv.cbqri.capacity"
-+#define TYPE_RISCV_CBQRI_BC         "riscv.cbqri.bandwidth"
-+
-+/* Capacity Controller hardware capabilities */
-+typedef struct RiscvCbqriCapacityCaps {
-+    uint16_t nb_mcids;
-+    uint16_t nb_rcids;
-+
-+    uint16_t ncblks;
-+
-+    bool supports_at_code:1;
-+
-+    bool supports_alloc_op_config_limit:1;
-+    bool supports_alloc_op_read_limit:1;
-+    bool supports_alloc_op_flush_rcid:1;
-+
-+    bool supports_mon_op_config_event:1;
-+    bool supports_mon_op_read_counter:1;
-+
-+    bool supports_mon_evt_id_none:1;
-+    bool supports_mon_evt_id_occupancy:1;
-+} RiscvCbqriCapacityCaps;
-+
-+/* Bandwidth Controller hardware capabilities */
-+typedef struct RiscvCbqriBandwidthCaps {
-+    uint16_t nb_mcids;
-+    uint16_t nb_rcids;
-+
-+    uint16_t nbwblks;
-+    uint16_t mrbwb;
-+
-+    bool supports_at_code:1;
-+
-+    bool supports_alloc_op_config_limit:1;
-+    bool supports_alloc_op_read_limit:1;
-+
-+    bool supports_mon_op_config_event:1;
-+    bool supports_mon_op_read_counter:1;
-+
-+    bool supports_mon_evt_id_none:1;
-+    bool supports_mon_evt_id_rdwr_count:1;
-+    bool supports_mon_evt_id_rdonly_count:1;
-+    bool supports_mon_evt_id_wronly_count:1;
-+} RiscvCbqriBandwidthCaps;
-+
-+/*
-+ * Set the property defaults in a capability struct. A board changes the
-+ * fields it needs and passes the struct to the matching create function.
-+ */
-+void riscv_cbqri_cc_caps_init(RiscvCbqriCapacityCaps *caps);
-+void riscv_cbqri_bc_caps_init(RiscvCbqriBandwidthCaps *caps);
-+
-+DeviceState *riscv_cbqri_cc_create(hwaddr addr,
-+                                   const RiscvCbqriCapacityCaps *caps);
-+DeviceState *riscv_cbqri_bc_create(hwaddr addr,
-+                                   const RiscvCbqriBandwidthCaps *caps);
-+#endif
+@@ -142,6 +143,9 @@ static const BindingEntry bindings[] = {
+     TYPE_BINDING(TYPE_RAMFB_DEVICE, no_fdt_node),
+     TYPE_BINDING(TYPE_UEFI_VARS_SYSBUS, add_uefi_vars_node),
+     TYPE_BINDING(TYPE_WDT_SBSA, no_fdt_node),
++    /* RISC-V CBQRI controllers have no generic device tree node */
++    TYPE_BINDING(TYPE_RISCV_CBQRI_BC, no_fdt_node),
++    TYPE_BINDING(TYPE_RISCV_CBQRI_CC, no_fdt_node),
+     TYPE_BINDING("", NULL), /* last element */
+ };
+ 
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index ca4d5bc05b52..16c7e20204ac 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -58,6 +58,7 @@
+ #include "hw/pci-host/gpex.h"
+ #include "hw/display/ramfb.h"
+ #include "hw/acpi/aml-build.h"
++#include "hw/riscv/cbqri.h"
+ #include "qapi/qapi-type-infos-common.h"
+ #include "hw/virtio/virtio-iommu.h"
+ #include "hw/uefi/var-service-api.h"
+@@ -1158,6 +1159,8 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+ #ifdef CONFIG_TPM
+     machine_class_allow_dynamic_sysbus_dev(mc, TYPE_TPM_TIS_SYSBUS);
+ #endif
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_BC);
++    machine_class_allow_dynamic_sysbus_dev(mc, TYPE_RISCV_CBQRI_CC);
+ 
+     object_class_property_add_bool(oc, "aclint", virt_get_aclint,
+                                    virt_set_aclint);
 
 -- 
 2.43.0
