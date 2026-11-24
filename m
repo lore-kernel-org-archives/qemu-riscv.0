@@ -1,45 +1,45 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6DF21606A332
-	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 19:49:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4BA2606A327
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 19:49:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hb87kwgP
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GM5DSllS
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVwV3-00028g-MT; Tue, 24 Nov 2026 14:48:21 -0500
+	id 1xVwV6-00029P-Rz; Tue, 24 Nov 2026 14:48:24 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xVwUn-000266-6E; Tue, 24 Nov 2026 14:48:07 -0500
+ id 1xVwUl-00025i-Eg; Tue, 24 Nov 2026 14:48:03 -0500
 Received: from tor.source.kernel.org ([2600:3c04:e001:324:0:1991:8:25])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <fustini@kernel.org>)
- id 1xVwUj-0006Bf-HY; Tue, 24 Nov 2026 14:48:04 -0500
+ id 1xVwUj-0006Bk-H6; Tue, 24 Nov 2026 14:48:03 -0500
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 61EA361831;
+ by tor.source.kernel.org (Postfix) with ESMTP id 0E9D461EDE;
+ Tue, 24 Nov 2026 19:47:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7B7601F000D0;
  Tue, 24 Nov 2026 19:47:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 663751F000D8;
- Tue, 24 Nov 2026 19:47:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1795549677;
- bh=unA0AlydyBdK5hhDkfV9CB9rkG4lbCQxzpaAnVWLJEk=;
+ s=k20260515; t=1795549678;
+ bh=5S3SlIa6EtSvbqxlsU1Lfl9OJby7kPC2CyAnzoqh4RQ=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=hb87kwgPLdEpW6RZHkzwssWyl+8z6QZhEtPMvaKxLL3CAWReZlV3Qj8dBdmtmGF9+
- 1ZKvVKYUiy4YlQyFbEpjnB/Pwv/GqjmQKHY7q/wYMXpkbUI4Yk4eUP55SHrwmGW2gJ
- UDkl5ocbhzwhr4tAZyCGXkCzROCuADlAIMZJCZpEitNAES3StiSapa7xsWNploJCcE
- u2uawH4zDxFi9TBlT0w57UFYaCbqUCNCTugw+eTQF0TntcMTmRp0zfaG5k7ZTAuvfQ
- ve9L2LEFElAorJiYngftE40zUiQw89P4QYDivh0rt4QjpyXvU4rTIcSyBAH04p8VrU
- T81Nb4ggyaxZw==
+ b=GM5DSllSESCRcRrIRz8nwcA11hEkgmInx/zoG0lyNbYzSlOiFOWnFTFWRs+fvfa54
+ aTLBp2fCe+LfHcPxHmrixpiuOuY5VO3/BA54MGtdPuO3qV9Dff7g6XCj0elRSVV95o
+ 6ujhzSngoglspx47DES6AyD0DpEexVZ08f8Kw8SCxBKzGlmr3S+RfzV7uGOcVA+HZN
+ UEngzhSESpuvQr3EN+tsJ/O2s3FcHjbx0TIGFuPbw0LF2DIzi9T1exthapRtGj3CS2
+ 8nOHSPsyuTdAAyjJD9OyH/UIxJ1FZdq6Ia+KgxOYa9MZemWfafEQQvAuyoCaShEylt
+ Ib8qJWA3pnt+w==
 From: Drew Fustini <fustini@kernel.org>
-Date: Tue, 24 Nov 2026 11:47:49 -0800
-Subject: [PATCH v9 1/7] riscv: implement Ssqosid extension and srmcfg CSR
+Date: Tue, 24 Nov 2026 11:47:50 -0800
+Subject: [PATCH v9 2/7] tests/tcg/riscv64: add test for the srmcfg CSR
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20261124-riscv-ssqosid-cbqri-v9-1-73b961a3f1d9@kernel.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261124-riscv-ssqosid-cbqri-v9-2-73b961a3f1d9@kernel.org>
 References: <20261124-riscv-ssqosid-cbqri-v9-0-73b961a3f1d9@kernel.org>
 In-Reply-To: <20261124-riscv-ssqosid-cbqri-v9-0-73b961a3f1d9@kernel.org>
 To: qemu-devel@nongnu.org
@@ -58,12 +58,12 @@ Cc: qemu-riscv@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
  guo.wenjia23@zte.com.cn, liu.qingtao2@zte.com.cn, 
  Drew Fustini <fustini@kernel.org>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9011; i=fustini@kernel.org;
- h=from:subject:message-id; bh=QpUXbcnGjpJdbj4z+j6D8mYc8LkwJwGpNbWABjb0Hk0=;
- b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSzvnydIaApxhIhkHH0o4WkgszcBUWLmE7WKS57cbzx+
- gSt2bvDOkpZGMS4GGTFFFk2fci7sMQr9OuC+S+2wcxhZQIZwsDFKQATWeHAyPBPK+1Y+NeW00cf
- HbjkV9Pzb0L+d+P9DcpLkid/c+tdwKAGVLH1a6GW1aKQj03BPkxb3x7lkeb329y9Yc5tS3PNNYF
- HeAA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6398; i=fustini@kernel.org;
+ h=from:subject:message-id; bh=RwlTwtjmFYekxu3uJdgDOpweqtI4+VTIun1/NFEaMwg=;
+ b=owGbwMvMwCV2+43O4ZsaG3kYT6slMWSzvnz95Rzr14/+0ieTLu4KeP193rq5vbuuzNPfEScnw
+ loe5VMg21HKwiDGxSArpsiy6UPehSVeoV8XzH+xDWYOKxPIEAYuTgGYyNcKRoa1Qi4+Ag3N7bx2
+ c22eCO9bp/hnw3WlY847DvBrbT4d9EqX4b/HCbtye1+DCw5l+/f6a7/yTIlaFi7NbOMXlr7d+am
+ 0CTcA
 X-Developer-Key: i=fustini@kernel.org; a=openpgp;
  fpr=1B6F948213EA489734F3997035D5CD577C1E6010
 Received-SPF: pass client-ip=2600:3c04:e001:324:0:1991:8:25;
@@ -86,265 +86,253 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Kornel Dulęba <mindal@semihalf.com>
+Check that only the RCID and MCID fields of srmcfg are writable and
+that an S-mode access to srmcfg raises an illegal instruction exception
+unless mstateen0.SRMCFG is set. Also check that a VS-mode access raises
+a virtual instruction exception when mstateen0.SRMCFG is set and an
+illegal instruction exception when it is clear.
 
-Implement the srmcfg CSR defined by the Ssqosid ISA extension
-(Supervisor-mode Quality of Service ID). The CSR contains two fields:
-
-  - Resource Control ID (RCID) used to determine resource allocation
-  - Monitoring Counter ID (MCID) used to track resource usage
-
-The CSR is defined for S-mode, so check mstateen0.srmcfg to determine
-if S-mode is allowed to access it. In addition, accessing it when V=1
-shall cause a virtual instruction exception.
-
-The extension is enabled by default on the rv32 and rv64 base CPUs.
-
-Link: https://github.com/riscv/riscv-ssqosid/releases/tag/v1.0
-Link: https://github.com/riscv-non-isa/riscv-cbqri/releases/download/v1.0/riscv-cbqri.pdf
-Link: https://docs.riscv.org/reference/isa/priv/smstateen.html
-Reviewed-by: Radim Krčmář <radim.krcmar@oss.qualcomm.com>
-Signed-off-by: Kornel Dulęba <mindal@semihalf.com>
-[fustini: rebase, fix check_srmcfg]
 Signed-off-by: Drew Fustini <fustini@kernel.org>
 ---
- disas/riscv.c                     |  1 +
- target/riscv/cpu.c                |  4 ++++
- target/riscv/cpu.h                |  3 +++
- target/riscv/cpu_bits.h           |  9 ++++++++
- target/riscv/cpu_cfg_fields.h.inc |  1 +
- target/riscv/machine.c            | 19 +++++++++++++++++
- target/riscv/tcg/csr.c            | 45 +++++++++++++++++++++++++++++++++++++++
- 7 files changed, 82 insertions(+)
+ tests/tcg/riscv64/system/meson.build |   1 +
+ tests/tcg/riscv64/test-srmcfg.S      | 210 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 211 insertions(+)
 
-diff --git a/disas/riscv.c b/disas/riscv.c
-index ca0d6e90b373..bce5f58305dd 100644
---- a/disas/riscv.c
-+++ b/disas/riscv.c
-@@ -703,6 +703,7 @@ static const char *csr_name(int csrno)
-     case 0x0143: return "stval";
-     case 0x0144: return "sip";
-     case 0x0180: return "satp";
-+    case 0x0181: return "srmcfg";
-     case 0x0200: return "hstatus";
-     case 0x0202: return "hedeleg";
-     case 0x0203: return "hideleg";
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 44348ed2e700..4a958d060ea3 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -285,6 +285,7 @@ const RISCVIsaExtData isa_edata_arr[] = {
-     ISA_EXT_DATA_ENTRY(ssdbltrp, PRIV_VERSION_1_13_0, ext_ssdbltrp),
-     ISA_EXT_DATA_ENTRY(ssnpm, PRIV_VERSION_1_13_0, ext_ssnpm),
-     ISA_EXT_DATA_ENTRY(sspm, PRIV_VERSION_1_13_0, ext_sspm),
-+    ISA_EXT_DATA_ENTRY(ssqosid, PRIV_VERSION_1_13_0, ext_ssqosid),
-     ISA_INTERNAL_EXT_DATA_ENTRY(ssstateen, PRIV_VERSION_1_12_0, ext_ssstateen),
-     ISA_INTERNAL_EXT_DATA_ENTRY(ssstrict, PRIV_VERSION_1_12_0, has_priv_1_12),
-     ISA_EXT_DATA_ENTRY(sstc, PRIV_VERSION_1_12_0, ext_sstc),
-@@ -1052,6 +1053,7 @@ static void riscv_cpu_reset_hold(Object *obj, ResetType type)
-                    (!cpu->cfg.ext_svade && cpu->cfg.ext_svadu ?
-                     MENVCFG_ADUE : 0);
-     env->henvcfg = 0;
-+    env->srmcfg = 0;
- 
- #ifdef CONFIG_TCG
-     uint8_t iprio;
-@@ -3549,6 +3551,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zbc = true,
-         .cfg.ext_zbs = true,
-         .cfg.ext_sstc = true,
-+        .cfg.ext_ssqosid = true,
-         .cfg.ext_svadu = true,
-         .cfg.ext_svvptc = true,
-     ),
-@@ -3622,6 +3625,7 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .cfg.ext_zbc = true,
-         .cfg.ext_zbs = true,
-         .cfg.ext_sstc = true,
-+        .cfg.ext_ssqosid = true,
-         .cfg.ext_svadu = true,
-         .cfg.ext_svvptc = true,
-     ),
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index d0e2a6584d90..ae113cd67625 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -372,6 +372,9 @@ struct CPUArchState {
-     uint64_t ctr_dst[16 << SCTRDEPTH_MAX];
-     uint64_t ctr_data[16 << SCTRDEPTH_MAX];
- 
-+    /* Ssqosid extension */
-+    target_ulong srmcfg;
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index cdd2e99d22a3..12f972ccab74 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -26,6 +26,7 @@ tests += {
+   'test-minstret-ecall.S': setup + {'qemu_args': ['-icount', 'shift=1', qemu_args]},
+   'test-minstret-wfi.S': setup + {'qemu_args': ['-icount', 'shift=1', qemu_args]},
+   'test-misa-w.S': setup + {'qemu_args': ['-cpu', 'rv64,x-misa-w=true,c=true,v=true', qemu_args]},
++  'test-srmcfg.S': setup + {'qemu_args': ['-cpu', 'rv64,ssqosid=true,smstateen=true', qemu_args]},
+   'test-zvabd.S': setup + {'qemu_args': ['-cpu', 'rv64,v=true,vlen=256,x-zvabd=true', qemu_args]},
+   'test-vsepc-masking.S': setup + {
+     'test_name': 'test-vsepc-masking-c',
+diff --git a/tests/tcg/riscv64/test-srmcfg.S b/tests/tcg/riscv64/test-srmcfg.S
+new file mode 100644
+index 000000000000..a1c956c0b977
+--- /dev/null
++++ b/tests/tcg/riscv64/test-srmcfg.S
+@@ -0,0 +1,210 @@
++/*
++ * RISC-V Ssqosid srmcfg CSR test: check the WARL fields of srmcfg, that
++ * mstateen0.SRMCFG is writable, and that an S-mode access to srmcfg
++ * raises an illegal instruction exception while mstateen0.SRMCFG is
++ * clear and succeeds once it is set. A VS-mode access raises a virtual
++ * instruction exception while mstateen0.SRMCFG is set and an illegal
++ * instruction exception while it is clear.
++ *
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
 +
-     /* Machine and Supervisor interrupt priorities */
-     uint8_t miprio[64];
-     uint8_t siprio[64];
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 3579789a1f56..33af64f3667e 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -228,6 +228,9 @@
- #define CSR_SPTBR           0x180
- #define CSR_SATP            0x180
- 
-+/* Ssqosid extension */
-+#define CSR_SRMCFG          0x181
++.equ CSR_SRMCFG,		0x181
++.equ CSR_MSTATEEN0,		0x30c
++.equ SRMCFG_RCID_MCID,		0x0FFF0FFF
++.equ MSTATEEN0_SRMCFG,		(1 << 55)
++.equ MSTATUS_MPP,		0x1800
++.equ MSTATUS_MPP_S,		0x0800
++.equ MSTATUS_MPV,		(1 << 39)
++.equ CAUSE_ILLEGAL_INST,	2
++.equ CAUSE_ECALL_S,		9
++.equ CAUSE_ECALL_VS,		10
++.equ CAUSE_VIRT_INST,		22
++.equ PMPCFG_NAPOT_RWX,		0x1f
++.equ SRMCFG_TEST_VALUE,		0x00550033	/* MCID 0x55, RCID 0x33 */
 +
- /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
- #define CSR_SISELECT        0x150
- #define CSR_SIREG           0x151
-@@ -356,6 +359,7 @@
- #define SMSTATEEN0_FCSR     (1ULL << 1)
- #define SMSTATEEN0_JVT      (1ULL << 2)
- #define SMSTATEEN0_CTR      (1ULL << 54)
-+#define SMSTATEEN0_SRMCFG   (1ULL << 55)
- #define SMSTATEEN0_P1P13    (1ULL << 56)
- #define SMSTATEEN0_HSCONTXT (1ULL << 57)
- #define SMSTATEEN0_IMSIC    (1ULL << 58)
-@@ -1199,4 +1203,9 @@ typedef enum CTRType {
- #define MCONTEXT64                         0x0000000000001FFFULL
- #define MCONTEXT32_HCONTEXT                0x0000007F
- #define MCONTEXT64_HCONTEXT                0x0000000000003FFFULL
++	.option norvc
++	.text
 +
-+/* SRMCFG CSR field masks (Ssqosid extension) */
-+#define SRMCFG_RCID                      0x00000FFF
-+#define SRMCFG_MCID                      0x0FFF0000
++	.global _start
 +
- #endif
-diff --git a/target/riscv/cpu_cfg_fields.h.inc b/target/riscv/cpu_cfg_fields.h.inc
-index 85fc3ad8bb8c..1ecdf9f393b4 100644
---- a/target/riscv/cpu_cfg_fields.h.inc
-+++ b/target/riscv/cpu_cfg_fields.h.inc
-@@ -113,6 +113,7 @@ BOOL_FIELD(ext_ssaia)
- BOOL_FIELD(ext_smctr)
- BOOL_FIELD(ext_ssctr)
- BOOL_FIELD(ext_sscofpmf)
-+BOOL_FIELD(ext_ssqosid)
- BOOL_FIELD(ext_smepmp)
- BOOL_FIELD(ext_smrnmi)
- BOOL_FIELD(ext_ssnpm)
-diff --git a/target/riscv/machine.c b/target/riscv/machine.c
-index 9fc699a4826f..a9713d9e1a6b 100644
---- a/target/riscv/machine.c
-+++ b/target/riscv/machine.c
-@@ -399,6 +399,24 @@ static const VMStateDescription vmstate_sdext = {
-     }
- };
- 
-+static bool ssqosid_needed(void *opaque)
-+{
-+    RISCVCPU *cpu = opaque;
++_start:
++	la	t0, trap_handler
++	csrw	mtvec, t0
 +
-+    return cpu->cfg.ext_ssqosid;
-+}
++	/* Let S-mode access all of memory. */
++	li	t0, -1
++	csrw	pmpaddr0, t0
++	li	t0, PMPCFG_NAPOT_RWX
++	csrw	pmpcfg0, t0
 +
-+static const VMStateDescription vmstate_ssqosid = {
-+    .name = "cpu/ssqosid",
-+    .version_id = 1,
-+    .minimum_version_id = 1,
-+    .needed = ssqosid_needed,
-+    .fields = (const VMStateField[]) {
-+        VMSTATE_UINTTL(env.srmcfg, RISCVCPU),
-+        VMSTATE_END_OF_LIST()
-+    }
-+};
++	/* Only the RCID and MCID fields of srmcfg are writable. */
++	li	t0, -1
++	csrw	CSR_SRMCFG, t0
++	csrr	t1, CSR_SRMCFG
++	li	t2, SRMCFG_RCID_MCID
++	bne	t1, t2, _fail
 +
- static int riscv_cpu_post_load(void *opaque, int version_id)
- {
-     RISCVCPU *cpu = opaque;
-@@ -674,6 +692,7 @@ const VMStateDescription vmstate_riscv_cpu = {
-         &vmstate_sstc,
-         &vmstate_mseccfg,
-         &vmstate_sdext,
-+        &vmstate_ssqosid,
-         NULL
-     }
- };
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 2a37fb735fa2..a74ca6700873 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -1805,6 +1805,40 @@ static RISCVException write_stimecmph(CPURISCVState *env, int csrno,
-     return RISCV_EXCP_NONE;
- }
- 
-+static RISCVException check_srmcfg(CPURISCVState *env, int csrno)
-+{
-+    if (!riscv_cpu_cfg(env)->ext_ssqosid) {
-+        return RISCV_EXCP_ILLEGAL_INST;
-+    }
++	/* mstateen0.SRMCFG must not be read-only zero. */
++	li	t0, MSTATEEN0_SRMCFG
++	csrw	CSR_MSTATEEN0, t0
++	csrr	t1, CSR_MSTATEEN0
++	and	t1, t1, t0
++	beqz	t1, _fail
 +
-+    RISCVException ret = smstateen_acc_ok(env, 0, SMSTATEEN0_SRMCFG);
-+    if (ret != RISCV_EXCP_NONE) {
-+        return ret;
-+    }
++	/*
++	 * With mstateen0.SRMCFG clear an S-mode access to srmcfg must raise
++	 * an illegal instruction exception.
++	 */
++	csrw	CSR_MSTATEEN0, zero
++	la	t0, smode_access_blocked
++	jal	enter_smode
++	la	t0, trap_mcause
++	ld	t1, 0(t0)
++	li	t2, CAUSE_ILLEGAL_INST
++	bne	t1, t2, _fail
 +
-+    /*
-+     * Even though this is an S-mode CSR the spec says that we need to throw
-+     * a virtual instruction fault if a guest tries to access it.
-+     */
-+    return env->virt_enabled ?
-+           RISCV_EXCP_VIRT_INSTRUCTION_FAULT : smode(env, csrno);
-+}
++	/*
++	 * With mstateen0.SRMCFG set an S-mode write to srmcfg must not trap
++	 * and must read back.
++	 */
++	li	t0, MSTATEEN0_SRMCFG
++	csrw	CSR_MSTATEEN0, t0
++	la	t0, trap_mcause
++	sd	zero, 0(t0)
++	la	t0, smode_access_allowed
++	jal	enter_smode
++	la	t0, trap_mcause
++	ld	t1, 0(t0)
++	bnez	t1, _fail
++	la	t0, smode_value
++	ld	t1, 0(t0)
++	li	t2, SRMCFG_TEST_VALUE
++	bne	t1, t2, _fail
 +
-+static RISCVException read_srmcfg(CPURISCVState *env, int csrno,
-+                                  target_ulong *val)
-+{
-+    *val = env->srmcfg;
-+    return RISCV_EXCP_NONE;
-+}
++	/*
++	 * With mstateen0.SRMCFG set a VS-mode access to srmcfg must raise a
++	 * virtual instruction exception.
++	 */
++	la	t0, smode_access_blocked
++	jal	enter_vsmode
++	la	t0, trap_mcause
++	ld	t1, 0(t0)
++	li	t2, CAUSE_VIRT_INST
++	bne	t1, t2, _fail
 +
-+static RISCVException write_srmcfg(CPURISCVState *env, int csrno,
-+                                   target_ulong val, uintptr_t ra)
-+{
-+    env->srmcfg = val & (SRMCFG_RCID | SRMCFG_MCID);
-+    return RISCV_EXCP_NONE;
-+}
++	/*
++	 * With mstateen0.SRMCFG clear the same VS-mode access must raise an
++	 * illegal instruction exception.
++	 */
++	csrw	CSR_MSTATEEN0, zero
++	la	t0, smode_access_blocked
++	jal	enter_vsmode
++	la	t0, trap_mcause
++	ld	t1, 0(t0)
++	li	t2, CAUSE_ILLEGAL_INST
++	bne	t1, t2, _fail
 +
++	li	a0, 0
++	j	_exit
 +
- #define VSTOPI_NUM_SRCS 5
- 
- /*
-@@ -3753,6 +3787,10 @@ static RISCVException write_mstateen0(CPURISCVState *env, int csrno,
-         if (riscv_cpu_cfg(env)->ext_ssctr) {
-             wr_mask |= SMSTATEEN0_CTR;
-         }
++_fail:
++	li	a0, 1
 +
-+        if (riscv_cpu_cfg(env)->ext_ssqosid) {
-+            wr_mask |= SMSTATEEN0_SRMCFG;
-+        }
-     }
- 
-     return write_mstateen(env, csrno, wr_mask, new_val);
-@@ -3812,6 +3850,10 @@ static RISCVException write_mstateen0h(CPURISCVState *env, int csrno,
-         wr_mask |= SMSTATEEN0_CTR;
-     }
- 
-+    if (riscv_cpu_cfg(env)->ext_ssqosid) {
-+        wr_mask |= SMSTATEEN0_SRMCFG;
-+    }
++/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
++_exit:
++	la	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
 +
-     return write_mstateenh(env, csrno, wr_mask, new_val);
- }
- 
-@@ -6419,6 +6461,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
-     /* Supervisor Protection and Translation */
-     [CSR_SATP]     = { "satp",     satp, read_satp,     write_satp     },
- 
-+    /* Supervisor-Level Quality-of-Service Identifiers (Ssqosid) */
-+    [CSR_SRMCFG]   = { "srmcfg",  check_srmcfg, read_srmcfg, write_srmcfg },
++/*
++ * Run the code at t0 in S-mode. That code ends with an ecall, which the
++ * trap handler turns into a return to M-mode at the instruction after
++ * the ecall, so the S-mode code returns to our caller with ra intact.
++ */
++enter_smode:
++	li	t1, MSTATUS_MPP
++	csrc	mstatus, t1
++	li	t1, MSTATUS_MPP_S
++	csrs	mstatus, t1
++	csrw	mepc, t0
++	mret
 +
-     /* Supervisor-Level Window to Indirectly Accessed Registers (AIA) */
-     [CSR_SISELECT]   = { "siselect",   csrind_or_aia_smode, NULL, NULL,
-                          rmw_xiselect                                       },
++/* Same as enter_smode, with mstatus.MPV set so that mret enters VS-mode. */
++enter_vsmode:
++	li	t1, MSTATUS_MPP
++	csrc	mstatus, t1
++	li	t1, MSTATUS_MPP_S | MSTATUS_MPV
++	csrs	mstatus, t1
++	csrw	mepc, t0
++	mret
++
++/* The csrr is expected to trap. The handler skips it and the nop. */
++smode_access_blocked:
++	csrr	t1, CSR_SRMCFG
++	nop
++	ecall
++	ret
++
++smode_access_allowed:
++	li	t1, SRMCFG_TEST_VALUE
++	csrw	CSR_SRMCFG, t1
++	csrr	t1, CSR_SRMCFG
++	la	t2, smode_value
++	sd	t1, 0(t2)
++	ecall
++	ret
++
++	.balign	4
++trap_handler:
++	csrr	t4, mcause
++	li	t5, CAUSE_ECALL_S
++	beq	t4, t5, 1f
++	li	t5, CAUSE_ECALL_VS
++	beq	t4, t5, 1f
++	li	t5, CAUSE_ILLEGAL_INST
++	beq	t4, t5, 3f
++	li	t5, CAUSE_VIRT_INST
++	bne	t4, t5, 2f
++
++3:
++	/* Record the cause and skip the trapping insn and the one after it. */
++	la	t5, trap_mcause
++	sd	t4, 0(t5)
++	csrr	t4, mepc
++	addi	t4, t4, 8
++	csrw	mepc, t4
++	mret
++
++2:
++	/* Any other trap is a failure: exit from M-mode. */
++	li	t5, MSTATUS_MPP
++	csrs	mstatus, t5
++	la	t4, _fail
++	csrw	mepc, t4
++	mret
++
++1:
++	/* ecall from S or VS-mode: return to M-mode after the ecall. */
++	li	t5, MSTATUS_MPP
++	csrs	mstatus, t5
++	csrr	t4, mepc
++	addi	t4, t4, 4
++	csrw	mepc, t4
++	mret
++
++	.data
++	.balign	8
++semiargs:
++	.space	16
++trap_mcause:
++	.space	8
++smode_value:
++	.space	8
 
 -- 
 2.43.0
