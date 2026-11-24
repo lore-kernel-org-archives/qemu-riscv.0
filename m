@@ -1,141 +1,142 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BDB6606A31E
-	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 12:11:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BA75606A691
+	for <qemu-riscv@archiver.kernel.org>; Tue, 24 Nov 2026 16:14:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mK2LA0ha;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z9WP8VDq
+	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kPsf3aTo;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LYiPKar4
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xVpMR-0000x1-FD; Tue, 24 Nov 2026 07:10:59 -0500
+	id 1xVt95-0008Ae-FK; Tue, 24 Nov 2026 11:13:27 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVpMP-0000w6-RE
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 07:10:57 -0500
+ id 1xVt90-00089K-MC
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 11:13:23 -0500
 Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xVpMM-00067V-3S
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 07:10:57 -0500
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1xVt8y-0001DT-5x
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 11:13:22 -0500
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AOAuSaJ120204
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 12:10:52 GMT
+ 6AOFLGLU4124327
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 16:13:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- dFTlc8A4BU9VskvAEZY7T5zU4YZVc7LfjAvhtaZEzOg=; b=mK2LA0hawLqVZuqt
- 97Dv9dH4gy6oZPYyXJUmYKD9XOH1pvAEfQqsYqNG0X7MFzotdUxxvFCZQb3oUfum
- fZoUViyxSjCL8t1K7gDCkhBY4WKjnaZWjOGedNqdQeOqbpgq5SrO7pf/0GAfxkWZ
- ILaTaO5QyiSuD9ctWJp1TQTizMXwnp0jlefCGKJZ689zMl5/GB02lXLyvIliRM7m
- ZnGrC7Rp4VSp20jPzN3Hrdb24//AbH3yOIc448AqqfKJX73rZuviZtH07YoQc3F6
- 1wnXIZocjqG+lcdSbgxARczFZaSHdjRB3gxFWks4dNi5Pfgb7dEGtDHge/su5ogA
- kGSa1Q==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4x8f2xvp-1
+ /AYPQQmmExJ/bArdg/hnXvAX3qAATfSXQTZhVZHAXjs=; b=kPsf3aTofUD6BKtw
+ EZpdW+e+Z4i6MaPptgHQ22KbFxWAvc10+H1XE26T0G19n560ZG5LdLQ9FS/OkU0B
+ A1roecn8Z7BgvWZ1Kz8DJJUwc2hSI+rweL30T1qDtFvyNxSWWxTIfcwCfF4TiY4F
+ 1LhpmSYsdKlvodjX3zkvVLU5HbZumZfaXZ/B8i6p4xL08k2GQ4bZ8zAjzuqMAm1p
+ yATWKv8dy1Hmi3DHi+VVFAR/y3U9msYnBN539WKg5NioX3qzSCgB6BqeSwnQbWca
+ u7m9Qv0DYxV218//UBmQytTHXT8vaoB2NMhh7L1i1dZvr6VU9N+Ojf6AA+ooXnZw
+ Xw3fAQ==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com
+ [209.85.219.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j54rhanrg-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 12:10:52 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-94960131b4eso804275185a.3
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 04:10:52 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 16:13:16 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id
+ 6a1803df08f44-91b937ecbb4so80702396d6.2
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 08:13:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795522251; x=1796127051; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795536795; x=1796141595; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=dFTlc8A4BU9VskvAEZY7T5zU4YZVc7LfjAvhtaZEzOg=;
- b=Z9WP8VDqtRQCfIHa/6NjOathSCI+A4yAirXLjtVRYo6lCLPLeXroGp0IZMpK38/M7+
- SbB/XWiM8iGRs0xL3s7rPIyup/TC4UOt1jUtGdDNfatq08MCuVm2wvOVtEPc3djQ2zXu
- e1TSI8zDX6dLszNHzLWZ6a/vR6kl7mJPsFRF4BDqsfumVx3KyX9AMdqpojjR0818jKSG
- 2d9VK8IcrfoWH6slfaZ6Kui5RLCy1HNWm4ZRiWyhw6/yEn7zgQzgwUi9Lyy5n2Ci+3oj
- wjB/gEjvzXxI1+Z0C27vxV6hiA2ZWYujdIpkOu4FSXjFDeeB23Ztkqx5tAS3EElQ2B73
- GqDg==
+ bh=/AYPQQmmExJ/bArdg/hnXvAX3qAATfSXQTZhVZHAXjs=;
+ b=LYiPKar4r2HGC0G/Nx4rxy13uvjraG65kkYiViMXgp0k2gheT+Or3ow3SxrlI7kqoY
+ uNhDhx/vYFmIY1Xa1We57a4u1K96oR08WPllpp9LN+csRttulu+F6FdvLzcUAEk1iDxS
+ RYdrGCM8Yrbhh0XLDs602uCQ84pGFRMZ/EG3wVIZjBkyrpxOD/VfMlxBvdxglYX8DeMl
+ SAv+fmsG3AnHMAqIgGc2N7/WUK8dqmxzQtosUX8fCEcZJt9czK/ZsMRjRdT6vgPBT5lS
+ KLDVcC5O+XjnWw19y5E6hsvp8yii3uJLSP1HMyYpRglASlKV3ZP+XYlRTvnAoxvvFDVJ
+ GQsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795522251; x=1796127051;
+ d=1e100.net; s=20260707; t=1795536795; x=1796141595;
  h=content-transfer-encoding:content-type:in-reply-to:content-language
  :from:references:cc:to:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=dFTlc8A4BU9VskvAEZY7T5zU4YZVc7LfjAvhtaZEzOg=;
- b=xCaKbtfrXr2d2aYyBUIopPEVQa+pptQZLoVxGZfIUj+Gz6vAWb9ZwMy2IOccbabdJu
- cTlai7JAxlr4KX1bzRje/uFZqkJpBVmbMMXBi9QVGlOh+S86eYDcKtcptUzSiJt6Tsvp
- i9x7M3Kv9YvZXxaSLrAG88Qm8MOnF+FdvNk9/rgLMSEdrxTWQEmrf2GSlE2fH/Q0e4Ab
- B0teIii1Xh/2rHjZkNFNi/tQtIlbG1o9uhzNb9WD8VdLn2OEw0FpiZXLtxp7rDtHD+4L
- r+dP0hKKZlOTVhffpyB5x7/zI8JGCmP0mxN7CKcdHr679Yzzpp4Vp8FUBGF5bqZtehtL
- mbbg==
+ bh=/AYPQQmmExJ/bArdg/hnXvAX3qAATfSXQTZhVZHAXjs=;
+ b=NaSRdOxsE/IwvluvQtC9471Oi5tN2x4KedOyLTiaF/vF+siPisiyMzJC1gAQljiJTu
+ 19zC158pQTSL3faWeqXC4XcDGJchNtFydP4gZoo/Xjf28Q51iW8V2U72frDNkuZWZ/NP
+ PmkXr/ZEvzy2chxi2uAcpBFH10ul0FHDQNWC7N5uIrIAZmFBz8pTdgUXLzMPIFvcdA7j
+ wb/pE3OCKKQEAerRH45xienj15F9+vkbzVim64JdfXRy64fwxoO3tc7mNDKu6/tg5aHq
+ /UpmaRmW0HWrj90ZcCM9hTWE/yjJMax0IvT/vtqmwzkbKLuYBzOUzk2mjNPHHGyl070I
+ 5lOg==
 X-Forwarded-Encrypted: i=1;
- AL+hErFt4utvQTBGkQaeuUeYc7u5vtpGPpxATVA0QUq+MxiUN8ljg/W37/uGVF8F9pig2bRo9RwTRdAi96Kp@nongnu.org
-X-Gm-Message-State: APuU4Z8LqMwUVw4C7sPtZ6gT+FsP5orkHd6g9cPc1Jd50nDR07YvXeN2
- mKWagDW1L8C4r29KEFfd23oXjt3dl9jeYZOnv9CRSG/2rm4f/y5SZQDdt93KoGAKMn4iaIqACB5
- N6SwyiurfvbU/Y4xSfrGg/m6FQT8o74pj0UnzZQK0U7fKmlc5Iuwad0xU5A==
-X-Gm-Gg: AZFdTZf2K0dKAJyoiEGc3EupX/dzQ2U0w5+eeu5m0dt3a+IcnbqEoF0nx4gNCCnhBrD
- GSsCVJz6171Nn0a3s8zzIMwfQa+xnDeTcxzbYmcLySf0SPsMYvUs7p/HYSQ/+nSmEQ+snmdwQFn
- DPuBbJn/IPBhkTFEgpAirN5RGf7nW/C0+LSVVPgo3MeYV5Z+KNaqyfR6ftaO4/5WPUX9kokrxNR
- hk3xGcyaItv7bfX1A4UzL9EunW//XBxd611u8WvLAovudaKTxbgPYi/5XAoh8Twa9d+um/t0S5A
- 81/mjLRSvrTB95CQSy2xuJhb0wYu6umHgnDwse/iemYvg4swBtSf49eK8QRqtHnaEF0zLBUYRRt
- B2MATc2LLJ5c72Wa2rB4iXEqS9vwkPzjq+PJWJmG2V6WvcsWBzvze4GjEMGA2chHNrEykEbkUU8
- F+36waADfB
-X-Received: by 2002:a05:620a:700e:b0:93b:db80:e0cf with SMTP id
- af79cd13be357-949bab5101emr2344468485a.60.1795522251177; 
- Tue, 24 Nov 2026 04:10:51 -0800 (PST)
-X-Received: by 2002:a05:620a:700e:b0:93b:db80:e0cf with SMTP id
- af79cd13be357-949bab5101emr2344461185a.60.1795522250418; 
- Tue, 24 Nov 2026 04:10:50 -0800 (PST)
+ AL+hErGizc+mWDWq7cuKDZIfL3FgHpZS0+pG/se74v44IL4L2BwvIL5Jhgk0qKrfEphTvjw3oT2lA4O8ifaV@nongnu.org
+X-Gm-Message-State: APuU4Z8WPhJuHcpvRz3JizMOXN/kzTV0L0nlORdLebTMhyEAsEzPFuVl
+ FrXnQdRPQkrkopAujHD4ZyduBAZAu3O6Nsd1wD6/6729UITc4Pfuc9OwWStG/ziJerRMRPh7x2s
+ bKf651MbdvRLMApTZGCYMh1Vy2Widlt9rRyROjFnBPIpKmey0wRWquZZI5w==
+X-Gm-Gg: AZFdTZeZz0Y3lwGvZ6x/gBgQjp9RZYh0k8wIJshwRMcOruio4/DppCBuvqXFzDd9OVL
+ LZV58iL/nko3iOL01pA7evjqAmovT7kI2tPTcU0KOOHdARGeWyS6XsmYa36IxTCzBCneUzV3FXl
+ /crlWLmYgY3QFnpQwhZv1Y3HJlt+iH+UnWGDPx5HNQAMnlBfBbMxuikbmoUIhIKH9jmRFXBZFOw
+ 3pFpTNXTMoqx8kaPMPqUaQTjfZY+/XHR0CyjHDf7f3IB8gKDa/XCbo13g6qg1EI02gWuFuPRTaJ
+ vg3lEFuNp6MAU4a1i5XB4AMBEVqj0R/xODdMf0G25aDPWMVgoblFemOrNQXoybqnyrFIIfvluvD
+ YjyEgRjB3l6X0Fxb0ShdGKTVj342nZ7PbrXaqEMib79fwpyZ2ZuXPaFwFGHHff+dG2FnqkI9qkV
+ Io2nBOi7ES
+X-Received: by 2002:ac8:5d09:0:b0:535:a20:8277 with SMTP id
+ d75a77b69052e-55d769940e9mr281913621cf.10.1795536795125; 
+ Tue, 24 Nov 2026 08:13:15 -0800 (PST)
+X-Received: by 2002:ac8:5d09:0:b0:535:a20:8277 with SMTP id
+ d75a77b69052e-55d769940e9mr281912841cf.10.1795536794488; 
+ Tue, 24 Nov 2026 08:13:14 -0800 (PST)
 Received: from [192.168.68.101] ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949bb3a646fsm1031070685a.22.2026.11.24.04.10.47
+ d75a77b69052e-55d78811fd5sm132540511cf.8.2026.11.24.08.13.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Nov 2026 04:10:49 -0800 (PST)
-Message-ID: <4dabf588-b0ab-4360-8cc0-19560a6750fb@oss.qualcomm.com>
-Date: Tue, 24 Nov 2026 09:10:46 -0300
+ Tue, 24 Nov 2026 08:13:13 -0800 (PST)
+Message-ID: <67da6667-477e-4c94-a678-7c5345c8600b@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 13:13:09 -0300
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] hw/riscv/riscv-iommu: Add unit tests for MSI trap
- handling
-To: Zephyr Li <fritchleybohrer@gmail.com>, qemu-devel@nongnu.org
-Cc: palmer@dabbelt.com, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- qemu-riscv@nongnu.org, farosas@suse.de, lvivier@redhat.com,
- pbonzini@redhat.com
-References: <20261116075141.167317-1-fritchleybohrer@gmail.com>
- <20261116075141.167317-4-fritchleybohrer@gmail.com>
+Subject: Re: [PATCH] target/riscv: make Zicfiss CBO checks independent of TLB
+ state
+To: Abhigyan Kumar <314abh@gmail.com>, qemu-riscv@nongnu.org
+Cc: qemu-devel@nongnu.org, =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?=
+ <philmd@oss.qualcomm.com>,
+ Zhao Liu <zhao1.liu@intel.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
+ <liwei1518@gmail.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu.zevorn@gmail.com>
+References: <20261114215908.260568-1-314abh@gmail.com>
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 Content-Language: en-US
-In-Reply-To: <20261116075141.167317-4-fritchleybohrer@gmail.com>
+In-Reply-To: <20261114215908.260568-1-314abh@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA0NyBTYWx0ZWRfX67fllDKaRxXi
- gSbxDft/8npbgHYx2S5SdH9zISQ8v0dODqrUo1uKcCRJJfdyehA7R3G3w+Lcz8YhzXITSjVtyDG
- o/AaLCiVowK90z99yAcr0Kk6qti3QdE=
-X-Authority-Analysis: v=2.4 cv=JbgpPkKV c=1 sm=1 tr=0 ts=6b057ecc cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=BKkmP1QG c=1 sm=1 tr=0 ts=6b05b79c cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=KpfOZQ45AAAA:8 a=iAGwjg5LuKujN0-w2ZEA:9
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22 a=KHlNn528OWJD8b-aQ5dU:22
-X-Proofpoint-GUID: 6Chp4jFruAGHeGzaFhR9dFz15YdSKqCT
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA0NyBTYWx0ZWRfX3paWr9fWN5DH
- 33nfJJ0BEHM9wDd3rPbeFx40LKP9m6tGAV46z4VMHRcIyKGRefnmwgStPVCpij1tHY/UEeETpRg
- R9+bpMCGlm9/Q03UARu3a9vwB0rDqlN97DGhFUzVf52NUjC2XzhSiH5hqclgq73/yDr/aLlEmwC
- Q5xwu7P+99h/JTeD4XeXEFGMLtUKxY8YFUbKPC/QBEovZhKjJiiSdFP7wr9CYQDKNl5wgXuS07l
- lqNTolDhljV32+kObcGSORXsI/JoIr8yUsfEKPTPKgenWp5aKH3LSQ8LtPLe2B0mVfSKU+IaC2k
- xnqqY0ZgVui5We0rSKvUNon+b9N9lyPY6R7HYh8Q0MRCU0caXRn1T5IebSSVxC2i1Cioau9hZ9j
- JjwjRyC8n7HizNpB1J/ESzMav4BRl32hQGhqqf6ganaJKen47j3c+INLqgK0ysECdky5R1JgksO
- pz6sXUAVmo1/ZMz/OOw==
-X-Proofpoint-ORIG-GUID: 6Chp4jFruAGHeGzaFhR9dFz15YdSKqCT
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=NEAV23lmAAAA:8 a=p0WdMEafAAAA:8 a=pGLkceISAAAA:8 a=Dezw0IVeCP2Y-Kh92igA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA2MyBTYWx0ZWRfXyYGALSbgGEEZ
+ JA9sp85ZOpqSvjgDq+OVj17XK7vdUlMfMJlh0pKC+Wm3IZW9/AfStX1B4LDLx7ocdNJI45+gzvZ
+ PF+m1pQ3RGMabrwG5n36tZ0fWH2LvVU=
+X-Proofpoint-GUID: Tga4Kj901m8i_aygMy5GzD6XE2l019o1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA2MyBTYWx0ZWRfXxhi7FK+gIPYi
+ +TWEfowePbHD/qcshnGMMTlaH9ZHQFU6gotkFAdnlxRbrw7DgM4fm/SumBT2jMHFbxfucuVwq7A
+ oLHOkTQJofw4a0zF9YRarlQgMCB6XExjxS1ApPNs1JQIFKDw4xaLx/JSKpD8bVXj9laevtYFkQB
+ 5QERVRn/zk3+BQ/MJXuopTn4gmy6kwqs2uXSiGvVJT0XOyWE3n38AOSH62GOPdiP2TW25IFxzQM
+ zAMpABfK3UMxBVXCLzCUThXliBU5ktfGpRoR+jBdMYzTM6TPvr8yokL9VExETD7kBs01qsS7+G3
+ 1/VND88NcnlEtTe6eOy+fUsiHveNof3BvJYT0aB9oTEbgIw3hOLSLazK7cTGdm+dGhuAPCHEJ+Z
+ 14P8BFhoVfXpBGqyLPY3pYe+wFk902kXiIus8h56CvkYORZr7rSCRryMRpYZkHKIkbJY1O6OOde
+ KbphbMvIcuE4AjqxVQg==
+X-Proofpoint-ORIG-GUID: Tga4Kj901m8i_aygMy5GzD6XE2l019o1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_02,2026-11-23_01,2025-10-01_01
+ definitions=2026-11-24_04,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0
- impostorscore=0 suspectscore=0 clxscore=1015 priorityscore=1501 phishscore=0
+ priorityscore=1501 malwarescore=0 clxscore=1015 bulkscore=0 adultscore=0
+ phishscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240047
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240063
 Received-SPF: pass client-ip=205.220.168.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -144,7 +145,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=ham autolearn_force=no
+ SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,498 +157,306 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+Hi,
 
 
-On 11/16/2026 4:51 AM, Zephyr Li wrote:
-> The recovery-fault and ordinary-DMA fallback paths are difficult to
-> exercise deterministically with a qtest that updates page tables between
-> the initial translation and the synchronous trap callback.
+This patch fails to build, at least in my env, when applied on top of
+alistair/riscv-to-apply.next (https://github.com/alistair23/qemu):
+
+[1889/2854] Compiling C object libqemu-riscv64-softmmu.a.p/target_riscv_tcg_op_helper.c.o
+FAILED: libqemu-riscv64-softmmu.a.p/target_riscv_tcg_op_helper.c.o
+cc -Ilibqemu-riscv64-softmmu.a.p -I. -I.. -Itarget/riscv -I../target/riscv -Isubprojects/libvduse -I../subprojects/libvduse -Iqapi -Itrace -Iui -Iui/shader -I/usr/include/pixman-1 -I/usr/include/glib-2.0 -I/usr/lib/aarch64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gio-unix-2.0 -I/usr/include/slirp -fdiagnostics-color=auto -Wall -Winvalid-pch -Werror -std=gnu11 -O2 -g -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fno-strict-aliasing 
+-fno-common -fwrapv -ftrivial-auto-var-init=zero -fzero-call-used-regs=used-gpr -fstack-protector-strong -Wempty-body -Wendif-labels -Wexpansion-to-defined -Wformat-overflow=2 -Wformat-security -Wformat-y2k -Wignored-qualifiers -Wimplicit-fallthrough=2 -Winit-self -Wmissing-format-attribute -Wmissing-prototypes -Wnested-externs -Wold-style-declaration -Wold-style-definition -Wredundant-decls -Wshadow=local -Wstrict-prototypes -Wtype-limits -Wundef -Wvla -Wwrite-strings -Wno-missing-include-dirs 
+-Wno-psabi -Wno-shift-negative-value -isystem /home/dbarboza/work/qemu/linux-headers -isystem linux-headers -iquote . -iquote /home/dbarboza/work/qemu -iquote /home/dbarboza/work/qemu/include -iquote /home/dbarboza/work/qemu/host/include/aarch64 -iquote /home/dbarboza/work/qemu/host/include/generic -iquote /home/dbarboza/work/qemu/tcg/aarch64 -fPIE -pthread -D_DEFAULT_SOURCE -D_XOPEN_SOURCE=600 -DNCURSES_WIDECHAR=1 -isystem../linux-headers -isystemlinux-headers -DCOMPILING_PER_TARGET 
+'-DCONFIG_TARGET="riscv64-softmmu-config-target.h"' -DTARGET_ARCH_PREFIX=target_riscv '-DCONFIG_DEVICES="riscv64-softmmu-config-devices.h"' -MD -MQ libqemu-riscv64-softmmu.a.p/target_riscv_tcg_op_helper.c.o -MF libqemu-riscv64-softmmu.a.p/target_riscv_tcg_op_helper.c.o.d -o libqemu-riscv64-softmmu.a.p/target_riscv_tcg_op_helper.c.o -c ../target/riscv/tcg/op_helper.c
+../target/riscv/tcg/op_helper.c: In function ‘check_zicbom_access’:
+../target/riscv/tcg/op_helper.c:237:14: error: unused variable ‘fault_addr’ [-Werror=unused-variable]
+   237 |     uint64_t fault_addr = address;
+       |              ^~~~~~~~~~
+cc1: all warnings being treated as errors
+
+
+This happens because 'fault_addr' is being used only inside the #ifdef:
+
+
+#ifdef CONFIG_USER_ONLY
+     ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
+                              mmu_idx, true, &phost, ra);
+     if (ret & TLB_MMIO) {
+         env->badaddr = fault_addr;
+         riscv_raise_exception(env, RISCV_EXCP_STORE_AMO_ACCESS_FAULT, ra);
+     } else if (ret != TLB_INVALID_MASK) {
+         /* Success: readable */
+         return;
+     }
+#else
+(...)
+#endif
+
+
+And, for riscv64-softmmu builds, the variable will be left unused and gcc will nag about it.
+
+
+Can you please rebase the patch on top of alistair/riscv-to-apply.next branch
+and re-send?  Thanks,
+
+Daniel
+
+
+On 11/14/2026 6:59 PM, Abhigyan Kumar wrote:
+> The Zicfiss extension requires CBO.CLEAN/FLUSH/INVAL on a shadow stack
+> page to raise a store/AMO access fault. Citing section 15.1.2.3 ("Shadow
+> Stack Memory Protection") of the RISC-V spec:
 > 
-> Move the private callback into an implementation fragment shared with a
-> unit test. Use real QEMU types and replace the callback dependencies
-> only in the test translation unit, without exporting a new API or adding
-> runtime test hooks.
+>      "Memory mapped as an SS page cannot be written to by instructions
+>      other than SSAMOSWAP.W/D, SSPUSH, and C.SSPUSH. Attempts will raise
+>      a store/AMO access-fault exception. Access to a SS page using
+>      cache-block operation (CBO.*) instructions is not permitted. Such
+>      accesses will raise a store/AMO access-fault exception. Implicit
+>      accesses, including instruction fetches to an SS page, are not
+>      permitted. Such accesses will raise an access-fault exception
+>      appropriate to the access type. However, the shadow stack is
+>      readable by all instructions that only load from memory."
 > 
-> Cover rejected attributes, missing contexts, MSI forwarding, recovery
-> faults, and 4/8-byte fallback writes with success and error returns.
-> Check the addresses, little-endian bytes, transaction attributes,
-> context release, single-fault behavior, and disabled replay HPM
-> accounting. The PV assertions describe the existing callback policy, not
-> complete request-PID validity handling.
+> Currently, CBO.* instructions quietly return when operated on a shadow
+> stack page. check_zicomb_access probes pages for read with non-fault
+> set. Then, get_physical_address reports a shadow stack page as
+> unreadable when called from a probing tlb_fill. But it only works when
+> probe reaches tlb_fill. After a usual load, probe hits TLB and reports
+> the page as readable. Hence, causing CBOs to quietly return.
 > 
-> Register the test for system builds and add it to the RISC-V MAINTAINERS
-> entry. Use the usual pointer declaration in the moved callback. The
-> production behavior is unchanged.
+> This commit introduces CPUTLBEntryFull.extra.riscv.sstack as
+> a marker for shadow stack pages inside TLB entries. When riscv.sstack is
+> set, check_zicbom_access falls through it to probe_write.
 > 
-> Use a distinct opaque reference in the context stub so the
-> cleanup checks distinguish the returned context from its
-> cache-lifetime reference.
+> With this commit, the now-redundant special case in get_physical_address
+> for probe is removed. is_probe in a call to get_physical_address is
+> replaced with is_sstack_page. As a side effect non-fault probes of
+> shadow stack pages no longer see them as unreadable, matching what a
+> usual load does.
 > 
-> Signed-off-by: Zephyr Li <fritchleybohrer@gmail.com>
+> Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4789
+> Fixes: 669b4867495c ("target/riscv: mmu changes for zicfiss shadow stack protection")
+> Signed-off-by: Abhigyan Kumar <314abh@gmail.com>
 > ---
-
-
-Reviewed-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-
->   MAINTAINERS                        |   1 +
->   hw/riscv/riscv-iommu-trap.c.inc    |  69 ++++++++
->   hw/riscv/riscv-iommu.c             |  61 +------
->   tests/unit/meson.build             |   1 +
->   tests/unit/test-riscv-iommu-trap.c | 266 +++++++++++++++++++++++++++++
->   5 files changed, 338 insertions(+), 60 deletions(-)
->   create mode 100644 hw/riscv/riscv-iommu-trap.c.inc
->   create mode 100644 tests/unit/test-riscv-iommu-trap.c
+>   include/hw/core/cpu.h         |  5 ++++
+>   target/riscv/tcg/cpu_helper.c | 49 +++++++++++++++++++++++++----------
+>   target/riscv/tcg/op_helper.c  | 16 ++++++++++++
+>   3 files changed, 57 insertions(+), 13 deletions(-)
 > 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 3d53e104c5..75de9034b8 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -387,6 +387,7 @@ F: tests/functional/riscv64
->   F: tests/tcg/riscv32/
->   F: tests/tcg/riscv64/
->   F: tests/qtest/iommu-riscv-test.c
-> +F: tests/unit/test-riscv-iommu-trap.c
->   
->   RISC-V XThead* extensions
->   M: Christoph Muellner <christoph.muellner@vrull.eu>
-> diff --git a/hw/riscv/riscv-iommu-trap.c.inc b/hw/riscv/riscv-iommu-trap.c.inc
-> new file mode 100644
-> index 0000000000..1e3eaee930
-> --- /dev/null
-> +++ b/hw/riscv/riscv-iommu-trap.c.inc
-> @@ -0,0 +1,69 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/*
-> + * Private RISC-V IOMMU MSI trap callback
-> + *
-> + * Copyright (C) 2021-2023, Rivos Inc.
-> + */
+> diff --git a/include/hw/core/cpu.h b/include/hw/core/cpu.h
+> index 5b7c330047..71666a5497 100644
+> --- a/include/hw/core/cpu.h
+> +++ b/include/hw/core/cpu.h
+> @@ -277,6 +277,11 @@ struct CPUTLBEntryFull {
+>               uint8_t shareability;
+>               bool guarded;
+>           } arm;
 > +
-> +/* Shared privately with the deterministic trap callback unit tests. */
-> +
-> +/*
-> + * Translations matching MSI pattern check are redirected to "riscv-iommu-trap"
-> + * memory region as untranslated address, for additional MSI/MRIF interception
-> + * by IOMMU interrupt remapping implementation.
-> + * Note: Device emulation code generating an MSI is expected to provide a valid
-> + * memory transaction attributes with requested_id set.
-> + */
-> +static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
-> +    uint64_t data, unsigned size, MemTxAttrs attrs)
-> +{
-> +    RISCVIOMMUState *s = opaque;
-> +    RISCVIOMMUContext *ctx;
-> +    MemTxResult res;
-> +    void *ref;
-> +    uint32_t devid = attrs.requester_id;
-> +    IOMMUTLBEntry iotlb = {
-> +        .iova = addr,
-> +        .target_as = s->target_as,
-> +        .addr_mask = ~0ULL,
-> +        .perm = IOMMU_WO,
-> +    };
-> +    int cause;
-> +
-> +    if (attrs.unspecified) {
-> +        return MEMTX_ACCESS_ERROR;
-> +    }
-> +
-> +    /* FIXME: PCIe bus remapping for attached endpoints. */
-> +    devid |= s->bus << 8;
-> +
-> +    ctx = riscv_iommu_ctx(s, devid, attrs.pid, IOMMU_WO, addr, &ref);
-> +    if (ctx == NULL) {
-> +        res = MEMTX_ACCESS_ERROR;
-> +    } else {
-> +        /*
-> +         * The trap address is the original IOVA. Resolve the MSI GPA
-> +         * without consulting or updating the translation cache.
-> +         * Exclude this internal replay from the modeled HPM events.
-> +         */
-> +        cause = riscv_iommu_spa_fetch(s, ctx, &iotlb, false);
-> +        if (cause) {
-> +            riscv_iommu_report_fault(s, ctx,
-> +                RISCV_IOMMU_FQ_TTYPE_UADDR_WR, cause,
-> +                !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV),
-> +                addr, iotlb.translated_addr);
-> +            res = MEMTX_ACCESS_ERROR;
-> +        } else if (iotlb.target_as == &s->trap_as) {
-> +            res = riscv_iommu_msi_write(s, ctx, addr,
-> +                                       iotlb.translated_addr, data,
-> +                                       size, attrs);
-> +        } else {
-> +            /* The mapping may have changed since the original walk. */
-> +            data = cpu_to_le64(data);
-> +            res = dma_memory_write(iotlb.target_as, iotlb.translated_addr,
-> +                                   &data, size, attrs);
-> +        }
-> +    }
-> +    riscv_iommu_ctx_put(s, ref);
-> +    return res;
-> +}
-> diff --git a/hw/riscv/riscv-iommu.c b/hw/riscv/riscv-iommu.c
-> index 5752a4776b..cb98840121 100644
-> --- a/hw/riscv/riscv-iommu.c
-> +++ b/hw/riscv/riscv-iommu.c
-> @@ -2599,66 +2599,7 @@ static const MemoryRegionOps riscv_iommu_mmio_ops = {
->       }
+> +        struct {
+> +            /* Zicfiss shadow stack page. */
+> +            bool sstack;
+> +        } riscv;
+>       } extra;
 >   };
 >   
-> -/*
-> - * Translations matching MSI pattern check are redirected to "riscv-iommu-trap"
-> - * memory region as untranslated address, for additional MSI/MRIF interception
-> - * by IOMMU interrupt remapping implementation.
-> - * Note: Device emulation code generating an MSI is expected to provide a valid
-> - * memory transaction attributes with requested_id set.
-> - */
-> -static MemTxResult riscv_iommu_trap_write(void *opaque, hwaddr addr,
-> -    uint64_t data, unsigned size, MemTxAttrs attrs)
-> -{
-> -    RISCVIOMMUState* s = (RISCVIOMMUState *)opaque;
-> -    RISCVIOMMUContext *ctx;
-> -    MemTxResult res;
-> -    void *ref;
-> -    uint32_t devid = attrs.requester_id;
-> -    IOMMUTLBEntry iotlb = {
-> -        .iova = addr,
-> -        .target_as = s->target_as,
-> -        .addr_mask = ~0ULL,
-> -        .perm = IOMMU_WO,
-> -    };
-> -    int cause;
-> -
-> -    if (attrs.unspecified) {
-> -        return MEMTX_ACCESS_ERROR;
-> -    }
-> -
-> -    /* FIXME: PCIe bus remapping for attached endpoints. */
-> -    devid |= s->bus << 8;
-> -
-> -    ctx = riscv_iommu_ctx(s, devid, attrs.pid, IOMMU_WO, addr, &ref);
-> -    if (ctx == NULL) {
-> -        res = MEMTX_ACCESS_ERROR;
-> -    } else {
-> -        /*
-> -         * The trap address is the original IOVA. Resolve the MSI GPA
-> -         * without consulting or updating the translation cache.
-> -         * Exclude this internal replay from the modeled HPM events.
-> -         */
-> -        cause = riscv_iommu_spa_fetch(s, ctx, &iotlb, false);
-> -        if (cause) {
-> -            riscv_iommu_report_fault(s, ctx,
-> -                RISCV_IOMMU_FQ_TTYPE_UADDR_WR, cause,
-> -                !!(ctx->tc & RISCV_IOMMU_DC_TC_PDTV),
-> -                addr, iotlb.translated_addr);
-> -            res = MEMTX_ACCESS_ERROR;
-> -        } else if (iotlb.target_as == &s->trap_as) {
-> -            res = riscv_iommu_msi_write(s, ctx, addr,
-> -                                       iotlb.translated_addr, data,
-> -                                       size, attrs);
-> -        } else {
-> -            /* The mapping may have changed since the original walk. */
-> -            data = cpu_to_le64(data);
-> -            res = dma_memory_write(iotlb.target_as, iotlb.translated_addr,
-> -                                   &data, size, attrs);
-> -        }
-> -    }
-> -    riscv_iommu_ctx_put(s, ref);
-> -    return res;
-> -}
-> +#include "riscv-iommu-trap.c.inc"
+> diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
+> index 58e98e975c..d1b902fea2 100644
+> --- a/target/riscv/tcg/cpu_helper.c
+> +++ b/target/riscv/tcg/cpu_helper.c
+> @@ -1096,7 +1096,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>                                   hwaddr *fault_pte_addr,
+>                                   int access_type, int mmu_idx,
+>                                   bool first_stage, bool two_stage,
+> -                                bool is_debug, bool is_probe)
+> +                                bool is_debug, bool *is_sstack_page)
+>   {
+>       /*
+>        * NOTE: the env->pc value visible here will not be
+> @@ -1254,7 +1254,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>               int vbase_ret = get_physical_address(env, &vbase, &vbase_prot,
+>                                                    base, NULL, MMU_DATA_LOAD,
+>                                                    MMUIdx_U, false, true,
+> -                                                 is_debug, false);
+> +                                                 is_debug, NULL);
 >   
->   static MemTxResult riscv_iommu_trap_read(void *opaque, hwaddr addr,
->       uint64_t *data, unsigned size, MemTxAttrs attrs)
-> diff --git a/tests/unit/meson.build b/tests/unit/meson.build
-> index 37b561d4a7..e4c425fbad 100644
-> --- a/tests/unit/meson.build
-> +++ b/tests/unit/meson.build
-> @@ -132,6 +132,7 @@ if have_system
->       'test-iov': [],
->       'test-opts-visitor': [testqapi],
->       'test-xs-node': [qom],
-> +    'test-riscv-iommu-trap': [],
->       'test-virtio-dmabuf': [meson.project_source_root() / 'hw/display/virtio-dmabuf.c'],
->       'test-qmp-cmds': [testqapi],
->       'test-xbzrle': [migration],
-> diff --git a/tests/unit/test-riscv-iommu-trap.c b/tests/unit/test-riscv-iommu-trap.c
-> new file mode 100644
-> index 0000000000..d4753c7f31
-> --- /dev/null
-> +++ b/tests/unit/test-riscv-iommu-trap.c
-> @@ -0,0 +1,266 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +/* Deterministic tests of the private RISC-V IOMMU MSI trap callback. */
-> +#include "qemu/osdep.h"
-> +#include "qemu/bswap.h"
-> +#include "hw/riscv/riscv-iommu.h"
+>               if (vbase_ret != TRANSLATE_SUCCESS) {
+>                   if (fault_pte_addr) {
+> @@ -1411,6 +1411,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>           return TRANSLATE_FAIL;
+>       }
+>   
+> +    /* If gets stale after a goto restart. */
+> +    sstack_page = false;
 > +
-> +#define TEST_IOVA       0x400040ull
-> +#define TEST_GPA        0x28000040ull
-> +#define TEST_DATA       0x1122334455667788ull
-> +
-> +static struct {
-> +    RISCVIOMMUState state;
-> +    RISCVIOMMUContext ctx;
-> +    unsigned ref_cookie;
-> +    AddressSpace physical_as;
-> +    AddressSpace changed_as;
-> +    MemTxAttrs attrs;
-> +    bool missing_ctx;
-> +    int walk_fault;
-> +    AddressSpace *walk_as;
-> +    hwaddr walk_addr;
-> +    MemTxResult msi_result;
-> +    MemTxResult dma_result;
-> +    unsigned size;
-> +    unsigned ctx_calls;
-> +    unsigned put_calls;
-> +    unsigned walk_calls;
-> +    unsigned msi_calls;
-> +    unsigned fault_calls;
-> +    unsigned dma_calls;
-> +} test;
-> +
-> +static void assert_attrs(MemTxAttrs attrs)
-> +{
-> +    g_assert_cmpuint(attrs.requester_id, ==, test.attrs.requester_id);
-> +    g_assert_cmpuint(attrs.pid, ==, test.attrs.pid);
-> +    g_assert_cmpuint(attrs.secure, ==, test.attrs.secure);
-> +    g_assert_cmpuint(attrs.space, ==, test.attrs.space);
-> +    g_assert_cmpuint(attrs.user, ==, test.attrs.user);
-> +    g_assert_cmpuint(attrs.memory, ==, test.attrs.memory);
-> +    g_assert_cmpuint(attrs.debug, ==, test.attrs.debug);
-> +    g_assert_cmpuint(attrs.address_type, ==, test.attrs.address_type);
-> +    g_assert_cmpuint(attrs.unspecified, ==, test.attrs.unspecified);
-> +}
-> +
-> +static RISCVIOMMUContext *test_ctx(RISCVIOMMUState *s, unsigned devid,
-> +                                 unsigned pid, IOMMUAccessFlags perm,
-> +                                 uint64_t iova, void **ref)
-> +{
-> +    g_assert_true(s == &test.state);
-> +    g_assert_cmpuint(devid, ==,
-> +                     test.attrs.requester_id | (test.state.bus << 8));
-> +    g_assert_cmpuint(pid, ==, test.attrs.pid);
-> +    g_assert_cmpuint(perm, ==, IOMMU_WO);
-> +    g_assert_cmphex(iova, ==, TEST_IOVA);
-> +    test.ctx_calls++;
-> +    /* Cached contexts return a separate reference for ctx_put(). */
-> +    *ref = test.missing_ctx ? NULL : &test.ref_cookie;
-> +    return test.missing_ctx ? NULL : &test.ctx;
-> +}
-> +
-> +static void test_ctx_put(RISCVIOMMUState *s, void *ref)
-> +{
-> +    g_assert_true(s == &test.state);
-> +    g_assert_true(ref == (test.missing_ctx ? NULL : &test.ref_cookie));
-> +    test.put_calls++;
-> +}
-> +
-> +static int test_spa_fetch(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> +                          IOMMUTLBEntry *iotlb, bool update_hpm)
-> +{
-> +    g_assert_true(s == &test.state);
-> +    g_assert_true(ctx == &test.ctx);
-> +    g_assert_cmphex(iotlb->iova, ==, TEST_IOVA);
-> +    g_assert_true(iotlb->target_as == &test.physical_as);
-> +    g_assert_cmphex(iotlb->addr_mask, ==, UINT64_MAX);
-> +    g_assert_cmpuint(iotlb->perm, ==, IOMMU_WO);
-> +    g_assert_false(update_hpm);
-> +    test.walk_calls++;
-> +    iotlb->target_as = test.walk_as;
-> +    iotlb->translated_addr = test.walk_addr;
-> +    return test.walk_fault;
-> +}
-> +
-> +static MemTxResult test_msi_write(RISCVIOMMUState *s,
-> +                                  RISCVIOMMUContext *ctx, uint64_t iova,
-> +                                  uint64_t gpa, uint64_t data, unsigned size,
-> +                                  MemTxAttrs attrs)
-> +{
-> +    g_assert_true(s == &test.state);
-> +    g_assert_true(ctx == &test.ctx);
-> +    g_assert_cmphex(iova, ==, TEST_IOVA);
-> +    g_assert_cmphex(gpa, ==, test.walk_addr);
-> +    g_assert_cmphex(iova, !=, gpa);
-> +    g_assert_cmphex(data, ==, TEST_DATA);
-> +    g_assert_cmpuint(size, ==, test.size);
-> +    assert_attrs(attrs);
-> +    test.msi_calls++;
-> +    return test.msi_result;
-> +}
-> +
-> +static void test_report_fault(RISCVIOMMUState *s, RISCVIOMMUContext *ctx,
-> +                              uint32_t ttype, uint32_t cause, bool pv,
-> +                              uint64_t iotval, uint64_t iotval2)
-> +{
-> +    g_assert_true(s == &test.state);
-> +    g_assert_true(ctx == &test.ctx);
-> +    g_assert_cmpuint(ttype, ==, RISCV_IOMMU_FQ_TTYPE_UADDR_WR);
-> +    g_assert_cmpuint(cause, ==, test.walk_fault);
-> +    /* Check the existing callback policy, not the complete PID/DPE model. */
-> +    g_assert_cmpuint(pv, ==, !!(test.ctx.tc & RISCV_IOMMU_DC_TC_PDTV));
-> +    g_assert_cmphex(iotval, ==, TEST_IOVA);
-> +    g_assert_cmphex(iotval2, ==, test.walk_addr);
-> +    test.fault_calls++;
-> +}
-> +
-> +static MemTxResult test_dma_write(AddressSpace *as, dma_addr_t addr,
-> +                                  const void *buf, dma_addr_t len,
-> +                                  MemTxAttrs attrs)
-> +{
-> +    static const uint8_t expected[] = {
-> +        0x88, 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11,
-> +    };
-> +
-> +    g_assert_true(as == &test.changed_as);
-> +    g_assert_cmphex(addr, ==, test.walk_addr);
-> +    g_assert_cmpuint(len, ==, test.size);
-> +    g_assert_cmpmem(buf, len, expected, len);
-> +    assert_attrs(attrs);
-> +    test.dma_calls++;
-> +    return test.dma_result;
-> +}
-> +
-> +/* Redirect dependencies only while compiling the private implementation. */
-> +#define riscv_iommu_ctx test_ctx
-> +#define riscv_iommu_ctx_put test_ctx_put
-> +#define riscv_iommu_spa_fetch test_spa_fetch
-> +#define riscv_iommu_msi_write test_msi_write
-> +#define riscv_iommu_report_fault test_report_fault
-> +#define dma_memory_write test_dma_write
-> +#include "hw/riscv/riscv-iommu-trap.c.inc"
-> +#undef riscv_iommu_ctx
-> +#undef riscv_iommu_ctx_put
-> +#undef riscv_iommu_spa_fetch
-> +#undef riscv_iommu_msi_write
-> +#undef riscv_iommu_report_fault
-> +#undef dma_memory_write
-> +
-> +static void reset_test(void)
-> +{
-> +    memset(&test, 0, sizeof(test));
-> +    test.state.target_as = &test.physical_as;
-> +    test.state.bus = 0x80;
-> +    test.attrs = (MemTxAttrs) {
-> +        .requester_id = 0x3456,
-> +        .pid = 0x5a,
-> +        .secure = true,
-> +        .space = 1,
-> +        .user = true,
-> +        .memory = true,
-> +        .debug = true,
-> +        .address_type = 1,
-> +    };
-> +    test.ctx.process_id = test.attrs.pid;
-> +    test.walk_as = &test.state.trap_as;
-> +    test.walk_addr = TEST_GPA;
-> +    test.size = 4;
-> +}
-> +
-> +static MemTxResult trap_write(void)
-> +{
-> +    return riscv_iommu_trap_write(&test.state, TEST_IOVA, TEST_DATA,
-> +                                  test.size, test.attrs);
-> +}
-> +
-> +static void assert_calls(unsigned ctx, unsigned walk, unsigned msi,
-> +                         unsigned fault, unsigned dma)
-> +{
-> +    g_assert_cmpuint(test.ctx_calls, ==, ctx);
-> +    g_assert_cmpuint(test.put_calls, ==, ctx);
-> +    g_assert_cmpuint(test.walk_calls, ==, walk);
-> +    g_assert_cmpuint(test.msi_calls, ==, msi);
-> +    g_assert_cmpuint(test.fault_calls, ==, fault);
-> +    g_assert_cmpuint(test.dma_calls, ==, dma);
-> +}
-> +
-> +static void test_unspecified(void)
-> +{
-> +    reset_test();
-> +    test.attrs.unspecified = true;
-> +    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
-> +    assert_calls(0, 0, 0, 0, 0);
-> +}
-> +
-> +static void test_missing_context(void)
-> +{
-> +    reset_test();
-> +    test.missing_ctx = true;
-> +    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
-> +    assert_calls(1, 0, 0, 0, 0);
-> +}
-> +
-> +static void test_msi_forward(void)
-> +{
-> +    reset_test();
-> +    test.size = 8;
-> +    test.msi_result = MEMTX_ERROR;
-> +    g_assert_cmpuint(trap_write(), ==, MEMTX_ERROR);
-> +    assert_calls(1, 1, 1, 0, 0);
-> +}
-> +
-> +static void test_rewalk_fault(gconstpointer data)
-> +{
-> +    reset_test();
-> +    test.attrs.pid = 0;
-> +    test.ctx.process_id = 0;
-> +    test.ctx.tc = data ? RISCV_IOMMU_DC_TC_PDTV : 0;
-> +    test.walk_fault = RISCV_IOMMU_FQ_CAUSE_WR_FAULT_VS;
-> +    g_assert_cmpuint(trap_write(), ==, MEMTX_ACCESS_ERROR);
-> +    assert_calls(1, 1, 0, 1, 0);
-> +}
-> +
-> +typedef struct FallbackCase {
-> +    const char *name;
-> +    unsigned size;
-> +    MemTxResult result;
-> +} FallbackCase;
-> +
-> +static void test_fallback(gconstpointer data)
-> +{
-> +    const FallbackCase *cfg = data;
-> +
-> +    reset_test();
-> +    test.size = cfg->size;
-> +    test.walk_as = &test.changed_as;
-> +    test.walk_addr = 0x90000040;
-> +    test.dma_result = cfg->result;
-> +    g_assert_cmpuint(trap_write(), ==, cfg->result);
-> +    assert_calls(1, 1, 0, 0, 1);
-> +}
-> +
-> +int main(int argc, char **argv)
-> +{
-> +    static const FallbackCase fallback_cases[] = {
-> +        { "fallback-4-success", 4, MEMTX_OK },
-> +        { "fallback-4-error", 4, MEMTX_ERROR },
-> +        { "fallback-8-success", 8, MEMTX_OK },
-> +        { "fallback-8-error", 8, MEMTX_ERROR },
-> +    };
-> +
-> +    g_test_init(&argc, &argv, NULL);
-> +    g_test_add_func("/riscv-iommu/trap/unspecified", test_unspecified);
-> +    g_test_add_func("/riscv-iommu/trap/missing-context", test_missing_context);
-> +    g_test_add_func("/riscv-iommu/trap/msi-forward", test_msi_forward);
-> +    g_test_add_data_func("/riscv-iommu/trap/rewalk-fault-pdtv-off", NULL,
-> +                         test_rewalk_fault);
-> +    g_test_add_data_func("/riscv-iommu/trap/rewalk-fault-pdtv-on",
-> +                         GUINT_TO_POINTER(1), test_rewalk_fault);
-> +    for (unsigned i = 0; i < G_N_ELEMENTS(fallback_cases); i++) {
-> +        g_autofree char *path = g_strdup_printf("/riscv-iommu/trap/%s",
-> +                                               fallback_cases[i].name);
-> +
-> +        g_test_add_data_func(path, &fallback_cases[i], test_fallback);
+>       target_ulong rwx = pte & (PTE_R | PTE_W | PTE_X);
+>       /* Check for reserved combinations of RWX flags. */
+>       switch (rwx) {
+> @@ -1421,10 +1424,10 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>           if (cpu_get_bcfien(env) && first_stage) {
+>               sstack_page = true;
+>               /*
+> -             * if ss index, read and write allowed. else if not a probe
+> -             * then only read allowed
+> +             * If ss index, read and write allowed, else allow only reads.
+> +             * Page flagged in TLB for CBOs to be able to tell them apart.
+>                */
+> -            rwx = is_sstack_idx ? (PTE_R | PTE_W) : (is_probe ? 0 :  PTE_R);
+> +            rwx = is_sstack_idx ? (PTE_R | PTE_W) : PTE_R;
+>               break;
+>           }
+>           return TRANSLATE_FAIL;
+> @@ -1539,7 +1542,7 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>               int gpa_ret = get_physical_address(env, &gpa_paddr, &gpa_prot,
+>                                                  pte_gpa, NULL, MMU_DATA_STORE,
+>                                                  MMUIdx_U, false, true,
+> -                                               is_debug, false);
+> +                                               is_debug, NULL);
+>               if (gpa_ret != TRANSLATE_SUCCESS) {
+>                   if (fault_pte_addr) {
+>                       *fault_pte_addr = pte_gpa >> 2;
+> @@ -1612,6 +1615,10 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
+>       }
+>       *ret_prot = prot;
+>   
+> +    if (is_sstack_page) {
+> +        *is_sstack_page = sstack_page;
 > +    }
-> +    return g_test_run();
-> +}
+> +
+>       return TRANSLATE_SUCCESS;
+>   }
+>   
+> @@ -1669,13 +1676,13 @@ bool riscv_cpu_translate_for_debug(CPUState *cs, vaddr addr,
+>       int mmu_idx = riscv_env_mmu_index(&cpu->env, false);
+>   
+>       if (get_physical_address(env, &phys_addr, &prot, addr, NULL, 0, mmu_idx,
+> -                             true, env->virt_enabled, true, false)) {
+> +                             true, env->virt_enabled, true, NULL)) {
+>           return false;
+>       }
+>   
+>       if (env->virt_enabled) {
+>           if (get_physical_address(env, &phys_addr, &prot, phys_addr, NULL,
+> -                                 0, MMUIdx_U, false, true, true, false)) {
+> +                                 0, MMUIdx_U, false, true, true, NULL)) {
+>               return false;
+>           }
+>       }
+> @@ -1779,6 +1786,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       bool first_stage_error = true;
+>       bool two_stage_lookup = mmuidx_2stage(mmu_idx);
+>       bool two_stage_indirect_error = false;
+> +    bool sstack_page = false;
+>       int ret = TRANSLATE_FAIL;
+>       privilege_mode_t mode = mmuidx_priv(mmu_idx);
+>       /* default TLB page size */
+> @@ -1794,7 +1802,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>           /* Two stage lookup */
+>           ret = get_physical_address(env, &pa, &prot, address,
+>                                      &env->guest_phys_fault_addr, access_type,
+> -                                   mmu_idx, true, true, false, probe);
+> +                                   mmu_idx, true, true, false, &sstack_page);
+>           /*
+>            * A G-stage exception may be triggered during two state lookup.
+>            * And the env->guest_phys_fault_addr has already been set in
+> @@ -1816,7 +1824,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>   
+>               ret = get_physical_address(env, &pa, &prot2, im_address, NULL,
+>                                          access_type, MMUIdx_U, false, true,
+> -                                       false, probe);
+> +                                       false, NULL);
+>   
+>               qemu_log_mask(CPU_LOG_MMU,
+>                             "%s 2nd-stage address=%" VADDR_PRIx
+> @@ -1854,7 +1862,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>           /* Single stage lookup */
+>           ret = get_physical_address(env, &pa, &prot, address, NULL,
+>                                      access_type, mmu_idx, true, false, false,
+> -                                   probe);
+> +                                   &sstack_page);
+>   
+>           qemu_log_mask(CPU_LOG_MMU,
+>                         "%s address=%" VADDR_PRIx " ret %d physical "
+> @@ -1880,8 +1888,23 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
+>       }
+>   
+>       if (ret == TRANSLATE_SUCCESS) {
+> -        tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> -                     prot, mmu_idx, tlb_size);
+> +        /*
+> +         * tlb_set_page(cs, address & ~(tlb_size - 1), pa & ~(tlb_size - 1),
+> +         *           prot, mmu_idx, tlb_size);
+> +         */
+> +        CPUTLBEntryFull full = {
+> +            .phys_addr = pa & ~(tlb_size - 1),
+> +            .attrs = MEMTXATTRS_UNSPECIFIED,
+> +            .prot = prot,
+> +            .lg_page_size = ctz64(tlb_size),
+> +            /*
+> +             * Allows CBO.* to differentiate between a shadow-ss from a usual,
+> +             * readable one.
+> +             */
+> +            .extra.riscv.sstack = sstack_page,
+> +        };
+> +
+> +        tlb_set_page_full(cs, mmu_idx, address & ~(tlb_size - 1), &full);
+>           return true;
+>       } else if (probe) {
+>           return false;
+> diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
+> index f9c79fe6b9..a289cb1a84 100644
+> --- a/target/riscv/tcg/op_helper.c
+> +++ b/target/riscv/tcg/op_helper.c
+> @@ -224,6 +224,9 @@ void HELPER(cbo_zero)(CPURISCVState *env, target_ulong address)
+>    * section 2.5.2 of the CMO specification) for Zicbom, raising
+>    * either store page-fault (non-virtualized) or store guest-page
+>    * fault (virtualized).
+> + *
+> + * Zicfiss: CBOs on a shadow stack page always raise a store/AMO access fault
+> + * even though loads are allowed.
+>    */
+>   static void check_zicbom_access(CPURISCVState *env,
+>                                   target_ulong address,
+> @@ -233,6 +236,9 @@ static void check_zicbom_access(CPURISCVState *env,
+>       int mmu_idx = riscv_env_mmu_index(env, false);
+>       uint16_t cbomlen = cpu->cfg.cbom_blocksize;
+>       void *phost;
+> +#ifndef CONFIG_USER_ONLY
+> +    CPUTLBEntryFull *full;
+> +#endif
+>       int ret;
+>   
+>       /* Mask off low-bits to align-down to the cache-block. */
+> @@ -250,12 +256,22 @@ static void check_zicbom_access(CPURISCVState *env,
+>        * addresses, whether a cache-block management instruction is
+>        * permitted to access the cache block is UNSPECIFIED."
+>        */
+> +#ifdef CONFIG_USER_ONLY
+>       ret = probe_access_flags(env, address, cbomlen, MMU_DATA_LOAD,
+>                                mmu_idx, true, &phost, ra);
+>       if (ret != TLB_INVALID_MASK) {
+>           /* Success: readable */
+>           return;
+>       }
+> +#else
+> +    ret = probe_access_full(env, address, cbomlen, MMU_DATA_LOAD,
+> +            mmu_idx, true, &phost, &full, ra);
+> +    /* A shadow stack page is readable but faults after fall through. */
+> +    if (ret != TLB_INVALID_MASK && !full->extra.riscv.sstack) {
+> +        /* Success: readable */
+> +        return;
+> +    }
+> +#endif
+>   
+>       /*
+>        * Since not readable, must be writable. On failure, store
 
 
