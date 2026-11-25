@@ -1,111 +1,136 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2D5F606A321
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 08:37:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49665606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 09:39:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Jx1ChU4Q
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cfKivzVm;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=OnlPehHy
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW8V8-000091-D5; Wed, 25 Nov 2026 03:37:15 -0500
+	id 1xW9SY-0002yw-Nb; Wed, 25 Nov 2026 04:38:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xW8V3-00008V-H7
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 03:37:09 -0500
-Received: from mail-pj1-x1033.google.com ([2607:f8b0:4864:20::1033])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <wxchen0913@gmail.com>)
- id 1xW8V1-0004Zr-4P
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 03:37:08 -0500
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-3b421e8d111so3693999a91.3
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 00:37:06 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xW9SV-0002xu-Dn
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 04:38:35 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
+ id 1xW9SP-0005Jz-Rr
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 04:38:32 -0500
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 6AP68SHf3534084
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 09:38:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=aP2WhLKUTUQM2WIjGhOOjXahzbHH4gFYsFi
+ NDi0WfVw=; b=cfKivzVm3kaLqcSQQsWlq865Y3ZvviVcjzVOlLSnwbXy0FJUus8
+ 7WYFHDEYAE5LQiH81ZmPeq/mBKVgmSgzFB23m97yAdCpsVeFVDWdD02ZnYVi4CoZ
+ uepu5ZMyWGnAND7AbBpp6rwyjHzXsTRrAy9hqiFK1jYJSYaVd7FTok22AL9+ns+Y
+ gQOuK/BEC8Z1pQ/vTbORBRGQ2YO1LcA4GcLepLTwC/PBuVNMnlmO6Rq5I1IU4wAV
+ z2hDhCqaclBzuuggvn54Ubx9p9bOBJsn/YL56mA7bG3OcdFNOj4Ahw5o2E7+c3c2
+ U3a44ZlHnCVr+9Zqvb/sZwKvGoXqAqLRKeg==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mqbj2yw-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 09:38:28 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-94960131b4eso145378085a.3
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 01:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795595826; x=1796200626; darn=nongnu.org;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to:content-type;
- bh=pBGdOaoCqcbgRwmoUAayveLAK2PspDh+9+88Eyi2Gi0=;
- b=Jx1ChU4QvzXk/GRyK48NZGXX8qqy+nAFNTzqkcfk204qg1CnlObkd5+WKxq+Ylv0+X
- 5Udld6lsyuKEdbkG3jnSVXuddoCcG+H4v/fY6IqBLglSPPJxvrOXmJu/2w32Z2KSDOlq
- mpuWFOm/bHBBlK/aSbc2LUMdYtrRvhUqzcauWXBZxJzmqSlMSmAL/5W3gLt+WNiVtPAl
- 8uzdMN4Hp4sjH9jJPopDIDHfzRVtDzcEH+jL2SOx/ToxETelcNJRB2KqXdZ9WHkx75SW
- 2n4yycUF/sHeEM7VBhL2FZheX2bmMxzk0e58CE1O+z3W6GDSRpnKg2WFF7EzOseuzVEl
- qNZg==
+ d=oss.qualcomm.com; s=google; t=1795599507; x=1796204307; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=aP2WhLKUTUQM2WIjGhOOjXahzbHH4gFYsFiNDi0WfVw=;
+ b=OnlPehHyDe5QskooY6KPePx7ZNZgdiddJakeI50US6nY2bUqYWM+DoVbfQoBLR8XmL
+ Uo5fU8/ElM9BK4MKvlnaZ68UsCLgPK0tki+AthtTcRCVcRhvgpwWgNbyDPsBlv3Bwaah
+ tUx/y9lk1rt7cF/zADxZ38Sf/Mrt8HUvlJZZmS0i+dcuM2cB0h8pnKyrNgi9XkvNUahj
+ yv8dRMypadernVTFyTF6LrES1wXxhNf3p0hUWF05mt1UUaVshtBMbWu8OExfKemqwdQb
+ /87ztamD0uwl9Qnot4M8pymH4Snav4vgs2eFvckNewyupSk46XNQHtkia6Ex2OCHkZlW
+ pCCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795595826; x=1796200626;
- h=cc:to:message-id:content-transfer-encoding:content-type
- :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to:content-type;
- bh=pBGdOaoCqcbgRwmoUAayveLAK2PspDh+9+88Eyi2Gi0=;
- b=HK+4xvAJ7mDWDzDhT4vi7scydPz95VMDGKo3aWZxnbg4DforZq6usydlUNaz682n6G
- EwrKYZ2EyZq/BVnyl+/nEWCnF10GUmznCq/z0jCNcac5e7YHPv75ykDmEVMbe3IwHZdq
- kART3j35LPx03LSWkbwyLEZaaTM5/dkj48a6ur8FAvju7fMI1QZvHEXlhZs/NnhAFMBp
- 3ofLfapc29DqWStCA2bwH6vlFCj8ik87NhNbEoCTHfFfui4aHn1u3WxwUajGvD08XHZD
- h9P/0OOVl7qcph/51D3Dj2uEo1FcsjwtKZMX77OYzORq1CGyJSs6xbw/xTL1ZNCFz1Nl
- q2+g==
-X-Forwarded-Encrypted: i=1;
- AL+hErGAiQ3Yw8PXYmGBoWHI4mDVFhUFXjFjnlAya08fGkibQaiuR94n20x8uTA/O6PwY2uWpMicMkcMWHYO@nongnu.org
-X-Gm-Message-State: APuU4Z/grGCkjFB1DtlE/iJqSKU8rioWP6vQ0GXBWaR/9CFTcEDLlnBM
- s2WIzp5ksaEf7yhHb05t718XQS9cycPlRV5GDMVLby4bkqqJr/carcwX
-X-Gm-Gg: AZFdTZchauSemHnbBkNkNnNNYv9hLOP45oNLrM2X0414nDNLke4jSILfYaId1bYzeza
- yFcmkqPZoFc8dDoT8rGVq36Xk3WHONizw+tqOhHlOy9kqEV8Vp5qnDBpnQ3mmAQypnADwCPSUxq
- KyUrov0P4ncFTMuxcX/631VClEbZMqizUljszDFGzk/NwfA9t/+rX0uXDm48AQR/Ri/BEniMRIj
- 343vW7/SCHzJLIMARnaYZwAeGFQyf37RdqfKrrhG+2OU5jgrlTFIq5o8QahX5OLNbb3p5ueB0e5
- JQ5nZ7lextF6NHigZtLEhIy+kGFCivXR5GZCLZ7hLIOIg8AblYj6lTo6Vv6Ol409MRzQi4VTcBp
- nL9MOwG2wFS0NOQ/EiwdWyaRBb7X+z7p8s9aZPP7e4hvjcO+TZ8xhKVsaDPRZ1g/txEoycBh1TY
- MPe1Rm9X3Vz7jrTTin80pgSqwTCghYSt8wFpjZt0c/kWWb9r2VCvabWQaWnHQPuGniaAnP12iQR
- G4SsDeCXjqAJrI9GKbMbPqvGSJ7UEYw2C/F+qRJVkkHfoAhshJkS06W/VrgjsJbwdw6tYDQRHEX
- Pf4ykquTp6XnURYMfmIz2ID4
-X-Received: by 2002:a17:90b:388c:b0:3ac:e6a:1b2b with SMTP id
- 98e67ed59e1d1-3b41c5585femr16943774a91.0.1795595824799; 
- Wed, 25 Nov 2026 00:37:04 -0800 (PST)
-Received: from [127.0.1.1] ([14.19.9.16]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b40578d771sm29247245a91.1.2026.11.25.00.37.00
+ d=1e100.net; s=20260707; t=1795599507; x=1796204307;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=aP2WhLKUTUQM2WIjGhOOjXahzbHH4gFYsFiNDi0WfVw=;
+ b=at4Ceowi5KK3JOcyFFLYRvMOguUl23+23uZ2oTq3wgYx14dIv+Dix6M9uuKBIHPHHi
+ NJnObHR47aaIHFWjAr564PIB4avB5Vg0kw4E/tmCMTyVvrmTf6WYaNvD/F91mvJOn0JH
+ 4COLt49BOmK4/I7dIfbFFPZB58J095lBgEkk0zr+Z4fIQ6rfdqu/ky9sgqqcyVlmtXtm
+ uCaiQGERar9eVg1JqVne5v6PU/mUn8fB6C3ge/HHRx5zhTLgAQV+hy965Xq4fQJ2EDVF
+ kKfFq+SD5P3taIGEB4mKHG2MWn1VPnw83iOIVtN3p3gl/Pmf55bpagfHvY0hez340xM7
+ VPbQ==
+X-Gm-Message-State: APuU4Z/WvrlUU8XvQFQlMfANdeMsBGMUln5M1ktAEielE8CfaAxUntPX
+ qCyknl+I/XfT40Iccnjg/71k08+yGQydH2cLTzc3FMVoYo/qjdeC6Mos4m8hDI2l97CNVEoOIOM
+ JwDaxeoN7gNRArH7KrRzVj2R7ASy241mfDtSaLOPHpwp3whjANPUaFrs/mw==
+X-Gm-Gg: AZFdTZfhNtD6Ba36ksMLjlyQ0cxnLLMAX5aTExYYqBRUT93MXDnZaPdJoSPA+kNDNEN
+ N2quU0+rYvXuYYUXiRw+uTM/k92OAHJVmwl4rfnE+Pk27Wg5Hn6P2eWPuLxJKM/hWVIiBF4V+l4
+ pffx/rxJUNXJQnRywImn/E/NY66tvZl8JAKFA+iXjxGHj+igdv+CokjN/xOKvyzKY+4j4ToCDcr
+ ENWOyGK54W8fkN7frsOlTgA8ySPGyZQ/oN3JYeJ/gOIrL2MQGWcpNEeZZsB23ofHmI6nLGFjiCC
+ 9kjTyHrRMEmHQCigiCt5aq8c9pymvak5BuRUY/KQcQzewy1lJjas8lJpEoz08SprBIzeC2iGLwx
+ YHU89CyvLtH5EwK9N9GeOgXMriKFiMgHmDF6iob+XgJooy7/xMFewRNCEU1pUgvDbM9uMRKT6K2
+ uZTvWEdKivxQ==
+X-Received: by 2002:a05:620a:2906:b0:93e:5eaf:dd87 with SMTP id
+ af79cd13be357-949bab54b88mr3068311385a.62.1795599507309; 
+ Wed, 25 Nov 2026 01:38:27 -0800 (PST)
+X-Received: by 2002:a05:620a:2906:b0:93e:5eaf:dd87 with SMTP id
+ af79cd13be357-949bab54b88mr3068307785a.62.1795599506832; 
+ Wed, 25 Nov 2026 01:38:26 -0800 (PST)
+Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-949bb3f2de5sm1257212585a.29.2026.11.25.01.38.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 00:37:04 -0800 (PST)
-From: WX Chen <wxchen0913@gmail.com>
-Date: Wed, 25 Nov 2026 16:11:05 +0800
-Subject: [PATCH v2] target/riscv: add RVTSO memory ordering for vector
- memory accesses
+ Wed, 25 Nov 2026 01:38:26 -0800 (PST)
+From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
+ zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH v3 0/1] target/riscv: do not write SXL < UXL
+Date: Wed, 25 Nov 2026 06:38:21 -0300
+Message-ID: <20261125093822.228611-1-daniel.barboza@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-fix-rvtso-vector-stride-v2-1-4aa58066e0b3@gmail.com>
-X-B4-Tracking: v=1; b=H4sIABiYBmsC/4WOQQ6DIBBFr9KwLg0DIthV79G4AByUpEoDhrQx3
- r3oBZq/esmfN38jGVPATO6XjSQsIYe4VODXC3GTWUakYahMOOMtAAfqw4emsuZIC7o1JprXFAa
- kovND65mQHhSp1++EtXqan31lazJSm8zipsPHNA6dckI4oUGjl2CU05KLRhmusfNtq5my8lBNI
- ddH33NjgUP4f04BWuMaCazhlln5GGcTXjcXZ9Lv+/4DLTmMO/kAAAA=
-X-Change-ID: 20261121-fix-rvtso-vector-stride-39fd6f035f17
-To: qemu-devel@nongnu.org
-Cc: Tao Tang <tangtao1634@phytium.com.cn>, 
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Weiwei Li <liwei1518@gmail.com>, 
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
- Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
- Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
- WX Chen <wxchen0913@gmail.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795595820; l=6482;
- i=wxchen0913@gmail.com; s=20260725; h=from:subject:message-id;
- bh=2KfzBroKq6ABOBfo4xXullswpVOj3yegZavDjjWUly8=;
- b=9DjY8cGK5Yvy189u7c9c5+nT6stAQvAB5rS+I90Qa4rcGxOpqA6vuPjtIpjpdclO52aYjuWJ3
- jfXRbCKF/cpBxe/DdS6mTrmEFD9I3++ZMZBGs+4yc8SU5Ix/ABq695b
-X-Developer-Key: i=wxchen0913@gmail.com; a=ed25519;
- pk=FX63IRxmtz1BCNzHxOOWDPTo8L/D0YUxlIKc1WKi7wo=
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1033;
- envelope-from=wxchen0913@gmail.com; helo=mail-pj1-x1033.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzOCBTYWx0ZWRfX9l01MCJ0+YuE
+ TfqYZ56FRLiawqu2TDNuOtPP7QajzHcy4tlaiK1i2/y4y+h57PS0M0HNO8eaTvYOgvh9oiENX9J
+ pAtrDPrfWwYSj5oMtBqfTxShSsa3DtI=
+X-Authority-Analysis: v=2.4 cv=Bb9NQbt2 c=1 sm=1 tr=0 ts=6b06ac94 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=mMd-UP4esFFwHtkMSWUA:9 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzOCBTYWx0ZWRfX8AHlpUIz2+K7
+ VUP9fyRi9J3fot0BclnTtqBrZVdIsWtc+6uOACUUW62s9W3H6DtWxq75IJlwAomhva3MfB1FhHQ
+ BMmP59kEfp8l96Df1dNXzHet+9xtnw+i+SCdwQ6/GOeqqKDUPFPjqnrzhTaJZXSqEU90FwMyLTk
+ c91nvvX/flbSe36ou7mD9wizsXo+a2svYoyZoFzVj+7Tn2LEC92stqEOJHEQh3rk0XXSCBEJb52
+ f8wVZN7xLYTXSAdRhVzGq4A3Rr4B2C1dIISNLrImVe0lF0jfNg9OMOfDUx9qVtVM4YY063Ny8M5
+ FfMJe2K5Y1/6uBk2/7LYJa+6gB7uu14Om3ax8uSW0cLzDbNiOQn7X5o1Pg4c1QpSkPeNfCPkESY
+ HYAvo8h6Mdx41b9q8F4Tx+YTOJkku3aeY0KJmxIrJ3+E2XseGwYPtCIsBvpsvLWEPhOxuyV9RyT
+ NkV0cJzufH7asaXFUag==
+X-Proofpoint-ORIG-GUID: Uiy3BNIZ8MEGMzZi37tX4vzlAyYvDU-C
+X-Proofpoint-GUID: Uiy3BNIZ8MEGMzZi37tX4vzlAyYvDU-C
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250038
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+X-Spam_score_int: -27
+X-Spam_score: -2.8
+X-Spam_bar: --
+X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
+ RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -118,183 +143,37 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The RISC-V Ztso extension provides default memory ordering of:
-    R -> R,  R -> W,  W -> W,  without W -> R,
-but ldst_stride_trans, ldst_index_trans, ldff_trans and ldst_whole_trans
-currently lack the ordering listed above. This may not satisfy the guest
-requirements on hosts with weak memory ordering.
-This patch adds the above ordering in these functions.
+Hi,
 
-Signed-off-by: WX Chen <wxchen0913@gmail.com>
----
-Changes in v2:
-- Handle ldst_index_trans, ldff_trans, ldst_whole_trans.
-- Add references to the Ztso comment in ldst_us_trans.
-- Link to v1: https://lore.kernel.org/qemu-devel/20261121-fix-rvtso-vector-stride-v1-1-1c451042b0b5@gmail.com
----
- target/riscv/tcg/insn_trans/trans_rvv.c.inc | 56 +++++++++++++++++++++++++----
- 1 file changed, 50 insertions(+), 6 deletions(-)
+In this version we're adding a comment in riscv_update_xl_field()
+explaining the intended use of the 'min_field_val' argument.  We also
+took the chance of fixing a conflict with the
+alistair/riscv-to-apply.next branch.  
 
-diff --git a/target/riscv/tcg/insn_trans/trans_rvv.c.inc b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-index 7e1295f33e7d4b7a2ff26cbf428f6b5d9eb682ff..0949884b426b7d0995c76d11c1fde9445a9dcac9 100644
---- a/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_rvv.c.inc
-@@ -880,7 +880,7 @@ typedef void gen_helper_ldst_stride(TCGv_ptr, TCGv_ptr, TCGv,
- 
- static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-                               uint32_t data, gen_helper_ldst_stride *fn,
--                              DisasContext *s)
-+                              DisasContext *s, bool is_store)
- {
-     TCGv_ptr dest, mask;
-     TCGv base, stride;
-@@ -896,10 +896,22 @@ static bool ldst_stride_trans(uint32_t vd, uint32_t rs1, uint32_t rs2,
-     tcg_gen_addi_ptr(dest, tcg_env, vreg_ofs(s, vd));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
-+    /*
-+     * See ztso comment in ldst_us_trans for more info on why
-+     * the barriers are put around the loop.
-+     */
-+    if (is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
-+    }
-+
-     mark_vs_dirty(s);
- 
-     fn(dest, mask, base, stride, tcg_env, desc);
- 
-+    if (!is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
-+    }
-+
-     finalize_rvv_inst(s);
-     return true;
- }
-@@ -924,7 +936,7 @@ static bool ld_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     data = FIELD_DP32(data, VDATA, VTA, s->vta);
-     data = FIELD_DP32(data, VDATA, VMA, s->vma);
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
- 
- static bool ld_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -958,7 +970,7 @@ static bool st_stride_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-         return false;
-     }
- 
--    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_stride_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
- }
- 
- static bool st_stride_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -981,7 +993,7 @@ typedef void gen_helper_ldst_index(TCGv_ptr, TCGv_ptr, TCGv,
- 
- static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-                              uint32_t data, gen_helper_ldst_index *fn,
--                             DisasContext *s)
-+                             DisasContext *s, bool is_store)
- {
-     TCGv_ptr dest, mask, index;
-     TCGv base;
-@@ -998,10 +1010,22 @@ static bool ldst_index_trans(uint32_t vd, uint32_t rs1, uint32_t vs2,
-     tcg_gen_addi_ptr(index, tcg_env, vreg_ofs(s, vs2));
-     tcg_gen_addi_ptr(mask, tcg_env, vreg_ofs(s, 0));
- 
-+    /*
-+     * See ztso comment in ldst_us_trans for more info on why
-+     * the barriers are put around the loop.
-+     */
-+    if (is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
-+    }
-+
-     mark_vs_dirty(s);
- 
-     fn(dest, mask, base, index, tcg_env, desc);
- 
-+    if (!is_store && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
-+    }
-+
-     finalize_rvv_inst(s);
-     return true;
- }
-@@ -1045,7 +1069,7 @@ static bool ld_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
-     data = FIELD_DP32(data, VDATA, VTA, s->vta);
-     data = FIELD_DP32(data, VDATA, VMA, s->vma);
--    return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, false);
- }
- 
- static bool ld_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -1098,7 +1122,7 @@ static bool st_index_op(DisasContext *s, arg_rnfvm *a, uint8_t eew)
-     data = FIELD_DP32(data, VDATA, VM, a->vm);
-     data = FIELD_DP32(data, VDATA, LMUL, emul);
-     data = FIELD_DP32(data, VDATA, NF, a->nf);
--    return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s);
-+    return ldst_index_trans(a->rd, a->rs1, a->rs2, data, fn, s, true);
- }
- 
- static bool st_index_check(DisasContext *s, arg_rnfvm* a, uint8_t eew)
-@@ -1135,6 +1159,14 @@ static bool ldff_trans(uint32_t vd, uint32_t rs1, uint32_t data,
- 
-     fn(dest, mask, base, tcg_env, desc);
- 
-+    /*
-+     * See ztso comment in ldst_us_trans for more info on why
-+     * the barriers are put around the loop.
-+     */
-+    if (s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
-+    }
-+
-     finalize_rvv_inst(s);
- 
-     /* vector unit-stride fault-only-first load may modify vl CSR */
-@@ -1193,6 +1225,14 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-      */
-     bool use_helper_fn = !s->vstart_eq_zero;
- 
-+    /*
-+     * See ztso comment in ldst_us_trans for more info on why
-+     * the barriers are put around the loop.
-+     */
-+    if (!is_load && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_ST | TCG_MO_ST_ST | TCG_BAR_STRL);
-+    }
-+
-     if (!use_helper_fn) {
-         uint32_t size = s->cfg_ptr->vlenb * nf;
-         TCGv_i64 t8 = tcg_temp_new_i64();
-@@ -1244,6 +1284,10 @@ static bool ldst_whole_trans(uint32_t vd, uint32_t rs1, uint32_t nf,
-         fn(dest, base, tcg_env, desc);
-     }
- 
-+    if (is_load && s->ztso) {
-+        tcg_gen_mb(TCG_MO_LD_LD | TCG_MO_LD_ST | TCG_BAR_LDAQ);
-+    }
-+
-     finalize_rvv_inst(s);
-     return true;
- }
+No other changes made.  Patch based on alistair/riscv-to-apply.next.
 
----
-base-commit: 08ed97c33c3818ef51a7c852347a28e9f66807b5
-change-id: 20261121-fix-rvtso-vector-stride-39fd6f035f17
+Changes in v3:
+- added 'min_field_val' intended use comment in riscv_update_xl_field();
+- rebased on top of alistair/riscv-to-apply.next.
+- v2 link: https://lore.kernel.org/qemu-devel/20261119124141.1279663-1-daniel.barboza@oss.qualcomm.com/
 
-Best regards,
+Daniel Henrique Barboza (1):
+  target/riscv: do not write SXL < UXL
+
+ target/riscv/tcg/csr.c               | 47 +++++++++++++++-------
+ tests/tcg/riscv64/system/meson.build |  7 ++++
+ tests/tcg/riscv64/test-uxl-sxl.S     | 59 ++++++++++++++++++++++++++++
+ 3 files changed, 99 insertions(+), 14 deletions(-)
+ create mode 100644 tests/tcg/riscv64/test-uxl-sxl.S
+
 -- 
-WX Chen <wxchen0913@gmail.com>
+2.43.0
 
 
