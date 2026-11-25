@@ -1,83 +1,82 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C095606A31E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:39:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FB94606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:39:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=WYJSnOGH
+	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=HHUeXT2P
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW2ti-0000Us-0Q; Tue, 24 Nov 2026 21:38:14 -0500
+	id 1xW2th-0000TB-EK; Tue, 24 Nov 2026 21:38:13 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2tB-0000EH-1a
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:42 -0500
-Received: from mail-yw1-x1134.google.com ([2607:f8b0:4864:20::1134])
+ id 1xW2tD-0000F3-A3
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:44 -0500
+Received: from mail-yw1-x112a.google.com ([2607:f8b0:4864:20::112a])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2t6-00079N-ND
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:40 -0500
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-8b0dba37a7fso42647047b3.0
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:34 -0800 (PST)
+ id 1xW2t6-0007JG-S1
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:43 -0500
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-8b4d6981c67so33648447b3.1
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1795574253; x=1796179053; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1795574255; x=1796179055; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Y0uQomD/7jYFFCn01yAXbAJpuXqIpyq5wUONqra66zs=;
- b=WYJSnOGHfY49Q8i2lWCJWZl/jhf/R2EyJXMmXVUALqD78+gFTLgh594agqnkiwzaCS
- en2HXo7ttjdYV6Xyp/S5gXHaK0aDOJjYYrremcm2thDrip9wBNo1uZC4yf+UxcMtAcvU
- lfYJaoBenx3wKIcLGWUGXr1tzxhkGt8kovcZ7ZsrG7jPcFo56GPLTjrK3zm/m2ZyE3fz
- DRUAOiZTkS3hSuZlBHrn7ocPhoZowMNEgTEugUJlkjNl6debNbsTWquPUoRMYu//t74H
- rzswaYERKKg6oFvtiLAHhXZXAVt0eqlh+IQhQPxFU90q/rXfygJFJ6bX3BIQ4gzClkAR
- eNVg==
+ bh=LOUfIjat+MroaKY2x0Bigjz50tx25K856bVnBvDhOOw=;
+ b=HHUeXT2Py3434QYMbBYZUviCEYZjg7vIjf/DN/zxrl+A6A7jzNFdiVn0l96LWqSM79
+ jEG15gBS/UECPNBh8yKwpDF0BW85MzRkXNvZshYNjtrUEO10HhbzTio2TdVB9RHR+XJR
+ 9SBk24v4AZQ41jU2u2u5bltUJklgGGWKWCgKxlno+OS3eLKPtKblJCvUJ9PViCX0o55c
+ lc3Ni1jLpvQtwyakYOzuVVA+b5cOt/49sVqiEKNJaGh3SHX2s7kJKUXuzlMdvwPNFdeU
+ UHBQxISRRrFMgcOrglfrmumXNoqoj4Cury5ZfyCl2GFkI9RxZs2Rf4Xrj64K+00F6bBB
+ aPkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795574253; x=1796179053;
+ d=1e100.net; s=20260707; t=1795574255; x=1796179055;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Y0uQomD/7jYFFCn01yAXbAJpuXqIpyq5wUONqra66zs=;
- b=VzSqP8hSGCZ9CnoDGsIcv+lxspSSjNTU4MKZben4CthzIwULyvKFzJkOmMbcYtOMC5
- sCbnmR4g08Tifb6m7rumucgT3ff//59y3Hdj9nokLTZdXf8NpvsIppCCzqGk6scVOBJx
- n3+M7rIny1CKvPQKdFD85R4oN2wKg6UxGisHZaHgkR+gi/fmpHhxFt+4Nih8RWxQDwGv
- NBY9YXt/gf2XJLtjqzc9+rAqM/Ai89MsWp9fR8BFi+GJuOmcZ+P9T+e3yzSyrIhAYPo1
- YftZVXqOW7iqZhDiGCZKk2wriYOZ0ULiT7sLKMzq6n3a0QxjGLa04arLsBme0QQS9FiM
- N2hg==
+ bh=LOUfIjat+MroaKY2x0Bigjz50tx25K856bVnBvDhOOw=;
+ b=0WiRLXe4U7hZH+E401i3uilrTua3Dq+usqK/faSH+SRD1VAHSSAQryGL9ppqDmS02P
+ U/NsfHkJf4Jxgidi8EBlXR97tfhRehykXOSTFdDLOdU3rx712QG02lIf0n9lyINqAlxs
+ 5ZochGND4UF6f408TrDSQu3EKjebL1Yzy81BWgey05B20wX+e/PfH/oeFOWyYQhR0BYg
+ HOyhHNrksJQLYDxVBP6xaqwZE8FnB5ovlFNe95nErS02XxDbkMKabCwEop/HUr5ojT20
+ HzARdpT/bejh4t7Het4vfNaVjUokhSLneFWpPFVHKbUrs+cXcRXgBI/FaOJXjs5cMMu2
+ nRmg==
 X-Forwarded-Encrypted: i=1;
- AL+hErHth48o/6tlJszOqJE4BwOPdO95pXjS2hTqamwEKc91w51GYNEoEZbnY5WtYo+S/ZmgAchi/G2Y222h@nongnu.org
-X-Gm-Message-State: APuU4Z8uKF3vgbv68KURbMiFO49um2zA5y+0KccfpAcAj5pOKtLkT4yj
- VIkC5C6lg04nGStwz/bBuK8F3yNjVA+8nH9/GXQjMc+vWhr1YG5rGEpE8cLJDzMDfNw=
-X-Gm-Gg: AZFdTZebCc5v5Jhp0QtLcw6qgg2Q2s+PWXHy1ktt3+RpSlm1aeCWKJFiygELSHjouQZ
- c7BboPDIql3LAmKACVTRLhVYbhNhU1ZDCHhrnZXsVhS6/yxhqAJJByqiZpQUy95e8nbUc1WPgfd
- cqIvuBc0RqxJcXfi+X71AVR7aGzWhjRV08zs2kq5CyKbf+sXdZ+Rcn15xKxE90hL12uY584vSjb
- ks2ip8WFw8pM64uh9FfwopfktPwaP+ZEIh9fewZ+s3NI3B0CtipQwhtilq+ArVVpma32jSPdUUX
- /YgI2b4BMrT1jfkEhxPWsMc8fJmC2ZYikXuCVFE8mVsi1ZNkCbLw+5X6B7EU9AE/aDoTuJONjNN
- 0349ukzZnTN609OK40FF7Ir//+lcV25GTlnChLE2pLpIOVltDjtf1sqFYqVNkMtqmT/Py3TNJdJ
- U+0w35dVki0JSaTj+McUGxnk2BsROunq5pH+63ZgFpHKnaNBIv0xTwbTvY/LiGVFEu6IMc8iBtw
- mBIYUEvX01YQqRr4xqWz6Ewk2BXttnRj5ZNleqqsm6h2RfmQgxcVdzKBQTNjT0s25dwk82ijor6
- mfIrSLsBTNbBaE4WgbiBlrPJqlX2o9FACbKOfDCngSK+i/vq6vw+Ap6mPT9cpgHq4qLChTdBp7N
- nKGBIoq8UdA==
-X-Received: by 2002:a05:690c:e0c:b0:8b4:d64a:7aaa with SMTP id
- 00721157ae682-8b5204ba69fmr69205257b3.43.1795574253394; 
- Tue, 24 Nov 2026 18:37:33 -0800 (PST)
+ AL+hErH6fkVogeRANyzEWl7jvmRPBZMWWNNvN42Ud/ra5DaVCbEROIQdvOgP7WnAyFaq/6cf9phlGcdyup6w@nongnu.org
+X-Gm-Message-State: APuU4Z/9IQCynqd0xb07BldUAtoGYO6xuRVLD+n8j2A55taAoMVZ889z
+ 6ooqy4ziSAoMvTRerMA8N/M9Ef2M/3rVJXdRulkJSSDjy8zJVOhOqBCaPNwD+eSRi5M=
+X-Gm-Gg: AZFdTZdIEoQHw5fFBoCZ/QbNJR3ZQXNGftbU7UMrkMAqNIBNXJ7ZGZXNiRQKczFc6Qf
+ dO1WUnJy1PRnSlX77UQoFbzc6x8NmJb8PVH5zfGE928TJbWQoeNtJD/zb07dg/97/rsrdRIbmBt
+ H1U7OZEip5QeepP0/UI0+oWx0bsEVfKU+91rtjyE32lQ4y6yK9xZ8yP+gLYKDVCBD577J/2SeyC
+ mRjwPHEqBfdOP/WW4zdsuUQSwPU3Fz2xpYi0ABaHdKzBKPTTUBxv5qJRYsQ66gZh5InrA7Z1R7V
+ rkCckhks9Mo8DMraRuCcvDWJieCHxfU7rCFQt0c2Q8bh2Amd72TKsPafjGrYgAeeFUJz/isjJ1T
+ BsbBgG7ae63v+V30ECUhfaBOC0u0bJuKu4Xe9a66uexERAbK5JoeLXq+ahIMHcgx/dx/bPcz20J
+ zDjjsIfb8IognloHT1kkhPVif51mCYJJiXD4SSld8ncAkZZ6C2SQMaY+/FGj9BCZzlFV8BgSrbo
+ 0AYIr0DDYHDF61B8k8J+6zLXgxuMBX4NzklrkqLWtI5xWHxHE46y6cXCFBnbu/RhVKxdCRS0Ff2
+ /gh97hu8Gya9cIUGVe3Fjp1pzoF6nqdljKZA2/ECZ2TXpUl+UoLXMHpMS5uNQ/QFsdDFsJ/JIeo
+ IU25pNdLmAEkqOc2ZfYMG3EBksQnB6w==
+X-Received: by 2002:a05:690c:48c3:b0:8b4:c1ef:79d2 with SMTP id
+ 00721157ae682-8b5204bc1bfmr65090937b3.40.1795574255341; 
+ Tue, 24 Nov 2026 18:37:35 -0800 (PST)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:ea8f:7897:2f4d:9891])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.32
+ 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 18:37:33 -0800 (PST)
+ Tue, 24 Nov 2026 18:37:34 -0800 (PST)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Tue, 24 Nov 2026 20:37:25 -0600
-Subject: [PATCH 6/8] hw/riscv/spacemit-k3: Load next stage from boot media
- if bootrom is not supplied
+Date: Tue, 24 Nov 2026 20:37:27 -0600
+Subject: [PATCH 8/8] docs: Document spacemit-k3 machine
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-spacemit_k3-v1-6-e911d6e88542@oss.tenstorrent.com>
+Message-Id: <20261124-spacemit_k3-v1-8-e911d6e88542@oss.tenstorrent.com>
 References: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 In-Reply-To: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
@@ -93,8 +92,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 X-Mailer: b4 0.15.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1134;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1134.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::112a;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x112a.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -112,330 +111,312 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When the bootrom is not supplied via -bios, simulate the bootrom's
-loading of the next stage from appropriate boot media based on the
-boot selection pins. A boootinfo block is read from a fixed address on
-boot media to determine the offset to load the next boot stage from.
-A CRC check is done on the loaded boot stage, and compared to a value
-stored on boot media. If this check fails, or the boot media is unable
-to be read, the next boot media as per the boot mode order is chosen.
+Document spacemit-k3 machine, how to build boot media for it and
+how to boot it using the different boot modes it supports.
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- hw/misc/spacemit_k3_syscon.c         |  31 ++++++
- hw/riscv/spacemit_k3.c               | 197 ++++++++++++++++++++++++++++++++++-
- include/hw/misc/spacemit_k3_syscon.h |  10 ++
- 3 files changed, 235 insertions(+), 3 deletions(-)
+ MAINTAINERS                       |   1 +
+ docs/system/riscv/spacemit_k3.rst | 259 ++++++++++++++++++++++++++++++++++++++
+ docs/system/target-riscv.rst      |   1 +
+ 3 files changed, 261 insertions(+)
 
-diff --git a/hw/misc/spacemit_k3_syscon.c b/hw/misc/spacemit_k3_syscon.c
-index 03a826495a..452cab8183 100644
---- a/hw/misc/spacemit_k3_syscon.c
-+++ b/hw/misc/spacemit_k3_syscon.c
-@@ -30,8 +30,14 @@
- #define BOOT_MODE_VALUE_USB 0x10001000
- #define BOOT_MODE_VALUE_UART 0x10001800
- 
-+#define SELECTED_BOOT_MODE_VALUE_EMMC 0xb00
-+#define SELECTED_BOOT_MODE_VALUE_NOR 0xb01
-+#define SELECTED_BOOT_MODE_VALUE_UFS 0xb03
-+#define SELECTED_BOOT_MODE_VALUE_SD 0xb10
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 0227d92be2..5c2ce76516 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1858,6 +1858,7 @@ Spacemit Machines
+ M: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
+ L: qemu-riscv@nongnu.org
+ S: Supported
++F: docs/system/riscv/spacemit_*.rst
+ F: hw/misc/spacemit_*.c
+ F: hw/riscv/spacemit_*.c
+ F: hw/ssi/spacemit_*.c
+diff --git a/docs/system/riscv/spacemit_k3.rst b/docs/system/riscv/spacemit_k3.rst
+new file mode 100644
+index 0000000000..5d5bbda84f
+--- /dev/null
++++ b/docs/system/riscv/spacemit_k3.rst
+@@ -0,0 +1,259 @@
++Spacemit K3 (``spacemit-k3``)
++======================================
 +
- /* CPU Config register offsets */
- #define BOOT_PIN_SELECT 0x20
-+#define BOOT_DEV_FLAG_REG 0x110
- 
- /* Syscon APMU register offsets */
- #define APMU_RCPU_CLK_RES_CTRL 0x14c
-@@ -183,6 +189,31 @@ static uint32_t spacemit_k3_boot_mode_value(int boot_mode)
-     return boot_mode_values[boot_mode];
- }
- 
-+void spacemit_k3_set_selected_boot_mode(SpacemitK3CPUConfigState *s,
-+                                        int selected_boot_mode) {
-+    static const uint32_t selected_boot_mode_values[] = {
-+      [SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC] =
-+          SELECTED_BOOT_MODE_VALUE_EMMC,
-+      [SPACEMIT_K3_SELECTED_BOOT_MODE_NOR] =
-+          SELECTED_BOOT_MODE_VALUE_NOR,
-+      [SPACEMIT_K3_SELECTED_BOOT_MODE_UFS] =
-+          SELECTED_BOOT_MODE_VALUE_UFS,
-+      [SPACEMIT_K3_SELECTED_BOOT_MODE_SD] =
-+          SELECTED_BOOT_MODE_VALUE_SD,
-+    };
++The Spacemit K3 is a RISC-V SoC from Spacemit, containing 8 RVA23 compliant
++X100 cores, 8 A100 cores with large vector len (1024), a real-time cpu (RCPU)
++and RISC-V AIA.
 +
-+    if (selected_boot_mode < 0 ||
-+          selected_boot_mode >= ARRAY_SIZE(selected_boot_mode_values)) {
-+        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad selected boot mode %d\n",
-+                      __func__,
-+                      selected_boot_mode);
-+        return;
-+    }
++The ``spacemit-k3`` QEMU machine can be used for firmware and OS development.
++This machine supports the same boot paths that real hardware does and can
++serve as a tool to test firmware images without access to hardware. It is
++possible to boot U-Boot SPL, OpenSBI and U-Boot/EDK2. While it is possible
++to boot Linux (UART works with a defconfig kernel + busybox initrd), many
++of the peripherals that Linux exercises aren't modelled yet.
 +
-+    s->regs[TO_REG(BOOT_DEV_FLAG_REG)] =
-+      selected_boot_mode_values[selected_boot_mode];
-+}
++spacemit-k3 QEMU model features
++-------------------------------
 +
- static const MemoryRegionOps spacemit_k3_syscon_mpmu_ops = {
-     .read = spacemit_k3_syscon_mpmu_read,
-     .write = spacemit_k3_syscon_mpmu_write,
-diff --git a/hw/riscv/spacemit_k3.c b/hw/riscv/spacemit_k3.c
-index 47e5ec1932..2ff035c239 100644
---- a/hw/riscv/spacemit_k3.c
-+++ b/hw/riscv/spacemit_k3.c
-@@ -27,9 +27,15 @@
- #include "hw/ssi/ssi.h"
- 
- #include "system/system.h"
-+#include "system/block-backend-io.h"
-+#include "qemu/error-report.h"
-+#include <stdint.h>
-+#include <zlib.h>
- 
- #include "hw/riscv/spacemit_k3.h"
- 
-+#include "system/qtest.h"
++* 8 Spacemit X100 Cores
++* RISC-V compliant Advanced Interrupt Architecture
++* 16550A compatible UART
++* Syscon/Clock Controllers
++* 1 QSPI Controller with NOR Flash
++* 2 SD and 1 EMMC Controllers
++* 1 UFS Controller
 +
- #define SPACEMIT_K3_IRQCHIP_NUM_MSIS       511
- #define SPACEMIT_K3_IRQCHIP_NUM_SOURCES    512
- #define SPACEMIT_K3_IRQCHIP_NUM_PRIO_BITS  3
-@@ -43,6 +49,11 @@
- #define SPACEMIT_K3_ACLINT_MTIMECMP      0x4000
- #define SPACEMIT_K3_ACLINT_TIMEBASE_FREQ 24000000
- 
-+#define SPACEMIT_K3_FSBL_NOR_OFFSET  0x0
-+#define SPACEMIT_K3_FSBL_SD_OFFSET   0x100000
-+#define SPACEMIT_K3_FSBL_EMMC_OFFSET 0x100000
-+#define SPACEMIT_K3_FSBL_UFS_OFFSET  0x100000
++Known limitations
++-----------------
 +
- static const MemMapEntry spacemit_k3_memmap[] = {
-     [SPACEMIT_K3_PCIE] =              {  0x80000000,    0x4000000 },
-     [SPACEMIT_K3_ESPI_SLV_MEM] =      {  0x84000000,    0x2000000 },
-@@ -92,6 +103,130 @@ static const MemMapEntry spacemit_k3_memmap[] = {
-     [SPACEMIT_K3_DRAM] =              { 0x100000000,  0x400000000 },
- };
- 
-+static int spacemit_k3_load_fsbl(SpacemitK3State *ms, DriveInfo *di,
-+                                 uint64_t bootinfo_offset,
-+                                 int selected_boot_mode)
-+{
-+    /* Read Bootinfo block */
-+    g_autofree void *bootinfo = g_malloc(0x44);
-+    uint32_t spl0_offset, spl_max_size, spl_size, target_crc, computed_crc;
-+    if (blk_pread(blk_by_legacy_dinfo(di), bootinfo_offset, 0x44, bootinfo, 0) <
-+        0) {
-+        error_report("Cannot read bootinfo from boot media");
-+        return -1;
-+    }
++The 8 A100 cores and the Realtime CPU on the K3 SoC are not modelled.
++I2C, Networking and PCIe are not modelled.
 +
-+    /* Check CRC of Bootinfo block */
-+    target_crc = ldl_le_p(bootinfo + 0x40);
-+    computed_crc = crc32(0, bootinfo, 0x40);
++Bootrom
++-------
 +
-+    if (target_crc != computed_crc) {
-+        error_report("Bootinfo CRC doesn't match");
-+        return -1;
-+    }
++The spacemit-k3 machine optionally accepts a bootrom binary dumped
++from hardware via ``-bios``. If this file is supplied, the machine starts
++executing this, just as real hardware would. The bootrom can be dumped
++following `this <https://gist.github.com/asrinivasanTT/4498e3b37015cd5c6e8ca6641c2a3340>`_
++guide.
 +
-+    /* Get SPL Offset and Max Size from bootinfo */
-+    spl0_offset = ldl_le_p(bootinfo + 0x20);
-+    spl_max_size = ldl_le_p(bootinfo + 0x28);
++In case the bootrom is not supplied, a fallback loading method is implemented.
++Look for more details at the end of the next section.
 +
-+    if (spl_max_size < 0x1000) {
-+        error_report("SPL Max Size value is too small");
-+        return -1;
-+    }
++Boot Modes
++----------
 +
-+    /*
-+     * Every bootinfo block generated from the vendor
-+     * BSP seems to have this as the max value, so
-+     * cap it at that.
-+     */
-+    if (spl_max_size > 0x74000) {
-+        error_report("SPL Max Size value is too big");
-+        return -1;
-+    }
++The spacemit-k3 machine accepts a boot-mode machine property ``-M spacemit-k3,boot-mode=nor``
++that determines which boot media the bootrom loads the next boot stage from.
++This argument can be set to one of the following options:
 +
-+    g_autofree void *fsbl = g_malloc(spl_max_size);
++1. ``boot-mode=emmc`` - SD -> EMMC -> XMODEM
++2. ``boot-mode=nor`` - SD -> NOR -> XMODEM
++3. ``boot-mode=nand`` - SD -> NAND -> XMODEM
++4. ``boot-mode=ufs`` - SD -> UFS -> XMODEM
++5. ``boot-mode=usb`` - USB FASTBOOT
++6. ``boot-mode=uart`` - UART XMODEM
 +
-+    /* Read SPL */
-+    if (blk_pread(blk_by_legacy_dinfo(di), spl0_offset, spl_max_size, fsbl, 0) <
-+        0) {
-+        error_report("Cannot read FSBL from boot media");
-+        return -1;
-+    }
++All boot modes try SD first. ``boot-mode=nor`` is the default option. At the
++moment, the spacemit-k3 machine doesn't support NAND flash and USB, so those
++boot methods aren't supported.
 +
-+    spl_size = ldq_le_p(fsbl + 0xfe0 + 0x8);
-+    if (spl_size > spl_max_size - 0x1000) {
-+        error_report("SPL Size is too big");
-+        return -1;
-+    }
++If a bootrom isn't supplied via ``-bios``, qemu loads the next stage from boot
++media in the same manner as the bootrom would, trying to load from one boot
++medium and falling back to the next if it fails to. Only the ``emmc``, ``nor``
++and ``ufs`` boot methods are supported in this case. The xmodem fallback for
++these methods isn't implemented either.
 +
-+    /* Check CRC of SPL*/
-+    target_crc = ldl_le_p(fsbl + 0xfe0 + 28);
-+    computed_crc = crc32(0, fsbl + 0x1000, spl_size);
 +
-+    if (target_crc != computed_crc) {
-+        error_report("FSBL CRC doesn't match");
-+        return -1;
-+    }
++Building Firmware Binaries from Vendor BSP
++------------------------------------------
 +
-+    rom_add_blob_fixed("spacemit-k3.fsbl", fsbl + 0x1000, spl_size,
-+                       ms->memmap[SPACEMIT_K3_SRAM].base + 0x1000);
++1. OpenSBI: A bug in vendor OpenSBI causes writes to an out of bound address
++and results in store faults. We need to patch 3 lines to use it
 +
-+    /*
-+     * Bootrom writes to this register to specify boot medium it picked
-+     * Subsequnent stages read this register. Simulate this write
-+     */
-+    spacemit_k3_set_selected_boot_mode(&ms->cpu_config, selected_boot_mode);
-+    return 0;
-+}
++.. code-block:: bash
 +
-+static int spacemit_k3_load_fsbl_sd(SpacemitK3State *ms)
-+{
-+    DriveInfo *sd = drive_get(IF_SD, 0, 0);
-+    if (!sd) {
-+        error_report("Failed to get sd");
-+        return -1;
-+    }
++	$ git clone -b k3-br-v1.0.y https://github.com/spacemit-com/opensbi/
++	$ cd opensbi
++	$ # Patch out of bound writes
++	$ sed -i 's|^\([[:space:]]*\)\(cci_enable_snoop_dvm_reqs([456]);\)|\1// \2|' platform/generic/spacemit/spacemit_k3.c
++	$ CROSS_COMPILE=riscv64-unknown-linux-gnu- PLATFORM_RISCV_XLEN=64 make O=build PLATFORM=generic PLATFORM_DEFCONFIG=k3_defconfig BUILD_INFO=y -j$(nproc)
++	$ # Enable logging and rebuild
++	$ KCONFIG_CONFIG=build/platform/generic/kconfig/.config OPENSBI_PLATFORM_SRC_DIR=./platform/generic OPENSBI_SRC_DIR=./ OPENSBI_PLATFORM=generic ./scripts/Kconfiglib/setconfig.py ENABLE_LOGGING=y
++	$ CROSS_COMPILE=riscv64-unknown-linux-gnu- PLATFORM_RISCV_XLEN=64 make O=build PLATFORM=generic BUILD_INFO=y -j$(nproc)
 +
-+    return spacemit_k3_load_fsbl(ms, sd, SPACEMIT_K3_FSBL_SD_OFFSET,
-+                                 SPACEMIT_K3_SELECTED_BOOT_MODE_SD);
-+}
++2. U-Boot
 +
-+static int spacemit_k3_load_fsbl_emmc(SpacemitK3State *ms)
-+{
-+    DriveInfo *emmc = drive_get(IF_SD, 0, 2);
-+    if (!emmc) {
-+        error_report("Failed to get emmc");
-+        return -1;
-+    }
++.. code-block:: bash
 +
-+    return spacemit_k3_load_fsbl(ms, emmc, SPACEMIT_K3_FSBL_EMMC_OFFSET,
-+                                 SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC);
-+}
++   $ git clone -b k3-br-v1.0.y https://github.com/spacemit-com/uboot-2022.10/
++   $ cd uboot-2022.10
++   $ make k3_defconfig
++   $ CROSS_COMPILE=riscv64-unknown-linux-gnu- make -j$(nproc)
 +
-+static int spacemit_k3_load_fsbl_ufs(SpacemitK3State *ms)
-+{
-+    DriveInfo *ufs = drive_get(IF_SCSI, 0, 0);
-+    if (!ufs) {
-+        error_report("Failed to get ufs");
-+        return -1;
-+    }
++This produces 4 files ``bootinfo_block.bin``, ``bootinfo_spinor.bin``,
++``FSBL.bin`` and ``u-boot.itb``.
 +
-+    return spacemit_k3_load_fsbl(ms, ufs, SPACEMIT_K3_FSBL_UFS_OFFSET,
-+                                 SPACEMIT_K3_SELECTED_BOOT_MODE_UFS);
-+}
++3. EDK2: EDK2 can be used instead of U-Boot. You'll still have to use the FSBL
++and bootinfo from U-Boot.
 +
-+static int spacemit_k3_load_fsbl_nor(SpacemitK3State *ms)
-+{
-+    DriveInfo *nor = drive_get(IF_MTD, 0, 0);
-+    if (!nor) {
-+        error_report("Failed to get nor flash");
-+        return -1;
-+    }
++.. code-block:: bash
 +
-+    return spacemit_k3_load_fsbl(ms, nor, SPACEMIT_K3_FSBL_NOR_OFFSET,
-+                                 SPACEMIT_K3_SELECTED_BOOT_MODE_NOR);
-+}
++	$ git clone -b k3 https://github.com/spacemit-com/edk2.git
++	$ git clone -b k3 https://github.com/spacemit-com/edk2-platforms.git
++	$ git -C edk2 submodule update --init
++	$ git -C edk2-platforms submodule update --init
++	$ export WORKSPACE=$PWD
++	$ export PACKAGES_PATH=$WORKSPACE/edk2:$WORKSPACE/edk2-platforms
++	$ export GCC5_RISCV64_PREFIX=riscv64-unknown-linux-gnu-
++	$ source edk2/edksetup.sh
++	$ make -C edk2/BaseTools
++	$ build -a RISCV64 -t GCC5 -b RELEASE -n $(nproc) -p Platform/Spacemit/K3/MUSE-Pico/MUSE-Pico.dsc
 +
- static void spacemit_k3_machine_done(Notifier *notifier, void *data)
- {
-     SpacemitK3State *s = container_of(notifier, SpacemitK3State,
-@@ -103,9 +238,65 @@ static void spacemit_k3_machine_done(Notifier *notifier, void *data)
- 
-     riscv_boot_info_init(&boot_info, &s->soc);
- 
--    riscv_find_and_load_firmware(machine, &boot_info,
--                                 firmware_name,
--                                 &start_addr, NULL);
-+    /*
-+     * Load bootrom supplied via -bios.
-+     * If no file is supplied, load next stage from supplied images
-+     * exactly as how bootrom would.
-+     */
-+    if (machine->firmware && strcmp(machine->firmware, "default") &&
-+        strcmp(machine->firmware, "none")) {
-+        riscv_find_and_load_firmware(machine, &boot_info, firmware_name,
-+                                     &start_addr, NULL);
-+    } else {
-+        switch (s->boot_mode) {
-+        case SPACEMIT_K3_BOOT_MODE_NOR:
-+            if (spacemit_k3_load_fsbl_sd(s) < 0) {
-+                error_report("Booting from SD failed, trying NOR");
-+                if (spacemit_k3_load_fsbl_nor(s) < 0) {
-+                    error_report("Booting from NOR Failed");
-+                    if (qtest_enabled()) {
-+                        return;
-+                    }
-+                    exit(1);
-+                }
-+            }
-+            break;
-+        case SPACEMIT_K3_BOOT_MODE_EMMC:
-+            if (spacemit_k3_load_fsbl_sd(s) < 0) {
-+                error_report("Booting from SD failed, trying EMMC");
-+                if (spacemit_k3_load_fsbl_emmc(s) < 0) {
-+                    error_report("Booting from EMMC Failed");
-+                    if (qtest_enabled()) {
-+                        return;
-+                    }
-+                    exit(1);
-+                }
-+            }
-+            break;
-+        case SPACEMIT_K3_BOOT_MODE_UFS:
-+            if (spacemit_k3_load_fsbl_sd(s) < 0) {
-+                error_report("Booting from SD failed, trying UFS");
-+                if (spacemit_k3_load_fsbl_ufs(s) < 0) {
-+                    error_report("Booting from UFS Failed");
-+                    if (qtest_enabled()) {
-+                        return;
-+                    }
-+                    exit(1);
-+                }
-+            }
-+            break;
-+        case SPACEMIT_K3_BOOT_MODE_NAND:
-+        case SPACEMIT_K3_BOOT_MODE_USB:
-+        case SPACEMIT_K3_BOOT_MODE_UART:
-+            error_report("Supply bootrom via -bios to use these boot methods");
-+            if (qtest_enabled()) {
-+                return;
-+            }
-+            exit(1);
-+        }
-+        s->soc.harts[0].env.resetvec =
-+            s->memmap[SPACEMIT_K3_SRAM].base + 0x1000;
-+    }
- }
- 
- static void spacemit_k3_machine_init(MachineState *machine)
-diff --git a/include/hw/misc/spacemit_k3_syscon.h b/include/hw/misc/spacemit_k3_syscon.h
-index 873f2c08e1..68450680d7 100644
---- a/include/hw/misc/spacemit_k3_syscon.h
-+++ b/include/hw/misc/spacemit_k3_syscon.h
-@@ -77,4 +77,14 @@ enum {
-     SPACEMIT_K3_BOOT_MODE_UART,
- };
- 
-+enum {
-+    SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC,
-+    SPACEMIT_K3_SELECTED_BOOT_MODE_NOR,
-+    SPACEMIT_K3_SELECTED_BOOT_MODE_UFS,
-+    SPACEMIT_K3_SELECTED_BOOT_MODE_SD,
-+};
++This will produce a ``fitimage/MUSE-Pico/MUSE-Pico.itb``. Use this instead of
++``u-boot.itb``.
 +
-+void spacemit_k3_set_selected_boot_mode(SpacemitK3CPUConfigState *s,
-+                                        int selected_boot_mode);
++Building Firmware Binaries from Upstream Sources
++------------------------------------------------
 +
- #endif /* HW_MISC_SPACEMIT_K3_SYSCON_H */
++While upstream OpenSBI is a drop-in replacement for vendor OpenSBI, support in
++upstream U-Boot is limited at the moment. The U-Boot build can only be loaded
++via YMODEM via U-Boot SPL. Build instructions for U-Boot will be added once
++support is more stable.
++
++1. OpenSBI
++
++.. code-block:: bash
++
++	$ git clone https://github.com/riscv-software-src/opensbi/
++	$ cd opensbi
++	$ CROSS_COMPILE=riscv64-unknown-linux-gnu- PLATFORM_RISCV_XLEN=64 make O=build PLATFORM=generic PLATFORM_RISCV_ISA=rv64gc FW_TEXT_START=0x100000000 BUILD_INFO=y -j$(nproc)
++	$ pushd build/platform/generic/firmware
++	$ wget https://github.com/spacemit-com/opensbi/raw/refs/heads/k3-br-v1.0.y/platform/generic/spacemit/fw_dynamic.its
++	$ mkimage -f fw_dynamic.its fw_dynamic.itb
++
++This should produce a ``build/platform/generic/firmware/fw_dynamic.itb``. This
++can replace the ``fw_dynamic.itb`` from vendor OpenSBI.
++
++Booting with firmware on NOR Flash
++----------------------------------
++
++Creating an image
++
++.. code-block:: bash
++
++	$ truncate -s 8M nor.img
++	$ dd if=bootinfo_spinor.bin of=nor.img bs=1 seek=0 conv=notrunc status=none
++	$ dd if=FSBL.bin of=nor.img bs=1 seek=$((0x20000)) conv=notrunc status=none
++	$ # esos at 0xb0000 is skipped as it is not needed
++	$ dd if=fw_dynamic.itb of=nor.img bs=1 seek=$((0x1b0000)) conv=notrunc status=none
++	$ dd if=u-boot.itb of=nor.img bs=1 seek=$((0x210000)) conv=notrunc status=none
++
++
++To boot the image
++
++.. code-block:: bash
++
++	$ ./build/qemu-system-riscv64 -M spacemit-k3 \
++		-nographic -drive if=mtd,format=raw,file=nor.img
++
++Booting with firmware on SD/EMMC/UFS
++------------------------------------
++
++Creating an image
++
++.. code-block:: bash
++
++	$ truncate -s 32M sd.img
++	$ echo 'label: gpt' | sfdisk sd.img
++	$ dd if=bootinfo_block.bin of=sd.img bs=1 seek=$((0x100000)) conv=notrunc status=none
++	$ dd if=FSBL.bin of=sd.img bs=1 seek=$((0x180000)) conv=notrunc status=none
++	$ # esos at 0x400000 is skipped as it is not needed
++	$ dd if=fw_dynamic.itb of=sd.img bs=1 seek=$((0x700000)) conv=notrunc status=none
++	$ dd if=u-boot.itb of=sd.img bs=1 seek=$((0x800000)) conv=notrunc status=none
++
++
++To boot the image with SD,
++
++.. code-block:: bash
++
++	$ ./build/qemu-system-riscv64 -M spacemit-k3 \
++		-nographic -drive if=sd,format=raw,file=sd.img,index=0
++
++To boot with EMMC, use ``-M spacemit-k3,boot-mode=emmc`` to set the boot mode
++and attach the image to the EMMC controller via ``if=sd,file=sd.img,index=2``.
++
++To boot with UFS, use ``-M spacemit-k3,boot-mode=ufs`` to set the boot mode and
++attach the image to the UFS controller via ``if=scsi,file=sd.img``.
++
++Rootfs on UFS
++-------------
++
++Most Spacemit K3 boards boot with the boot firmware on NOR flash and rootfs on
++UFS.
++
++The UFS image for this must be built with a block size of 4096. Most pre-built
++distro images off the internet are built with a block size of 512 and aren't
++compatible.
++
++To build an UFS image with a rootfs,
++
++.. code-block:: bash
++
++	$ truncate -s 8G ufs.img
++	$ # Attach this image to a loop device
++	$ sudo losetup --sector-size 4096 -fP --show ufs.img
++	$ # Loop device /dev/loopN
++	$ sudo sfdisk /dev/loopN <<EOF
++	label: gpt
++	start=2048, size=131072, type=uefi,  name=ESP
++	size=, type=linux, name=rootfs
++	EOF
++	$ # Create filesystems
++	$ sudo mkfs.vfat -F 32 -S 4096 /dev/loopNp1
++	$ sudo mkfs.ext4 -b 4096 /dev/loopNp2
++	$ # Mount partitions
++	$ sudo mkdir -p /mnt/k3/ /mnt/k3/boot/efi
++	$ sudo mount /dev/loopNp2 /mnt/k3/ && sudo mount /dev/loopNp1 /mnt/k3/boot/efi/
++	$ # Copy over rootfs/ESP to /mnt/k3/
++
++To boot with this UFS image,
++
++.. code-block:: bash
++
++	$ ./build/qemu-system-riscv64 -M spacemit-k3 \
++		-nographic -drive if=mtd,format=raw,file=nor.img \
++		-drive if=scsi,format=raw,file=ufs.img
++
++
++If you want to use the UFS image to store both the boot firmware and the
++rootfs, write the boot firmware binaries to the SD/EMMC/UFS offsets, then
++follow the steps in this section, substituting the start LBA of the ESP to a
++higher value like 4096 so that the first 16MB is free for the firmware
++partitions.
++
++Booting from XMODEM
++-------------------
++
++The Spacemit K3 bootrom implements UART boot via XMODEM as a fallback in case
++none of the boot media has a valid U-Boot SPL on it. This can be used in QEMU
++if you supply the bootrom via ``-bios``. You can boot the ``FSBL.bin`` from
++vendor U-Boot, or any M-mode payload wrapped in the header that vendor U-Boot
++wraps U-Boot SPL in using this method.
++
++To boot the ``FSBL.bin`` from the vendor U-Boot via XMODEM,
++
++.. code-block:: bash
++
++	$ ./build/qemu-system-riscv64 -M spacemit-k3,boot-mode=uart \
++		-bios k3.bin -nographic -serial pty
++	# QEMU prints a /dev/pts/N
++
++In a separate terminal,
++
++.. code-block:: bash
++
++	$ picocom -b 115200 --send-cmd sx /dev/pts/N
++	# Ctrl-A + Ctrl-S
++	# Select FSBL.bin to send
+diff --git a/docs/system/target-riscv.rst b/docs/system/target-riscv.rst
+index cc0ef4b64f..d38ad98642 100644
+--- a/docs/system/target-riscv.rst
++++ b/docs/system/target-riscv.rst
+@@ -74,6 +74,7 @@ undocumented; you can get a complete list by running
+    riscv/riscv-server-ref
+    riscv/shakti-c
+    riscv/sifive_u
++   riscv/spacemit_k3
+    riscv/tt_atlantis
+    riscv/virt
+    riscv/xiangshan-kunminghu
 
 -- 
 2.43.0
