@@ -1,137 +1,141 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8414E606A32A
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:21:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 676B3606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:21:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Xn0nGN9V;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eFf7/oS0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EjkKEe2h;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fA0F98ON
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWCva-0002SJ-B7; Wed, 25 Nov 2026 08:20:50 -0500
+	id 1xWCwE-0002hn-7C; Wed, 25 Nov 2026 08:21:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvW-0002Re-4E
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:20:46 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xWCw4-0002cU-8Z
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:22 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvT-0000cQ-1B
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:20:45 -0500
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ id 1xWCw0-0000gf-DC
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:18 -0500
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9mcNM796779
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:41 GMT
+ 6AP9mBk94130800
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=/c8KOt3pZX8naevWJKnwHj9QH40Vq0onuaj
- Vg/XZDpc=; b=Xn0nGN9Ve0xc/FK1redET0z6AGFrKN5HF+IWCExqLcCn0P4qt8h
- xoOdXwabKZujRwp86UihXD9HmbOsRpdZ32TvycoIpRQ1qj54PwpU+bkAhwLs8BHN
- DdUZCsiYfLQLJLqVuYbjvPfNRF45SExkjVI+0MgdYrRdxdrKOuakn6GUCPguagFr
- UrpaiATEzoRuERnt2o1q/dVoO+y3/vVdzR4Cfo7yTETtKof0KVKT0MBmzEYL0cAn
- SWfTVzYdeFCLseFsRcxWOxM2u/Zwk5Du8PZtFDh0USF7I/luiVG6thuLrujlgcfA
- GNXL6UwFp+WHEml36rlEoFkeZ2KDntC/0qA==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
- [209.85.219.72])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5n6rtur8-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=4e+LYFEBHvN
+ q2airE7BwHREyHQTc+YyjmSq/kXaHRMA=; b=EjkKEe2howgJ3oLNlAaCRj+8IG+
+ cRcFicWq6WUyFS4wme7m6lKKhD8D7A6Mniah7NXGjIWTB3wj9hVFs+sb/wYMtvmf
+ MhDRHD/FpW1lUIb/vj/J+a/4MvxxVE3T+WxE9b/q0nOVvydDNo0mNuPnEz9HLhOH
+ cnsX5YRmBnQXF/PKsqPk3nvwqyw8LiKBjwKjBWsCqtTEkIL0v2MtDHtXmR01Rq+q
+ uzV4K7Y5tSMI8ed6XYHkZptuJ2nCs7UinrhbJG8TUTG4vcIusszZkNBIwO0fCmEL
+ ZsBOj+gmSdXOcTxGft5k3xQUqHZ+pHRjyBpi0J1NIHdFnRWAWdm2yIDSANw==
+Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
+ [209.85.222.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vuhs0xv-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:41 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id
- 6a1803df08f44-92126ecb4b8so98644466d6.3
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:20:40 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:05 +0000 (GMT)
+Received: by mail-ua1-f70.google.com with SMTP id
+ a1e0cc1a2514c-9806e283b0eso3527388241.3
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:21:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795612840; x=1796217640; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=/c8KOt3pZX8naevWJKnwHj9QH40Vq0onuajVg/XZDpc=;
- b=eFf7/oS0tHpMJfOUYLe9veKCbcKULRDau8FjvCayNhQY+GJavd3AuBh4Q/fO9G2d2Z
- ZTxRedOJB36w0cmdfAeeArxCl8384bgFOOfo2f5bayBKlsDVQf9eEc5o5XDrI3SoLCF9
- uuk4cjEDXjbocVO7uNglfn7yQ4gfv/RHeE3f/dYik9rlreHxM3+mPaH2szwwIAb7PpGO
- N0YIg0SgVo7SJTvPvowbJMBHKQhPJ+iUTxylDZE2zruuhGV3PkJ1WxZKeiC16emu20lX
- MtIzomVBrJWwTZDxum0/iH2Hrv5AV1Bwe2IWeclKiHy3ev3svoG9k+9uij9Ar2cDrg7e
- Ma7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795612840; x=1796217640;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=oss.qualcomm.com; s=google; t=1795612865; x=1796217665; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=/c8KOt3pZX8naevWJKnwHj9QH40Vq0onuajVg/XZDpc=;
- b=1LRkf1UqWgH8PmMqFC6F3nlTXANjGjDug7Di+J2kzS8k1ajaMRdBy8WDgbiUYIWy4K
- 4vrpRknCpeUlGgEKOgtdCr/iz690Nor07L4iY83a4gXIAJ39Jk+XEFzSqMRE9eJhpXTg
- BpZCM3IvmeBslKOnJsUUHe/oeN4nq7CSaSdR/WL3wbslRvOtU60vGRGpc3l6LmjFTguT
- XGXqFCAC0A+Ja/suZ1+lA8v2yCg3LeYkqACly0hrJlikfAvOGQfqST4ZUDxG6bX5uEsU
- F/gif0YOcfDVZNeToUHJH0DFPr6pZgnjECaC3yvEVOFQg8rsZ5Yb6jiZTclmnuKQRzBg
- BaFw==
-X-Gm-Message-State: APuU4Z/RSEn8RSuTMvYrm5LukJPLTCXa7WQ5BFWVAanUarKkyuIPmjBA
- lRvcBL2TfIbzlOY9bIlAV5ob6VbD1zORvc/TpbmhLlrQxB+yMM5c9Rlxe0tezwgV8WaBFRTqlUN
- IorDMhEAS3SKs95Lmx1d44xFW+j4gtFPawTv09G7WJBN4H/Uo6ZpAbEV7rQ==
-X-Gm-Gg: AZFdTZeFGQWx+K09EMYv+ezJf9M9xHmw6rs6nyInXHBUpSxt56QViVbs0xPUO8SfDbW
- N4yKyMiPdc+ldz6cwVms42bGuFSB0RGaBalXf3ZbBJ8rBlhXxcrxRnY/Y41k2cRw6s0Km9L0QvV
- mcJ94WvoQKWU3yAxfRqHPi+Q/mwSXfgV4fCxVj4pdicXj8k0iDetn/AMu/XY+0xoQ7lehhRz2Ss
- BzR1J/Fs55ZQXSfiJg7hfTXDuZHCGY55yUL7H8fI94FB/EOrxGIwEuuZA7uaLLY+PjNfl2Vffu6
- /JC3o2zqmDFvMjjNsf75xXYsxTACp2Tk6ZO9H4mv2uTRunUOaHT//Ai6zplofSgf1xlH+2t9ih0
- V2wvQSORfBVaSDf4gKJnOim6fIGj68Xs/KZzSb17H41FEK4ReIUCjsovdkR8qy1ffTOZhprmlTu
- ltTN/MFRsElg==
-X-Received: by 2002:a05:6214:4e81:b0:921:2e16:c325 with SMTP id
- 6a1803df08f44-92134aef10dmr277628156d6.26.1795612839787; 
- Wed, 25 Nov 2026 05:20:39 -0800 (PST)
-X-Received: by 2002:a05:6214:4e81:b0:921:2e16:c325 with SMTP id
- 6a1803df08f44-92134aef10dmr277627836d6.26.1795612839304; 
- Wed, 25 Nov 2026 05:20:39 -0800 (PST)
+ bh=4e+LYFEBHvNq2airE7BwHREyHQTc+YyjmSq/kXaHRMA=;
+ b=fA0F98ONHcPqLwT0PoWrewwA413yvG7iR+X71HrVBdMiwUC/0oHIJvAtVmriMFhM2l
+ VcjuXmI03kc6yv7QJy1hnPAFf6lQncb1ghItd5WtKjCFKJCh2BpA9prITvLoSMbSeqja
+ IaQOM3eQ2vth4iuD5OgKFtUIXh4A8VOFspseF6lGqz61B5aXz0txf5eg5MCw3F7lA9aR
+ +cQoiub+YvW0mDN43fTHWpLnd01fQ5LddJWRHx1v6kL9iOBIYY9i2UrEIk2HhHyIDKbZ
+ g5BOC6y36bY3Mrtty6bqHkrqDiSMNRBjgvAOwdwfPd7npeSvQFSdnL0c8873Ycb2CLEK
+ Z2Ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795612865; x=1796217665;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=4e+LYFEBHvNq2airE7BwHREyHQTc+YyjmSq/kXaHRMA=;
+ b=SVqO9zXNqymdk3iGk7++CcV41QFpkF3y6hP9mq3lra+5EJDyzpA5f/hrPWavldgeaA
+ GDYt5RByoLRS1nzEH2ovECwWSPBd169kBeSmw6OcjERVZevT7DD1fozFsiS+hcSDlTvt
+ M2rqx7hcSvy1vnAqeMckVarhF3N4WgMOqcFIja5kdVBb7UnXvK92kONLQLvKDMkYCkFQ
+ gEfFxPcmfHtMQTDrrN1BlLnGYnT2XvXBc+IIinViSw2wjnxw43pi8Zgt65KD7mQ4Vxik
+ vJ7PaBsJmj5RPVZrlQojDJyin6tcGpr0PrR6PZHS616YkeQOu16nToVqI0Oc5Txun/4+
+ X01g==
+X-Gm-Message-State: APuU4Z886D7cdLX63PHNwDSn05X1wKjzGVpKxeaQ/1+vgUQNwpYg/zH1
+ MGlGG+IcLfsm2Zy3ZAaFkQfx/o62CW/lLaRsOLmCqZDO2jvUxwrKuLRbBFNfMMufEOT4BF7HdZT
+ KHhk+/0BwjxEOsrpc9ay38ntLnsmsuzFvWToZxQUKfErtt6STb5e+O4npkQ==
+X-Gm-Gg: AZFdTZdgrC6iyMoEij3DsmRBlqpRtC8RXilQw76HGaPEv4UunY8eIyQ3e0nAFXlOWYi
+ bHHF5EFHd9SisHB6PbEY9ZAX/JdQz83pw/BfnMP2tlt+4gAOc5zGGlml+Qb+DN0hw3w7mANT6jF
+ RA1puCZ+zwOa8K/xK4AUsDkkMJY649pJ6Vm+jwxbDogS5NYrFAwEcoJFmjDzKIHYQ1QuxLuFy8G
+ PHB1OdrzM0/jEH1tYv6S3Hk/JWVKVmlJDDRm1d+YVcS4mSC7upChOAd3Q1TZpmKqIOEifFiA6YW
+ jv3Oo8z4b886Kb3g4Br4tF8leZu4KqU2q1vDoZHMOW3puh8fps82wQ2lEmgI3tSAkYMCmo9Odit
+ JWycvGs0zCEHtAviOktvekmXvRppBiBEJqF3UPOd01zRpuca+iHVvnWDnNVNdxYrvBYCc8/6kOq
+ jUGhtfRLFQLw==
+X-Received: by 2002:a05:6102:26c7:b0:7d2:7be1:271f with SMTP id
+ ada2fe7eead31-7d7395b6953mr10083238137.31.1795612864552; 
+ Wed, 25 Nov 2026 05:21:04 -0800 (PST)
+X-Received: by 2002:a05:6102:26c7:b0:7d2:7be1:271f with SMTP id
+ ada2fe7eead31-7d7395b6953mr10083195137.31.1795612864023; 
+ Wed, 25 Nov 2026 05:21:04 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.20.37
+ 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.21.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 05:20:38 -0800 (PST)
+ Wed, 25 Nov 2026 05:21:03 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PATCH 00/15] target/riscv: gitlab fixes super pack
-Date: Wed, 25 Nov 2026 10:19:59 -0300
-Message-ID: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH 08/15] target/riscv: filter out reserved (m|h)envcfg.CBIE value
+Date: Wed, 25 Nov 2026 10:20:07 -0300
+Message-ID: <20261125132015.229955-9-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
+References: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MiBTYWx0ZWRfX8UKGr3iBo+nE
- 0qXYDbAx9JzOX6/EPJ0KN35YshFamCs2GpMcU3LC+lD8lsLR7+4+v5v+5lVaHDkNNGX+3c85bKJ
- PDg+u9d+iUmX86lYhXpBGjxLN0zgO0wQuCT+7XHXFnSgRQIej/OQ21DDHTITn7UXShklkxuKgTd
- Ty2BBI4x6HIHY7xo1fdmazfFa7HlSQwfk6+YUZGX3jF1FvTB34jrcmW0qAXuI4Ki6LbtyWBZpRA
- yNpnrPVzEdI78XSLHq2C808jJ5y3/PaWGLrj1pt35X+XffUv3hB5lfjyTIu/sgSQVeUv5fG3ocP
- X99vkwQkV3mjeFTeyL/uHRM6jzZxBJ2uwZ2JBXugyjCoIxX0683dRLiv9T9nbbo5hEYXDqJCHN1
- SOGjP36kaQExmNbpTufp77PuCEPxdk5OkFKbpQ2UqR4ZoDXO72naVWc56B3VbpE+M25WZrFsMLQ
- kiexdn9MESFwHbG0fcg==
-X-Authority-Analysis: v=2.4 cv=Voa2kO2n c=1 sm=1 tr=0 ts=6b06e0a9 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Authority-Analysis: v=2.4 cv=FPmOVOos c=1 sm=1 tr=0 ts=6b06e0c1 cx=c_pps
+ a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=p0WdMEafAAAA:8
- a=CFW21O7Hy6Q10OLQpGcA:9 a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-GUID: QBjToTxgFRWFyo3_cekgIFv8-P_wcv7B
-X-Proofpoint-ORIG-GUID: QBjToTxgFRWFyo3_cekgIFv8-P_wcv7B
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MiBTYWx0ZWRfX2n3H/BxMQ5Wx
- 8xu8UYup7yy+CkW0HJ2eLiWLvFwkI9zBudJrlS8EQH7sejHYI8u1FMER/B0V6c3r31FMiIfAkYN
- cVKaIzODRW5GJlTpODuy4Kf/k1MQMJk=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=ZgkQZYNTZRhgL34ysRAA:9 a=TD8TdBvy0hsOASGTdmB-:22
+X-Proofpoint-GUID: klp8wh2CPIdwiqs8yxqIFDw-CRaWghsd
+X-Proofpoint-ORIG-GUID: klp8wh2CPIdwiqs8yxqIFDw-CRaWghsd
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXzS3XWUeFt6L4
+ C+1EH2xKlVAzzCA0/ZNwpis408R99yoMMB8AvuVN7RELVWYAdb59Imp2OzKHm0fNFwxkCsczdto
+ Nj/kvmIpgV2qD1Vt9zLrPlXXic8PSkY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX1e8lj7b7TLhA
+ RSe0VaUUyXsyWB9YiC6UMrvajdpva+ueJ4WQjRgrUr7XshSlBsk3fc4uKrRazEV8avdB+MssdGc
+ fVSmpmGrQpK5vfZKYCeLEB4hsCnRiwunnefIOA6IHeQAzSOikmWifVtPck0UhilYjZozGruMLWF
+ 06QsD1Ezn36PESxaDlCz6i0sJq/qrLxRkkWaphswuLa+PVjy/rd+IoH+ZMwOBuqUkyor336ricC
+ ZfHrh75o1R400wHY0wezIA14zKRbvZ8asmFq0vHjpAnxWMXSv9kGBA4elBs3A4MuvzZ7OGkXOaK
+ oMKVQM613DXmRPLQL8O0Pmjl7CFkT3cjzhuyuq7BLaVAEn1keX8jRXSRnkyn6P2d+RMvVHapGJR
+ WV1ReEKNkk+S28lF9H7HZ9QR95g90T7YU62zV581Ge1UdsSjMjQTiPEXHwW6ZYqQHIyeM+OFa4E
+ HKGYsJnF7oBWzfc0xIA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
- adultscore=0 spamscore=0 priorityscore=1501 suspectscore=0 phishscore=0
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 adultscore=0 phishscore=0 clxscore=1015 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250052
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250053
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -143,109 +147,162 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Greetings,
+We can't allow CBIE = 10b to be written since it's marked as Reserved.
 
-This is a collection of gitlab fixes I've sent in the last 2 weeks or
-so.  They're scattered around the mailing and, to my surprise, they
-can't be applied independently on top of alistair/riscv-to-apply.next
-without generating conflicts with one another, which is quite unpleasant
-to deal with.
-
-I decided then to create a super pack and send them together, hopefully
-creating a better upstreaming experience for all of us.
-
-The following Gitlab issues are fixed by this series:
-
-https://gitlab.com/qemu-project/qemu/-/work_items/4821
-https://gitlab.com/qemu-project/qemu/-/work_items/3526
-https://gitlab.com/qemu-project/qemu/-/work_items/3133
-https://gitlab.com/qemu-project/qemu/-/work_items/4592
-https://gitlab.com/qemu-project/qemu/-/work_items/4591
-https://gitlab.com/qemu-project/qemu/-/work_items/4593
-https://gitlab.com/qemu-project/qemu/-/work_items/4596
-https://gitlab.com/qemu-project/qemu/-/work_items/4216
-https://gitlab.com/qemu-project/qemu/-/work_items/4826
-https://gitlab.com/qemu-project/qemu/-/work_items/4811
-https://gitlab.com/qemu-project/qemu/-/work_items/4488
-https://gitlab.com/qemu-project/qemu/-/work_items/4827
-https://gitlab.com/qemu-project/qemu/-/work_items/4818
-https://gitlab.com/qemu-project/qemu/-/work_items/4680
-
-Acks given for each individual fix were carried over.  Only the latest
-version of each patches was included.
-
-Patches based on alistair/riscv-to-apply.next.
-
-Daniel Henrique Barboza (15):
-  target/riscv: do not write SXL < UXL
-  target/riscv: avoid amocas.* x0 clobbering
-  target/riscv/tcg/csr: filter bits when r/w HVIP(H)
-  target/riscv: fix hedeleg writable mask
-  target/riscv: clear hgatp bits from write mask
-  target/riscv: allow hvip.VSTIP writes when (m|h)envcfg.STCE is set
-  target/riscv: allow zicbo insns to run without RVS
-  target/riscv: filter out reserved (m|h)envcfg.CBIE value
-  target/riscv: sanitize mnstatus.MNPP field
-  target/riscv: do not write RVG in misa CSR
-  target/riscv: do not clear mstatush after mstatus write
-  target/riscv: clear mstatus.MIE if mstatush.MDT is set
-  target/riscv/tcg/pmp.c: remove no-op in mseccfg_csr_write()
-  target/riscv/tcg: refactor mseccfg_csr_write()
-  target/riscv/tcg/csr.c: add mseccfgh CSR
-
- target/riscv/cpu_bits.h                       |   9 +
- target/riscv/tcg/csr.c                        | 187 ++++++++++++++++--
- .../riscv/tcg/insn_trans/trans_rvzacas.c.inc  |  15 +-
- target/riscv/tcg/op_helper.c                  |   5 +-
- target/riscv/tcg/pmp.c                        |  62 +++---
- target/riscv/tcg/translate.c                  |   5 +-
- tests/tcg/riscv32/system/meson.build          |  30 +++
- tests/tcg/riscv32/test-mseccfg-bits-1.S       |  69 +++++++
- tests/tcg/riscv32/test-mseccfg-bits-2.S       |  56 ++++++
- tests/tcg/riscv32/test-mseccfg-bits-3.S       |  56 ++++++
- tests/tcg/riscv32/test-mseccfg-bits-4.S       |  55 ++++++
- tests/tcg/riscv32/test-mstatush-clear.S       |  57 ++++++
- tests/tcg/riscv32/test-mstatush-mdt-mie.S     |  55 ++++++
- tests/tcg/riscv64/system/meson.build          |  62 ++++++
- tests/tcg/riscv64/test-amocas-x0.S            |  49 +++++
- tests/tcg/riscv64/test-hedeleg-write.S        |  57 ++++++
- tests/tcg/riscv64/test-hgatp-rw.S             |  61 ++++++
- tests/tcg/riscv64/test-hvip-read.S            |  41 ++++
- tests/tcg/riscv64/test-hvip-vstip.S           |  65 ++++++
- tests/tcg/riscv64/test-menvcfg-cbie.S         |  82 ++++++++
- tests/tcg/riscv64/test-misa-G.S               |  51 +++++
- tests/tcg/riscv64/test-mseccfg-pmm-clear.S    |  63 ++++++
- tests/tcg/riscv64/test-mseccfg-pmm-reserved.S |  63 ++++++
- tests/tcg/riscv64/test-mstatus-mnstatus-mpp.S |  75 +++++++
- tests/tcg/riscv64/test-uxl-sxl.S              |  59 ++++++
- tests/tcg/riscv64/test-zicbo-umode.S          |  98 +++++++++
- 26 files changed, 1437 insertions(+), 50 deletions(-)
- create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-1.S
- create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-2.S
- create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-3.S
- create mode 100644 tests/tcg/riscv32/test-mseccfg-bits-4.S
- create mode 100644 tests/tcg/riscv32/test-mstatush-clear.S
- create mode 100644 tests/tcg/riscv32/test-mstatush-mdt-mie.S
- create mode 100644 tests/tcg/riscv64/test-amocas-x0.S
- create mode 100644 tests/tcg/riscv64/test-hedeleg-write.S
- create mode 100644 tests/tcg/riscv64/test-hgatp-rw.S
- create mode 100644 tests/tcg/riscv64/test-hvip-read.S
- create mode 100644 tests/tcg/riscv64/test-hvip-vstip.S
+Fixes: e979f6a15552 ("target/riscv: gate envcfg CBO fields on extensions")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4216
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
+ target/riscv/tcg/csr.c                | 14 ++++-
+ tests/tcg/riscv64/system/meson.build  |  5 ++
+ tests/tcg/riscv64/test-menvcfg-cbie.S | 82 +++++++++++++++++++++++++++
+ 3 files changed, 99 insertions(+), 2 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-menvcfg-cbie.S
- create mode 100644 tests/tcg/riscv64/test-misa-G.S
- create mode 100644 tests/tcg/riscv64/test-mseccfg-pmm-clear.S
- create mode 100644 tests/tcg/riscv64/test-mseccfg-pmm-reserved.S
- create mode 100644 tests/tcg/riscv64/test-mstatus-mnstatus-mpp.S
- create mode 100644 tests/tcg/riscv64/test-uxl-sxl.S
- create mode 100644 tests/tcg/riscv64/test-zicbo-umode.S
 
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index a715f48e01..83eb44a590 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -3431,7 +3431,12 @@ static RISCVException write_menvcfg(CPURISCVState *env, int csrno,
+ 
+     /* CBIE/CBCFE are read-only zero when Zicbom is not implemented. */
+     if (cfg->ext_zicbom) {
+-        mask |= MENVCFG_CBIE | MENVCFG_CBCFE;
++        mask |= MENVCFG_CBCFE;
++
++        /* CBIE = 0b10 is marked as Reserved.  */
++        if (get_field(val, MENVCFG_CBIE) != 0b10) {
++            mask |= MENVCFG_CBIE;
++        }
+     }
+ 
+     /* CBZE is read-only zero when Zicboz is not implemented. */
+@@ -3613,7 +3618,12 @@ static RISCVException write_henvcfg(CPURISCVState *env, int csrno,
+ 
+     /* CBIE/CBCFE are read-only zero when Zicbom is not implemented. */
+     if (cfg->ext_zicbom) {
+-        mask |= HENVCFG_CBIE | HENVCFG_CBCFE;
++        mask |= HENVCFG_CBCFE;
++
++        /* CBIE = 0b10 is marked as Reserved.  */
++        if (get_field(val, HENVCFG_CBIE) != 0b10) {
++            mask |= HENVCFG_CBIE;
++        }
+     }
+ 
+     /* CBZE is read-only zero when Zicboz is not implemented. */
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index fd52d1e4ec..be9d892a95 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -151,6 +151,11 @@ tests += {
+    'cflags': cflags + ['-march=rv64gcv_zicbom_zicboz'],
+     'qemu_args': ['-cpu', 'rv64,s=off,h=off,zicbom=on,zicboz=on', qemu_args],
+   },
++
++  'test-menvcfg-cbie.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max', qemu_args],
++  },
+ }
+ 
+ if 'qemu-system-riscv64' in emulators
+diff --git a/tests/tcg/riscv64/test-menvcfg-cbie.S b/tests/tcg/riscv64/test-menvcfg-cbie.S
+new file mode 100644
+index 0000000000..324993d214
+--- /dev/null
++++ b/tests/tcg/riscv64/test-menvcfg-cbie.S
+@@ -0,0 +1,82 @@
++/*
++ * Test if menvcfg.CBIE/henvcfg.CBIE reserved value 10b isn't written.
++ * See Gitlab 4216 for more info.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++.option norvc
++	.text
++	.global _start
++
++_start:
++	lla	t0, trap
++	csrw	mtvec, t0
++
++	/* Set menvcfg.CBIE [5:4] to 0b00.  */
++	li	t0, 3
++	slli	t0, t0, 4
++	csrc	menvcfg, t0
++
++	/* Now set it to 0b10.  */
++	li	t1, 1
++	slli	t1, t1, 5
++	csrs	menvcfg, t1
++
++	/* Read it back, rshift it, check if it's 00.  */
++	csrr	s0, menvcfg
++	srli	s0, s0, 4
++	andi	s0, s0, 3
++	bnez	s0, _fail
++
++	/*
++	 * The same constraints apply to henvcfg.CBIE, thus we're
++	 * testing it like above: set it to 00b, then 10b, then
++	 * see if it's zero.
++	 */
++	li	t0, 3
++	slli	t0, t0, 4
++	csrc	henvcfg, t0
++
++	/* Now set it to 0b10.  */
++	li	t1, 1
++	slli	t1, t1, 5
++	csrs	henvcfg, t1
++
++	/* Read it back, rshift it, check if it's 00.  */
++	csrr	s0, henvcfg
++	srli	s0, s0, 4
++	andi	s0, s0, 3
++	bnez	s0, _fail
++
++	li	a0, 0
++	j	_exit
++
++_fail:
++	li	a0, 1
++	j	_exit
++
++trap:
++	# Any trap is a fail code 1
++	li	a0, 1
++
++# Exit code in a0
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
++
++	# Semihosting call sequence
++.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	16
++semiargs:
++	.space	16
 -- 
 2.43.0
 
