@@ -1,142 +1,141 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C618606A33C
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:22:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B6D51606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:23:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=YX5F9lJF;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=c5VPYG+i
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Is5dbB/b;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XchSfB6A
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWCwf-00038H-1P; Wed, 25 Nov 2026 08:21:58 -0500
+	id 1xWCxc-0004em-6N; Wed, 25 Nov 2026 08:22:56 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCwA-0002g2-Sm
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:27 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xWCwD-0002i7-TP
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:30 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCw8-0000hi-LG
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:26 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xWCwB-0000jU-V8
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:29 -0500
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9mHdX3763959
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:13 GMT
+ 6AP9mTjl4034188
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=4CBm32AKdCK
- GSgkhdP/5MnR7wS0Yjt7U3ZvOWnO8J5g=; b=YX5F9lJFng0QRNrOIyqnI1Uncq7
- FUzam25aBPb2++jwIPeikPq8LoqZU4pfNEsk9j5/dHqGUj+VnnofFI5aNaEx3XO1
- FwFjZZE1hpwiQIQ71ebMi1IGC+EUoSoTAotpovcjXm20qrYRv7IEdXMz+aq2HXut
- JAqySfxV+uVcMkZmpPK9HNuJtz+RbXncE97diW8YShDmFkbRK23emyQIiwzGBrnL
- y4NLo/NkKvfyfCwL6WrQCyJyQgTH1oc6APYIB1WP1yRMHXGRdkYA7ZOIDKZBZ4n8
- /vt+qesGBpgeF+AUpbByVBWZwiC5JZNFFAOvwUJd7bsBofqDVgwJdoZQzqw==
-Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
- [209.85.222.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vv2ry1t-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=SGEIUTKJi4H
+ KbuW7+gY4LzKvvPFfsIo/eyBqALVXtew=; b=Is5dbB/bNVPnUt98ZF4tao63ak4
+ UTwJFHb6atETquJrBihCWHSgVXGNvXIV9xk0/TLY5LCcUVXFquDrmpeEWMx6C4xG
+ DnnMcZDqWFRHwSCMbHXmyP0/P7jmJGxhDt82fmCyYaHjOFByOHtYlLOxb2oEuyGh
+ snBCULY9vu6r3Db3oMTFopCJo9x51JS+fsQ0c5Bm7WrjATDB5McuOM2E7e2ynVpQ
+ Nj5rFORDfEf3fX0UVpP60JHfWxqhsOdPv7WrMDvCMbHDmG/2f2vGiQ5rFMeT6VTf
+ Eb63Hdz3+V4OJhuokJUqoIjw9Vas8AOD1DCdFqGDfXaq9mwaj79+nDPYMRA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mqbjxwx-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:13 +0000 (GMT)
-Received: by mail-ua1-f70.google.com with SMTP id
- a1e0cc1a2514c-990c957f129so2085100241.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:21:13 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:26 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id
+ 6a1803df08f44-92135a58c91so22235586d6.1
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:21:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795612873; x=1796217673; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795612885; x=1796217685; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4CBm32AKdCKGSgkhdP/5MnR7wS0Yjt7U3ZvOWnO8J5g=;
- b=c5VPYG+iKrEvzCkNKI+RglER+RpOwTjNgsCM1q2JmsB84c5IDV7AtKdj7z9d7eRQXE
- BMpHkeecS4YvYD4hxAmBV6/Gz7TYOCSVS6IqQQ+FXZbPSn4gdhT7ukCtPPmb+e0MUYzB
- vAX2S6t/MgBpL9hwg9hR/GzrWIUij1qQ1TRZmwqy4XAJJo1oGv/ERs4LVyzkcSnyfpzA
- W+VRFsST5imAD2Npe8/G9CbKWBbI2ubJxAPa1/10q3Pi2KPql2TeeYTTVNuOZpKqx3jW
- lcJLYbL+9OH+rD3CQfe/7KJPgcpmUL6/xvU31GYwIE/u9DAfA6Jcx/I0e9cJMvhOxJP8
- n5HQ==
+ bh=SGEIUTKJi4HKbuW7+gY4LzKvvPFfsIo/eyBqALVXtew=;
+ b=XchSfB6A9Rr+3g6MH/RW5w/cXnLE9CZKijBHNf6/iHtI7bBRa4QWjdnBfiihpY+wtW
+ sxAjlxnV7s611vg8ha88uhyVUWtYHEhKe3h8cW+Ra3DpOCtFGjUsYri+LkQee1RcGrvB
+ g1G7v8mn1p0djDmDB/V4gcD5oCJDDAL7BQVzN/rSv5ITP9tDNL+8u4bJ3a2O+E7zJM+n
+ HbwtjEgMCV6KEE2JTaU9sjj5alaa3nuYyo8/6bxNLFYpoziCVyo3Y+55SQJ9vphgbWGW
+ /gykh2N+3XmJUo41qVb55oYl1WsDG4qjydWyyhnpGwqgZj5nPToA6jRjXI24JBZGnS0G
+ aZYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795612873; x=1796217673;
+ d=1e100.net; s=20260707; t=1795612885; x=1796217685;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4CBm32AKdCKGSgkhdP/5MnR7wS0Yjt7U3ZvOWnO8J5g=;
- b=E2jS+wdyXsfRSVP0+HP3dDrvjc65T/7ztmbRLVK7jC56l69QePA5r5YU2XaNbMsMRC
- tcHZ/cFaD1PI9sYLBe4jR7BEmsdXQ2QGzbhcC1whLhIZedatWHaXM0kiCNNdJZGCBQqP
- Oh+ZeyoKg2OtznpaB/rgCz4oInN5OmyoYOzYAnHIkkIzpafK7R7a/PAfjKnVW0hJ1Bdr
- PEzvD9ndVOFD4jO3c632v7+fSFvunzK1uIFrNKpnj14+3G06CVyaO/6ZY3Q5kWT21yXq
- AKvb7o+08Hp7oZF/iaDJpuTWs0vdU0W1XA2Q1LEorkaMsanUlJDWJ2XIm+llEqXzr4qQ
- pNyA==
-X-Gm-Message-State: APuU4Z9e4LwoyR+fc9fU8IN/lr+EYksKn1tf18c3WRXDqTBQATxzuH/2
- 6Q4dYqrIVcH2EC3404nX3N6FBa95XN8vwH+h3qHuhSX+z9aTehwTVBITmiFjk+F0EjMhHY9mEN3
- yYeW4PjaDxMT2aeRj1cDVmlcAmXwwc4gXFhT+gapQNFpNcVqFaLsePkaMmQ==
-X-Gm-Gg: AZFdTZcEP8urEgShsw1+WFWuNF9EJYSMUtnqw/FNjyDA4mJ/rbCEyVvg80XD6p9Rx+s
- IZvxghG2W/m6WlGUwMB1w+PGy5RsN1NKx2l6w7ynbOJPV9V8/fcVynsLNtkeI8+UozbPkRsHhqO
- eakDJYkWnmS1SLXNquyCRBzSvJTDrNMEA7bgqDfS0BXNFmURs4LQ1gsV2jy2uuVdyRsfab7zjsi
- 0tfsy+dAhOKRwSDBD148H9Io7eLHnst8GR8zdI9opnFJqsC0XxPpa1MjzbPXbLLmhgKImIGXzN+
- RUnQQmAFZD8u38lBNdDdAOfO04PafWKr8X25RjFZ/kOzpI8LtdT3hYVPm6MMPBg4tZfSeJXycq3
- VOuMpyAofDP0h6wRk5627bRLDL2dd8iJajIwl6lFRT+HiLybqoR+Icv2x14G9WrolRv7ekES/PY
- hx4I/N+O4DYw==
-X-Received: by 2002:a05:6102:41a3:b0:7a3:b2c2:2e70 with SMTP id
- ada2fe7eead31-7d7395e32c3mr6028395137.11.1795612872793; 
- Wed, 25 Nov 2026 05:21:12 -0800 (PST)
-X-Received: by 2002:a05:6102:41a3:b0:7a3:b2c2:2e70 with SMTP id
- ada2fe7eead31-7d7395e32c3mr6028376137.11.1795612872326; 
- Wed, 25 Nov 2026 05:21:12 -0800 (PST)
+ bh=SGEIUTKJi4HKbuW7+gY4LzKvvPFfsIo/eyBqALVXtew=;
+ b=EMFbrJH9KlxUT/TiRvImVZTbqze674BMyrohdQpLTTHD/ndMQgEKrQbuJfRvAxhpl3
+ G5uWMSNhlwwnFkOyqmvHN1zJm9TmLdiIwgyQ3/iWu/NwOErYwXFEQtaW2CLEWgEAB8cH
+ ++9wvfrUGTC+nxVzEwGFK0BPlXMYl05c2hlCNTOyIn1ybCqumF0KcIWNYhvfY0Vyvi9H
+ V95lLk6w8Idz2jAun621z7kDUbNcuB9xX9fR8BIMlSztLSFEwBwhJgXGmxg413UMO/78
+ gGlYOEHECmqXuBQAwmAaYBHlLagWrFzRd1s0GGcpiuOn2rD9YpbH7DD1j55Xbm2WnPCs
+ 6pZw==
+X-Gm-Message-State: APuU4Z/odMpjth2rf7H8047zOW/oYaolVWroBBMkj5Z346SYgOC19osj
+ b4dtmyzzlQwK1/yNbyD7YIa4Ol8vWDxhgs9t98Ve9sUPsCLUKwrJNw0+exhyuQNVH1FK5R2GL7C
+ DYp37yL1EJ+0ylpUuZPIDj4Gm4aby019m30BlP3QTZxN8R4DxYyv0uXnDyQ==
+X-Gm-Gg: AZFdTZd2jZr+fjFrKZWl6ClRnTMGcy9GOCcRIJUiwJ8uP5UwdleqLKfHttKHFGWZFhz
+ s8a1yxsa3sGIax+PpBXyh79RoL4Dsxb293SeIDDB+AfsNHDGZtqWccEMaP/C3bU5zW12urzORF0
+ V8UGXf/lNcXkDoh0OUyGsDl33puXoaGNFkijxxr6fHg+SzT7GEFuRGKguhmsENLyE9uXKTJjAZL
+ KAgjStrf7C8v7K95toOjIM2uYbiHmn2B7r4jYVSDei3WLq0SEe10hHbs0DwOJN6uxURUOOHawFw
+ qrPUe79rXhbsRdLt8nIEQupEGF+2jQorgSVjz+UrNSbAE/Snzx3oHxKAifqEItMi2FjhaBRPDV0
+ f9MiYxbc0Z+ul42/TiTPHNmNXmUl0j+AipPlowVrOZEwwKoH4ezT5t1zwC4hdnMkktUcnQMYbEP
+ LJuxgKE0Bqaw==
+X-Received: by 2002:a05:6214:20a8:b0:921:3d07:3008 with SMTP id
+ 6a1803df08f44-9213d07d004mr288431636d6.20.1795612885001; 
+ Wed, 25 Nov 2026 05:21:25 -0800 (PST)
+X-Received: by 2002:a05:6214:20a8:b0:921:3d07:3008 with SMTP id
+ 6a1803df08f44-9213d07d004mr288431236d6.20.1795612884322; 
+ Wed, 25 Nov 2026 05:21:24 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.21.09
+ 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.21.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 05:21:11 -0800 (PST)
+ Wed, 25 Nov 2026 05:21:23 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 11/15] target/riscv: do not clear mstatush after mstatus write
-Date: Wed, 25 Nov 2026 10:20:10 -0300
-Message-ID: <20261125132015.229955-12-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 15/15] target/riscv/tcg/csr.c: add mseccfgh CSR
+Date: Wed, 25 Nov 2026 10:20:14 -0300
+Message-ID: <20261125132015.229955-16-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 References: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXy/+h8cDj2926
- vtsc8MwCa5nflxzHfezFT0eKMzorVG8SbGaseDN+bxLUs8g/tSi1HIC/0PR8jupYhtOkjWCh4PZ
- +1s+Mf94NCxbebXoEgSi956dPaIlcyo=
-X-Proofpoint-GUID: hH1AqnvMQ4Km8S3FtAeTFILu187id5Dp
-X-Proofpoint-ORIG-GUID: hH1AqnvMQ4Km8S3FtAeTFILu187id5Dp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXwfvbW6dv6KtE
- 3iQllIgJo8kiUtm8oYrIZT/UXdWGspW0ri+1sJ+Rz8uBCRAiBZPmJXGAR5xnuN6p0RcFm8z2HSg
- c/k8UA/LG0VjRX2kq7oepYiT72gdPehpv8OmY/7ETtXTB63M0lBu/hSYA9HIJZiNy6p3ZPANSY/
- aYaZVs26wZI9T+NkEV9av6zyROASoOO5KO8wyE5RyANtoahPVuoWD4sVYhrS3wkHPyeaCu7TZue
- vhq1/3oi9mvBKt212ZtEO1jmuNI4/5XZ9WjlHjS/f4UxffefW9c93paioS4RKWMXJOml3X+iV8E
- vmnF2u/INzuZnZUJdL5tJjZMgPvSb1nB+xTBphbTo+tZkstV7aiLZI5WkAzhFU8yoaT+6UeOT4f
- bKyhxYw/GDqh/PePk/oc8oryX3iaKc3wlJCGGhfKjzQSmXaUzWYycquGO1Zpkn63R1HkNHGaGWL
- X2Y8yfsb4WfbkAG79zA==
-X-Authority-Analysis: v=2.4 cv=A/z5rKWG c=1 sm=1 tr=0 ts=6b06e0c9 cx=c_pps
- a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX9CGArIrkA+FT
+ Ja06bKdkORv/w57OQ1bsPvC9F2Q349ch28913LCt/CJUfv6rutiM5btQe8TOQ7LgETFAY7orC1t
+ RJj1rx7/CkKTPXA16k4KTtB9vmukIdU=
+X-Authority-Analysis: v=2.4 cv=Bb9NQbt2 c=1 sm=1 tr=0 ts=6b06e0d6 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=ifGG3HfVTgaK5DfkZOgA:9 a=TD8TdBvy0hsOASGTdmB-:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=8OGCS-QHHjKBapB54hwA:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX3qLYsW6SpHPR
+ Hxapp8wlPm4OpGFc5AGkX8F4MFXbxaGxWohc6XwmRBxdao7YEamCFyaEnq/YfHJhZCP/HE/wJug
+ I8K8l+mbYsoaJCXyfKxp1UIvBPhLr6HbYRY4z0mmYWIJ870oCZrVKPphjXh3xnDaNMkuGYtDIW3
+ yKXg9oR/OsbHXCjvCCgnSGOKJ7/yYQXqxHUnTIGEuc6Ph1u1TQebf9ySbiPNcla6mRGH47eN8+A
+ aaOotoojcL31NtA5023sro3eW36MUE5U7xIlc4ai17W1S7ReffvAdOYZmQ5X4YZZrS8GUrs6SHM
+ 9T239aQ4nqA4YxZmPrMMVefwjaWjcO85ngx54DJOfZ1VladZw/OJhmjjAurRb2eEzSYF8C34Wau
+ EXQKOtLmsHG2wYIUcw4gU3UeziZPkMF4rG0oqeR0CYYFe/YMceYJ5asDVEauhaTxoHw2X61m8Dq
+ W0qxhnCT6zUXNpIXjWw==
+X-Proofpoint-ORIG-GUID: r4gRohEEKjZsENKWh83yKRhulRNacj4S
+X-Proofpoint-GUID: r4gRohEEKjZsENKWh83yKRhulRNacj4S
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 priorityscore=1501 impostorscore=0
- suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0 phishscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611250053
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+ spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250053
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -152,132 +151,115 @@ X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
 	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-For RV32 we have mstatus and mstatush, both 32 bit CSRs, that shares the
-same 64 bit container in env->mstatus.  mstatus will read/write the
-lower 32 bits of env->mstatus, mstatush will read/write the higher 32
-bits of env->mstatus.
+Even though the mseccfgh CSR is a read-only zero the spec requires its
+existence for RV32.
 
-We forgot about that in write_mstatus() and, when running in 32 bits,
-we're happily setting the write mask with bits that belongs to higher
-half of env->mstatus.  The result is that whatever was written there via
-mstatush is being cleared.
-
-The solution is to clear the higher half of the mask if we're running 32
-bits.
-
-Fixes: 284d697c74ef ("target/riscv: Merge m/vsstatus and m/vsstatush into one uint64_t unit")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4488
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4680
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/tcg/csr.c                  |  9 ++++
- tests/tcg/riscv32/system/meson.build    |  5 +++
- tests/tcg/riscv32/test-mstatush-clear.S | 57 +++++++++++++++++++++++++
- 3 files changed, 71 insertions(+)
- create mode 100644 tests/tcg/riscv32/test-mstatush-clear.S
+ target/riscv/tcg/csr.c                  | 32 +++++++++++++++++++++++++
+ tests/tcg/riscv32/test-mseccfg-bits-1.S | 15 +++++++++++-
+ 2 files changed, 46 insertions(+), 1 deletion(-)
 
 diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 929ee0a279..9414f741d5 100644
+index 429d7093a9..b4288b5576 100644
 --- a/target/riscv/tcg/csr.c
 +++ b/target/riscv/tcg/csr.c
-@@ -2161,6 +2161,15 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-         }
-     }
- 
-+    /*
-+     * For 32 bit accesses we're writing just the lower 32 bits of
-+     * the env->mstatus container.  The higher bits are written via
-+     * write_mstatush().
-+     */
-+    if (xl == MXL_RV32) {
-+        mask &= MAKE_64BIT_MASK(0, 32);
-+    }
-+
-     mstatus = (mstatus & ~mask) | (val & mask);
- 
-     env->mstatus = mstatus;
-diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
-index 415a1c212d..3217c51951 100644
---- a/tests/tcg/riscv32/system/meson.build
-+++ b/tests/tcg/riscv32/system/meson.build
-@@ -27,6 +27,11 @@ tests += {
-     'cflags': cflags,
-     'qemu_args': ['-cpu', 'max', qemu_args],
-   },
-+
-+  'test-mstatush-clear.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max,smdbltrp=on', qemu_args],
-+  },
+@@ -805,6 +805,15 @@ static RISCVException have_mseccfg(CPURISCVState *env, int csrno)
+     return RISCV_EXCP_ILLEGAL_INST;
  }
  
- if 'qemu-system-riscv32' in emulators
-diff --git a/tests/tcg/riscv32/test-mstatush-clear.S b/tests/tcg/riscv32/test-mstatush-clear.S
-new file mode 100644
-index 0000000000..5053832700
---- /dev/null
-+++ b/tests/tcg/riscv32/test-mstatush-clear.S
-@@ -0,0 +1,57 @@
-+/*
-+ * Verify that mstatush is not being cleared after writing mstatus
-+ * (Gitlab 4488).
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
++static RISCVException have_mseccfgh(CPURISCVState *env, int csrno)
++{
++    if (riscv_cpu_mxl(env) != MXL_RV32) {
++        return RISCV_EXCP_ILLEGAL_INST;
++    }
 +
-+#define MSTATUSH_MDT 0x400
++    return have_mseccfg(env, csrno);
++}
 +
-+.option norvc
-+	.text
-+	.global _start
+ static RISCVException debug(CPURISCVState *env, int csrno)
+ {
+     if (riscv_cpu_cfg(env)->debug || riscv_cpu_cfg(env)->ext_sdtrig) {
+@@ -5762,6 +5771,26 @@ static RISCVException write_mseccfg(CPURISCVState *env, int csrno,
+     return RISCV_EXCP_NONE;
+ }
+ 
++static RISCVException read_mseccfgh(CPURISCVState *env, int csrno,
++                                    target_ulong *val)
++{
++    /*
++     * The higher half of mseccfg has only PMM.  The spec says:
++     *  "The PMM field is read-only zero for RV32".
++     * Ergo mseccfgh is always 0.
++     */
++    *val = 0;
 +
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
++    return RISCV_EXCP_NONE;
++}
 +
-+	/* Write mstatush.MDT.  */
-+	csrr	s0, mstatush
-+	li	t0, MSTATUSH_MDT
-+	or	t1, s0, t0
-+	csrw	mstatush, t1
++static RISCVException write_mseccfgh(CPURISCVState *env, int csrno,
++                                     target_ulong val, uintptr_t ra)
++{
++    /* See read_mseccfgh().  */
++    return RISCV_EXCP_NONE;
++}
 +
-+	/* Check if mstatush.MDT is indeed written.  */
-+	csrr	s0, mstatush
-+	and	t1, s0, t0
-+	bne	t0, t1, _fail
-+
-+	/* Read mstatus, write the same stuff back to it.  */
-+	csrr	t1, mstatus
-+	csrw	mstatus, t1
-+
+ static RISCVException read_pmpcfg(CPURISCVState *env, int csrno,
+                                   target_ulong *val)
+ {
+@@ -6665,6 +6694,9 @@ riscv_csr_operations csr_ops[CSR_TABLE_SIZE] = {
+     /* Physical Memory Protection */
+     [CSR_MSECCFG]    = { "mseccfg",   have_mseccfg, read_mseccfg, write_mseccfg,
+                          .min_priv_ver = PRIV_VERSION_1_11_0           },
++    [CSR_MSECCFGH]    = { "mseccfgh", have_mseccfgh,
++                          read_mseccfgh, write_mseccfgh,
++                          .min_priv_ver = PRIV_VERSION_1_11_0           },
+     [CSR_PMPCFG0]    = { "pmpcfg0",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG1]    = { "pmpcfg1",   pmp, read_pmpcfg,  write_pmpcfg  },
+     [CSR_PMPCFG2]    = { "pmpcfg2",   pmp, read_pmpcfg,  write_pmpcfg  },
+diff --git a/tests/tcg/riscv32/test-mseccfg-bits-1.S b/tests/tcg/riscv32/test-mseccfg-bits-1.S
+index ffa88f5f2f..01c29577e1 100644
+--- a/tests/tcg/riscv32/test-mseccfg-bits-1.S
++++ b/tests/tcg/riscv32/test-mseccfg-bits-1.S
+@@ -1,5 +1,6 @@
+ /*
+- * Verify mseccfg bits USEED, SSEED, MLPE and WPRI.
++ * Verify mseccfg bits USEED, SSEED, MLPE and WPRI.  Also verifies
++ * if mseccfgh exists and it's read-only zero.
+  *
+  * With "rv32,u=off,h=off,s=off,zkr=on,zicfilp=off" we expect no
+  * bits being written in mseccfg.
+@@ -11,6 +12,7 @@
+  */
+ 
+ #define CSR_MSECCFG 0x747
++#define CSR_MSECCFGH 0x757
+ 
+ .option norvc
+ 	.text
+@@ -38,6 +40,17 @@ _start:
+ 	andi	t3, t3, 7	// USEED, SSEED, MLPE -> bits 1, 2, 3
+ 	bnez	t3, _fail
+ 
 +	/*
-+	 * Make sure that we didn't clear mstatush.MDT after
-+	 * writing mstatus.
++	 * mseccfgh reads the higher half of mseccfg, which contains
++	 * only mseccfg.PMM.  This bit is read-only zero in RV32,
++	 * thus mseccfgh must be always zeroed.  Write a full 1s
++	 * mask in it and verify.
 +	 */
-+	csrr	s0, mstatush
-+	and	t1, s0, t0
-+	bne	t0, t1, _fail
++	li	t0, -1
++	csrw	CSR_MSECCFGH, t0
++	csrr	t0, CSR_MSECCFGH
++	bnez	t0, _fail
 +
-+	j	_pass
-+
-+trap:
-+	j	_fail
-+
-+_pass:
-+	li	t0, 0x100000
-+	li	t1, 0x5555	/* FINISHER_PASS */
-+	sw	t1, 0(t0)
-+	j	.
-+
-+_fail:
-+	li	t0, 0x100000
-+	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
-+	sw	t1, 0(t0)
-+	j	.
+ 	j	_pass
+ 
+ trap:
 -- 
 2.43.0
 
