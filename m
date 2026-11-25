@@ -1,133 +1,132 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 487F4606A326
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:23:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AA8D606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:23:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=IV4Gk1RO;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Gk8yrArp
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RwsIq0Vn;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=bPQw+trR
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWCw0-0002ZL-8p; Wed, 25 Nov 2026 08:21:16 -0500
+	id 1xWCx0-0003Tq-V7; Wed, 25 Nov 2026 08:22:22 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvr-0002Wa-Gu
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:08 -0500
+ id 1xWCwG-0002mz-0r
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:34 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvo-0000gH-HO
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:07 -0500
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ id 1xWCwE-0000iB-0Z
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:31 -0500
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9miBb3642175
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:03 GMT
+ 6AP9mOq3555528
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=Sf1vlvsyNSv
- 3W8tH1Pd0HGHQYqYncQYGXkZkrt2mbuQ=; b=IV4Gk1RONfJe9nhxj6kCDjYxBmj
- WbLyAX+8WGdPEvUaFIp4ZD1t4xn/A6bFdBFI1Kd8oKm9kVZlJqWVV9tKvFodNKtt
- 1XHxZh225Xy5sjDGfSX6mRNIsmZSJU/B29dStC84rxLxl6Nngkbpjod7DhfJ1m+Q
- UYeiXDFyTM2cv6Ya9xK9Bd1FbUOOXc88Sus+goOnE5uJkV+zK1GwMpVxtrdbZNMF
- T3RounuGroqgsC82Be8GOcd7qg1Mdfn1D4oH00Gw4Tqn7YdgdaguoVKgXV1GPUFW
- PRwgIgi3FHn1lUQMiUjEGPuZ80lzPhkbE5ZxxYCm6hhbw1uy1TWtdhhR06Q==
-Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com
- [209.85.217.70])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mc2b0un-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=LH5/T/WTO2y
+ +K7VE019zRy+Z3vALoCprjTmvlwdA3No=; b=RwsIq0Vngbh8/uuOZ7siutWAmIZ
+ KBFicPSnSGYqtKXcCbm7yoV+OeTYMPLDclA90iOROInJc9h5c4BleYd1Y/HTB55f
+ quCiMVElkte2++xd3lq18nWxMgy7lTYh0yIoenXZ8Q7VeeqqDoiUONHS3+RPyj63
+ irOjMSs/sVIvlI4njtzPT/m+IBOIGUH7SyLcIphJ7zmxhdUlOUt1sOYMKs6o2NSg
+ tSWLGWwih0EQ77voqnJgLLNfu+9YCohX5SumrOQ3218nyF03DvzkIcygX/yVszHq
+ 9XwbiCwvskAObh4gZg33Yz4hxICaS4eX7JHDRlyMTxhkLGdJ4XdNghAfU4Q==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com
+ [209.85.217.71])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vvnrymg-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:02 +0000 (GMT)
-Received: by mail-vs1-f70.google.com with SMTP id
- ada2fe7eead31-7b206156cc6so2929311137.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:21:02 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:21:17 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id
+ ada2fe7eead31-7cc48fbca26so920837137.3
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:21:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795612862; x=1796217662; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795612877; x=1796217677; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Sf1vlvsyNSv3W8tH1Pd0HGHQYqYncQYGXkZkrt2mbuQ=;
- b=Gk8yrArplwwUh5r+RRBj/Sy2RkZQCEa3MXxt5/MyP4J57gYe9BFs3bg4CsfQgAFOTP
- knP2SmwmYnzVwAuEjlh90DW4KUr9ux5wX738W0xdmgFNfYhVRp40tdfdMVh8Gnj0Yg4q
- R3AdyqFvKJMW7BWUVy5Kl8PEuMFkemvrgLR0oUoMYIWpR2i0ieo7y077moiD7PupD2v2
- R5QGIyMifJl3fk2sDGdtktzj2CAJDGx9MhiUmHN0twio34BEI/7gdTj0FZsKDeFgbEEW
- uocAzWbC8MeTd+stomo/F2E06hTwt2g5qto679HtL3NPtSZ/c2lw3EN5LjODBqCWOOWe
- K2ag==
+ bh=LH5/T/WTO2y+K7VE019zRy+Z3vALoCprjTmvlwdA3No=;
+ b=bPQw+trRQg07tHiPCkQef+uFuP9EenXNlBhNOzlW/GHf/vM03CuLY3vMNWvG3bnGk6
+ LeCNUj9/oHDMmFc+BSFe1UJjM2yVXHUYI3zowMESdOYqfle1msYmAquzBQ04jQND686x
+ 2NLbkF5E8gOnJZTNxtpu/qmOJUvbwVQCGjIf8tpIy1kGfB18hXf06IAHYOooxu+V10vX
+ uca7tFFzLgK0qq/CvQXnBhxUSu+kG3Fdn0o7KUxRr0vzlcSJ+SidwR6V7dmXhAX0ys+K
+ iShlfABwrDNS4Rf9qXpCMYlkWOrGqKFjZaKKupqfdeP7RJ5/s40VHvTSMMpKSHGIZEf9
+ JApQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795612862; x=1796217662;
+ d=1e100.net; s=20260707; t=1795612877; x=1796217677;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=Sf1vlvsyNSv3W8tH1Pd0HGHQYqYncQYGXkZkrt2mbuQ=;
- b=R44YX0uy5WfNtxTfIKjZxCpFlNgr/tlxL/FjElxJSpla+maeCq2oIRb0rElY6H71ih
- 8wIATTqCPPZ/EzIQNzXzXjqcuKlvdTEfhYX5MMRZqK996Ds7obu3LQry6OM9D6JRpXUR
- Huf+CP4TSLy/C6xe68g861DmQCm8QzSuFgbURP8FZ0NIzGgA7FB11YiaS7bhgOb075jj
- nIjcmqxFj9UMgO1UF/JzEaiumpaqt9pLiZXt0lhRfkZLHtWuOKagmVrPG98gjb1nR2ZG
- EaU3PiE7UK+qaVfnnDLaV0EjVYuLx4isfPyQeIF9nxQeCZCJLUis2DxmkWeaK3xb1bOX
- MgzA==
-X-Gm-Message-State: APuU4Z+7R/hP4WJabEA7t4l7CZDpilv8LWDjqH7PyY6x0hJhsTkghNxr
- d+5cIpHAiSyz3aAIJZl3fe1z/5aZ68wEJoEJzSBTRvH9TJxepSwTls6aEDFkzZYI3KmM9PEYQfl
- j+46Jrk+frhiHSArbYDFRtQsqDit5ofFQV7+jqWPZOXmwrobBJDzbE03cKw==
-X-Gm-Gg: AZFdTZc+6s2pgPCdW7ZSh/AoAgvfu+sE6dHGdhuteoTqPG0rQe/KaV8mCWZgOzP1cBo
- FbAxrR7g9s5UZ1o7BpBQT5uLN6bgc7B+VTaTIIRyYnDa4Et7fq4tdFHMYFglYCqT/D7LlDs5Vmw
- oOto6RzMSkw3vwgr/T7pxRNOzrDMwA3qV2eGlC2tKGHP9F6cskkXpiKVSs+ZtAVt55Sl3qpIMuF
- otmJfHjDKuFiiwbvAwL3zjyBZiHTGHTZtaIIBem20G4Jc1Fnp2KaMKGtuoHa90zd8n6uQLMdAQK
- jxoyvLDv5g9uaNiPv0Z/rCsIBY7aaEkzc+Pi/w/zaGVFdBl8ilAkn3SOJmE1TTwzP28wwi3tqA1
- rg0khKMbZ4GDBMGW0ORPWHqr2QujjmNX3vOLkUje2x6xz7obve/QPzQCDH2pbtlDO1bUMKGiWiy
- LgjDehdwgwpg==
-X-Received: by 2002:a05:6102:3f13:b0:7b4:879c:bb76 with SMTP id
- ada2fe7eead31-7d739582ee2mr9904527137.21.1795612861843; 
- Wed, 25 Nov 2026 05:21:01 -0800 (PST)
-X-Received: by 2002:a05:6102:3f13:b0:7b4:879c:bb76 with SMTP id
- ada2fe7eead31-7d739582ee2mr9904482137.21.1795612861220; 
- Wed, 25 Nov 2026 05:21:01 -0800 (PST)
+ bh=LH5/T/WTO2y+K7VE019zRy+Z3vALoCprjTmvlwdA3No=;
+ b=A0gSI673QmJUsvV8OSwbpDTKriAeccnzAsEwlBLaUOKQnNriRi6YFiIgkJqyhlWxgo
+ Zauz82ZM6cIl6cI4Vv/QEiSGbKS6b6OxD5oBEinjpi1CthCr8VvRzMlcVMdBRXEpe+VI
+ m/pWBBUL9StazLqvJxhLzBfuC15cfQp+/s49yO0bfCIc6AsRfIWkhQ51OTklBxxPvFV3
+ Iy55x705bq4G914XkHZZdLt25UOdbDGKtS0cuh4H+4mGFp6fhPPgnqYulXhTtETxVDIF
+ xYkx6JTrbp3wZ8h2L0pLk7p2s3l1QCL6gurxV5xCQH2r8x0HgeXbvCzjyIsFc57Fu9yg
+ DwGg==
+X-Gm-Message-State: APuU4Z8vnVb55nTUcI00ZfX0CtdxDGdIAzqKdKSvYV/wYYQc0u4Y/YSQ
+ pmf5I4tALQI4gwv9/gznuaMeMzcuvIp0xCv32pdY2rx3SnQxpGJWBr+vFaCZl+XuFIieLivyhN5
+ zKuiPRxBgAsV08nO+hZ2G6ChGNZgTS2sNlbMfxrXqR2hVTf85no0r5lcgdw==
+X-Gm-Gg: AZFdTZeQ3/Z1zKQmFnHvzft6lhEaRodjDBSbZpGfrF+hXLBkfquar7nhuAc84ORXyE/
+ hgyj/0A1sYABJ1TWkHP4dC+ttF2hm04bnSqjp57lk1Gtnv3JcAASjJKAQwIuE4ByaBJhHasN2f9
+ aSMNrw5VLbBpF/93hBMAmaculNhzB5Qo7mph/PFrHBHKI60PEyGns8ia75TAvLc87dvt8MQXvOu
+ +/vSoP3ccW5bX07FLOjLSflvuNeKu4oQTJ7VCEbiXl62ErKQoyDUTkjbFq1U/LFNBh5pUHTJEjD
+ WrNdGjvP9T3cHs9X+B1hF7Vs8MkbtjUxwxo9PmIehKedR2hnLxAo8LcJrpfp1Zn0rxQJfIAQ2zC
+ SrxLnMqzAmf0kRnH7Gptf8/v2urbkH/LBgkR/YtkSOUEyE1LxT593qC+yRjvG2VSK5usA4z/TZ2
+ AO4juynJUBDw==
+X-Received: by 2002:a05:6102:3712:b0:7cc:32ce:4c51 with SMTP id
+ ada2fe7eead31-7d739696e39mr7717095137.8.1795612877161; 
+ Wed, 25 Nov 2026 05:21:17 -0800 (PST)
+X-Received: by 2002:a05:6102:3712:b0:7cc:32ce:4c51 with SMTP id
+ ada2fe7eead31-7d739696e39mr7717046137.8.1795612876588; 
+ Wed, 25 Nov 2026 05:21:16 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.20.58
+ 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.21.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 05:21:00 -0800 (PST)
+ Wed, 25 Nov 2026 05:21:14 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 07/15] target/riscv: allow zicbo insns to run without RVS
-Date: Wed, 25 Nov 2026 10:20:06 -0300
-Message-ID: <20261125132015.229955-8-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 12/15] target/riscv: clear mstatus.MIE if mstatush.MDT is set
+Date: Wed, 25 Nov 2026 10:20:11 -0300
+Message-ID: <20261125132015.229955-13-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 References: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=aPJlOr9m c=1 sm=1 tr=0 ts=6b06e0be cx=c_pps
- a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXxwJPFbgIkJ+A
+ r3XYRldw83LPPAm2NYoDCYvEI1tM7Wuf2OKyFRw4FzigAzzo5K3pIDN7y7ftlkU1K0Q8CwkhodM
+ O1PeG5Ox2z9t/rNWcGt8Lukp259dPyatAd0BA4gZs0rybEKZP697BHtsHhnveuKdkKSeOCI933o
+ 4GvI5G0T7+G9A9m0s0ZGqmegAL6SmJdcE2aX5fwvLMemCFegVmuqx3gf4SwTgG5t48DhPKM+ElR
+ vXOriHceWwcWU+wzTaah771kQ5udyFbgwbRPIxgMhykhMd7G2gWGbiE871lETbnf5Q6MqDHmgmD
+ ntfunXBM5zEN9qhvVRRqUHt50cY9iRCWw9SkWT/nsyX36Kri8rWpI9xCkvgRtdsVfKRWqj+ckB7
+ K58MHzE0u/iVZUlTBfP2qYgcc7POKrOOwkpnvXzYey6RZ+l475zn/9N9NfJ32gzj9t4/GfnVr8w
+ hcnGpRKMauzKBxbDWpw==
+X-Proofpoint-ORIG-GUID: -ftx2ad2i9THjq0pvKkJQPwsl5VuICST
+X-Proofpoint-GUID: -ftx2ad2i9THjq0pvKkJQPwsl5VuICST
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX4/JnSuUfm66z
+ ZRaoFksKAguOIsRb90eko/TodXt/qd8nG+hc7r4BYTDzZrBTTDFK53RfyrobTBCedpeztXTnY4l
+ /SWaPHX9rLyvHDSUmUJ7wcicBELmeX4=
+X-Authority-Analysis: v=2.4 cv=R4mWitRX c=1 sm=1 tr=0 ts=6b06e0cd cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=KKjn5n9Ayip0tkzwBa4A:9 a=crWF4MFLhNY0qMRaF8an:22
-X-Proofpoint-GUID: UIZf7UD0qLkiYSF-dl0Oj5g-haz7O57n
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX+d25hE8OiHeh
- Mm8jvFcMqtiNpVwnXPbARyJJ9Wmz36LWDX1mLKqnzJ54X/r2pcx0JAwrZVeqIkOVQfgpaoRrqsO
- 0Th0pWM6K27UJ7+GirRvBrVf+G3KEJ/xq8W/dXHnjPOfmebjpBecSfKrlyxW7uEZSoPGvDmID70
- lutdMsYVK37n+KqRcYALcx5gpR3SFYYCHt9KP7VCNAgnqEmyX5rQbQrHNa6JI7wJLvspEva75Fh
- db51ukJnrzEo0NRW41jgXG1C59XQEQwsBbGt3zprQYam6PuvTf80wHzFbSfqaAjhEu0vLCAjJ+9
- MezEHtJUU3/POPA1bh9SBq6TC9ivT9pOBOHpX0YqkX9BgrnXH9tT4s1zZqnnVvLL3Gijb257GgN
- qACzeZSa05vP+i830vU7bkPb1CkdIRDk6KHpdAbIZsKeuzENs1ntveD7vi2oJvgdU0Zm1eIPq8v
- 6mdoA5cx9qTzE1Ajb3A==
-X-Proofpoint-ORIG-GUID: UIZf7UD0qLkiYSF-dl0Oj5g-haz7O57n
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXysz/WaC9TKTU
- NjAeb1vy6Z6PB1/RMk6rDv0082/BHFdvQUqZbNBWjV4xWg6bSRAjAPQl6w9z3z24Ot6bEvJso1r
- yJMJZRxaV9TJ+GfZhdinKnuWwIwhZ28=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=iTC3F798xIRISN9uQnUA:9 a=ODZdjJIeia2B_SHc_B0f:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 phishscore=0 lowpriorityscore=0
- adultscore=0 spamscore=0 clxscore=1015 malwarescore=0 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611250053
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250053
 Received-SPF: pass client-ip=205.220.180.131;
  envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
@@ -136,7 +135,7 @@ X-Spam_bar: --
 X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
  RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
- SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -156,71 +155,104 @@ X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-check_zicbo_envcfg() is validating access using S-mode constraints that
-are only relevant if we have RVS enabled in the hart.  If we have a hart
-that has M-mode and U-mode, but not S mode, zicbo insns will always
-fault.
+This is the same logic used by rv64 with the difference that, for rv32,
+MDT is located in mstatush and MIE is still on mstatus:
 
-Execute the exclusive S-mode checks only if RVS is present.
+- write_mstatush(): clear mstatus.MIE if mstatush.MDT is going to be
+  set;
+- write_mstatus(): for rv32, if mstatush.MDT is already set, clear
+  mstatus.MIE from 'val'.
 
-Fixes: a939c500793a ("target/riscv: implement Zicboz extension")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4596
+The logic for rv64 is unchanged.
+
+Fixes: d2e92f1c6d44 ("target/riscv: Add Smdbltrp CSRs handling")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4827
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/tcg/op_helper.c         |  5 +-
- tests/tcg/riscv64/system/meson.build |  5 ++
- tests/tcg/riscv64/test-zicbo-umode.S | 98 ++++++++++++++++++++++++++++
- 3 files changed, 107 insertions(+), 1 deletion(-)
- create mode 100644 tests/tcg/riscv64/test-zicbo-umode.S
+ target/riscv/tcg/csr.c                    | 22 ++++++++-
+ tests/tcg/riscv32/system/meson.build      |  5 +++
+ tests/tcg/riscv32/test-mstatush-mdt-mie.S | 55 +++++++++++++++++++++++
+ 3 files changed, 80 insertions(+), 2 deletions(-)
+ create mode 100644 tests/tcg/riscv32/test-mstatush-mdt-mie.S
 
-diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-index 52aa545eec..db4cea326a 100644
---- a/target/riscv/tcg/op_helper.c
-+++ b/target/riscv/tcg/op_helper.c
-@@ -172,7 +172,10 @@ static void check_zicbo_envcfg(CPURISCVState *env, target_ulong envbits,
-         riscv_raise_exception(env, RISCV_EXCP_VIRT_INSTRUCTION_FAULT, ra);
-     }
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index 9414f741d5..429d7093a9 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -2091,6 +2091,7 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+     uint64_t mstatus = env->mstatus;
+     uint64_t mask = 0;
+     RISCVMXL xl = riscv_cpu_mxl(env);
++    bool is_rv32 = xl == MXL_RV32;
  
--    if ((env->priv < PRV_S) && !get_field(env->senvcfg, envbits)) {
-+    /* Skip S-mode exclusive checks if we don't have RVS.  */
-+    if (riscv_has_ext(env, RVS)
-+        && env->priv < PRV_S
-+        && !get_field(env->senvcfg, envbits)) {
-         riscv_raise_exception(env, RISCV_EXCP_ILLEGAL_INST, ra);
+     /*
+      * MPP field have been made WARL since priv version 1.11. However,
+@@ -2130,7 +2131,19 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
+ 
+     if (riscv_cpu_cfg(env)->ext_smdbltrp) {
+         mask |= MSTATUS_MDT;
+-        if ((val & MSTATUS_MDT) != 0) {
++
++        /*
++         * For RV64, we'll have both MDT and MIE in the same
++         * register so the MDT state that matters is the one being
++         * written in 'val'.
++         *
++         * For RV32 MDT is located in mstatush, thus we'll have to
++         * check env->mstatus to see its current state.
++         *
++         * For both cases, if MDT = 1, MIE must be zero.
++         */
++        if ((!is_rv32 && (val & MSTATUS_MDT))
++            || (is_rv32 && (env->mstatus & MSTATUS_MDT))) {
+             val &= ~MSTATUS_MIE;
+         }
      }
- #endif
-diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index 87a26389ee..fd52d1e4ec 100644
---- a/tests/tcg/riscv64/system/meson.build
-+++ b/tests/tcg/riscv64/system/meson.build
-@@ -146,6 +146,11 @@ tests += {
+@@ -2206,7 +2219,12 @@ static RISCVException write_mstatush(CPURISCVState *env, int csrno,
+     if (riscv_cpu_cfg(env)->ext_smdbltrp) {
+         mask |= MSTATUS_MDT;
+         if ((valh & MSTATUS_MDT) != 0) {
+-            mask |= MSTATUS_MIE;
++            /*
++             * Priv spec: When the MDT bit is set to 1 by an explicit
++             * CSR write, the MIE (Machine Interrupt Enable) bit is
++             * cleared to 0.
++             */
++            env->mstatus &= ~MSTATUS_MIE;
+         }
+     }
+     env->mstatus = (env->mstatus & ~mask) | (valh & mask);
+diff --git a/tests/tcg/riscv32/system/meson.build b/tests/tcg/riscv32/system/meson.build
+index 3217c51951..79ad7b89ac 100644
+--- a/tests/tcg/riscv32/system/meson.build
++++ b/tests/tcg/riscv32/system/meson.build
+@@ -32,6 +32,11 @@ tests += {
      'cflags': cflags,
-     'qemu_args': ['-cpu', 'max', qemu_args],
+     'qemu_args': ['-cpu', 'max,smdbltrp=on', qemu_args],
    },
 +
-+  'test-zicbo-umode.S': {
-+   'cflags': cflags + ['-march=rv64gcv_zicbom_zicboz'],
-+    'qemu_args': ['-cpu', 'rv64,s=off,h=off,zicbom=on,zicboz=on', qemu_args],
++  'test-mstatush-mdt-mie.S': {
++    'cflags': cflags,
++    'qemu_args': ['-cpu', 'max,smdbltrp=on', qemu_args],
 +  },
  }
  
- if 'qemu-system-riscv64' in emulators
-diff --git a/tests/tcg/riscv64/test-zicbo-umode.S b/tests/tcg/riscv64/test-zicbo-umode.S
+ if 'qemu-system-riscv32' in emulators
+diff --git a/tests/tcg/riscv32/test-mstatush-mdt-mie.S b/tests/tcg/riscv32/test-mstatush-mdt-mie.S
 new file mode 100644
-index 0000000000..4ce91baafc
+index 0000000000..8763bc8768
 --- /dev/null
-+++ b/tests/tcg/riscv64/test-zicbo-umode.S
-@@ -0,0 +1,98 @@
++++ b/tests/tcg/riscv32/test-mstatush-mdt-mie.S
+@@ -0,0 +1,55 @@
 +/*
-+ * Test if cbo instructions are executable without S mode
-+ * available.  Code derived from the Gitlab 4596 testcase.
++ * Verify that when mstatush.MDT = 1 MIE is read only zero (Gitlab 4827).
 + *
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + * SPDX-License-Identifier: GPL-2.0-or-later
 + */
 +
-+#define CSR_MENVCFG 0x30a
-+#define MENVCFG_CB  ((1 << 7) | (1 << 6) | (1 << 4))  // CBZE | CBCFE | CBIE=01
++#define MSTATUS_MIE 0x8
++#define MSTATUSH_MDT 0x400
 +
 +.option norvc
 +	.text
@@ -230,85 +262,43 @@ index 0000000000..4ce91baafc
 +	lla	t0, trap
 +	csrw	mtvec, t0
 +
-+	/*
-+	 * PMP entry 0: NAPOT over all of memory, RWX, so U-mode
-+	 * can fetch and access data.
-+	 */
-+	li	t0, -1
-+	csrw	pmpaddr0, t0
-+	li	t0, 0x1f
-+	csrw	pmpcfg0, t0
++	/* Write mstatush.MDT.  */
++	csrr	s0, mstatush
++	li	t0, MSTATUSH_MDT
++	or	t1, s0, t0
++	csrw	mstatush, t1
 +
-+	/*
-+	 * Enable the CBO instructions for U-mode and report what
-+	 * menvcfg reads back.
-+	 */
-+	li	t0, MENVCFG_CB
-+	csrs	CSR_MENVCFG, t0
-+	csrr	s1, CSR_MENVCFG
++	/* Check if mstatush.MDT is indeed written.  */
++	csrr	s0, mstatush
++	and	t1, s0, t0
++	bne	t0, t1, _fail
 +
-+	// mret to U-mode at user_code (MPP = 0)
-+	li	t0, 3 << 11
-+	csrc	mstatus, t0
-+	la	t0, user_code
-+	csrw	mepc, t0
-+	la	s2, cbo_step
-+	mret
++	/* Read mstatus, set MIE, write it back.  */
++	csrr	t1, mstatus
++	ori     t1, t1, MSTATUS_MIE
++	csrw	mstatus, t1
 +
-+user_code:
-+	la 	a0, buffer       // address of buffer
-+	li	t1, 1
-+	sw	t1, 0(s2)
-+	cbo.zero	(a0)
-+	li	t1, 2
-+	sw	t1, 0(s2)
-+	cbo.clean	(a0)
-+	li	t1, 3
-+	sw	t1, 0(s2)
-+	cbo.flush	(a0)
-+	li	t1, 4
-+	sw	t1, 0(s2)
-+	cbo.inval	(a0)
-+	ecall
++	/* Make sure that MIE is not set.  */
++	csrr	t1, mstatus
++	andi	t1, t1, MSTATUS_MIE
++	bnez	t1, _fail
++
++	j	_pass
 +
 +trap:
-+	csrr s3, mcause
-+	li t0, 8                   // environment call from U-mode
-+	bne s3, t0, _fail
-+	li	a0, 0
-+	j	_exit
++	j	_fail
 +
-+_fail:
-+	li	a0, 1
-+	j	_exit
-+
-+# Exit code in a0
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
++_pass:
++	li	t0, 0x100000
++	li	t1, 0x5555	/* FINISHER_PASS */
++	sw	t1, 0(t0)
 +	j	.
 +
-+	.data
-+
-+	.balign	64
-+cbo_step:
-+	.word 0
-+buffer:
-+	.fill 64, 1, 0xa5
-+
-+	.balign	16
-+semiargs:
-+	.space	16
-+
++_fail:
++	li	t0, 0x100000
++	li	t1, 0x13333	/* status = FINISHER_FAIL, code = 1 */
++	sw	t1, 0(t0)
++	j	.
 -- 
 2.43.0
 
