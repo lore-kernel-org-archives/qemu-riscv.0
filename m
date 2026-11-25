@@ -1,82 +1,83 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2468D606A31E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:39:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C095606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:39:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=XzYeJIZB
+	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=WYJSnOGH
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW2ti-0000Wk-W1; Tue, 24 Nov 2026 21:38:15 -0500
+	id 1xW2ti-0000Us-0Q; Tue, 24 Nov 2026 21:38:14 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2tC-0000Ez-Va
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:44 -0500
-Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
+ id 1xW2tB-0000EH-1a
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:42 -0500
+Received: from mail-yw1-x1134.google.com ([2607:f8b0:4864:20::1134])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2t6-00075x-Lb
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:42 -0500
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-8b503e2a87bso55835247b3.3
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:33 -0800 (PST)
+ id 1xW2t6-00079N-ND
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:40 -0500
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-8b0dba37a7fso42647047b3.0
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1795574252; x=1796179052; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1795574253; x=1796179053; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=Z9B2OsTJxESKKY8dhBVJaIdsu7HrQeQSFpW9GphlygY=;
- b=XzYeJIZB01C1m8Mf8hW4u1H2vHjyaZo6ELsORODCtgNvu0yjEiRv+rXNz3Hdkaqjex
- Kf18DxzF1VcDaj4YCZsYriLno6TEKZcq2E+xnNVooBzwGw7NU/ROR28kvKoGW07JVwTI
- 42Iy/LsWUJ4+gfoob6sFkD25qcBMH+YA4A6GXZBy8Fs+1YHxEmuAHSSOiZTXfk2r9K3X
- npYORpZ14NoOgp+tNe7+/ZBPUkGFQzjNWNF8LwmdUujVY2w4eRljRyyWz710v6dOUS2V
- ohpR3EHQYjq1LFsL3tqjumNtv/OroH9ISNrASLxad42OHlZQp40TZbth8K50meRAp5Et
- ss/g==
+ bh=Y0uQomD/7jYFFCn01yAXbAJpuXqIpyq5wUONqra66zs=;
+ b=WYJSnOGHfY49Q8i2lWCJWZl/jhf/R2EyJXMmXVUALqD78+gFTLgh594agqnkiwzaCS
+ en2HXo7ttjdYV6Xyp/S5gXHaK0aDOJjYYrremcm2thDrip9wBNo1uZC4yf+UxcMtAcvU
+ lfYJaoBenx3wKIcLGWUGXr1tzxhkGt8kovcZ7ZsrG7jPcFo56GPLTjrK3zm/m2ZyE3fz
+ DRUAOiZTkS3hSuZlBHrn7ocPhoZowMNEgTEugUJlkjNl6debNbsTWquPUoRMYu//t74H
+ rzswaYERKKg6oFvtiLAHhXZXAVt0eqlh+IQhQPxFU90q/rXfygJFJ6bX3BIQ4gzClkAR
+ eNVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795574252; x=1796179052;
+ d=1e100.net; s=20260707; t=1795574253; x=1796179053;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Z9B2OsTJxESKKY8dhBVJaIdsu7HrQeQSFpW9GphlygY=;
- b=OqvqGMllv/oyB5uOVucDo4AzeelMKakHvyVnoazKLNF7CeJdw1IlyTCF6EvfIKTeM+
- F845H5DM0B5p4oOTTCTun0PFsNTVOvWkdiz7Ji+auxJdmh5DkmmjGXU83ypvnkIlR9oM
- xNTRQxQxZyIhcK4UMYX82t5OrjvpwVXwnqeDJOnS+O6nWt9EwALZ2aWGOuNpqzw2gT3l
- fZ8MIW1WX2Nevz4sFvDzi/+aoWad7H5Vdk+kWAwGZnApWOmpDgWr3Af1EEMkZmFMuhEd
- 0z0W34sXhr/PspUR3om2vctHPGA2xaL0oYf5/NX4Fmi85v9/iF4UDJAfReB5cwHCZMLN
- 3f9A==
+ bh=Y0uQomD/7jYFFCn01yAXbAJpuXqIpyq5wUONqra66zs=;
+ b=VzSqP8hSGCZ9CnoDGsIcv+lxspSSjNTU4MKZben4CthzIwULyvKFzJkOmMbcYtOMC5
+ sCbnmR4g08Tifb6m7rumucgT3ff//59y3Hdj9nokLTZdXf8NpvsIppCCzqGk6scVOBJx
+ n3+M7rIny1CKvPQKdFD85R4oN2wKg6UxGisHZaHgkR+gi/fmpHhxFt+4Nih8RWxQDwGv
+ NBY9YXt/gf2XJLtjqzc9+rAqM/Ai89MsWp9fR8BFi+GJuOmcZ+P9T+e3yzSyrIhAYPo1
+ YftZVXqOW7iqZhDiGCZKk2wriYOZ0ULiT7sLKMzq6n3a0QxjGLa04arLsBme0QQS9FiM
+ N2hg==
 X-Forwarded-Encrypted: i=1;
- AL+hErFBrCbWq5Vq1i431KFxd0bdg8/J1ISnGiv6n61GWxknRqZr4T3BR57qhVkUbEjrX8S1IbH1MV8om1Zs@nongnu.org
-X-Gm-Message-State: APuU4Z82TdqbCYjGJP7AoG/+GWWpAHQHZ6NYq6nWZb5BY1eRfEMYlExq
- AoQdXofY4GU1zCs2v8no0u8wfn7bu7x54cTQu6d7SAsIQS+xlLZT2uEnbpyaRPSat9k=
-X-Gm-Gg: AZFdTZdw95bIhPZKSTWIrR1Ev2jfT+ThaJ5gXaGjgp8sBvq/lQAawjQwIA3/5kmor+v
- DoCQwY6A0VipJ9b6zjjSn8mtFXHI/GC/of6oIgGfk/OUlrGMywSznZ8MehMFdpE9olpzfFzVDvc
- HR9uKF+QfgALAI5yvsBp0kxTUv73KpzmHTDoio7JOEjURwQ/vlr4/Qz8ESiC2MynTxHWjXlfW7N
- Yi4OZhi83cBE0Z42nJV+qzf4ue68gIZrboW6PfWVXjHMJNCbgzkKOWFsHL038k5Bab1XtkZD/LB
- iwTfZaIIK8hlb8wxEtJkWnWaGeiAMTgvILZeUE9m06XGnQhbPxCyy0WeqSEw4M5b/YBpW9VjmGU
- HraItLKTzCdjggwfXSvVL+G3AcjLi7v9Z4U0puPrKX2xNjULRO/LGoygWsaGgOcs6D39K4LUUwx
- ONnkeiw/1MYt+xiyHsRey/0uX7WTemxc+jg2O0sj1N/shXfSLs9ReOtu4O1vC3bpnVlSBRdbIre
- i/6PXH95sdMo0d2XlCUybiTbaKTonSDa7NZrb3CbrzL5jw6aSEdqqQB6mqLneSyJu0weCy2chfV
- zzoHaVZN0fhdGKvIAcHzVtEBgtRFmRG2YdpQZDDApHHf09iFgApNyctf+u5+ZsGdpa838iyM9mF
- DsvaalaFq
-X-Received: by 2002:a05:690c:e284:10b0:8b5:27f1:6889 with SMTP id
- 00721157ae682-8b527f16935mr46726557b3.30.1795574252581; 
- Tue, 24 Nov 2026 18:37:32 -0800 (PST)
+ AL+hErHth48o/6tlJszOqJE4BwOPdO95pXjS2hTqamwEKc91w51GYNEoEZbnY5WtYo+S/ZmgAchi/G2Y222h@nongnu.org
+X-Gm-Message-State: APuU4Z8uKF3vgbv68KURbMiFO49um2zA5y+0KccfpAcAj5pOKtLkT4yj
+ VIkC5C6lg04nGStwz/bBuK8F3yNjVA+8nH9/GXQjMc+vWhr1YG5rGEpE8cLJDzMDfNw=
+X-Gm-Gg: AZFdTZebCc5v5Jhp0QtLcw6qgg2Q2s+PWXHy1ktt3+RpSlm1aeCWKJFiygELSHjouQZ
+ c7BboPDIql3LAmKACVTRLhVYbhNhU1ZDCHhrnZXsVhS6/yxhqAJJByqiZpQUy95e8nbUc1WPgfd
+ cqIvuBc0RqxJcXfi+X71AVR7aGzWhjRV08zs2kq5CyKbf+sXdZ+Rcn15xKxE90hL12uY584vSjb
+ ks2ip8WFw8pM64uh9FfwopfktPwaP+ZEIh9fewZ+s3NI3B0CtipQwhtilq+ArVVpma32jSPdUUX
+ /YgI2b4BMrT1jfkEhxPWsMc8fJmC2ZYikXuCVFE8mVsi1ZNkCbLw+5X6B7EU9AE/aDoTuJONjNN
+ 0349ukzZnTN609OK40FF7Ir//+lcV25GTlnChLE2pLpIOVltDjtf1sqFYqVNkMtqmT/Py3TNJdJ
+ U+0w35dVki0JSaTj+McUGxnk2BsROunq5pH+63ZgFpHKnaNBIv0xTwbTvY/LiGVFEu6IMc8iBtw
+ mBIYUEvX01YQqRr4xqWz6Ewk2BXttnRj5ZNleqqsm6h2RfmQgxcVdzKBQTNjT0s25dwk82ijor6
+ mfIrSLsBTNbBaE4WgbiBlrPJqlX2o9FACbKOfDCngSK+i/vq6vw+Ap6mPT9cpgHq4qLChTdBp7N
+ nKGBIoq8UdA==
+X-Received: by 2002:a05:690c:e0c:b0:8b4:d64a:7aaa with SMTP id
+ 00721157ae682-8b5204ba69fmr69205257b3.43.1795574253394; 
+ Tue, 24 Nov 2026 18:37:33 -0800 (PST)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:ea8f:7897:2f4d:9891])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.31
+ 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 18:37:32 -0800 (PST)
+ Tue, 24 Nov 2026 18:37:33 -0800 (PST)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Tue, 24 Nov 2026 20:37:24 -0600
-Subject: [PATCH 5/8] riscv: Add Spacemit K3 machine
+Date: Tue, 24 Nov 2026 20:37:25 -0600
+Subject: [PATCH 6/8] hw/riscv/spacemit-k3: Load next stage from boot media
+ if bootrom is not supplied
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-spacemit_k3-v1-5-e911d6e88542@oss.tenstorrent.com>
+Message-Id: <20261124-spacemit_k3-v1-6-e911d6e88542@oss.tenstorrent.com>
 References: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 In-Reply-To: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
@@ -92,8 +93,8 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 X-Mailer: b4 0.15.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1136.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1134;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1134.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
@@ -111,727 +112,330 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a spacemit-k3 machine based on the RVA23 compliant Spacemit K3
-SoC[1]. This machine currently models the single boot hart (Spacemit
-X100) in the system, a uart, boot media (SPI NOR, SD, EMMC, UFS) and
-boot-mode selection. This machine accepts the bootrom dumped from the
-hardware via -bios, which loads the next boot stage from boot media
-based on the boot-mode selection.
-
-[1] https://github.com/spacemit-com/docs-chip/blob/main/en/key_stone/k3/k3_docs/k3_ds.md
+When the bootrom is not supplied via -bios, simulate the bootrom's
+loading of the next stage from appropriate boot media based on the
+boot selection pins. A boootinfo block is read from a fixed address on
+boot media to determine the offset to load the next boot stage from.
+A CRC check is done on the loaded boot stage, and compared to a value
+stored on boot media. If this check fails, or the boot media is unable
+to be read, the next boot media as per the boot mode order is chosen.
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- MAINTAINERS                    |   2 +
- hw/riscv/Kconfig               |  16 ++
- hw/riscv/meson.build           |   1 +
- hw/riscv/spacemit_k3.c         | 525 +++++++++++++++++++++++++++++++++++++++++
- include/hw/riscv/spacemit_k3.h | 104 ++++++++
- 5 files changed, 648 insertions(+)
+ hw/misc/spacemit_k3_syscon.c         |  31 ++++++
+ hw/riscv/spacemit_k3.c               | 197 ++++++++++++++++++++++++++++++++++-
+ include/hw/misc/spacemit_k3_syscon.h |  10 ++
+ 3 files changed, 235 insertions(+), 3 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 7dfae9f40d..0227d92be2 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1859,9 +1859,11 @@ M: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
- L: qemu-riscv@nongnu.org
- S: Supported
- F: hw/misc/spacemit_*.c
-+F: hw/riscv/spacemit_*.c
- F: hw/ssi/spacemit_*.c
- F: hw/ufs/spacemit_*.c
- F: include/hw/misc/spacemit_*.h
-+F: include/hw/riscv/spacemit_*.h
- F: include/hw/ssi/spacemit_*.h
- F: target/riscv/tcg/spacemit_csr.c
+diff --git a/hw/misc/spacemit_k3_syscon.c b/hw/misc/spacemit_k3_syscon.c
+index 03a826495a..452cab8183 100644
+--- a/hw/misc/spacemit_k3_syscon.c
++++ b/hw/misc/spacemit_k3_syscon.c
+@@ -30,8 +30,14 @@
+ #define BOOT_MODE_VALUE_USB 0x10001000
+ #define BOOT_MODE_VALUE_UART 0x10001800
  
-diff --git a/hw/riscv/Kconfig b/hw/riscv/Kconfig
-index 807fcaaf28..a04a635f98 100644
---- a/hw/riscv/Kconfig
-+++ b/hw/riscv/Kconfig
-@@ -133,6 +133,22 @@ config SIFIVE_U
-     select SSI_SD
-     select UNIMP
++#define SELECTED_BOOT_MODE_VALUE_EMMC 0xb00
++#define SELECTED_BOOT_MODE_VALUE_NOR 0xb01
++#define SELECTED_BOOT_MODE_VALUE_UFS 0xb03
++#define SELECTED_BOOT_MODE_VALUE_SD 0xb10
++
+ /* CPU Config register offsets */
+ #define BOOT_PIN_SELECT 0x20
++#define BOOT_DEV_FLAG_REG 0x110
  
-+config SPACEMIT
-+    bool
-+    default y
-+    depends on RISCV64
-+    select DEVICE_TREE
-+    select RISCV_ACLINT
-+    select RISCV_APLIC
-+    select RISCV_IMSIC
-+    select SD
-+    select SDHCI
-+    select SERIAL_MM
-+    select SSI
-+    select SSI_M25P80
-+    select UFS_SYSBUS
-+    select UNIMP
-+
- config SPIKE
-     bool
-     default y
-diff --git a/hw/riscv/meson.build b/hw/riscv/meson.build
-index b60108787d..2bd7f0dd39 100644
---- a/hw/riscv/meson.build
-+++ b/hw/riscv/meson.build
-@@ -23,6 +23,7 @@ riscv_ss.add(when: 'CONFIG_XIANGSHAN_KUNMINGHU', if_true: files('xiangshan_kmh.c
- riscv_ss.add(when: 'CONFIG_RISCV_MIPS_CPS', if_true: files('cps.c'))
- riscv_ss.add(when: 'CONFIG_MIPS_BOSTON_AIA', if_true: files('boston-aia.c'))
- riscv_ss.add(when: 'CONFIG_K230', if_true: files('k230.c'))
-+riscv_ss.add(when: 'CONFIG_SPACEMIT', if_true: files('spacemit_k3.c'))
+ /* Syscon APMU register offsets */
+ #define APMU_RCPU_CLK_RES_CTRL 0x14c
+@@ -183,6 +189,31 @@ static uint32_t spacemit_k3_boot_mode_value(int boot_mode)
+     return boot_mode_values[boot_mode];
+ }
  
- riscv_ss.add(when: 'CONFIG_SOPHGO_CV1800B', if_true: files('cv1800b.c'))
- riscv_ss.add(when: 'CONFIG_MILKV_DUO', if_true: files('milkv_duo.c'))
-diff --git a/hw/riscv/spacemit_k3.c b/hw/riscv/spacemit_k3.c
-new file mode 100644
-index 0000000000..47e5ec1932
---- /dev/null
-+++ b/hw/riscv/spacemit_k3.c
-@@ -0,0 +1,525 @@
-+/*
-+ * Spacemit K3 SPI Controller
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Anirudh Srinivasan
-+ */
-+
-+#include "qemu/osdep.h"
-+
-+#include "qemu/units.h"
-+
-+#include "hw/core/boards.h"
-+#include "hw/core/sysbus.h"
-+
-+#include "hw/intc/riscv_aplic.h"
-+#include "hw/intc/riscv_imsic.h"
-+
-+#include "hw/riscv/boot.h"
-+#include "hw/riscv/riscv_hart.h"
-+
-+#include "hw/char/serial-mm.h"
-+#include "hw/intc/riscv_aclint.h"
-+#include "hw/misc/unimp.h"
-+#include "hw/sd/sd.h"
-+#include "system/blockdev.h"
-+#include "hw/ssi/ssi.h"
-+
-+#include "system/system.h"
-+
-+#include "hw/riscv/spacemit_k3.h"
-+
-+#define SPACEMIT_K3_IRQCHIP_NUM_MSIS       511
-+#define SPACEMIT_K3_IRQCHIP_NUM_SOURCES    512
-+#define SPACEMIT_K3_IRQCHIP_NUM_PRIO_BITS  3
-+#define SPACEMIT_K3_IMSIC_GUESTS           5
-+#define SPACEMIT_K3_IMSIC_MSTRIDE          0x1000
-+#define SPACEMIT_K3_IMSIC_SSTRIDE          0x40000
-+#define SPACEMIT_K3_IMSIC_GUEST_BITS       6
-+
-+#define SPACEMIT_K3_ACLINT_MTIME_SIZE    0xc000
-+#define SPACEMIT_K3_ACLINT_MTIME         0xbff8
-+#define SPACEMIT_K3_ACLINT_MTIMECMP      0x4000
-+#define SPACEMIT_K3_ACLINT_TIMEBASE_FREQ 24000000
-+
-+static const MemMapEntry spacemit_k3_memmap[] = {
-+    [SPACEMIT_K3_PCIE] =              {  0x80000000,    0x4000000 },
-+    [SPACEMIT_K3_ESPI_SLV_MEM] =      {  0x84000000,    0x2000000 },
-+    [SPACEMIT_K3_QSPI_AHB] =          {  0xb8000000,    0x8000000 },
-+    [SPACEMIT_K3_SRAM] =              {  0xc0800000,      0x80000 },
-+    [SPACEMIT_K3_AUDIO_PERIPH] =      {  0xc0880000,     0x180000 },
-+    [SPACEMIT_K3_DDR_TRAIN_BUF] =     {  0xc08d0000,      0x10000 },
-+    [SPACEMIT_K3_USB_OTG] =           {  0xc0a00000,     0x100000 },
-+    [SPACEMIT_K3_UFSHC] =             {  0xc0e00000,      0x40000 },
-+    [SPACEMIT_K3_ETH0] =              {  0xcac80000,       0x2000 },
-+    [SPACEMIT_K3_DP1] =               {  0xcac88000,       0x4000 },
-+    [SPACEMIT_K3_ESPI] =              {  0xcac8c000,       0x1000 },
-+    [SPACEMIT_K3_MAILBOX3] =          {  0xcac90c00,        0x400 },
-+    [SPACEMIT_K3_USB3] =              {  0xcad00000,     0x100000 },
-+    [SPACEMIT_K3_DDRC0] =             {  0xcb000000,    0x1000000 },
-+    [SPACEMIT_K3_DDRC1] =             {  0xcc000000,    0x1000000 },
-+    [SPACEMIT_K3_I2C1] =              {  0xd4011000,        0x800 },
-+    [SPACEMIT_K3_I2C2] =              {  0xd4012000,        0x800 },
-+    [SPACEMIT_K3_WDT0] =              {  0xd4014000,       0x1000 },
-+    [SPACEMIT_K3_I2C6] =              {  0xd4018800,        0x800 },
-+    [SPACEMIT_K3_I2C8] =              {  0xd401D800,        0x800 },
-+    [SPACEMIT_K3_SYSCON_APBC] =       {  0xd4015000,       0x1000 },
-+    [SPACEMIT_K3_THERMAL] =           {  0xd4018000,        0x100 },
-+    [SPACEMIT_K3_UART0] =             {  0xd4017000,        0x100 },
-+    [SPACEMIT_K3_GPIO] =              {  0xd4019000,        0x800 },
-+    [SPACEMIT_K3_PINCTRL] =           {  0xd401e000,       0x1000 },
-+    [SPACEMIT_K3_SYSCON_MPMU] =       {  0xd4050000,      0x10000 },
-+    [SPACEMIT_K3_PLL] =               {  0xd4090000,      0x10000 },
-+    [SPACEMIT_K3_QSPI] =              {  0xd420c000,       0x1000 },
-+    [SPACEMIT_K3_SDHCI0] =            {  0xd4280000,        0x200 },
-+    [SPACEMIT_K3_SDHCI1] =            {  0xd4280800,        0x200 },
-+    [SPACEMIT_K3_EMMC] =              {  0xd4281000,        0x200 },
-+    [SPACEMIT_K3_SYSCON_APMU] =       {  0xd4282800,        0x400 },
-+    [SPACEMIT_K3_CPU_CONFIG_UNIT] =   {  0xd4282C00,        0x400 },
-+    [SPACEMIT_K3_COUNTER] =           {  0xd5001000,         0x10 },
-+    [SPACEMIT_K3_SYSCON_DCIU] =       {  0xd8440000,       0xc000 },
-+    [SPACEMIT_K3_CCI550] =            {  0xd8500000,     0x100000 },
-+    [SPACEMIT_K3_SEC_APB_CLK_UNIT] =  {  0xf0610000,       0x2000 },
-+    [SPACEMIT_K3_SEC_JTAG_SOFTWARE] = {  0xf0618000,       0x1000 },
-+    [SPACEMIT_K3_SEC_BCM_CONFIG] =    {  0xf0700000,     0x100000 },
-+    [SPACEMIT_K3_MIMSIC] =            {  0xf1000000,      0x10000 },
-+    [SPACEMIT_K3_MAPLIC] =            {  0xf1800000,       0x4000 },
-+    [SPACEMIT_K3_ACLINT] =            {  0xf1810000,      0x10000 },
-+    [SPACEMIT_K3_BOOTROM] =           {  0xffe00000,     0x200000 },
-+    [SPACEMIT_K3_SIMSIC] =            {  0xe0400000,     0x200000 },
-+    [SPACEMIT_K3_SAPLIC] =            {  0xe0804000,       0x4000 },
-+    [SPACEMIT_K3_DRAM] =              { 0x100000000,  0x400000000 },
-+};
-+
-+static void spacemit_k3_machine_done(Notifier *notifier, void *data)
-+{
-+    SpacemitK3State *s = container_of(notifier, SpacemitK3State,
-+                                     machine_done);
-+    MachineState *machine = MACHINE(s);
-+    hwaddr start_addr = s->memmap[SPACEMIT_K3_BOOTROM].base;
-+    const char *firmware_name = riscv_default_firmware_name(&s->soc);
-+    RISCVBootInfo boot_info;
-+
-+    riscv_boot_info_init(&boot_info, &s->soc);
-+
-+    riscv_find_and_load_firmware(machine, &boot_info,
-+                                 firmware_name,
-+                                 &start_addr, NULL);
-+}
-+
-+static void spacemit_k3_machine_init(MachineState *machine)
-+{
-+    SpacemitK3State *s = SPACEMIT_K3_MACHINE(machine);
-+    MemoryRegion *system_memory = get_system_memory();
-+    MemoryRegion *bootrom = g_new(MemoryRegion, 1);
-+    MemoryRegion *sram = g_new(MemoryRegion, 1);
-+    MemoryRegion *ddr_train_buf = g_new(MemoryRegion, 1);
-+    int hart_count = machine->smp.cpus;
-+    int i;
-+
-+    s->memmap = spacemit_k3_memmap;
-+
-+    object_initialize_child(OBJECT(machine), "soc", &s->soc,
-+                            TYPE_RISCV_HART_ARRAY);
-+    object_property_set_str(OBJECT(&s->soc), "cpu-type", machine->cpu_type,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "hartid-base", 0,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "num-harts", hart_count,
-+                            &error_abort);
-+    object_property_set_int(OBJECT(&s->soc), "resetvec",
-+                            s->memmap[SPACEMIT_K3_BOOTROM].base,
-+                            &error_abort);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->soc), &error_fatal);
-+
-+    /*
-+     * Define APLIC and IMSIC nodes directly (without helper function)
-+     * so that we get handles to misic memory regions.
-+     */
-+    for (i = 0; i < hart_count; i++) {
-+        riscv_imsic_create(get_system_memory(),
-+                         s->memmap[SPACEMIT_K3_MIMSIC].base +
-+                             i * SPACEMIT_K3_IMSIC_MSTRIDE,
-+                         i, true, 1, SPACEMIT_K3_IRQCHIP_NUM_MSIS);
-+    }
-+
-+    for (i = 0; i < hart_count; i++) {
-+        riscv_imsic_create(
-+          get_system_memory(),
-+          s->memmap[SPACEMIT_K3_SIMSIC].base + i * SPACEMIT_K3_IMSIC_SSTRIDE, i,
-+          false, 1 + SPACEMIT_K3_IMSIC_GUESTS, SPACEMIT_K3_IRQCHIP_NUM_MSIS);
-+    }
-+
-+    s->irqchip = riscv_aplic_create(
-+        get_system_memory(), s->memmap[SPACEMIT_K3_MAPLIC].base,
-+        s->memmap[SPACEMIT_K3_MAPLIC].size, 0, 0,
-+        SPACEMIT_K3_IRQCHIP_NUM_SOURCES, SPACEMIT_K3_IRQCHIP_NUM_PRIO_BITS,
-+        true, true, NULL);
-+
-+    riscv_aplic_create(get_system_memory(), s->memmap[SPACEMIT_K3_SAPLIC].base,
-+                       s->memmap[SPACEMIT_K3_SAPLIC].size, 0, 0,
-+                       SPACEMIT_K3_IRQCHIP_NUM_SOURCES,
-+                       SPACEMIT_K3_IRQCHIP_NUM_PRIO_BITS, true, false,
-+                       s->irqchip);
-+
-+    riscv_aclint_mtimer_create(get_system_memory(),
-+            s->memmap[SPACEMIT_K3_ACLINT].base,
-+            SPACEMIT_K3_ACLINT_MTIME_SIZE,
-+            0, hart_count,
-+            SPACEMIT_K3_ACLINT_MTIMECMP,
-+            SPACEMIT_K3_ACLINT_MTIME,
-+            SPACEMIT_K3_ACLINT_TIMEBASE_FREQ, true);
-+
-+    riscv_aclint_swi_create(get_system_memory(),
-+            s->memmap[SPACEMIT_K3_ACLINT].base,
-+            0, hart_count, false);
-+
-+    /* register system main memory (actual RAM) */
-+    memory_region_add_subregion(system_memory, s->memmap[SPACEMIT_K3_DRAM].base,
-+                                machine->ram);
-+
-+    /* boot rom */
-+    memory_region_init_rom(bootrom, NULL, "spacemit-k3.bootrom",
-+                           s->memmap[SPACEMIT_K3_BOOTROM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[SPACEMIT_K3_BOOTROM].base, bootrom);
-+
-+    memory_region_init_ram(sram, NULL, "sram",
-+                             s->memmap[SPACEMIT_K3_SRAM].size, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[SPACEMIT_K3_SRAM].base, sram);
-+
-+    memory_region_init_ram(ddr_train_buf, NULL, "ddr_train_buf",
-+                           s->memmap[SPACEMIT_K3_DDR_TRAIN_BUF].size,
-+                           &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[SPACEMIT_K3_DDR_TRAIN_BUF].base,
-+                                ddr_train_buf);
-+
-+    create_unimplemented_device("spacemit-k3.sec_jtag_software",
-+                                s->memmap[SPACEMIT_K3_SEC_JTAG_SOFTWARE].base,
-+                                s->memmap[SPACEMIT_K3_SEC_JTAG_SOFTWARE].size);
-+
-+    create_unimplemented_device("spacemit-k3.syscon_apbc",
-+                                s->memmap[SPACEMIT_K3_SYSCON_APBC].base,
-+                                s->memmap[SPACEMIT_K3_SYSCON_APBC].size);
-+
-+    create_unimplemented_device("spacemit-k3.sec_bcm_config",
-+                                s->memmap[SPACEMIT_K3_SEC_BCM_CONFIG].base,
-+                                s->memmap[SPACEMIT_K3_SEC_BCM_CONFIG].size);
-+
-+    create_unimplemented_device("spacemit-k3.pll",
-+                                s->memmap[SPACEMIT_K3_PLL].base,
-+                                s->memmap[SPACEMIT_K3_PLL].size);
-+
-+    create_unimplemented_device("spacemit-k3.pinctrl",
-+                                s->memmap[SPACEMIT_K3_PINCTRL].base,
-+                                s->memmap[SPACEMIT_K3_PINCTRL].size);
-+
-+    create_unimplemented_device("spacemit-k3.counter",
-+                                s->memmap[SPACEMIT_K3_COUNTER].base,
-+                                s->memmap[SPACEMIT_K3_COUNTER].size);
-+
-+    create_unimplemented_device("spacemit-k3.sec_apb_clk_unit",
-+                                s->memmap[SPACEMIT_K3_SEC_APB_CLK_UNIT].base,
-+                                s->memmap[SPACEMIT_K3_SEC_APB_CLK_UNIT].size);
-+
-+    create_unimplemented_device("spacemit-k3.i2c1",
-+                                s->memmap[SPACEMIT_K3_I2C1].base,
-+                                s->memmap[SPACEMIT_K3_I2C1].size);
-+
-+    create_unimplemented_device("spacemit-k3.i2c2",
-+                                s->memmap[SPACEMIT_K3_I2C2].base,
-+                                s->memmap[SPACEMIT_K3_I2C2].size);
-+
-+    create_unimplemented_device("spacemit-k3.i2c6",
-+                                s->memmap[SPACEMIT_K3_I2C6].base,
-+                                s->memmap[SPACEMIT_K3_I2C6].size);
-+
-+    create_unimplemented_device("spacemit-k3.i2c8",
-+                                s->memmap[SPACEMIT_K3_I2C8].base,
-+                                s->memmap[SPACEMIT_K3_I2C8].size);
-+
-+    create_unimplemented_device("spacemit-k3.espi",
-+                                s->memmap[SPACEMIT_K3_ESPI].base,
-+                                s->memmap[SPACEMIT_K3_ESPI].size);
-+
-+    create_unimplemented_device("spacemit-k3.audio_periph",
-+                                s->memmap[SPACEMIT_K3_AUDIO_PERIPH].base,
-+                                s->memmap[SPACEMIT_K3_AUDIO_PERIPH].size);
-+
-+    create_unimplemented_device("spacemit-k3.mailbox3",
-+                                s->memmap[SPACEMIT_K3_MAILBOX3].base,
-+                                s->memmap[SPACEMIT_K3_MAILBOX3].size);
-+
-+    create_unimplemented_device("spacemit-k3.syscon_dciu",
-+                                s->memmap[SPACEMIT_K3_SYSCON_DCIU].base,
-+                                s->memmap[SPACEMIT_K3_SYSCON_DCIU].size);
-+
-+    create_unimplemented_device("spacemit-k3.cci550",
-+                                s->memmap[SPACEMIT_K3_CCI550].base,
-+                                s->memmap[SPACEMIT_K3_CCI550].size);
-+
-+    create_unimplemented_device("spacemit-k3.espi_slv_mem",
-+                                s->memmap[SPACEMIT_K3_ESPI_SLV_MEM].base,
-+                                s->memmap[SPACEMIT_K3_ESPI_SLV_MEM].size);
-+
-+    create_unimplemented_device("spacemit-k3.wdt0",
-+                                s->memmap[SPACEMIT_K3_WDT0].base,
-+                                s->memmap[SPACEMIT_K3_WDT0].size);
-+
-+    create_unimplemented_device("spacemit-k3.dp1",
-+                                s->memmap[SPACEMIT_K3_DP1].base,
-+                                s->memmap[SPACEMIT_K3_DP1].size);
-+
-+    create_unimplemented_device("spacemit-k3.gpio",
-+                                s->memmap[SPACEMIT_K3_GPIO].base,
-+                                s->memmap[SPACEMIT_K3_GPIO].size);
-+
-+    create_unimplemented_device("spacemit-k3.pcie",
-+                                s->memmap[SPACEMIT_K3_PCIE].base,
-+                                s->memmap[SPACEMIT_K3_PCIE].size);
-+
-+    create_unimplemented_device("spacemit-k3.usb_otg",
-+                                s->memmap[SPACEMIT_K3_USB_OTG].base,
-+                                s->memmap[SPACEMIT_K3_USB_OTG].size);
-+
-+    create_unimplemented_device("spacemit-k3.eth0",
-+                                s->memmap[SPACEMIT_K3_ETH0].base,
-+                                s->memmap[SPACEMIT_K3_ETH0].size);
-+
-+    create_unimplemented_device("spacemit-k3.usb3",
-+                                s->memmap[SPACEMIT_K3_USB3].base,
-+                                s->memmap[SPACEMIT_K3_USB3].size);
-+
-+    create_unimplemented_device("spacemit-k3.thermal",
-+                                s->memmap[SPACEMIT_K3_THERMAL].base,
-+                                s->memmap[SPACEMIT_K3_THERMAL].size);
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.cpu_config",
-+                            &s->cpu_config, TYPE_SPACEMIT_K3_CPU_CONFIG);
-+    object_property_set_int(OBJECT(&s->cpu_config),
-+                                "boot-mode", s->boot_mode, &error_fatal);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->cpu_config), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->cpu_config), 0,
-+                    s->memmap[SPACEMIT_K3_CPU_CONFIG_UNIT].base);
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.ddrc0", &s->ddrc0,
-+                            TYPE_SPACEMIT_K3_DDRC);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->ddrc0), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddrc0), 0,
-+                    s->memmap[SPACEMIT_K3_DDRC0].base);
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.ddrc1", &s->ddrc1,
-+                            TYPE_SPACEMIT_K3_DDRC);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->ddrc1), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ddrc1), 0,
-+                    s->memmap[SPACEMIT_K3_DDRC1].base);
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.syscon_apmu",
-+                            &s->syscon_apmu, TYPE_SPACEMIT_K3_SYSCON_APMU_UNIT);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->syscon_apmu), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->syscon_apmu), 0,
-+                    s->memmap[SPACEMIT_K3_SYSCON_APMU].base);
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.syscon_mpmu",
-+                            &s->syscon_mpmu, TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->syscon_mpmu), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->syscon_mpmu), 0,
-+                    s->memmap[SPACEMIT_K3_SYSCON_MPMU].base);
-+
-+    for (int num_sdhci = 0; num_sdhci < SPACEMIT_K3_NUM_SDHCI; num_sdhci++) {
-+        MemoryRegion *sdhci_vendor_region = g_new(MemoryRegion, 1);
-+        g_autofree char *sdhci_name =
-+            g_strdup_printf("spacemit-k3.sdhci%d", num_sdhci);
-+        g_autofree char *sdhci_vendor_name =
-+            g_strdup_printf("spacemit-k3.sdhci%d.vendor", num_sdhci);
-+
-+        object_initialize_child(OBJECT(machine), sdhci_name,
-+                                &s->sdhci[num_sdhci], TYPE_SYSBUS_SDHCI);
-+        sysbus_realize(SYS_BUS_DEVICE(&s->sdhci[num_sdhci]), &error_fatal);
-+        sysbus_mmio_map(SYS_BUS_DEVICE(&s->sdhci[num_sdhci]), 0,
-+                      s->memmap[SPACEMIT_K3_SDHCI0 + num_sdhci].base);
-+        sysbus_connect_irq(
-+          SYS_BUS_DEVICE(&s->sdhci[num_sdhci]), 0,
-+          qdev_get_gpio_in(s->irqchip, SPACEMIT_K3_SDHCI0_IRQ + num_sdhci));
-+
-+        memory_region_init_ram(sdhci_vendor_region, NULL, sdhci_vendor_name,
-+                             0x100, &error_fatal);
-+        memory_region_add_subregion(
-+          system_memory, s->memmap[SPACEMIT_K3_SDHCI0 + num_sdhci].base + 0x100,
-+          sdhci_vendor_region);
-+    }
-+
-+    MemoryRegion *emmc_vendor_region = g_new(MemoryRegion, 1);
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.emmc", &s->emmc,
-+                            TYPE_SYSBUS_SDHCI);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->emmc), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->emmc), 0,
-+                    s->memmap[SPACEMIT_K3_EMMC].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->emmc), 0,
-+                       qdev_get_gpio_in(s->irqchip, SPACEMIT_K3_EMMC_IRQ));
-+
-+    memory_region_init_ram(emmc_vendor_region, NULL, "spacemit-k3.emmc.vendor",
-+                           0x100, &error_fatal);
-+    memory_region_add_subregion(system_memory,
-+                                s->memmap[SPACEMIT_K3_EMMC].base + 0x100,
-+                                emmc_vendor_region);
-+
-+    /*
-+     * Attach an SD/EMMC card image if one was provided via -drive if=sd
-+     * indices 0 and 1 are the 2 SD controllers, index 2 is EMMC
-+     */
-+    for (int sd_idx = 0; sd_idx < SPACEMIT_K3_NUM_SDHCI + 1; sd_idx++) {
-+        bool is_sd = sd_idx < 2;
-+        DriveInfo *dinfo = drive_get(IF_SD, 0, sd_idx);
-+        if (dinfo) {
-+            DeviceState *card =
-+              is_sd ? qdev_new(TYPE_SD_CARD) : qdev_new(TYPE_EMMC);
-+            qdev_prop_set_drive_err(card, "drive", blk_by_legacy_dinfo(dinfo),
-+                              &error_fatal);
-+            qdev_realize_and_unref(
-+                card,
-+                qdev_get_child_bus(DEVICE(is_sd ? &s->sdhci[sd_idx] : &s->emmc),
-+                                   "sd-bus"),
-+                &error_fatal);
-+        }
-+    }
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.qspi", &s->qspi,
-+                            TYPE_SPACEMIT_K3_SPI);
-+    qdev_prop_set_uint32(DEVICE(&s->qspi), "ahb-base",
-+                         s->memmap[SPACEMIT_K3_QSPI_AHB].base);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->qspi), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->qspi), 0,
-+                    s->memmap[SPACEMIT_K3_QSPI].base);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->qspi), 1,
-+                    s->memmap[SPACEMIT_K3_QSPI_AHB].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->qspi), 0,
-+                       qdev_get_gpio_in(s->irqchip, SPACEMIT_K3_QSPI_IRQ));
-+
-+    /* Attach an NOR flash image if one was provided via -drive if=mtd */
-+    {
-+      DriveInfo *dinfo = drive_get(IF_MTD, 0, 0);
-+      if (dinfo) {
-+        DeviceState *flash = qdev_new("w25q64");
-+        qdev_prop_set_drive_err(flash, "drive", blk_by_legacy_dinfo(dinfo),
-+                                &error_fatal);
-+        qdev_realize_and_unref(
-+            flash, qdev_get_child_bus(DEVICE(&s->qspi), "ssi"), &error_fatal);
-+
-+        qdev_connect_gpio_out_named(
-+            DEVICE(&s->qspi), "cs", 0,
-+            qdev_get_gpio_in_named(flash, SSI_GPIO_CS, 0));
-+      }
-+    }
-+
-+    object_initialize_child(OBJECT(machine), "spacemit-k3.ufs", &s->ufs,
-+                            TYPE_SPACEMIT_K3_UFS);
-+    sysbus_realize(SYS_BUS_DEVICE(&s->ufs), &error_fatal);
-+    sysbus_mmio_map(SYS_BUS_DEVICE(&s->ufs), 0,
-+                    s->memmap[SPACEMIT_K3_UFSHC].base);
-+    sysbus_connect_irq(SYS_BUS_DEVICE(&s->ufs), 0,
-+                       qdev_get_gpio_in(s->irqchip, SPACEMIT_K3_UFSHC_IRQ));
-+
-+    /* Attach a UFS image if one was provided via -drive if=scsi */
-+    {
-+      DriveInfo *dinfo = drive_get(IF_SCSI, 0, 0);
-+      if (dinfo) {
-+        DeviceState *lu = qdev_new(TYPE_UFS_LU);
-+        qdev_prop_set_drive_err(lu, "drive", blk_by_legacy_dinfo(dinfo),
-+                                &error_fatal);
-+        qdev_realize_and_unref(lu, BUS(s->ufs.bus), &error_fatal);
-+      }
-+    }
-+
-+    serial_mm_init(system_memory, s->memmap[SPACEMIT_K3_UART0].base, 2,
-+                   qdev_get_gpio_in(s->irqchip, SPACEMIT_K3_UART0_IRQ), 115200,
-+                   serial_hd(0), DEVICE_LITTLE_ENDIAN);
-+
-+    s->machine_done.notify = spacemit_k3_machine_done;
-+    qemu_add_machine_init_done_notifier(&s->machine_done);
-+}
-+
-+static char *spacemit_k3_get_boot_mode(Object *obj, Error **errp)
-+{
-+    SpacemitK3State *s = SPACEMIT_K3_MACHINE(obj);
-+    static const char * const boot_mode_names[] = {
-+        [SPACEMIT_K3_BOOT_MODE_EMMC] = "emmc",
-+        [SPACEMIT_K3_BOOT_MODE_NOR]  = "nor",
-+        [SPACEMIT_K3_BOOT_MODE_NAND] = "nand",
-+        [SPACEMIT_K3_BOOT_MODE_UFS]  = "ufs",
-+        [SPACEMIT_K3_BOOT_MODE_USB]  = "usb",
-+        [SPACEMIT_K3_BOOT_MODE_UART] = "uart",
++void spacemit_k3_set_selected_boot_mode(SpacemitK3CPUConfigState *s,
++                                        int selected_boot_mode) {
++    static const uint32_t selected_boot_mode_values[] = {
++      [SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC] =
++          SELECTED_BOOT_MODE_VALUE_EMMC,
++      [SPACEMIT_K3_SELECTED_BOOT_MODE_NOR] =
++          SELECTED_BOOT_MODE_VALUE_NOR,
++      [SPACEMIT_K3_SELECTED_BOOT_MODE_UFS] =
++          SELECTED_BOOT_MODE_VALUE_UFS,
++      [SPACEMIT_K3_SELECTED_BOOT_MODE_SD] =
++          SELECTED_BOOT_MODE_VALUE_SD,
 +    };
 +
-+    return g_strdup(boot_mode_names[s->boot_mode]);
++    if (selected_boot_mode < 0 ||
++          selected_boot_mode >= ARRAY_SIZE(selected_boot_mode_values)) {
++        qemu_log_mask(LOG_GUEST_ERROR, "%s: bad selected boot mode %d\n",
++                      __func__,
++                      selected_boot_mode);
++        return;
++    }
++
++    s->regs[TO_REG(BOOT_DEV_FLAG_REG)] =
++      selected_boot_mode_values[selected_boot_mode];
 +}
 +
-+static void spacemit_k3_set_boot_mode(Object *obj, const char *value,
-+                                      Error **errp) {
-+  SpacemitK3State *s = SPACEMIT_K3_MACHINE(obj);
-+  int boot_mode = SPACEMIT_K3_BOOT_MODE_NOR; /* Default to NOR */
+ static const MemoryRegionOps spacemit_k3_syscon_mpmu_ops = {
+     .read = spacemit_k3_syscon_mpmu_read,
+     .write = spacemit_k3_syscon_mpmu_write,
+diff --git a/hw/riscv/spacemit_k3.c b/hw/riscv/spacemit_k3.c
+index 47e5ec1932..2ff035c239 100644
+--- a/hw/riscv/spacemit_k3.c
++++ b/hw/riscv/spacemit_k3.c
+@@ -27,9 +27,15 @@
+ #include "hw/ssi/ssi.h"
+ 
+ #include "system/system.h"
++#include "system/block-backend-io.h"
++#include "qemu/error-report.h"
++#include <stdint.h>
++#include <zlib.h>
+ 
+ #include "hw/riscv/spacemit_k3.h"
+ 
++#include "system/qtest.h"
 +
-+  if (!strcmp(value, "emmc")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_EMMC;
-+  } else if (!strcmp(value, "nor")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_NOR;
-+  } else if (!strcmp(value, "nand")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_NAND;
-+  } else if (!strcmp(value, "ufs")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_UFS;
-+  } else if (!strcmp(value, "usb")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_USB;
-+  } else if (!strcmp(value, "uart")) {
-+    boot_mode = SPACEMIT_K3_BOOT_MODE_UART;
-+  } else {
-+    error_setg(errp, "Invalid boot-mode '%s'", value);
-+  }
-+  s->boot_mode = boot_mode;
-+}
+ #define SPACEMIT_K3_IRQCHIP_NUM_MSIS       511
+ #define SPACEMIT_K3_IRQCHIP_NUM_SOURCES    512
+ #define SPACEMIT_K3_IRQCHIP_NUM_PRIO_BITS  3
+@@ -43,6 +49,11 @@
+ #define SPACEMIT_K3_ACLINT_MTIMECMP      0x4000
+ #define SPACEMIT_K3_ACLINT_TIMEBASE_FREQ 24000000
+ 
++#define SPACEMIT_K3_FSBL_NOR_OFFSET  0x0
++#define SPACEMIT_K3_FSBL_SD_OFFSET   0x100000
++#define SPACEMIT_K3_FSBL_EMMC_OFFSET 0x100000
++#define SPACEMIT_K3_FSBL_UFS_OFFSET  0x100000
 +
-+static void spacemit_k3_machine_instance_init(Object *obj)
+ static const MemMapEntry spacemit_k3_memmap[] = {
+     [SPACEMIT_K3_PCIE] =              {  0x80000000,    0x4000000 },
+     [SPACEMIT_K3_ESPI_SLV_MEM] =      {  0x84000000,    0x2000000 },
+@@ -92,6 +103,130 @@ static const MemMapEntry spacemit_k3_memmap[] = {
+     [SPACEMIT_K3_DRAM] =              { 0x100000000,  0x400000000 },
+ };
+ 
++static int spacemit_k3_load_fsbl(SpacemitK3State *ms, DriveInfo *di,
++                                 uint64_t bootinfo_offset,
++                                 int selected_boot_mode)
 +{
-+    SpacemitK3State *s = SPACEMIT_K3_MACHINE(obj);
++    /* Read Bootinfo block */
++    g_autofree void *bootinfo = g_malloc(0x44);
++    uint32_t spl0_offset, spl_max_size, spl_size, target_crc, computed_crc;
++    if (blk_pread(blk_by_legacy_dinfo(di), bootinfo_offset, 0x44, bootinfo, 0) <
++        0) {
++        error_report("Cannot read bootinfo from boot media");
++        return -1;
++    }
 +
-+    s->boot_mode = SPACEMIT_K3_BOOT_MODE_NOR;
++    /* Check CRC of Bootinfo block */
++    target_crc = ldl_le_p(bootinfo + 0x40);
++    computed_crc = crc32(0, bootinfo, 0x40);
++
++    if (target_crc != computed_crc) {
++        error_report("Bootinfo CRC doesn't match");
++        return -1;
++    }
++
++    /* Get SPL Offset and Max Size from bootinfo */
++    spl0_offset = ldl_le_p(bootinfo + 0x20);
++    spl_max_size = ldl_le_p(bootinfo + 0x28);
++
++    if (spl_max_size < 0x1000) {
++        error_report("SPL Max Size value is too small");
++        return -1;
++    }
++
++    /*
++     * Every bootinfo block generated from the vendor
++     * BSP seems to have this as the max value, so
++     * cap it at that.
++     */
++    if (spl_max_size > 0x74000) {
++        error_report("SPL Max Size value is too big");
++        return -1;
++    }
++
++    g_autofree void *fsbl = g_malloc(spl_max_size);
++
++    /* Read SPL */
++    if (blk_pread(blk_by_legacy_dinfo(di), spl0_offset, spl_max_size, fsbl, 0) <
++        0) {
++        error_report("Cannot read FSBL from boot media");
++        return -1;
++    }
++
++    spl_size = ldq_le_p(fsbl + 0xfe0 + 0x8);
++    if (spl_size > spl_max_size - 0x1000) {
++        error_report("SPL Size is too big");
++        return -1;
++    }
++
++    /* Check CRC of SPL*/
++    target_crc = ldl_le_p(fsbl + 0xfe0 + 28);
++    computed_crc = crc32(0, fsbl + 0x1000, spl_size);
++
++    if (target_crc != computed_crc) {
++        error_report("FSBL CRC doesn't match");
++        return -1;
++    }
++
++    rom_add_blob_fixed("spacemit-k3.fsbl", fsbl + 0x1000, spl_size,
++                       ms->memmap[SPACEMIT_K3_SRAM].base + 0x1000);
++
++    /*
++     * Bootrom writes to this register to specify boot medium it picked
++     * Subsequnent stages read this register. Simulate this write
++     */
++    spacemit_k3_set_selected_boot_mode(&ms->cpu_config, selected_boot_mode);
++    return 0;
 +}
 +
-+static void spacemit_k3_machine_class_init(ObjectClass *oc, const void *data)
++static int spacemit_k3_load_fsbl_sd(SpacemitK3State *ms)
 +{
-+    MachineClass *mc = MACHINE_CLASS(oc);
++    DriveInfo *sd = drive_get(IF_SD, 0, 0);
++    if (!sd) {
++        error_report("Failed to get sd");
++        return -1;
++    }
 +
-+    mc->desc = "Spacemit K3 board";
-+    mc->init = spacemit_k3_machine_init;
-+    mc->max_cpus = 1;
-+    mc->default_cpus = 1;
-+    mc->default_ram_id = "spacemit-k3.dram";
-+    mc->default_ram_size = 16 * GiB;
-+    mc->default_cpu_type = TYPE_RISCV_CPU_SPACEMIT_X100;
-+
-+    object_class_property_add_str(oc, "boot-mode", spacemit_k3_get_boot_mode,
-+                                  spacemit_k3_set_boot_mode);
-+    object_class_property_set_description(
-+        oc, "boot-mode",
-+        "Sets the boot select and download select/mode pins"
-+        "on the K3. Possible options are emmc,nor,nand,ufs"
-+        "usb,uart. The first 4 options default to SD first"
-+        "and the chosen option next.");
++    return spacemit_k3_load_fsbl(ms, sd, SPACEMIT_K3_FSBL_SD_OFFSET,
++                                 SPACEMIT_K3_SELECTED_BOOT_MODE_SD);
 +}
 +
-+static const TypeInfo spacemit_k3_machine_typeinfo = {
-+    .name       = TYPE_SPACEMIT_K3_MACHINE,
-+    .parent     = TYPE_MACHINE,
-+    .instance_init = spacemit_k3_machine_instance_init,
-+    .class_init = spacemit_k3_machine_class_init,
-+    .instance_size = sizeof(SpacemitK3State),
-+};
-+
-+static void spacemit_k3_machine_init_register_types(void)
++static int spacemit_k3_load_fsbl_emmc(SpacemitK3State *ms)
 +{
-+    type_register_static(&spacemit_k3_machine_typeinfo);
++    DriveInfo *emmc = drive_get(IF_SD, 0, 2);
++    if (!emmc) {
++        error_report("Failed to get emmc");
++        return -1;
++    }
++
++    return spacemit_k3_load_fsbl(ms, emmc, SPACEMIT_K3_FSBL_EMMC_OFFSET,
++                                 SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC);
 +}
 +
-+type_init(spacemit_k3_machine_init_register_types)
-diff --git a/include/hw/riscv/spacemit_k3.h b/include/hw/riscv/spacemit_k3.h
-new file mode 100644
-index 0000000000..d4d894703b
---- /dev/null
-+++ b/include/hw/riscv/spacemit_k3.h
-@@ -0,0 +1,104 @@
-+/*
-+ * Spacemit K3 Machine
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Anirudh Srinivasan
-+ */
++static int spacemit_k3_load_fsbl_ufs(SpacemitK3State *ms)
++{
++    DriveInfo *ufs = drive_get(IF_SCSI, 0, 0);
++    if (!ufs) {
++        error_report("Failed to get ufs");
++        return -1;
++    }
 +
-+#ifndef HW_RISCV_SPACEMIT_K3_H
-+#define HW_RISCV_SPACEMIT_K3_H
++    return spacemit_k3_load_fsbl(ms, ufs, SPACEMIT_K3_FSBL_UFS_OFFSET,
++                                 SPACEMIT_K3_SELECTED_BOOT_MODE_UFS);
++}
 +
-+#include "hw/core/boards.h"
-+#include "hw/riscv/riscv_hart.h"
-+#include "hw/sd/sdhci.h"
-+#include "hw/misc/spacemit_k3_syscon.h"
-+#include "hw/ssi/spacemit_k3_spi.h"
-+#include "hw/ufs/spacemit_k3_ufs.h"
++static int spacemit_k3_load_fsbl_nor(SpacemitK3State *ms)
++{
++    DriveInfo *nor = drive_get(IF_MTD, 0, 0);
++    if (!nor) {
++        error_report("Failed to get nor flash");
++        return -1;
++    }
 +
-+#define TYPE_SPACEMIT_K3_MACHINE MACHINE_TYPE_NAME("spacemit-k3")
-+OBJECT_DECLARE_SIMPLE_TYPE(SpacemitK3State, SPACEMIT_K3_MACHINE);
++    return spacemit_k3_load_fsbl(ms, nor, SPACEMIT_K3_FSBL_NOR_OFFSET,
++                                 SPACEMIT_K3_SELECTED_BOOT_MODE_NOR);
++}
 +
-+#define SPACEMIT_K3_NUM_SDHCI 2
-+
-+struct SpacemitK3State {
-+    /*< private >*/
-+    MachineState parent;
-+
-+    /*< public >*/
-+    Notifier machine_done;
-+    const MemMapEntry *memmap;
-+
-+    RISCVHartArrayState soc;
-+    DeviceState *irqchip;
-+
-+    SDHCIState sdhci[SPACEMIT_K3_NUM_SDHCI], emmc;
-+    SpacemitK3DDRCState ddrc0, ddrc1;
-+    SpacemitK3CPUConfigState cpu_config;
-+    SpacemitK3SysconAPMUState syscon_apmu;
-+    SpacemitK3SysconMPMUState syscon_mpmu;
-+    SpacemitK3SpiState qspi;
-+    SpacemitK3UFSState ufs;
-+
-+    int boot_mode;
-+};
-+
+ static void spacemit_k3_machine_done(Notifier *notifier, void *data)
+ {
+     SpacemitK3State *s = container_of(notifier, SpacemitK3State,
+@@ -103,9 +238,65 @@ static void spacemit_k3_machine_done(Notifier *notifier, void *data)
+ 
+     riscv_boot_info_init(&boot_info, &s->soc);
+ 
+-    riscv_find_and_load_firmware(machine, &boot_info,
+-                                 firmware_name,
+-                                 &start_addr, NULL);
++    /*
++     * Load bootrom supplied via -bios.
++     * If no file is supplied, load next stage from supplied images
++     * exactly as how bootrom would.
++     */
++    if (machine->firmware && strcmp(machine->firmware, "default") &&
++        strcmp(machine->firmware, "none")) {
++        riscv_find_and_load_firmware(machine, &boot_info, firmware_name,
++                                     &start_addr, NULL);
++    } else {
++        switch (s->boot_mode) {
++        case SPACEMIT_K3_BOOT_MODE_NOR:
++            if (spacemit_k3_load_fsbl_sd(s) < 0) {
++                error_report("Booting from SD failed, trying NOR");
++                if (spacemit_k3_load_fsbl_nor(s) < 0) {
++                    error_report("Booting from NOR Failed");
++                    if (qtest_enabled()) {
++                        return;
++                    }
++                    exit(1);
++                }
++            }
++            break;
++        case SPACEMIT_K3_BOOT_MODE_EMMC:
++            if (spacemit_k3_load_fsbl_sd(s) < 0) {
++                error_report("Booting from SD failed, trying EMMC");
++                if (spacemit_k3_load_fsbl_emmc(s) < 0) {
++                    error_report("Booting from EMMC Failed");
++                    if (qtest_enabled()) {
++                        return;
++                    }
++                    exit(1);
++                }
++            }
++            break;
++        case SPACEMIT_K3_BOOT_MODE_UFS:
++            if (spacemit_k3_load_fsbl_sd(s) < 0) {
++                error_report("Booting from SD failed, trying UFS");
++                if (spacemit_k3_load_fsbl_ufs(s) < 0) {
++                    error_report("Booting from UFS Failed");
++                    if (qtest_enabled()) {
++                        return;
++                    }
++                    exit(1);
++                }
++            }
++            break;
++        case SPACEMIT_K3_BOOT_MODE_NAND:
++        case SPACEMIT_K3_BOOT_MODE_USB:
++        case SPACEMIT_K3_BOOT_MODE_UART:
++            error_report("Supply bootrom via -bios to use these boot methods");
++            if (qtest_enabled()) {
++                return;
++            }
++            exit(1);
++        }
++        s->soc.harts[0].env.resetvec =
++            s->memmap[SPACEMIT_K3_SRAM].base + 0x1000;
++    }
+ }
+ 
+ static void spacemit_k3_machine_init(MachineState *machine)
+diff --git a/include/hw/misc/spacemit_k3_syscon.h b/include/hw/misc/spacemit_k3_syscon.h
+index 873f2c08e1..68450680d7 100644
+--- a/include/hw/misc/spacemit_k3_syscon.h
++++ b/include/hw/misc/spacemit_k3_syscon.h
+@@ -77,4 +77,14 @@ enum {
+     SPACEMIT_K3_BOOT_MODE_UART,
+ };
+ 
 +enum {
-+    SPACEMIT_K3_CPU_CONFIG_UNIT,
-+    SPACEMIT_K3_SEC_JTAG_SOFTWARE,
-+    SPACEMIT_K3_SEC_APB_CLK_UNIT,
-+    SPACEMIT_K3_SEC_BCM_CONFIG,
-+    SPACEMIT_K3_PLL,
-+    SPACEMIT_K3_SYSCON_MPMU,
-+    SPACEMIT_K3_SYSCON_APMU,
-+    SPACEMIT_K3_SYSCON_APBC,
-+    SPACEMIT_K3_UART0,
-+    SPACEMIT_K3_PINCTRL,
-+    SPACEMIT_K3_COUNTER,
-+    SPACEMIT_K3_SDHCI0,
-+    SPACEMIT_K3_SDHCI1,
-+    SPACEMIT_K3_EMMC,
-+    SPACEMIT_K3_BOOTROM,
-+    SPACEMIT_K3_SRAM,
-+    SPACEMIT_K3_DDR_TRAIN_BUF,
-+    SPACEMIT_K3_AUDIO_PERIPH,
-+    SPACEMIT_K3_DDRC0,
-+    SPACEMIT_K3_DDRC1,
-+    SPACEMIT_K3_DRAM,
-+    SPACEMIT_K3_MIMSIC,
-+    SPACEMIT_K3_SIMSIC,
-+    SPACEMIT_K3_MAPLIC,
-+    SPACEMIT_K3_SAPLIC,
-+    SPACEMIT_K3_ACLINT,
-+    SPACEMIT_K3_I2C1,
-+    SPACEMIT_K3_I2C2,
-+    SPACEMIT_K3_I2C6,
-+    SPACEMIT_K3_I2C8,
-+    SPACEMIT_K3_ESPI,
-+    SPACEMIT_K3_MAILBOX3,
-+    SPACEMIT_K3_SYSCON_DCIU,
-+    SPACEMIT_K3_CCI550,
-+    SPACEMIT_K3_ESPI_SLV_MEM,
-+    SPACEMIT_K3_WDT0,
-+    SPACEMIT_K3_DP1,
-+    SPACEMIT_K3_GPIO,
-+    SPACEMIT_K3_QSPI,
-+    SPACEMIT_K3_QSPI_AHB,
-+    SPACEMIT_K3_UFSHC,
-+    SPACEMIT_K3_PCIE,
-+    SPACEMIT_K3_USB_OTG,
-+    SPACEMIT_K3_ETH0,
-+    SPACEMIT_K3_USB3,
-+    SPACEMIT_K3_THERMAL,
++    SPACEMIT_K3_SELECTED_BOOT_MODE_EMMC,
++    SPACEMIT_K3_SELECTED_BOOT_MODE_NOR,
++    SPACEMIT_K3_SELECTED_BOOT_MODE_UFS,
++    SPACEMIT_K3_SELECTED_BOOT_MODE_SD,
 +};
 +
-+enum {
-+    SPACEMIT_K3_UART0_IRQ = 42,
-+    SPACEMIT_K3_SDHCI0_IRQ = 99,
-+    SPACEMIT_K3_SDHCI1_IRQ = 100,
-+    SPACEMIT_K3_EMMC_IRQ = 101,
-+    SPACEMIT_K3_QSPI_IRQ  = 117,
-+    SPACEMIT_K3_UFSHC_IRQ  = 135,
-+};
++void spacemit_k3_set_selected_boot_mode(SpacemitK3CPUConfigState *s,
++                                        int selected_boot_mode);
 +
-+#endif
+ #endif /* HW_MISC_SPACEMIT_K3_SYSCON_H */
 
 -- 
 2.43.0
