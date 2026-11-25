@@ -1,142 +1,103 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A8C0606A339
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 09:39:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81ACD606A329
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 10:06:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gK+lGdMW;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=A3Wbb5bC
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=uM153vMv
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW9Sa-0002zb-Pm; Wed, 25 Nov 2026 04:38:40 -0500
+	id 1xW9tc-0002rR-Kt; Wed, 25 Nov 2026 05:06:36 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xW9SW-0002yi-V5
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 04:38:37 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xW9SS-0005K9-0v
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 04:38:36 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9Dnkl3682014
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 09:38:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=zXTZCrjipYT
- fySZk8W0Hqsax1IO6IE4ttIUiJZaMlrU=; b=gK+lGdMWYutAAac242bDjcbnu6V
- xfl8g9hjWX8H7AmwRzHVSlho6jc9yzH4tf5L2Sp9NK59BK1qT9+Q7OUooDhjLBwt
- PtltiKFxr5Xy2gmN4Zfoa6sJs0IGLUoJQN8hDat0ppZhFzpggHwPgnkBId/vxaU9
- sXr92Gllj9NHodHoqmFRZJjlIzcnmOPews1hYUewF6XQto8cPu+P5sVKr+J1s+JN
- ehXX8EhOA18OLWt9TkAeNMzOLQAcGqwC91c/g9h4gHCuVkA30DYNpGPHFgo9W2e0
- 8FS7EIfxSHVz/nYVm5C7fWQJPiDpgfuFvqjJwqCugK/yPr+uALc+MwcWTJw==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vv2r4pk-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 09:38:30 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-94975041698so1405318685a.0
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 01:38:30 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <w1355457260@gmail.com>)
+ id 1xW9tb-0002r9-Ah
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:06:35 -0500
+Received: from mail-pj2-x0b.google.com ([2607:f8b0:4864:39::b])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+ (Exim 4.90_1) (envelope-from <w1355457260@gmail.com>)
+ id 1xW9tZ-000293-M2
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:06:35 -0500
+Received: by mail-pj2-x0b.google.com with SMTP id
+ d9443c01a7336-2f042b6ef3aso40437745ad.1
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 02:06:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795599510; x=1796204310; darn=nongnu.org;
+ d=gmail.com; s=20260707; t=1795601192; x=1796205992; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=zXTZCrjipYTfySZk8W0Hqsax1IO6IE4ttIUiJZaMlrU=;
- b=A3Wbb5bCGJK05i7MqBBqLyzJr8yTmhorbiGPDSo15zclPuDsBSsNzw1YtnHFgpvaga
- P26UBUykLm9fwOnEpUsFokqMNL/GX5TRmV8/mLCnsuT4IgaJiGqq0PbEJK0qQPHelBMY
- n3G8ZGMNecK4o1Of+lgR1dS/WWUh78iiEBl+a3dFs8GEtpmPmzN3eHYh+7eSGKg6OMtV
- CqRfwc+GpsuFLuBLei8OJT4xNo+CE8rt7CpW+Hpj7loVquExVlguRh/tEE+j1EASp+p0
- HPBDAfhgIDZMOueAE/1huG2Lj24H52klnY7efHqkiHPNnWWXsU6klI3DFzJxncPpi8W8
- eFig==
+ bh=01612jM2atsR1/GUpPpAsoE+njy80UF0HzZADHRQwGU=;
+ b=uM153vMvlX2BJOuYzjIG2I/q7fGFfNc1cm+YOvOJEtCfp1mThia0bqQzgFjlJck0VO
+ bQ0cTwA9CaorCs5/GjyEVdSzexw6GGVXJZsYungEgxuxOpcRwgRwgwFtnVzcPWseoGQ+
+ l2T8wZJIKlVJglrK3EsILDF0glOCmsg2W2w9maycOryocS1eaMSG6/6Rl5QVxcbkEP1X
+ o0puvDvvOgEEzOcCLp/kbggzHSy3uFDkOQEJJOVhddup2i8fDoB6qYXL6nR6ioFP+njH
+ UocdRXb9fiiYu82ihhwmjmQ6AD5WHh3J2wPL6s4sR2Z3ho6DVDC8U/uWy/I+QNgOj17W
+ 3yqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795599510; x=1796204310;
+ d=1e100.net; s=20260707; t=1795601192; x=1796205992;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=zXTZCrjipYTfySZk8W0Hqsax1IO6IE4ttIUiJZaMlrU=;
- b=PwwD8AotEk3kgbnLbML2bElcXIuU5/iqfiAvTzjDG6w2XylEU91NoR9fUwgn4Olcrz
- U25OJ7S6d6dzJWHEh3mo54BbYmfSaVlGQVEJdon1vU+aCP+wAx/jz8bo3OykmWBeZhsg
- DGVfmWO0RKgR3st0OSSal5DgUZ1nWKkQ9RpcwvboWNn5iVYooNlpp0B3quXnZUHYeHMW
- IaO6zLIocyYnyq7nxh7kgDUQHJU5nMzjLNgoJDwERu58HaHnb0NnOp8z9PhDUyASmzbS
- FF1xOd2Bxxr2J1T0MaRLpvy80nUgqFxLqkCPH9dbGh6PnhuIIhSmkg8kLLKCKb86vhhC
- /qXw==
-X-Gm-Message-State: APuU4Z8RFrQtD99wYKWC3sF4Xm+57gmJLSFezmsVxu6APkJNOowui1Lz
- X1LF93aF6J7OACGcIiqp+2R8iqrn96LTy9MWhyVEol7ZWNszzTkHwQO390c+WBG5dgCSiy5qoQ+
- v8FtwtBfYDLzNWhO3o1sS3E5bPB33AB0/zr7R2hee57f7u+dn/xdiml7+ysKseFL3BQ==
-X-Gm-Gg: AZFdTZfyJb306k/w+wMOXgl3OjtxK25VG7+W/3zeyusd32F2ux7LuCjPw9The1eNkYA
- 6IgNmImc9OROHKm01Vk9MKC6XgxxmJ3L7ICKiB6LlJnvzsZEG/qYjN4SvPq1IfaZz6X/mrRXnzw
- c720e16lzEoxdZ0BmspgFQmmQc15uvgJ/8HzG+E9pZOrbpDGCnJHSbey4XB45ETcRr6hHeHA8ql
- aSbps671DxH8bqDFrOUDlZgt9707fciKJoSlkK1E+HkqyTWe7L9paK6jOyz9oiF6Mjtl4B3qeww
- TebwkQqhoWWLi+JbsMPM+1jP5s4rV+QNExf+wk5P8q9ZpXYiVRmTkZQznye1T/kCzVMcr2NuS18
- a/DPFMfR5FsNbcvwyIT4fkSKVlHO6TvtTflD8I6EjyMAlahUlH4b7mb3v7OPYuI6mvRLdTOjOsu
- zDE0T1hX0MPQ==
-X-Received: by 2002:a05:620a:1a09:b0:93f:22af:ccdc with SMTP id
- af79cd13be357-949b340223bmr3060456885a.4.1795599510186; 
- Wed, 25 Nov 2026 01:38:30 -0800 (PST)
-X-Received: by 2002:a05:620a:1a09:b0:93f:22af:ccdc with SMTP id
- af79cd13be357-949b340223bmr3060455085a.4.1795599509626; 
- Wed, 25 Nov 2026 01:38:29 -0800 (PST)
-Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
+ bh=01612jM2atsR1/GUpPpAsoE+njy80UF0HzZADHRQwGU=;
+ b=NV2tzw7Z2c0rudE4cDDm8yEiovq9PtBL0Euv4aOEhnEZkzwG0TTocfsmlEl2IacXot
+ Zay5XLv1ULYN4b4+EEEU+hGqdEJQIrcsPX6fNX1MPo8gaXduJv/uANnOHmsId/TIeLS0
+ sib7QZY+J8YBAzv2XKph6YMb5pKoUw0SKdamqYI0AEYcWD/nHyZ/o9Lc8Vt7qjw8FBXV
+ VunDe9pxudvPGyjDEkD7UlOlBLakjgYlhx5Ft8UPY3bN3eQ7vYef+6BmPdN4O4ENX6zR
+ 6VPN7cWi1tJIr/I/lsF1ixYlpOzxZIx4hhc/4q2sKQT1S68TE/0yAuZ811kXlQjK2WPM
+ f+aQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErG+8gyrQwrrv+fBf2p9vYLpefL9DbOVuectXjleanPcbWGuxS9+xoCpHrHLemKgtncqwckTYh7ZCiK0@nongnu.org
+X-Gm-Message-State: APuU4Z+ZVEpkgdlt+T2LOn5t2oNWW1V00Ov4OEYG2iPWZAbOHWIFdHjd
+ pVFAZA+jFVipYrLrx6ZEy8TC+07TtKxL6Q8ItI35MejjYz5Wg/f0p903
+X-Gm-Gg: AZFdTZexrKccoX4NmhZ3hqThp5WzKAcM2Aj8sWZxGZcBzv8ROv5hIeMfr8I/nNYkOg/
+ 31H9c16/MBW2dqCpXOoHu20VSZ51kjwMYisKarBaWbNqF4trY/oSgdhhSaoVm2zxBFIqrc5II2e
+ Gx4E0G0+bh7jkc2y9jT9cTRI/3QUei6towTLPl6sk+ZGHmYD1W/Elm6ZuY75CNVG6SLAPv/ltAU
+ zTmakBckbKNQyHN6O3f0dieHfkQX+EsRSjSYGEPwNMtn7R9UFphMe4KxlToNyPQB0vl7+Pa6EIq
+ qbfsI/84ZGiNw+r90EQniTL9K76BQSzIBlYUQcFAEJliYYIbUKrFUXLgIMXc7ulLeuul5lHYrrm
+ ZSJN3m07MS+FSdhevHepQyO41wUY31xdWTlz00CcQ9gNVNMMczRLi/yZSRpLkZjWhTbH05C68KX
+ SVqnNgil9oVH3XuXBML7VYDWC1unoKpZsLGn4WjEZ1+U0f8o0lTr5zO6/X6eWkCKbcvFQ9ohxwd
+ uTXO/nJ2RHFmQCAjyNoH+xLDGACDx7dlsjpYWcIUKyyhHtkAClKXRNFMkLHfrBH3mNkDh0vBoq9
+ 82NWMi2ByKU+9KYiQFaT0U9x2A==
+X-Received: by 2002:a05:6a20:2446:b0:3f9:6c37:4b3c with SMTP id
+ adf61e73a8af0-401493a666cmr19885050637.1.1795601191567; 
+ Wed, 25 Nov 2026 02:06:31 -0800 (PST)
+Received: from nixos ([2409:8a28:ae4:7f20:3645:b698:a929:4bcd])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949bb3f2de5sm1257212585a.29.2026.11.25.01.38.27
+ d2e1a72fcca58-8c872e456a7sm8688496b3a.29.2026.11.25.02.06.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 01:38:28 -0800 (PST)
-From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
+ Wed, 25 Nov 2026 02:06:30 -0800 (PST)
+From: Zixin Wang <w1355457260@gmail.com>
+To: asrinivasan@oss.tenstorrent.com
+Cc: qemu-devel@nongnu.org, qemu-riscv@nongnu.org,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Weiwei Li <liwei1518@gmail.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH v3 1/1] target/riscv: do not write SXL < UXL
-Date: Wed, 25 Nov 2026 06:38:22 -0300
-Message-ID: <20261125093822.228611-2-daniel.barboza@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261125093822.228611-1-daniel.barboza@oss.qualcomm.com>
-References: <20261125093822.228611-1-daniel.barboza@oss.qualcomm.com>
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>, Jeuk Kim <jeuk20.kim@samsung.com>,
+ Alistair Francis <alistair@alistair23.me>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Zixin Wang <w1355457260@gmail.com>
+Subject: Re: [PATCH 0/8] Add Spacemit K3 Machine
+Date: Wed, 25 Nov 2026 10:06:04 +0000
+Message-ID: <20261125100604.128764-1-w1355457260@gmail.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
+References: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzOCBTYWx0ZWRfX/ecNqGsbXssO
- RkZkC++5YLXNnROZZkx62/ttrGA5xHMcEvKJ2+k9ZimUvJPDRPHoIU+A83x9TTKMvgafxYBqx07
- +2q1hsj6jwqstrHpE0fgReM+m3k1CEM=
-X-Proofpoint-GUID: 1X89kue_Z0AiD9ZZ5Wch-41CFMsgwqM5
-X-Proofpoint-ORIG-GUID: 1X89kue_Z0AiD9ZZ5Wch-41CFMsgwqM5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzOCBTYWx0ZWRfX2Etk1Hja72/T
- PMMJdxuWWGNtadWTuk9Z3ro2xs1aPnhiOa52mpsY+d/t5QyJLYbZRbYARrnA3HOvxfDCHM6sZib
- IPY8XBd5echjWpWYIoBjKtvDcHE4akH77whUVz1HEzkyE/CMnPqJDqjHD5AYNue9SN+DdKbY5pW
- kRuOpY7bOPZtOo3rY0GEq6tfJBdtvepH0aexMwFq70pgrCusgkKYj+a6sOSB1gIaRsawzZvs8Vn
- Nm3xTyp3X47XZch9JeBJcKYZcSyK0Esd2SK9lf6jcPQWLAJbIKT6yfhcYP3dmtJQ1D1OTSTNpxu
- TSCRZPQfkSOHy9fnXGuCfmeH4cOnqmb1ElQP5Ho6oV80ogc6r2K1aGe8IiSCca4e8njfBKu7xjn
- kXjwMctnKnnrvbUl3Kv3vj1glGVQ9gpLYmg7sKyYLOgl8/1ncYTWX5cTevvHxFmZe5yYI7hORfF
- FS4/Wq1m8+zfMmCIcyA==
-X-Authority-Analysis: v=2.4 cv=A/z5rKWG c=1 sm=1 tr=0 ts=6b06ac96 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=JF9118EUAAAA:8 a=a7LDkB8lNaJXYUdKcV4A:9
- a=PEH46H7Ffwr30OY-TuGO:22 a=xVlTc564ipvMDusKsbsT:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 priorityscore=1501 impostorscore=0
- suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0 phishscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611250038
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2607:f8b0:4864:39::b;
+ envelope-from=w1355457260@gmail.com; helo=mail-pj2-x0b.google.com
+X-Spam_score_int: -17
+X-Spam_score: -1.8
+X-Spam_bar: -
+X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
+ RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -149,211 +110,19 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-RISC-V priv spec says: "If S-mode is implemented, the set of legal
-values that the uxl field may assume excludes those that would cause
-UXLEN to be greater than SXLEN.".  At this moment there's no relation
-between SXL and UXL writes, i.e.  we're happy to accept SXL < UXL.
+Hi Anirudh,
 
-We'll start by renaming riscv_write_uxl() to riscv_update_xl_field(),
-making it closer to what the function actually does.  Then, in the same
-function:
+Thanks for the series. I have also been working on a SpaceMiT K3 machine model for QEMU (a Linux-first subset that boots Linux through OpenSBI), and I have qtests and a functional boot test for it locally. Since your series already covers the K3 machine, I will hold my own version and not send it, to avoid duplicate review effort.
 
-- 'xl' is renamed to 'mlx' since it stores riscv_cpu_mxl();
-- 'uxl' is renamed to 'xl', indicating that the function is dealing with
-   multiple XL files (SXL, UXL, VSSTATUS.UXL ...);
-- add a new 'min_field_val' field.
+Would you like help with tests for this series, or do you plan to add them yourself? I would be happy to either contribute tests (I can share the qtest/functional-test setup from my model) or boot-test your series with the K3 SDK images and report the results, including a Tested-by tag if the tests pass.
 
-With this improved helper what's left is to change SXL/UXL update order
-in write_mstatus() and, when updating SXL, we'll use the written UXL
-value as a minimal value for SXL.
-
-This means that if we're in a SXL < UXL case, e.g. SXL = 1 and UXL = 2,
-we'll write SXL = 2/UXL = 2.  Another possibility would be to decrement
-UXL and write SXL = 1/UXL = 1, but the bug report in [1] mentions that
-bumping SXL is the default behavior of other emulators.  For the sake of
-compatibility we're doing the same.
-
-[1] https://gitlab.com/qemu-project/qemu/-/work_items/4821
-
-Fixes: ebef6685a1a2 ("target/riscv: use SXL instead of MXL for read_sstatus")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4821
-Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
----
- target/riscv/tcg/csr.c               | 47 +++++++++++++++-------
- tests/tcg/riscv64/system/meson.build |  7 ++++
- tests/tcg/riscv64/test-uxl-sxl.S     | 59 ++++++++++++++++++++++++++++
- 3 files changed, 99 insertions(+), 14 deletions(-)
- create mode 100644 tests/tcg/riscv64/test-uxl-sxl.S
-
-diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index 2a37fb735f..0e2ef8530b 100644
---- a/target/riscv/tcg/csr.c
-+++ b/target/riscv/tcg/csr.c
-@@ -2049,15 +2049,32 @@ static target_ulong legalize_mpp(CPURISCVState *env, target_ulong old_mpp,
-     return val;
- }
- 
--static uint64_t riscv_write_uxl(CPURISCVState *env, uint64_t val,
--                                uint64_t field)
-+/*
-+ * The intended use of this function w.r.t 'min_field_val' based on
-+ * our current design of always making SXL >= UXL:
-+ *
-+ * - set min_field_val = 0 when updating UXL fields;
-+ * - set min_field_val = existing_UXL_val when updating SXL fields.
-+ */
-+static uint64_t riscv_update_xl_field(CPURISCVState *env, uint64_t val,
-+                                      uint64_t field, uint32_t min_field_val)
- {
--    RISCVMXL xl = riscv_cpu_mxl(env);
--    uint64_t uxl = get_field(val, field);
-+    RISCVMXL mxl = riscv_cpu_mxl(env);
-+    uint64_t xl = get_field(val, field);
-+    bool field_updated = false;
- 
--    if (xl != MXL_RV128 && uxl == MXL_RV128) {
--        uxl = xl;
--        val = set_field(val, field, uxl);
-+    if (xl < min_field_val) {
-+        xl = min_field_val;
-+        field_updated = true;
-+    }
-+
-+    if (mxl != MXL_RV128 && xl == MXL_RV128) {
-+        xl = mxl;
-+        field_updated = true;
-+    }
-+
-+    if (field_updated) {
-+        val = set_field(val, field, xl);
-     }
- 
-     return val;
-@@ -2118,14 +2135,16 @@ static RISCVException write_mstatus(CPURISCVState *env, int csrno,
-             mask |= MSTATUS_MPV | MSTATUS_GVA;
-         }
- 
--        if (riscv_has_ext(env, RVS) && (val & MSTATUS64_SXL) != 0) {
--            mask |= MSTATUS64_SXL;
--            val = riscv_write_uxl(env, val, MSTATUS64_SXL);
--        }
--
-         if (riscv_has_ext(env, RVU) && (val & MSTATUS64_UXL) != 0) {
-             mask |= MSTATUS64_UXL;
--            val = riscv_write_uxl(env, val, MSTATUS64_UXL);
-+            val = riscv_update_xl_field(env, val, MSTATUS64_UXL, 0);
-+        }
-+
-+        if (riscv_has_ext(env, RVS) && (val & MSTATUS64_SXL) != 0) {
-+            uint32_t min_val = get_field(val, MSTATUS64_UXL);
-+
-+            mask |= MSTATUS64_SXL;
-+            val = riscv_update_xl_field(env, val, MSTATUS64_SXL, min_val);
-         }
-     }
- 
-@@ -5509,7 +5528,7 @@ static RISCVException write_vsstatus(CPURISCVState *env, int csrno,
-     if ((val & VSSTATUS64_UXL) == 0) {
-         mask &= ~VSSTATUS64_UXL;
-     } else {
--        val = riscv_write_uxl(env, val, VSSTATUS64_UXL);
-+        val = riscv_update_xl_field(env, val, VSSTATUS64_UXL, 0);
-     }
-     if ((env->henvcfg & HENVCFG_DTE)) {
-         if ((val & SSTATUS_SDT) != 0) {
-diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index cdd2e99d22..8938fc6caa 100644
---- a/tests/tcg/riscv64/system/meson.build
-+++ b/tests/tcg/riscv64/system/meson.build
-@@ -116,6 +116,13 @@ tests += {
-   }
- }
- 
-+tests += {
-+  'test-uxl-sxl.S': {
-+    'cflags': cflags,
-+    'qemu_args': ['-cpu', 'max', qemu_args],
-+  }
-+}
-+
- if 'qemu-system-riscv64' in emulators
-   tcg_tests += {
-     'riscv64-softmmu': {
-diff --git a/tests/tcg/riscv64/test-uxl-sxl.S b/tests/tcg/riscv64/test-uxl-sxl.S
-new file mode 100644
-index 0000000000..54dc0832b3
---- /dev/null
-+++ b/tests/tcg/riscv64/test-uxl-sxl.S
-@@ -0,0 +1,59 @@
-+/*
-+ * Test that UXL will never be read as greater than SXL.
-+ *
-+ * Based on Gitlab 4821 testcase, which is derived from riscv-arch-test.
-+ *
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+.option norvc
-+	.text
-+	.global _start
-+
-+_start:
-+	lla	t0, trap
-+	csrw	mtvec, t0
-+
-+	csrr	s0, mstatus
-+	li	t0, 0xf
-+	slli	t0, t0, 32
-+	not	t0, t0
-+	and	t1, s0, t0
-+	li	t2, 0x6                // SXL = 01, UXL = 10
-+	slli	t2, t2, 32
-+	or	t1, t1, t2
-+	csrw	mstatus, t1
-+	csrr	s1, mstatus
-+	csrw	mstatus, s0            // restore
-+
-+	srli	t1, s1, 34
-+	andi	t1, t1, 3              // SXL
-+	srli	t2, s1, 32
-+	andi	t2, t2, 3              // UXL
-+	sltu	a0, t1, t2             // fail if SXL < UXL
-+	j	_exit
-+
-+trap:
-+	# Any trap is a fail code 1
-+	li	a0, 1
-+
-+# Exit code in a0
-+_exit:
-+	lla	a1, semiargs
-+	li	t0, 0x20026	# ADP_Stopped_ApplicationExit
-+	sd	t0, 0(a1)
-+	sd	a0, 8(a1)
-+	li	a0, 0x20	# TARGET_SYS_EXIT_EXTENDED
-+
-+	# Semihosting call sequence
-+	.balign	16
-+	slli	zero, zero, 0x1f
-+	ebreak
-+	srai	zero, zero, 0x7
-+	j	.
-+
-+	.data
-+	.balign	16
-+semiargs:
-+	.space	16
--- 
-2.43.0
-
+Best regards,
+Zixin Wang
 
