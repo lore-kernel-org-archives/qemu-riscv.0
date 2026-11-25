@@ -1,134 +1,135 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52852606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F336606A323
 	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 13:23:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=dfhVauE/;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FIgYJ0Au
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=gooM8Zg/;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=dZj5p1hC
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWCvu-0002X2-D2; Wed, 25 Nov 2026 08:21:10 -0500
+	id 1xWCvu-0002XR-SO; Wed, 25 Nov 2026 08:21:10 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvk-0002Tl-A1
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:00 -0500
-Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
+ id 1xWCvh-0002T0-Bz
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:20:58 -0500
+Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWCvi-0000fI-8Q
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:21:00 -0500
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ id 1xWCvf-0000eb-3G
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 08:20:56 -0500
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9mGc43126481
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:57 GMT
+ 6AP9mrix3644047
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:date:from:in-reply-to:message-id
- :mime-version:references:subject:to; s=qcppdkim1; bh=4tEQQ7eidww
- jDePy8Iaa7jhpKNmAip5LpHkQJSjkIjg=; b=dfhVauE/H4PshhQF+puX0DpQaie
- DlekQlcD53mSQIHdqEyv1aw3cyQxhyB2LGjgeGCDiRr1n38DkmyxbUgGW+Qc8EGc
- CQ+A2r6H6ethuRSfTR2WPxkMirFrfBaUW6rctCngTN8mbijngzq/I9OQFOCPh6vI
- dGyhCYXhMr2mC4GCFBKHJuwe3bBsTTKLOHfZ0R9ls/CWKWSNBQ2Z0Sxicb3cpkbR
- tyW8TFkTVqkEw1l9xua6fw8xtdEZxAeamImJaJHMt/pi/8GRVS+AZIgUphvcQ0Pp
- XjYxY9NRC3qkk/scxZtGJ+JKZFuIjAZspyB7U7TQnU+gxQA5TnclUEaTvmA==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
- [209.85.219.71])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5eydcb8q-1
+ :mime-version:references:subject:to; s=qcppdkim1; bh=6oxiWNkSf6B
+ JG8LmX1T6UuxZLH4idLko4HUpZrmuC6g=; b=gooM8Zg/iSB4jhsAAe5AI+5WJ6s
+ /H0H+tE6MZmjwqxpJpVQkNCWvrVuHL2QHiZWq7OMR5iOs9KV2zVKRBe8czc5TLJl
+ hclDiUno9a0qHqrUnokOLS69eAUKwMh6nD82Yycl+HJjZi0b2ynnWlK7GwSSzneB
+ hj5yzvKgyBwX3rvF5sGFVrgT+y5PPdqXN1+cx6RPMopQMDehvtBOCSLipNQUwOwq
+ QMLi546W7+9LKHTUR8XuPV0hDQSY23W+pn6i0BeTbGWOAXbsgFMRoCQ3BzcWOWTw
+ 5QcVK7SHBHF1+nbcc+2YXbHVZzjR6Tb/6gDv4VHDumJOIKkqMkNMiZhoqmw==
+Received: from mail-ua1-f70.google.com (mail-ua1-f70.google.com
+ [209.85.222.70])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mc2b0ty-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:56 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id
- 6a1803df08f44-91c6c1e082bso106994676d6.0
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:20:56 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 13:20:53 +0000 (GMT)
+Received: by mail-ua1-f70.google.com with SMTP id
+ a1e0cc1a2514c-990835cec5aso3553198241.0
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 05:20:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795612856; x=1796217656; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795612853; x=1796217653; darn=nongnu.org;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=4tEQQ7eidwwjDePy8Iaa7jhpKNmAip5LpHkQJSjkIjg=;
- b=FIgYJ0AuWNDVMMw6K8yNDn+kneVHBDQKJ7gePU5Gdi+KPdDcPqJQTBXa900gqkiXkb
- rD9IsA+rPJCHi7yRJToPFrxQ5fCgx+YkGwGKSjw9gYmYkXbSDw5L836/rRaz6y4huM3N
- WxYzZ7+kWYj/J86KC3jBGdBZXVtOvWhts99mNMdqlFjPHYdsdQ7353WYWWuLFwDb/f6X
- oaiInit9XUhdycUZ5XutP9V/G3uL0IKbQ7Ua6JnbSebbcJ5qQnJpVZYoaqsH59SgfA39
- 1REZr2AiE5RiMt8fLzbjtwq0UskKtMfOHbvVAnV4pmu1V04PaYXFydsDhqEkvDHyQKuJ
- KaCw==
+ bh=6oxiWNkSf6BJG8LmX1T6UuxZLH4idLko4HUpZrmuC6g=;
+ b=dZj5p1hCXCgjddyUmWUCdxOnKCC7fkp5r4zYRZPMBLFxm7s5BfeizFktSrkGViG++W
+ dSm56yamk0tFTdvMp3V+NaQGX7M6I0j4gpv1St+pQK2DS/EF8rvlfMNFHsr/u8Pj7CDs
+ MBtk1z+Sdn2USAwRXqabhTITxEfEJjALx46ilZswNb7fkTwKCw7hk4qVTvYfXgVGKINf
+ tL1mr/XPgl2i8zD7bfGY705hfAekKiN17iBJRcccclZHfh/5YCACHwyCHFLSZ9yp1Hmk
+ WYBQ4MIm9viSJGWBH4yq1LAeVujLISPf7k2CP6T0IkIwuz8OQS3I59srmz6k/KTRWd1u
+ jW2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795612856; x=1796217656;
+ d=1e100.net; s=20260707; t=1795612853; x=1796217653;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to:content-type;
- bh=4tEQQ7eidwwjDePy8Iaa7jhpKNmAip5LpHkQJSjkIjg=;
- b=pLGPi9pnQGT2sroRJTLWl8n/wGIcO/GZcxe+eyy5a/4QdmY5TV5JvmeXvaGrudvQiP
- YOGAdpfwQp3Dp/9aIXKEezu0AtZHr+YleMTjKNOn+0zCj5SH8RA97UBWh3ekewxNiN0L
- 0nV7NkTC/MI2iWJzsBQo1Vb8TO6ohECVNKvgUw4LTwZBGZv4TKti2Cx5sOpoaNAAgUPp
- 1OgIF37FBtX+yDj9eoTCH17hcvUS5dwx0F/LqTgmGlh3b2BtHTbt3tXLmBoXG4ef3G9t
- LlaSokyIzI3xE4uujB6gyMJPrGivWGbPzIcNBH2qRdwUf46sHmDOiNhulZkFJ8tPXFd2
- l7mA==
-X-Gm-Message-State: APuU4Z/MUSHShmdiefON8m79LHhHBh9xsgtjfz/eJ8zUHV49gMrYkyEa
- qOrXZ4GywxliaLZP5dZikQ25RBFAT8L+n55aaf85bPXNZJHBheNG5drU6ewNMQrigRTrILSTrHs
- mgDps2Qe0VMZdDMuxrcctZgmUKXZ5/eDmjZCS8ZfUIt+YuhIGiMB2m0Y8sA==
-X-Gm-Gg: AZFdTZdFNj5K78d1vmAWeeSJiho8aisXkLamU/BL/nIjfS03H/oFXlJE42jpxwjwmI5
- vP4QWytAlHvfECyRwrIktH1uGoHhMKCVum3PWFOrkxcKhZoRFJjOTCoJWt1chDtEK0RKFR0giQm
- 6kIXs2hmxT7RJ+m4p9//LWknAIX/LnmdmM68onKKOg7nbZduWAeoW1l4wHrvMnDatLvohQ92zsb
- DZToZ7kybL7EcgHIxr7dEBqYUfPhch+8H+GzTvMxcjfkSziaRkjouugtSUqAjaGPQ709QLexiFC
- tA8R6kk2fR2JVcvUXt/ns6J0toB0zB099r5Rm/YFGTrowugG/Gdt0+cWOmLDpdBYCxcJQc2Tuar
- Xh3kcn/ee4TnJ1sD9N0VPT2In/RH0F6uni3owB/CFUm74uNTCkdN+EZ/cH6SZt0EkHWXH73F2Bc
- +w9klFHYAQNQ==
-X-Received: by 2002:a05:6214:dac:b0:91f:2374:9b65 with SMTP id
- 6a1803df08f44-9212e0e4c4emr333250776d6.21.1795612855880; 
- Wed, 25 Nov 2026 05:20:55 -0800 (PST)
-X-Received: by 2002:a05:6214:dac:b0:91f:2374:9b65 with SMTP id
- 6a1803df08f44-9212e0e4c4emr333250216d6.21.1795612855222; 
- Wed, 25 Nov 2026 05:20:55 -0800 (PST)
+ bh=6oxiWNkSf6BJG8LmX1T6UuxZLH4idLko4HUpZrmuC6g=;
+ b=H8TK/ad4rKQYW4AAu7nX7GRpjJejGOOIegsMQI3e/vmM7Qa8Yl8DhWPs0Pz34EpV+H
+ KcUpiIqUB/cJAxpqMHHILZiDLIEkJMIHyDyUcnWx1DorlJQgoTO0ERSDbI2FFKuzHcA2
+ us67hSxpD6AyAgbJfGazBvydteo+r8wYb2c+/md0BjFcwYoFVZvmZgUhworZ2G6SMziG
+ UXN3blDCuovyF1YJVZr+rtIvPtl4XnhS4NqDK2J2gK1oCSX2l/d5dvEcTv+8KLeEo9gz
+ M7Jx32GFIAz4PjpKVIu/Rj5nXNOo572kHpflpI1ZcfJURlvP32KoPAtdGLh0XP6B33Fy
+ e39g==
+X-Gm-Message-State: APuU4Z/QhRvXHfGwXxHfr9mZ7fIwTE2fYWuwZJAuMOs4U/hfNf0BN4CM
+ EsdcnCxp2iM5d7dkQUk3Qtn2Y3Bgo0XsGsLFLQwqRPtGR4uoU2ED3AiOocNLdy/nQAjtcUawNIp
+ q3H8LvmW4Sob1QfiUXK2jwE6Q0ErCMXhtq5uTr+cfW6XKe1g4c1gE3Xm6RA==
+X-Gm-Gg: AZFdTZerdslPVi8FHlgP3RR2PzupQ26Vv8tT1XgDT+k023DJabOQV1nqPLllFxl+1Xd
+ eFIMg9YHQvqWSeiXRj7HUSPAja8Vb4AxYHlWd0/CNCjXoytjII4rlML+D1LLyOOzjDm/sQNYJOr
+ jQ+YamobOaX2D64UaLa42l+FKPY2eNF7uSv6mjZKhh+UCqa0X2O5c8DDB3fdDIKLvhKG+wcI5IL
+ KIiJcFhi54RM4kZ/W7bL7P5HpljfoH49x0p5J+JbxsWiVo4uvkXo6+l+kBOf5yaCLSL2RpKYir6
+ nb6Hmo8dN3ruWg2AOY9CtLOIeSlC5I1VLMyeCdRpi0LLs13aB5lKfPqTVP29PzXGLt1fOlEeVVd
+ AhDwYQonw09AxRPZmgffMclAx2OyEH+qZpG3EKPyyK9IqZ23s8NDug0iny6B+EXQQSc3hjqLeqS
+ +2OB8+RjSrZQ==
+X-Received: by 2002:a05:6102:26d3:b0:7d6:a8d7:fd91 with SMTP id
+ ada2fe7eead31-7d6db989524mr7303468137.13.1795612853211; 
+ Wed, 25 Nov 2026 05:20:53 -0800 (PST)
+X-Received: by 2002:a05:6102:26d3:b0:7d6:a8d7:fd91 with SMTP id
+ ada2fe7eead31-7d6db989524mr7303442137.13.1795612852644; 
+ Wed, 25 Nov 2026 05:20:52 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.20.52
+ 6a1803df08f44-92134a08552sm160836946d6.34.2026.11.25.05.20.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 05:20:54 -0800 (PST)
+ Wed, 25 Nov 2026 05:20:52 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Palmer Dabbelt <palmer@dabbelt.com>
-Subject: [PATCH 05/15] target/riscv: clear hgatp bits from write mask
-Date: Wed, 25 Nov 2026 10:20:04 -0300
-Message-ID: <20261125132015.229955-6-daniel.barboza@oss.qualcomm.com>
+Subject: [PATCH 04/15] target/riscv: fix hedeleg writable mask
+Date: Wed, 25 Nov 2026 10:20:03 -0300
+Message-ID: <20261125132015.229955-5-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 References: <20261125132015.229955-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfX0FUwVlzkzxK7
- EfO4VV8MCEq2zvJVQAYC0WeVgCkkFGC74Rvnfr7KIEXSoGMdrIoUr6A77X5fW6rYPh+1po9qn5c
- 1sy1XUaOrfjdJnDYQfX11zjhExRNBB0=
-X-Proofpoint-ORIG-GUID: lRUnHEfnB9gZzySbdpXu2z9cdjDBS0Oe
-X-Proofpoint-GUID: lRUnHEfnB9gZzySbdpXu2z9cdjDBS0Oe
-X-Authority-Analysis: v=2.4 cv=GIGdgeNK c=1 sm=1 tr=0 ts=6b06e0b8 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Authority-Analysis: v=2.4 cv=aPJlOr9m c=1 sm=1 tr=0 ts=6b06e0b6 cx=c_pps
+ a=R6oCqFB+Yf/t2GF8e0/dFg==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=p0WdMEafAAAA:8
- a=EUspDBNiAAAA:8 a=3sS3A2hXxFRu-t1DIr4A:9 a=1HOtulTD9v-eNWfpl4qZ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXy6C3Jnr5ecih
- 1/5kEKQYf6LbUvz7DfTzQHU3FqhSzZFUXTOm+kRapujaj3ndVkPgVXwIihWLN5IrLSXag2/jexE
- PUy8wQbZvDdISCekJyZKUGPaCU55+jUXYxSl/09zh03BBPR32SqpL1f84IHLFkmnvvgtkei7xPc
- b1sOyrxH1z7/s1ZR1tl4jtcRg38GbintH2lGaKBDvrVzXvUIIvYj0ESOySawF/zLOiW568xpz0X
- 1VMqIdvizEAizImk0kPYetKQiFpsu/WCBqcC23sI1tKRFKg4Pn1LKwyORVKzStXlG9N70tJUSB2
- j4iJz2tkz8i/rhWIOMRgvwvgrFQfcpq3/2fGFWsTDldKpA5loJd/C+h7XevC5d0PoeFLDdxl90S
- KlnHLgpfl56LDoFB916Mwn9crVLzFzISpFa1MClOaP67O09VE5gU6x2yb0ktU1otvkFIMXDbzat
- 1/EhkuE0eU55atdxWiw==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=IH4YEds1svsedXLTdUwA:9 a=TD8TdBvy0hsOASGTdmB-:22
+X-Proofpoint-GUID: D8DyBJY-V9jqhMM86vga_nc8Yn7FDdX7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXytaelI/kUNzQ
+ 6WLc+eMZRpOJ+uYqwNoOeHDX4EZROJkyJII2bxETet7r/1zdouQndYeK6unfaeY7TMalXpE1i9g
+ wex6i+VwTcan80nSP/XG/JAWoyczbWNwg/1fd/SKwTLrYOJAXHfSN579VOWFbDbw1BicQE6RmmA
+ JOMEbnSd59oMI6wO3sfc7vIzBabvRuHZzKbm2sObhdT1zZBT62Y3DQJbfDqWVNO7JQ+bPrWNGpN
+ 8rue/7fy/MO17jdwCyWIu9i9fBGyYbREOo8Ou/AYc9TUeHKJ4S2mFbz7VrJ1m72LgPTm48+kqAR
+ WxDiXRDUECv1CTfnx9j7SdDd20g3cmwbNm+GwoDpnwxtQkDEGiaYaQMmulnqO0/SzOwDP7/JIA3
+ FqZxEGsv8i110oJWG229otdjIxnMegtYt0dxfQZ2S/T+ZSE8+8ifAkaOQwRNoqjSbTKLMusY5hT
+ kib9VYYkyVc3e2vyp9A==
+X-Proofpoint-ORIG-GUID: D8DyBJY-V9jqhMM86vga_nc8Yn7FDdX7
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MyBTYWx0ZWRfXxOeLAZg/wQrq
+ dhZQLP9GYQzPUQnOFcrtqAivBDyLj5e6y9ll27YbEK2ELABxvOuA8yaleWsxx1zvOnvq9pM4yts
+ C/X14Zj3Xx69Sg2YX5thLFb2X2DxI5w=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
- spamscore=0 priorityscore=1501 bulkscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250053
-Received-SPF: pass client-ip=205.220.168.131;
- envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
+ priorityscore=1501 impostorscore=0 phishscore=0 lowpriorityscore=0
+ adultscore=0 spamscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611250053
+Received-SPF: pass client-ip=205.220.180.131;
+ envelope-from=daniel.barboza@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -155,95 +156,83 @@ X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-We're allowing writes on bits that the ISA demands to be zeroed.
+Bit 19 (hardware error) must be writable in hedeleg, i.e. it must be
+delegable.  Add it DELEGABLE_EXCPS.
 
-In theory we could let PPN[1:0] be writable for Bare modes.  In the
-'hgatp' section the spec says:
+While we're at it, hedeleg bit 0 is only writable if IALIGN = 16, i.e.
+RVC is enabled.  Remove bit 0 from the delegation/writable mask if RVC
+is enabled.
 
-"An implementation that supports only the defined paged virtual-memory
-schemes and/or Bare may make PPN[1:0] read-only zero."
-
-This is our case since we only support sv32, sv39, sv48 and sv57 and
-Bare, thus let's make our lives easier and zero these bits all the time.
-
-Fixes: 1349f9695208 ("target/riscv: UPDATE xATP write CSR")
-Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4591
+Fixes: bc083a51caff ("target/riscv: hardwire bits in hideleg and hedeleg")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/4592
 Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 ---
- target/riscv/cpu_bits.h              |  9 ++++
- target/riscv/tcg/csr.c               |  8 ++++
- tests/tcg/riscv64/system/meson.build |  5 +++
- tests/tcg/riscv64/test-hgatp-rw.S    | 61 ++++++++++++++++++++++++++++
- 4 files changed, 83 insertions(+)
- create mode 100644 tests/tcg/riscv64/test-hgatp-rw.S
+ target/riscv/tcg/csr.c                 | 11 +++++
+ tests/tcg/riscv64/system/meson.build   |  5 +++
+ tests/tcg/riscv64/test-hedeleg-write.S | 57 ++++++++++++++++++++++++++
+ 3 files changed, 73 insertions(+)
+ create mode 100644 tests/tcg/riscv64/test-hedeleg-write.S
 
-diff --git a/target/riscv/cpu_bits.h b/target/riscv/cpu_bits.h
-index 3579789a1f..dcd3f239fe 100644
---- a/target/riscv/cpu_bits.h
-+++ b/target/riscv/cpu_bits.h
-@@ -744,6 +744,15 @@ typedef enum {
- #define SATP64_ASID         0x0FFFF00000000000ULL
- #define SATP64_PPN          0x00000FFFFFFFFFFFULL
- 
-+/*
-+ * Priv spec, hgatp section: "An implementation that supports only the
-+ * defined paged virtual-memory schemes and/or Bare may make PPN[1:0]
-+ * read-only zero.".  This is our case so we're choosing to clear
-+ * PPN[1:0] all the time.
-+ */
-+#define HGATP32_ZERO        (MAKE_64BIT_MASK(29, 2) | 0b11)
-+#define HGATP64_ZERO        (MAKE_64BIT_MASK(58, 2) | 0b11)
-+
- /* RNMI mnstatus CSR mask */
- #define MNSTATUS_NMIE       0x00000008
- #define MNSTATUS_MNPV       0x00000080
 diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
-index e132690389..6989393bac 100644
+index c94ce88594..e132690389 100644
 --- a/target/riscv/tcg/csr.c
 +++ b/target/riscv/tcg/csr.c
-@@ -5355,6 +5355,14 @@ static RISCVException write_hgatp(CPURISCVState *env, int csrno,
-                                   target_ulong val, uintptr_t ra)
+@@ -1837,6 +1837,7 @@ static const uint64_t all_ints = M_MODE_INTERRUPTS | S_MODE_INTERRUPTS |
+                          (1ULL << (RISCV_EXCP_LOAD_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_STORE_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_SW_CHECK)) | \
++                         (1ULL << (RISCV_EXCP_HW_ERR)) | \
+                          (1ULL << (RISCV_EXCP_INST_GUEST_PAGE_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_LOAD_GUEST_ACCESS_FAULT)) | \
+                          (1ULL << (RISCV_EXCP_VIRT_INSTRUCTION_FAULT)) | \
+@@ -4947,6 +4948,16 @@ static RISCVException write_hedeleg(CPURISCVState *env, int csrno,
+                                     target_ulong val, uintptr_t ra)
  {
-     env->hgatp = legalize_xatp(env, env->hgatp, val);
+     env->hedeleg = val & vs_delegable_excps;
 +
-+    /* Clear HGATP zero fields.  */
-+    if (riscv_cpu_mxl(env) == MXL_RV32) {
-+        env->hgatp &= ~HGATP32_ZERO;
-+    } else {
-+        env->hgatp &= ~HGATP64_ZERO;
++    /*
++     * delegable_excps includes bit 0, which is writable only if
++     * IALIGN = 32 (no RVC present).  Ergo clear bit 0 if we have
++     * RVC.
++     */
++    if (riscv_has_ext(env, RVC)) {
++        env->hedeleg &= ~1ULL;
 +    }
 +
      return RISCV_EXCP_NONE;
  }
  
 diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
-index e176587d1d..9684628014 100644
+index 9754c2a55a..e176587d1d 100644
 --- a/tests/tcg/riscv64/system/meson.build
 +++ b/tests/tcg/riscv64/system/meson.build
-@@ -136,6 +136,11 @@ tests += {
-     'cflags': cflags,
-     'qemu_args': ['-cpu', 'max', qemu_args],
+@@ -131,6 +131,11 @@ tests += {
+     'cflags': cflags + ['-march=rv64gcv'],
+     'qemu_args': ['-cpu', 'max,smpmpmt=false,pmu-mask=0xfffffff8,smdbltrp=true,ssdbltrp=true', qemu_args],
    },
 +
-+  'test-hgatp-rw.S': {
++  'test-hedeleg-write.S': {
 +    'cflags': cflags,
 +    'qemu_args': ['-cpu', 'max', qemu_args],
 +  },
  }
  
  if 'qemu-system-riscv64' in emulators
-diff --git a/tests/tcg/riscv64/test-hgatp-rw.S b/tests/tcg/riscv64/test-hgatp-rw.S
+diff --git a/tests/tcg/riscv64/test-hedeleg-write.S b/tests/tcg/riscv64/test-hedeleg-write.S
 new file mode 100644
-index 0000000000..4bda3c38f5
+index 0000000000..919de1fb3f
 --- /dev/null
-+++ b/tests/tcg/riscv64/test-hgatp-rw.S
-@@ -0,0 +1,61 @@
++++ b/tests/tcg/riscv64/test-hedeleg-write.S
+@@ -0,0 +1,57 @@
 +/*
-+ * Test for writable hgatp bits.  See Gitlab 4591 for reference.
++ * Test for writable hedeleg bits.  Based on Gitlab 4592 testcase,
++ * which is derived from riscv-arch-test.
 + *
 + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
 + * SPDX-License-Identifier: GPL-2.0-or-later
 + */
++
++#define HEDELEG_W_MASK 0xcb1fe
 +
 +.option norvc
 +	.text
@@ -254,19 +243,13 @@ index 0000000000..4bda3c38f5
 +	csrw	mtvec, t0
 +
 +	/*
-+	 * Write in HGATP the same value written in Gitlab 4591
-+	 * testcase (0x8c00000000000003).
++	 * Write a full 1 mask on hedeleg, read it back, see if
++	 * all the expected bits were set.
 +	 */
-+	li	t0, 0x8c
-+	slli	t0, t0, 56
-+	addi	t0, t0, 3
-+	csrw	hgatp, t0
-+
-+	/* hgatp expected is 0x8000000000000000. */
-+	li	t0, 0x8
-+	slli	t0, t0, 60
-+	csrr	t1, hgatp
-+
++	addi	t0, zero, -1
++	csrw	hedeleg, t0
++	csrr	t0, hedeleg
++	li	t1, HEDELEG_W_MASK
 +	bne	t0, t1, _fail
 +	li	a0, 0
 +	j	_exit
@@ -298,7 +281,6 @@ index 0000000000..4bda3c38f5
 +	.balign	16
 +semiargs:
 +	.space	16
-+
 -- 
 2.43.0
 
