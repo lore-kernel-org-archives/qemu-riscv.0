@@ -1,122 +1,175 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A2D1606A321
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 05:26:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 739A4606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 05:41:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=alistair23.me header.i=@alistair23.me header.a=rsa-sha256 header.s=fm3 header.b=pVj++7j7;
-	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=Uh4B3z58
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.a=rsa-sha256 header.s=dkim.wdc.com header.b=mieV8T39;
+	dkim=pass (1024-bit key) header.d=sharedspace.onmicrosoft.com header.i=@sharedspace.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-sharedspace-onmicrosoft-com header.b=p8vPqh2b
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW5Wo-0007To-FF; Wed, 25 Nov 2026 00:26:46 -0500
+	id 1xW5lC-0003yl-IK; Wed, 25 Nov 2026 00:41:38 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xW5Wk-0007SJ-GP
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 00:26:42 -0500
-Received: from fout-a5-smtp.messagingengine.com ([103.168.172.148])
+ (Exim 4.90_1)
+ (envelope-from <prvs=7821f5b77=Alistair.Francis@wdc.com>)
+ id 1xW5l8-0003y6-Nv; Wed, 25 Nov 2026 00:41:34 -0500
+Received: from esa3.hgst.iphmx.com ([216.71.153.141])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <alistair@alistair23.me>)
- id 1xW5Wh-00053i-3N
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 00:26:42 -0500
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.phl.internal (Postfix) with ESMTP id 0ADA4EC0B30
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 00:26:38 -0500 (EST)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Wed, 25 Nov 2026 00:26:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
- t=1795584397; x=1795670797; bh=1npGmdVsZQMImqQ/n6vwzSBBxRKbExhG
- 59I2qLBooVE=; b=pVj++7j7hQfrKWMQo6qdyPh3be75bldQ3eVjVmnopWeh/gEJ
- F+J2dta46c0ntRauhM0m2IFKQ4aunjz/s6p2VB8oJigpLNjap0yYSW2uUfIIjKwE
- fxiLn6xQueoWIKjqfKp5W1qIFOBakQYs+d1xEbUapSVYHYBIwviCIwNIA33WLNUK
- tVQ0gwHYgX3M8LzlxBJNyjYch2ffdO+z9gJr860vQMBOZAyby9BNdQ/Peb8YGSpa
- ZhMcWXC2im9LROK5fReCx5vsHHLf4lwS4wURqSemc511ev7wpZ7QxLvTN2FXXdtQ
- yuz/rZ9Al6Vkkyw7vCg3QL6fPNHMi0b7kgg5AA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1795584397; x=
- 1795670797; bh=1npGmdVsZQMImqQ/n6vwzSBBxRKbExhG59I2qLBooVE=; b=U
- h4B3z58ARZ8YxnNL96N5592bMZ520KvJc8iq2iidbVyuYNEyva5WsWuoBW+yw3fE
- vIqSOJlpBSm/kCzKRGhFVxJ7crmPA0odoPzgkYKPKqGmD+UA2iTOX7XlbAEAqkE4
- tX9t49Yft9+pB3srY9UcVksxB5BVF2y53vryn5BDzeOAMoHhdQ3NQT7xyGp9BqXX
- HbWF7xE/hP8SwhqKKzncPetFe4s0YqoIKNWdlf+s5MEzWElvlF+FUKAWNA0FmHSi
- KfQSh3YpgZ9E8Wdoi+5bmBdlDnEdlAQVh8St0zebLz89n+TtsIJZSNP03leY8iJZ
- MbrjXv2xQosox6PpcTMHw==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
- repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
- action=sign d=alistair23.me a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1795584397; d=alistair23.me;
- mf=PGFsaXN0YWlyQGFsaXN0YWlyMjMubWU+;
- rt=PHFlbXUtcmlzY3ZAbm9uZ251Lm9yZz4=;
- s=fm3:rsa-sha256:orJhy0kEp4a59o/wRC1CtPtXK22tuok+V/BXME86Gi2dzPi
- Orrjlh7bgl6NJ0Py1PO5CN5Lok/AhByihlVpYIgHJemj/afFAI5bsGRoAGzpPyrN
- gpBxpEr3OExqvoHlXPIj4Rl1GH1kPYmB21selbjCVTfHKYLhUpmpT76biyTGzbfh
- YmzuoMdIPgvpluQow8XSwT9SpiGrKPHWyzZzuxniAr5IS2/loYSUFrTlJo3emQDH
- 43aF10WPSulIU4Luc0ZpqOChTdxB6vxGXBURmDxWLcv2v4cOmlSHDT+1WjEFiMy+
- 21m02m6Z9r80SboxkkF7ojq/IKAIt7uG0RSTwVw==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
- repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
- action=mi-m=1; hc=13;
- hn=cc,content-transfer-encoding,content-type,date,feedback-id,
- from,in-reply-to,message-id,mime-version,references,subject,to,
- user-agent;
-Message-Instance: m=1;
- h=sha256:MKzXAhuDgQLz8idLrQTlni/33o4Dn4ACq0je9jmlSsY=:1npGmdVsZQMImqQ/n6vwzSBBxRKbExhG59I2qLBooVE=;
-X-ME-Sender: <xms:jXEGa0dx_GJszhvj6W_efIJ9UinDsmpm9UP7HlMjnD3054exQaT3Sg>
- <xme:jXEGa6jwTZAm2U2g1taOaFoKV4qX9EuZUlWbhIB42YsHVGxDlbJptyOBeKQJ1XL-j
- Bh9SIb6KlDZJzwpN3Xdd_DR3jepUSegeFIlHiVv3-9993QNzvZEkEw>
-X-ME-Received: <xmr:jXEGa0oa293FaV61rmSc4o6j6LBL29jvLPZzzhjg2IADTO-5XW8yzyoEh_3k3-kRkZy5fnS0tYpA6WiBspOiA_b1JoM>
-X-ME-Proxy-Cause: dmFkZTFOlHCvl502QlSDRktyZXpx6Gp9w3AE4ADiRUjSEXbWkwjdTCLiWXOCFlDKHlNiR+
- 9d1ZjZy4S2dMUy2O4sxHu/9+62fhbOr0pZr/IypsrPFH2Ew8XI35/eSxZgMQQ7rSsEQMch
- Cv+RbWdTNpbzwSKaSkDJgFLBXU9GUetfNelud/CC+AAeqB6siZxlgFteNVXIQJoOjSXFPF
- h+uFXIeZOvNo0uKb8t7tc2xwaBFuoZ8cfnoZSygemVaeNVe7vVjL0QnBCN2DMARVwD9D1A
- sH2z7d+ikXpTCpgXOGjaiyn9Tb1Sx2mxirJ6vr394dcX1VhyQIWZW/pYWgdhXia58zkJPv
- /5CJ86gJlwchOh/0SEYlT9W2ac+pVZabYHiUjMrde1Pypd40blyQHwUafoNcauVz2G9Cfb
- vFlCuFjI10nfwl24+XluzQsUOnvOP8UCtQqokpcX7go3m+IX02qqAOj/BBhyP9zQOZ08Ct
- x7lwBDuPUwZLZ25Z1rg3ZWEWKj9otZXlfVJIXhsmKTycq8VWhHv7JaKiao3twdhBEqQZn/
- YFR8YBpZz16en3By2DHe5dsyodJHrYoi/8vbMBoX6KkJmA39RE5lCX/+iQGb4EQ4T889Ni
- tOakzQiq2JKJDoCmJ3mne6JnpAWUz2DGTEEedAh0ATfe5RHOmQpLwfE0+i9Q
-X-ME-Proxy: <xmx:jXEGayGl8mk3kJTDg3zSZL_PwdJWNkNJkTwLXL23IkXzSAPvvJp5QA>
- <xmx:jXEGa2n9lSm9kM_s87dy2B1vk1W_pjKn_aYIbvLWLFbzSy-RLXRMFg>
- <xmx:jXEGa1m_HwqhiYb6GgrZdC5G687fUw98W9Mt1HQO99JggJzkoijfVA>
- <xmx:jXEGa3vq29PykN6m2bgcptkn_vbn2PtIsqnNazHOcV22mMd5Z_lKsQ>
- <xmx:jXEGa5UwSxtzmjxxcsEuFrAypQ_Ctp4vs69h96zEJzk2JS0ykU_2bWWi>
-Feedback-ID: ifd214418:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 25 Nov 2026 00:26:36 -0500 (EST)
-Message-ID: <017f473e57de177d6f19cf2d2c0164a2b468883b.camel@alistair23.me>
-Subject: Re: [PATCH 0/7] RISC-V: Add CDAC VEGA machine support
-From: Alistair <alistair@alistair23.me>
-To: Karthika B <karthika.b@cdac.in>, qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org
-Date: Wed, 25 Nov 2026 15:26:34 +1000
-In-Reply-To: <638251604.134327.1795583900339@webmail2.cdac.in>
-References: <385625713.441366.1761727810206@webmail2.cdac.in>
- <20261016080709.17331-1-karthika.b@cdac.in>
- <efc72269be92a118b39a7190003aa167fbbae579.camel@alistair23.me>
- <1877215787.132651.1795579446420@webmail2.cdac.in>
- <54fb26d98d3072005b7d0ada3a39e30be7579c78.camel@alistair23.me>
- <638251604.134327.1795583900339@webmail2.cdac.in>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.62.1 (by Flathub.org) 
+ (Exim 4.90_1)
+ (envelope-from <prvs=7821f5b77=Alistair.Francis@wdc.com>)
+ id 1xW5l6-0002y1-Rb; Wed, 25 Nov 2026 00:41:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+ t=1795585301; x=1827121301;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=Xyk49Lqt8rtTzCQgkevqztBuCKT9zC18KalbkOtyd1E=;
+ b=mieV8T39Vk+vtIQFQT/Q5dUtNBlWp7iNeInQD+wO1gEKGIinhliNGAbK
+ BP/B1EoDtgL4beW6bLJR7yA1FN8S8Tfv1EBiTI7D4oyg0xMFQFI8AcdgR
+ lNcAE4HRdu/s4xEn0Fk891P0l/b/mIT+6p1XC7sNRMSkOwn0vZE2z6gnQ
+ 9VQFbQSYFNZ9S1k5u+a/8ahyQUKa/+u30OwDGSnpkXNmGl/mpwm/x3Fnx
+ 9wLGTZAZLvsjsES3HrG/GezZR1ARkno+xms0xFtzztckkJXpt4xSNZx60
+ GHu0cVdmLTBA3FPDIJXORta6wQMf0QalUZwKDt19o3l21HN7Sc3MpMJw3 Q==;
+X-CSE-ConnectionGUID: 1bGLNRo1QJWJtytgFV6osA==
+X-CSE-MsgGUID: +OTGJK30T3qs0HXA7vjcMw==
+X-IronPort-AV: E=Sophos;i="6.27,232,1786982400"; d="scan'208";a="161712728"
+Received: from mail-westusazon11012034.outbound.protection.outlook.com (HELO
+ SJ2PR03CU001.outbound.protection.outlook.com) ([52.101.43.34])
+ by ob1.hgst.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 25 Nov 2026 13:41:39 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jEao4nwvGmigtkKnUUOX9sFFvCB4TTNSPtVSd18Wqv0zxS8beDLRzRev8KlZvJYMwRXdByCBfe0lYhzC2d7qo49h9XkBS8f0b/y7eP9NPZMPlD7DSHBNsLyTNRPz8JS4S08dkAydN05yTzdvBBnRWkEI1tjC1qH6t1VjfRX6FBnTMVvXTVgKY1ZUvhPI2bSFqcFPe5/E09VKuQi0YvvitlqLJkw6aoomgbM7ciNphfVvTjnizFqNogiiMAgYF2WPDT2EWILCIQQ/Il94Kh+D6z22brPR+yIaX3MNQsViX/NFhpJMzXMOZCU+YBHbu8yVwM+B/HGA771Sb5ssZqvJxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Xyk49Lqt8rtTzCQgkevqztBuCKT9zC18KalbkOtyd1E=;
+ b=Gl6DfABHdYI6e+oaw64WtP52B1sDG/ssFQYLhSE4qk41QkP7fKbGdKihvXuGrw5z+71jYkkMnrHxX8yrBgurmz4iHeaR49a/IuKqiH18z+ILeFfFVCygPmat9OqmrdfnY4Nhsu0LK3OU+9YBhDcg1JknOSvcyn6T/ya1XHts6K5896Gb0HuF8srbD3F5KHjGDm/hCGH/9jJCKaSgsNohIXkHpiwIR3GiEisYJmtoiB64R4XCVWpmWHRXz+tJ5ij7kPPkjUf568EnIxOH7njYLS4XRmrUCYDbdhaJ6FvpLiAFIvU7DehXnG1sEJFmiOmM8NwLzNM/zcfYX4pfkh+tfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Xyk49Lqt8rtTzCQgkevqztBuCKT9zC18KalbkOtyd1E=;
+ b=p8vPqh2bchbuPMf+3oEzavIqSvr33/AmPhfQbXWbOsFEK04jkN5xRhbt5WFp3u5Q+Fco2RZzSJwupp9tbb2NfR5DjePniDJMr+LCy8SSN/pqQqWm/awhELoB7cUtBujpA2UaeGDGciVBiDXrhsta6HS3AiwPDPDg7vU3qHthX/w=
+Received: from MN6PR04MB9359.namprd04.prod.outlook.com (2603:10b6:208:4f2::13)
+ by SJ2PR04MB8511.namprd04.prod.outlook.com (2603:10b6:a03:4ff::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.6; Wed, 25 Nov
+ 2026 05:41:28 +0000
+Received: from MN6PR04MB9359.namprd04.prod.outlook.com
+ ([fe80::e729:bbef:5a37:2e77]) by MN6PR04MB9359.namprd04.prod.outlook.com
+ ([fe80::e729:bbef:5a37:2e77%3]) with mapi id 15.21.0639.012; Wed, 25 Nov 2026
+ 05:41:27 +0000
+From: Alistair Francis <Alistair.Francis@wdc.com>
+To: "philmd@oss.qualcomm.com" <philmd@oss.qualcomm.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+CC: "lyndra@linux.alibaba.com" <lyndra@linux.alibaba.com>,
+ "qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, "palmer@dabbelt.com"
+ <palmer@dabbelt.com>, "daniel.barboza@oss.qualcomm.com"
+ <daniel.barboza@oss.qualcomm.com>, "chao.liu@processmission.com"
+ <chao.liu@processmission.com>, "liwei1518@gmail.com" <liwei1518@gmail.com>,
+ "zhiwei_liu@linux.alibaba.com" <zhiwei_liu@linux.alibaba.com>
+Subject: Re: [PATCH] target/riscv: Keep cycle overflow deadlines in virtual
+ nanoseconds
+Thread-Topic: [PATCH] target/riscv: Keep cycle overflow deadlines in virtual
+ nanoseconds
+Thread-Index: AQHdeHQ4jIISyLoXQ0eJhazphV17nbc+TlAA
+Date: Wed, 25 Nov 2026 05:41:27 +0000
+Message-ID: <30cab26388210f6739daa16645b7c27c7d97d59b.camel@wdc.com>
+References: <20261119222036.71913-1-philmd@oss.qualcomm.com>
+In-Reply-To: <20261119222036.71913-1-philmd@oss.qualcomm.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Evolution 3.62.1 (by Flathub.org) 
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wdc.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: MN6PR04MB9359:EE_|SJ2PR04MB8511:EE_
+x-ms-office365-filtering-correlation-id: c6c90e18-f714-476a-2577-08df4ab6bfec
+wdcipoutbound: EOP-TRUE
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|10070799003|376014|366016|23010399003|1800799024|19092799006|38070700021|10067099003|56012099006|11063799006|261022105027099003|261022075727099003|261021123027099003|261021121427099003|261026140227099003|261028144727099003|261102123227099003|261009223027099003|22082099003|18002099003|3023799007;
+x-microsoft-antispam-message-info: vzHEI92LhNYT972YQaMMC2skISLx8EQd+Sf/z7W6RQvrxRYlfDm5cl9rPMoix91/1puVcdNnLjGlb+mKHzN2TESbc2osJgRbR8Wct6Ssa8I92f5C6Cte47X3/mVTUET8KHV/WMmbrRFmTODn5oFlSDqxWWylRQ4FbSbU/lY5FAepURTQlHa6AIJ2LIm1h4AKqmHb4rUFH999rb8JLL2D+GLWWo65XNNSL6kx7MOQJNLF5Jgf9ZpDEHqb1dupJ8DRw+uyBnm83G7mDr09vEVKM732MRrlDgjkKrX+9dCgE4I9TynQvB+fFrpEEfwzNGdGw6b1fQSPye9GYWjBfeZgxrofoPA8/BJAeGeJ4cONFo7AAxrBl9o4g7FS+rjC45acQBY4rJaqw3rSfoNmon1FEdjySEhv7bJYDhDKes9C0B6fMV4Oij/O/7sCzpgi7saNn4qB4qAfwIFFFjAqBK8zzS8azhbMJJCYp1R6bPr1oc8BVAUpJN+x1uAjyyAC+BlS00Szhq3mwyMwU3HYFUL0pUVUc1f4fG/bKC5MUuJTJXahyJSvkIxfgbTdjxG/magJ7zcIUvJ9zBRWzZntp/Ja1nvT78d/Uzc3pkZafQz6ttpChKwd1T09ij95zZukJOYmXAlhZGHYSOaT53UJRmwxOK1hjooxcJJ2pJP5UF46K+lBM1rA9ney06xtlhWhspCXlTzz7z+J+xHPRFgFG1YccSHuXJlt0jXNNs+KvOOWG+U=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN6PR04MB9359.namprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(10070799003)(376014)(366016)(23010399003)(1800799024)(19092799006)(38070700021)(10067099003)(56012099006)(11063799006)(261022105027099003)(261022075727099003)(261021123027099003)(261021121427099003)(261026140227099003)(261028144727099003)(261102123227099003)(261009223027099003)(22082099003)(18002099003)(3023799007);
+ DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WTA2eXlldVZKS0NNbW9mc1VTdnpUYlRoSG9CRlgvUzQ2NWN1QUhqcFdpTGlP?=
+ =?utf-8?B?MWhzcHBwU0QvVWFmZGNFS1RYcVZhRzNXNlEwa015NmtCY0IyZmovTEl1ZU5t?=
+ =?utf-8?B?ZGgraWVCcHFLRFp1K2I4MEhBdS9iLzZXWk8xeU9hRFhKMUs1TDdPZGxUeEtp?=
+ =?utf-8?B?VzFvTWRoc0dZZ04zeEFnTGdrVW1kVWJaclU3aXhHOTJGM3ZlcW5iWWFaSWM4?=
+ =?utf-8?B?eDdNamp2UEJuMEhud1VVSHJmaHlZV1A0MTVpbE9ETkdlZ0NEbDhVM0YzYlRu?=
+ =?utf-8?B?OFo0WnVQcmtYR2VVNWFDODUrbW5PdFVrejZ6RzBWazVpc0gwc01mM29CZTlK?=
+ =?utf-8?B?aDVpZ3J4bzFJa3BQampWNnN5NVBwSjBpMmxqMFkvUmYwZXZNWjhKOEFsaVpt?=
+ =?utf-8?B?WDloOTZBRVdHZngxSlV2eWtuTGdHOHBoVHBISHNhOHVKanIweEdLeXNvbXd4?=
+ =?utf-8?B?MTE4Y0tMaWRiSmRNeW5kK0VycTFYSEg2T0NYYlptaklidC9NQmNJZGVKVmZr?=
+ =?utf-8?B?SnRiRjlxdnBmNTc5RTNjU0NZUjY2eDdqT3BtWStWMXpuOHZXS3QrWWtlRndo?=
+ =?utf-8?B?YjY0dHpaUlk1c2J1YUc3WTBhNlF6REFjbjByQ1hZZlg4eXI5YlBOQWR0Umtz?=
+ =?utf-8?B?SGxJK3p3aDVGSlJyVWwxemIzQXJieVBIcEw5dVNJVnl6Wk43cG9SVXpJZ0lu?=
+ =?utf-8?B?bnd4SDhLbjFROU9sYjNJRGpmNERYcDN4dkxhNUpRVkoyY3dpTElvNGVEV2ZF?=
+ =?utf-8?B?WHhlcmtQTWYrY0NEMlZlQk5YQ3p6dFh0UXczb1ZwYW92M0FjazZmL0pSdW5p?=
+ =?utf-8?B?R2FUSTROYnhXRWE3TnRDek5nZFkzSGxyMnNBTGtROHE0eXhkWTcxTlNZYkJD?=
+ =?utf-8?B?dWgvNWp4TytuUFA0Rm5hYWV0dzNCODNnMG8yRko2TGZsOFZnRkQ5Mis3R1V1?=
+ =?utf-8?B?RFlBK2RhSExMSUd5VU1MU3Frc0RQYnhsYmlzT0xlRXNNRUdhUHRVdHVCdGk5?=
+ =?utf-8?B?OVZYY24zdlRSZDM5WnlQNG1CQnFwaEE0VVZJRnJGNm5MazVEK3dMaDF3dGRB?=
+ =?utf-8?B?VnhqQWtRQmROTDdpektVQSt4c3d2OEE3bUlXMlNubTc5TlJFcGhRZ0RtbGQ2?=
+ =?utf-8?B?akRWU2JEUnZ0SE5kNmNoUHhXNUNDUjYraXNGUlR6RUxzK1ZleUtCY1lQbnQ2?=
+ =?utf-8?B?TnhBb1R2UWFPc1VaaUFpRHNrczhKOXdyVHVJSVU2Y2c5dTZVNXEwakV2UnRr?=
+ =?utf-8?B?WG9yMjIxbVlOcGJ0cTYra29RZ3daYUs4bTB6NUI2Z1BCaGxWd0NOU0ludTdR?=
+ =?utf-8?B?ZkpwUUlNS2YwWjcveGYvRzhDVmVJVVpVdGwxbDN3NU9LZE1QOXRqK2VUNVVY?=
+ =?utf-8?B?NkN5OVJwQ2w3MmFqOHQxeUovdnFnaW5FQkhwMHcwNFJPTmVYOG12d3IrSStG?=
+ =?utf-8?B?RmhWdFNaSXZyTlZFTzJYYldDTi9xcG9TdlVocnkwZmhLeVF4Z3F3NGR5U3pk?=
+ =?utf-8?B?bVArcS9saHlXdmtJaDhESGN1Q3hITkQ4UFhXcmFhd2JIVUE5bFZjOHR6YStD?=
+ =?utf-8?B?R0k5dFB2bHhuZWd1T2lHMHhiRU1xM1piZEFnSllzdUxvL1FhNE9zZ2dFNElZ?=
+ =?utf-8?B?clU4RkIxem9uU3kyaUlVaVdVY29ic3dGL0hVNDV1RndScGRPeHB4VWhMVTdT?=
+ =?utf-8?B?bkVCRUhtdnR6K2N6aHdTa3dLc3VockJtRmprbjlLckZWd1FEY284WjIxdFJy?=
+ =?utf-8?B?OVlxWmxqSVFzeG9EVTFVQlNnQjFCdXVsbTc4elZ5WHRrYUREN1MwZ1krRTVX?=
+ =?utf-8?B?ekZydmZHaGRSMGJxTG5ZL0RiOVBSa2J6TjJvd21IY2x4QlRtbE1USUhvOG9B?=
+ =?utf-8?B?OVdwZEpxY0lQMEZOTDVBanllaDJTT21lVER2M3ZDa3d3VzdpTlJHK0RId0x1?=
+ =?utf-8?B?MHJEWGRVYjFzYkhEdCt2QkRwYkhQOFVqZVJDVXZXUEw2NmR4bnZubHluMjhw?=
+ =?utf-8?B?ZmwxVENyVG1QRm5YdnRTOHlZQzB2QTdWWWxzWkg2ZkJDdHpkbHY5aEhpVVpq?=
+ =?utf-8?B?d1lKbnZiOU4zYlZNaHY4RjRUYUlLaDFIWGJKYlVpOCtzcENEWDdUQXM0ckg4?=
+ =?utf-8?B?Sks2U0FxSUZnZHNSbXRvZkxNZkd1dEk3RmVmc0xobFZGeTJHRG1iekxrVzh4?=
+ =?utf-8?B?dHBVYjljMldYWFdnaTJ3cHBocFNXQ1NZa0hEc2x6NDRXcUQ5TlUxNEx1VHg4?=
+ =?utf-8?B?RG83ajBLUTJvbDIzcFc3RWxvRDV0RHJ1cUFZWmZKVlI2YUxiL0lNeTBUU281?=
+ =?utf-8?B?YnVYcHAyOFNDWjBHNEtra0hPTEd6aVBPM3NFbVNNUVQycE05YjB1OTcwK2lS?=
+ =?utf-8?Q?cAL+OFgC0+asRMH5qvfhSDphZGuAePGbnEjFSgY4tpKZg?=
+x-ms-exchange-antispam-messagedata-1: dwiR8SHnryKrpgZ09ZrIR1IqBwWNWuYnY0c=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <6EA72A59EC255D4E822B9ACD441EE2A5@namprd04.prod.outlook.com>
+Content-Transfer-Encoding: base64
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Received-SPF: pass client-ip=103.168.172.148;
- envelope-from=alistair@alistair23.me; helo=fout-a5-smtp.messagingengine.com
-X-Spam_score_int: -20
-X-Spam_score: -2.1
-X-Spam_bar: --
-X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+X-Exchange-RoutingPolicyChecked: chfWp19OHqBdVYimzP3VQYedSPB1G2VJoyv8iMn8Q9du7zn5gqiQpPxLC2Jtr00eleZ7Z0zGQDFEuCE8y6AlEcybahI3dYq0kSnTI0dYDekT6h3bhpHatUcX9Blv4cvENnTIdtcWKLrS9f5jYSnbqLtIivXa5mo/G9c+ufgY3aGF7HNp8u0wFO0sbtwtwjBcl8/3k883iZvqwL423kjK02pzQQRPPqJixAi3chCFto3/1scWz42mvGu4t+zZcN/I6HqpbN6L9mnqrklJTzsgqm4Lq6gCiLhm7fQRyZqKPtLMdB5Xqivxd+Ylm1v/jysVz4ykkTM7c0QerjaTdLgTaw==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: Ulf6THSpTlWYDUupAW88ipds5ouB1iYTw8Q4Zdy+OKy0hGbcVd+R06cq/GAkMj8Y/Cb1FHz4mAG2UW0WMVylPuZKP1RM9gnt2Ihd14/baHfkHln7wT+oPKSfQzPbj1kEK8ykuUCrp4QpvS7RiKLmCBlm3uuw4lgLqbNbnsJor3PkZlhy4OrlYc7CGTEelDAq7N+t2j5Dt45fDb4EK7jVUF1pHWtEdlbm1VwDwTFU5Fe5Zvmympek1q4IkTPwckeM1v2cL50bRTPEh5SFIYg20sEMkTrgYmFtla0cti+ttFFmmpsgRY/dUqahqTqAtl/1QiELuTTxt8S+vMqnD9t277pzZUlqMQ7sKP4PESO2UIKTP3vQtwyrR681kDAJxa/bq3xrYn/pXs6Qkht9YPo4XWDNELC4jmUPDeQ/rl3Wn3C80tSmy6C9Jvw+hZ2kqoJf+V0jewdF+pQgsEj/MVldcmMNnBVOzH6FeZ0CsUoa1D0T9IpgQ4adsMQ2/2khChD46iOcPFND+BHg8BwSymTrT18/i6fzfusFVDY7NjbtqZeqF0M7GsaZWbkdVNJJCAGzTNebzX4aoFvOFxtzS/OshhBI4lw7EfcZSedrQwZhW0prJkXGT0S6mZehWndi/3po
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: MN6PR04MB9359.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c6c90e18-f714-476a-2577-08df4ab6bfec
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Nov 2026 05:41:27.3423 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Y7auScYyKLMr0uwexq7JGsOASrofrY8mmNB4ehnB9QH36NKoc56Scp8ekLCawTGtnej8ucUB8jUVgQBpKmNmzJK9pHeWeZgJkyS3E2U2Tok=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR04MB8511
+Received-SPF: pass client-ip=216.71.153.141;
+ envelope-from=prvs=7821f5b77=Alistair.Francis@wdc.com;
+ helo=esa3.hgst.iphmx.com
+X-Spam_score_int: -43
+X-Spam_score: -4.4
+X-Spam_bar: ----
+X-Spam_report: (-4.4 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_PASS=-0.001,
+ RCVD_IN_DNSWL_MED=-2.3, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -129,641 +182,57 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, 2026-11-25 at 10:48 +0530, Karthika B wrote:
-> Hi Alistair,
->=20
-> Thanks for the reply. Just to clarify one thing on 23 October, we
-> sent a
-> detailed response addressing each of your original points
-> (maintainership
-> status, the PLIC/CLINT register layout, BBL vs OpenSBI, and the AI
-> usage
-> question), along with two follow-up patches, as a reply in this
-> thread
-> rather than a separate v2:
->=20
-> https://lore.kernel.org/qemu-riscv/?q=3Dvega
->=20
-> I want to check whether that reply reached you, since your latest
-> message
-> only quotes from my message today. If you did see it, no need to
-> revisit
-> anything. I just want to make sure nothing was missed on our end.
-
-Yes, you replied to me directly. It doesn't really address the original
-concerns though.
-
-Just a note re-reading that message. You will want to use the upstream
-QEMU PLIC and CLINT and not create new ones
-
-Alistair
-
->=20
-> Thanks,
-> Karthika
->=20
-> > On 11/25/2026 10:15 AM Alistair <alistair@alistair23.me> wrote:
-> >=20
-> > =C2=A0
-> > On Wed, 2026-11-25 at 09:34 +0530, Karthika B wrote:
-> > >=20
-> > > Hi Alistair,
-> > >=20
-> > > Checking in on this thread. Wanted to ask whether the patches are
-> > > still under consideration, or if anything further is needed from
-> > > our
-> > > side. In particular, I'd like to confirm whether the follow-up
-> >=20
-> > They are not under consideration. I left some comments and I don't
-> > see
-> > a v2 that addresses those.
-> >=20
-> > > patches (the CPU fix and the OpenSBI test) looked correct, and
-> > > whether our response on the AI-policy question was sufficient, or
-> > > if
-> > > there's anything there you'd like us to clarify or change.
-> >=20
-> > The code breaks QEMU's current AI policy, so can not be merged. The
-> > policy seems to be changing soon, so it's possible it could be
-> > merged
-> > in the future, but that isn't for certain.
-> >=20
-> > Alistair
-> >=20
-> > >=20
-> > > Happy to provide any further detail.
-> > >=20
-> > > > On 10/19/2026 7:11 AM Alistair <alistair@alistair23.me> wrote:
-> > > >=20
-> > > > =C2=A0
-> > > > On Fri, 2026-10-16 at 13:37 +0530, Karthika B wrote:
-> > > > > This series adds QEMU machine support for VEGA, a RISC-V SoC
-> > > > > family
-> > > > > developed by C-DAC (Centre for Development of Advanced
-> > > > > Computing,
-> > > > > India) as part of the DIR-V processor program.
-> > > > > VEGA series of microprocessors are developed as part of the
-> > > > > Microprocessor Development Programme, initiated and funded by
-> > > > > MeitY
-> > > > > (Ministry of Electronics and Information Technology,
-> > > > > Government
-> > > > > of
-> > > > > India), with the mission objective to design and develop
-> > > > > indigenously a family of microprocessors, related IPs, and
-> > > > > the
-> > > > > complete ecosystem to enable fully indigenous product
-> > > > > development
-> > > > > catering to various requirements in the strategic,
-> > > > > industrial,
-> > > > > and
-> > > > > commercial sectors. VEGA is developed at C-DAC,
-> > > > > Thiruvananthapuram.
-> > > > >=20
-> > > > > Background
-> > > > > ----------
-> > > > > VEGA is a series of 32-bit and 64-bit single/multi-core RISC-
-> > > > > V
-> > > > > processors (Thejas32 and Thejas64) developed under the DIR-V
-> > > > > program,
-> > > > > integrated with multi-level caches, an MMU, and a coherent
-> > > > > interconnect on real silicon. This series adds a QEMU 'vega'
-> > > > > machine
-> > > > > model supporting both the Thejas32 (RV32) and Thejas64 (RV64)
-> > > > > variants, modelled on real silicon behaviour rather than a
-> > > > > synthetic/virtual platform.
-> > > >=20
-> > > > Thanks for the series. It's cool to see some more RISC-V
-> > > > designs.
-> > > >=20
-> > > > Thank you for submitting the patches.
-> > > >=20
-> > > > For some context, we already have support for a Shakti machine,
-> > > > and
-> > > > that is being deprecated and removed as it hasn't been
-> > > > maintained
-> > > > by
-> > > > the original submitter.
-> > > >=20
-> > > > I also noticed that you listed yourself as "Odd Fixes" in the
-> > > > maintainers file, so this won't be accepted.
-> > > >=20
-> > > > We don't have the resource to maintain your custom board and
-> > > > reviewers
-> > > > are stretched very thin to look at your patches. If you don't
-> > > > want
-> > > > to
-> > > > maintain it, we aren't going to be able to either.
-> > > >=20
-> > > > >=20
-> > > > > More details on the VEGA processor series:
-> > > > > =C2=A0 https://vegaprocessors.in/
-> > > > > VEGA documentation:
-> > > > > =C2=A0 https://cdac-vega.gitlab.io/
-> > > > >=20
-> > > > > The model has been validated against Aries boards (Thejas32)
-> > > > > and
-> > > > > Thejas64 SoCs, booting:
-> > > > > =C2=A0 - bare-metal ELF payloads via -bios (no DTB, fixed UART
-> > > > > framing),
-> > > > > =C2=A0=C2=A0=C2=A0 for both RV32 and RV64, using the VEGA SDK's e=
-xample UART
-> > > > > =C2=A0=C2=A0=C2=A0 "hello world" application
-> > > > > =C2=A0 - Linux via BBL with a user-supplied -dtb describing the
-> > > > > SoC
-> > > > > (RV64)
-> > > >=20
-> > > > No BBL, please use OpenSBI or an equivalent
-> > > >=20
-> > > > >=20
-> > > > > What's included
-> > > > > ----------------
-> > > > > =C2=A0- hw/riscv/vega.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 - machine model, device
-> > > > > creation,
-> > > > > boot
-> > > > > flow.
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 Note: VEGA does not =
-generate
-> > > > > its
-> > > > > device
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 tree internally; -dt=
-b is
-> > > > > required
-> > > > > for any
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -kernel boot (see no=
-te
-> > > > > below)
-> > > > > =C2=A0- hw/intc/vega_plic.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0 - CDAC PLIC variant (register
-> > > > > layout
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 differs from the gen=
-eric
-> > > > > riscv,plic0;
-> > > >=20
-> > > > Why?
-> > > >=20
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 see patch N/N for de=
-tails)
-> > > > > =C2=A0- hw/intc/vega_aclint.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - ACL=
-INT MSWI/SSWI/MTIMER, with
-> > > > > the
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 STIMECMP handling VE=
-GA's
-> > > > > boot
-> > > > > ROM /
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 BBL relies on
-> > > > > =C2=A0- target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 - adds TYPE_RISCV_CPU_VEGA32
-> > > > > and
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 TYPE_RISCV_CPU_VEGA6=
-4, CPU
-> > > > > subtypes
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 baking in VEGA's fix=
-ed
-> > > > > baseline
-> > > > > (IMA
-> > > > > +
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 S/U + Zicsr/Zifencei=
- +
-> > > > > SV32/SV39),
-> > > > > so
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -M vega boots on eit=
-her
-> > > > > architecture
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 without a manual -cp=
-u
-> > > > > string;
-> > > > > see
-> > > > > note
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 below on why both ar=
-e
-> > > > > parented
-> > > > > on
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 sifive-u rather than=
- the
-> > > > > generic
-> > > > > base
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 CPU type
-> > > > > =C2=A0- docs/system/riscv/vega.rst - user-facing documentation
-> > > > > =C2=A0- tests/functional/riscv32/test_vega.py,
-> > > > > =C2=A0=C2=A0 tests/functional/riscv64/test_vega.py
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 - functional tests booting -M
-> > > > > vega
-> > > > > on
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 both architectures (=
-bare-
-> > > > > metal
-> > > > > on
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 both; bare-metal + L=
-inux/BBL
-> > > > > on
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 riscv64), fetching s=
-mall
-> > > > > test
-> > > > > binaries
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 from a stable, check=
-summed
-> > > > > external
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 asset repository
-> > > > > =C2=A0- MAINTAINERS entry
-> > > > >=20
-> > > > > Notable hardware characteristics reviewers should know up
-> > > > > front
-> > > >=20
-> > > > Have you read QEMU's AI policy?
-> > > >=20
-> > > > https://www.qemu.org/docs/master/devel/code-provenance.html#use-of-=
-ai-generated-content
-> > > >=20
-> > > > > -------------------------------------------------------------
-> > > > > ----
-> > > > > =C2=A0- The PLIC and CLINT/ACLINT are co-located at the same base
-> > > > > address
-> > > > > =C2=A0=C2=A0 on real VEGA silicon (0x20010000). This is not a QEM=
-U
-> > > > > modelling
-> > > > > =C2=A0=C2=A0 error; it reflects the actual SoC memory map.
-> > > >=20
-> > > > What? Why?
-> > > >=20
-> > > > > =C2=A0- The PLIC aperture is 0x400 bytes, sized for the current
-> > > > > maximum
-> > > > > =C2=A0=C2=A0 hart count on this SoC family; it is not the generic
-> > > > > upstream
-> > > > > PLIC
-> > > > > =C2=A0=C2=A0 aperture size.
-> > > > > =C2=A0- UART register framing differs between boot modes: bare-
-> > > > > metal
-> > > > > always
-> > > > > =C2=A0=C2=A0 uses shift=3D2/io-width=3D4 (fixed 32-bit stride), w=
-hile Linux
-> > > > > boot
-> > > > > =C2=A0=C2=A0 reads reg-shift from the DTB serial node, since the =
-two
-> > > > > boot
-> > > > > paths
-> > > > > =C2=A0=C2=A0 exercise the hardware through different firmware lay=
-ers.
-> > > > > =C2=A0- TYPE_RISCV_CPU_VEGA32/VEGA64 are parented on
-> > > > > TYPE_RISCV_CPU_SIFIVE_U
-> > > > > =C2=A0=C2=A0 rather than TYPE_RISCV_CPU_BASE or TYPE_RISCV_BARE_C=
-PU.
-> > > > > =C2=A0=C2=A0 TYPE_RISCV_CPU_BASE's default misa_ext includes RVH,=
- and
-> > > > > the
-> > > > > =C2=A0=C2=A0 class-level misa_ext merge is OR-only (a subtype can=
-not
-> > > > > clear
-> > > > > a
-> > > > > bit
-> > > > > =C2=A0=C2=A0 its parent already set), so RVH could not be disable=
-d from
-> > > > > a
-> > > > > =C2=A0=C2=A0 TYPE_RISCV_CPU_BASE-derived subtype. TYPE_RISCV_BARE=
-_CPU
-> > > > > avoids
-> > > > > =C2=A0=C2=A0 that, but unconditionally forces max_satp_mode to 'b=
-are'
-> > > > > for
-> > > > > any
-> > > > > =C2=A0=C2=A0 CPU in its lineage regardless of what the subtype
-> > > > > configures,
-> > > > > which
-> > > > > =C2=A0=C2=A0 breaks paging. TYPE_RISCV_CPU_SIFIVE_U has neither i=
-ssue,
-> > > > > but
-> > > > > =C2=A0=C2=A0 silently sets priv_spec to PRIV_VERSION_1_10_0 (an o=
-lder
-> > > > > RISC-
-> > > > > V
-> > > > > =C2=A0=C2=A0 privileged spec version) rather than the current one=
-. This
-> > > > > surfaced
-> > > > > =C2=A0=C2=A0 as a real boot hang against production BBL/DTB pairs
-> > > > > (BBL's
-> > > > > =C2=A0=C2=A0 delegate_traps() mideleg assertion failed) that was =
-not
-> > > > > visible in
-> > > > > =C2=A0=C2=A0 simpler test boots, since the hang depends on firmwa=
-re
-> > > > > built
-> > > > > =C2=A0=C2=A0 against a newer priv spec than 1.10.0. Both VEGA CPU
-> > > > > subtypes
-> > > > > =C2=A0=C2=A0 explicitly override priv_spec back to PRIV_VERSION_L=
-ATEST
-> > > > > to
-> > > > > fix
-> > > > > =C2=A0=C2=A0 this; anyone deriving a new CPU subtype from a SiFiv=
-e-
-> > > > > family
-> > > > > parent
-> > > > > =C2=A0=C2=A0 should be aware this default does not propagate the =
-way
-> > > > > ISA
-> > > > > =C2=A0=C2=A0 extension bits might be assumed to.
-> > > > > =C2=A0- VEGA does not generate a device tree internally. -dtb is
-> > > > > required
-> > > > > =C2=A0=C2=A0 for any -kernel (Linux/BBL) boot; the machine errors=
- out
-> > > > > clearly
-> > > > > if
-> > > > > =C2=A0=C2=A0 a kernel is given without -dtb and without -bios fir=
-mware.
-> > > > > A
-> > > > > bare
-> > > > > =C2=A0=C2=A0 "-M vega" with no boot arguments at all (e.g. qtest'=
-s
-> > > > > generic
-> > > > > =C2=A0=C2=A0 smoke tests) is a valid, inert state and does not er=
-ror.
-> > > > > This
-> > > > > keeps
-> > > > > =C2=A0=C2=A0 the initial series scoped to what has been directly
-> > > > > tested;
-> > > > > =C2=A0=C2=A0 internal FDT generation may follow as a later series=
-.
-> > > > > =C2=A0- PLIC and CLINT compatible strings are "cdac,plic-1.0.0"
-> > > > > and
-> > > > > =C2=A0=C2=A0 "riscv,clint0" respectively. CDAC's own Buildroot-ba=
-sed
-> > > > > BBL/Linux
-> > > > > =C2=A0=C2=A0 builds use a CDAC-specific PLIC driver matched again=
-st the
-> > > > > former,
-> > > > > =C2=A0=C2=A0 and use the generic CLINT compatible string directly=
- (no
-> > > > > =C2=A0=C2=A0 CDAC-specific CLINT driver exists in any current VEG=
-A
-> > > > > firmware
-> > > > > =C2=A0=C2=A0 variant). A DTB intended to boot stock, unmodified r=
-iscv-
-> > > > > pk/BBL
-> > > > > =C2=A0=C2=A0 (which only recognises "riscv,plic0" verbatim) will =
-need
-> > > > > to
-> > > > > =C2=A0=C2=A0 additionally advertise that generic string for the P=
-LIC
-> > > > > node.
-> > > > >=20
-> > > > > What is NOT included / deliberately left out
-> > > > > ---------------------------------------------
-> > > > > =C2=A0- No AIA/APLIC/IMSIC support: current VEGA silicon does not
-> > > > > implement
-> > > > > =C2=A0=C2=A0 AIA, so that code path (present in earlier internal
-> > > > > revisions)
-> > > > > has
-> > > > > =C2=A0=C2=A0 been removed rather than left as dead code.
-> > > >=20
-> > > > Again, please read the AI code policy
-> > > >=20
-> > > > https://www.qemu.org/docs/master/devel/code-provenance.html#use-of-=
-ai-generated-content
-> > > >=20
-> > > > Alistair
-> > > >=20
-> > > > > =C2=A0- No internal device-tree generation: see note above; -dtb
-> > > > > is
-> > > > > =C2=A0=C2=A0 required for -kernel boots in this series.
-> > > > > =C2=A0- No SDHCI, SPI, I2C functional models yet: exposed as
-> > > > > =C2=A0=C2=A0 unimplemented-device stubs matching the real address
-> > > > > ranges,
-> > > > > so
-> > > > > =C2=A0=C2=A0 guest software can probe them safely; functional mod=
-els
-> > > > > may
-> > > > > follow
-> > > > > =C2=A0=C2=A0 in later series.
-> > > > > =C2=A0- No RV32 Linux boot test yet: the functional test suite
-> > > > > covers
-> > > > > =C2=A0=C2=A0 bare-metal on both architectures and a full Linux/BB=
-L boot
-> > > > > on
-> > > > > =C2=A0=C2=A0 riscv64 only, since an RV32 (Thejas32) Linux/BBL boo=
-t has
-> > > > > not
-> > > > > yet
-> > > > > =C2=A0=C2=A0 been verified; this may follow in a later series onc=
-e
-> > > > > available.
-> > > > >=20
-> > > > > Testing
-> > > > > -------
-> > > > > =C2=A0- riscv32-softmmu and riscv64-softmmu builds, `make check`
-> > > > > clean
-> > > > > on
-> > > > > =C2=A0=C2=A0 both
-> > > > > =C2=A0- checkpatch.pl clean across the series
-> > > > > =C2=A0- Functional tests added under
-> > > > > tests/functional/riscv32/test_vega.py
-> > > > > =C2=A0=C2=A0 and tests/functional/riscv64/test_vega.py, passing v=
-ia
-> > > > > both
-> > > > > direct
-> > > > > =C2=A0=C2=A0 invocation and `meson test` on both architectures:
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 - bare-metal "hello world" boot (RV32 an=
-d RV64)
-> > > > > =C2=A0=C2=A0=C2=A0=C2=A0 - full Linux boot via BBL to a login pro=
-mpt (RV64)
-> > > > > =C2=A0- Manual testing additionally covered: virtio-net
-> > > > > networking,
-> > > > > and an
-> > > > > =C2=A0=C2=A0 extended stress-ng run (CPU, matrix, VM, filesystem,
-> > > > > device-
-> > > > > access
-> > > > > =C2=A0=C2=A0 stressors) under Linux on -M vega
-> > > > >=20
-> > > > > We previously posted an early version of VEGA machine support
-> > > > > (Message-ID:
-> > > > > <385625713.441366.1761727810206@webmail2.cdac.in>)
-> > > > > without a proper cover letter, MAINTAINERS entry,
-> > > > > documentation,
-> > > > > or
-> > > > > tests, and sent via a webmail client rather than git send-
-> > > > > email,
-> > > > > which likely affected formatting. This series is a corrected
-> > > > > resubmission addressing all of that: it is sent via git send-
-> > > > > email,
-> > > > > and adds the documentation, MAINTAINERS entry, and functional
-> > > > > tests
-> > > > > that were missing before. We've since read and followed
-> > > > > docs/devel/submitting-a-patch.rst in full. Feedback on
-> > > > > process as
-> > > > > well as code is very welcome.
-> > > > >=20
-> > > > > Karthika B (7):
-> > > > > =C2=A0 hw/intc: Add CDAC VEGA PLIC device model
-> > > > > =C2=A0 hw/intc: Add CDAC VEGA ACLINT device model
-> > > > > =C2=A0 target/riscv: Add VEGA32 and VEGA64 CPU types
-> > > > > =C2=A0 hw/riscv: Add CDAC VEGA machine model
-> > > > > =C2=A0 docs/system/riscv: Add VEGA machine documentation
-> > > > > =C2=A0 tests/functional: Add VEGA machine functional tests
-> > > > > =C2=A0 MAINTAINERS: Add entry for VEGA machine
-> > > > >=20
-> > > > > =C2=A0MAINTAINERS=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=
-=A0 14 +
-> > > > > =C2=A0configs/devices/riscv64-softmmu/default.mak |=C2=A0=C2=A0 1=
- +
-> > > > > =C2=A0docs/system/riscv/vega.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 219=
- +++++++
-> > > > > =C2=A0docs/system/target-riscv.rst=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 =
-1 +
-> > > > > =C2=A0hw/intc/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 7 +
-> > > > > =C2=A0hw/intc/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2 +
-> > > > > =C2=A0hw/intc/vega_aclint.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 | 668
-> > > > > ++++++++++++++++++++
-> > > > > =C2=A0hw/intc/vega_plic.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 517
-> > > > > +++++++++++++++
-> > > > > =C2=A0hw/riscv/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 11 +
-> > > > > =C2=A0hw/riscv/meson.build=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
-> > > > > =C2=A0hw/riscv/vega.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 502
-> > > > > +++++++++++++++
-> > > > > =C2=A0include/hw/intc/vega_aclint.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 84 +++
-> > > > > =C2=A0include/hw/intc/vega_plic.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 =
-87 +++
-> > > > > =C2=A0include/hw/riscv/vega.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 136 ++++
-> > > > > =C2=A0target/riscv/cpu-qom.h=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 2 +
-> > > > > =C2=A0target/riscv/cpu.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 25 +
-> > > > > =C2=A0tests/functional/riscv32/meson.build=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
-> > > > > =C2=A0tests/functional/riscv32/test_vega.py=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 32 +
-> > > > > =C2=A0tests/functional/riscv64/meson.build=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 +
-> > > > > =C2=A0tests/functional/riscv64/test_vega.py=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 63 ++
-> > > > > =C2=A020 files changed, 2374 insertions(+)
-> > > > > =C2=A0create mode 100644 docs/system/riscv/vega.rst
-> > > > > =C2=A0create mode 100644 hw/intc/vega_aclint.c
-> > > > > =C2=A0create mode 100644 hw/intc/vega_plic.c
-> > > > > =C2=A0create mode 100644 hw/riscv/vega.c
-> > > > > =C2=A0create mode 100644 include/hw/intc/vega_aclint.h
-> > > > > =C2=A0create mode 100644 include/hw/intc/vega_plic.h
-> > > > > =C2=A0create mode 100644 include/hw/riscv/vega.h
-> > > > > =C2=A0create mode 100644 tests/functional/riscv32/test_vega.py
-> > > > > =C2=A0create mode 100644 tests/functional/riscv64/test_vega.py
-> > >=20
-> > > With Regards,
-> > > Karthika B
-> > > Project Engineer
-> > > HDG
-> > >=20
-> > > -----------------------------------------------------------------
-> > > ----
-> > > ---------------------------------------
-> > > [ C-DAC is on Social-Media too. Kindly follow us at:
-> > > Facebook: https://www.facebook.com/CDACINDIA=C2=A0& Twitter:
-> > > @cdacindia ]
-> > >=20
-> > > This e-mail is for the sole use of the intended recipient(s) and
-> > > may
-> > > contain confidential and privileged information. If you are not
-> > > the
-> > > intended recipient, please contact the sender by reply e-mail and
-> > > destroy
-> > > all copies and the original message. Any unauthorized review,
-> > > use,
-> > > disclosure, dissemination, forwarding, printing or copying of
-> > > this
-> > > email
-> > > is strictly prohibited and appropriate legal action will be
-> > > taken.
-> > > -----------------------------------------------------------------
-> > > ----
-> > > ---------------------------------------
->=20
-> With Regards,
-> Karthika B
-> Project Engineer
-> HDG
->=20
-> ---------------------------------------------------------------------
-> ---------------------------------------
-> [ C-DAC is on Social-Media too. Kindly follow us at:
-> Facebook: https://www.facebook.com/CDACINDIA=C2=A0& Twitter: @cdacindia ]
->=20
-> This e-mail is for the sole use of the intended recipient(s) and may
-> contain confidential and privileged information. If you are not the
-> intended recipient, please contact the sender by reply e-mail and
-> destroy
-> all copies and the original message. Any unauthorized review, use,
-> disclosure, dissemination, forwarding, printing or copying of this
-> email
-> is strictly prohibited and appropriate legal action will be taken.
-> ---------------------------------------------------------------------
-> ---------------------------------------
+T24gVGh1LCAyMDI2LTExLTE5IGF0IDIzOjIwICswMTAwLCBQaGlsaXBwZSBNYXRoaWV1LURhdWTD
+qSB3cm90ZToNCj4gVGhlIGN5Y2xlIGNvdW50ZXIgdXNlcyBpY291bnRfZ2V0KCksIHdoaWNoIGFs
+cmVhZHkgcmV0dXJucyB2aXJ0dWFsDQo+IHRpbWUgaW4gbmFub3NlY29uZHMuIFRoZSBQTVUgb3Zl
+cmZsb3cgaGVscGVyIGFwcGxpZXMgaWNvdW50X3RvX25zKCkNCj4gdG8gYm90aCBjeWNsZSBhbmQg
+aW5zdHJ1Y3Rpb24gY291bnRlcnMsIHNvIGN5Y2xlIG92ZXJmbG93IHRpbWVycw0KPiBhcmUgZGVs
+YXllZCBieSB0aGUgaWNvdW50IHNoaWZ0Lg0KPiANCj4gUGFzcyB0aGUgY291bnRlciBjb250ZXh0
+IHRvIHRoZSBoZWxwZXIgYW5kIHNjYWxlIG9ubHkgaW5zdHJ1Y3Rpb24NCj4gY291bnRzLg0KPiAN
+Cj4gRml4ZXM6IGIyZDdhN2M3ZTRlMzAgKCJ0YXJnZXQvcmlzY3Y6IEltcGxlbWVudCBwcml2aWxl
+Z2UgbW9kZQ0KPiBmaWx0ZXJpbmcgZm9yIGN5Y2xlL2luc3RyZXQiKQ0KPiBTaWduZWQtb2ZmLWJ5
+OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1kQG9zcy5xdWFsY29tbS5jb20+DQoNClJl
+dmlld2VkLWJ5OiBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFpci5mcmFuY2lzQHdkYy5jb20+DQoN
+CkFsaXN0YWlyDQoNCj4gLS0tDQo+IMKgdGFyZ2V0L3Jpc2N2L3RjZy9wbXUuYyB8IDEyICsrKysr
+KysrLS0tLQ0KPiDCoDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDQgZGVsZXRpb25z
+KC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvdGFyZ2V0L3Jpc2N2L3RjZy9wbXUuYyBiL3RhcmdldC9y
+aXNjdi90Y2cvcG11LmMNCj4gaW5kZXggMDE2NWZhZjA2Yjg2Li5jZDRkZTljZGUwYWIgMTAwNjQ0
+DQo+IC0tLSBhL3RhcmdldC9yaXNjdi90Y2cvcG11LmMNCj4gKysrIGIvdGFyZ2V0L3Jpc2N2L3Rj
+Zy9wbXUuYw0KPiBAQCAtMjgxLDEyICsyODEsMTUgQEAgc3RhdGljIGdib29sZWFuIHBtdV9yZW1v
+dmVfZXZlbnRfbWFwKGdwb2ludGVyDQo+IGtleSwgZ3BvaW50ZXIgdmFsdWUsDQo+IMKgwqDCoMKg
+IHJldHVybiAoR1BPSU5URVJfVE9fVUlOVCh2YWx1ZSkgPT0gR1BPSU5URVJfVE9fVUlOVCh1ZGF0
+YSkpID8NCj4gdHJ1ZSA6IGZhbHNlOw0KPiDCoH0NCj4gwqANCj4gLXN0YXRpYyBpbnQ2NF90IHBt
+dV9pY291bnRfdGlja3NfdG9fbnMoaW50NjRfdCB2YWx1ZSkNCj4gK3N0YXRpYyBpbnQ2NF90IHBt
+dV9pY291bnRfdGlja3NfdG9fbnMoQ1BVUklTQ1ZTdGF0ZSAqZW52LCB1aW50MzJfdA0KPiBjdHJf
+aWR4LA0KPiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgaW50NjRfdCB2YWx1ZSkNCj4gwqB7DQo+IMKgwqDC
+oMKgIGludDY0X3QgcmV0ID0gMDsNCj4gwqANCj4gwqDCoMKgwqAgaWYgKGljb3VudF9lbmFibGVk
+KCkpIHsNCj4gLcKgwqDCoMKgwqDCoMKgIHJldCA9IGljb3VudF90b19ucyh2YWx1ZSk7DQo+ICvC
+oMKgwqDCoMKgwqDCoCAvKiBUaGUgY3ljbGUgY291bnRlciBjb3VudHMgbnMgb2YgdmlydHVhbCB0
+aW1lLCBzZWUNCj4gaWNvdW50X2dldCgpICovDQo+ICvCoMKgwqDCoMKgwqDCoCByZXQgPSByaXNj
+dl9wbXVfY3RyX21vbml0b3JfaW5zdHJ1Y3Rpb25zKGVudiwgY3RyX2lkeCkgPw0KPiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqAgaWNvdW50X3RvX25zKHZhbHVlKSA6IHZhbHVlOw0KPiDCoMKg
+wqDCoCB9IGVsc2Ugew0KPiDCoMKgwqDCoMKgwqDCoMKgIHJldCA9IChOQU5PU0VDT05EU19QRVJf
+U0VDT05EIC8gUklTQ1ZfVElNRUJBU0VfRlJFUSkgKg0KPiB2YWx1ZTsNCj4gwqDCoMKgwqAgfQ0K
+PiBAQCAtNDU2LDggKzQ1OSw5IEBAIGludCByaXNjdl9wbXVfc2V0dXBfdGltZXIoQ1BVUklTQ1ZT
+dGF0ZSAqZW52LA0KPiB1aW50NjRfdCB2YWx1ZSwgdWludDMyX3QgY3RyX2lkeCkNCj4gwqANCj4g
+wqDCoMKgwqAgaWYgKHJpc2N2X3BtdV9jdHJfbW9uaXRvcl9jeWNsZXMoZW52LCBjdHJfaWR4KSB8
+fA0KPiDCoMKgwqDCoMKgwqDCoMKgIHJpc2N2X3BtdV9jdHJfbW9uaXRvcl9pbnN0cnVjdGlvbnMo
+ZW52LCBjdHJfaWR4KSkgew0KPiAtwqDCoMKgwqDCoMKgwqAgb3ZlcmZsb3dfbnMgPQ0KPiBwbXVf
+aWNvdW50X3RpY2tzX3RvX25zKChpbnQ2NF90KW92ZXJmbG93X2RlbHRhKTsNCj4gLcKgwqDCoMKg
+wqDCoMKgIG92ZXJmbG93X2xlZnQgPSBwbXVfaWNvdW50X3RpY2tzX3RvX25zKG92ZXJmbG93X2xl
+ZnQpIDsNCj4gK8KgwqDCoMKgwqDCoMKgIG92ZXJmbG93X25zID0gcG11X2ljb3VudF90aWNrc190
+b19ucyhlbnYsIGN0cl9pZHgsDQo+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgDQo+
+IChpbnQ2NF90KW92ZXJmbG93X2RlbHRhKTsNCj4gK8KgwqDCoMKgwqDCoMKgIG92ZXJmbG93X2xl
+ZnQgPSBwbXVfaWNvdW50X3RpY2tzX3RvX25zKGVudiwgY3RyX2lkeCwNCj4gb3ZlcmZsb3dfbGVm
+dCk7DQo+IMKgwqDCoMKgIH0gZWxzZSB7DQo+IMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIC0xOw0K
+PiDCoMKgwqDCoCB9DQo=
 
