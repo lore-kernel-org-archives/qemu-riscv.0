@@ -1,127 +1,130 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8560606A323
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 10:17:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5A1C3606A6A7
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 10:18:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=H1j1zW9+;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jGovdm5f
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nImFTzlm;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=avMOwpRX
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWA4K-0005bA-MB; Wed, 25 Nov 2026 05:17:41 -0500
+	id 1xWA4N-0005cK-B0; Wed, 25 Nov 2026 05:17:43 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWA4J-0005aE-W2
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:17:40 -0500
+ id 1xWA4M-0005bq-H1
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:17:42 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <daniel.barboza@oss.qualcomm.com>)
- id 1xWA4I-0003B6-8J
- for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:17:39 -0500
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ id 1xWA4J-0003BL-S1
+ for qemu-riscv@nongnu.org; Wed, 25 Nov 2026 05:17:41 -0500
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AP9mRqH4131759
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 10:17:37 GMT
+ 6AP9mLpJ555411
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 10:17:39 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=7s3e05jPnPpSupK/Fl+yjTI6DjiuviOW5DE
- A007d/Nc=; b=H1j1zW9+D5sEK7yvd7XS9B1DOKxXRNFvYoBCr6lrQiAuIDCvcoG
- 3C63lwzVwP4hxC105KCb26pMSxw+x2DSeo440wGfhK3nxcwYSpRrXd3S/0p70/X9
- asl6Js8RsYJGeqllaeO4JHiGWEepN/65eBi5Fxcwfbx8duSg2OOFf5efBBKZ4OWg
- TtjDkK3zuomz9LFC2psQMc0KTp9erBaDaEHaA9UV/czkTYPAAe3bhq47ip+yI3vV
- r9onap+WqVZLEcgVcE/ZN6B1jPFLRXCgEg2hdWRAdrTa0jx2hkiKoUSiNXlvewCM
- NA/mFo94xi+jwezQW37teYBrRRacsjSRK7g==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vuhrapn-1
+ cc:content-transfer-encoding:date:from:in-reply-to:message-id
+ :mime-version:references:subject:to; s=qcppdkim1; bh=ZPFzXf5CXX9
+ P55bldodHWlAY6t/62vaKgQ1lRwuIfJw=; b=nImFTzlmyXkq2UYMD6UD3QU9/Sh
+ B8Y4Gi2T1yVhjvezSdF6nk/3FMQS8zdAV1I4JPKJNXBg8j86wQpicotPxkBQioZR
+ j/nEqOoBHKnIoqL+nxc5CNdDQbJJr2HHPOBSKl1O8lcSswkPgO98YJVBlfU+onxD
+ rInj9Qt7g+TVD9s/4loobSEfngwdj3WD9+rpRaK8nHrgxqN3g/rOKfQUFtV9aSmp
+ 8WSx7dbh/3Uy5ys7V+1h3LEkW2Hq8ncFfcRy3bpE7kKltvXuC8RF6iFZj1RgxNTf
+ W5y2OL7k9ECCHp/ZH67FPYlxPKst/nyACpYBZnURK/bJnVOPyU4NR4UrfGg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vvnr9r7-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 10:17:37 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-93f20addba1so866306085a.1
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 02:17:36 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 10:17:38 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id
+ af79cd13be357-93f32050e72so1266295785a.1
+ for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 02:17:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795601855; x=1796206655; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=7s3e05jPnPpSupK/Fl+yjTI6DjiuviOW5DEA007d/Nc=;
- b=jGovdm5fZZfEaYIpYyrCYlKjYoPlEIUN8ZwF5/oNmoTcDDMJJqx27lQHkVAsj3tmL1
- VGtB+VFDwpdvUt6H7OqSP21IYqf/IyNhaT4FScAXt3zrp/FJpixmXrRzi3FvXzB3SsZJ
- P24kVaifY/hqqDMtXrpPwYW19A0DM9v74sedpyKdZqAUUp14PZuYolDnZ0Y6E4wKJpXB
- Efko1XiKiPuXKPvUeHuU9o2SPfD+uVRwZVrdYZLLfQQA+HI3OZ8R8vvwPwBG03AUZj9r
- HedwJNdwDJ4VaPBhym0QOTWUY8nmHA//o63+gD0a3obrlQPQn2IHbQ9wDaHmR24+K3Zp
- bU5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795601855; x=1796206655;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=oss.qualcomm.com; s=google; t=1795601858; x=1796206658; darn=nongnu.org;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=7s3e05jPnPpSupK/Fl+yjTI6DjiuviOW5DEA007d/Nc=;
- b=UYvD9LgdMGojzJzCt7yHpaFRPUzaELeSdzNKRL21am/LBQWYKWdEaE6NcTDtEoZKMP
- bhW3DjTkWvmfHNSHJt9+CPFZ80b4K+JjwFoLSUBNFofo+x07OrjXPr6+hWCBzbuxyiSW
- mttX4KKVHR0myxwwvQVL7So7q+JRXQAXMH5FGfZm9n1k3uEPw9HYKQM0WBze9S/AKdmv
- JOfluNFYzggfNt/Rdnj0p4B1e3yAUsvquwOLs85DX6ZiD47NVPNhlpks+oj+B2C78wEd
- yzS2iy2FoQvdlmcOvwnkO0YesuBIZXKMKjbbL9zGbchJ/0+CLL2Z0euMSCq7ZWnf1Rtp
- P3Rg==
-X-Gm-Message-State: APuU4Z9lvtYxH36VoNgqESqs/BiZCAJxNDtbXW1uFhzImf5PSCem+9R2
- iADFiHwiy6u+PFrdMB8ovA0cfLTT3mgtdHlzBKhxnnTNgYiS5ZFnunMzzG9V3HzjR/ryFBxxNJz
- DFM3S5EIHkgK8hEIzJdsSey9tX3Zr/1h5TLcHVZAg0vQ3QrvIWGw23DbuHg==
-X-Gm-Gg: AZFdTZf3RMM9t3uuxdqJqgNkmf7jncATiKGtgxTXpkotkrbdQ1R9d0VR5b0IHzmSC3S
- csPWNc30JtZ1N/EmNrDv9pZ7M2WnuturfVm2YjDzOhi9Crx/iMFIF9mg4ZB5FY2sE8n8OYkXpZ8
- T+zZ8zUePUL8RDTrzhOaxPkuiTEZ9d/dOWf0BaH29DfhwkAqi1cxj52mMDOofyaqo7RnMxs/iaE
- 957yH1Kl6PtCWco+kh1eIQUyPCsAE6c5NZjinaVO6mEYdIfr3Z7I9jBhcf4J65LfSHwuzXP1Z+Q
- MbwXnxwhb92d3eEITrVdGmlpzi4I5u1OZyGJpAPFAiBkqqO5qZ7wzNC5f5ehKCeAMUowhtTleWO
- uDXzmxfxh9u3fjH9EZ3gXiDso+se8u5alLUrrrcJQohpzgwXDXiCU4ZR7UeMKM1FnUKas5KtFBF
- tUQwX8pxYuCw==
-X-Received: by 2002:a05:620a:3722:b0:949:472f:226e with SMTP id
- af79cd13be357-949bab15455mr3373524385a.71.1795601855418; 
- Wed, 25 Nov 2026 02:17:35 -0800 (PST)
-X-Received: by 2002:a05:620a:3722:b0:949:472f:226e with SMTP id
- af79cd13be357-949bab15455mr3373520785a.71.1795601854905; 
- Wed, 25 Nov 2026 02:17:34 -0800 (PST)
+ bh=ZPFzXf5CXX9P55bldodHWlAY6t/62vaKgQ1lRwuIfJw=;
+ b=avMOwpRXy9z4lrRiiWpOhU1rF0uLaPkkODmtua4VIz5hFBYzDMYCAN7HEl1Ah4oQjB
+ dmBj8isn3u8gB9JUZM6tXNMTfCL9xNeJB4er3Sb/1e5tWEZvYSXMGaFOMl2Sbh1qfz8e
+ FYEM0u4xClSDVhy9CAebd/TfuxTy4irAr4EViel3RS6qdzOcl1NeAETQEnQHEOhoMEUD
+ tYTbeA/7iGLIQrX1TzIG9RU+lhItgm2/IEbKYhD/cNXMbVneUsHG/7rhkSsGEaaqFjWA
+ faKbAreZ/5UFnch67TvG5QmYhbQDiud/c5M720RVZILldUMxiYjdQaaMLm7AfzkjbYUb
+ uVLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20260707; t=1795601858; x=1796206658;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+ :to:cc:subject:date:message-id:reply-to:content-type;
+ bh=ZPFzXf5CXX9P55bldodHWlAY6t/62vaKgQ1lRwuIfJw=;
+ b=tz5B3Oh5Rc0BZ8dLCPffLRhzKcnE0UVl/lpPzZGhn3/6Mo0mmJXoVQcqlOGLXpRvCw
+ ZKx5QvNLgOLoO9vS4SlMOAPjXywveI3SK6/9kS/y5P/1wHG/UyhyGm6GLFDMPdWp6+tI
+ CqL0J+bY/H8r9w+pI75Pd9sXpIAOpVycX70Ve4Bi92XnWjvYTRgSZOKdU2leYCvaTg3G
+ zXvAAK7U3p92Fu0tAsIodjE3WlqhzI2pde4SiscIqbA+kdKVwGhuyfqsxVxZhYGrazqJ
+ htMzuj13ZH3QNyjjVQa4TZKaR0L2oFNRcmIEEJynpOs4bE5/tgql5jKLTIVcsu7C4DDH
+ Bj+w==
+X-Gm-Message-State: APuU4Z9JAwKzZGcW+HSbe/jj6wPXSjHDM1Bxh3EX6CBqmr5c6L2mu+EJ
+ VsFVmTzE/MS6ycrhvxhUzY4SgEdPTKH9UjGRFj6eSbYb0ukORCcMSkgXR7mydp/QlFQitmTp+Cb
+ M+xhStqKorxqebakZyw1ZQpcrA7A3VUeIgiuBLblcHZq/xF3e65cZ0xmXGw==
+X-Gm-Gg: AZFdTZd/WxeL6z+LtQYg6Wg3RXBtSsyrj7JmuVR4CuoFZY3Eo+sXsqOPXcg2O5nUTB+
+ CDp3yrs/tLXi0+X3K+QfqDUC0X5bJQTiaJ+Rli8SmlBQ7eKMA6PgplfAyCI9a18+ZGOWBE5d7f6
+ evEmKF5fd8xs8W0ok7FuEPEjdzdPHReHQEa/Y2ITOtpe8JM0SsOhcwpjBgCsZqrpQQICMPm281g
+ VIAgOwgqlX+/Y+VxCDZeJlFJ6Xt30FQEwVZbkoFMGMXekllQBfbiPpQVO6KUok+aG65f62ddnKR
+ tVEjA2FO6fONYUYooSbiR33q2jeOK2SesuD9UsM7z75PEcGtP6UZycEpyXtto7YYG1zDJJMs0jZ
+ Fz4nwah8Isv5CYVdO8mThb2G2g/5VjQXVS/Ks+trJ36hYsKZNXpUBrZB+u48jbAXJwwMYsNsBSI
+ J4jRDa79ld3A==
+X-Received: by 2002:a05:620a:8388:b0:949:5fa1:4e5d with SMTP id
+ af79cd13be357-949bab23228mr3105451485a.64.1795601858028; 
+ Wed, 25 Nov 2026 02:17:38 -0800 (PST)
+X-Received: by 2002:a05:620a:8388:b0:949:5fa1:4e5d with SMTP id
+ af79cd13be357-949bab23228mr3105447385a.64.1795601857434; 
+ Wed, 25 Nov 2026 02:17:37 -0800 (PST)
 Received: from QCOM-UWl2o8bcGT.qualcomm.com ([189.110.107.17])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-949bb34ad6dsm1280811085a.12.2026.11.25.02.17.33
+ af79cd13be357-949bb34ad6dsm1280811085a.12.2026.11.25.02.17.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Nov 2026 02:17:34 -0800 (PST)
+ Wed, 25 Nov 2026 02:17:36 -0800 (PST)
 From: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-riscv@nongnu.org, alistair.francis@wdc.com, liwei1518@gmail.com,
  zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
-Subject: [PATCH v3 0/1] target/riscv: avoid amocas.* x0 clobbering
-Date: Wed, 25 Nov 2026 07:17:29 -0300
-Message-ID: <20261125101730.228914-1-daniel.barboza@oss.qualcomm.com>
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>
+Subject: [PATCH v3 1/1] target/riscv: avoid amocas.* x0 clobbering
+Date: Wed, 25 Nov 2026 07:17:30 -0300
+Message-ID: <20261125101730.228914-2-daniel.barboza@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261125101730.228914-1-daniel.barboza@oss.qualcomm.com>
+References: <20261125101730.228914-1-daniel.barboza@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=FPmOVOos c=1 sm=1 tr=0 ts=6b06b5c1 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfX0qZEj2pocAMu
+ 38MDik7b6Rg+EurjDYstsPm0LQgjAA9Y+krOLXXGwsNShawloHjk8ZQPBp6N9pJprD4q2l359wF
+ 7hbJsPU7Klg2BLpn3JJa+pT+0C4Y1Mg3+2FDBHt1tFBJaJKi0pMLqiMfG80AWr4Sq1qvm8lS5xJ
+ msfE0HjyZG0gw/wWj/KincWGrRpeUlip9lwTmLnmqjVnAbSIz/18aHP7EoIN2mnY7xadH3bY099
+ A5HTNU6tu3lFasVSeVwu/q61UJhruD4nptegyuc6DdCp+0jz3QO6v/dZiElhKCFH1L/wfrG+jTG
+ xXPgGDO2P+t9E0HJnLUB63ByydOFPLqOLxKKFpe0O44kGlokv48QQz4T/6azKVhAR/DphPuEO3u
+ nfbvUBA9YZvHU7m4V8qSr19lOCMVEmQzDQRFP+6qb3j4gYBfbjyTJrwLW39qXzUu6QViEtPMvmD
+ 8H8Ys2HY7dynzq6ItrQ==
+X-Proofpoint-ORIG-GUID: 9yXpFsAy5xFAjlGmWk1FPkIfLQuxayuN
+X-Proofpoint-GUID: 9yXpFsAy5xFAjlGmWk1FPkIfLQuxayuN
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfXwk7Rovf1cJtc
+ fGp8XywX8kUktf68vHQTb8lmitZi1+UTfL2kTGCpR6MOqYBdw4kh1lAAOOSje5QzcMmchCZlcTr
+ q/STAj20ggBpCeuNWqxDUHqOCQLkOwc=
+X-Authority-Analysis: v=2.4 cv=R4mWitRX c=1 sm=1 tr=0 ts=6b06b5c2 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=2Chh/y2wedAoPG2p3qwUfw==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=5YhHKsphd0Gvzk42CI0A:9 a=zZCYzV9kfG8A:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: Mafi2m2IIDIpbb7GBFqyoFjKH6Z3VKGK
-X-Proofpoint-ORIG-GUID: Mafi2m2IIDIpbb7GBFqyoFjKH6Z3VKGK
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfX1lf8JoleCYkD
- B4CfOgGyslON21wr6SJZ3tMWiQ6mArEIL7KNuvxw16IZNebKzCI4+6hfHR55a2xXBhAbeednmie
- aHAj8POU16IRyEl4uJZyFUkRR5vLTbY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfX6NFCAg9HemMr
- ShuNEHxIoy4jBiLFw6/eUVOOFN/jMsxfebRB/E4tBJu29uzq1iIQCpCyWIakEcslSkSRUwuxZue
- /QPEfpeyfG0w0GDtNwNCMDUDa4Ft2bbEISIxsAVzu6NVsUd8L8bdaJNXpa4YmqjMjluhvOGa6XZ
- IDdGZyL+8lo5OZcy6GszLzeO2o1aeQ5XuVURUOlZykhqn1x6Q/GUL34RuNCWYbDGwLphsZ07mOk
- NZPS7cRnp5OBnZIqq7w1w5qk4/XXX7XmsYcZ1PNCiIZ2+o8FMeGGcoe3BfRqB609XyU6d/s1fqA
- /hJqRrgXB6EQOfsec1A1RQmG253nJMiE1haDjejCqaIiT5QhWpmAZ+oIzQV5js19HiDEHSF71jB
- WG46wZnE7JPbNc47nW3RALp2HP+1reaI97N2eEGjaruabKEYaeSYRGPmeKJSK3t/muBtUO5Alqf
- VZS/j1E6U7euZg+e5Lg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=p0WdMEafAAAA:8
+ a=EUspDBNiAAAA:8 a=sK0Jn417EFhoLsV17G0A:9 a=PEH46H7Ffwr30OY-TuGO:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 suspectscore=0 impostorscore=0
- priorityscore=1501 adultscore=0 phishscore=0 clxscore=1015 spamscore=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250040
 Received-SPF: pass client-ip=205.220.180.131;
@@ -144,27 +147,42 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi,
+gen_cmpxchg* and trans_amocas_q() load amocas registers using get_gpr().
+When the register is x0/zero get_gpr() returns ctx->zero, the shared TCG
+constant that every x0 read uses.  As it is today, the amocas helpers
+uses tcg_gen_atomic_cmpxchg_* helpers using the dest register retrieved
+by get_gpr().
 
-This is the same as v2 but rebased with alistair/riscv-to-apply.next.
-No other changes made.
+So, if we have something like:
 
+amocas.d                zero,s0,(a0)
 
-Changes in v3:
-- rebased with alistair/riscv-to-apply.next
-- v2 link: https://lore.kernel.org/qemu-devel/20261112125307.485690-1-daniel.barboza@oss.qualcomm.com/ 
+gen_cmpxchg() uses ctx->zero as 'dest' for tcg_gen_atomic_cmpxchg_tl(),
+which will end up clobbering it with whatever is in 'rs1'.  ctx->zero
+will be reset back to normal in init_disas_context(), but if there's
+something else that ends up reading it in the same TB, e.g.:
 
+beqz                    a2,24
 
-Daniel Henrique Barboza (1):
-  target/riscv: avoid amocas.* x0 clobbering
+This will read a clobbered ctx->zero and then all bets are off.
 
+The fix is to use a temp variable as 'dest' for gen_atomic_cmpxchg_*
+calls instead of the result of get_gpr().  We are already executing
+gen_set_grp() in all cases using 'dest', making this change a bit
+simpler.
+
+Fixes: b52d49e97fc4 ("target/riscv: Add support for Zacas extension")
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/3526
+Signed-off-by: Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>
+---
  .../riscv/tcg/insn_trans/trans_rvzacas.c.inc  | 15 ++++--
  target/riscv/tcg/translate.c                  |  5 +-
  tests/tcg/riscv64/system/meson.build          |  7 +++
@@ -172,6 +190,144 @@ Daniel Henrique Barboza (1):
  4 files changed, 69 insertions(+), 7 deletions(-)
  create mode 100644 tests/tcg/riscv64/test-amocas-x0.S
 
+diff --git a/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc b/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
+index 79bca1e957..e908ed2377 100644
+--- a/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
++++ b/target/riscv/tcg/insn_trans/trans_rvzacas.c.inc
+@@ -72,13 +72,14 @@ static bool gen_cmpxchg64(DisasContext *ctx, arg_atomic *a, MemOp mop)
+         return false;
+     }
+ 
+-    TCGv_i64 dest = get_gpr_pair(ctx, a->rd);
++    TCGv_i64 cmp = get_gpr_pair(ctx, a->rd);
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv_i64 src2 = get_gpr_pair(ctx, a->rs2);
++    TCGv_i64 dest = tcg_temp_new_i64();
+ 
+     mop |= ctx->mo_endianness;
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+-    tcg_gen_atomic_cmpxchg_i64(dest, src1, dest, src2, ctx->mem_idx, mop);
++    tcg_gen_atomic_cmpxchg_i64(dest, src1, cmp, src2, ctx->mem_idx, mop);
+ 
+     gen_set_gpr_pair(ctx, a->rd, dest);
+     return true;
+@@ -117,15 +118,19 @@ static bool trans_amocas_q(DisasContext *ctx, arg_amocas_q *a)
+     TCGv_i128 src2 = tcg_temp_new_i128();
+     TCGv_i64 src2l = get_gpr(ctx, a->rs2, EXT_NONE);
+     TCGv_i64 src2h = get_gpr(ctx, a->rs2 == 0 ? 0 : a->rs2 + 1, EXT_NONE);
+-    TCGv_i64 destl = get_gpr(ctx, a->rd, EXT_NONE);
+-    TCGv_i64 desth = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
++    TCGv_i64 cmpl = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv_i64 cmph = get_gpr(ctx, a->rd == 0 ? 0 : a->rd + 1, EXT_NONE);
++    TCGv_i64 destl = tcg_temp_new_i64();
++    TCGv_i64 desth = tcg_temp_new_i64();
++    TCGv_i128 cmp = tcg_temp_new_i128();
+     MemOp memop = MO_ALIGN | MO_UO;
+ 
+     memop |= ctx->mo_endianness;
++    tcg_gen_concat_i64_i128(cmp, cmpl, cmph);
+     tcg_gen_concat_i64_i128(src2, src2l, src2h);
+     tcg_gen_concat_i64_i128(dest, destl, desth);
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+-    tcg_gen_atomic_cmpxchg_i128(dest, src1, dest, src2, ctx->mem_idx, memop);
++    tcg_gen_atomic_cmpxchg_i128(dest, src1, cmp, src2, ctx->mem_idx, memop);
+ 
+     tcg_gen_extr_i128_i64(destl, desth, dest);
+ 
+diff --git a/target/riscv/tcg/translate.c b/target/riscv/tcg/translate.c
+index 72d36764d8..fdf9c39bef 100644
+--- a/target/riscv/tcg/translate.c
++++ b/target/riscv/tcg/translate.c
+@@ -1176,13 +1176,14 @@ static bool gen_amo(DisasContext *ctx, arg_atomic *a,
+ 
+ static bool gen_cmpxchg(DisasContext *ctx, arg_atomic *a, MemOp mop)
+ {
+-    TCGv dest = get_gpr(ctx, a->rd, EXT_NONE);
++    TCGv cmp = get_gpr(ctx, a->rd, EXT_NONE);
+     TCGv src1 = get_address(ctx, a->rs1, 0);
+     TCGv src2 = get_gpr(ctx, a->rs2, EXT_NONE);
++    TCGv dest = tcg_temp_new();
+ 
+     mop |= ctx->mo_endianness;
+     decode_save_opc(ctx, RISCV_UW2_ALWAYS_STORE_AMO);
+-    tcg_gen_atomic_cmpxchg_tl(dest, src1, dest, src2, ctx->mem_idx, mop);
++    tcg_gen_atomic_cmpxchg_tl(dest, src1, cmp, src2, ctx->mem_idx, mop);
+ 
+     gen_set_gpr(ctx, a->rd, dest);
+     return true;
+diff --git a/tests/tcg/riscv64/system/meson.build b/tests/tcg/riscv64/system/meson.build
+index cdd2e99d22..842712defa 100644
+--- a/tests/tcg/riscv64/system/meson.build
++++ b/tests/tcg/riscv64/system/meson.build
+@@ -116,6 +116,13 @@ tests += {
+   }
+ }
+ 
++tests += {
++  'test-amocas-x0.S': {
++    'cflags': cflags + ['-march=rv64gc'],
++    'qemu_args': ['-cpu', 'max', qemu_args],
++  }
++}
++
+ if 'qemu-system-riscv64' in emulators
+   tcg_tests += {
+     'riscv64-softmmu': {
+diff --git a/tests/tcg/riscv64/test-amocas-x0.S b/tests/tcg/riscv64/test-amocas-x0.S
+new file mode 100644
+index 0000000000..a7bbd059f0
+--- /dev/null
++++ b/tests/tcg/riscv64/test-amocas-x0.S
+@@ -0,0 +1,49 @@
++/*
++ * Test if amocas.d will clobber x0.  Based on Gitlab 3526.
++ *
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ * SPDX-License-Identifier: GPL-2.0-or-later
++ */
++
++	.option norvc
++	.text
++
++	.global _start
++
++_start:
++	li     t0, 5
++	lla    t1, amo_target
++	li     t2, 0
++
++	/* amocas.d zero, t0, (t1) */
++	.word  0x2853302f
++
++	/* If x0 is clobbered this bnez will fail.  */
++	bnez   t2, _fail
++
++	li     a0, 0
++	j      _exit
++
++_fail:
++	li    a0, 1
++
++/* Exit through the semihosting SYS_EXIT_EXTENDED call with a0 as the code. */
++_exit:
++	lla	a1, semiargs
++	li	t0, 0x20026	/* ADP_Stopped_ApplicationExit */
++	sd	t0, 0(a1)
++	sd	a0, 8(a1)
++	li	a0, 0x20	/* TARGET_SYS_EXIT_EXTENDED */
++	.balign	16
++	slli	zero, zero, 0x1f
++	ebreak
++	srai	zero, zero, 0x7
++	j	.
++
++	.data
++	.balign	8
++semiargs:
++	.space	16
++/* An amo target must be a valid, 8-byte aligned address.  */
++amo_target:
++	.dword	0x1234
 -- 
 2.43.0
 
