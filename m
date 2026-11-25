@@ -1,82 +1,82 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA514606A31E
-	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:38:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 927C5606A31E
+	for <qemu-riscv@archiver.kernel.org>; Wed, 25 Nov 2026 02:38:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=bivRgrDf
+	dkim=pass (2048-bit key) header.d=tenstorrent.com header.i=@tenstorrent.com header.a=rsa-sha256 header.s=google header.b=b2ruRhxH
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xW2ti-0000WX-T2; Tue, 24 Nov 2026 21:38:14 -0500
+	id 1xW2tf-0000Pc-Cy; Tue, 24 Nov 2026 21:38:11 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2tD-0000F4-C7
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:44 -0500
-Received: from mail-yw1-x112e.google.com ([2607:f8b0:4864:20::112e])
+ id 1xW2t3-0000Dd-QL
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:36 -0500
+Received: from mail-yw1-x1136.google.com ([2607:f8b0:4864:20::1136])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <asrinivasan@tenstorrent.com>)
- id 1xW2t6-00075t-ST
- for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:43 -0500
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-8b4d5e645d1so33595007b3.1
- for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:33 -0800 (PST)
+ id 1xW2t0-0006gt-Is
+ for qemu-riscv@nongnu.org; Tue, 24 Nov 2026 21:37:33 -0500
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-8b2d14968c9so49950547b3.0
+ for <qemu-riscv@nongnu.org>; Tue, 24 Nov 2026 18:37:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tenstorrent.com; s=google; t=1795574251; x=1796179051; darn=nongnu.org;
+ d=tenstorrent.com; s=google; t=1795574248; x=1796179048; darn=nongnu.org;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=15ZiMIlKWSXfjh2bljs8N9XPSIeZkVSaqHO+BLmCJrw=;
- b=bivRgrDfq0TYdVxIg2yrKdNz+aQ2jr4JSNu/lvUMAj4bOJYu15n62joOomPFVs7iof
- lmkBrXZDna7FJDe/PJyqlA0RGivaAA88C7efQZykQRMYcI2P4y2rhseGE5p9HcJEXnM1
- MxBxrq742x0B3HOM4HdyUVtdpYolKFuNwGOu174HrHpeq4L1NVzUeSdFsTluRmXAdsyt
- EyilQSkzaG4KfHBekv8ht12GPJ4TziISBceEwkNhNZJyLx+mwYFZ4+CG//peCcFAb9Ku
- LrW9n05oeusdXRzkcX4GwoE2jWDFY4L0Tcdw5VobqXJRlK8HWo6o9OWcJcdIppV7RAdg
- G80A==
+ bh=jFHhwHMgrIoOJ5yqs7RMfUf7Q9Iqhbn4Sz+oDFcTYA4=;
+ b=b2ruRhxHvEjy/cRve5PGxuQS6n47OWjKdEvMY3VKOCCXYlZhvu20vQQotHmCojints
+ YD4SuyM4pd3KIzpBNx3feOazySbzaBe6z3jrqE4PdFtTrf0zJQ4AqCmiusC+T5dSM8qt
+ +WLbD0lUKCouVqkf+13BCV6I+ZxpiSEYAfZQTk9GFvWt8XMoPYcIlrMAaVRFvDbtzmc9
+ s6cpLr7kic5dq66PEIGho0aWmW4IeW77YsSaICkdXnOX7RYgv3T3Qh+IiVXrNYht32IF
+ hW4dcAqa8WLvdgVDVS0m9kXr+oIN+2fBSRl9bEIgc4crgW1v1XN392RQkRAzqWt/dwXu
+ PhcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795574251; x=1796179051;
+ d=1e100.net; s=20260707; t=1795574248; x=1796179048;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :content-type:mime-version:subject:date:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=15ZiMIlKWSXfjh2bljs8N9XPSIeZkVSaqHO+BLmCJrw=;
- b=mAdlt4vAaOjAFgSO7t5bsk7O30uxpb5a1zZbsEPq7dRxQhW/7vTCPn+UnH6WIzso4M
- dImZiULJ8cq6WkxzpRd9sqnkkl54vvi9Y62ujXbkpSyXutjjdH7eSUr2rjCQ6D+9qD8T
- 4D0ADgOcvOZd1kPsfS+gucNByYn68e51JtUm27ZqmRMmaJ3bLvlJ/u+WQENu1RqbbsvL
- ClZeamvSfP39rHU78iM5lrp3YgC+YKpn0hXO39HwSt3jqEESsrnlh6S7WMRY5/xa/k6u
- 9yeIAXrBlnPy+L+C7u5BsyWn3mHsj2BkLqQ1enFFLXJlvmNw2wo+2Nod7BMIEm8fyf7g
- 6IPg==
+ bh=jFHhwHMgrIoOJ5yqs7RMfUf7Q9Iqhbn4Sz+oDFcTYA4=;
+ b=ZTbb5j74F9P2Qy/dKr81oFB+EmgpJSvo7xbKTSvLWyKWCp3t9VXqMsIons94A/U3Na
+ Hi28/7qnkPnJl+32F6BWq81yk1p091lP57F4GLId9UxxCLxetxAJh1erJVEuTC6GUvBr
+ V5jETFwG9lc2Q6yu50HJdYvb4E1vCsRz+SfeV96WCWWUjRq9l9VWL6Q958DGwMt1b7cw
+ L19md9pSXcY6l0vSWuaR9+z91r3bd56HKUp7h+imYKJDGX7YNMuh81oH86HF1E5CCuX/
+ lG/7EgEGnsB8H3VtEJuhMR297mQ4GPmO9yQJglOzo3TfL9f7rpIIZSt26aRjoBoLF9q7
+ 9kyA==
 X-Forwarded-Encrypted: i=1;
- AL+hErHyJmHA+usAFkSkG450O42qK+DdKDIhBnETK1ofeZ9+l0ijx3PQCkt2Ehx8HMojnIXZcdF/vAks6PQH@nongnu.org
-X-Gm-Message-State: APuU4Z+44WzvlDpR+C6rmab++p4eXdRINEkq2zkDsxirby2V5Cd9FhSF
- gI7qPHdYbQ+p+pBUpjLQ4kbzAlK5ji+HiEoWvupLCPjk1DvkZ2NXwiLVBAr2Nxn9M6c=
-X-Gm-Gg: AZFdTZcVW0D3jeL9BfCXCFWSd2GBRZS1JkbNZdJjegDZH+oaeNBus0SP19ODzduk5Aq
- NQ0tD7VUuTUfDbnn+gecE53YwcHX3WtxVw2NpBF88UkwDKI+8DcInTDbpP1DMEYPQXyyl6B6V1h
- u4gJyN4jO7VmbhZITTWkiNww+OtsG7kMk3P7+J3K3o51+Zz5v0UIuTVESjWD0hAViISWcJsAOiz
- L+5LqBIY6PcqwKhiagznEZ0k4Y8pzDT4m/P8YErfKVCVhsY+l5mEbssoJ7jMFS0SSDX3wCAPyfY
- GcHSI/a8bAzVti4hYG/pjZpPMZKBPwxO7w6Alw4svUT9z+aIPw5GDQnRJFvHmXgOD4QNuikIc+j
- b/wOMBtKNJkLGeLLhtnhf+qhT/ihANX3OCEfjPFSuIzY6plzPFdiaNGCk1AQsF9heu5oAZZY2ZQ
- nYO2Ja8l7spZzmP6umO92EQl/aM8BW872NMzOlkZXWvTCrMShra5y2wlf1RbmRCkaZqXvzEKJJC
- xTNwcZKg1/T+29cJsiAhjo8FPqhix4zND4fAYMMXyUNR1S4mryyhEkZLRBfKbt43ewEZZr2VqRD
- jNTN6REGGXx8U50MIaCDfcJYXXXUjC7livnHfQkVfOwlWS8RLX8RIumtqEuh0vChCyBVo4kAwIf
- sVtgGVpi9
-X-Received: by 2002:a05:690c:688e:b0:8b1:813e:91b0 with SMTP id
- 00721157ae682-8b52031ab68mr56858307b3.9.1795574251303; 
- Tue, 24 Nov 2026 18:37:31 -0800 (PST)
+ AL+hErG0FVpq4prLloRaYRcD55cM5Ft22ptq7LOIjZ9VQAvh+qvhx0zHPDNiIAWwD0DOaq94X/FlzrOrRYoS@nongnu.org
+X-Gm-Message-State: APuU4Z9K7ypuc7Bj9KKSP3cq0yJMKdIcyXiWiLE3ONme03Vz4HCpfYfk
+ fCh4JJEZK6IFfeNkPoPrsIVmcSvAwlOtepd8BFQuuvE7F4KW5sGIiTN7Hm4qPFp8vUI=
+X-Gm-Gg: AZFdTZf7hKpC0oLRxeogNdwgdI4FRSg6wn29r97HzviAXK7adSN8vqS6uY/Jl2snNLX
+ Qji5JHCJIIfV9tCGLs8VDYqdhHfm00RA++DtLCh72U37BXL7TQsvfe4YckE4QcogaqDU19chP/C
+ otgWc2+A6XYhr6KBHxRWUuyjhfe+WlSRLRPOoNY2ZRHEN4bG2dGW+CHlLqJenM26Bxx5Zc65rhR
+ KkPFPOc79PDI9NpPHCd9bgpTCX5pnh1LSzokqHp5xlbvae/KnhxgeSx6xj07w1AgnfMj51X0V7V
+ sqNtkTXGD+rMuGr/VrAOOk6uMEW4GP/5phmZFU8Sz/J7NSZ6BkW9XU7jKTdHjjyNvSLxt4rwuPv
+ /w9ZnANHu6kX8u9j54LhQq06vE7zsraxvlnjHZ0RDur2JluvfRCVBVHRTCJ7G+2f+gboK8vEsht
+ Tbh9FzYNxw6nbiKYTKSyYmpN1lmXopDIPI1GnWpygo8uaAeDjci8U6okp+DgC7eoMaFHpaWa+py
+ amJ10EWInODWzdxDCdWHH7kU5s1PZPwJmfdH/kEiZtdxJZYZuj/Yt5ipPpqHBQKOduxQ9a2UFw4
+ CvvMexi16HP1Wr9Aw6SGb9DBKrfBFrULTcNQ/3+35Q98BXFGtkANLrIVulUUgW/iGU3i8TBjqyS
+ hcdQbc1a2XHhqa6iiWg91NwyUGALg9Nc=
+X-Received: by 2002:a05:690c:b99:b0:8b3:504a:42e9 with SMTP id
+ 00721157ae682-8b520436e29mr58803837b3.10.1795574248253; 
+ Tue, 24 Nov 2026 18:37:28 -0800 (PST)
 Received: from [192.168.2.129] ([2600:1700:220:59e0:ea8f:7897:2f4d:9891])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.30
+ 00721157ae682-8b52028d628sm65626717b3.8.2026.11.24.18.37.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Nov 2026 18:37:30 -0800 (PST)
+ Tue, 24 Nov 2026 18:37:27 -0800 (PST)
 From: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
-Date: Tue, 24 Nov 2026 20:37:23 -0600
-Subject: [PATCH 4/8] hw/misc: Add a model for Spacemit K3 syscons
+Date: Tue, 24 Nov 2026 20:37:20 -0600
+Subject: [PATCH 1/8] target/riscv: Add Spacemit X100 CPU type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-spacemit_k3-v1-4-e911d6e88542@oss.tenstorrent.com>
+Message-Id: <20261124-spacemit_k3-v1-1-e911d6e88542@oss.tenstorrent.com>
 References: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 In-Reply-To: <20261124-spacemit_k3-v1-0-e911d6e88542@oss.tenstorrent.com>
 To: qemu-devel@nongnu.org
@@ -92,14 +92,14 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
  Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 X-Mailer: b4 0.15.1
-Received-SPF: pass client-ip=2607:f8b0:4864:20::112e;
- envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x112e.google.com
+Received-SPF: pass client-ip=2607:f8b0:4864:20::1136;
+ envelope-from=asrinivasan@tenstorrent.com; helo=mail-yw1-x1136.google.com
 X-Spam_score_int: -19
 X-Spam_score: -2.0
 X-Spam_bar: --
 X-Spam_report: (-2.0 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_EF=-0.1, RCVD_IN_DNSWL_NONE=-0.0001,
- SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
+ SPF_HELO_NONE=0.001, SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
@@ -111,65 +111,205 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-16.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add a model for syscons in the Spacemit K3 SoC that implement Clocks,
-Reset, DDR Control and other mischallaneous functionality.
+Adds a CPU definition for the X100 cores present in the Spacemit K3 SoC.
+The CPU definition is based on information from datasheet[1] and Linux
+device tree. The custom CSRs are based on what the Spacemit K3 bootrom,
+U-Boot SPL and OpenSBI write to during the boot process.
 
-Minimal functionality is implemented for each device so that the
-spacemit-k3 machine can boot up till U-Boot/EDK2.
+[1] https://github.com/spacemit-com/docs-chip/tree/main/en/key_stone/k3
 
 Signed-off-by: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
 ---
- MAINTAINERS                          |   2 +
- hw/misc/meson.build                  |   1 +
- hw/misc/spacemit_k3_syscon.c         | 338 +++++++++++++++++++++++++++++++++++
- hw/misc/trace-events                 |   8 +
- include/hw/misc/spacemit_k3_syscon.h |  80 +++++++++
- 5 files changed, 429 insertions(+)
+ MAINTAINERS                     |  6 +++
+ target/riscv/cpu-qom.h          |  1 +
+ target/riscv/cpu.c              | 87 +++++++++++++++++++++++++++++++++++++++++
+ target/riscv/cpu_vendorid.h     |  4 ++
+ target/riscv/tcg/csr.h          |  3 ++
+ target/riscv/tcg/meson.build    |  1 +
+ target/riscv/tcg/spacemit_csr.c | 82 ++++++++++++++++++++++++++++++++++++++
+ 7 files changed, 184 insertions(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 52a9ffbb33..7dfae9f40d 100644
+index 40bf63651c..a9dbb39815 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -1858,8 +1858,10 @@ Spacemit Machines
- M: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
- L: qemu-riscv@nongnu.org
- S: Supported
-+F: hw/misc/spacemit_*.c
- F: hw/ssi/spacemit_*.c
- F: hw/ufs/spacemit_*.c
-+F: include/hw/misc/spacemit_*.h
- F: include/hw/ssi/spacemit_*.h
- F: target/riscv/tcg/spacemit_csr.c
+@@ -1854,6 +1854,12 @@ F: hw/*/*sifive*.c
+ F: include/hw/*/*sifive*.h
+ F: tests/functional/riscv64/test_sifive_u.py
  
-diff --git a/hw/misc/meson.build b/hw/misc/meson.build
-index 7a071af82b..558fde8ff5 100644
---- a/hw/misc/meson.build
-+++ b/hw/misc/meson.build
-@@ -169,6 +169,7 @@ specific_ss.add(when: 'CONFIG_MIPS_ITU', if_true: files('mips_itu.c'))
++Spacemit Machines
++M: Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>
++L: qemu-riscv@nongnu.org
++S: Supported
++F: target/riscv/tcg/spacemit_csr.c
++
+ Tenstorrent Machines
+ M: Joel Stanley <joel@jms.id.au>
+ M: Nicholas Piggin <npiggin@gmail.com>
+diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
+index 61234842e3..d88a56f514 100644
+--- a/target/riscv/cpu-qom.h
++++ b/target/riscv/cpu-qom.h
+@@ -56,6 +56,7 @@
+ #define TYPE_RISCV_CPU_THEAD_C908       RISCV_CPU_TYPE_NAME("thead-c908")
+ #define TYPE_RISCV_CPU_THEAD_C908V      RISCV_CPU_TYPE_NAME("thead-c908v")
+ #define TYPE_RISCV_CPU_VEYRON_V1        RISCV_CPU_TYPE_NAME("veyron-v1")
++#define TYPE_RISCV_CPU_SPACEMIT_X100    RISCV_CPU_TYPE_NAME("spacemit-x100")
+ #define TYPE_RISCV_CPU_TT_ASCALON       RISCV_CPU_TYPE_NAME("tt-ascalon")
+ #define TYPE_RISCV_CPU_XIANGSHAN_NANHU  RISCV_CPU_TYPE_NAME("xiangshan-nanhu")
+ #define TYPE_RISCV_CPU_XIANGSHAN_KMH    RISCV_CPU_TYPE_NAME("xiangshan-kunminghu")
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 15c27f4ce4..9bbe0cf626 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -3616,6 +3616,93 @@ static const TypeInfo riscv_cpu_type_infos[] = {
+         .misa_mxl_max = MXL_RV64,
+     ),
  
- specific_ss.add(when: 'CONFIG_RISCV_MIPS_CMGCR', if_true: files('riscv_cmgcr.c'))
- specific_ss.add(when: 'CONFIG_RISCV_MIPS_CPC', if_true: files('riscv_cpc.c'))
-+specific_ss.add(when: 'CONFIG_SPACEMIT', if_true: files('spacemit_k3_syscon.c'))
- if igvm.found()
-    system_ss.add(when: 'CONFIG_FW_CFG_DMA', if_true: files('vmlaunchupdate.c'))
- endif
-diff --git a/hw/misc/spacemit_k3_syscon.c b/hw/misc/spacemit_k3_syscon.c
++    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_SPACEMIT_X100, TYPE_RISCV_VENDOR_CPU,
++        .misa_mxl_max = MXL_RV64,
++        .misa_ext = RVG | RVB | RVC | RVS | RVU | RVH | RVV,
++        .priv_spec = PRIV_VERSION_1_13_0,
++        .vext_spec = VEXT_VERSION_1_00_0,
++#if !defined(CONFIG_USER_ONLY)
++        .cfg.pmp_granularity = 1 << 12,
++        /*
++         * QEMU doesn't allow setting this yet
++         * .cfg.pmp_addr_bits = 38,
++         */
++        .custom_csrs = spacemit_csr_list,
++        .num_triggers = 4,
++#endif
++
++        /* ISA extensions */
++        .cfg.mmu = true,
++        .cfg.vlenb = 256 >> 3,
++        .cfg.elen = 64,
++        .cfg.pmp = true,
++        .cfg.pmp_regions = 16,
++        .cfg.cbom_blocksize = 64,
++        .cfg.cbop_blocksize = 64,
++        .cfg.cboz_blocksize = 64,
++        .cfg.ext_zic64b = true,
++        .cfg.ext_zicbom = true,
++        .cfg.ext_zicbop = true,
++        .cfg.ext_zicboz = true,
++        .cfg.ext_zicntr = true,
++        .cfg.ext_zicond = true,
++        .cfg.ext_zicsr = true,
++        .cfg.ext_zifencei = true,
++        .cfg.ext_zihintntl = true,
++        .cfg.ext_zihintpause = true,
++        .cfg.ext_zihpm = true,
++        .cfg.ext_zimop = true,
++        .cfg.ext_zawrs = true,
++        .cfg.ext_zfa = true,
++        .cfg.ext_zfbfmin = true,
++        .cfg.ext_zfh = true,
++        .cfg.ext_zfhmin = true,
++        .cfg.ext_zcb = true,
++        .cfg.ext_zcmop = true,
++        .cfg.ext_zba = true,
++        .cfg.ext_zbb = true,
++        .cfg.ext_zbc = true,
++        .cfg.ext_zbs = true,
++        .cfg.ext_zkt = true,
++        .cfg.ext_zvbb = true,
++        .cfg.ext_zvbc = true,
++        .cfg.ext_zvfbfmin = true,
++        .cfg.ext_zvfbfwma = true,
++        .cfg.ext_zvfh = true,
++        .cfg.ext_zvfhmin = true,
++        .cfg.ext_zvkb = true,
++        .cfg.ext_zvkg = true,
++        .cfg.ext_zvkn = true,
++        .cfg.ext_zvknc = true,
++        .cfg.ext_zvkned = true,
++        .cfg.ext_zvkng = true,
++        .cfg.ext_zvknha = true,
++        .cfg.ext_zvknhb = true,
++        .cfg.ext_zvks = true,
++        .cfg.ext_zvksc = true,
++        .cfg.ext_zvksed = true,
++        .cfg.ext_zvksg = true,
++        .cfg.ext_zvksh = true,
++        .cfg.ext_zvkt = true,
++        .cfg.ext_smaia = true,
++        .cfg.ext_smcntrpmf = true,
++        .cfg.ext_smstateen = true,
++        .cfg.ext_ssaia = true,
++        .cfg.ext_sscofpmf = true,
++        .cfg.ext_sstc = true,
++        .cfg.ext_svinval = true,
++        .cfg.ext_svnapot = true,
++        .cfg.ext_svpbmt = true,
++
++        .cfg.mvendorid = SPACEMIT_VENDOR_ID,
++        .cfg.marchid = SPACEMIT_X100_MARCHID,
++        .cfg.mimpid = SPACEMIT_X100_MIMPID,
++
++        .cfg.pmu_mask = MAKE_64BIT_MASK(3, 16),
++
++        .cfg.max_satp_mode = VM_1_10_SV39,
++    ),
++
+     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_THEAD_C906, TYPE_RISCV_VENDOR_CPU,
+         .misa_mxl_max = MXL_RV64,
+         .misa_ext = RVG | RVC | RVS | RVU,
+diff --git a/target/riscv/cpu_vendorid.h b/target/riscv/cpu_vendorid.h
+index 751a13aace..885604604d 100644
+--- a/target/riscv/cpu_vendorid.h
++++ b/target/riscv/cpu_vendorid.h
+@@ -10,4 +10,8 @@
+ 
+ #define TENSTORRENT_VENDOR_ID   0x7a1
+ 
++#define SPACEMIT_VENDOR_ID      0x710
++#define SPACEMIT_X100_MARCHID   0x8000000058000002
++#define SPACEMIT_X100_MIMPID    0x33d8a600
++
+ #endif /*  TARGET_RISCV_CPU_VENDORID_H */
+diff --git a/target/riscv/tcg/csr.h b/target/riscv/tcg/csr.h
+index 53ba3b4a4d..e2515a9e4c 100644
+--- a/target/riscv/tcg/csr.h
++++ b/target/riscv/tcg/csr.h
+@@ -81,6 +81,9 @@ bool riscv_csr_is_vpu(int csrno);
+ void riscv_get_csr_ops(int csrno, riscv_csr_operations *ops);
+ void riscv_set_csr_ops(int csrno, const riscv_csr_operations *ops);
+ 
++/* In spacemit_csr.c */
++extern const RISCVCSR spacemit_csr_list[];
++
+ /* In th_csr.c */
+ extern const RISCVCSR th_csr_list[];
+ 
+diff --git a/target/riscv/tcg/meson.build b/target/riscv/tcg/meson.build
+index 86805b30cb..3d7fc5fcc7 100644
+--- a/target/riscv/tcg/meson.build
++++ b/target/riscv/tcg/meson.build
+@@ -24,6 +24,7 @@ riscv_system_ss.add(files(
+   'mips_csr.c',
+   'pmp.c',
+   'pmu.c',
++  'spacemit_csr.c',
+   'th_csr.c',
+ ))
+ 
+diff --git a/target/riscv/tcg/spacemit_csr.c b/target/riscv/tcg/spacemit_csr.c
 new file mode 100644
-index 0000000000..03a826495a
+index 0000000000..8f7a9b9418
 --- /dev/null
-+++ b/hw/misc/spacemit_k3_syscon.c
-@@ -0,0 +1,338 @@
++++ b/target/riscv/tcg/spacemit_csr.c
+@@ -0,0 +1,82 @@
 +/*
-+ * Spacemit K3 Syscons
-+ *
-+ * Control clocks, resets, ddr and misc functionality
++ * Spacemit X100 CSRs
 + *
 + * SPDX-License-Identifier: GPL-2.0-or-later
 + *
@@ -177,435 +317,79 @@ index 0000000000..03a826495a
 + */
 +
 +#include "qemu/osdep.h"
-+#include "qapi/error.h"
-+#include "migration/vmstate.h"
-+#include "qemu/log.h"
-+#include "qemu/module.h"
-+#include "hw/core/qdev-properties.h"
-+#include "system/address-spaces.h"
-+#include "system/dma.h"
-+#include "crypto/hash.h"
-+#include "hw/core/cpu.h"
-+#include "hw/misc/spacemit_k3_syscon.h"
-+#include "trace.h"
++#include "cpu.h"
++#include "cpu_vendorid.h"
++#include "csr.h"
 +
-+#define TO_REG(offset) (offset >> 2)
++#define CSR_SPACEMIT_TCMCFG   0x5db
++#define CSR_SPACEMIT_MSETUP   0x7c0
++#define CSR_SPACEMIT_MHCR     0x7c1
++#define CSR_SPACEMIT_MHCOR    0x7c2
++#define CSR_SPACEMIT_PMACFG0  0x7de
++#define CSR_SPACEMIT_PMAADDR8 0x7e8
++#define CSR_SPACEMIT_ML2SETUP 0x7f0
++#define CSR_SPACEMIT_ML2HINT  0x7f7
++#define CSR_SPACEMIT_MVMD1    0xbf9
 +
-+#define BOOT_MODE_VALUE_NOR 0x10000200
-+#define BOOT_MODE_VALUE_EMMC 0x10000000
-+#define BOOT_MODE_VALUE_NAND 0x10000400
-+#define BOOT_MODE_VALUE_UFS 0x10000600
-+#define BOOT_MODE_VALUE_USB 0x10001000
-+#define BOOT_MODE_VALUE_UART 0x10001800
-+
-+/* CPU Config register offsets */
-+#define BOOT_PIN_SELECT 0x20
-+
-+/* Syscon APMU register offsets */
-+#define APMU_RCPU_CLK_RES_CTRL 0x14c
-+
-+/* Syscon MPMU register offsets */
-+#define MPMU_POSR 0x10
-+
-+static uint64_t spacemit_k3_syscon_mpmu_read(void *opaque, hwaddr offset,
-+                                             unsigned size)
++static RISCVException read_zero(CPURISCVState *env, int csrno,
++                                target_ulong *val)
 +{
-+    uint64_t ret = 0;
++    *val = 0;
 +
-+    switch (offset) {
-+    case MPMU_POSR:
-+        ret = 0xff0000;
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "%s: unimplemented read (size %u, offset 0x%"
-+                      HWADDR_PRIx ")\n", TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT,
-+                      size, offset);
-+        break;
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException write_none(CPURISCVState *env, int csrno,
++                                 target_ulong val, uintptr_t ra)
++{
++    return RISCV_EXCP_NONE;
++}
++
++static RISCVException any_x100(CPURISCVState *env, int csrno)
++{
++    if (env_archcpu(env)->cfg.mimpid != SPACEMIT_X100_MIMPID ||
++      env_archcpu(env)->cfg.marchid != SPACEMIT_X100_MARCHID) {
++        return RISCV_EXCP_ILLEGAL_INST;
 +    }
 +
-+    trace_spacemit_k3_syscon_mpmu_read(offset, size, ret);
-+    return ret;
++    return RISCV_EXCP_NONE;
 +}
 +
-+static void spacemit_k3_syscon_mpmu_write(void *opaque, hwaddr offset,
-+                                  uint64_t value, unsigned size)
++static bool test_spacemit_mvendorid(RISCVCPU *cpu)
 +{
-+    trace_spacemit_k3_syscon_mpmu_write(offset, size, value);
-+    qemu_log_mask(LOG_UNIMP, "%s: unimplemented write (size %u, offset 0x%"
-+                  HWADDR_PRIx ", value 0x%" PRIx64 ")\n",
-+                  TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT, size, offset, value);
++    return cpu->cfg.mvendorid == SPACEMIT_VENDOR_ID;
 +}
 +
-+static uint64_t spacemit_k3_syscon_apmu_read(void *opaque, hwaddr offset,
-+                                             unsigned size)
-+{
-+    uint64_t ret = 0;
-+
-+    switch (offset) {
-+    case APMU_RCPU_CLK_RES_CTRL:
-+        ret = BIT(23);
-+        break;
-+    default:
-+        qemu_log_mask(LOG_UNIMP, "%s: unimplemented read (size %u, offset 0x%"
-+                      HWADDR_PRIx ")\n", TYPE_SPACEMIT_K3_SYSCON_APMU_UNIT,
-+                      size, offset);
-+        break;
-+    }
-+
-+    trace_spacemit_k3_syscon_apmu_read(offset, size, ret);
-+    return ret;
-+}
-+
-+static void spacemit_k3_syscon_apmu_write(void *opaque, hwaddr offset,
-+                                  uint64_t value, unsigned size)
-+{
-+    trace_spacemit_k3_syscon_apmu_write(offset, size, value);
-+}
-+
-+static uint64_t spacemit_k3_ddrc_read(void *opaque, hwaddr offset,
-+                                      unsigned size)
-+{
-+    SpacemitK3DDRCState *s = opaque;
-+    uint64_t ret;
-+
-+    /*
-+     * Register offsets and names are not known
-+     * Values here are set based on what
-+     * DDR fw polls for and what bits it expects
-+     * to be set.
-+     */
-+    switch (offset) {
-+    case 0x10014:
-+        ret = 1;
-+        break;
-+    case 0x10514:
-+        ret = 1;
-+        break;
-+    case 0x10c84:
-+        ret = 1;
-+        break;
-+    case 0x60001c:
-+        ret = 1;
-+        break;
-+    case 0xb40010:
-+        ret = s->b40010;
-+        break;
-+    case 0xb400c8:
-+        ret = 7;
-+        break;
-+    default:
-+        ret = 0;
-+        break;
-+    }
-+
-+    return ret;
-+}
-+
-+static void spacemit_k3_ddrc_write(void *opaque, hwaddr offset,
-+                                  uint64_t value, unsigned size)
-+{
-+    SpacemitK3DDRCState *s = opaque;
-+
-+    switch (offset) {
-+    case 0xb400c4:
-+        s->b40010 = value == 0 ? 1 : 0;
-+        break;
-+    }
-+}
-+
-+static uint64_t spacemit_k3_cpu_config_read(void *opaque, hwaddr offset,
-+                                            unsigned size)
-+{
-+    SpacemitK3CPUConfigState *s = SPACEMIT_K3_CPU_CONFIG(opaque);
-+    uint64_t ret = s->regs[TO_REG(offset)];
-+
-+    trace_spacemit_k3_cpu_config_read(offset, size, ret);
-+    return ret;
-+}
-+
-+static void spacemit_k3_cpu_config_write(void *opaque, hwaddr offset,
-+                                  uint64_t value, unsigned size)
-+{
-+    SpacemitK3CPUConfigState *s = SPACEMIT_K3_CPU_CONFIG(opaque);
-+
-+    trace_spacemit_k3_cpu_config_write(offset, size, value);
-+
-+    s->regs[TO_REG(offset)] = value;
-+}
-+
-+static uint32_t spacemit_k3_boot_mode_value(int boot_mode)
-+{
-+    static const uint32_t boot_mode_values[] = {
-+      [SPACEMIT_K3_BOOT_MODE_EMMC] = BOOT_MODE_VALUE_EMMC,
-+      [SPACEMIT_K3_BOOT_MODE_NOR] = BOOT_MODE_VALUE_NOR,
-+      [SPACEMIT_K3_BOOT_MODE_NAND] = BOOT_MODE_VALUE_NAND,
-+      [SPACEMIT_K3_BOOT_MODE_UFS] = BOOT_MODE_VALUE_UFS,
-+      [SPACEMIT_K3_BOOT_MODE_USB] = BOOT_MODE_VALUE_USB,
-+      [SPACEMIT_K3_BOOT_MODE_UART] = BOOT_MODE_VALUE_UART,
-+    };
-+
-+    if (boot_mode < 0 || boot_mode >= ARRAY_SIZE(boot_mode_values)) {
-+        return BOOT_MODE_VALUE_NOR;
-+    }
-+
-+    return boot_mode_values[boot_mode];
-+}
-+
-+static const MemoryRegionOps spacemit_k3_syscon_mpmu_ops = {
-+    .read = spacemit_k3_syscon_mpmu_read,
-+    .write = spacemit_k3_syscon_mpmu_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
++const RISCVCSR spacemit_csr_list[] = {
++    { .csrno = CSR_SPACEMIT_TCMCFG,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "tcmcfg", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_MSETUP,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "msetup", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_MHCR,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "mhcr", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_MHCOR,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "mhcor", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_PMACFG0,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "pmacfg0", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_PMAADDR8,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "pmaaddr8", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_ML2SETUP,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "ml2setup", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_ML2HINT,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "ml2hint", any_x100, read_zero, write_none } },
++    { .csrno = CSR_SPACEMIT_MVMD1,
++      .insertion_test = test_spacemit_mvendorid,
++      .csr_ops = { "mvmd1", any_x100, read_zero, write_none } },
++    { }
 +};
-+
-+static const MemoryRegionOps spacemit_k3_syscon_apmu_ops = {
-+    .read = spacemit_k3_syscon_apmu_read,
-+    .write = spacemit_k3_syscon_apmu_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
-+};
-+
-+static const MemoryRegionOps spacemit_k3_ddrc_ops = {
-+    .read = spacemit_k3_ddrc_read,
-+    .write = spacemit_k3_ddrc_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
-+};
-+
-+static const MemoryRegionOps spacemit_k3_cpu_config_ops = {
-+    .read = spacemit_k3_cpu_config_read,
-+    .write = spacemit_k3_cpu_config_write,
-+    .endianness = DEVICE_LITTLE_ENDIAN,
-+    .valid = {
-+        .min_access_size = 4,
-+        .max_access_size = 4,
-+    },
-+};
-+
-+static void spacemit_k3_syscon_mpmu_init(Object *obj)
-+{
-+    SpacemitK3SysconMPMUState *s = SPACEMIT_K3_SYSCON_MPMU_UNIT(obj);
-+    SysBusDevice *dev = SYS_BUS_DEVICE(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &spacemit_k3_syscon_mpmu_ops, s,
-+                          TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT,
-+                          SPACEMIT_K3_SYSCON_MPMU_SIZE);
-+    sysbus_init_mmio(dev, &s->mmio);
-+}
-+
-+static void spacemit_k3_syscon_apmu_init(Object *obj)
-+{
-+    SpacemitK3SysconAPMUState *s = SPACEMIT_K3_SYSCON_APMU_UNIT(obj);
-+    SysBusDevice *dev = SYS_BUS_DEVICE(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &spacemit_k3_syscon_apmu_ops, s,
-+                          TYPE_SPACEMIT_K3_SYSCON_APMU_UNIT,
-+                          SPACEMIT_K3_SYSCON_APMU_SIZE);
-+    sysbus_init_mmio(dev, &s->mmio);
-+}
-+
-+static void spacemit_k3_ddrc_init(Object *obj)
-+{
-+    SpacemitK3DDRCState *s = SPACEMIT_K3_DDRC(obj);
-+    SysBusDevice *dev = SYS_BUS_DEVICE(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &spacemit_k3_ddrc_ops, s,
-+                          TYPE_SPACEMIT_K3_DDRC, SPACEMIT_K3_DDRC_SIZE);
-+    sysbus_init_mmio(dev, &s->mmio);
-+
-+    s->b40010 = 0;
-+}
-+
-+static void spacemit_k3_cpu_config_init(Object *obj)
-+{
-+    SpacemitK3CPUConfigState *s = SPACEMIT_K3_CPU_CONFIG(obj);
-+    SysBusDevice *dev = SYS_BUS_DEVICE(obj);
-+
-+    memory_region_init_io(&s->mmio, obj, &spacemit_k3_cpu_config_ops, s,
-+                          TYPE_SPACEMIT_K3_CPU_CONFIG,
-+                          SPACEMIT_K3_CPU_CONFIG_SIZE);
-+    sysbus_init_mmio(dev, &s->mmio);
-+}
-+
-+static void spacemit_k3_ddrc_reset_hold(Object *obj, ResetType type)
-+{
-+    SpacemitK3DDRCState *s = SPACEMIT_K3_DDRC(obj);
-+
-+    s->b40010 = 0;
-+}
-+
-+static void spacemit_k3_ddrc_class_init(ObjectClass *oc,
-+                                               const void *data)
-+{
-+    ResettableClass *rc = RESETTABLE_CLASS(oc);
-+
-+    rc->phases.hold = spacemit_k3_ddrc_reset_hold;
-+}
-+
-+static void spacemit_k3_cpu_config_reset_hold(Object *obj, ResetType type)
-+{
-+    SpacemitK3CPUConfigState *s = SPACEMIT_K3_CPU_CONFIG(obj);
-+
-+    memset(s->regs, 0, sizeof(s->regs));
-+    s->regs[TO_REG(BOOT_PIN_SELECT)] =
-+        spacemit_k3_boot_mode_value(s->boot_mode);
-+}
-+
-+static const Property spacemit_k3_cpu_config_properties[] = {
-+    DEFINE_PROP_INT32("boot-mode", SpacemitK3CPUConfigState, boot_mode,
-+                      SPACEMIT_K3_BOOT_MODE_NOR),
-+};
-+
-+static void spacemit_k3_cpu_config_class_init(ObjectClass *klass,
-+                                              const void *data)
-+{
-+    DeviceClass *dc = DEVICE_CLASS(klass);
-+    ResettableClass *rc = RESETTABLE_CLASS(klass);
-+
-+    device_class_set_props(dc, spacemit_k3_cpu_config_properties);
-+    rc->phases.hold = spacemit_k3_cpu_config_reset_hold;
-+}
-+
-+static const TypeInfo spacemit_k3_syscon_types[] = {
-+    {
-+        .name = TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(SpacemitK3SysconMPMUState),
-+        .instance_init = spacemit_k3_syscon_mpmu_init,
-+    },
-+    {
-+        .name = TYPE_SPACEMIT_K3_SYSCON_APMU_UNIT,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(SpacemitK3SysconAPMUState),
-+        .instance_init = spacemit_k3_syscon_apmu_init,
-+    },
-+    {
-+        .name = TYPE_SPACEMIT_K3_DDRC,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(SpacemitK3DDRCState),
-+        .instance_init = spacemit_k3_ddrc_init,
-+        .class_init = spacemit_k3_ddrc_class_init,
-+    },
-+    {
-+        .name = TYPE_SPACEMIT_K3_CPU_CONFIG,
-+        .parent = TYPE_SYS_BUS_DEVICE,
-+        .instance_size = sizeof(SpacemitK3CPUConfigState),
-+        .instance_init = spacemit_k3_cpu_config_init,
-+        .class_init = spacemit_k3_cpu_config_class_init,
-+    },
-+};
-+DEFINE_TYPES(spacemit_k3_syscon_types);
-diff --git a/hw/misc/trace-events b/hw/misc/trace-events
-index 6c425ce8da..ec7072f309 100644
---- a/hw/misc/trace-events
-+++ b/hw/misc/trace-events
-@@ -474,3 +474,11 @@ restore_host_x86_igvm(void) ""
- # tt_atlantis_prcm.c
- tt_atlantis_prcm_read(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
- tt_atlantis_prcm_write(uint32_t domain, uint64_t offset, uint64_t data) "domain 0x%02x offset 0x%" PRIx64 " data 0x%" PRIx64
-+
-+# spacemit_k3_syscon.c
-+spacemit_k3_syscon_apmu_read(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-+spacemit_k3_syscon_apmu_write(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-+spacemit_k3_syscon_mpmu_read(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-+spacemit_k3_syscon_mpmu_write(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-+spacemit_k3_cpu_config_read(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-+spacemit_k3_cpu_config_write(uint64_t offset, unsigned size, uint64_t value) "offset 0x%04" PRIx64 " size %u value 0x%08" PRIx64
-diff --git a/include/hw/misc/spacemit_k3_syscon.h b/include/hw/misc/spacemit_k3_syscon.h
-new file mode 100644
-index 0000000000..873f2c08e1
---- /dev/null
-+++ b/include/hw/misc/spacemit_k3_syscon.h
-@@ -0,0 +1,80 @@
-+/*
-+ * Spacemit K3 Syscons
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ *
-+ * Copyright 2026 Anirudh Srinivasan
-+ */
-+
-+#ifndef HW_MISC_SPACEMIT_K3_SYSCON_H
-+#define HW_MISC_SPACEMIT_K3_SYSCON_H
-+
-+#include "qom/object.h"
-+#include "hw/core/sysbus.h"
-+#include "system/memory.h"
-+#include <stdint.h>
-+
-+#define SPACEMIT_K3_CPU_CONFIG_SIZE 0x400
-+#define SPACEMIT_K3_SYSCON_MPMU_SIZE 0x10000
-+#define SPACEMIT_K3_SYSCON_APMU_SIZE 0x400
-+#define SPACEMIT_K3_DDRC_SIZE 0x1000000
-+
-+#define TYPE_SPACEMIT_K3_SYSCON_MPMU_UNIT "spacemit-k3-syscon-mpmu"
-+OBJECT_DECLARE_SIMPLE_TYPE(SpacemitK3SysconMPMUState,
-+                           SPACEMIT_K3_SYSCON_MPMU_UNIT)
-+#define TYPE_SPACEMIT_K3_SYSCON_APMU_UNIT "spacemit-k3-syscon-apmu"
-+OBJECT_DECLARE_SIMPLE_TYPE(SpacemitK3SysconAPMUState,
-+                           SPACEMIT_K3_SYSCON_APMU_UNIT)
-+#define TYPE_SPACEMIT_K3_DDRC "spacemit-k3-ddrc"
-+OBJECT_DECLARE_SIMPLE_TYPE(SpacemitK3DDRCState, SPACEMIT_K3_DDRC)
-+#define TYPE_SPACEMIT_K3_CPU_CONFIG "spacemit-k3-cpu-config"
-+OBJECT_DECLARE_SIMPLE_TYPE(SpacemitK3CPUConfigState, SPACEMIT_K3_CPU_CONFIG)
-+
-+
-+struct SpacemitK3SysconMPMUState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+    /*< public >*/
-+
-+    MemoryRegion mmio;
-+};
-+
-+struct SpacemitK3SysconAPMUState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+    /*< public >*/
-+
-+    MemoryRegion mmio;
-+};
-+
-+struct SpacemitK3DDRCState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+    /*< public >*/
-+
-+    MemoryRegion mmio;
-+
-+    /* Register at offset 0xb40010 that stores some state */
-+    uint32_t b40010;
-+};
-+
-+struct SpacemitK3CPUConfigState {
-+    /*< private >*/
-+    SysBusDevice parent_obj;
-+    /*< public >*/
-+
-+    MemoryRegion mmio;
-+    uint32_t regs[SPACEMIT_K3_CPU_CONFIG_SIZE >> 2];
-+    int boot_mode;
-+};
-+
-+enum {
-+    SPACEMIT_K3_BOOT_MODE_EMMC,
-+    SPACEMIT_K3_BOOT_MODE_NOR,
-+    SPACEMIT_K3_BOOT_MODE_NAND,
-+    SPACEMIT_K3_BOOT_MODE_UFS,
-+    SPACEMIT_K3_BOOT_MODE_USB,
-+    SPACEMIT_K3_BOOT_MODE_UART,
-+};
-+
-+#endif /* HW_MISC_SPACEMIT_K3_SYSCON_H */
 
 -- 
 2.43.0
