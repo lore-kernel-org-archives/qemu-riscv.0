@@ -1,105 +1,104 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0017606A333
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 15:42:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2AD1606A31C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 15:47:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nLMnagva;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=HIJcTmYX
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PgMrAIhQ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FXCzTGqR
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWbbK-0003Cn-SH; Thu, 26 Nov 2026 10:41:34 -0500
+	id 1xWbgd-0007ZU-NF; Thu, 26 Nov 2026 10:47:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xWbbI-0003Aw-Sc
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 10:41:32 -0500
+ id 1xWbg0-0006xo-Og
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 10:46:30 -0500
 Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xWbbG-0001xV-V9
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 10:41:32 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xWbfz-0008Ia-5D
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 10:46:24 -0500
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AQEVYw93298770
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:41:29 GMT
+ 6AQEUtl9088368
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:46:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- IQ85ilLmMN0r86RviriAxcHemBHLrPTeGe2iVuPQyMM=; b=nLMnagvaDP2JCvyb
- Lp+OH7tBzAs+gg94hVQ8OQJQJx1k+5fdcmoeyiJXP4hWTmrIHX+cP3qtj/c0w5gB
- J8gnUhI5Qn6YncKXacF5DDcxAFrE2d03+ekl/vuzn5RH1TSUCp3XQu+GAKvIkvFg
- gi7B4zdBaT9HXPqBL4QHIqz8CwkVvQyxbIpfCgPVntXbsV9zUQ6X906CCpO0dcu1
- W4uvUiFZC8gSWZhgHLrAaUba9DYr2UKZjPUGUWkPFIv0aUjsS//Kp/k9xoYX7Qxl
- Mio5QlafUKlbTsZOHGZMAzRUMSwxaiGUvdNGNzsK95URE6/lNz5/cZIBkM2ps8oh
- LcrVBg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ak02vrf-1
+ a/U9xVMFUIgN7644JNssHaN59LVzIuUQ0CN+in6JWnU=; b=PgMrAIhQcpVPgUJO
+ Qao7/zKx6y99zbbgN8m9jtyGHEguJRldVOcKMkFDgCW/d22+GMbo3SubLcvUN5z8
+ LIYOeJPKwGlRJv4zgPnPp75vQEnZbC/q+L4RP+x0/UGyRDBo3MEG3CifVJMM/ou4
+ 5LQd7hdcf75r34JAZimaflhbxeitO5b0u1w15uygqRWW0RQ0X3XcIvZe5ePDKPgw
+ bJd9PsKBWHHkZNb5IAf3QpOFaauzi6A7v/dUaVc1lwWUaPnsKsGXo2/Dkc8A4Qi7
+ MS0fMhJlVwCozWKMUv6TKQKUP+GbZUZmiy0SJuayu4fRxgVL5gyCPpYnNnd0bnUt
+ kotR3w==
+Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com
+ [209.85.128.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6hm81fe0-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:41:29 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-94a1db3cd3cso10070585a.0
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 07:41:29 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:46:21 +0000 (GMT)
+Received: by mail-yw1-f197.google.com with SMTP id
+ 00721157ae682-8b50256700cso99590397b3.3
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 07:46:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795707689; x=1796312489; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795707981; x=1796312781; darn=nongnu.org;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=IQ85ilLmMN0r86RviriAxcHemBHLrPTeGe2iVuPQyMM=;
- b=HIJcTmYXdh38ETnv/mJkaCbaTKHUHfmEl5ph4b1bCs4JnjelcgbHpbg5daTl9/EMjb
- VtwgJvnMvts0WLPpMTNXHsi7OZVuL2De8kBVKXkI5LDyPTL8RXBpoLhgM3WxM4T9WRMH
- Dkb3VZ+whFKWV8/93oGuw0yQK0fgz8C811ep4bsdCBfeJ15y8fHVqNI0mrsIcaXpqx44
- WNMbjZRMeBJh56aYRij3PUm3lOkEdzclnVGshQJ6E2pBhzFtjSsLQmdiXNcPMp35qREH
- n9pYFRUxbIZah4hZVg6fvmya6onHAKfErEsu3TZVTdHYjATo9qgVylzZp8+TWQEaa8U9
- D9hw==
+ bh=a/U9xVMFUIgN7644JNssHaN59LVzIuUQ0CN+in6JWnU=;
+ b=FXCzTGqR4UAn+2s0HR7CJrtdbXrrNYEGv0HvShCDqNCQCltI64mk/QeOZfWpfoilNq
+ MZ59cNogZAsHanNiA3u9hvZ+oiCypEpZ8p7rZsDFJlThv6H9q1+wTwsCy2JbCHMf+dS3
+ Olp7TLal47zlWqXVK3KgYZdJqz4dTuHv/grkUSsNpUKZZzTpJYcwJRJpjsAFGlPIMuTT
+ l+IkjkFlDO8eEZu8op7VOsCGv4CjQiowtpvPt6PtDp0LDahlGBrZjuHsjd1z0THkSmDb
+ wHRTYRPK6Kt/P7slH8TgRyJe65j0WzwOUgPsDPMTU5OFgrGecdGbpROXQ5Z5JnuhM0xN
+ GmbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795707689; x=1796312489;
+ d=1e100.net; s=20260707; t=1795707981; x=1796312781;
  h=content-transfer-encoding:content-type:in-reply-to:from:references
  :cc:to:content-language:subject:user-agent:mime-version:date
  :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to:content-type;
- bh=IQ85ilLmMN0r86RviriAxcHemBHLrPTeGe2iVuPQyMM=;
- b=r45mstmZhoWATfe56LcyFWtLhLEiARebJSCr3kLTil6w/J+bBYRc9YOYcg3VUyNpee
- 8l00b+asgDZne7kQChA7pMxqDkTmZnvPmnLmFAWPsysR5N40Q9UNuVY5rj9sOeDaXftd
- 2xaNB0/rUQOaSAH4fFRuhDtuDbZk0rhvJ9CKvnGvLVTBgEiN1fojXPfKP8ZK96yyfemL
- nRq2cn/XFfcRG2nHhhk0+vlMFRYO0M+l0o5mKdcwqrTfs3QEBktQo/RwSlDgP0KHMRjz
- 0OZAC8+XTD2WbXTp8wN8idov2UkFoUfSv6hlyOu1ipl+iMovZTUmbHUkmunkMSrAWvS1
- P5xA==
+ bh=a/U9xVMFUIgN7644JNssHaN59LVzIuUQ0CN+in6JWnU=;
+ b=z8EiKzf3LqM9dBa6b3k2PV4voSDt5m1iqdpDtdAEctkjcpk+u9t8XjvslJOYew1QoF
+ B6tSozF0Yqr4HBXaTkXVRXdIg8o/LOvHZdfcStXMbVpr7N2wNZO3nARhyqFoiIU2PgYb
+ DCIeQIcmDvFZDk5ZjxRzitropxKBMaOjy9IfvlSPNr08t+1G/IClFEJeONayHrB5AUwm
+ ke5Y7rTHh9JY8n55TZQGzkjXiWv9iXioDKMsu0yAo6q36uyiubJROBqsjv1cC2p38cjO
+ kyxYWYooUbSF/h3QOgcNYERxixHSt2WAYG/rWmhcbFBGYAHGq2hhUTlt3dGvsInQ8wR0
+ I+Bg==
 X-Forwarded-Encrypted: i=1;
- AL+hErHJ8uFynN2P6YsROEORODtCFeZC8+s2SQc5KFaMKAB0TVmbHKYs5Ww3hGiCthNp3yQA8c007dpCaK+A@nongnu.org
-X-Gm-Message-State: APuU4Z/Eer7BO2y+7VUWdjLipI7mE+T1fXveU9es9fV8sVerOkRJgjlI
- xdV7tJFtrk0c/YEPgUDZ7RLmc0DM78yaG8nl1g9VIZ6mYLmGNm74tv3njP1q0X6OxoSLwx0s6uk
- aCBwXUZsB/fLyrtLgFDq97jpntnyBLzmsq3d5usXAKrdMMrR/ZqpqiggSag==
-X-Gm-Gg: AZFdTZdRAI0kXK98HsjSdkVOuCr6GEPZNfbf3RdayVOdCs1KOVsOAKoCNQo+qbCqRtJ
- f2Eq0RKS1n3D0o8EoeCDyhhArzmSCa7+JMTGnlmVqMwlf677tTsHE1sAVIGnNxhtHsg/GNnQ6e8
- dm0qaJikPtUazo+bxabkUGrnN2FqGeUAXwBwrWWVRxVSMYxZYVp8+11qEQzRpPHrSwekpPBbz0U
- bEJemRTnf9utzxdi6O0muYdfGkwn0khP51NkPTXf4hY3bfAVarttLu76xOowFbF8hJhMZh6B/cd
- xmljQEUD0RUKiH4bue7RqwmPz5qMjcZburZk3D0nF19vGTvwIspqHhG1UCfugbk8I3BmdsRJ/z8
- HtuLB6mrdkYEAFT0XlOGpNwGSpsLsIzu2o0AKXhMFaL1ZVdACkFxpHnl6W24N37yivmT+12Nzqg
- GEQB3FV0c=
-X-Received: by 2002:a05:620a:17a2:b0:947:a247:6afb with SMTP id
- af79cd13be357-949ba965b28mr3889349585a.13.1795707688659; 
- Thu, 26 Nov 2026 07:41:28 -0800 (PST)
-X-Received: by 2002:a05:620a:17a2:b0:947:a247:6afb with SMTP id
- af79cd13be357-949ba965b28mr3889343785a.13.1795707688221; 
- Thu, 26 Nov 2026 07:41:28 -0800 (PST)
+ AL+hErExbrYg7CukcdCxLehw733TEcCAnYaut7rnRtQODs6pzOmR6BUivlYTuVY1jva8Ct+1yyjWteV0oR84@nongnu.org
+X-Gm-Message-State: APuU4Z/cIYCBsAQK9TpTpi3AO/+oj5LDbSP+sxlaiv3H4kfxhxblWLyy
+ kE7APceMPhawYp9QJ9aVe7ACzRVVpbXrNdUWdV4nkYGdJVchjLJil1zjNOIQzlHsDpz75K3xNlk
+ D70ArrdkSvvb2qOZgTE/oM5NeyZIXVF4A9y05MJMFxwFQJSbmRIZd6uQvlw==
+X-Gm-Gg: AZFdTZdGqvjkhRk5/K0CY+1+smL7UUzm9l2+hnlMx8xGIjCjOrQJjFbBZ5Op6lJ7gz5
+ v1Wb+RLmMzFDTm261NaAxXmKxrVVUWs5Zhyvx2pwGVtilLY8jQG4RmbXh433zIAWw28tJfXW2QK
+ 6Okgpf1R6+iJvid9GnayUMTKzaRKfA9sFy3SHC3Y7h3OOJzVKs79Aimgv0P8KweD4xazmQVBIPJ
+ Npls5ViyewlA+V/Vk7nTHIIfrgYZwO2djD1MKpbYBf2yh9vcJIiQxYEq6rVMT4e9OCowO3dXZcV
+ rmMD8MbtyAttsENDTUSbYWlsh6pnHL/2wXER4whYd1kKvhXXVxCOCsaTNE2h4dcK/aoPZwDAr8U
+ L+4/yQ7Mp8akqwX9eL64AOzpQ1tSriizyZsp6XIWG72NA34PR+Uir84Zx2XdbWntR8+bFnlPIQK
+ 3VEpkmYpo=
+X-Received: by 2002:a05:690c:4485:b0:8b4:f2bc:7c39 with SMTP id
+ 00721157ae682-8b52042ee4dmr62693887b3.15.1795707981442; 
+ Thu, 26 Nov 2026 07:46:21 -0800 (PST)
+X-Received: by 2002:a05:690c:4485:b0:8b4:f2bc:7c39 with SMTP id
+ 00721157ae682-8b52042ee4dmr62693627b3.15.1795707980726; 
+ Thu, 26 Nov 2026 07:46:20 -0800 (PST)
 Received: from [192.168.69.202] (pmd666.hd.free.fr. [82.67.153.177])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb884b8429sm957744665e9.14.2026.11.26.07.41.26
+ ffacd0b85a97d-4ab6a67f1b2sm38305753f8f.25.2026.11.26.07.46.18
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 26 Nov 2026 07:41:27 -0800 (PST)
-Message-ID: <aba99506-a519-49dc-93e7-1e45c904349d@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 16:41:25 +0100
+ Thu, 26 Nov 2026 07:46:20 -0800 (PST)
+Message-ID: <80cee4a1-80ed-47bb-99aa-d2ad65303211@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 16:46:18 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/8] MAINTAINERS: update Daniel's entries to be consistent
+Subject: Re: [PATCH 7/8] accel/tcg: update stale comment for cpu_io_recompile
 Content-Language: en-US
 To: =?UTF-8?Q?Alex_Benn=C3=A9e?= <alex.bennee@linaro.org>,
- qemu-devel@nongnu.org, =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?=
- <berrange@redhat.com>
+ qemu-devel@nongnu.org
 Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
  Laurent Vivier <lvivier@redhat.com>, Eric Farman <farman@linux.ibm.com>,
@@ -121,37 +120,36 @@ Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Christian Borntraeger <borntraeger@linux.ibm.com>
 References: <20261126143607.2374676-1-alex.bennee@linaro.org>
- <20261126143607.2374676-2-alex.bennee@linaro.org>
+ <20261126143607.2374676-8-alex.bennee@linaro.org>
 From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20261126143607.2374676-2-alex.bennee@linaro.org>
+In-Reply-To: <20261126143607.2374676-8-alex.bennee@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=T4oZ3PKQ c=1 sm=1 tr=0 ts=6b085329 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
+X-Proofpoint-ORIG-GUID: HQCXZtKAw6AgeVyJ8sHZ2rX0b35Epof0
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2MSBTYWx0ZWRfX0N/ZsCNHnrrs
+ X+B4if8ebwpVlkvFBk1uqW2ZoGCRAOKRnXKO4S2ymx/ZH+OFMccxWd5jmM0P2W9Vsos3k2crjM0
+ VeuBKHB2RqumIWZoCID6lifCGmutCr8=
+X-Proofpoint-GUID: HQCXZtKAw6AgeVyJ8sHZ2rX0b35Epof0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2MSBTYWx0ZWRfXwNUhqYJXhCkD
+ imJ9j43ymMgipAuV5KfEtvxaWKjDPMWdeoAu3tKxrMAodzWL+M/mgEhtYsGd8uwvN8H0mM1/L4F
+ Bpt5rPXNTJW08KEL/FB57Ib5qVTs3wuKz0o6+DbyBIOUAvSiQSEK+1KowEStNKMvpacBS7bn5bN
+ KkjcdfZx3mk1me7GONa1x6zwsmvlUWsh+xaio9PUrMnEBm6D2HugPggpK7KRlCrThqCrhJVPDUM
+ 6xarZbaIuZTYAjrFjVxCHWiEQ66nr4CP9luYSuJ1ZD8Yi00PnND6E+wZij9QEPk1meUJ0RJF0K1
+ NJEzSubNtMZga5v2oPF97cBjMRAlSnYp0Yz6kk+Hy4i87lwFNfz5FxpitnC7bn7ouZNikxE6Qgv
+ vREinnVneZAmY9K0Bhr9WR1TThHFaXqS5yrlsoYxi8RdtAWUjxTdOBA/d0m9IY8N4NnqU+zfhpn
+ CkV3TY10cgUBKXgloqw==
+X-Authority-Analysis: v=2.4 cv=O/usLx9W c=1 sm=1 tr=0 ts=6b08544d cx=c_pps
+ a=0mLRTIufkjop4KoA/9S1MA==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=20KFwNOVAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=f45CAlVN0ESyyzyWPnoA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: 1H_aF7d5f1B3KTYVvTvPep0Kv0i3Jfc2
-X-Proofpoint-GUID: 1H_aF7d5f1B3KTYVvTvPep0Kv0i3Jfc2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2MSBTYWx0ZWRfX6ETwk/BudZ9J
- GZXGIxUW2oLcVMsada8TNJznVZr3hf3zBvNqh/e7Guxl8cfX1yO4KLse3u6tp/OTYFnpfxQ0oQP
- OL6ASCeahjrLio+aIEgHweNHMjfu1AIahTGqmkXLCpkzWhYXEjhxSbZT/Uq5ueSuoYoFmXgCbYl
- 840CEEOQ9k2SNEph6vy3CBi1FQmgg03uDX9EpVBqN4dx0WEgrn7OzUsq+6tDHN5LGFJZDPXz30k
- 4tmqtzG7zU0IVNKT5nSls8DUr4fdWmdU8uc7JedIbCZctSUJQCtayKU55l6TI1XxiG1JgXh4RUC
- 7yXR/6TO0n/Z3fT+7Xahb+HyD5zV/XajgslD6uz4RSYBzR8SkgQg3/z70O4YOSdWctY6wl5QfGd
- aFopIbFh1pxEKS4HBbkuQbk93pF2dpJqXZCzCa0ti8OKu8gxryWp+c22D3B8AiY7TI1CybkNmBh
- v0EGAqzaWjPcBWB20+g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2MSBTYWx0ZWRfX8R7FUHQM+9Ez
- V/RF0E9frjdBPLOYtnPgBR1Lz2qrBRaUwc7hnE0lBJOdEiSCtV5i0jgOO7uxrIBw2W5WigRlpVs
- Kf78L0HGOh7KJvOCz8vgoNTF2HjXNeA=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=ZJAeW4rM5LkjTApEfjwA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22 a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_03,2026-11-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
+ spamscore=0 priorityscore=1501 bulkscore=0 adultscore=0 clxscore=1015
+ impostorscore=0 lowpriorityscore=0 phishscore=0 suspectscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260061
 Received-SPF: pass client-ip=205.220.180.131;
@@ -183,24 +181,37 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 26/11/26 15:36, Alex BennÃ©e wrote:
-> When testing my get_maintainers.py I was shocked to see:
+> since 18a536f1f8d6 ("accel/tcg: Always require can_do_io") we always
+> trigger a recompile when we detect i/o mid-block. Update the comment
+> to reflect that.
 > 
->    ➜  ./scripts/get_maintainer.py --list-absent-maintainers-since "2 years ago"
->    Maintainer              Last Seen   Email(s)                        Subsystems
->    ------------------------------------------------------------------------------
->    ...
->    Daniel P. Berrange      2024-06-10  berrange@redhat.com             QOM, QDev, Seccomp, Cryptography, Buffers, I/O Channels, User authorization, Sockets, File monitor, Functional testing framework, Build system architecture, Meson, GIT submodules
-> 
-> Which is of course incorrect but tripped up by the fact we have been
-> utf-8 clean for some time. There are some entries that are correct so
-> fix up the rest in solidarity with my fellow utf-8 using hackers ;-)
-> 
-> Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-> Message-ID: <20261120182200.789086-1-alex.bennee@linaro.org>
+> Fixes: 18a536f1f8d6 ("accel/tcg: Always require can_do_io")
 > Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 > ---
->   MAINTAINERS | 28 ++++++++++++++--------------
->   1 file changed, 14 insertions(+), 14 deletions(-)
+>   accel/tcg/translate-all.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
+> index ea8257935ed..59991339620 100644
+> --- a/accel/tcg/translate-all.c
+> +++ b/accel/tcg/translate-all.c
+> @@ -566,8 +566,10 @@ void tb_check_watchpoint(CPUState *cpu, uintptr_t retaddr)
+>   
+>   #ifndef CONFIG_USER_ONLY
+>   /*
+> - * In deterministic execution mode, instructions doing device I/Os
+> - * must be at the end of the TB.
+> + * Instructions doing device I/Os must happen at the end
+> + * of the TB as they can change system state affecting following
+> + * instructions. When we detect mid-block IO we trigger a re-compile
+> + * with cflags
 
-Tested-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+"with the TB cflags."
+
+Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+
+>    *
+>    * Called by softmmu_template.h, with iothread mutex not held.
+>    */
+
 
