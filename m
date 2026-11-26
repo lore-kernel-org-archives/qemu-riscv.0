@@ -1,96 +1,120 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E459C606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 14:04:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7ED8A606A327
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 14:36:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ynDEXjUt
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=Fp6FhS/y
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWa4Y-0005qB-8p; Thu, 26 Nov 2026 09:03:38 -0500
+	id 1xWaaL-0007kw-DK; Thu, 26 Nov 2026 09:36:30 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <christopher.elwood2024@gmail.com>)
- id 1xWT1w-0007Vm-5B
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 01:32:29 -0500
-Received: from mail-qt1-x82f.google.com ([2607:f8b0:4864:20::82f])
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xWaa9-0007bm-PZ
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:17 -0500
+Received: from mail-wm1-x336.google.com ([2a00:1450:4864:20::336])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
- (Exim 4.90_1) (envelope-from <christopher.elwood2024@gmail.com>)
- id 1xWT1u-000445-1U
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 01:32:27 -0500
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-5365d26ccbdso73552421cf.0
- for <qemu-riscv@nongnu.org>; Wed, 25 Nov 2026 22:32:23 -0800 (PST)
+ (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
+ id 1xWaa5-0001ft-8p
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:17 -0500
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4bb6adaf0f1so61654595e9.0
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 06:36:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20260707; t=1795674742; x=1796279542; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=8hzrF4+vtHNE3BF7VknLANTlGaG4dcRdQ697tzIwUjw=;
- b=ynDEXjUtPdAyftozPC/woi0D3hogM7orG3pqRNKAIg0IOqnYe69xTKYbwRRk0B48fJ
- pGMRofrydHED9jy8bppKjqLRxNjaAAk2gl6iqClDMScTX0HmvtEOzOq0BPzwKCpi9TLJ
- gBaj9ewqJr65tu54HnNJHJAnA2lc1473h3BvBIMBzcoqV0raDXY213BKzUte3aAWG/f0
- 86ctJP/zMJO/3H8BpcuUNS1xeFVD/tLs0xPQhOKKeofgPYPwThRsnZt+sZzECyTmnTDt
- kRDnGyVykmFqONorpBjqQzxR7asUFkPLekq1Q5H/VdybhBzJvUWJxm2G+g5nFeWsHPOa
- pvvA==
+ d=linaro.org; s=google; t=1795703772; x=1796308572; darn=nongnu.org;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=Nsk3fLPm7OZUWnuZkBr+3MNBAw9oM/IWgRRZixghfFo=;
+ b=Fp6FhS/yz+IQpr9YkMZGKRUnZ7fC5HFiNa2km9zTCBeVctekg3UynPEZ5c78WVv7Im
+ wUY3Z3jmvU54c/zBw3YEhHAnR2QCO/DEADHFAlk0otGnLlnkbIG+48FjgX4Nxgk9vmsg
+ PT/K+1Pfvh8gVCLh7KnNqk7cU8gWi1wYLPzBnrgD4dPB6fbdiv3kb/bWHlnLHhJgJk9K
+ /D8xQfclvUl1PCx3nIsFXGuwDniJkyZYDDRv2m4j23waOlKwlM8krFIktFYSrdlunz9n
+ i9+653ZW5G0vpOJYPmlDhW/UxTB8kyYgOPgTPwvebpcoEeflO6ZOnkq0t0oEC+uBwHvI
+ RK6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795674742; x=1796279542;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=8hzrF4+vtHNE3BF7VknLANTlGaG4dcRdQ697tzIwUjw=;
- b=BVBIpog1NvR3PE41cx8sOkLXKzS8onQ6hTRKQUrVEZeW2BjTiW3gZ8uIUWe7FEkQK2
- NN7D57XLhAYL2sph+9uLqpptBVlmiqOuCDFVMpRu7ebMuOZX1UAnCfv3VmYiEVERF//X
- ar2jMIE8bQrMPA8pxYBHkTS9oe5TSiaBH7S9OZwWKKzoAZlyvJ+IJulMpYHimIACtzde
- oawdKNSV8ecCSB4MeisBH2If6XPhV7QrkUhTF1haTvU5aTNowJ4kVCmuMh5vxGReeGG5
- B9oXhzPp1VlwEL3gq85WD3gLKd35F3ZscOOnf0xdnERiOtxx9/4u9be/nCVsFipX8S3E
- XeNA==
-X-Gm-Message-State: APuU4Z8b5sfZcjAzxSfgn7I6KPOuxUz9FupUI+kE0Q3mQEdy1zUYplwH
- FMQoA6FYzf3YxKLx1alryUWtX0xTmwJsM1fWg1enHl24XXcynwuaw6hQ
-X-Gm-Gg: AZFdTZduaXMVWlR/xhhO0DWzfezgXZ+lbgIzztcnNmO96QFVkn/JGtxAwnzf57xETRU
- 5q0djdi6V4b9aQX1u9PNE3RizhrDGc60pOgYGISZS0SXXQsD4FPFThk70iepZzMc6lwNqWZyDTq
- 2Uqak/Y0RZ62oylYzfzepW2u4ed1EJ1nNqsYwKOD8ipljNeYpsbkueYhzpj/614hLV/vYgqiLTC
- a3CpeOiPiZYR/BIRxrVyaINPxsHSraedQacFJV03YYTa/cIVhElhFlvkjbbj6+CEbZbiZJxRwKQ
- CWMOEAvcq2GPLnF8KgACzbD1CfXEiwFUB41I/frWdGU66hwa4QWcKPTu//nf1L4lUFzRrFDZNaJ
- axvAyFI726hALRn7M6/qTEnj5R0l5H7OnaeYOnOlnk7OZnpDMV4lG0L16AvPOaLHpmKwN53jeXy
- 7jba74CtG1sXNNhm+v+kPc9YDweZF/A60JD5DSf50ULNrPfTte7gbo6DNkCUKLkFdVFj+bcPDzW
- 4aMQqXEVAqqzJnGpCTQK4SAJyeuXjxAGcvLWEs01rdT0dgB+IRoTOoBHLhY4zBMzsBDhnyK2HlW
- fqI06R5Znmkekwed2Hlo2O/vw1pFHm5BqHMptz7P+XGJE+eN4/O5anKvsvSYU6WX6X4F++412AI
- Q6J7beYz72vg8K7vWmTUw2Uyd+7i1ulAr
-X-Received: by 2002:a05:622a:58c6:b0:55d:36d3:a949 with SMTP id
- d75a77b69052e-55d769ea509mr391577981cf.27.1795674742287; 
- Wed, 25 Nov 2026 22:32:22 -0800 (PST)
-Received: from localhost.localdomain (46-110-2-156.zmmnohaa.metronetinc.net.
- [46.110.2.156]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-55d7888fb27sm172357501cf.25.2026.11.25.22.32.21
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Wed, 25 Nov 2026 22:32:21 -0800 (PST)
-From: Christopher Elwood <christopher.elwood2024@gmail.com>
+ d=1e100.net; s=20260707; t=1795703772; x=1796308572;
+ h=content-transfer-encoding:content-type:mime-version:references
+ :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=Nsk3fLPm7OZUWnuZkBr+3MNBAw9oM/IWgRRZixghfFo=;
+ b=R4YzyQoEbSmuEwukCYhXm4oCLG8xDRfNc1Z4JxodilgwvaNIedq/caUCCJKDEy2Pf+
+ GxaYAskSl209TDs6Dim1n00ByR0t4EQDg2w0Z3y+1n5HvyhWJIwW8lslb954JtarB8Ev
+ rkyzIoUPdZ/Ja9HoYbAj5x5E4P8E52yH7wALkhwt7ZzWCd7S20WG9eywEDnmCkfOjvIo
+ wIu6ZYriZbMcah6Ai5YtV89S8qlLRXUYgG3cD0eVAP/Vlbdi7+PGFUHec9zArq4fzqhW
+ AoOKvfpMK+ZbsS77XWiChEW5XgFNC15jiV30oGJ/ka0AXXuJ/UXDxoTbvC+5q/hBlRvv
+ HgVQ==
+X-Forwarded-Encrypted: i=1;
+ AL+hErFrqWcuw/X4chYbpE9sYEZvTMssq/cQYd+kCDJ4Y5A3Dn4Z58Xw6u24pNbgSMLuq9WdJ8oJfRLaFlOR@nongnu.org
+X-Gm-Message-State: APuU4Z/Vt9bwGDLOWq5PSoQiik92W4ppDAaUtit4icki/3RPElxtle6Y
+ uct53QGF984MtA9SH3x4QtC5FRP0mjb3/WLJZ95F4vtzonzf3aRsa/cWtC4KbDmjSJE=
+X-Gm-Gg: AZFdTZdR63KXIxcrvdOXY38oVeMizZHJ0Szpr807NimOnxHQKisbg2qwIMNGchaDaC3
+ QdE2gMhx+dvaDm+tGkPQXTB8CaSZdX5zjbE4ZhztGenSO7shDcz8gAGMTsx6/qTwcwtGpFe35Hg
+ RZJ11XeaRxlsn+JIjSm9AjzqhaMvhaMlVeouXi+tu64uenZL1NhJdyWRLq0NPbKYRKWxaK/fkC5
+ WsUKhHjj2cbNhUMw+ZB2JNuNhrAnCOPaEVQCiUErNbEATHsB9SpQ1F/OXmkiztEvIy46ytoJKNa
+ Ii4zC+XHI7/I4FwRjcY8/K7V2P1IbWBl7JkDfNqEmgUsBsOwW7OX0/odeIC6EMKoDaqSJ0Cfp7z
+ VvhJRdLkQn69C5TUUHuhPu+9KQBSOhSbDcOR1CTiBOwe9IANZUbIYBroBhy2UeYFULpkewqsiES
+ yToIXFYdM7E6ALonpA8mXuMlyOMyJUSamTHLlq9+/BgWpbMrw6V/sXeRB1t6c0wQhpVIFzqa1LJ
+ NruaaJ9f8nIh9iKtP2jQrCMg7gnb1soF1nJ93iM2BYxGwyxMVuBxmfXGLD7uD5jrRDbxVNbQF+X
+ WPWYwzAV3Z0kP/0fq+uOnD70T1ue
+X-Received: by 2002:a05:600c:5303:b0:4a2:1a:a11d with SMTP id
+ 5b1f17b1804b1-4bb88785d24mr412664495e9.0.1795703771390; 
+ Thu, 26 Nov 2026 06:36:11 -0800 (PST)
+Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4bb90660cb4sm566256175e9.2.2026.11.26.06.36.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 26 Nov 2026 06:36:08 -0800 (PST)
+Received: from draig.lan (localhost [IPv6:::1])
+ by draig.lan (Postfix) with ESMTP id D1E095FA33;
+ Thu, 26 Nov 2026 14:36:07 +0000 (GMT)
+From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, palmer@dabbelt.com, alistair.francis@wdc.com,
- liwei1518@gmail.com, daniel.barboza@oss.qualcomm.com,
- zhiwei_liu@linux.alibaba.com, chao.liu@processmission.com,
- Christopher Elwood <christopher.elwood2024@gmail.com>
-Subject: [PATCH] target/riscv: raise access fault for shadow stack accesses to
- non-SS pages
-Date: Thu, 26 Nov 2026 01:32:19 -0500
-Message-Id: <20261126063219.90134-1-christopher.elwood2024@gmail.com>
-X-Mailer: git-send-email 2.39.5 (Apple Git-154)
+Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ qemu-s390x@nongnu.org, Richard Henderson <richard.henderson@linaro.org>,
+ Laurent Vivier <lvivier@redhat.com>, Eric Farman <farman@linux.ibm.com>,
+ LIU Zhiwei <zhiwei_liu@linux.alibaba.com>, Zhao Liu <zhao1.liu@intel.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>, qemu-arm@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Matthew Rosato <mjrosato@linux.ibm.com>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Anirudh Srinivasan <asrinivasan@oss.tenstorrent.com>,
+ Portia Stephens <portias@oss.tenstorrent.com>,
+ Halil Pasic <pasic@linux.ibm.com>, qemu-riscv@nongnu.org,
+ Joel Stanley <joel@jms.id.au>, Chao Liu <chao.liu@processmission.com>,
+ Akihiko Odaki <odaki@rsg.ci.i.u-tokyo.ac.jp>,
+ Michael Ellerman <mpe@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Peter Maydell <peter.maydell@linaro.org>,
+ Nicholas Piggin <npiggin@gmail.com>,
+ =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+ Weiwei Li <liwei1518@gmail.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 4/8] MAINTAINERS: update security reporting links
+Date: Thu, 26 Nov 2026 14:36:03 +0000
+Message-ID: <20261126143607.2374676-5-alex.bennee@linaro.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261126143607.2374676-1-alex.bennee@linaro.org>
+References: <20261126143607.2374676-1-alex.bennee@linaro.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2607:f8b0:4864:20::82f;
- envelope-from=christopher.elwood2024@gmail.com; helo=mail-qt1-x82f.google.com
-X-Spam_score_int: -17
-X-Spam_score: -1.8
-X-Spam_bar: -
-X-Spam_report: (-1.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Received-SPF: pass client-ip=2a00:1450:4864:20::336;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x336.google.com
+X-Spam_score_int: -20
+X-Spam_score: -2.1
+X-Spam_bar: --
+X-Spam_report: (-2.1 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001,
  RCVD_IN_DNSWL_NONE=-0.0001, SPF_HELO_NONE=0.001,
  SPF_PASS=-0.001 autolearn=unavailable autolearn_force=no
 X-Spam_action: no action
-X-Mailman-Approved-At: Thu, 26 Nov 2026 09:03:12 -0500
 X-BeenThere: qemu-riscv@nongnu.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -101,137 +125,39 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-20.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Section 15.1.2.3 ("Shadow Stack Memory Protection") of the RISC-V
-privileged specification says:
+We've updated the online pages but we should make sure MAINTAINERS
+doesn't point people to the wrong place.
 
-    "Shadow stack instructions are restricted to accessing shadow stack
-    (pte.xwr=010b) pages. Should a shadow stack instruction access a
-    page that is not designated as a shadow stack page and is not
-    marked as read-only (pte.xwr=001), a store/AMO access-fault
-    exception will be invoked."
-
-QEMU does not implement this.  For sspush and ssamoswap.d in S-mode:
-
- - RW (xwr=011) and RWX (xwr=111) pages are written with no trap.
- - X (xwr=100) and RX (xwr=101) pages raise a store page fault
-   (cause 15) instead of an access fault (cause 7).
-
-SSPOPCHK loads through the same MMU index, so it is affected too: on RW,
-RWX and RX pages it raised a software-check exception (cause 18) when
-the loaded value mismatched, and on X pages a page fault.  It now raises
-a store/AMO access fault on all four, which takes priority over the
-software check.
-
-Handle these encodings in the leaf PTE switch of get_physical_address()
-and return a new TRANSLATE_SS_ACCESS_FAULT result for shadow stack
-accesses on the first stage.  riscv_cpu_tlb_fill() reports it as a
-store/AMO access fault.  Read-only pages keep raising a store page
-fault, and G-stage leaves are unaffected.
-
-Tested: unpatched master vs. this patch on riscv64-softmmu, same base
-and configure flags.  Reproducer from #4622: exit status 255 before, 0
-after, all eight cases raising cause 7.  Scenario 3 from #4379
-(sspopchk with a mismatching value on an RW page): cause 18 before,
-cause 7 after; scenario 1 (unmapped page) stays at cause 15.  sspopchk
-on RW/RWX/X/RX pages now raises cause 7, and sspush, sspopchk and
-ssamoswap.d on SS, read-only and unmapped pages are unchanged.
-
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4622
-Resolves: https://gitlab.com/qemu-project/qemu/-/issues/4379
-Co-developed-by: Tarun Patanjali tarun.patanjali@utexas.edu
-Signed-off-by: Tarun Patanjali tarun.patanjali@utexas.edu
-Co-developed-by: Rishab Pradeep rishab@rispop.dev
-Signed-off-by: Rishab Pradeep rishab@rispop.dev
-Signed-off-by: Christopher Elwood christopher.elwood2024@gmail.com
+Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-ID: <20261120200511.822573-23-alex.bennee@linaro.org>
+Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
-Scenario 2 of the reproducer attached to #4379 (M-mode ssamoswap.w,
-mtval = 0 instead of the faulting address) is a separate problem and is
-not changed by this patch.
+ MAINTAINERS | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-The new check is made before the U/SUM and A/D checks.  The spec says
-U/SUM is enforced normally for shadow stack accesses, so I would like
-confirmation that an access fault is the right result for an SS
-instruction to an RW page that also fails one of those checks.
-
- target/riscv/cpu.h            |  1 +
- target/riscv/tcg/cpu_helper.c | 23 ++++++++++++++++++++++-
- 2 files changed, 23 insertions(+), 1 deletion(-)
-
-diff --git a/target/riscv/cpu.h b/target/riscv/cpu.h
-index 49a1186bdbb..2dd76837a7e 100644
---- a/target/riscv/cpu.h
-+++ b/target/riscv/cpu.h
-@@ -139,6 +139,7 @@ enum {
-     TRANSLATE_PMP_FAIL,
-     TRANSLATE_G_STAGE_FAIL,
-     TRANSLATE_PMA_FAIL,
-+    TRANSLATE_SS_ACCESS_FAULT,
- };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index cf701b11cf1..ad9dfc43898 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -82,9 +82,7 @@ F: docs/glossary.rst
  
- /* Extension context status */
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 58e98e975c2..d8af744068e 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -1438,6 +1438,19 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-             return TRANSLATE_FAIL;
-         }
-         break;
-+    case PTE_R | PTE_W:
-+    case PTE_R | PTE_W | PTE_X:
-+    case PTE_X:
-+    case PTE_R | PTE_X:
-+        /*
-+         * Zicfiss: a shadow stack access may only target a shadow stack
-+         * page (xwr=010) or a read-only page (handled above as a store
-+         * page fault). Any other leaf is a store/AMO access fault.
-+         */
-+        if (is_sstack_idx && first_stage) {
-+            return TRANSLATE_SS_ACCESS_FAULT;
-+        }
-+        break;
-     }
+ Responsible Disclosure, Reporting Security Issues
+ -------------------------------------------------
+-W: https://wiki.qemu.org/SecurityProcess
+-M: Michael S. Tsirkin <mst@redhat.com>
+-L: qemu-security@nongnu.org
++W: https://www.qemu.org/contribute/security-process/
  
-     int prot = 0;
-@@ -1780,6 +1793,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-     bool two_stage_lookup = mmuidx_2stage(mmu_idx);
-     bool two_stage_indirect_error = false;
-     int ret = TRANSLATE_FAIL;
-+    MMUAccessType fault_type = access_type;
-     privilege_mode_t mode = mmuidx_priv(mmu_idx);
-     /* default TLB page size */
-     hwaddr tlb_size = TARGET_PAGE_SIZE;
-@@ -1877,6 +1891,13 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
- 
-     if (ret == TRANSLATE_PMP_FAIL || ret == TRANSLATE_PMA_FAIL) {
-         pmp_pma_violation = true;
-+    } else if (ret == TRANSLATE_SS_ACCESS_FAULT) {
-+        /*
-+         * Shadow stack accesses to non-SS pages are always store/AMO
-+         * access faults.
-+         */
-+        pmp_pma_violation = true;
-+        fault_type = MMU_DATA_STORE;
-     }
- 
-     if (ret == TRANSLATE_SUCCESS) {
-@@ -1903,7 +1924,7 @@ bool riscv_cpu_tlb_fill(CPUState *cs, vaddr address, int size,
-         cpu_check_watchpoint(cs, address, size, MEMTXATTRS_UNSPECIFIED,
-                              wp_access, retaddr);
- 
--        raise_mmu_exception(env, address, access_type, pmp_pma_violation,
-+        raise_mmu_exception(env, address, fault_type, pmp_pma_violation,
-                             first_stage_error, two_stage_lookup,
-                             two_stage_indirect_error);
-         cpu_loop_exit_restore(cs, retaddr);
+ Trivial patches
+ ---------------
 -- 
-2.39.5 (Apple Git-154)
+2.47.3
+
 
