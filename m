@@ -1,75 +1,75 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C27B7606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 14:37:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0920B606A329
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 14:37:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=TxBEUzqU
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=g1yUZ3sN
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWaav-0008ET-Nn; Thu, 26 Nov 2026 09:37:06 -0500
+	id 1xWab1-0008QS-GD; Thu, 26 Nov 2026 09:37:12 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xWaaB-0007d0-DE
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:19 -0500
-Received: from mail-wr1-x42f.google.com ([2a00:1450:4864:20::42f])
+ id 1xWaaD-0007fI-Qf
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:22 -0500
+Received: from mail-wm1-x333.google.com ([2a00:1450:4864:20::333])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
  (Exim 4.90_1) (envelope-from <alex.bennee@linaro.org>)
- id 1xWaa5-0001fe-De
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:19 -0500
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-4a9be758734so4503302f8f.1
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 06:36:12 -0800 (PST)
+ id 1xWaa7-0001hN-Hv
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 09:36:21 -0500
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4bb6057b333so34026905e9.3
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 06:36:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1795703771; x=1796308571; darn=nongnu.org;
+ d=linaro.org; s=google; t=1795703774; x=1796308574; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=Q28Zkm6Imddycp744yCwHnsZdff3NyNMmmodEEbvWlc=;
- b=TxBEUzqU6taeWui+96v2XiN4v0pLabN+pI3IaHNJx60v4u3K96bAqaAVvDWi4eK/kp
- 7l12TM4PbNmQk5GOj1w0axqnvU0i7j9yUQ4plTG2khI0I3dnoRToY0b9riVvHNc/QmA6
- CcLbqyD0y5V/n1UU9Lf6zhpFlmv2ev4m47iq7RPQKO4mt947ntPxVuvxP/ytR3AK4Vv9
- BSdeS+1yRJLClo9TXa8xgiCcaCbVRzeXorWng/9xO1g6/9Jhc9KNQjh8QGQPBtJFfcLP
- Zp/HLxdvxM+X+Umk0SLMIrF0jARW/b/Z0f2/16o+l6OC2vInWLxQHEDQtsj5R+ZynwKI
- +94g==
+ bh=+CjRTWznI/DieEMibp13lhrGBosFJP3Y8S+JTPO6RbU=;
+ b=g1yUZ3sNHFlP5trFnr064Y7GXBu8UIfGKCR5QZDj9agZqbcx9jWbWQDPCeASKCR1av
+ jQDN/MJB8jZdinXZWQjtfakdjf/7fqjuJ8AdeF1xObgQ/klGV1r022vhfRhPsdnOypmN
+ FMLzF+osb1N/hSu687bmzLA6y/IgNDjJl4ai0qm4V1HgYBIYaJhobJLMdSc9UbzFxtOd
+ OxWhYea1DxDioY2qglK8wEXyYFxVGWEgMej676O0k6uj7pzI6psbZAQMxU3ffWS9RiVI
+ 0qfbAep39sCPLc5iz+F3UyPQYD2kE55+XbuLfEuM20+3W1sueu47sUaZWwnj7jllRt/f
+ cPNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795703771; x=1796308571;
+ d=1e100.net; s=20260707; t=1795703774; x=1796308574;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=Q28Zkm6Imddycp744yCwHnsZdff3NyNMmmodEEbvWlc=;
- b=nCu/ohwJxyU+wCDP+F2gAX26SJOMYM/pfwAaDjMyIlEQ7+tXqFcB2d25zCbygY3ZDM
- ZBtFsREu0mp5m1pNmvDbTH49+chct/6yX6SgOFPg0Til6E+o1zHFzuBLw6GwGbOWXFvI
- 0CYz0uB4E1gg9QNMvCAMrqi64J+A1yL5AIZE7ampNDbL62Of6c14qwwayhSX9YLXnLer
- VDpy9Z3Cs2kIga5qhfawsGQFFlIdjZfdrdBerniuTBOrW5JuP6wwOTcl5GjbUP7IJRK7
- iDjtS62DdMhc9ZNcKj6tH1eLLpNrsSqaS7es5n/FiEO40iBiM6cLQP/sR2mOWjNXQtN6
- 1lgQ==
+ bh=+CjRTWznI/DieEMibp13lhrGBosFJP3Y8S+JTPO6RbU=;
+ b=BVWCWXOnJGdLfLVgpx6mYkBtmrMaxzYshz1NxPB3WapobR3MXMdQ4uKdIT4KoVwLWh
+ TLnwlLb/kRaTqZSfheVgReQSxYDZqh6cR1zv7/0elCJhKM+5Lw8enIS9rhMvT1y7eI7i
+ xx+Xz8mfBO3qiSw6SeRkY8Xd5Tis6W73Vs8yC0i9CJbPBd2pKaRWYt5ZGIwSg2VdK8ZG
+ o70DjKwXiGMP95W/vJDzXQiXCMp4aWD84qTZR+sUAQd6PXWZ8kimM2RqpjrefJYm5sby
+ wOZ2jnRUhKZBiWIbBZpBL/SjYHecXUx+AQP3gV5gZZxZBu0jSvE4Q8D2SfP2oBHWN3xR
+ hSMg==
 X-Forwarded-Encrypted: i=1;
- AL+hErG/zM8JNLUpK+2xuDfADFhLcvipvu51mVKWdz7ZjL44s0vLf6Kc8CTxGImHk/XxwAeWRnqxT93Niz6D@nongnu.org
-X-Gm-Message-State: APuU4Z/AgPg65ODOOMF2vbB91d3IqnLdWV3QZVZpnuS5DcSWKQrxKXxP
- G024hR7ic7LRKvG23XNd9s2aVI3fr/SgxXovRCo1o38ufjJ1XmxMpBN04UhRTqE9kXE=
-X-Gm-Gg: AZFdTZcNY4CXH6xQsmjzWwix8rdJsKyiIGwzA08rYHeAADMbyvyAs9ZLoySMdlBccDw
- 51D/ZDnH6e9PRmPlQDpzRcs0cRNP/LhUn53i9hKHXfX+/x5W2i31A4L7fHubgJ8uGifMIbbguAz
- c9RlTQRcB54oNENJn4XZ7+DSgbsgM0YOv8cxXzpYZ2ztmh49v3AOUryGBh0lZ4mIxIUDTE7IfdF
- rUX3ChA+KQ708o9Us4T0zpHTP3UjqfW36Qs6Qjoqk8pUQDune1hc0Z6ffyc4tHvLX8gyXE5KjOL
- qcWGFIU4D/QWuqHUvI6YPOZs4eygYnu2FMJl9zez5tfxeg+oRLz7baOYj3aynCitq/IdtLkClo4
- XdD7MK4P/Eu/z+qaEu9qwyBgzl/SZ6r+U+Fbd0TTeBJu4gaHOFr8pk48khOlYUGr+w+ryr1ADVt
- wS7Dd6+XZRLdS7EnEbXH/1VJOxM9iFgfxxsPWccyq0Z/vX0cHtHVN2FjVuuMa3gsX7nFVnm8jGW
- FeMr32kdLFqpSR6VA3Jz8iSPKa4xbhQm2CaI7Vua6p/rXzc0SWk+iZLiAhsNESmqI2FsCjBEGDR
- h7rv+lPLg3ytQoG0wToF9j2bXOyQ
-X-Received: by 2002:a05:600c:46d0:b0:4bb:8711:fee8 with SMTP id
- 5b1f17b1804b1-4bb8881894amr427166195e9.20.1795703770907; 
- Thu, 26 Nov 2026 06:36:10 -0800 (PST)
+ AL+hErEc6pV737Y96z6O69PhGKSZvNkR/Kx+61YvGAdgVzyU3wDogtgh2Ldd8gnvzVGPuyGI+1SkBx+jyvvz@nongnu.org
+X-Gm-Message-State: APuU4Z/KVPorNGdvpoyQRGEqOZos85JMFoC0G5UzbG7gcl4Ognxm+s0s
+ 4/fa9MOR9054PSgDDLvMGvWYfvndvTI5NOckt4GS0RMk1knGEMjkdRmWhh6lwM6ikSo=
+X-Gm-Gg: AZFdTZcTPFhsaW9zfhDaMggpW2+9Abr9o0J75AhGhYX7xBQFZDACxQUDE06OwWIxpiP
+ EuvCsmHXkbG/IU/bSXfbXzECNFC6cBeFOakCH6toX5MCD82HtoPx2MrvVhYjga1uymusR8OPb1K
+ bmMyehSY25H2qnKatZp7n58lxeR+PP7UzA2tGwI2L9h2zghZVPmqc+wtyVwupE8A4z1JzhwFJjn
+ 0VZnD6Q39u1bTVq5nZ4VT9bmQx/dqhDyYPZqT1RxkB7WMnArFmiZjXnAxZv94d++DuDE0/kUDEh
+ H6OdCASAJvOkrFPLT8r8jI+HMdX1kF3ZY1hXrRp3+5qcnEj5EQWCcR6CULDcP3G/MI4/aIYXPcy
+ eQNcr5R3fbXHIqugVSSoIGE6t6bS6At2hU/BeF9KZhxLvI+W9lWjS6IvJeTy5JAHyBpvW04TlmK
+ btC5JEFZ7ZnL7a0XgEedhrCE0+nrJdoBmZQFFFLQbjpF13T4Td/tZpVMq3o+vpFFVJ6EenxuBNR
+ R5LoZELQBVifUo7qm2pMmTeTiwpMUTAHWJSrWgB9LTkW+ZQkYH80TFMKAIeMNyFdA+QyYWQxl5p
+ OFJxVumE8xw9gghSEICLEjiYWDtj
+X-Received: by 2002:a05:600c:1115:b0:4bb:abcd:4233 with SMTP id
+ 5b1f17b1804b1-4bbabcd428bmr31205905e9.19.1795703773893; 
+ Thu, 26 Nov 2026 06:36:13 -0800 (PST)
 Received: from draig.lan ([185.124.0.158]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4bb853368d3sm600746945e9.1.2026.11.26.06.36.08
+ ffacd0b85a97d-4ab6c340df4sm47005957f8f.55.2026.11.26.06.36.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Nov 2026 06:36:08 -0800 (PST)
+ Thu, 26 Nov 2026 06:36:11 -0800 (PST)
 Received: from draig.lan (localhost [IPv6:::1])
- by draig.lan (Postfix) with ESMTP id 8CCF15F9CE;
- Thu, 26 Nov 2026 14:36:07 +0000 (GMT)
+ by draig.lan (Postfix) with ESMTP id 2EA235FAAB;
+ Thu, 26 Nov 2026 14:36:08 +0000 (GMT)
 From: =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>
 To: qemu-devel@nongnu.org
 Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
@@ -93,11 +93,10 @@ Cc: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  Weiwei Li <liwei1518@gmail.com>, Kuan-Wei Chiu <visitorckw@gmail.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Fabiano Rosas <farosas@suse.de>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
- Christian Borntraeger <borntraeger@linux.ibm.com>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 1/8] MAINTAINERS: update Daniel's entries to be consistent
-Date: Thu, 26 Nov 2026 14:36:00 +0000
-Message-ID: <20261126143607.2374676-2-alex.bennee@linaro.org>
+ Christian Borntraeger <borntraeger@linux.ibm.com>
+Subject: [PATCH 7/8] accel/tcg: update stale comment for cpu_io_recompile
+Date: Thu, 26 Nov 2026 14:36:06 +0000
+Message-ID: <20261126143607.2374676-8-alex.bennee@linaro.org>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261126143607.2374676-1-alex.bennee@linaro.org>
 References: <20261126143607.2374676-1-alex.bennee@linaro.org>
@@ -105,8 +104,8 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Received-SPF: pass client-ip=2a00:1450:4864:20::42f;
- envelope-from=alex.bennee@linaro.org; helo=mail-wr1-x42f.google.com
+Received-SPF: pass client-ip=2a00:1450:4864:20::333;
+ envelope-from=alex.bennee@linaro.org; helo=mail-wm1-x333.google.com
 X-Spam_score_int: -20
 X-Spam_score: -2.1
 X-Spam_bar: --
@@ -125,158 +124,41 @@ List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-23.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
-	autolearn=unavailable autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When testing my get_maintainers.py I was shocked to see:
+since 18a536f1f8d6 ("accel/tcg: Always require can_do_io") we always
+trigger a recompile when we detect i/o mid-block. Update the comment
+to reflect that.
 
-  ➜  ./scripts/get_maintainer.py --list-absent-maintainers-since "2 years ago"
-  Maintainer              Last Seen   Email(s)                        Subsystems
-  ------------------------------------------------------------------------------
-  ...
-  Daniel P. Berrange      2024-06-10  berrange@redhat.com             QOM, QDev, Seccomp, Cryptography, Buffers, I/O Channels, User authorization, Sockets, File monitor, Functional testing framework, Build system architecture, Meson, GIT submodules
-
-Which is of course incorrect but tripped up by the fact we have been
-utf-8 clean for some time. There are some entries that are correct so
-fix up the rest in solidarity with my fellow utf-8 using hackers ;-)
-
-Reviewed-by: Daniel P. Berrangé <berrange@redhat.com>
-Message-ID: <20261120182200.789086-1-alex.bennee@linaro.org>
+Fixes: 18a536f1f8d6 ("accel/tcg: Always require can_do_io")
 Signed-off-by: Alex Bennée <alex.bennee@linaro.org>
 ---
- MAINTAINERS | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ accel/tcg/translate-all.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 9e001a85ee3..8c5a40a6929 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3750,7 +3750,7 @@ T: git https://github.com/kostyanf14/qemu.git qga-win32
+diff --git a/accel/tcg/translate-all.c b/accel/tcg/translate-all.c
+index ea8257935ed..59991339620 100644
+--- a/accel/tcg/translate-all.c
++++ b/accel/tcg/translate-all.c
+@@ -566,8 +566,10 @@ void tb_check_watchpoint(CPUState *cpu, uintptr_t retaddr)
  
- QOM
- M: Paolo Bonzini <pbonzini@redhat.com>
--R: Daniel P. Berrange <berrange@redhat.com>
-+R: Daniel P. Berrangé <berrange@redhat.com>
- S: Supported
- F: docs/devel/qom.rst
- F: include/qom/
-@@ -3765,7 +3765,7 @@ F: tests/qtest/qom-test.c
- 
- QDev
- M: Paolo Bonzini <pbonzini@redhat.com>
--R: Daniel P. Berrange <berrange@redhat.com>
-+R: Daniel P. Berrangé <berrange@redhat.com>
- S: Supported
- F: docs/qdev-device-use.txt
- F: hw/core/qdev*
-@@ -3998,14 +3998,14 @@ F: tests/qtest/dbus*
- F: scripts/xml-preprocess*
- 
- Seccomp
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: system/qemu-seccomp.c
- F: include/system/seccomp.h
- F: tests/unit/test-seccomp.c
- 
- Cryptography
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Maintained
- F: crypto/
- F: include/crypto/
-@@ -4026,20 +4026,20 @@ F: include/qemu/coroutine*
- F: tests/unit/test-coroutine.c
- 
- Buffers
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: util/buffer.c
- F: include/qemu/buffer.h
- 
- I/O Channels
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Maintained
- F: io/
- F: include/io/
- F: tests/unit/test-io-*
- 
- User authorization
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Maintained
- F: authz/
- F: qapi/authz.json
-@@ -4047,14 +4047,14 @@ F: include/authz/
- F: tests/unit/test-authz-*
- 
- Sockets
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Maintained
- F: include/qemu/sockets.h
- F: util/qemu-sockets.c
- F: qapi/sockets.json
- 
- File monitor
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: util/filemonitor*.c
- F: include/qemu/filemonitor.h
-@@ -4192,7 +4192,7 @@ F: docs/specs/fsi.rst
- F: tests/qtest/aspeed_fsi-test.c
- 
- Firmware schema specifications
--R: Daniel P. Berrange <berrange@redhat.com>
-+R: Daniel P. Berrangé <berrange@redhat.com>
- R: Kashyap Chamarthy <kchamart@redhat.com>
- S: Orphan
- F: docs/interop/firmware.json
-@@ -4693,7 +4693,7 @@ F: tests/vm/freebsd
- Functional testing framework
- M: Thomas Huth <th.huth+qemu@posteo.eu>
- R: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
--R: Daniel P. Berrange <berrange@redhat.com>
-+R: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: docs/devel/testing/functional.rst
- F: scripts/clean_functional_cache.py
-@@ -4725,7 +4725,7 @@ F: .gitlab-ci.d/custom-runners/debian-13-ppc64le.yml
- Documentation
- -------------
- Build system architecture
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: docs/devel/build-system.rst
- 
-@@ -4749,7 +4749,7 @@ Build System
- Meson
- M: Paolo Bonzini <pbonzini@redhat.com>
- R: Marc-André Lureau <marcandre.lureau@redhat.com>
--R: Daniel P. Berrange <berrange@redhat.com>
-+R: Daniel P. Berrangé <berrange@redhat.com>
- R: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
- S: Maintained
- F: meson.build
-@@ -4781,7 +4781,7 @@ F: hw/*/Kconfig*
- F: target/*/Kconfig*
- 
- GIT submodules
--M: Daniel P. Berrange <berrange@redhat.com>
-+M: Daniel P. Berrangé <berrange@redhat.com>
- S: Odd Fixes
- F: scripts/git-submodule.sh
- 
+ #ifndef CONFIG_USER_ONLY
+ /*
+- * In deterministic execution mode, instructions doing device I/Os
+- * must be at the end of the TB.
++ * Instructions doing device I/Os must happen at the end
++ * of the TB as they can change system state affecting following
++ * instructions. When we detect mid-block IO we trigger a re-compile
++ * with cflags
+  *
+  * Called by softmmu_template.h, with iothread mutex not held.
+  */
 -- 
 2.47.3
 
