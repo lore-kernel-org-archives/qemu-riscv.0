@@ -1,95 +1,95 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B639606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 23:37:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A9A5606A323
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 23:37:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nu2hh29r;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XumG8tPM
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=kR0KHfLo;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xqifyzo/
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWj17-00044Z-CI; Thu, 26 Nov 2026 18:36:41 -0500
+	id 1xWj0p-0003od-2Q; Thu, 26 Nov 2026 18:36:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xWj16-00043s-5s
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 18:36:40 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ id 1xWj0m-0003mc-Rx
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 18:36:21 -0500
+Received: from mx0a-0031df01.pphosted.com ([205.220.168.131])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <philmd@oss.qualcomm.com>)
- id 1xWj14-00044r-O7
- for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 18:36:39 -0500
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+ id 1xWj0j-0003mg-Nh
+ for qemu-riscv@nongnu.org; Thu, 26 Nov 2026 18:36:20 -0500
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
  by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6AQJw8xe3990014
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 23:36:37 GMT
+ 6AQJvnUE060366
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 23:36:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- QONOBStajQYCwKzBtGV4nyPtKNWDG/mhSu+eYFrVE2Q=; b=nu2hh29rBe4H6m71
- O1x+wDbmH6VUDyI1GLsWxoU1v+DbMeosG0Abww5b8GhaPuB0f3FViJsy7uO8VDVK
- HhpTR6qdN6dKH5m1964nYsGlZiUN2LNMU1lTX+xbFC0Cn5ZxzZe1MLzkIkUxetOx
- xFO2Wk5I5H5SWYxEUuDF68pHlMTQHqrM+QzhCsZuPR1167aHXQ4vIT/zrEmpUgvW
- Lb9lMoHEil82XlNdW07W3IpmyTWTacFO2+/GM/yQAAh1B2uvr1rZmsAvW5+g0Ggr
- 7BGTW9flaiApOTmtPFyFN6FmVw0z138YxQ9VNMqrfdYUL1Bdph4mKGgc9mAOk4Lt
- LAE49A==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
- [209.85.222.199])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ak042qf-1
+ D7XKEWDLW+ifXRRVmGZj4PQhDJgWMVe/UWJ+OSD0TXw=; b=kR0KHfLoz2Hv7Af9
+ 67j9D43sGxyaBFd2Py2PoF4fkGrQNsvwn96aJ4dioNdzjRiwimEHAkwltsEY68SU
+ E0PTE1UuTTcQrnyOETehcCeHuWZf6mRflPGlIvw00QReKBgdrrVmofaR2JoE9XFu
+ sJyjiustPs2zbqiL8ly4ehBi0na9R8Fatb+JYsS+qxOcnBm/MGkUN9wy3/tCJMXE
+ f14zMvLw0qQ7SR5OriWDPfBN/2hcrqfqi99BOH9iFtdK2M+sFvc7iitClYcHtHSq
+ MGjLy+QV5iiyBkyG1A9lWz1a6/jiY9Qws/tkKFdRhYK0cJEx4DvRARkqVqQo8a8Q
+ YVVdDQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6u4hrfxu-1
  (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 23:36:37 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id
- af79cd13be357-94961ed97d6so1245745385a.1
- for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:36:37 -0800 (PST)
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 23:36:16 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id
+ af79cd13be357-9493e89d4f9so1018089285a.2
+ for <qemu-riscv@nongnu.org>; Thu, 26 Nov 2026 15:36:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795736197; x=1796340997; darn=nongnu.org;
+ d=oss.qualcomm.com; s=google; t=1795736175; x=1796340975; darn=nongnu.org;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
  :date:message-id:reply-to:content-type;
- bh=QONOBStajQYCwKzBtGV4nyPtKNWDG/mhSu+eYFrVE2Q=;
- b=XumG8tPMKcSF+HidebH2VRQSF3kZpUuv8atOPvGZo8u1b5s+qS+XImZqHsU6nRuuhi
- D9iOMk2SgxwY+rgUWR+pZvPHLrF/aLNXVpDNs37VBzje+OelcqNWKNJMsRXzAt6kziGR
- UjF7/KNhwr9A3iApYoHaaZisywo/taTeb5G/hmhP9/4a0J1mWNBus5YJHnCCVrYHiWZG
- a+K8HdK4/cpn+ApfNjTBsz6Zgitv5lxnKTZA6XJl7hklgrO2JGMA4aNX5Xrwr7WKjSJs
- QBeN7oQpSy0TLZT0JTESPyS8Yzj8JNjQiUyrvB0T4AB/QkTIN785IqxOA6pO3Atha7VG
- 2DJw==
+ bh=D7XKEWDLW+ifXRRVmGZj4PQhDJgWMVe/UWJ+OSD0TXw=;
+ b=Xqifyzo/GOdUR0wdMM6YOR5xUfA2RazP52gQ7Rog8q84ZUZsMK09wgoWu/9doyRAgP
+ eHPD8eul3aMvJB4J2z8Gu364xPvrohuMqNUbFt6wuiOaVNwRpLlocIQTCuK0APW2oZpG
+ Q8omoXONLL5ZFeWzD8LScQ9vmVnVp7YWXlVRsQbf3VhVRTsxRoXjdJcN6oxH+Lh/TXdO
+ xE6WpYAdvItPfceC62kyawnoCGsZKr9obDi0Mw5khC+i+A2K25K2LVHa9LZlWyKcq9o5
+ KWh+3cEh5SB9J9VUo6gZVZP/VIqhaMwl5UAPUoaPsxEeMek55DJ3afiA6dOJFcAg2WGk
+ YvSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795736197; x=1796340997;
+ d=1e100.net; s=20260707; t=1795736175; x=1796340975;
  h=content-transfer-encoding:content-type:mime-version:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
  :content-type;
- bh=QONOBStajQYCwKzBtGV4nyPtKNWDG/mhSu+eYFrVE2Q=;
- b=ygmf7CW9iAYmjda6gEX9iM+Y8H6xfI7ASvWPUGLL8iXU/FDDK+WRjTD8ASiANsrYnq
- oTkVSq9HrRs3C9kQ4ikAZ4ztfe0yWKFA/Qfi8E0wfI9EkMqCa4ARpirYmbOQeBeMVbb9
- iik2h0I0+vCBjb1/NTOG4DLqFE5v7gziXplUs1gRPxkXLCMsrNv8JlS4qox9aFBz9fmM
- PZORUBkuQkpHE+dot4pBhgSyjoJzbIh/R3DgQ22wMw7hPGDs42eHXg3bPdeXEt3iXX2U
- +H25ASRlyoPMi2+umRquazd3KNwkbA0g0XEH492cskoSJR1lKgJUccZoug938jOzMxyD
- 6chA==
+ bh=D7XKEWDLW+ifXRRVmGZj4PQhDJgWMVe/UWJ+OSD0TXw=;
+ b=ShxKNvgHwix8BG/S/lTusCYS65cz94+XQlFWDDYVrTMrT7q7/17JdQ0Ttc9Ylk9VUe
+ IGAsTtjaD2iAOfa1D8Hx0pBgLg4pvcfL7VMy3uct+FufkfVJsRpCszCzq6uNvHHHT5R7
+ 92RtKpzmHdKk/TRGlNsVMePXr59HdLId3xUxuw2NOKYW5EiNEmT2rMVHUN4va5eIG9nP
+ ei1pN3Vtgjr1YzIjLQ0xuZ2Cm2bz8hv82RIREJbxuHUERk5zRPhPDAhwASQh2/LF2pQO
+ MmJMIF+pXXTrz/ObSuh+KLAK3XgXUSbRIZRUZejPpBLCW4ybxsNMfuWJBG1rMvD/3XO1
+ W7mA==
 X-Forwarded-Encrypted: i=1;
- AL+hErFob0+wL6h/LR3ffADF2qCC/vWB94t64HDByj4S3dqZLGOAU2aLpwD+Wj6EAUZ2gmBTutHTbVO3j+5l@nongnu.org
-X-Gm-Message-State: APuU4Z+pXUxS61AKgdqshiDQVCVkolLscdOR/pbZyxXseE0u4lAU2ny7
- OdTAkg/disw8FO7qqiRusrjF1C40GE0AFxZpyMhYXhQceoRol83qwqj6qh+jLaXsCCwQba8M5rX
- bour7ipn3N06tA/4U2KG5vpbp/dAF9NnPWi+Q6cLj9dgrQ1ToJC2Xkx8Hng==
-X-Gm-Gg: AZFdTZdXuwTIMJS+RxglCEU3Q8JyHemmZTKAvV+uXrBl57+tFLBLSrC9m+kQuDk9ljw
- Xzuz/CAmqbXLdgxlbU7c0IqEIHw6CWkyuaB1el4d6lFygCDW1CJj63p145vRHR8fJLvIALV5YcG
- fWUmYJF9UYST7qij3m+kL76UvLCZTKKcTT4V7lh7cWyaFCHzbjFDW6Z9+ogoyj0JBZKi4AK9Fm1
- 0a006GFCxpZAxHlQvRtY4K/axMCZHI4klqXGCJQ0Fz3ZRs0Y3PNeLN01IOLyG8bWQlBblvgs55/
- Z9uuxoxwi70/GYozvqPEQQ0syikYvN/H0E/glS8AkWZ5oBGZ63v/HyByPVaduPKltmBVfyMS6lN
- ASp2v1qq3CDzHorgwxBKPSnailYGGOiqYHzYgfp+OnZt8RFWe/dkuZggUdXp5Hr1Iwh6aROKqLN
- lq2Q4Uj8Laj7OeGA==
-X-Received: by 2002:a05:620a:2792:b0:93e:64ac:5dfd with SMTP id
- af79cd13be357-949b3402246mr4031066085a.3.1795736196832; 
- Thu, 26 Nov 2026 15:36:36 -0800 (PST)
-X-Received: by 2002:a05:620a:2792:b0:93e:64ac:5dfd with SMTP id
- af79cd13be357-949b3402246mr4031063485a.3.1795736196370; 
- Thu, 26 Nov 2026 15:36:36 -0800 (PST)
+ AL+hErEVnxsIKBVAu7XnSG0cC6G8+PfTxn/RMDKbcVUfS/F7LzPtVD38eihQzw3RzNRQ66kRYIbhxCC0gcFy@nongnu.org
+X-Gm-Message-State: APuU4Z+awCJk/UpEZpEQKl08fnV58Z+7MIyxlWDwdIz98BsxlLSrbcf4
+ P+ppMXHZyF2f4YMlccD3DGX8ElYoki1slVJ9xmHBb7Hzrivq92xMSNJi1zqyTj5/QypF90asB+t
+ 4pjWL+wxjOUoTx102u3vHGtylZp6SHuBXJlzcAWuhn7dFcVXS2GDySvoTUA==
+X-Gm-Gg: AZFdTZfIm+0aLMqGiJfkuvQK1m+9zndN5z4arVg9BWGQGdlPJsR/eNmIBhm7nt/ZBQA
+ vDP4essxkXTpAJvWG9ChIrSDLQhk7cwZWc3b8W1+J0QVs2ZlwgwtqAK+T0REsIQIhBNJlNQHMja
+ iBIkwjg0wd+Hx1UXBSnmz+uQkv0So855toUuMBcPMAjqbNnUw5gECUVH8wwc8B6yx7OxiPpFfLn
+ g7sJIeIGpQ2AL7M6V9sIt6kKj5a5cDeDCuedphR30yqAs0zafBF0qBms/e9a7s5e1BTpxcycvxc
+ vm+0xcT+IKxmcfFzsg3u34LutIVmMlfV6Ez8zCCvtBEewvP2shUPKHoAXKZ3qSEi5srIwXz2jCT
+ ZF9q0oh+8qt0eMBMHK/r1NnZEMGnoptdC+RAkNKmcXLuRE1j1Tx1ANoNiSRo6s50NdO3wJkEVyY
+ xlvyVNlj9nIKOY4A==
+X-Received: by 2002:a05:620a:4453:b0:947:7691:731c with SMTP id
+ af79cd13be357-949bab47e86mr3886675385a.65.1795736175095; 
+ Thu, 26 Nov 2026 15:36:15 -0800 (PST)
+X-Received: by 2002:a05:620a:4453:b0:947:7691:731c with SMTP id
+ af79cd13be357-949bab47e86mr3886672585a.65.1795736174615; 
+ Thu, 26 Nov 2026 15:36:14 -0800 (PST)
 Received: from localhost.localdomain (pmd666.hd.free.fr. [82.67.153.177])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4ab658e2d60sm44575008f8f.3.2026.11.26.15.36.35
+ ffacd0b85a97d-4ab658e2d55sm43222277f8f.5.2026.11.26.15.36.12
  (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Thu, 26 Nov 2026 15:36:35 -0800 (PST)
+ Thu, 26 Nov 2026 15:36:13 -0800 (PST)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 To: qemu-devel@nongnu.org
 Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
@@ -98,10 +98,9 @@ Cc: Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
  =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
  Peter Maydell <peter.maydell@linaro.org>
-Subject: [PATCH 04/24] target/arm: Update TB flags split comment for 64-bit
- tb->flags
-Date: Fri, 27 Nov 2026 00:35:42 +0100
-Message-ID: <20261126233604.67722-5-philmd@oss.qualcomm.com>
+Subject: [PATCH 01/24] target/arm: Widen CPUARMTBFlags::flags to 64 bits
+Date: Fri, 27 Nov 2026 00:35:39 +0100
+Message-ID: <20261126233604.67722-2-philmd@oss.qualcomm.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261126233604.67722-1-philmd@oss.qualcomm.com>
 References: <20261126233604.67722-1-philmd@oss.qualcomm.com>
@@ -109,35 +108,35 @@ X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=T4oZ3PKQ c=1 sm=1 tr=0 ts=6b08c285 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA5MyBTYWx0ZWRfXyM1sm7M7kV0H
+ dBaaTkemBjhDQJGG8F84/XDvyEETD++/+9zNqjtodKjPhaGbS7tXjE8CtzxqY1mYh4cWwiewNo/
+ ni3iJAa6pxf73TeodOlTclL4rsPnj30=
+X-Proofpoint-GUID: 6_-PIY_Svi8TbvE13uAYDoEJRfVZ1z0e
+X-Proofpoint-ORIG-GUID: 6_-PIY_Svi8TbvE13uAYDoEJRfVZ1z0e
+X-Authority-Analysis: v=2.4 cv=M9fYuCws c=1 sm=1 tr=0 ts=6b08c270 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=EmkihZIgwSgxwUNpL-8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-ORIG-GUID: gqiKNx9esG1KqZGyUPnWfU0UgFXGp6BD
-X-Proofpoint-GUID: gqiKNx9esG1KqZGyUPnWfU0UgFXGp6BD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA5MyBTYWx0ZWRfX31ozT5Rm8AfI
- KzaA8Y0iOXu1z+rHKC9PeeK3guIBHlArgRqXjueAfrTVq4VtN/V4vQY4GUrHi33YO8R74gtAl2N
- w8gymSNynsbew+1YlqbslHOIHPwG/MeoDVCrU0WechzsengbsXSGkFmcfBS3FyO6TDfzv65yotO
- uiCHNk4O1SXNv23DTdlGon/qDA8E4TksHLJm+mJXQEGckOQy7sn1URqN1H0HLEHaztispod4wx4
- nXuDXqMs9+Y72fFOb9MFfNXlK33vNY+TuWI2pUS6rdlTimhYyW5HUmD+7ZvLNhTyhLpS1bNFDoa
- MrYYeZglkUM/vDuimHet5tOndaC91u75JpQ08wfo9p2prl/7axo2ZLxKhNQx67eYNC9Q6u291Qw
- a8pSj9qMSQerbd7SVnCbp2finzg74XOT1/+DrVJyQ2lW1PEa2qhAm0eaPVmyrn7rL79AZa4emTd
- PE7BRaiPGzc9S/emD/w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA5MyBTYWx0ZWRfXy4MTT5XIbe1O
- yhkLN9stad/aK8CUx2vOwceAq3xbzQQnIBNGZPr9hTz3oSHjf954IjlLs+XzGjB1AV3WNSo+LhP
- cPiMwuaJo0/Y9M5xgzs8buArFu3urFg=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=yHur-PbuXrsg72ao36wA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA5MyBTYWx0ZWRfX+gR2GKPxPFPY
+ 0SOZf/L53IcOD3QlwmAnSCfAg4ghbKo45sOICiICp9/RDFu04vGuSSFgYX0r7wdLkGS5kg6tdgL
+ TKMpz1cKlNxnqfUwFuG3nJ5/7aeA+//m5EWp5MLRXv1G+ACADdXejPCkJtHM5WlGmKMZwidykkb
+ iEoqrNjkYMmAGm5ki40hek8jDeJgt4ctYb9sg6/jafU53XmpM6eeOWSmB1lmaOmv+Ii8v3ToEHs
+ Efq1bOO75HtCbOI5z89YyDPXU53ybE0C5F+S+swlvf3EYCYK3qyhOCqnt+b0Zo64sRubOS+YwpV
+ HR6GwHHGuXphZjdGOefviuOX10e2VOirSnR08Hw0Pd32HDost8aM+lDdv8142NzGJ7MKLLLtjK/
+ eSlZl8Phh033KuRlh+vhGIjQojYt4mU5C15IFu5EDjBVNiXbWNjiHuFl2eC8jjBe8jbBOAvHOdV
+ +fIunUx3BNVThSCfOpw==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_05,2026-11-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
+ bulkscore=0 adultscore=0 impostorscore=0 suspectscore=0 malwarescore=0
+ spamscore=0 lowpriorityscore=0 priorityscore=1501 phishscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260093
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=philmd@oss.qualcomm.com; helo=mx0b-0031df01.pphosted.com
+Received-SPF: pass client-ip=205.220.168.131;
+ envelope-from=philmd@oss.qualcomm.com; helo=mx0a-0031df01.pphosted.com
 X-Spam_score_int: -27
 X-Spam_score: -2.8
 X-Spam_bar: --
@@ -159,35 +158,74 @@ Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-TranslationBlock::flags is now 64-bit, but AArch64 needs
-TBFLAG_ANY (15 bits) plus TBFLAG_A64 (51 bits), so the split
-with tb->cs_base is still required.
+Use the 64-bit field accessors for TBFLAG_ANY and print the value
+with PRIx64. Prepare for TranslationBlock::flags becoming 64-bit.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 ---
- target/arm/cpu.h | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ target/arm/cpu.h        | 12 ++++++------
+ target/arm/tcg/hflags.c |  4 ++--
+ 2 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/target/arm/cpu.h b/target/arm/cpu.h
-index 5ee9ebf352fb..59e44b76a08a 100644
+index b2f393f50184..5ee9ebf352fb 100644
 --- a/target/arm/cpu.h
 +++ b/target/arm/cpu.h
-@@ -2484,8 +2484,9 @@ static inline bool arm_sctlr_b(const CPUARMState *env)
- uint64_t arm_sctlr(CPUARMState *env, int el);
+@@ -150,7 +150,7 @@ typedef struct ARMPACKey {
+ 
+ /* See the commentary above the TBFLAG field definitions.  */
+ typedef struct CPUARMTBFlags {
+-    uint32_t flags;
++    uint64_t flags;
+     uint64_t flags2;
+ } CPUARMTBFlags;
+ 
+@@ -2614,12 +2614,12 @@ FIELD(TBFLAG_A64, MTE0_STORE_ONLY, 48, 1)
+ FIELD(TBFLAG_A64, MTX, 49, 2)
  
  /*
-- * We have more than 32-bits worth of state per TB, so we split the data
-- * between tb->flags and tb->cs_base, which is otherwise unused for ARM.
-+ * We have more than 64-bits worth of state per TB (AArch64 needs
-+ * TBFLAG_ANY (15 bits) plus TBFLAG_A64 (51 bits)), so we split the data
-+ * between tb->flags and tb->cs_base.
-  * We collect these two parts in CPUARMTBFlags where they are named
-  * flags and flags2 respectively.
-  *
+- * Helpers for using the above. Note that only the A64 accessors use
+- * FIELD_DP64() and FIELD_EX64(), because in the other cases the flags
+- * word either is or might be 32 bits only.
++ * Helpers for using the above. Note that only the ANY and A64 accessors
++ * use FIELD_DP64() and FIELD_EX64(), because the A32, M32 and AM32
++ * fields all fit in 32 bits.
+  */
+ #define DP_TBFLAG_ANY(DST, WHICH, VAL) \
+-    ((DST).flags = FIELD_DP32((DST).flags, TBFLAG_ANY, WHICH, VAL))
++    ((DST).flags = FIELD_DP64((DST).flags, TBFLAG_ANY, WHICH, VAL))
+ #define DP_TBFLAG_A64(DST, WHICH, VAL) \
+     ((DST).flags2 = FIELD_DP64((DST).flags2, TBFLAG_A64, WHICH, VAL))
+ #define DP_TBFLAG_A32(DST, WHICH, VAL) \
+@@ -2629,7 +2629,7 @@ FIELD(TBFLAG_A64, MTX, 49, 2)
+ #define DP_TBFLAG_AM32(DST, WHICH, VAL) \
+     ((DST).flags2 = FIELD_DP32((DST).flags2, TBFLAG_AM32, WHICH, VAL))
+ 
+-#define EX_TBFLAG_ANY(IN, WHICH)   FIELD_EX32((IN).flags, TBFLAG_ANY, WHICH)
++#define EX_TBFLAG_ANY(IN, WHICH)   FIELD_EX64((IN).flags, TBFLAG_ANY, WHICH)
+ #define EX_TBFLAG_A64(IN, WHICH)   FIELD_EX64((IN).flags2, TBFLAG_A64, WHICH)
+ #define EX_TBFLAG_A32(IN, WHICH)   FIELD_EX32((IN).flags2, TBFLAG_A32, WHICH)
+ #define EX_TBFLAG_M32(IN, WHICH)   FIELD_EX32((IN).flags2, TBFLAG_M32, WHICH)
+diff --git a/target/arm/tcg/hflags.c b/target/arm/tcg/hflags.c
+index c0b47f484e65..7dbc5759d718 100644
+--- a/target/arm/tcg/hflags.c
++++ b/target/arm/tcg/hflags.c
+@@ -753,8 +753,8 @@ static void assert_hflags_rebuild_correctly(CPUARMState *env)
+ 
+     if (unlikely(c.flags != r.flags || c.flags2 != r.flags2)) {
+         fprintf(stderr, "TCG hflags mismatch "
+-                        "(current:(0x%08x,0x%016" PRIx64 ")"
+-                        " rebuilt:(0x%08x,0x%016" PRIx64 ")\n",
++                        "(current:(0x%016" PRIx64 ",0x%016" PRIx64 ")"
++                        " rebuilt:(0x%016" PRIx64 ",0x%016" PRIx64 ")\n",
+                 c.flags, c.flags2, r.flags, r.flags2);
+         abort();
+     }
 -- 
 2.55.0
 
