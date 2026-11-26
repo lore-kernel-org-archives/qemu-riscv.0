@@ -1,34 +1,34 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3602F606A31C
-	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 07:55:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A92A606A31C
+	for <qemu-riscv@archiver.kernel.org>; Thu, 26 Nov 2026 07:55:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=Oyb6gVws
+	dkim=pass (1024-bit key) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.a=rsa-sha256 header.s=default header.b=mfH72ltZ
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWUJF-0006Wu-17; Thu, 26 Nov 2026 02:54:25 -0500
+	id 1xWUJD-0006Tj-Co; Thu, 26 Nov 2026 02:54:23 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xWUJD-0006U4-09; Thu, 26 Nov 2026 02:54:23 -0500
-Received: from [115.124.30.98] (helo=out30-98.freemail.mail.aliyun.com)
+ id 1xWUJA-0006Sp-PT; Thu, 26 Nov 2026 02:54:20 -0500
+Received: from [115.124.30.118] (helo=out30-118.freemail.mail.aliyun.com)
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <zhiwei_liu@linux.alibaba.com>)
- id 1xWUJ7-0002aC-O9; Thu, 26 Nov 2026 02:54:22 -0500
+ id 1xWUJ6-0002aD-IH; Thu, 26 Nov 2026 02:54:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linux.alibaba.com; s=default;
- t=1795679641; h=From:To:Subject:Date:Message-Id:MIME-Version;
- bh=YB7zpQZ5dthJk1KtAbItcRut6aFLG1DUMiC1rMDzGR8=;
- b=Oyb6gVwsDlYkVJ5dV2kI3WukLMDlurKxY0gTdIHB4tc06le/mYJvLLoUUHAeX5GkAdUdzxdo6WhwHy/nEcpzd0NGIQOLJrbbUI6x2Y+N37FxFLecMDmKpYrPCUfLJLzwToq+N6vkdfnTk0gLEBFBKmx2jqUM/h+GkYkKr9nipvM=
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R491e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033032089153;
+ t=1795679642; h=From:To:Subject:Date:Message-Id:MIME-Version;
+ bh=Qn405w8Fk25gD85AWEa0clQi1Oxu/bxaWlWUiQBI7OE=;
+ b=mfH72ltZ9clh4Oy0pNe8t/f/lrHKobY4szi4aDdW/6mQWVXrHZDP+XeK+mKK9xgS2Y8REavgdBBn2F8anLHJ6uSsJa2sxaAsDEYWxuI0KL18odJTw+0JGSWRhSEp+gcbm1+/wwMj33A0BqD6dM0z2iONt2gFxGEere3kxgP8zxw=
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=maildocker-contentspam033037009110;
  MF=zhiwei_liu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0XFTpGYj_1795679640; 
+ TI=SMTPD_---0XFTpGYt_1795679640; 
 Received: from localhost.localdomain(mailfrom:zhiwei_liu@linux.alibaba.com
- fp:SMTPD_---0XFTpGYj_1795679640 cluster:ay36) by smtp.aliyun-inc.com;
- Thu, 26 Nov 2026 15:54:00 +0800
+ fp:SMTPD_---0XFTpGYt_1795679640 cluster:ay36) by smtp.aliyun-inc.com;
+ Thu, 26 Nov 2026 15:54:01 +0800
 From: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
 To: qemu-devel@nongnu.org
 Cc: Palmer Dabbelt <palmer@dabbelt.com>,
@@ -37,20 +37,20 @@ Cc: Palmer Dabbelt <palmer@dabbelt.com>,
  Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
  Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
  Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org
-Subject: [PATCH 3/6] target/riscv: Preserve access faults during VS PTE A/D
- translation
-Date: Thu, 26 Nov 2026 15:53:47 +0800
-Message-Id: <20261126075350.13022-4-zhiwei_liu@linux.alibaba.com>
+Subject: [PATCH 4/6] tests/tcg/riscv64: Check access faults during VS A/D
+ updates
+Date: Thu, 26 Nov 2026 15:53:48 +0800
+Message-Id: <20261126075350.13022-5-zhiwei_liu@linux.alibaba.com>
 X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 In-Reply-To: <20261126075350.13022-1-zhiwei_liu@linux.alibaba.com>
 References: <20261126075350.13022-1-zhiwei_liu@linux.alibaba.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.98 (deferred)
-Received-SPF: pass client-ip=115.124.30.98;
+X-Host-Lookup-Failed: Reverse DNS lookup failed for 115.124.30.118 (deferred)
+Received-SPF: pass client-ip=115.124.30.118;
  envelope-from=zhiwei_liu@linux.alibaba.com;
- helo=out30-98.freemail.mail.aliyun.com
+ helo=out30-118.freemail.mail.aliyun.com
 X-Spam_score_int: -166
 X-Spam_score: -16.7
 X-Spam_bar: ----------------
@@ -74,51 +74,82 @@ X-Spam-Status: No, score=-26.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
 	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT,USER_IN_DEF_DKIM_WL
-	autolearn=ham autolearn_force=no version=4.0.1
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Updating a VS PTE's A/D bits requires G-stage translation of that PTE's
-guest-physical address with store access. This translation can itself
-need to set a G-stage PTE's D bit. A PMP denial of that physical write
-returns TRANSLATE_PMP_FAIL, but the VS walker replaces the result with
-TRANSLATE_G_STAGE_FAIL and records the VS PTE guest-physical address.
-The original access then reports a guest-page fault even though the
-mapping is valid and a physical page-table access was rejected. A PMA
-error returned by this recursive call is lost in the same way.
+Extend the nested-PTE-read test case to cover the recent A/D error propagation
+fix. The initial read translation succeeds, and the failure must occur only when
+VS A/D bit updating retries the G-stage translation with store access.
 
-Apply the physical-access-fault helper to the A/D translation result.
-Return PMP and PMA failures before setting fault_pte_addr, as in the
-VS PTE read path. Keeping the result lets the existing exception code
-select the access fault for the original operation. For example, a load
-whose implicit A/D update fails must still raise a load access fault,
-even though the recursive translation used store access. The guest
-physical fault address stays zero for this physical access error.
+Implement the scenario in the following steps:
 
-Leave other G-stage failures on the existing guest-page-fault path.
-This changes error propagation, not the conditions for updating A/D
-bits or the atomic PTE write. The next commit extends the regression
-with a PMP-denied G-stage D-bit update after a successful read walk.
+1. Setup PTEs
+Clear A and D bits in the VS leaf PTE. For the G-stage PTE mapping that VS
+leaf-table page, keep A set but D clear. This allows the initial G-stage load
+to succeed without updating the G-stage PTE.
+
+2. Configure PMP
+Set a higher-priority PMP entry for G_L0 to Read-Only, while keeping other
+physical memory accessible. Reading G-stage PTEs still works, but setting the
+leaf PTE's D bit is denied.
+
+3. Test Guest Load
+Issue a guest load. Updating the VS PTE's A bit triggers a G-stage translation
+retry with store access. This retry attempts to set the G-stage D bit and hits
+the PMP denial. Verify that a Load Access Fault (cause 5) is raised, with mtval
+holding the faulting address and mtval2 set to zero (failure code 9).
+
+4. Test Guest Store
+Repeat with a guest store. Expect a Store Access Fault (cause 7) with the same
+address checks (failure code 10). This verifies that the fault cause reflects
+the original guest operation, rather than the implicit PTE access.
+
+5. Verify & Cleanup
+Confirm that the G-stage leaf PTE's D bit remains clear (failure code 11).
+Restore PMP permissions and both leaf PTEs to maintain valid translation
+states for subsequent tests.
+
+Without the preceding fix, the first new load reports a guest-page
+fault and exits with code 9. This extension injects a PMP failure; it
+does not add a separate PMA-injection case for the A/D path. All prior
+read-path and genuine guest-page-fault checks remain in the test.
 
 Signed-off-by: LIU Zhiwei <zhiwei_liu@linux.alibaba.com>
+AI-used-for: tests
 ---
- target/riscv/tcg/cpu_helper.c | 3 +++
- 1 file changed, 3 insertions(+)
+ tests/tcg/riscv64/test-gstage-access-fault.S | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/target/riscv/tcg/cpu_helper.c b/target/riscv/tcg/cpu_helper.c
-index 90a3731214..548879ee6a 100644
---- a/target/riscv/tcg/cpu_helper.c
-+++ b/target/riscv/tcg/cpu_helper.c
-@@ -1549,6 +1549,9 @@ static int get_physical_address(CPURISCVState *env, hwaddr *physical,
-                                                MMUIdx_U, false, true,
-                                                is_debug, false);
-             if (gpa_ret != TRANSLATE_SUCCESS) {
-+                if (is_physical_access_fault(gpa_ret)) {
-+                    return gpa_ret;
-+                }
-                 if (fault_pte_addr) {
-                     *fault_pte_addr = pte_gpa >> 2;
-                 }
+diff --git a/tests/tcg/riscv64/test-gstage-access-fault.S b/tests/tcg/riscv64/test-gstage-access-fault.S
+index 61a0957270..e8ebb4b684 100644
+--- a/tests/tcg/riscv64/test-gstage-access-fault.S
++++ b/tests/tcg/riscv64/test-gstage-access-fault.S
+@@ -184,6 +184,24 @@ _start:
+         TRY_FETCH 20, 8
+         WRITE_PTE (G_L0 + 0x20), (((VS_ROOT >> 12) << 10) | 0xdf)
+ 
++        /*
++         * VS A/D updating re-runs G-stage with store semantics. Its leaf D
++         * update is rejected by PMP, after the initial read walk succeeded.
++         */
++        WRITE_PTE (VS_L0 + 0x20), 0x200f
++        WRITE_PTE (G_L0 + 0x30), (((VS_L0 >> 12) << 10) | 0x5f)
++        PMP_PAGE G_L0, 1
++        TRY_DATA 0, 5, 9
++        TRY_DATA 1, 7, 10
++        li t0, (G_L0 + 0x30)
++        ld t1, 0(t0)
++        andi t1, t1, 0x80
++        li a0, 11
++        bnez t1, fail
++        PMP_ALL
++        WRITE_PTE (VS_L0 + 0x20), 0x20cf
++        WRITE_PTE (G_L0 + 0x30), (((VS_L0 >> 12) << 10) | 0xdf)
++
+         /* An unmapped physical G-stage root produces PMA access faults. */
+         li t0, 0x8000000000090000
+         csrw hgatp, t0
 -- 
 2.43.0
 
