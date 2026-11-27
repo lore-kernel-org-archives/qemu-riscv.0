@@ -1,58 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2318D606A31C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 09:53:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D02F606A31F
+	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 10:58:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=jCJEwUar;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=JsouJ7rO
+	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=h6mmAa36;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=APlAzm/G
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nongnu.org;
 	 s=lists1p-gnu-org; h=From:In-Reply-To:MIME-Version:References:Subject:To:
-	Date; bh=HAUQ6pbBSUBoEs1lgve5pL3R7Njw6Z0m6VicrKtJxqQ=; b=jCJEwUarwmCOzaNjSj1v
-	GR/bum2Cf9ep4yuQhMLkP8Ggcd2AeTxjxJ5asuXx9yX3NvXMxlxjtKqZa4Sf24Wl3L/eK6rcM1jbo
-	Yq3tu65uZwJlL5VK52EVtZBhVip77sbesvwqzn3/okyRQt/CNWEdmw3V4xfGkIBf5aiMZLUk78erp
-	d3TZNrF9DXRo1ch8al2CSDvOVu3bqTs+FRf2yuHuPUlUnbt/YjMkRk2QzHnaHAPU/uVsY96FSApb7
-	GcsWe4Ghq6EPwvQZ/gUvXV0tvFhZOS7gJ0aD0OHWeEaAVHb+kU4kR9Wh0gwPbp/3a8+ejSDskxtNi
-	2iAdfwCcJYdQiA==;
+	Date; bh=A9Y8xk+XkRuYYH4afektXWPlVhgVQCkeSjPq8TyS5kc=; b=h6mmAa36oG7LnPcC8Ue8
+	UkNxtqjHUzg3EncFuS7+xq9CbnAtcRk8WNJ/VH2mkows1YsEvFiCpCqsXlJk7cGdt3hqRnCuMcXSw
+	vxFsJXoxBUs/J+t6S5pkGewmnlhKeaTvH6c1N+FT8YRMWebxyYNW5ZyJ6cVBt2yWFmXfmFys7mOJN
+	z/QA1Sw+1zR5AxbOOr6qCSNQWOkjVcY+AAHynzwAu7u4UYUVFTcPY5tlv/f/GyqxET8msF8/BWZme
+	hBPj07MKaEwHgyxgZmOSWk77arKWeh71H45hZg2JpM35rSIot/imMplS+6N8CMCj1s/c0Rc80DTGw
+	UNbOP72xBATtwg==;
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWsdy-0006Jz-QG; Fri, 27 Nov 2026 04:53:26 -0500
+	id 1xWtdc-0005rX-6T; Fri, 27 Nov 2026 05:57:08 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWsdp-0006H9-QX; Fri, 27 Nov 2026 04:53:19 -0500
+ id 1xWtdZ-0005qe-RD; Fri, 27 Nov 2026 05:57:05 -0500
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWsdo-0008Vs-GQ; Fri, 27 Nov 2026 04:53:17 -0500
+ id 1xWtdX-0003ML-33; Fri, 27 Nov 2026 05:57:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=HAUQ6pbBSUBoEs1lgve5pL3R7Njw6Z0m6VicrKtJxqQ=; b=JsouJ7rOD3SCpPM
- 4UEbpGqKjBHsUCKah47cmlI2i3x/2pFZGaYOBY7fig5i+f1y/rhJut/0Fh7cIF4Yh3NmsIpE+2d7Z
- C0O8ScaUG6roHPmQl++nheMtno+nSSanXsSx5jxHYv3IWEyrUS7X5eON4laR1J5yPxPCEGiLkNYMp
- xY=;
-Date: Fri, 27 Nov 2026 10:59:39 +0100
+ List-Help; bh=A9Y8xk+XkRuYYH4afektXWPlVhgVQCkeSjPq8TyS5kc=; b=APlAzm/G27H32AH
+ vrXVwCbTZ5AUxjp5Q/AKe8DXn2h8fwqO906dyLbcWcJv1xRbdy/clbY7XjLpGnonWG3GVBUxEjrdl
+ r/w7xfieXgGwpilaSP8zXK/AZ7BVeeUR2Hc0CDhS3CHj/ffqVQm8ObgO1maQq+bwpUSIeDqnHKHF8
+ 08=;
+Date: Fri, 27 Nov 2026 12:03:25 +0100
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, 
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: Re: [PATCH 02/24] accel/tcg: Update stale TranslationBlock::jmp_lock
- comment
-Message-ID: <awlUfubmBjdtwEac@hive.localdomain>
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+ Paolo Bonzini <pbonzini@redhat.com>
+Subject: Re: [PATCH 03/24] accel/tcg: Widen TranslationBlock::flags to 64 bits
+Message-ID: <awlUl2by0PPZ2K7N@hive.localdomain>
 References: <20261126233604.67722-1-philmd@oss.qualcomm.com>
- <20261126233604.67722-3-philmd@oss.qualcomm.com>
+ <20261126233604.67722-4-philmd@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261126233604.67722-3-philmd@oss.qualcomm.com>
+In-Reply-To: <20261126233604.67722-4-philmd@oss.qualcomm.com>
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
  helo=rev.ng
 X-Spam_score_int: -20
@@ -76,20 +76,51 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 27/11/26, Philippe Mathieu-Daudé wrote:
-> jmp_lock was placed to fill a 4-byte hole, but commit 9da6079b2695
-> ("tcg: Add TranslationBlock.jmp_insn_offset") added jmp_insn_offset[],
-> so jmp_lock, jmp_reset_offset[] and jmp_insn_offset[] now take 12
-> bytes, leaving a 4-byte hole after jmp_insn_offset.
+> 32-bit host support was removed in v11.0.0 (with commit 372ec46b9f
+> "meson: Reject 32-bit hosts"), so there is no reason to keep the TB
+> flags 32-bit. The wider field fills the 4-byte hole between icount
+> and tc, leaving sizeof(TranslationBlock) unchanged. Widen
+> TCGTBCPUState::flags too.
+> 
+> Feed the upper 32 bits into the TB hash, and adapt format string.
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->  include/exec/translation-block.h | 6 +++++-
+>  accel/tcg/tb-hash.h              | 5 +++--
+>  include/accel/tcg/tb-cpu-state.h | 2 +-
+>  include/exec/translation-block.h | 2 +-
+>  accel/tcg/cpu-exec.c             | 2 +-
+>  4 files changed, 6 insertions(+), 5 deletions(-)
+> 
+> diff --git a/accel/tcg/tb-hash.h b/accel/tcg/tb-hash.h
+> index f7b159f04cb6..819b594618aa 100644
+> --- a/accel/tcg/tb-hash.h
+> +++ b/accel/tcg/tb-hash.h
+> @@ -63,9 +63,10 @@ static inline unsigned int tb_jmp_cache_hash_func(vaddr pc)
+>  
+>  static inline
+>  uint32_t tb_hash_func(tb_page_addr_t phys_pc, vaddr pc,
+> -                      uint32_t flags, uint64_t flags2, uint32_t cf_mask)
+> +                      uint64_t flags, uint64_t flags2, uint32_t cf_mask)
+>  {
+> -    return qemu_xxhash8(phys_pc, pc, flags2, flags, cf_mask);
+> +    /* Fold the upper flag bits into the cf_mask slot. */
+> +    return qemu_xxhash8(phys_pc, pc, flags2, flags, cf_mask ^ (flags >> 32));
+>  }
+
+From what I can tell, while cf_mask ^ (flags >> 32) does increase the
+probability for hash collisions it should still be extremely rare.
+Currently the only possibility for extra collision is with the riscv ALTFMT,
+BIG_ENDIAN, SDEXT_STEP fields and CF_COUNT_MASK, from what I can tell.
+
+IMO, for the time being this wouldn't cause any real performance issues
+compared to say adding an extra word to qemu_xxhash8().
 
 Reviewed-by: Anton Johansson <anjo@rev.ng>
 
