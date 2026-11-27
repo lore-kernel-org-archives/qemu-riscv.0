@@ -1,58 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39DEC606A327
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 11:26:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDDED606A329
+	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 11:28:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=FfUitIFZ;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=Ax0pJI5P
+	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=KcutLKqu;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=cYUeSzmM
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nongnu.org;
 	 s=lists1p-gnu-org; h=From:In-Reply-To:MIME-Version:References:Subject:To:
-	Date; bh=0xZYO1dD+MKVQc6P93xJWS+NiqPlaBxbaZMd9fXlEmY=; b=FfUitIFZ39fxMspgdfKh
-	mTUkLGqcejLtxO4L4D7UtZ9kN9SThm4ap/2WKzB0j5Ula7QKNhZ/GOYsuJ/nT+nT8BMoNFQGbiL7+
-	9ZarhgAFsaf+vBbIYFA3FQw9F1A0TckX0e/J07kk4f9CBt+Ldx4W4y24NZtX75ApPEbN5sdfSL35+
-	T9TYyBMp8U6915Za220qIRcdxF6z4beLaT3BBAwEKssP5dbJlqUfgVY5eH+qhFA1W3xYDDmoil0wx
-	u8bt4D+P9ki4mW5gnmvvdUmxMyyKVdoazCRZ0lreKiZKzWmH/moSKny1a+hUsAN7YF8aj22HiErvL
-	ESreBderUnX1OA==;
+	Date; bh=yUcEQVcir+I8jhCcp94l7XAIvWirrkMYvtH0CuUjA80=; b=KcutLKqu4lNSmpngygXE
+	n3T0XJQ9Ai3ADxbXyWq/J2tf0KuoIyGHqq4pvOCTbsTJxCl8Ixu0upIB7dXJYNZBaGJUoiD2mVkxg
+	Rk0ggcaDkjsXO9qggjra1ZMcqWkCpDoxET5SlO+gdCRGodtGrb+AE++vdMXM4WCGfxsUlI+JMUQWQ
+	S1SLbCf60aNXRIS3amZCg4SceqThhMlOTWPclFjktA2S6qL2Yo1Q+6MGCTRLQWtRFqWPXWa7NVWKE
+	KpYd+orZacd7OFACwVRMS2qFgXm/ZsFDOuOvsxo+TkckVZVbkSbKDo24Yxryb1OcltD+IZCfbdy6Q
+	2aYKpY+3x5dtRg==;
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWu61-0008BZ-Ex; Fri, 27 Nov 2026 06:26:29 -0500
+	id 1xWu7X-0001nA-3z; Fri, 27 Nov 2026 06:28:03 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWu5a-0007yy-MR; Fri, 27 Nov 2026 06:26:02 -0500
+ id 1xWu7P-0001jt-A3; Fri, 27 Nov 2026 06:27:56 -0500
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWu5Z-0007Cm-9E; Fri, 27 Nov 2026 06:26:02 -0500
+ id 1xWu7N-0007fP-7T; Fri, 27 Nov 2026 06:27:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=0xZYO1dD+MKVQc6P93xJWS+NiqPlaBxbaZMd9fXlEmY=; b=Ax0pJI5PioIpVwC
- 6RJt9/ihSAF3nMvuieo2DY6BpgZKr25fLwoFDaFFImgTiDLzRjbNCq3ZStM4GKz3Eu1mUYkhHeJQz
- tnO0rl+fm2pd48/F+sp+CAuIGDx+NeNR1uTCKpjbyjzACy4L/DL32CAOncEFtT9VCJtgA0W6obAUS
- n8=;
-Date: Fri, 27 Nov 2026 12:32:24 +0100
+ List-Help; bh=yUcEQVcir+I8jhCcp94l7XAIvWirrkMYvtH0CuUjA80=; b=cYUeSzmMc3zYTd/
+ /1zHBWglcGak8OtJIkdqtRfwrMaBbzs71904oxHmjqlNqgvCRlWdkuFVggqmRLZ84Tq6QpoT7qrC+
+ NxgkbXDeHwjwY/xfy3HFEPNNoEisdmrZ/xEGkDqdtrheMymvROy3w3IWSM48J3TEAhE028z57RShS
+ xs=;
+Date: Fri, 27 Nov 2026 12:34:17 +0100
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, 
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Max Filippov <jcmvbkbc@gmail.com>
-Subject: Re: [PATCH 23/24] target/xtensa: Use 64-bit TB flags
-Message-ID: <awlqQ19ely0p4ou0@hive.localdomain>
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Subject: Re: [PATCH 24/24] accel/tcg: Update TranslationBlock::cs_base
+ description
+Message-ID: <awlqjrCTtvwibM9f@hive.localdomain>
 References: <20261126233604.67722-1-philmd@oss.qualcomm.com>
- <20261126233604.67722-24-philmd@oss.qualcomm.com>
+ <20261126233604.67722-25-philmd@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261126233604.67722-24-philmd@oss.qualcomm.com>
+In-Reply-To: <20261126233604.67722-25-philmd@oss.qualcomm.com>
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
  helo=rev.ng
 X-Spam_score_int: -20
@@ -82,44 +82,55 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
 On 27/11/26, Philippe Mathieu-Daudé wrote:
-> TranslationBlock::flags and TCGTBCPUState::flags are now
-> 64-bit, use matching types for the values derived from them.
+> Describe the current TranslationBlock::cs_base users.
+> 
+> Commits that introduced target use of cs_base:
+>   arm:        a378206a205a target/arm: Move mode specific TB flags to tb->cs_base
+>   hppa:       c301f34e798e target/hppa: Implement IASQ
+>               ebd0e151149a target/hppa: Include priv level in user-only iaoq
+>   microblaze: d7ecb757d199 target/microblaze: Ensure imm constant is always available
+>   riscv:      55b490b58fbf target/riscv: Record misa_ext in TCGTBCPUState.cs_base
+>               1c88ab9e77bd target/riscv: Use the tb->cs_base as the extend tb flags
+>   s390x:      303c681a8f50 target/s390x: Implement EXECUTE via new TranslationBlock
+>   sh4:        4bfa602bc222 target/sh4: Handle user-space atomics
+>   sparc:      b453b70bd8e6 sparc fixes (first commit matching cs_base = env->npc)
+>   xtensa:     5d630cef4f91 target/xtensa: rework zero overhead loops implementation
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->  target/xtensa/cpu.c       | 2 +-
->  target/xtensa/translate.c | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  include/exec/translation-block.h | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
 > 
-> diff --git a/target/xtensa/cpu.c b/target/xtensa/cpu.c
-> index c193396928f9..33054c81ca48 100644
-> --- a/target/xtensa/cpu.c
-> +++ b/target/xtensa/cpu.c
-> @@ -60,7 +60,7 @@ static vaddr xtensa_cpu_get_pc(CPUState *cs)
->  static TCGTBCPUState xtensa_get_tb_cpu_state(CPUState *cs)
->  {
->      CPUXtensaState *env = cpu_env(cs);
-> -    uint32_t flags = 0;
-> +    uint64_t flags = 0;
->      uint64_t cs_base = 0;
+> diff --git a/include/exec/translation-block.h b/include/exec/translation-block.h
+> index 491de24d71b9..8fca1bd92267 100644
+> --- a/include/exec/translation-block.h
+> +++ b/include/exec/translation-block.h
+> @@ -60,12 +60,19 @@ struct TranslationBlock {
+>      vaddr pc;
 >  
->      flags |= xtensa_get_ring(env);
-> diff --git a/target/xtensa/translate.c b/target/xtensa/translate.c
-> index 175fd4b5cfc2..57392ffd8319 100644
-> --- a/target/xtensa/translate.c
-> +++ b/target/xtensa/translate.c
-> @@ -1121,7 +1121,7 @@ static void xtensa_tr_init_disas_context(DisasContextBase *dcbase,
->                                           CPUState *cpu)
->  {
->      DisasContext *dc = container_of(dcbase, DisasContext, base);
-> -    uint32_t tb_flags = dc->base.tb->flags;
-> +    uint64_t tb_flags = dc->base.tb->flags;
+>      /*
+> -     * Target-specific data associated with the TranslationBlock, e.g.:
+> -     * x86: the original user, the Code Segment virtual base,
+> -     * arm: an extension of tb->flags,
+> +     * cs_base: target-specific data associated with the TranslationBlock,
+> +     * as returned by cpu_get_tb_cpu_state() and part of the lookup key.
+> +     *
+> +     * Targets using it:
+> +     * x86: the Code Segment virtual base (0 in 64-bit mode),
+> +     * arm: an extension of tb->flags (CPUARMTBFlags::flags2),
+> +     * hppa: the CS_BASE_DIFF* bits and the IAOQ_B page offset,
+> +     * microblaze: the IMM prefix value,
+> +     * riscv: misa_ext (lookup key only, not read by the translator),
+>       * s390x: instruction data for EXECUTE,
+> +     * sh4: r0 (gUSA region end) when in a gUSA sequence (user-only),
+>       * sparc: the next pc of the instruction queue (for delay slots),
+> -     * riscv: misa_ext.
+> +     * xtensa: zero-overhead loop end distance and loop begin offset.
+>       */
+>      uint64_t cs_base;
 >  
->      dc->config = cpu_env(cpu)->config;
->      dc->pc = dc->base.pc_first;
 > -- 
 > 2.55.0
-> 
 > 
 
 Reviewed-by: Anton Johansson <anjo@rev.ng>
