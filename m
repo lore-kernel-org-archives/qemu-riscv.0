@@ -1,60 +1,58 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 682B9606A31E
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 11:22:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55D8C606A31C
+	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 11:22:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=tcVQjeZL;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=fpWfgtHK
+	dkim=pass (2048-bit key) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=o5rXW/+U;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=rev.ng header.i=@rev.ng header.a=rsa-sha256 header.s=dkim header.b=qfXLlrkq
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nongnu.org;
 	 s=lists1p-gnu-org; h=From:In-Reply-To:MIME-Version:References:Subject:To:
-	Date; bh=+qpX3wJDR5S6loiinTy/b4SlnrKKBnn3wqRdd/zs3Q0=; b=tcVQjeZL3orsWL52z8BV
-	71RFSBMngNk4RIPOsMjAwQjzQNQX7Ejoy//ugn5LHkjwlok2AGu5ITcNTFH3wV5gtBGLCk0cQ5jRi
-	cy2+fAPxN6AuVq1QEPGZgF34z27TZSdipFUkTe8TReDXJvjK2jpkP06OuYyy8G3lcaysn2gAvM3Bf
-	bs1uYj7kkE36JPCn59+qgCOhPx8DueIF0Co+Xyq1e/U42Qym5bVZNXSNoz7VKorx2R9IxIqvYF3Nh
-	FQXbDxuHOfQD3IwrU0xCxWXwkIEyxdiaFu9ye5qBkrCb7qzMHqf/8prOdCZ95S3QbLUUhwTluLMgq
-	kyQqX/vyNSYRjQ==;
+	Date; bh=u9MbZTo0bJ5gYJv6q4hvBPRcyGw2yuHuNMvohS9MJ3s=; b=o5rXW/+UV66oYL7jtCy8
+	zzqOsGdDGykkf7Ctk9mG85DvEoOkEMU4JbL6sLP8+X4KjPzfu8X2ksUJtNhcmQc4XsPz1fMfQNTW8
+	/sC8VfPNYssdhpGQ13/OT/pgKarPFoUCUiQB8Wk0Pjoxo0UHUa/FDe6efqUJNTv9+E8euVBTtJYKm
+	KbcmAI2rPjmqf6ZIEBgFZqNDYwoIZX1SyqYTt2nhlu67nkixNhGBhXqIkRKjrayju4BFqnFdKlAAD
+	R2Zs6YS90HVU0eS8NcqHurpkbpiQH/sSlxEbS4SYPClpGPP6BfESdCqooNjL4375K8lLGSXnZ41iB
+	8AFc0Rkapn7DVA==;
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xWu1j-00020v-L2; Fri, 27 Nov 2026 06:22:04 -0500
+	id 1xWu1N-0001hq-AY; Fri, 27 Nov 2026 06:21:42 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWu1C-0001Z3-PE; Fri, 27 Nov 2026 06:21:32 -0500
+ id 1xWu0e-0001Jc-1F; Fri, 27 Nov 2026 06:20:56 -0500
 Received: from rev.ng ([94.130.142.21])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <anjo@rev.ng>)
- id 1xWu1B-0001ni-E1; Fri, 27 Nov 2026 06:21:30 -0500
+ id 1xWu0c-00014Z-HZ; Fri, 27 Nov 2026 06:20:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=rev.ng;
  s=dkim; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
  References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive:List-Unsubscribe:List-Unsubscribe-Post:
- List-Help; bh=+qpX3wJDR5S6loiinTy/b4SlnrKKBnn3wqRdd/zs3Q0=; b=fpWfgtHKM8uTMLT
- s8V2I+UkS3LdRn4D94U+DQgzhKqBfiG1VfcA1lM1VE8DcCiMr2Xvf/Z4b16RC8UwkvR1i01XZV7fk
- dZ/RNSWOHMJlF7ewooLHFCsfEsCG9DtIUrmHVm+a4x448Gro4Vk+XApSYrKWEryS5JazHRlezJbEF
- ys=;
-Date: Fri, 27 Nov 2026 12:27:52 +0100
+ List-Help; bh=u9MbZTo0bJ5gYJv6q4hvBPRcyGw2yuHuNMvohS9MJ3s=; b=qfXLlrkqHxX7GNc
+ 0nNjfYsx2bwBiA/LzZJ0MuWhEHvP9QUcxWwY2TWtPxZ2PvSPm7S7F26ns57ist8QeBzAoj42l4AAE
+ xrh/NVf7AFyCnAG3WVxK5ivVdTR94uPhDsj38XBZ2/RdL+gC4HRo82ssuiYexKHya5mH+HQkewPdW
+ GE=;
+Date: Fri, 27 Nov 2026 12:27:19 +0100
 To: Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
 Cc: qemu-devel@nongnu.org, 
  Richard Henderson <richard.henderson@linaro.org>, qemu-riscv@nongnu.org,
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org, qemu-ppc@nongnu.org, 
  Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
- Ilya Leoshkevich <iii@linux.ibm.com>, 
- David Hildenbrand <david@kernel.org>, Cornelia Huck <cohuck@redhat.com>, 
- Eric Farman <farman@linux.ibm.com>, Matthew Rosato <mjrosato@linux.ibm.com>
-Subject: Re: [PATCH 19/24] target/s390x: Use 64-bit TB flags
-Message-ID: <awlpJxjHx7f7DUBB@hive.localdomain>
+ Yoshinori Sato <yoshinori.sato@nifty.com>
+Subject: Re: [PATCH 18/24] target/rx: Use 64-bit TB flags
+Message-ID: <awlpEAXr5uv81vI7@hive.localdomain>
 References: <20261126233604.67722-1-philmd@oss.qualcomm.com>
- <20261126233604.67722-20-philmd@oss.qualcomm.com>
+ <20261126233604.67722-19-philmd@oss.qualcomm.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261126233604.67722-20-philmd@oss.qualcomm.com>
+In-Reply-To: <20261126233604.67722-19-philmd@oss.qualcomm.com>
 Received-SPF: pass client-ip=94.130.142.21; envelope-from=anjo@rev.ng;
  helo=rev.ng
 X-Spam_score_int: -20
@@ -78,8 +76,8 @@ From:  Anton Johansson via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=unavailable autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -89,25 +87,99 @@ On 27/11/26, Philippe Mathieu-Daudé wrote:
 > 
 > Signed-off-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
 > ---
->  target/s390x/cpu.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  target/rx/cpu.c       |  6 +++---
+>  target/rx/translate.c | 16 ++++++++--------
+>  2 files changed, 11 insertions(+), 11 deletions(-)
 > 
-> diff --git a/target/s390x/cpu.c b/target/s390x/cpu.c
-> index d1250945d489..c6564974c50e 100644
-> --- a/target/s390x/cpu.c
-> +++ b/target/s390x/cpu.c
-> @@ -319,7 +319,7 @@ static int s390x_cpu_mmu_index(CPUState *cs, bool ifetch)
->  static TCGTBCPUState s390x_get_tb_cpu_state(CPUState *cs)
+> diff --git a/target/rx/cpu.c b/target/rx/cpu.c
+> index c35a98f7cefa..dba253bda9b1 100644
+> --- a/target/rx/cpu.c
+> +++ b/target/rx/cpu.c
+> @@ -47,10 +47,10 @@ static vaddr rx_cpu_get_pc(CPUState *cs)
+>  static TCGTBCPUState rx_get_tb_cpu_state(CPUState *cs)
 >  {
->      CPUS390XState *env = cpu_env(cs);
-> -    uint32_t flags;
-> +    uint64_t flags;
+>      CPURXState *env = cpu_env(cs);
+> -    uint32_t flags = 0;
+> +    uint64_t flags = 0;
 >  
->      if (env->psw.addr & 1) {
->          /*
+> -    flags = FIELD_DP32(flags, PSW, PM, env->psw_pm);
+> -    flags = FIELD_DP32(flags, PSW, U, env->psw_u);
+> +    flags = FIELD_DP64(flags, PSW, PM, env->psw_pm);
+> +    flags = FIELD_DP64(flags, PSW, U, env->psw_u);
+>  
+>      return (TCGTBCPUState){ .pc = env->pc, .flags = flags };
+>  }
+> diff --git a/target/rx/translate.c b/target/rx/translate.c
+> index 1bacc7adf929..69547c83cc05 100644
+> --- a/target/rx/translate.c
+> +++ b/target/rx/translate.c
+> @@ -36,7 +36,7 @@ typedef struct DisasContext {
+>      DisasContextBase base;
+>      CPURXState *env;
+>      uint32_t pc;
+> -    uint32_t tb_flags;
+> +    uint64_t tb_flags;
+>  } DisasContext;
+>  
+>  typedef struct DisasCompare {
+> @@ -243,7 +243,7 @@ static TCGv_i32 rx_load_source(DisasContext *ctx, TCGv_i32 mem,
+>  /* Processor mode check */
+>  static int is_privileged(DisasContext *ctx, int is_exception)
+>  {
+> -    if (FIELD_EX32(ctx->tb_flags, PSW, PM)) {
+> +    if (FIELD_EX64(ctx->tb_flags, PSW, PM)) {
+>          if (is_exception) {
+>              gen_helper_raise_privilege_violation(tcg_env);
+>          }
+> @@ -332,7 +332,7 @@ static void move_from_cr(DisasContext *ctx, TCGv_i32 ret, int cr, uint32_t pc)
+>          tcg_gen_movi_i32(ret, pc);
+>          break;
+>      case 2:     /* USP */
+> -        if (FIELD_EX32(ctx->tb_flags, PSW, U)) {
+> +        if (FIELD_EX64(ctx->tb_flags, PSW, U)) {
+>              tcg_gen_mov_i32(ret, cpu_sp);
+>          } else {
+>              tcg_gen_mov_i32(ret, cpu_usp);
+> @@ -348,7 +348,7 @@ static void move_from_cr(DisasContext *ctx, TCGv_i32 ret, int cr, uint32_t pc)
+>          tcg_gen_mov_i32(ret, cpu_bpc);
+>          break;
+>      case 10:    /* ISP */
+> -        if (FIELD_EX32(ctx->tb_flags, PSW, U)) {
+> +        if (FIELD_EX64(ctx->tb_flags, PSW, U)) {
+>              tcg_gen_mov_i32(ret, cpu_isp);
+>          } else {
+>              tcg_gen_mov_i32(ret, cpu_sp);
+> @@ -386,7 +386,7 @@ static void move_to_cr(DisasContext *ctx, TCGv_i32 val, int cr)
+>          break;
+>      /* case 1: to PC not supported */
+>      case 2:     /* USP */
+> -        if (FIELD_EX32(ctx->tb_flags, PSW, U)) {
+> +        if (FIELD_EX64(ctx->tb_flags, PSW, U)) {
+>              tcg_gen_mov_i32(cpu_sp, val);
+>          } else {
+>              tcg_gen_mov_i32(cpu_usp, val);
+> @@ -402,7 +402,7 @@ static void move_to_cr(DisasContext *ctx, TCGv_i32 val, int cr)
+>          tcg_gen_mov_i32(cpu_bpc, val);
+>          break;
+>      case 10:    /* ISP */
+> -        if (FIELD_EX32(ctx->tb_flags, PSW, U)) {
+> +        if (FIELD_EX64(ctx->tb_flags, PSW, U)) {
+>              tcg_gen_mov_i32(cpu_isp, val);
+>          } else {
+>              tcg_gen_mov_i32(cpu_sp, val);
+> @@ -2080,8 +2080,8 @@ static void clrsetpsw(DisasContext *ctx, int cb, int val)
+>              ctx->base.is_jmp = DISAS_UPDATE;
+>              break;
+>          case PSW_U:
+> -            if (FIELD_EX32(ctx->tb_flags, PSW, U) != val) {
+> -                ctx->tb_flags = FIELD_DP32(ctx->tb_flags, PSW, U, val);
+> +            if (FIELD_EX64(ctx->tb_flags, PSW, U) != val) {
+> +                ctx->tb_flags = FIELD_DP64(ctx->tb_flags, PSW, U, val);
+>                  tcg_gen_movi_i32(cpu_psw_u, val);
+>                  tcg_gen_mov_i32(val ? cpu_isp : cpu_usp, cpu_sp);
+>                  tcg_gen_mov_i32(cpu_sp, val ? cpu_usp : cpu_isp);
 > -- 
 > 2.55.0
-> 
 > 
 
 Reviewed-by: Anton Johansson <anjo@rev.ng>
