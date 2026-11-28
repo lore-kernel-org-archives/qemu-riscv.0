@@ -1,145 +1,83 @@
 Received: from lists1p.gnu.org (lists1p.gnu.org [209.51.188.17])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F755606A31C
-	for <qemu-riscv@archiver.kernel.org>; Fri, 27 Nov 2026 17:47:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72E26606A31E
+	for <qemu-riscv@archiver.kernel.org>; Sat, 28 Nov 2026 03:35:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LxngsvnU;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=LKOBij2X
+	dkim=pass (2048-bit key, unprotected) header.d=nongnu.org header.i=@nongnu.org header.a=rsa-sha256 header.s=lists1p-gnu-org header.b=qLDnUn8g;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=mail.ru header.i=@mail.ru header.a=rsa-sha256 header.s=mail4 header.b=GJzjvb6j
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=nongnu.org;
+	 s=lists1p-gnu-org; h=From:MIME-Version:Date:Subject:To:in-reply-to:
+	references; bh=snVkRC7FGBUTuEY5Mui1J4ST/UNJSaw7xlfAgqYsX40=; b=qLDnUn8g8VRdxm
+	AaWOhBlectGpjlMk3OpkoC0bfW33JXXaGZluwz4z6XZlOw6CpEufbm+Po8eSTaz9Y5ZA4CkbDX5jJ
+	z8b/65AgGUo5kYr9eCqKx0yEqE6ldvyWCLoaSdddbGHr+4G7be9/P0z3GWpj1AOZrIcIZ6UTENQfr
+	1zE1NpXOmc4YUMI46Gh8OGM+7d+bY1PHC6aXiUyvUmn7aYQBWPWedtzdscsRHmTitbTqvS82Ck+wx
+	FWuDRfbE6QIJiMjmq7plR1WAKLG1MQXU0PyXZb5JC0GfO77G5SJvhqKWRSEjqrczvGSskt4GZmM84
+	UU9km8E54Hy4vwt8d5+A==;
 Received: from localhost ([::1] helo=lists1p.gnu.org)
 	by lists1p.gnu.org with esmtp (Exim 4.90_1)
 	(envelope-from <qemu-riscv-bounces@nongnu.org>)
-	id 1xX02I-0007Sk-DC; Fri, 27 Nov 2026 12:47:02 -0500
+	id 1xX9Dh-0000VJ-6X; Fri, 27 Nov 2026 22:35:25 -0500
 Received: from eggs.gnu.org ([2001:470:142:3::10])
  by lists1p.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xX02G-0007RD-CC
- for qemu-riscv@nongnu.org; Fri, 27 Nov 2026 12:47:00 -0500
-Received: from mx0b-0031df01.pphosted.com ([205.220.180.131])
+ (Exim 4.90_1) (envelope-from <domestos48@mail.ru>)
+ id 1xX9DY-0000Tl-Nf; Fri, 27 Nov 2026 22:35:16 -0500
+Received: from send105.i.mail.ru ([89.221.237.200])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <pierrick.bouvier@oss.qualcomm.com>)
- id 1xX02E-0007EP-NY
- for qemu-riscv@nongnu.org; Fri, 27 Nov 2026 12:47:00 -0500
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6ARFpqIs2212381
- for <qemu-riscv@nongnu.org>; Fri, 27 Nov 2026 17:46:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
- cc:content-transfer-encoding:date:from:message-id:mime-version
- :subject:to; s=qcppdkim1; bh=E7vmuXwUTgj3KpmeOq+wmP+y0Vr0HC+uTSw
- fpOp+cDQ=; b=LxngsvnU/bvYdiruNYRRRtlDh1NZw+SmoGbYjItu9SlcgODOlDk
- Zhn4stcHP1AGCcGuRrRBF/NkPOEwa2aU8WBW4Vs2N/oCBSHa9sHzkPwePrb0xmxU
- /Ldep+NtWkJ/fife6mzZZoF6KjC3OVW+rQjJav4oAoaPv6HGSsFwJBDhsY7+2ggC
- PlYzxtCIt4m+HBx1wMW1a88ehmRZjvzRuATVJdslJD4OExkI2rNMHs80P+Xq2HTe
- YgMRbAJ8+y2Udnd8watkMfmgQ74dXM7Qg1KYw3DeCokxNprZL61O5ensEx3edwXN
- u//0gFM5k7lgaXpT/OUtnZzf4pBj18KFJcA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
- [209.85.216.69])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6u55v1ba-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <qemu-riscv@nongnu.org>; Fri, 27 Nov 2026 17:46:56 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id
- 98e67ed59e1d1-3b40e7f4fa2so10581857a91.2
- for <qemu-riscv@nongnu.org>; Fri, 27 Nov 2026 09:46:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oss.qualcomm.com; s=google; t=1795801616; x=1796406416; darn=nongnu.org;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=E7vmuXwUTgj3KpmeOq+wmP+y0Vr0HC+uTSwfpOp+cDQ=;
- b=LKOBij2XPl3dNMY//2SXDgqYKS23v7lXU1MR2QwcRToCs+mAWEIoSp+pzOt16p5WqH
- MFs78r49gKEDKMUM9ElF+BNvwLjno0APm6vWV4nXpV2ADtze/JgrSZhzlpU2evcb7459
- rtJ9pFW95SzZjyB2191XffmbIvWs4HlkE+hQCCC9aEvCXzsdu6oAYvEjnfQHMM6uAx5k
- jqF4Yz+NwNEoWzrqXuATWQ24FBcNlO7wgS6UEEtZPFKofvdkt0B7pLe9SMmdsFwnoFiU
- 5GJyAS6nIyt8JYs3WbiKxm7sW/n0geceY2T8E+7v7+93RYZAN8K+NbazqDKYBEANYgUc
- yv1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20260707; t=1795801616; x=1796406416;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=E7vmuXwUTgj3KpmeOq+wmP+y0Vr0HC+uTSwfpOp+cDQ=;
- b=NpUlkO0yQ13QcbsitR4XRbAkeRxZ/Q3gYbyUrfvcqfB5BgngJH0V4U0lPMHkaniahy
- 0lPkDnZ6J4aYR/O418+VBzuXNvup1gN57kHnQuz+FLRZQ0KsczPpdwtPYU020aWCFkCE
- IsR3Ofc2iH6LNMdqtCMe4ejempo/8TE9320ltBBmRBpMCm3Md6cleCfbqfbHnDgTfUm9
- wXlLmIPs7xjugYcfkGkWn7S6EnQEAF6dRD9Fsmpo6wCckqO6v4E5MJ/rdd//xg/VHTcM
- wVLHzc9RI1isTceKs6ulseR98lMMdYVLquqSuld+Nd/FntP+DAhbMDnpCad03zxgDw0u
- p3mQ==
-X-Gm-Message-State: APuU4Z/dIPem+isavmrQCD6lVniV8KJDj2W/+nQIakkhkcdQX2/J6KdX
- O+1rt1AC/X97QKUgV6/ya6VlHzhifcfCYy5Hz9kOZfYtwyRNbSORdR8fVm9o6v4w+tdOWzEACVF
- ZlqxrcesxqZ3sPEqJnXY4ianxcU9aeg74RsCxJy804hoiyU4xey2L1hDawQ==
-X-Gm-Gg: AZFdTZeb2+Z7zw9JWwH0OKN0RovhUBkfTsNX6yK7iO16mgW2SyzLJ9WJ4hziNEE6IXQ
- z79oj9ws6YH1scTtNcgmCSbOU25fsxD9FeSNm75AJlZuPLN9vr9l+6XzkHid9nf+7eU5J4EEhds
- RWPvKLMzeTTNhzbDxVj8b15JV52bvjnsW7lSyV9tmdo4jd1RDfafVY98fBvTvs1AYp1XVhNfNIn
- SIZCt368QoeNImV90bNO9CDj0d9eBxjOX6MBlnPGX7h9s+QrIMOeIx3P3wuQbyI4Pv7fT/LPYmT
- BjniG7qE3FUJIn2ff+KJ7o26n2Q6/bY9vPL7B4Sa+kFSptPKoum2VwJOiog8OGOJSlKUxHiFz7G
- vRqQYOkDF9LHdSX1BV0b+XJP98LlGQhMzl7P6uwUpnzmb4BvVJImzlRcNgWUHb6qPDGWbDzhnIK
- I6VPgNuTG6175e+kFn3Wsqaji2odtGzPQQEvcF
-X-Received: by 2002:a17:90b:3d8d:b0:3b3:b704:118c with SMTP id
- 98e67ed59e1d1-3b41cb4f321mr23879324a91.65.1795801615783; 
- Fri, 27 Nov 2026 09:46:55 -0800 (PST)
-X-Received: by 2002:a17:90b:3d8d:b0:3b3:b704:118c with SMTP id
- 98e67ed59e1d1-3b41cb4f321mr23879269a91.65.1795801615157; 
- Fri, 27 Nov 2026 09:46:55 -0800 (PST)
-Received: from pc.taild8403c.ts.net (192-80-163-190.dyn.novuscom.net.
- [192.80.163.190]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3b405ffa98esm41856732a91.17.2026.11.27.09.46.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Nov 2026 09:46:54 -0800 (PST)
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+ (Exim 4.90_1) (envelope-from <domestos48@mail.ru>)
+ id 1xX9DU-0006oJ-Pu; Fri, 27 Nov 2026 22:35:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mail.ru;
+ s=mail4; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
+ To:From:From:Sender:Reply-To:To:Cc:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive:
+ X-Cloud-Ids:Disposition-Notification-To;
+ bh=snVkRC7FGBUTuEY5Mui1J4ST/UNJSaw7xlfAgqYsX40=; t=1795836901; x=1795926901; 
+ b=GJzjvb6jfgsKE4Aw2VcEzs3aQsHSV/sYevuI0rdM2McZe4hYqlCQEeYXPCXr829jfb22CLGkj3C
+ 9zN4ur6dTjey2GGldi0qRyaz6FXSwqSYIaBkKkBaAWYcXZlpBo0LkeMNaCds7mExWXUWXFjGlq5kc
+ RsCuWbHxmFzlsy3Y1XlSjq+KQ2IBqT+Wn2lFyf3y0wXBDjnhWlBY1lzDbOvyiVDnAZOkVfHcm49Wx
+ 1XVo5IH5r7tlNQgQOZodSoANTVMyGKFS8dI/NqyERQ9App/+c0QCCJvThP8ejeQwU0EndgnTkJ9+O
+ 8mh1lc/sDk+sq8HI7wDvwLdIBK6XKAL5rbIA==;
+Received: by exim-smtp-558c69478d-gsxhs with esmtpa (envelope-from
+ <domestos48@mail.ru>)
+ id 1xX9DE-00000000AiT-3MFF; Sat, 28 Nov 2026 06:34:57 +0300
 To: qemu-devel@nongnu.org
-Cc: qemu-riscv@nongnu.org, Frank Chang <frank.chang@sifive.com>,
- "Fea.Wang" <fea.wang@sifive.com>,
- Mark Burton <mburton@qti.qualcomm.com>, Jim Shu <jim.shu@sifive.com>,
- Max Chou <max.chou@sifive.com>, Jay Chang <jay.chang@sifive.com>,
- brian.cain@oss.qualcomm.com,
- Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+Cc: Dmitry Kokorev <domestos48@mail.ru>, Palmer Dabbelt <palmer@dabbelt.com>,
  Alistair Francis <alistair.francis@wdc.com>,
- Gary Zancanelli <gzancane@qti.qualcomm.com>,
- Gary Zancanelli <quic_gzancane@quicinc.com>,
- Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
-Subject: [PATCH] target/riscv: add SiFive S7-AD CPU profile
-Date: Fri, 27 Nov 2026 10:46:40 -0700
-Message-ID: <20261127174640.406897-1-pierrick.bouvier@oss.qualcomm.com>
-X-Mailer: git-send-email 2.47.3
+ Weiwei Li <liwei1518@gmail.com>,
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+ Chao Liu <chao.liu@processmission.com>,
+ qemu-riscv@nongnu.org (open list:RISC-V TCG CPUs)
+Subject: [PATCH] target/riscv: fix exception handling for SIREG2-SIREG6
+ accesses
+Date: Sat, 28 Nov 2026 06:34:49 +0300
+Message-ID: <20261128033449.122558-1-domestos48@mail.ru>
+X-Mailer: git-send-email 2.56.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA3MCBTYWx0ZWRfX+aLXMTjUP+wn
- 9oy/O7tkSAD87fdT7ZDcIvCIKPJK8rQOBcn9hTOfeAjuG4cyTxAJJJE99hy2P62OPDCsyhrSEqy
- ns+l2DGnqvSSOhflHKzGLzqMu+2pAKQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA3MCBTYWx0ZWRfX803NRIXM1I6X
- 985BA+Y4vJRewUfjtydHORyPv2l++kBGYRNKHYnUun44PXkBZHak4N2T73FgMUSnetwGK2D23Vh
- oR7mFcZUjrgMaNz4CUGOfG5yAPcz6YGmApKtoKg/FZvqVX5DiahBu4nra0+q8WVTpnx/b1gyOPl
- TiNSDnIpt4BTbYYh1TklokdE46guWJfo39AFAeOQDaYsPPMVvk5SEJhjRJN67AkDFllTo4+YW5I
- RPLHCXzvOan+2FSPpSiBTXWIMlKpsZbPFNOWPyYhi8A9twbA+bYQmBR37RLGPc74ZTbO6VSO1Ka
- 4R9wjpLui/aLSWLkSIZ4IxdwYlVxSJJoaZdUAKKtrwqzO4kzx7OZlNK+VEOHsEquPKiQFt4YT9u
- 1z4dwttrWwdoVOiPLVHtRiiwM3Fdxgw1BVn2pqcL4ZEnPcx2K65zpAc5whNDX9yjjRpsHZRp5mC
- i1fw3JsTPwrl9HOceMQ==
-X-Proofpoint-ORIG-GUID: SYu2hW4bnH1ruMmWL-CqsbH_nndSi05y
-X-Authority-Analysis: v=2.4 cv=Z795j3RA c=1 sm=1 tr=0 ts=6b09c210 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=9852oil1ID9t5xBSyQ/BEA==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=COk6AnOGAAAA:8
- a=EUspDBNiAAAA:8 a=Y5XJB6cuqWXhgpbSPVgA:9 a=rl5im9kqc5Lf4LNbBjHf:22
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: SYu2hW4bnH1ruMmWL-CqsbH_nndSi05y
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-27_03,2026-11-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 malwarescore=0 clxscore=1015 priorityscore=1501
- adultscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270070
-Received-SPF: pass client-ip=205.220.180.131;
- envelope-from=pierrick.bouvier@oss.qualcomm.com;
- helo=mx0b-0031df01.pphosted.com
-X-Spam_score_int: -27
-X-Spam_score: -2.8
-X-Spam_bar: --
-X-Spam_report: (-2.8 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
+Authentication-Results: exim-smtp-558c69478d-gsxhs;
+ auth=pass smtp.auth=domestos48@mail.ru
+ smtp.mailfrom=domestos48@mail.ru
+X-Mailru-Src: smtp
+X-7564579A: 646B95376F6C166E
+X-77F55803: 4F1203BC0FB41BD9D70A5F1A44F40AC4984B02CC9DA0F8A0E2091737D616347F182A05F5380850408813C615274586453DE06ABAFEAF67059B41569FDD7B9B2AF23C9E2EA10BA734CF784B0C616BB7A4
+X-7FA49CB5: FF5795518A3D127A4AD6D5ED66289B5278DA827A17800CE7AB524098FB2F2222EA1F7E6F0F101C67BD4B6F7A4D31EC0BCC500DACC3FED6E28638F802B75D45FF8AA50765F7900637AC83A81C8FD4AD23D82A6BABE6F325AC2E85FA5F3EDFCBAA7353EFBB553375669F88000598BFA233F3106732FE27E3C8CD7AA220AB29594285D434980775D20F8EEF46B7454FC60B9742502CCDD46D0DBC0ADEB1C81BB362F6B57BC7E64490611E7FA7ABCAF51C92176DF2183F8FC7C068077CCD40B79AC98941B15DA834481F9449624AB7ADAF37BA3038C0950A5D36D5E8D9A59859A8B6470100DFE4501EF176E601842F6C81A1F004C906525384303E02D724532EE2C3F43C7A68FF6260569E8FC8737B5C2249EC8D19AE6D49635B68655334FD4449CB9ECD01F8117BC8BEAAAE862A0553A39223F8577A6DFFEA7CBB2DCFE07A54726643847C11F186F3C59DAA53EE0834AAEE
+X-C1DE0DAB: 0D63561A33F958A51DBE43BF87D51A1D5002B1117B3ED6964AF51DA3DD1D2E29ED71F038FC046993823CB91A9FED034534781492E4B8EEAD6804EF05EF4ADF2AF36E2E0160E5C55395B8A2A0B6518DF68C46860778A80D548E8926FB43031F38
+X-C8649E89: 1C3962B70DF3F0AD73CAD6646DEDE191716CD42B3DD1D34C77DD89D51EBB774225B6776AC983F447FC0B9F89525902EE6F57B2FD27647F25E66C117BDB76D65947646164FA1D80966B7662C0921B38C8FC40FF592C81304702711AC6647B96EC237095AB72748AEFB8341EE9D5BE9A0A2AAB519CF3ED7183BFD2B1E50FD673B6DF55745A629EFB84546A885F7A58241B4C41F94D744909CEF1DAEBD50C2D18C54FDD1B49881939BFC3981EEBE9DB10F943082AE146A756F3
+X-D57D3AED: 3ZO7eAau8CL7WIMRKs4sN3D3tLDjz0dLbV79QFUyzQ2Ujvy7cMT6pYYqY16iZVKkSc3dCLJ7zSJH7+u4VD18S7Vl4ZUrpaVfd2+vE6kuoey4m4VkSEu53w8ahmwBjZKM/YPHZyZHvz5uv+WouB9+ObcCpyrx6l7KImUglyhkEat/+ysWwi0gdhEs0JGjl6ggRWTy1haxBpVdbIX1nthFXOcIETfglQORZ0zpDET4ZrlAo0bq3TDyw5v+G6YiroYwFKm+EqDLIKE=
+X-Mailru-Sender: 6C3E74F07C41AE94D7CD221249107760BE279CFC5F046260249E1E589EC000561B70824BD67EA12241981BF91713E4B73BC2F568E0EB198D43A928ADF1FB8230B15D5A005FF75DDCF5AEC393025268E4D4F5E195AEB7941D607123C7294C0AD7D392818AC9EB1D6DC77752E0C033A69E3453F38A29522196
+X-Mras: Ok
+Received-SPF: pass client-ip=89.221.237.200; envelope-from=domestos48@mail.ru;
+ helo=send105.i.mail.ru
+X-Spam_score_int: -18
+X-Spam_score: -1.9
+X-Spam_bar: -
+X-Spam_report: (-1.9 / 5.0 requ) BAYES_00=-1.9, DKIM_SIGNED=0.1,
  DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1,
- RCVD_IN_DNSWL_LOW=-0.7, SPF_HELO_NONE=0.001,
+ FREEMAIL_ENVFROM_END_DIGIT=0.25, FREEMAIL_FROM=0.001, SPF_HELO_PASS=-0.001,
  SPF_PASS=-0.001 autolearn=ham autolearn_force=no
 X-Spam_action: no action
 X-BeenThere: qemu-riscv@nongnu.org
@@ -151,74 +89,51 @@ List-Post: <mailto:qemu-riscv@nongnu.org>
 List-Help: <mailto:qemu-riscv-request@nongnu.org?subject=help>
 List-Subscribe: <https://lists.nongnu.org/mailman/listinfo/qemu-riscv>,
  <mailto:qemu-riscv-request@nongnu.org?subject=subscribe>
+Reply-to:  Dmitry Kokorev <domestos48@mail.ru>
+From:  Dmitry Kokorev via <qemu-riscv@nongnu.org>
 Sender: qemu-riscv-bounces+qemu-riscv=archiver.kernel.org@nongnu.org
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-22.1 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_REPLYTO_END_DIGIT,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Gary Zancanelli <quic_gzancane@quicinc.com>
+Fix the `virt` flag in rmw_xireg_csrind() to use a range
+check covering VSIREG2 through VSIREG6. Avoid the early
+return for AIA isel ranges so that they are handled by the
+virtual instruction exception check.
 
-We are using this cpu internally at Qualcomm. After a conversation with
-SiFive folks, we publish this in case it might interest upstream.
-
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Resolves: https://gitlab.com/qemu-project/qemu/-/work_items/5008
+Signed-off-by: Dmitry Kokorev <domestos48@mail.ru>
 ---
- target/riscv/cpu-qom.h |  1 +
- target/riscv/cpu.c     | 24 ++++++++++++++++++++++++
- 2 files changed, 25 insertions(+)
+ target/riscv/tcg/csr.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/target/riscv/cpu-qom.h b/target/riscv/cpu-qom.h
-index 61234842e3c..0aa38544094 100644
---- a/target/riscv/cpu-qom.h
-+++ b/target/riscv/cpu-qom.h
-@@ -49,6 +49,7 @@
- #define TYPE_RISCV_CPU_SIFIVE_E31       RISCV_CPU_TYPE_NAME("sifive-e31")
- #define TYPE_RISCV_CPU_SIFIVE_E34       RISCV_CPU_TYPE_NAME("sifive-e34")
- #define TYPE_RISCV_CPU_SIFIVE_E51       RISCV_CPU_TYPE_NAME("sifive-e51")
-+#define TYPE_RISCV_CPU_SIFIVE_S7_AD     RISCV_CPU_TYPE_NAME("sifive-s7-ad")
- #define TYPE_RISCV_CPU_SIFIVE_U         RISCV_CPU_TYPE_NAME("sifive-u")
- #define TYPE_RISCV_CPU_SIFIVE_U34       RISCV_CPU_TYPE_NAME("sifive-u34")
- #define TYPE_RISCV_CPU_SIFIVE_U54       RISCV_CPU_TYPE_NAME("sifive-u54")
-diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
-index 15c27f4ce46..87b15692326 100644
---- a/target/riscv/cpu.c
-+++ b/target/riscv/cpu.c
-@@ -3608,6 +3608,30 @@ static const TypeInfo riscv_cpu_type_infos[] = {
-         .misa_mxl_max = MXL_RV64
-     ),
+diff --git a/target/riscv/tcg/csr.c b/target/riscv/tcg/csr.c
+index af444e3e6f..a7a914627e 100644
+--- a/target/riscv/tcg/csr.c
++++ b/target/riscv/tcg/csr.c
+@@ -2918,14 +2918,15 @@ static int rmw_xireg_csrind(CPURISCVState *env, int csrno,
+                               uint16_t isel, target_ulong *val,
+                               target_ulong new_val, target_ulong wr_mask)
+ {
+-    bool virt = csrno == CSR_VSIREG ? true : false;
++    bool virt = CSR_VSIREG <= csrno && csrno <= CSR_VSIREG6 &&
++                csrno != CSR_VSIREG4 - 1;
+     int ret = -EINVAL;
  
-+    DEFINE_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_S7_AD, TYPE_RISCV_VENDOR_CPU,
-+        .misa_mxl_max = MXL_RV64,
-+        .misa_ext = RVI | RVM | RVA | RVC | RVS | RVU,
-+        .priv_spec = PRIV_VERSION_1_12_0,
-+
-+        .cfg.mmu = true,
-+        .cfg.ext_zifencei = true,
-+        .cfg.ext_zicsr = true,
-+        .cfg.pmp = true,
-+        .cfg.pmp_regions = 8,
-+        .cfg.ext_zihintpause = true,
-+        .cfg.ext_zba = true,
-+        .cfg.ext_zbb = true,
-+        .cfg.ext_zkt = true,
-+        .cfg.ext_sscofpmf = true,
-+        .cfg.ext_svadu = false,
-+        .cfg.pmu_mask = MAKE_64BIT_MASK(3, 29),
-+        .cfg.max_satp_mode = VM_1_10_MBARE,
-+
-+        .cfg.mvendorid = 0x489,
-+        .cfg.marchid = UINT64_C(0x8000000000000d07),
-+        .cfg.mimpid = UINT64_C(0x0a231123),
-+    ),
-+
-     DEFINE_RISCV_CPU(TYPE_RISCV_CPU_SIFIVE_U54, TYPE_RISCV_CPU_SIFIVE_U,
-         .misa_mxl_max = MXL_RV64,
-     ),
+     if (xiselect_cd_range(isel)) {
+         ret = rmw_xireg_cd(env, csrno, isel, val, new_val, wr_mask);
+     } else if (xiselect_ctr_range(csrno, isel)) {
+         ret = rmw_xireg_ctr(env, csrno, isel, val, new_val, wr_mask);
+-    } else {
++    } else if (!xiselect_aia_range(isel)) {
+         /*
+          * As per the specification, access to unimplented region is undefined
+          * but recommendation is to raise illegal instruction exception.
 -- 
-2.47.3
+2.56.1
 
 
